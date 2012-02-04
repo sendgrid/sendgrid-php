@@ -1,87 +1,38 @@
 <?php
 
+
+
+$sendgrid = new SendGrid('a', 'b');
+$sendgrid->web;
+
+
 class SendGrid
 {
+  private $namespace = "SendGrid",
+          $username,
+          $password;
   
-  private $category_list,
-          $substitution_list,
-          $section_list,
-          $unique_argument_list,
-          $filter_setting_list,
-          $header_list;
-
-  public function __construct()
+  public function __construct($username, $password)
   {
-    # code...
+    $this->username = $username;
+    $this->password = $password;
   }
 
-  public function setCategories($category)
+  public function __get($api)
   {
-    # code...
+    $name = $api;
+    $api = "$this->namespace\\".ucwords($api);
+    $class_name = str_replace('\\', '/', "$api.php");
+    $file = __dir__ . DIRECTORY_SEPARATOR . $class_name;
+
+    if (!file_exists($file))
+    {
+      throw new Exception("Api '$class_name' not found.");
+    }
+    require_once $file;
+
+    $this->$name = new $api($this->username, $this->password);
+    return $this->$name;
   }
 
-  public function addCategory($category)
-  {
-    # code...
-  }
-
-  public function removeCategory($category)
-  {
-    # code...
-  }
-
-  public function setSubstitution($from_value, $to_values)
-  {
-    # code...
-  }
-
-  public function addSubstitution($from_value, $to_value)
-  {
-    # code...
-  }
-
-  public function setSections($key_value_pairs)
-  {
-    # code...
-  }
-  
-  public function addSection($from_value, $to_value)
-  {
-    # code...
-  }
-
-  public function setUniqueArguments($key_value_pairs)
-  {
-    # code...
-  }
-  
-  public function addUniqueArgument($key, $value)
-  {
-    # code...
-  }
-
-  public function setFilterSettings($filter_settings)
-  {
-    # code...
-  }
-  
-  public function addFilterSetting($filter_name, $parameter_name, $parameter_value)
-  {
-    # code...
-  }
-
-  public function setHeaders($key_value_pairs)
-  {
-    # code...
-  }
-  
-  public function addHeader($key, $value)
-  {
-    # code...
-  }
-
-  public function removeHeader($key)
-  {
-    # code...
-  }
 }
