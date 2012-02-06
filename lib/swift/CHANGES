@@ -1,0 +1,60 @@
+Changelog since Version 4.1.x
+=============================
+
+4.1.5 (2012-01-04)
+------------------
+
+ * enforced Swift_Spool::queueMessage() to return a Boolean
+ * made an optimization to the memory spool: start the transport only when required
+ * prevented stream_socket_client() from generating an error and throw a Swift_TransportException instead
+ * fixed a PHP warning when calling to mail() when safe_mode is off
+ * many doc tweaks
+
+4.1.4 (2011-12-16)
+------------------
+
+ * added a memory spool (Swift_MemorySpool)
+ * fixed too many opened files when sending emails with attachments
+
+4.1.3 (2011-10-27)
+------------------
+
+ * added STARTTLS support
+ * added missing @return tags on fluent methods
+ * added a MessageLogger plugin that logs all sent messages
+ * added composer.json
+
+4.1.2 (2011-09-13)
+------------------
+
+ * fixed wrong detection of magic_quotes_runtime
+ * fixed fatal errors when no To or Subject header has been set
+ * fixed charset on parameter header continuations
+ * added documentation about how to install Swiftmailer from the PEAR channel
+ * fixed various typos and markup problem in the documentation
+ * fixed warning when cache directory does not exist
+ * fixed "slashes are escaped" bug
+ * changed require_once() to require() in autoload
+
+4.1.1 (2011-07-04)
+------------------
+
+ * added missing file in PEAR package
+
+4.1.0 (2011-06-30)
+------------------
+
+ * documentation has been converted to ReST
+
+4.1.0 RC1 (2011-06-17)
+----------------------
+
+New features:
+
+ * changed the Decorator Plugin to allow replacements in all headers
+ * added Swift_Mime_Grammar and Swift_Validate to validate an email address
+ * modified the autoloader to lazy-initialize Swiftmailer
+ * removed Swift_Mailer::batchSend()
+ * added NullTransport
+ * added new plugins: RedirectingPlugin and ImpersonatePlugin
+ * added a way to send messages asynchronously (Spool)
