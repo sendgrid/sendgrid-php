@@ -51,7 +51,7 @@ class Mail
    * Initialize an array for the recipient 'to' field
    * Destroy previous recipient 'to' data.
    * @param Array $email - an array of email addresses
-   * @return the SMTP object.
+   * @return the SendGridMail object.
    */
   public function setTos(array $email)
   { 
@@ -63,7 +63,7 @@ class Mail
    * Initialize a single email for the recipient 'to' field
    * Destroy previous recipient 'to' data.
    * @param String $email - a single email address
-   * @return the SMTP object.
+   * @return the SendGridMail object.
    */
   public function setTo($email)
   {
@@ -75,7 +75,7 @@ class Mail
    * append an email address to the existing list of addresses
    * Preserve previous recipient 'to' data.
    * @param String $email - a single email address
-   * @return the SMTP object.
+   * @return the SendGridMail object.
    */
   public function addTo($email)
   {
@@ -86,7 +86,7 @@ class Mail
   /* removeTo
    * remove an email address from the list of addresses
    * @param String $email - an email address to be removed
-   * @return the SMTP object.
+   * @return the SendGridMail object.
    */
   public function removeTo($email)
   {
@@ -112,7 +112,7 @@ class Mail
   /* setFrom
    * set the from email
    * @param String $email - an email address
-   * @return the SMTP object.
+   * @return the SendGridMail object.
    */
   public function setFrom($email)
   {
@@ -166,7 +166,7 @@ class Mail
   /* setSubject
    * set the email subject
    * @param String $subject - the email subject
-   * @return the SMTP object
+   * @return the SendGridMail object
    */
   public function setSubject($subject)
   {
@@ -186,7 +186,7 @@ class Mail
   /* setText
    * Set the plain text part of the email
    * @param String $text - the plain text of the email
-   * @return the SMTP object.
+   * @return the SendGridMail object.
    */
   public function setText($text)
   {
@@ -207,7 +207,7 @@ class Mail
   /* setHTML
    * Set the HTML part of the email
    * @param String $html - the HTML part of the email
-   * @return the SMTP object.
+   * @return the SendGridMail object.
    */
   public function setHtml($html)
   {
@@ -251,7 +251,7 @@ class Mail
    * value[1] = email[1])
    *
    * @param array $key_value_pairs key/value pairs where the value is an array of values
-   * @return the SMTP object
+   * @return the SendGridMail object
    */
   public function setSubstitutions($key_value_pairs)
   {
@@ -267,7 +267,7 @@ class Mail
    *
    * @param string $from_key - the value to be replaced
    * @param array $to_values - an array of values to replace the $from_value
-   * @return the SMTP object
+   * @return the SendGridMail object
    */
   public function addSubstitution($from_value, array $to_values)
   {

@@ -4,16 +4,63 @@ namespace SendGrid;
 
 class Smtp extends Api implements MailInterface
 {
+  //the available ports
+  const TLS = 587;
+  const TLS_ALTERNATIVE = 25;
+  const SSL = 465;
+
+  //the list of port instances, to be recycled
+  private $swift_instances = array();
+  private $port;
 
   public function __construct($username, $password)
   {
     require_once ROOT_DIR . 'lib/swift/swift_required.php';
     call_user_func_array("parent::__construct", func_get_args());
+
+    //set the default port
+    $this->port = Smtp::TLS;
   }
 
-  private function mapToSwift(Mail $mail)
+  /* setPort
+   * set the SMTP outgoing port number
+   * @param Int $port - the port number to use
+   * @return the SMTP object
+   */
+  public function setPort($port)
   {
+    $this->port = $port;
+
+    return $this;
+  }
+
+  /* _getSwiftInstance
+   * initialize and return the swift transport instance
+   * @return the Swift_Mailer instance
+   */
+  private function _getSwiftInstance($port)
+  {
+  	if(!isset($this->swift_instances[$port]))
+  	{
+      $transport = \Swift_SmtpTransport::newInstance('smtp.sendgrid.net', $port);
+    	$transport->setUsername($this->username);
+    	$transport->setPassword($this->password);
+
+      $swift = \Swift_Mailer::newInstance($transport);
+
+      $this->swift_instances[$port] = $swift;
+  	}
   	
+  	return $this->swift_instances[$port];
+  }
+
+  /* _mapToSwift
+   * Maps the SendGridMail Object to the SwiftMessage object
+   * @param Mail $mail - the SendGridMail object
+   * @return the SwiftMessage object
+   */
+  private function _mapToSwift(Mail $mail)
+  {
   	$message = new \Swift_Message($mail->getSubject());
 
   	$message->setFrom($mail->getFrom());
@@ -24,30 +71,20 @@ class Smtp extends Api implements MailInterface
   	return $message;
   }
 
+  /* send
+   * Send the Mail Message
+   * @param Mail $mail - the SendGridMailMessage to be sent
+   * @return true if mail was sendable (not necessarily sent)
+   */
   public function send(Mail $mail)
   {
-    echo "attempting to send mail";
 
-    $transport = \Swift_SmtpTransport::newInstance('smtp.sendgrid.net', 587);
-  	$transport->setUsername($this->username);
-  	$transport->setPassword($this->password);
+    $swift = $this->_getSwiftInstance($this->port);
 
-    $swift = \Swift_Mailer::newInstance($transport);
+    $message = $this->_mapToSwift($mail);
 
-    $message = $this->mapToSwift($mail);
+    $swift->send($message, $failures);
 
-    if ($recipients = $swift->send($message, $failures))
-	{
-	  // This will let us know how many users received this message
-	  echo 'Message sent out to '.$recipients.' users';
-	}
-	// something went wrong =(
-	else
-	{
-	  echo "Something went wrong - ";
-	  print_r($failures);
-	}
-    
-
+    return true;
   }
 }
