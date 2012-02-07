@@ -25,7 +25,7 @@ class Mail
     
   }
 
-  public function __call($method, $args)
+  /*public function __call($method, $args)
   {
     if (substr($method, 0, 3) == 'get')
     {
@@ -35,28 +35,85 @@ class Mail
         return $this->$property;
       }
     }
-
     return null;
+  }*/
+
+  /* getTos
+   * Return the list of recipients
+   * @return list of recipients
+   */
+  public function getTos()
+  {
+    return $this->to_list;
   }
 
+  /* setTos
+   * Initialize an array for the recipient 'to' field
+   * Destroy previous recipient 'to' data.
+   * @param Array $email - an array of email addresses
+   * @return the SMTP object.
+   */
+  public function setTos(array $email)
+  { 
+    $this->to_list = $email;
+    return $this;
+  }
+
+  /* setTo
+   * Initialize a single email for the recipient 'to' field
+   * Destroy previous recipient 'to' data.
+   * @param String $email - a single email address
+   * @return the SMTP object.
+   */
   public function setTo($email)
   {
     $this->to_list = array($email);
     return $this;
   }
 
+  /* addTo
+   * append an email address to the existing list of addresses
+   * Preserve previous recipient 'to' data.
+   * @param String $email - a single email address
+   * @return the SMTP object.
+   */
   public function addTo($email)
   {
     $this->to_list[] = $email;
     return $this;
   }
 
+  /* removeTo
+   * remove an email address from the list of addresses
+   * @param String $email - an email address to be removed
+   * @return the SMTP object.
+   */
   public function removeTo($email)
   {
-    array_filter($this->to_list, function($x) use($email){ return $x == $email; });
+    foreach($this->to_list as $key => $val)
+    {
+      if($val == $email)
+      {
+        unset($this->to_list[$key]);
+      }
+    }
     return $this;
   }
 
+  /* getFrom
+   * get the from email address
+   * @return the from email address
+   */
+  public function getFrom()
+  {
+    return $this->from;
+  }
+
+  /* setFrom
+   * set the from email
+   * @param String $email - an email address
+   * @return the SMTP object.
+   */
   public function setFrom($email)
   {
     $this->from = $email;
@@ -65,7 +122,7 @@ class Mail
 
   public function setCc($email)
   {
-    $this->cc_list = array($email);
+    $this->cc_list = $email;
     return $this;
   }
 
@@ -82,7 +139,7 @@ class Mail
 
   public function setBcc($email)
   {
-    $this->bcc_list = array($email);
+    $this->bcc_list = $email;
     return $this;
   }
 
@@ -97,18 +154,61 @@ class Mail
     return $this;
   }
 
+  /* getSubject
+   * get the email subject
+   * @return the email subject
+   */
+  public function getSubject()
+  {
+    return $this->subject;
+  }
+
+  /* setSubject
+   * set the email subject
+   * @param String $subject - the email subject
+   * @return the SMTP object
+   */
   public function setSubject($subject)
   {
     $this->subject = $subject;
     return $this;
   }
 
+  /* getText
+   * get the plain text part of the email
+   * @return the plain text part of the email
+   */
+  public function getText()
+  {
+    return $this->text;
+  }
+
+  /* setText
+   * Set the plain text part of the email
+   * @param String $text - the plain text of the email
+   * @return the SMTP object.
+   */
   public function setText($text)
   {
     $this->text = $text;
     return $this;
   }
+  
+  /* getHtml
+   * Get the HTML part of the email
+   * @param String $html - the HTML part of the email
+   * @return the HTML part of the email.
+   */
+  public function getHtml()
+  {
+    return $this->html;
+  }
 
+  /* setHTML
+   * Set the HTML part of the email
+   * @param String $html - the HTML part of the email
+   * @return the SMTP object.
+   */
   public function setHtml($html)
   {
     $this->html = $html;
@@ -117,7 +217,7 @@ class Mail
 
   public function addAttachment($file)
   {
-    $this->attachment_list[] = $file;
+    
     return $this;
   }
 
@@ -144,12 +244,31 @@ class Mail
     return $this;
   }
 
+  /* SetSubstitutions
+   *
+   * Substitute a value for list of values, where each value corresponds
+   * to the list emails in a one to one relationship. (IE, value[0] = email[0], 
+   * value[1] = email[1])
+   *
+   * @param array $key_value_pairs key/value pairs where the value is an array of values
+   * @return the SMTP object
+   */
   public function setSubstitutions($key_value_pairs)
   {
 
     return $this;
   }
 
+  /* addSubstitution
+   *
+   * Substitute a value for list of values, where each value corresponds
+   * to the list emails in a one to one relationship. (IE, value[0] = email[0], 
+   * value[1] = email[1])
+   *
+   * @param string $from_key - the value to be replaced
+   * @param array $to_values - an array of values to replace the $from_value
+   * @return the SMTP object
+   */
   public function addSubstitution($from_value, array $to_values)
   {
     $this->substitution_list[$from_value] = $to_values;
@@ -210,4 +329,3 @@ class Mail
   }
 
 }
-

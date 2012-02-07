@@ -1,11 +1,5 @@
 <?php
 
-
-
-$sendgrid = new SendGrid('a', 'b');
-$sendgrid->web;
-
-
 class SendGrid
 {
   private $namespace = "SendGrid",
