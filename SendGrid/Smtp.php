@@ -67,6 +67,10 @@ class Smtp extends Api implements MailInterface
   	$message->setBody($mail->getHtml(), 'text/html');
   	$message->setTo($mail->getTos());
   	$message->addPart($mail->getText(), 'text/plain');
+    
+    //add all the headers
+    $headers = $message->getHeaders();
+    $headers->addTextHeader('X-SMTPAPI', json_encode($mail->getHeaders()), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
 
   	return $message;
   }
