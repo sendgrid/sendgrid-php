@@ -468,6 +468,7 @@ class MailTest extends PHPUnit_Framework_TestCase
       $headers["simple_header"] = "simple_value";
 
       $this->assertEquals($headers, $message->getHeaders());
+      $this->assertEquals("{\"header_1\":{\"item_1\":\"value_1\",\"item_2\":\"value_2\",\"item_3\":\"value_3\"},\"header_2\":\"value_4\",\"header_3\":\"value_4\",\"header_4\":{\"item_4\":{\"sub_item_1\":\"sub_value_1\",\"sub_item_2\":\"sub_value_2\"}},\"simple_header\":\"simple_value\"}", $message->getHeadersJson());
 
       //remove a header
       $message->removeHeader("simple_header");
