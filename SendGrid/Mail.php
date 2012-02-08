@@ -433,7 +433,7 @@ class Mail
    */
   public function addUniqueArgument($key, $value)
   {
-    $this->unique_argument_list[$key] = $value;
+    $this->header_list['unique_args'][$key] = $value;
     return $this;
   }
 
