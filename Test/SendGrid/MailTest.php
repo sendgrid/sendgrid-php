@@ -193,6 +193,39 @@ class MailTest extends PHPUnit_Framework_TestCase
     $this->assertEquals($html, $message->getHtml());
   }
 
+  public function testAttachmentAccessors()
+  {
+    $message = new SendGrid\Mail();
+
+    $attachments = 
+      array(
+        "path/to/file/file_1.txt", 
+        "../file_2.txt", 
+        "../file_3.txt"
+      );
+
+    $message->setAttachments($attachments);
+
+    $this->assertEquals($attachments, $message->getAttachments());
+
+    //ensure that addAttachment appends to the list of attachments
+    $message->addAttachment("../file_4.png");
+
+    $attachments[] = "../file_4.png";
+
+    $this->assertEquals($attachments, $message->getAttachments());
+
+
+    //Setting an attachment removes all other files
+    $message->setAttachment("only_attachment.sad");
+
+    $this->assertEquals(1, count($message->getAttachments()));
+
+    //Remove an attachment
+    $message->removeAttachment("only_attachment.sad");
+    $this->assertEquals(0, count($message->getAttachments()));
+  }
+
   public function testCategoryAccessors()
   {
     $message = new SendGrid\Mail();
@@ -383,5 +416,64 @@ class MailTest extends PHPUnit_Framework_TestCase
     $message->addFilterSetting("filter_4", "enable", 0);
     $message->addFilterSetting("filter_4", "setting_6", "setting_val_6");
     $message->addFilterSetting("filter_4", "setting_7", "setting_val_7");
+
+    $filters["filter_4"] = 
+      array(
+        "settings" => 
+          array(
+            "enable" => 0, 
+            "setting_6" => "setting_val_6", 
+            "setting_7" => "setting_val_7"
+          )
+      );
+
+    $header = $message->getHeaders();
+
+    $this->assertEquals($filters, $header['filters']);
+  }
+
+  public function testHeaderAccessors()
+  {
+    $message = new SendGrid\Mail();
+
+    $headers = 
+      array(
+        "header_1" => 
+          array(
+            "item_1" => "value_1", 
+            "item_2" => "value_2", 
+            "item_3" => "value_3"
+          ),
+        "header_2" => "value_4",
+        "header_3" => "value_4",
+        "header_4" => 
+          array(
+            "item_4" =>
+            array(
+              "sub_item_1" => "sub_value_1",
+              "sub_item_2" => "sub_value_2"
+            )
+          )
+      );
+
+
+
+      $message->setHeaders($headers);
+
+
+      $this->assertEquals($headers, $message->getHeaders());
+
+      $message->addHeader("simple_header", "simple_value");
+
+      $headers["simple_header"] = "simple_value";
+
+      $this->assertEquals($headers, $message->getHeaders());
+
+      //remove a header
+      $message->removeHeader("simple_header");
+
+      unset($headers["simple_header"]);
+
+      $this->assertEquals($headers, $message->getHeaders());
   }
 }

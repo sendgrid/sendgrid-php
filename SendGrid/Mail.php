@@ -310,14 +310,63 @@ class Mail
     return $this;
   }
 
-  public function addAttachment($file)
+  /**
+   * getAttachments
+   * Get the list of file attachments
+   * @return Array of indexed file attachments
+   */
+  public function getAttachments()
   {
-    
+    return $this->attachment_list;
+  }
+
+  /**
+   * setAttachments
+   * add multiple file attachments at once
+   * destroys previous attachment data.
+   * @param array $files - The list of files to attach
+   * @return  the SendGrid\Mail object
+   */
+  public function setAttachments(array $files)
+  {
+    $this->attachment_list = $files;
     return $this;
   }
 
+  /**
+   * setAttachment
+   * Initialize the list of attachments, and add the given file
+   * destroys previous attachment data.
+   * @param String $file - the file to attach
+   * @return the SendGrid\Mail object.
+   */
+  public function setAttachment($file)
+  {
+    $this->attachment_list = array($file);
+    return $this;
+  }
+
+  /**
+   * addAttachment
+   * Add a new email attachment, given the file name.
+   * @param String $file - The file to attach.
+   * @return  the SendGrid\Mail object.
+   */
+  public function addAttachment($file)
+  {
+    $this->attachment_list[] = $file;
+    return $this;
+  }
+
+  /**
+   * removeAttachment
+   * Remove a previously added file attachment, given the file name.
+   * @param  String $file - the file attachment to remove.
+   * @return the SendGrid\Mail object.
+   */
   public function removeAttachment($file)
   {
+    $this->_removeFromList($this->attachment_list, $file);
     return $this;
   }
 
@@ -504,7 +553,7 @@ class Mail
    */
   public function addHeader($key, $value)
   {
-    $this->headers_list[$key] = $value;
+    $this->header_list[$key] = $value;
     return $this;
   }
   
@@ -516,7 +565,7 @@ class Mail
    */
   public function removeHeader($key)
   {
-    unset($this->headers_list[$key]);
+    unset($this->header_list[$key]);
     return $this;
   }
 
