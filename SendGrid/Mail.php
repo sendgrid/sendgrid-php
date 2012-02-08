@@ -440,16 +440,6 @@ class Mail
   }
 
   /**
-   * getFilterSettings
-   * Return filter settings array
-   * @return array
-   */
-  public function getFilterSettings()
-  {
-    return $this->header_list['filters'];
-  }
-
-  /**
    * setFilterSettings
    * Set filter/app settings
    * @param array $filter_settings - array of fiter settings
