@@ -36,6 +36,8 @@ class Mail
         unset($list[$key]);
       }
     }
+    //repack the indices
+    $list = array_values($list);
   }
   
   /**
@@ -126,7 +128,7 @@ class Mail
    * get the Carbon Copy list of recipients
    * @return Array the list of recipients
    */
-  public function getCc()
+  public function getCcs()
   {
     return $this->cc_list;
   }
@@ -180,6 +182,16 @@ class Mail
 
     return $this;
   }
+
+  /**
+   * getBccs
+   * return the list of Blind Carbon Copy recipients
+   * @return Array - the list of Blind Carbon Copy recipients
+   */
+  public function getBccs()
+  {
+    return $this->bcc_list;
+  }
   
   /**
    * setBccs
@@ -189,7 +201,7 @@ class Mail
    */
   public function setBccs($email_list)
   {
-    $this->bcc_list = $email;
+    $this->bcc_list = $email_list;
     return $this;
   }
   
@@ -202,7 +214,7 @@ class Mail
    */
   public function setBcc($email)
   {
-    $this->bcc_list = $email;
+    $this->bcc_list = array($email);
     return $this;
   }
   
@@ -343,7 +355,7 @@ class Mail
    */
   public function removeCategory($category)
   {
-    $this->_removeFromList($this->headers_list['category'], $category);
+    $this->_removeFromList($this->header_list['category'], $category);
     return $this;
   }
 
@@ -402,16 +414,6 @@ class Mail
   {
     $this->header_list['section'][$from_value] = $to_value;
     return $this;
-  }
-
-  /**
-   * getUniqueArguments
-   * Return Unique Arguments List
-   * @return array
-   */
-  public function getUniqueArguments()
-  {
-    return $this->header_list['unique_args'];
   }
 
   /** 
@@ -479,6 +481,16 @@ class Mail
   public function getHeaders()
   {
     return $this->header_list;
+  }
+
+  /**
+   * getHeaders
+   * return the list of headers
+   * @return Array the list of headers
+   */
+  public function getHeadersJson()
+  {
+    return json_encode($this->getHeaders(), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
   }
   
   /**
