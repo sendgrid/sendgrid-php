@@ -19,8 +19,9 @@ class Mail
   {
     
   }
-
-  /* _removeFromList
+  
+  /**
+   * _removeFromList
    * Given a list of key/value pairs, removes the associated keys
    * where a value matches the given string ($item)
    * @param Array $list - the list of key/value pairs
@@ -36,8 +37,9 @@ class Mail
       }
     }
   }
-
-  /* getTos
+  
+  /**
+   * getTos
    * Return the list of recipients
    * @return list of recipients
    */
@@ -45,55 +47,60 @@ class Mail
   {
     return $this->to_list;
   }
-
-  /* setTos
+  
+  /**
+   * setTos
    * Initialize an array for the recipient 'to' field
    * Destroy previous recipient 'to' data.
    * @param Array $email - an array of email addresses
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function setTos(array $email)
   { 
     $this->to_list = $email;
     return $this;
   }
-
-  /* setTo
+  
+  /**
+   * setTo
    * Initialize a single email for the recipient 'to' field
    * Destroy previous recipient 'to' data.
    * @param String $email - a list of email addresses
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function setTo($email_list)
   {
     $this->to_list = array($email_list);
     return $this;
   }
-
-  /* addTo
+  
+  /**
+   * addTo
    * append an email address to the existing list of addresses
    * Preserve previous recipient 'to' data.
    * @param String $email - a single email address
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function addTo($email)
   {
     $this->to_list[] = $email;
     return $this;
   }
-
-  /* removeTo
+  
+  /**
+   * removeTo
    * remove an email address from the list of recipient addresses
    * @param String $email - an email address to be removed
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function removeTo($email)
   {
     $this->_removeFromList($this->to_list, $email);
     return $this;
   }
-
-  /* getFrom
+  
+  /**
+   * getFrom
    * get the from email address
    * @return the from email address
    */
@@ -101,19 +108,21 @@ class Mail
   {
     return $this->from;
   }
-
-  /* setFrom
+  
+  /**
+   * setFrom
    * set the from email
    * @param String $email - an email address
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function setFrom($email)
   {
     $this->from = $email;
     return $this;
   }
-
-  /* getCc
+  
+  /**
+   * getCc
    * get the Carbon Copy list of recipients
    * @return Array the list of recipients
    */
@@ -121,45 +130,49 @@ class Mail
   {
     return $this->cc_list;
   }
-
-  /* setCcs
+  
+  /**
+   * setCcs
    * Set the list of Carbon Copy recipients
    * @param String $email - a list of email addresses
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function setCcs(array $email_list)
   {
     $this->cc_list = $email_list;
     return $this;
   }
-
-  /* setCc
+  
+  /**
+   * setCc
    * Initialize the list of Carbon Copy recipients
    * destroy previous recipient data
    * @param String $email - a list of email addresses
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function setCc($email)
   {
     $this->cc_list = array($email);
     return $this;
   }
-
-  /* addCc
+  
+  /**
+   * addCc
    * Append an address to the list of Carbon Copy recipients
    * @param String $email - an email address
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function addCc($email)
   {
     $this->cc_list[] = $email;
     return $this;
   }
-
-  /* removeCc
+  
+  /**
+   * removeCc
    * remove an address from the list of Carbon Copy recipients
    * @param String $email - an email address
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function removeCc($email)
   {
@@ -167,31 +180,34 @@ class Mail
 
     return $this;
   }
-
-  /* setBccs
+  
+  /**
+   * setBccs
    * set the list of Blind Carbon Copy Recipients
    * @param Array $email_list - the list of email recipients to 
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function setBccs($email_list)
   {
     $this->bcc_list = $email;
     return $this;
   }
-
-  /* setBcc
+  
+  /**
+   * setBcc
    * Initialize the list of Carbon Copy recipients
    * destroy previous recipient Blind Carbon Copy data
    * @param String $email - an email address
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function setBcc($email)
   {
     $this->bcc_list = $email;
     return $this;
   }
-
-  /* addBcc
+  
+  /**
+   * addBcc
    * Append an email address to the list of Blind Carbon Copy 
    * recipients
    * @param String $email - an email address
@@ -202,11 +218,12 @@ class Mail
     return $this;
   }
 
-  /* removeBcc
+  /** 
+   * removeBcc
    * remove an email address from the list of Blind Carbon Copy
    * addresses
    * @param String $email - the email to remove
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function removeBcc($email)
   {
@@ -214,7 +231,8 @@ class Mail
     return $this;
   }
 
-  /* getSubject
+  /** 
+   * getSubject
    * get the email subject
    * @return the email subject
    */
@@ -223,10 +241,11 @@ class Mail
     return $this->subject;
   }
 
-  /* setSubject
+  /** 
+   * setSubject
    * set the email subject
    * @param String $subject - the email subject
-   * @return the SendGridMail object
+   * @return the SendGrid\Mail object
    */
   public function setSubject($subject)
   {
@@ -234,7 +253,8 @@ class Mail
     return $this;
   }
 
-  /* getText
+  /** 
+   * getText
    * get the plain text part of the email
    * @return the plain text part of the email
    */
@@ -243,10 +263,11 @@ class Mail
     return $this->text;
   }
 
-  /* setText
+  /** 
+   * setText
    * Set the plain text part of the email
    * @param String $text - the plain text of the email
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function setText($text)
   {
@@ -254,7 +275,8 @@ class Mail
     return $this;
   }
   
-  /* getHtml
+  /** 
+   * getHtml
    * Get the HTML part of the email
    * @param String $html - the HTML part of the email
    * @return the HTML part of the email.
@@ -264,10 +286,11 @@ class Mail
     return $this->html;
   }
 
-  /* setHTML
+  /** 
+   * setHTML
    * Set the HTML part of the email
    * @param String $html - the HTML part of the email
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function setHtml($html)
   {
@@ -286,11 +309,12 @@ class Mail
     return $this;
   }
 
-  /* setCategories
+  /** 
+   * setCategories
    * Set the list of category headers
    * destroys previous category header data
    * @param Array $category_list - the list of category values
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function setCategories($category_list)
   {
@@ -298,10 +322,11 @@ class Mail
     return $this;
   }
 
-  /* addCategory
+  /** 
+   * addCategory
    * Append a category to the list of categories
    * @param String $category - the new category to append
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function addCategory($category)
   {
@@ -309,11 +334,12 @@ class Mail
     return $this;
   }
 
-  /* removeCategory
+  /** 
+   * removeCategory
    * Given a category name, remove that category from the list
    * of category headers
    * @param String $category - the category to be removed
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function removeCategory($category)
   {
@@ -321,14 +347,15 @@ class Mail
     return $this;
   }
 
-  /* SetSubstitutions
+  /** 
+   * SetSubstitutions
    *
    * Substitute a value for list of values, where each value corresponds
    * to the list emails in a one to one relationship. (IE, value[0] = email[0], 
    * value[1] = email[1])
    *
    * @param array $key_value_pairs - key/value pairs where the value is an array of values
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function setSubstitutions($key_value_pairs)
   {
@@ -336,25 +363,27 @@ class Mail
     return $this;
   }
 
-  /* addSubstitution
+  /** 
+   * addSubstitution
    * Substitute a value for list of values, where each value corresponds
    * to the list emails in a one to one relationship. (IE, value[0] = email[0], 
    * value[1] = email[1])
    *
    * @param string $from_key - the value to be replaced
    * @param array $to_values - an array of values to replace the $from_value
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function addSubstitution($from_value, array $to_values)
   {
-    $this->header_list['sub'][] = $to_values;
+    $this->header_list['sub'][$from_value] = $to_values;
     return $this;
   }
 
-  /* setSection
+  /** 
+   * setSection
    * Set a list of section values
    * @param Array $key_value_pairs
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function setSections(array $key_value_pairs)
   {
@@ -362,11 +391,12 @@ class Mail
     return $this;
   }
   
-  /* addSection
+  /** 
+   * addSection
    * append a section value to the list of section values
    * @param String $from_value - the value to be replaced
    * @param String $to_value - the value to replace
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function addSection($from_value, $to_value)
   {
@@ -374,31 +404,75 @@ class Mail
     return $this;
   }
 
+  /**
+   * getUniqueArguments
+   * Return Unique Arguments List
+   * @return array
+   */
+  public function getUniqueArguments()
+  {
+    return $this->header_list['unique_args'];
+  }
+
+  /** 
+   * setUniqueArguments
+   * Set a list of unique arguments, to be used for tracking purposes
+   * @param array $key_value_pairs - list of unique arguments
+   */
   public function setUniqueArguments(array $key_value_pairs)
   {
-    $this->unique_argument_list = $key_value_pairs;
+    $this->header_list['unique_args'] = $key_value_pairs;
     return $this;
   }
-  
+    
+  /**
+   * addUniqueArgument
+   * Set a key/value pair of unique arguments, to be used for tracking purposes
+   * @param string $key   - key
+   * @param string $value - value
+   */
   public function addUniqueArgument($key, $value)
   {
     $this->unique_argument_list[$key] = $value;
     return $this;
   }
 
+  /**
+   * getFilterSettings
+   * Return filter settings array
+   * @return array
+   */
+  public function getFilterSettings()
+  {
+    return $this->header_list['filters'];
+  }
+
+  /**
+   * setFilterSettings
+   * Set filter/app settings
+   * @param array $filter_settings - array of fiter settings
+   */
   public function setFilterSettings($filter_settings)
   {
-    $this->filter_setting_list = $filter_settings;
+    $this->header_list['filters'] = $filter_settings;
     return $this;
   }
   
+  /**
+   * addFilterSetting
+   * Append a filter setting to the list of filter settings
+   * @param string $filter_name     - filter name
+   * @param string $parameter_name  - parameter name
+   * @param string $parameter_value - setting value 
+   */
   public function addFilterSetting($filter_name, $parameter_name, $parameter_value)
   {
-    $this->filter_setting_list[] = array($filter_name, $parameter_name, $parameter_value);
+    $this->header_list['filters'][$filter_name]['settings'][$parameter_name] = $parameter_value;
     return $this;
   }
-
-  /* getHeaders
+  
+  /**
+   * getHeaders
    * return the list of headers
    * @return Array the list of headers
    */
@@ -406,20 +480,22 @@ class Mail
   {
     return $this->header_list;
   }
-
-  /* setHeaders
+  
+  /**
+   * setHeaders
    * Sets the list headers
    * destroys previous header data
    * @param Array $key_value_pairs - the list of header data
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function setHeaders($key_value_pairs)
   {
     $this->header_list = $key_value_pairs;
     return $this;
   }
-  
-  /* addHeaders
+    
+  /**
+   * addHeaders
    * append the header to the list of headers
    * @param String $key - the header key
    * @param String $value - the header value
@@ -429,11 +505,12 @@ class Mail
     $this->headers_list[$key] = $value;
     return $this;
   }
-
-  /* removeHeaders
+  
+  /**
+   * removeHeaders
    * remove a header key
    * @param String $key - the key to remove
-   * @return the SendGridMail object.
+   * @return the SendGrid\Mail object.
    */
   public function removeHeader($key)
   {
