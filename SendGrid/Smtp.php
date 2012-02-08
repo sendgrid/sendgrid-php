@@ -67,9 +67,23 @@ class Smtp extends Api implements MailInterface
   	$message->setBody($mail->getHtml(), 'text/html');
   	$message->setTo($mail->getTos());
   	$message->addPart($mail->getText(), 'text/plain');
-    
+    $message->setCc($mail->getCcs());
+    $message->setBcc($mail->getBccs());
+
+    $attachments = $mail->getAttachments();
+
+    //add any attachments that were added
+    if($attachments)
+    {
+      foreach($attachments as $attachment)
+      {
+        $message->attach(\Swift_Attachment::fromPath($attachment));
+      }
+    }
+
     //add all the headers
-    $headers->addTextHeader('X-SMTPAPI', $message->getHeadersJson()));
+    $headers = $message->getHeaders();
+    $headers->addTextHeader('X-SMTPAPI', $mail->getHeadersJson());
 
   	return $message;
   }
