@@ -61,12 +61,12 @@ class Smtp extends Api implements MailInterface
    */
   private function _mapToSwift(Mail $mail)
   {
-  	$message = new \Swift_Message($mail->getSubject());
+    $message = new \Swift_Message($mail->getSubject());
 
-  	$message->setFrom($mail->getFrom());
-  	$message->setBody($mail->getHtml(), 'text/html');
-  	$message->setTo($mail->getTos());
-  	$message->addPart($mail->getText(), 'text/plain');
+    $message->setFrom($mail->getFrom());
+    $message->setBody($mail->getHtml(), 'text/html');
+    $message->setTo($mail->getTos());
+    $message->addPart($mail->getText(), 'text/plain');
     $message->setCc($mail->getCcs());
     $message->setBcc($mail->getBccs());
 
