@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>SendGrid_loader.php</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="container.css">
+    <script type="text/javascript" src="yahoo-dom-event.js"></script>
+    <script type="text/javascript" src="container-min.js"></script>
+  </head>
+
+  <body class="yui-skin-sam">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr><td class="title">SendGrid_loader.php</td></tr>
+      <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
+
+      <tr>
+        <td width="100%">
+          <table cellpadding="1" border="0" width="100%">
+            <tr>
+              <td class="headerItem" width="20%">Current file:</td>
+              <td class="headerValue" width="80%"><a href="index.html">/home/cj/home/sendgrid/sendgrid-php</a>/<a href="SendGrid_loader.php.html">SendGrid_loader.php</a></td>
+            </tr>
+            <tr>
+              <td class="legendItem" width="20%">Legend:</td>
+              <td class="legendValue" width="80%">
+                <span class="legendCov">executed</span>
+                <span class="legendNoCov">not executed</span>
+                <span class="legendDeadCode">dead code</span>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td>
+      </tr>
+    </table>
+
+    <br />
+
+    <center>
+      <table width="90%" cellpadding="2" cellspacing="1" border="0">
+        <tr>
+          <td class="tableHead" width="30%">&nbsp;</td>
+          <td class="tableHead" colspan="10">Coverage</td>
+        </tr>
+        <tr>
+          <td class="tableHead">&nbsp;</td>
+          <td class="tableHead" colspan="3">Classes</td>
+          <td class="tableHead" colspan="4">Functions / Methods</td>
+          <td class="tableHead" colspan="3">Lines</td>
+        </tr>
+        <tr>
+          <td class="coverDirectory">Total</td>
+          <td class="coverBar">
+             <div class="coverBarOutline" title="100.00%">
+                <div class="size snow"  style="width:100%" title="100.00%"></div>
+             </div>
+          </td>
+          <td class="coverPerNone">100.00%</td>
+          <td class="coverNumNone">&nbsp;</td>
+          <td class="coverBar">
+            <div class="coverBarOutline" title="100.00%">
+                <div class="size snow"  style="width:100%" title="100.00%"></div>
+            </div>
+          </td>
+          <td class="coverPerNone">100.00%</td>
+          <td class="coverNumNone">&nbsp;</td>
+          <td class="crap"><acronym title="Change Risk Anti-Patterns (CRAP) Index">CRAP</acronym></td>
+          <td class="coverBar">
+            <div class="coverBarOutline" title="100.00%">
+                <div class="size chameleon"  style="width:100%" title="100.00%"></div>
+            </div>
+          </td>
+          <td class="coverPerHi">100.00%</td>
+          <td class="coverNumHi">6 / 6</td>
+        </tr>
+
+        <tr>
+          <td class="coverFile" colspan="4"><a href="#5">sendGridLoader($string)</a></td>
+          <td class="coverBar">
+            <div class="coverBarOutline" title="100.00%">
+                <div class="size chameleon"  style="width:100%" title="100.00%"></div>
+            </div>
+          </td>
+          <td class="coverPerHi">100.00%</td>
+          <td class="coverNumHi">1 / 1</td>
+          <td class="crap">0</td>
+          <td class="coverBar">
+              <div class="coverBarOutline" title="100.00%">
+                  <div class="size chameleon"  style="width:100%" title="100.00%"></div>
+              </div>
+          </td>
+          <td class="coverPerHi">100.00%</td>
+          <td class="coverNumHi">6 / 6</td>
+        </tr>
+
+
+      </table>
+    </center>
+
+    <br />
+
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td><br /></td>
+      </tr>
+      <tr>
+        <td>
+<pre class="source">
+<span class="lineNum" id="container1"><a name="1"></a><a href="#1" id="line1">       1</a> </span>                : &lt;?php                                             
+<span class="lineNum" id="container2"><a name="2"></a><a href="#2" id="line2">       2</a> </span>                :                                                   
+<span class="lineNum" id="container3"><a name="3"></a><a href="#3" id="line3">       3</a> </span>                : define(&quot;ROOT_DIR&quot;, __dir__ . DIRECTORY_SEPARATOR);
+<span class="lineNum" id="container4"><a name="4"></a><a href="#4" id="line4">       4</a> </span>                :                                                   
+<span class="lineNum" id="container5"><a name="5"></a><a href="#5" id="line5">       5</a> </span>                : function sendGridLoader($string)                  
+<span class="lineNum" id="container6"><a name="6"></a><a href="#6" id="line6">       6</a> </span>                : {                                                 
+<span class="lineNum" id="container7"><a name="7"></a><a href="#7" id="line7">       7</a> </span><span class="lineCov">              1 :   if(preg_match(&quot;/^SendGrid/&quot;, $string))          </span>
+<span class="lineNum" id="container8"><a name="8"></a><a href="#8" id="line8">       8</a> </span><span class="lineCov">              1 :   {                                               </span>
+<span class="lineNum" id="container9"><a name="9"></a><a href="#9" id="line9">       9</a> </span><span class="lineCov">              1 :     $file = str_replace('\\', '/', &quot;$string.php&quot;);</span>
+<span class="lineNum" id="container10"><a name="10"></a><a href="#10" id="line10">      10</a> </span><span class="lineCov">              1 :     require_once ROOT_DIR . $file;                </span>
+<span class="lineNum" id="container11"><a name="11"></a><a href="#11" id="line11">      11</a> </span><span class="lineCov">              1 :   }                                               </span>
+<span class="lineNum" id="container12"><a name="12"></a><a href="#12" id="line12">      12</a> </span><span class="lineCov">              1 : }                                                 </span>
+<span class="lineNum" id="container13"><a name="13"></a><a href="#13" id="line13">      13</a> </span>                :                                                   
+
+</pre>
+        </td>
+      </tr>
+    </table>
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.1.1</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.2-1ubuntu4.11</a> and PHPUnit 3.6.3 at Thu Feb 9 15:26:56 PST 2012.</td></tr>
+    </table>
+
+    <br />
+
+    <script type="text/javascript">
+      //<![CDATA[
+      $E = YAHOO.util.Event;
+      YAHOO.namespace("phpunit.container");
+      YAHOO.phpunit.container.panelsData = {
+        "panel7": {
+          "header": "1 test covers line 7",
+          "body": "<ul><li class=\"testPassed\">MailTest::testToAccessors</li></ul>",
+          "footer": ""
+        },
+        "panel8": {
+          "header": "1 test covers line 8",
+          "body": "<ul><li class=\"testPassed\">MailTest::testToAccessors</li></ul>",
+          "footer": ""
+        },
+        "panel9": {
+          "header": "1 test covers line 9",
+          "body": "<ul><li class=\"testPassed\">MailTest::testToAccessors</li></ul>",
+          "footer": ""
+        },
+        "panel10": {
+          "header": "1 test covers line 10",
+          "body": "<ul><li class=\"testPassed\">MailTest::testToAccessors</li></ul>",
+          "footer": ""
+        },
+        "panel11": {
+          "header": "1 test covers line 11",
+          "body": "<ul><li class=\"testPassed\">MailTest::testToAccessors</li></ul>",
+          "footer": ""
+        },
+        "panel12": {
+          "header": "1 test covers line 12",
+          "body": "<ul><li class=\"testPassed\">MailTest::testToAccessors</li></ul>",
+          "footer": ""
+        },
+      "dummy": ""
+      };
+
+      YAHOO.phpunit.container.prepare = function (e) {
+        var elemId = $E.getTarget(e).id;
+        var line = elemId.substr(4);
+        var panelId = "panel" + line;
+        var containerId = "container" + line;
+
+        var panelData = YAHOO.phpunit.container.panelsData[panelId];
+
+        var panel = new YAHOO.widget.Panel(panelId, { visible:false, draggable:false, close:true } );
+        panel.setHeader(panelData["header"]);
+        panel.setBody(panelData["body"]);
+        panel.setFooter(panelData["footer"]);
+        panel.render(containerId);
+
+        $E.addListener(elemId, "click", panel.show, panel, true);
+        $E.removeListener(elemId, "mouseover");
+      };
+
+      function init() {
+        var ypc = YAHOO.phpunit.container;
+        for (var panelId in ypc.panelsData) {
+          var elemId = "line" + panelId.substr(5);
+          $E.addListener(elemId, "mouseover", ypc.prepare);
+        }
+      }
+
+      $E.addListener(window, "load", init);
+      //]]>
+    </script>
+  </body>
+</html>

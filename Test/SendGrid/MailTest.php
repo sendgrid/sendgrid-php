@@ -1,7 +1,5 @@
 <?php 
 
-require_once __dir__ . "/../../SendGrid/Mail.php";
-
 
 class MailTest extends PHPUnit_Framework_TestCase
 {
