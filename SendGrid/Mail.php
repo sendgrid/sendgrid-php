@@ -64,12 +64,12 @@ class Mail
    * setTos
    * Initialize an array for the recipient 'to' field
    * Destroy previous recipient 'to' data.
-   * @param Array $email - an array of email addresses
+   * @param Array $email_list - an array of email addresses
    * @return the SendGrid\Mail object.
    */
-  public function setTos(array $email)
+  public function setTos(array $email_list)
   { 
-    $this->to_list = $email;
+    $this->to_list = $email_list;
     return $this;
   }
   
@@ -80,9 +80,9 @@ class Mail
    * @param String $email - a list of email addresses
    * @return the SendGrid\Mail object.
    */
-  public function setTo($email_list)
+  public function setTo($email)
   {
-    $this->to_list = array($email_list);
+    $this->to_list = array($email);
     return $this;
   }
   
@@ -93,21 +93,24 @@ class Mail
    * @param String $email - a single email address
    * @return the SendGrid\Mail object.
    */
-  public function addTo($email)
+  public function addTo($email, $name=null)
   {
-    $this->to_list[] = $email;
+    $this->to_list[] = ($name ? $name . "<" . $email . ">" : $email);
+   
     return $this;
   }
   
   /**
    * removeTo
    * remove an email address from the list of recipient addresses
-   * @param String $email - an email address to be removed
+   * @param String $search_term - the regex value to be removed
    * @return the SendGrid\Mail object.
    */
-  public function removeTo($email)
+  public function removeTo($search_term)
   {
-    $this->_removeFromList($this->to_list, $email);
+    $this->to_list = array_values(array_filter($this->to_list, function($item) use($search_term) {
+      return !preg_match("/" . $search_term . "/", $item);
+    }));
     return $this;
   }
   
