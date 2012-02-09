@@ -29,9 +29,9 @@ class Mail
    */
   private function _removeFromList(&$list, $item)
   {
-    foreach($list as $key => $val)
+    foreach ($list as $key => $val)
     {
-      if($val == $item)
+      if ($val == $item)
       {
         unset($list[$key]);
       }

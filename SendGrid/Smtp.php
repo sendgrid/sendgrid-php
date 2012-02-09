@@ -40,18 +40,18 @@ class Smtp extends Api implements MailInterface
    */
   private function _getSwiftInstance($port)
   {
-  	if(!isset($this->swift_instances[$port]))
-  	{
+    if (!isset($this->swift_instances[$port]))
+    {
       $transport = \Swift_SmtpTransport::newInstance('smtp.sendgrid.net', $port);
-    	$transport->setUsername($this->username);
-    	$transport->setPassword($this->password);
+      $transport->setUsername($this->username);
+      $transport->setPassword($this->password);
 
       $swift = \Swift_Mailer::newInstance($transport);
 
       $this->swift_instances[$port] = $swift;
-  	}
-  	
-  	return $this->swift_instances[$port];
+    }
+
+    return $this->swift_instances[$port];
   }
 
   /* _mapToSwift
@@ -73,9 +73,9 @@ class Smtp extends Api implements MailInterface
     $attachments = $mail->getAttachments();
 
     //add any attachments that were added
-    if($attachments)
+    if ($attachments)
     {
-      foreach($attachments as $attachment)
+      foreach ($attachments as $attachment)
       {
         $message->attach(\Swift_Attachment::fromPath($attachment));
       }
@@ -85,7 +85,7 @@ class Smtp extends Api implements MailInterface
     $headers = $message->getHeaders();
     $headers->addTextHeader('X-SMTPAPI', $mail->getHeadersJson());
 
-  	return $message;
+    return $message;
   }
 
   /* send
@@ -95,7 +95,6 @@ class Smtp extends Api implements MailInterface
    */
   public function send(Mail $mail)
   {
-
     $swift = $this->_getSwiftInstance($this->port);
 
     $message = $this->_mapToSwift($mail);
