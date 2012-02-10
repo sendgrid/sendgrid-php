@@ -22,10 +22,8 @@ class SendGrid
 
     if($this->$name != null)
     {
-      return $this->name;
+      return $this->$name;
     }
-
-    echo "creating new instance";
 
     $api = $this->namespace . "\\" . ucwords($api);
     $class_name = str_replace('\\', '/', "$api.php");

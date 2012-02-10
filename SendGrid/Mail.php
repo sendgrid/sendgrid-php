@@ -169,14 +169,10 @@ class Mail
    */
   public function useHeaders()
   {
-    if($this->_preferNotToUseHeaders() && !$this->_isHeadersRequired())
-    {
-      return false;
-    }
-    return true;
+    return !($this->_preferNotToUseHeaders() && !$this->_isHeadersRequired());
   }
 
-  public function tomagotchi($preference)
+  public function setRecipientsInHeader($preference)
   {
     $this->use_headers = $preference;
 
@@ -207,7 +203,7 @@ class Mail
    */
   private function _preferNotToUseHeaders()
   {
-    if (count($this->getBccs()) > 0 || count($this->getBCcs()) > 0 || ($this->use_headers !== null && !$this->use_headers))
+    if (count($this->getBccs()) > 0 || count($this->getCcs()) > 0 || ($this->use_headers !== null && !$this->use_headers))
     {
       return true;
     }

@@ -488,4 +488,36 @@ class MailTest extends PHPUnit_Framework_TestCase
 
       $this->assertEquals($headers, $message->getHeaders());
   }
+
+  public function testUseHeaders()
+  {
+    $mail = new SendGrid\Mail();
+
+    $mail->addTo('foo@bar.com')->
+       addBcc('baa@bar.com')->
+       setFrom('boo@foo.com')->
+       setSubject('Subject')->
+       setHtml('Hello You');
+    
+    $this->assertFalse($mail->useHeaders());
+
+    $mail->removeBcc('baa@bar.com');
+    $this->assertTrue($mail->useHeaders());
+
+    $mail->addCc('bot@bar.com');
+    $this->assertFalse($mail->useHeaders());
+
+    $mail->removeCc('bot@bar.com')->
+      setRecipientsinHeader(true);
+    $this->assertTrue($mail->useHeaders());
+
+    $mail->setRecipientsinHeader(false);
+    $this->assertFalse($mail->useHeaders());
+
+    $mail->
+      addBcc('baa@bar.com')->
+      addAttachment('attachment.ext');
+
+    $this->assertTrue($mail->useHeaders());
+  }
 }

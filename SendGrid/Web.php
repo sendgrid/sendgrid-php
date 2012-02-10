@@ -106,12 +106,6 @@ class Web extends Api implements MailInterface
     if(!$mail->useHeaders())
     {
       $data = http_build_query($data);
-
-      echo " \r\n\r\n sending web non-headers \r\n\r\n";
-    }
-    else
-    {
-      echo "\r\n\r\n sending web headers \r\n\r\n";
     }
 
     $request = $this->domain . $this->endpoint;
