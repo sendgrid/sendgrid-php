@@ -5,8 +5,8 @@ namespace SendGrid;
 class Web extends Api implements MailInterface
 {
 
-  private $domain = "http://sendgrid.com/";
-  private $endpoint = "api/mail.send.json";
+  protected $domain = "http://sendgrid.com/";
+  protected $endpoint = "api/mail.send.json";
 
   /**
    * __construct
