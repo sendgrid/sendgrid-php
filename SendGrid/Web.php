@@ -7,7 +7,12 @@ class Web extends Api implements MailInterface
 
   private $domain = "http://sendgrid.com/";
   private $endpoint = "api/mail.send.json";
-  public function __construct()
+
+  /**
+   * __construct
+   * Create a new Web instance
+   */
+  public function __construct($username, $password)
   {
     call_user_func_array("parent::__construct", func_get_args());
   }
@@ -18,7 +23,7 @@ class Web extends Api implements MailInterface
    * @param  Mail   $mail [description]
    * @return String - the data query string to be posted
    */
-  private function _prepMessageData(Mail $mail)
+  protected function _prepMessageData(Mail $mail)
   {
     $params = 
     array(
@@ -46,7 +51,7 @@ class Web extends Api implements MailInterface
    * @param  String $token - the name of parameter
    * @return String - a url part that can be concatenated to a url request
    */
-  private function _arrayToUrlPart($array, $token)
+  protected function _arrayToUrlPart($array, $token)
   {
     $string = "";
 

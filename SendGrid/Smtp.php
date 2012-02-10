@@ -11,7 +11,7 @@ class Smtp extends Api implements MailInterface
 
   //the list of port instances, to be recycled
   private $swift_instances = array();
-  private $port;
+  protected $port;
 
   public function __construct($username, $password)
   {
@@ -59,7 +59,7 @@ class Smtp extends Api implements MailInterface
    * @param Mail $mail - the SendGridMail object
    * @return the SwiftMessage object
    */
-  private function _mapToSwift(Mail $mail)
+  protected function _mapToSwift(Mail $mail)
   {
     $message = new \Swift_Message($mail->getSubject());
 
