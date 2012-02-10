@@ -26,7 +26,20 @@ class WebTest extends PHPUnit_Framework_TestCase
     $mock = new WebMock("foo", "bar");
     $data = $mock->testPrepMessageData($message);
 
-    $this->assertEquals("api_user=foo&api_key=bar&subject=foobar+subject&text=foobar+text&from=bar%40foo.com&x-smtpapi=null&to[]=foo%40bar.com",$data);
+    $expected = 
+    array(
+      'api_user' => 'foo',
+      'api_key' => 'bar',
+      'subject' => 'foobar subject',
+      'html' => null,
+      'text' => 'foobar text',
+      'from' => 'bar@foo.com',
+      'to' => 'bar@foo.com',
+      'x-smtpapi' => '{"to":["foo@bar.com"]}',
+      'files[mynewattachment.jpg]' => '@mynewattachment.jpg'
+    );
+
+    $this->assertEquals($expected, $data);
 
 
     $array = 
@@ -52,8 +65,7 @@ class WebTest extends PHPUnit_Framework_TestCase
       setFrom('bar@foo.com')->
       setSubject('foobar subject')->
       setText('foobar text')->
-      addTo('foo@bar.com')->
-      addAttachment("mynewattachment.jpg");
+      addTo('foo@bar.com');
 
     $response = $sendgrid->web->send($message);
 

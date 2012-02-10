@@ -27,13 +27,23 @@ class Mail
    * @param Array $list - the list of key/value pairs
    * @param String $item - the value to be removed
    */
-  private function _removeFromList(&$list, $item)
+  private function _removeFromList(&$list, $item, $key_field = null)
   {
     foreach ($list as $key => $val)
     {
-      if ($val == $item)
+      if($key_field)
       {
-        unset($list[$key]);
+        if($val[$key_field] == $item)
+        {
+          unset($list[$key]);
+        }
+      }
+      else
+      {
+        if ($val == $item)
+        {
+          unset($list[$key]);
+        } 
       }
     }
     //repack the indices
@@ -329,7 +339,12 @@ class Mail
    */
   public function setAttachments(array $files)
   {
-    $this->attachment_list = $files;
+    $this->attachment_list = array();
+    foreach($files as $file)
+    {
+      $this->addAttachment($file);
+    }
+
     return $this;
   }
 
@@ -342,7 +357,7 @@ class Mail
    */
   public function setAttachment($file)
   {
-    $this->attachment_list = array($file);
+    $this->attachment_list = array($this->_getAttachmentInfo($file));
     return $this;
   }
 
@@ -354,7 +369,7 @@ class Mail
    */
   public function addAttachment($file)
   {
-    $this->attachment_list[] = $file;
+    $this->attachment_list[] = $this->_getAttachmentInfo($file);
     return $this;
   }
 
@@ -366,8 +381,15 @@ class Mail
    */
   public function removeAttachment($file)
   {
-    $this->_removeFromList($this->attachment_list, $file);
+    $this->_removeFromList($this->attachment_list, $file, "file");
     return $this;
+  }
+
+  private function _getAttachmentInfo($file)
+  {
+    $info = pathinfo($file);
+    $info['file'] = $file;
+    return $info;
   }
 
   /** 

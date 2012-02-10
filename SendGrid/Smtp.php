@@ -77,7 +77,7 @@ class Smtp extends Api implements MailInterface
     {
       foreach ($attachments as $attachment)
       {
-        $message->attach(\Swift_Attachment::fromPath($attachment));
+        $message->attach(\Swift_Attachment::fromPath($attachment['file']));
       }
     }
 

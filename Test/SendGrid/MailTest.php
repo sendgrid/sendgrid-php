@@ -204,14 +204,22 @@ class MailTest extends PHPUnit_Framework_TestCase
 
     $message->setAttachments($attachments);
 
-    $this->assertEquals($attachments, $message->getAttachments());
+    $msg_attachments = $message->getAttachments();
+
+    $this->assertEquals(count($attachments), count($msg_attachments));
+
+    for($i = 0; $i < count($attachments); $i++)
+    {
+      $this->assertEquals($attachments[$i], $msg_attachments[$i]['file']);
+    }
 
     //ensure that addAttachment appends to the list of attachments
     $message->addAttachment("../file_4.png");
 
     $attachments[] = "../file_4.png";
 
-    $this->assertEquals($attachments, $message->getAttachments());
+    $msg_attachments = $message->getAttachments();
+    $this->assertEquals($attachments[count($attachments) - 1], $msg_attachments[count($msg_attachments) - 1]['file']);
 
 
     //Setting an attachment removes all other files

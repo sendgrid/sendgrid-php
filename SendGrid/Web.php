@@ -25,6 +25,15 @@ class Web extends Api implements MailInterface
    */
   protected function _prepMessageData(Mail $mail)
   {
+    // workaround for posting recipients (in case there are a lot)
+    $headers = $mail->getHeaders();
+    $headers['to'] = $mail->getTos();
+    $mail->setHeaders($headers);
+
+    /* the api expects a 'to' parameter, but this parameter will be ignored
+     * since we're sending the recipients through the header. The from
+     * address will be used as a placeholder.
+     */
     $params = 
     array(
       'api_user'  => $this->username,
@@ -33,13 +42,17 @@ class Web extends Api implements MailInterface
       'html'      => $mail->getHtml(),
       'text'      => $mail->getText(),
       'from'      => $mail->getFrom(),
+      'to'        => $mail->getFrom(),
       'x-smtpapi' => $mail->getHeadersJson()
     );
 
-    $params = http_build_query($params);
-    $params.= $this->_arrayToUrlPart($mail->getTos(), "to");
-    $params.= $this->_arrayToUrlPart($mail->getBccs(), "bcc");
-    $params.= $this->_arrayToUrlPart($mail->getCcs(), "cc");
+    if($mail->getAttachments())
+    {
+      foreach($mail->getAttachments() as $attachment)
+      {
+        $params['files['.$attachment['filename'].'.'.$attachment['extension'].']'] = '@'.$attachment['file'];
+      }
+    }
 
     return $params;
   }
@@ -70,13 +83,19 @@ class Web extends Api implements MailInterface
    * send
    * Send an email
    * @param  Mail   $mail - The message to send
-   * @return [type]
+   * @return String the json response
    */
   public function send(Mail $mail)
   {
     $data = $this->_prepMessageData($mail);
 
     $request = $this->domain . $this->endpoint;
+
+    // we'll append the Bcc and Cc recipients to the url endpoint (GET)
+    // so that we can still post attachments (via cURL array).
+    $request.= "?" .
+      substr($this->_arrayToUrlPart($mail->getBccs(), "bcc"), 1) .
+      $this->_arrayToUrlPart($mail->getCcs(), "cc");
 
     $session = curl_init($request);
     curl_setopt ($session, CURLOPT_POST, true);
