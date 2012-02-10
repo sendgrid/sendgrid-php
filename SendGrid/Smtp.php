@@ -63,9 +63,22 @@ class Smtp extends Api implements MailInterface
   {
     $message = new \Swift_Message($mail->getSubject());
 
+    $recipients = array();
+    foreach($mail->getTos() as $recipient)
+    {
+      if(preg_match("/(.*)<(.*)>/", $recipient, $results))
+      {
+        $recipients[trim($results[2])] = trim($results[1]);
+      }
+      else
+      {
+        $recipients[] = $recipient;
+      }
+    }
+
     $message->setFrom($mail->getFrom());
     $message->setBody($mail->getHtml(), 'text/html');
-    $message->setTo($mail->getTos());
+    $message->setTo($recipients);
     $message->addPart($mail->getText(), 'text/plain');
     $message->setCc($mail->getCcs());
     $message->setBcc($mail->getBccs());
