@@ -409,6 +409,18 @@ class Mail
   }
 
   /** 
+   * setCategory
+   * Clears the category list and adds the given category
+   * @param String $category - the new category to append
+   * @return the SendGrid\Mail object.
+   */
+  public function setCategory($category)
+  {
+    $this->header_list['category'] = array($category);
+    return $this;
+  }
+
+  /** 
    * addCategory
    * Append a category to the list of categories
    * @param String $category - the new category to append

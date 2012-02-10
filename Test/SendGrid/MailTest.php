@@ -236,6 +236,9 @@ class MailTest extends PHPUnit_Framework_TestCase
   {
     $message = new SendGrid\Mail();
 
+    $message->setCategory('category_0');
+    $this->assertEquals("{\"category\":[\"category_0\"]}", $message->getHeadersJson());
+
     $categories = array(
                     "category_1", 
                     "category_2", 
