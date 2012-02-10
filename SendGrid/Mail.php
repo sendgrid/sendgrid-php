@@ -13,7 +13,7 @@ class Mail
           $text,
           $html,
           $attachment_list,
-          $header_list;
+          $header_list = array();
 
   public function __construct()
   {
@@ -554,6 +554,10 @@ class Mail
    */
   public function getHeadersJson()
   {
+    if (count($this->getHeaders()) <= 0)
+    {
+      return "{}";
+    }
     return json_encode($this->getHeaders(), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
   }
   
