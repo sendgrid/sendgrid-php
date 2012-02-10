@@ -62,23 +62,16 @@ class Smtp extends Api implements MailInterface
   protected function _mapToSwift(Mail $mail)
   {
     $message = new \Swift_Message($mail->getSubject());
-
-    $recipients = array();
-    foreach($mail->getTos() as $recipient)
-    {
-      if(preg_match("/(.*)<(.*)>/", $recipient, $results))
-      {
-        $recipients[trim($results[2])] = trim($results[1]);
-      }
-      else
-      {
-        $recipients[] = $recipient;
-      }
-    }
-
+    
+    /*
+     * Since we're sending transactional email, we want the message to go to one person at a time, rather
+     * than a bulk send. In order to do this, we'll have to send the list of recipients through the headers
+     * but Swift still requires a 'to' address. So we'll falsify it with the from address, as it will be 
+     * ignored anyway.
+     */
+    $message->setTo($mail->getFrom());
     $message->setFrom($mail->getFrom());
     $message->setBody($mail->getHtml(), 'text/html');
-    $message->setTo($recipients);
     $message->addPart($mail->getText(), 'text/plain');
     $message->setCc($mail->getCcs());
     $message->setBcc($mail->getBccs());
@@ -93,6 +86,11 @@ class Smtp extends Api implements MailInterface
         $message->attach(\Swift_Attachment::fromPath($attachment['file']));
       }
     }
+
+    //here we'll add the recipients list to the headers
+    $headers = $mail->getHeaders();
+    $headers['to'] = $mail->getTos();
+    $mail->setHeaders($headers);
 
     //add all the headers
     $headers = $message->getHeaders();
