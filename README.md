@@ -1,5 +1,5 @@
 # sendgrid-php #
-This library allows you to quickly and easily send emails through SendGrid using php
+This library allows you to quickly and easily send emails through SendGrid using PHP.
 
 ## License ##
 Licensed under the MIT License.
@@ -17,17 +17,20 @@ This library implements a common interface to make it very easy to use either AP
 
 ## Usage ##
 To begin using this library, you must first include it
-```php
+
+```
 include 'path/to/sendgrid-php/SendGrid_loader.php';
 ```
 
 Initialize the SendGrid object with your SendGrid credentials
-```php
+
+```
 $sendgrid = new SendGrid('username', 'password');
 ```
 
 Create a new SendGrid Mail object and add your message details
-```php
+
+```
 $mail = new SendGrid\Mail();
 $mail->addTo('foo@bar.com')->
        setFrom('me@bar.com')->
@@ -37,10 +40,12 @@ $mail->addTo('foo@bar.com')->
 ```
 
 Send it using the API of your choice (SMTP or Web)
-```php
+
+```
 $sendgrid->smtp->send($mail);
 ```
 Or 
-```php
+
+```
 $sendgrid->web->send($mail);
 ```
