@@ -2,9 +2,13 @@
 
 class SendGrid
 {
-  private $namespace = "SendGrid",
-          $username,
-          $password;
+  protected $namespace = "SendGrid",
+            $username,
+            $password;
+
+  // Available transport mechanisms
+  protected $web,
+            $smtp;
   
   public function __construct($username, $password)
   {
@@ -15,7 +19,15 @@ class SendGrid
   public function __get($api)
   {
     $name = $api;
-    $api = "$this->namespace\\".ucwords($api);
+
+    if($this->$name != null)
+    {
+      return $this->name;
+    }
+
+    echo "creating new instance";
+
+    $api = $this->namespace . "\\" . ucwords($api);
     $class_name = str_replace('\\', '/', "$api.php");
     $file = __dir__ . DIRECTORY_SEPARATOR . $class_name;
 
