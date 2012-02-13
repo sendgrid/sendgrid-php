@@ -25,10 +25,6 @@ class Web extends Api implements MailInterface
    */
   protected function _prepMessageData(Mail $mail)
   {
-    // workaround for posting recipients (in case there are a lot)
-    $headers = $mail->getHeaders();
-    $headers['to'] = $mail->getTos();
-    $mail->setHeaders($headers);
 
     /* the api expects a 'to' parameter, but this parameter will be ignored
      * since we're sending the recipients through the header. The from
@@ -46,6 +42,23 @@ class Web extends Api implements MailInterface
       'x-smtpapi' => $mail->getHeadersJson()
     );
 
+    // determine if we should send our recipients through our headers,
+    // and set the properties accordingly
+    if($mail->useHeaders())
+    {
+      // workaround for posting recipients through SendGrid headers
+      $headers = $mail->getHeaders();
+      $headers['to'] = $mail->getTos();
+      $mail->setHeaders($headers);
+
+      $params['x-smtpapi'] = $mail->getHeadersJson();
+    }
+    else
+    {
+      $params['to'] = $mail->getTos();
+    }
+
+    
     if($mail->getAttachments())
     {
       foreach($mail->getAttachments() as $attachment)
@@ -88,6 +101,18 @@ class Web extends Api implements MailInterface
   public function send(Mail $mail)
   {
     $data = $this->_prepMessageData($mail);
+
+    //if we're not using headers, we need to send a url friendly post
+    if(!$mail->useHeaders())
+    {
+      $data = http_build_query($data);
+
+      echo " \r\n\r\n sending web non-headers \r\n\r\n";
+    }
+    else
+    {
+      echo "\r\n\r\n sending web headers \r\n\r\n";
+    }
 
     $request = $this->domain . $this->endpoint;
 

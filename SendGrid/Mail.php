@@ -15,6 +15,8 @@ class Mail
           $attachment_list,
           $header_list = array();
 
+  protected $use_headers;
+
   public function __construct()
   {
     
@@ -156,6 +158,65 @@ class Mail
   {
     $this->cc_list = $email_list;
     return $this;
+  }
+
+  /**
+   * useHeaders
+   * Checks to see whether or not we can or should you headers. In most cases,
+   * we prefer to send our recipients through the headers, but in some cases,
+   * we actually don't want to. However, there are certain circumstances in 
+   * which we have to.
+   */
+  public function useHeaders()
+  {
+    if($this->_preferNotToUseHeaders() && !$this->_isHeadersRequired())
+    {
+      return false;
+    }
+    return true;
+  }
+
+  public function tomagotchi($preference)
+  {
+    $this->use_headers = $preference;
+
+    return $this;
+  }
+
+  /**
+   * isHeaderRequired
+   * determines whether or not we need to force recipients through the smtpapi headers
+   * @return boolean, if true headers are required
+   */
+  private function _isHeadersRequired()
+  {
+    if(count($this->getAttachments()) > 0 || $this->use_headers )
+    {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * _preferNotToUseHeaders
+   * There are certain cases in which headers are not a preferred choice
+   * to send email, as it limits some basic email functionality. Here, we
+   * check for any of those rules, and add them in to decide whether or 
+   * not to use headers
+   * @return boolean, if true we don't 
+   */
+  private function _preferNotToUseHeaders()
+  {
+    if (count($this->getBccs()) > 0 || count($this->getBCcs()) > 0 || ($this->use_headers !== null && !$this->use_headers))
+    {
+      return true;
+    }
+    return false;
+  }
+
+  public function forceHeaders()
+  {
+    
   }
   
   /**
