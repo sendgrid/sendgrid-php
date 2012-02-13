@@ -442,6 +442,9 @@ class MailTest extends PHPUnit_Framework_TestCase
   {
     $message = new SendGrid\Mail();
 
+    $this->assertEquals("{}", $message->getHeadersJson());
+
+
     $headers = 
       array(
         "header_1" => 
@@ -461,7 +464,6 @@ class MailTest extends PHPUnit_Framework_TestCase
             )
           )
       );
-
 
 
       $message->setHeaders($headers);
