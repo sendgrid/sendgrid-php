@@ -16,14 +16,4 @@ class WebMock extends SendGrid\Web
   {
     return $this->_arrayToUrlPart($array, $token);
   }
-
-  public function mockSend(SendGrid\Mail $mail)
-  {
-    $parts = array();
-
-    $parts['domain'] = $this->domain;
-    $parts['endpoint'] = $this->endpoint;
-    $parts['request'] = $this->_prepMessageData($mail);
-    return $parts;
-  }
 }
