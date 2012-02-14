@@ -124,3 +124,39 @@ $mail->addTo('john@somewhere.com')->
        addSection("%home%", array("The Robinsons"));
 ```
 
+### Using Unique Arguments ###
+
+Unique Arguments are used for tracking purposes
+
+```php
+$mail = new SendGrid\Mail();
+$mail->addTo('foo@bar.com')->
+       ...
+       addUniqueArguments("Customer", "Someone");
+       addUniqueArguments("location", "Somewhere");
+```
+
+### Using Filter Settings ###
+
+Filter Settings are used to enable and disable apps, and to pass parameters to those apps.
+
+```php
+$mail = new SendGrid\Mail();
+$mail->addTo('foo@bar.com')->
+       ...
+       addFilterSetting("gravatar", "enable", 1)->
+       addFilterSetting("footer", "enable", 1)->
+       addFilterSetting("footer", "text/plain", "Here is a plain text footer")->
+       addFilterSetting("footer", "text/html", "<p style = 'color:red;'>Here is an HTML footer</p>");
+```
+
+### Using Headers ###
+
+Headers can be used to add existing sendgrid functionality (such as for categories or filters), or custom headers can be added as necessary.
+
+```php
+$mail = new SendGrid\Mail();
+$mail->addTo('foo@bar.com')->
+       ...
+       addHeader("category", "My New Category");
+```
