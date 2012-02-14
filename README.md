@@ -66,3 +66,63 @@ Or
 ```php
 $sendgrid->web->send($mail);
 ```
+
+### Using Categories ###
+
+Categories are used to group email statistics provided by SendGrid
+
+To use a category, simply set the category name
+
+```php
+$mail = new SendGrid\Mail();
+$mail->addTo('foo@bar.com')->
+       ...
+       addCategory("Category 1")->
+       addCategory("Category 2");
+```
+
+
+### Using Attachments ###
+
+Attachments are currently file based only, with future plans for an in memory implementation as well.
+
+File attachments are limited to 7 MB per file.
+
+```php
+$mail = new SendGrid\Mail();
+$mail->addTo('foo@bar.com')->
+       ...
+       addAttachment("../path/to/file.txt");    
+```
+
+### Using Substitutions ###
+
+Substitutions can be used to customize multi-recipient emails, and tailor them for the user
+
+```php
+$mail = new SendGrid\Mail();
+$mail->addTo('john@somewhere.com')->
+       addTo("harry@somewhere.com")->
+       addTo("Bob@somewhere.com")->
+       ...
+       setHtml("Hey %name%, we've seen that you've been gone for a while")->
+       addSubstitution("%name%", array("John", "Harry", "Bob"));
+```
+
+### Using Sections ###
+
+Sections can be used to further customize messages for the end users.
+
+```php
+$mail = new SendGrid\Mail();
+$mail->addTo('john@somewhere.com')->
+       addTo("harry@somewhere.com")->
+       addTo("Bob@somewhere.com")->
+       ...
+       setHtml("Hey %name%, you work at %place%")->
+       addSubstitution("%name%", array("John", "Harry", "Bob"))->
+       addSubstitution("%place%", array("%office%", "%office%", "%home%"))->
+       addSection("%office%", array("Mile Square Park", "Platform 4 3/4"))->
+       addSection("%home%", array("The Robinsons"));
+```
+
