@@ -2,11 +2,11 @@
 
 include __dir__ . '/../' . 'SendGrid_loader.php';
 
-$sendgrid = new SendGrid('cj', 'secret');
+$sendgrid = new SendGrid('username', 'secret');
 
 $mail = new SendGrid\Mail();
-$mail->addTo('cj.buchmann@sendgrid.com')->
-       setFrom('jorge.urias@sendgrid.com')->
+$mail->addTo('foo@bar.com')->
+       setFrom('baz@bar.com')->
        setSubject('Subject')->
        setHtml('Hello');
 
