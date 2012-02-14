@@ -109,7 +109,7 @@ $mail->addTo('john@somewhere.com')->
 
 ### Using Sections ###
 
-Sections can be used to further customize messages for the end users.
+Sections can be used to further customize messages for the end users. A section is only useful in conjunction with a substition value.
 
 ```php
 $mail = new SendGrid\Mail();
