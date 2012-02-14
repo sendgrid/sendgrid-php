@@ -120,8 +120,8 @@ $mail->addTo('john@somewhere.com')->
        setHtml("Hey %name%, you work at %place%")->
        addSubstitution("%name%", array("John", "Harry", "Bob"))->
        addSubstitution("%place%", array("%office%", "%office%", "%home%"))->
-       addSection("%office%", array("Mile Square Park", "Platform 4 3/4"))->
-       addSection("%home%", array("The Robinsons"));
+       addSection("%office%", "an office")->
+       addSection("%home%", "your house");
 ```
 
 ### Using Unique Arguments ###
