@@ -67,9 +67,9 @@ $sendgrid->web->send($mail);
 
 ### Using Categories ###
 
-Categories are used to group email statistics provided by SendGrid
+Categories are used to group email statistics provided by SendGrid.
 
-To use a category, simply set the category name
+To use a category, simply set the category name.  Note: there is a maximum of 10 categories per email.
 
 ```php
 $mail = new SendGrid\Mail();
@@ -147,7 +147,7 @@ $mail->addTo('foo@bar.com')->
        addFilterSetting("gravatar", "enable", 1)->
        addFilterSetting("footer", "enable", 1)->
        addFilterSetting("footer", "text/plain", "Here is a plain text footer")->
-       addFilterSetting("footer", "text/html", "<p style = 'color:red;'>Here is an HTML footer</p>");
+       addFilterSetting("footer", "text/html", "<p style='color:red;'>Here is an HTML footer</p>");
 ```
 
 ### Using Headers ###
