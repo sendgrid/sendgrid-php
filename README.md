@@ -1,6 +1,6 @@
 # sendgrid-php #
 This library allows you to quickly and easily send emails through SendGrid using PHP.
-
+ 
 ## License ##
 Licensed under the MIT License.
 
