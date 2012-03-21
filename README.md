@@ -132,8 +132,8 @@ Unique Arguments are used for tracking purposes
 $mail = new SendGrid\Mail();
 $mail->addTo('foo@bar.com')->
        ...
-       addUniqueArguments("Customer", "Someone");
-       addUniqueArguments("location", "Somewhere");
+       addUniqueArgument("Customer", "Someone")->
+       addUniqueArgument("location", "Somewhere");
 ```
 
 ### Using Filter Settings ###
