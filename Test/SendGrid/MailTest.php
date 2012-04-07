@@ -62,6 +62,15 @@ class MailTest extends PHPUnit_Framework_TestCase
     $this->assertEquals("foo@bar.com", $message->getFrom());
   }
 
+  public function testFromNameAccessors()
+  {
+    $message = new SendGrid\Mail();
+
+    $message->setFromName("foo");
+
+    $this->assertEquals("foo", $message->getFromName());
+  }
+
   public function testCcAccessors()
   {
     $message = new SendGrid\Mail();
