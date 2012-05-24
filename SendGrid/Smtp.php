@@ -69,8 +69,13 @@ class Smtp extends Api implements MailInterface
      * but Swift still requires a 'to' address. So we'll falsify it with the from address, as it will be 
      * ignored anyway.
      */
-    $message->setTo($mail->getFrom());
-    $message->setFrom($mail->getFrom());
+
+    // Build From A_ARRAY based on if the send fromname is set.
+    $name = $mail->getFromName(); 
+    $from = !empty($name) ? array($name => $mail->getFrom()) : array($mail->getFrom());
+
+    $message->setTo($from);
+    $message->setFrom($from);
     $message->setBody($mail->getHtml(), 'text/html');
     $message->addPart($mail->getText(), 'text/plain');
     $message->setCc($mail->getCcs());
@@ -80,7 +85,7 @@ class Smtp extends Api implements MailInterface
     if($mail->useHeaders())
     {
       //send header based email
-      $message->setTo($mail->getFrom());
+      $message->setTo($from);
 
        //here we'll add the recipients list to the headers
       $headers = $mail->getHeaders();

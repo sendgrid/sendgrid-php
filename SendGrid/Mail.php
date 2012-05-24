@@ -7,6 +7,7 @@ class Mail
   
   private $to_list, 
           $from,
+          $from_name,
           $cc_list,
           $bcc_list,
           $subject,
@@ -135,6 +136,28 @@ class Mail
   public function setFrom($email)
   {
     $this->from = $email;
+    return $this;
+  }
+
+  /**
+   * getFromName
+   * get the from name address
+   * @return the from name address
+   */
+  public function getFromName()
+  {
+    return $this->from_name;
+  }
+  
+  /**
+   * setFromName
+   * set the from name
+   * @param String $name - a name
+   * @return the SendGrid\Mail object.
+   */
+  public function setFromName($name)
+  {
+    $this->from_name = $name;
     return $this;
   }
   
