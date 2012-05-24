@@ -70,8 +70,9 @@ class Smtp extends Api implements MailInterface
      * ignored anyway.
      */
 
-    // Build From ASSOC_ARRAY based on if the send fromname is set.  
-    $from = !empty($mail->getFromName()) ? array($mail->getFromName() => $mail->getFrom()) : array($mail->From());
+    // Build From ASSOC_ARRAY based on if the send fromname is set.
+    $name = $mail->getFromName(); 
+    $from = !empty($name) ? array($name => $mail->getFrom()) : array($mail->From());
 
     $message->setTo($from);
     $message->setFrom($from);
