@@ -18,6 +18,7 @@ class WebTest extends PHPUnit_Framework_TestCase
 
     $message->
       setFrom('bar@foo.com')->
+      setFromName('foo')->
       setSubject('foobar subject')->
       setText('foobar text')->
       addTo('foo@bar.com')->
@@ -34,6 +35,7 @@ class WebTest extends PHPUnit_Framework_TestCase
       'html' => null,
       'text' => 'foobar text',
       'from' => 'bar@foo.com',
+      'fromname' => 'foo',
       'to' => 'bar@foo.com',
       'x-smtpapi' => '{"to":["foo@bar.com"]}',
       'files[mynewattachment.jpg]' => '@mynewattachment.jpg'
