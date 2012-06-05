@@ -13,6 +13,7 @@ class SmtpTest extends PHPUnit_Framework_TestCase
     $message = new SendGrid\Mail();
     $message->
       setFrom('bar@foo.com')->
+      setFromName('John Doe')->
       setSubject('foobar subject')->
       setText('foobar text')->
       addTo('foo@bar.com')->

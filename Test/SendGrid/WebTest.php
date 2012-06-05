@@ -55,6 +55,24 @@ class WebTest extends PHPUnit_Framework_TestCase
     $this->assertEquals("&param[]=foo&param[]=bar&param[]=car&param[]=doo", $url_part);
   }
 
+  public function testOptionalParamters()
+  {
+    $message = new SendGrid\Mail();
+    $mock = new WebMock("foo", "bar");
+
+    // Default Values
+    $actual_without_optional_params = $mock->testPrepMessageData($message);
+
+    $this->assertArrayNotHasKey('fromname', $actual_without_optional_params);
+
+    // Set optional params
+    $message->setFromName('John Doe');
+
+    $actual_with_optional_params = $mock->testPrepMessageData($message);
+
+    $this->assertArrayHasKey('fromname', $actual_with_optional_params);
+  }
+
   public function testSendResponse()
   {
     $sendgrid = new SendGrid("foo", "bar");

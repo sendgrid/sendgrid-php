@@ -42,6 +42,10 @@ class Web extends Api implements MailInterface
       'x-smtpapi' => $mail->getHeadersJson()
     );
 
+    if(($fromname = $mail->getFromName())) {
+      $params['fromname'] = $fromname;
+    }
+
     // determine if we should send our recipients through our headers,
     // and set the properties accordingly
     if($mail->useHeaders())
