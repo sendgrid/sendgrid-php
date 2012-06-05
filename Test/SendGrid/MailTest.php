@@ -76,6 +76,18 @@ class MailTest extends PHPUnit_Framework_TestCase
     $this->assertEquals("Swift", $message->getFromName());
   }
 
+  public function testReplyToAccessors()
+  {
+    $message = new SendGrid\Mail();
+
+    // Defaults to false
+    $this->assertFalse($message->getReplyTo());
+
+    $message->setReplyTo("swift@sendgrid.com");
+
+    $this->assertEquals("swift@sendgrid.com", $message->getReplyTo());
+  }
+
   public function testCcAccessors()
   {
     $message = new SendGrid\Mail();

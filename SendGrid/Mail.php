@@ -4,10 +4,11 @@ namespace SendGrid;
 
 class Mail
 {
-  
-  private $to_list, 
+
+  private $to_list,
           $from,
           $from_name,
+          $reply_to,
           $cc_list,
           $bcc_list,
           $subject,
@@ -21,8 +22,9 @@ class Mail
   public function __construct()
   {
     $this->from_name = false;
+    $this->reply_to = false;
   }
-  
+
   /**
    * _removeFromList
    * Given a list of key/value pairs, removes the associated keys
@@ -165,7 +167,28 @@ class Mail
     $this->from_name = $name;
     return $this;
   }
-  
+
+  /**
+   * getReplyTo
+   * get the reply-to address
+   * @return the reply to address
+   */
+  public function getReplyTo()
+  {
+    return $this->reply_to;
+  }
+
+  /**
+   * setReplyTo
+   * set the reply-to address
+   * @param String $email - the email to reply to
+   * @return the SendGrid\Mail object.
+   */
+  public function setReplyTo($email)
+  {
+    $this->reply_to = $email;
+    return $this;
+  }
   /**
    * getCc
    * get the Carbon Copy list of recipients

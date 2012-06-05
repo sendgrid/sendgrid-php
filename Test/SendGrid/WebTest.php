@@ -64,13 +64,19 @@ class WebTest extends PHPUnit_Framework_TestCase
     $actual_without_optional_params = $mock->testPrepMessageData($message);
 
     $this->assertArrayNotHasKey('fromname', $actual_without_optional_params);
+    $this->assertArrayNotHasKey('replyto', $actual_without_optional_params);
 
     // Set optional params
     $message->setFromName('John Doe');
+    $message->setReplyTo('swift@sendgrid.com');
 
     $actual_with_optional_params = $mock->testPrepMessageData($message);
 
     $this->assertArrayHasKey('fromname', $actual_with_optional_params);
+    $this->assertEquals('John Doe', $actual_with_optional_params['fromname']);
+
+    $this->assertArrayHasKey('replyto', $actual_with_optional_params);
+    $this->assertEquals('swift@sendgrid.com', $actual_with_optional_params['replyto']);
   }
 
   public function testSendResponse()

@@ -46,6 +46,10 @@ class Web extends Api implements MailInterface
       $params['fromname'] = $fromname;
     }
 
+    if(($replyto = $mail->getReplyTo())) {
+      $params['replyto'] = $replyto;
+    }
+
     // determine if we should send our recipients through our headers,
     // and set the properties accordingly
     if($mail->useHeaders())
@@ -62,7 +66,7 @@ class Web extends Api implements MailInterface
       $params['to'] = $mail->getTos();
     }
 
-    
+
     if($mail->getAttachments())
     {
       foreach($mail->getAttachments() as $attachment)
