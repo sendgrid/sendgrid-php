@@ -1,5 +1,8 @@
 # sendgrid-php #
 This library allows you to quickly and easily send emails through SendGrid using PHP.
+
+# this-fork #
+The sole purpose of this fork is to add a "human from name" (see http://community.sendgrid.com/sendgrid/topics/_human_name)  when using SendGrid/Web API
  
 ## License ##
 Licensed under the MIT License.
