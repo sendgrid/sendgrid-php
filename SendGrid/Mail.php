@@ -7,6 +7,7 @@ class Mail
   
   private $to_list, 
           $from,
+          $fromName = NULL,
           $cc_list,
           $bcc_list,
           $subject,
@@ -126,6 +127,12 @@ class Mail
     return $this->from;
   }
   
+  public function getFromName()
+  {
+    $name = empty($this->fromName) ? $this->from : $this->fromName;
+    return $name;
+  }
+
   /**
    * setFrom
    * set the from email
@@ -135,6 +142,12 @@ class Mail
   public function setFrom($email)
   {
     $this->from = $email;
+    return $this;
+  }
+
+  public function setFromName($name)
+  {
+    $this->fromName = $name;
     return $this;
   }
   
