@@ -9,6 +9,14 @@ Licensed under the MIT License.
 git clone git@github.com:sendgrid/sendgrid-php.git
 ```
 
+## Testing ##
+
+The existing tests in the `Test` directory can be run using [PHPUnit](https://github.com/sebastianbergmann/phpunit/) with the following command:
+
+````
+phpunit Test/
+```
+
 ## SendGrid APIs ##
 SendGrid provides two methods of sending email: the Web API, and SMTP API.  SendGrid recommends using the SMTP API for sending emails.
 For an explanation of the benefits of each, refer to http://docs.sendgrid.com/documentation/get-started/integrate/examples/smtp-vs-rest/.
