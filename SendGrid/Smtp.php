@@ -70,11 +70,15 @@ class Smtp extends Api implements MailInterface
      * ignored anyway.
      */
     $message->setTo($mail->getFrom());
-    $message->setFrom($mail->getFrom());
+    $message->setFrom($mail->getFrom(true));
     $message->setBody($mail->getHtml(), 'text/html');
     $message->addPart($mail->getText(), 'text/plain');
     $message->setCc($mail->getCcs());
     $message->setBcc($mail->getBccs());
+
+    if(($replyto = $mail->getReplyTo())) {
+      $message->setReplyTo($replyto);
+    }
 
     // determine whether or not we can use SMTP recipients (non header based)
     if($mail->useHeaders())

@@ -4,9 +4,11 @@ namespace SendGrid;
 
 class Mail
 {
-  
-  private $to_list, 
+
+  private $to_list,
           $from,
+          $from_name,
+          $reply_to,
           $cc_list,
           $bcc_list,
           $subject,
@@ -19,9 +21,10 @@ class Mail
 
   public function __construct()
   {
-    
+    $this->from_name = false;
+    $this->reply_to = false;
   }
-  
+
   /**
    * _removeFromList
    * Given a list of key/value pairs, removes the associated keys
@@ -119,11 +122,16 @@ class Mail
   /**
    * getFrom
    * get the from email address
+   * @param Boolean $as_array - return the from as an assocative array
    * @return the from email address
    */
-  public function getFrom()
+  public function getFrom($as_array = false)
   {
-    return $this->from;
+    if($as_array && ($name = $this->getFromName())) {
+      return array("$this->from" => $name);
+    } else {
+      return $this->from;
+    }
   }
   
   /**
@@ -137,7 +145,50 @@ class Mail
     $this->from = $email;
     return $this;
   }
-  
+
+  /**
+   * getFromName
+   * get the from name 
+   * @return the from name
+   */
+  public function getFromName()
+  {
+    return $this->from_name;
+  }
+
+  /**
+   * setFromName
+   * set the name appended to the from email
+   * @param String $name - a name to append
+   * @return the SendGrid\Mail object.
+   */
+  public function setFromName($name)
+  {
+    $this->from_name = $name;
+    return $this;
+  }
+
+  /**
+   * getReplyTo
+   * get the reply-to address
+   * @return the reply to address
+   */
+  public function getReplyTo()
+  {
+    return $this->reply_to;
+  }
+
+  /**
+   * setReplyTo
+   * set the reply-to address
+   * @param String $email - the email to reply to
+   * @return the SendGrid\Mail object.
+   */
+  public function setReplyTo($email)
+  {
+    $this->reply_to = $email;
+    return $this;
+  }
   /**
    * getCc
    * get the Carbon Copy list of recipients
