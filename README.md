@@ -5,9 +5,14 @@ This library allows you to quickly and easily send emails through SendGrid using
 Licensed under the MIT License.
 
 ## Install ##
+
+Installing the SendGrid package is as simple as adding it to your project's include path and requiring it.  If you're using git, you can just clone down the repo like this:
+
 ```
 git clone git@github.com:sendgrid/sendgrid-php.git
 ```
+
+__Note__: If you don't have git or would rather install by unpacking a Zip or Tarball, you can always grab the latest version of the package from [the downloads page](https://github.com/sendgrid/sendgrid-php/downloads). 
 
 ## Testing ##
 
