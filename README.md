@@ -4,7 +4,7 @@ This library allows you to quickly and easily send emails through SendGrid using
 ## License ##
 Licensed under the MIT License.
 
-## Install ##
+## Downloading ##
 
 Installing the SendGrid package is as simple as adding it to your project's include path and requiring it.  If you're using git, you can just clone down the repo like this:
 
