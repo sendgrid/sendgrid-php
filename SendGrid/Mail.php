@@ -12,6 +12,7 @@ class Mail
           $cc_list,
           $bcc_list,
           $subject,
+          $charset,
           $text,
           $html,
           $attachment_list,
@@ -331,6 +332,16 @@ class Mail
     return $this;
   }
 
+  /**
+   * getCharset
+   * get the charset of the email
+   * @return the charset of the email
+   */
+  public function getCharset()
+  {
+      return $this->charset;
+  }
+
   /** 
    * getText
    * get the plain text part of the email
@@ -347,9 +358,10 @@ class Mail
    * @param String $text - the plain text of the email
    * @return the SendGrid\Mail object.
    */
-  public function setText($text)
+  public function setText($text, $charset=null)
   {
     $this->text = $text;
+    $this->charset = $charset;
     return $this;
   }
   
