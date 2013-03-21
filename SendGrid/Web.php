@@ -131,6 +131,9 @@ class Web extends Api implements MailInterface
     curl_setopt($session, CURLOPT_HEADER, false);
     curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
      
+    curl_setopt($session, CURLOPT_CONNECTTIMEOUT, 5);
+    curl_setopt($session, CURLOPT_TIMEOUT, 30);
+
     // obtain response
     $response = curl_exec($session);
     curl_close($session);
