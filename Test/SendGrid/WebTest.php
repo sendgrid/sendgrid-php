@@ -20,6 +20,7 @@ class WebTest extends PHPUnit_Framework_TestCase
       setFrom('bar@foo.com')->
       setSubject('foobar subject')->
       setText('foobar text')->
+      setHtml('foobar html')->
       addTo('foo@bar.com')->
       addAttachment("mynewattachment.jpg");
 
@@ -31,7 +32,7 @@ class WebTest extends PHPUnit_Framework_TestCase
       'api_user' => 'foo',
       'api_key' => 'bar',
       'subject' => 'foobar subject',
-      'html' => null,
+      'html' => 'foobar html',
       'text' => 'foobar text',
       'from' => 'bar@foo.com',
       'to' => 'bar@foo.com',
@@ -63,6 +64,8 @@ class WebTest extends PHPUnit_Framework_TestCase
     // Default Values
     $actual_without_optional_params = $mock->testPrepMessageData($message);
 
+    $this->assertArrayNotHasKey('html', $actual_without_optional_params);
+    $this->assertArrayNotHasKey('text', $actual_without_optional_params);
     $this->assertArrayNotHasKey('fromname', $actual_without_optional_params);
     $this->assertArrayNotHasKey('replyto', $actual_without_optional_params);
 
