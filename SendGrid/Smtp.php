@@ -15,7 +15,13 @@ class Smtp extends Api implements MailInterface
 
   public function __construct($username, $password)
   {
-    require_once ROOT_DIR . 'lib/swift/swift_required.php';
+    /* check for SwiftMailer,
+     * if it doesn't exist, try loading
+     * it from Pear
+     */
+    if (!class_exists('Swift')) {
+      require_once 'swift_required.php';
+    }
     call_user_func_array("parent::__construct", func_get_args());
 
     //set the default port

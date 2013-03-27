@@ -44,11 +44,13 @@ Before we begin using the library, its important to understand a few things abou
 
 ## Mail Usage ##
 
-To begin using this library, you must first include it
+To begin using this library, you must first include it and the dependencies. Composer makes this easy, just add:
 
 ```php
-include 'path/to/sendgrid-php/SendGrid_loader.php';
+require 'vendor/autoload.php';
 ```
+
+This will include both the SendGrid library, and the SwiftMailer dependency.
 
 Then, initialize the SendGrid object with your SendGrid credentials
 
