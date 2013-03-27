@@ -5,5 +5,9 @@
     "license": "MIT",
     "autoload": {
         "files": ["SendGrid_loader.php"]
+    },
+    "require": {
+    	"swiftmailer/swiftmailer": "v4.3.0"
     }
+
 }
