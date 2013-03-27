@@ -8,7 +8,6 @@ function sendGridLoader($string)
   {
     $file = str_replace('\\', '/', "$string.php");
     require_once ROOT_DIR . $file;
-    require "vendor/autoload.php";
   }
 }
 
