@@ -1,0 +1,9 @@
+env:
+	- SWIFTMAILER_VERSION="v4.3.0"
+
+before_script:
+   - composer require swiftmailer/swiftmailer:${SWIFTMAILER_VERSION}
+
+php:
+	- 5.4
+	- 5.3

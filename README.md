@@ -22,6 +22,16 @@ The existing tests in the `Test` directory can be run using [PHPUnit](https://gi
 phpunit Test/
 ```
 
+## Dependencies ##
+
+This library uses Composer to handle dependencies. To install the dependencies run Composer at the command line:
+
+```
+composer install
+```
+
+This will install SwiftMailer (the only dependency) into a folder named `vendor` inside the `sendgrid-php` directory.
+
 ## SendGrid APIs ##
 SendGrid provides two methods of sending email: the Web API, and SMTP API.  SendGrid recommends using the SMTP API for sending emails.
 For an explanation of the benefits of each, refer to http://docs.sendgrid.com/documentation/get-started/integrate/examples/smtp-vs-rest/.
