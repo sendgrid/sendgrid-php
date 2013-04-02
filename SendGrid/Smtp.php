@@ -71,10 +71,18 @@ class Smtp extends Api implements MailInterface
      */
     $message->setTo($mail->getFrom());
     $message->setFrom($mail->getFrom(true));
-    $message->setBody($mail->getHtml(), 'text/html');
-    $message->addPart($mail->getText(), 'text/plain');
     $message->setCc($mail->getCcs());
     $message->setBcc($mail->getBccs());
+
+    if ($mail->getHtml())
+    {
+      $message->setBody($mail->getHtml(), 'text/html');
+      if ($mail->getText()) $message->addPart($mail->getText(), 'text/plain');
+    }
+    else
+    {
+      $message->setBody($mail->getText(), 'text/plain');
+    }
 
     if(($replyto = $mail->getReplyTo())) {
       $message->setReplyTo($replyto);

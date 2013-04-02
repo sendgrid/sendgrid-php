@@ -35,12 +35,18 @@ class Web extends Api implements MailInterface
       'api_user'  => $this->username,
       'api_key'   => $this->password,
       'subject'   => $mail->getSubject(),
-      'html'      => $mail->getHtml(),
-      'text'      => $mail->getText(),
       'from'      => $mail->getFrom(),
       'to'        => $mail->getFrom(),
       'x-smtpapi' => $mail->getHeadersJson()
     );
+
+    if($mail->getHtml()) {
+      $params['html'] = $mail->getHtml();
+    }
+
+    if($mail->getText()) {
+      $params['text'] = $mail->getText();
+    }
 
     if(($fromname = $mail->getFromName())) {
       $params['fromname'] = $fromname;
