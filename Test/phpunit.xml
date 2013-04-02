@@ -1,0 +1,7 @@
+<phpunit bootstrap="./a_loaderTest.php">
+  <testsuites>
+    <testsuite name="Services SendGrid Test Suite">
+      <directory>./</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>
