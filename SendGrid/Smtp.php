@@ -20,7 +20,7 @@ class Smtp extends Api implements MailInterface
      * it from Pear
      */
     if (!class_exists('Swift')) {
-      require_once ROOT_DIR . 'lib/swift_required.php';
+      require_once 'swift_required.php';
     }
     call_user_func_array("parent::__construct", func_get_args());
 
