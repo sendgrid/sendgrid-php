@@ -1,18 +1,70 @@
-# sendgrid-php #
+# sendgrid-php
 This library allows you to quickly and easily send emails through SendGrid using PHP.
- 
-## License ##
-Licensed under the MIT License.
 
-## Downloading ##
+## Installation
 
-Installing the SendGrid package is as simple as adding it to your project's include path and requiring it.  If you're using git, you can just clone down the repo like this:
+There are a number of ways to install the SendGrid PHP helper library.  Choose from the options outlined below:
 
+### Composer
+
+The easier way to install the SendGrid php library is using [Composer](http://getcomposer.org/).  Composer makes it easy
+to install the library and all of its dependencies:
+
+#### 1. Update your composer.json
+
+If you already have a `composer.json`, just add the following to your require section:
+
+```json
+{
+  "require": {
+    "sendgrid/sendgrid-php": "~1.0.0"
+  }
+}
 ```
-git clone git@github.com:sendgrid/sendgrid-php.git
+*For more info on creating a `composer.json`, check out [this guide](http://getcomposer.org/doc/01-basic-usage.md#composer-json-project-setup).*
+
+#### 2. Install from packagist
+
+To install the library and it's dependencies, make sure you have [composer installed](http://getcomposer.org/doc/01-basic-usage.md#installation) and type the following:
+
+```bash
+composer install
 ```
 
-__Note__: If you don't have git or would rather install by unpacking a Zip or Tarball, you can always grab the latest version of the package from [the downloads page](https://github.com/sendgrid/sendgrid-php/downloads). 
+#### 3. Include autoload.php
+
+Now that we have everything installed, all we need to do is require it from our php script.  Add the following to the top of your php script:
+
+```php
+require 'vendor/autoload.php';
+```
+
+This will include both the SendGrid library, and the SwiftMailer dependency.
+
+### Git
+
+You can also install the package from github, although you will have to manually install the dependencies (see the section on installing dependencies below):
+
+```bash
+git clone https://github.com/sendgrid/sendgrid-php.git
+```
+
+And the require the autoloader from your php script:
+
+```php
+require '../path/to/sendgrid-php/SendGrid_loader.php';
+```
+
+## Installing Dependenices
+
+If you installed the library using composer or you're not planning on sending using SMTP, you can skip this section.  Otherwise, you will need to install
+SwiftMailer (which sendgrid-php depends on).  You can install from pear using the following:
+
+```bash
+pear channel-discover pear.swiftmailer.org
+pear install swift/swift
+```
+
 
 ## Testing ##
 
@@ -44,15 +96,7 @@ Before we begin using the library, its important to understand a few things abou
 
 ## Mail Usage ##
 
-To begin using this library, you must first include it and the dependencies. Composer makes this easy, just add:
-
-```php
-require 'vendor/autoload.php';
-```
-
-This will include both the SendGrid library, and the SwiftMailer dependency.
-
-Then, initialize the SendGrid object with your SendGrid credentials
+To begin using this library, initialize the SendGrid object with your SendGrid credentials
 
 ```php
 $sendgrid = new SendGrid('username', 'password');
