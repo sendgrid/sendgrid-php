@@ -17,7 +17,7 @@ If you already have a `composer.json`, just add the following to your require se
 ```json
 {
   "require": {
-    "sendgrid/sendgrid-php": "~1.0.0"
+    "sendgrid/sendgrid": "~1.0.0"
   }
 }
 ```
