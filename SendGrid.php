@@ -2,6 +2,8 @@
 
 class SendGrid
 {
+  const VERSION = "1.0.0";
+
   protected $namespace = "SendGrid",
             $username,
             $password;
