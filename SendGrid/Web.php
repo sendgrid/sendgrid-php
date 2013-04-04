@@ -131,12 +131,10 @@ class Web extends Api implements MailInterface
       $this->_arrayToUrlPart($mail->getCcs(), "cc");
 
     $session = curl_init($request);
-    curl_setopt ($session, CURLOPT_POST, true);
-    curl_setopt ($session, CURLOPT_POSTFIELDS, $data);
-
+    curl_setopt($session, CURLOPT_POST, true);
+    curl_setopt($session, CURLOPT_POSTFIELDS, $data);
     curl_setopt($session, CURLOPT_HEADER, false);
     curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
-     
     curl_setopt($session, CURLOPT_CONNECTTIMEOUT, 5);
     curl_setopt($session, CURLOPT_TIMEOUT, 30);
 
@@ -145,5 +143,5 @@ class Web extends Api implements MailInterface
     curl_close($session);
 
     return $response;
-  }  
+  }
 }
