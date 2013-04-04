@@ -95,7 +95,6 @@ class WebTest extends PHPUnit_Framework_TestCase
       addTo('foo@bar.com');
 
     $response = $sendgrid->web->send($message);
-
     $this->assertEquals("{\"message\": \"error\", \"errors\": [\"Bad username / password\"]}", $response);
   }
 }

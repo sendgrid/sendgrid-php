@@ -9,7 +9,7 @@ class SendGrid
   // Available transport mechanisms
   protected $web,
             $smtp;
-  
+
   public function __construct($username, $password)
   {
     $this->username = $username;
@@ -38,5 +38,4 @@ class SendGrid
     $this->$name = new $api($this->username, $this->password);
     return $this->$name;
   }
-
 }

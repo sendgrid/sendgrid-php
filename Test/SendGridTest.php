@@ -21,33 +21,15 @@ class SendGridTest extends PHPUnit_Framework_TestCase
     $this->assertEquals("SendGrid\Smtp", get_class($smtp));
     $this->assertEquals("SendGrid\Web", get_class($web));
 
-    try 
+    try
     {
       $sendgrid->notanapi;
-    } 
+    }
     catch (Exception $e) 
     {
       return;
     }
 
     $this->fail('A non object was instanciated');
-  }
-
-  public function testBadCredentials()
-  {
-    $sendgrid = new SendGrid("", "");
-    $message = new SendGrid\Mail();
-
-    $message->
-      setFrom('bar@foo.com')->
-      setSubject('foobar subject')->
-      setText('foobar text')->
-      setHtml('foobar html')->
-      addTo('foo@bar.com')->
-      addAttachment("mynewattachment.jpg");
-
-    // TODO: Add SMTP test
-    $web_response = $sendgrid->web->send($message);
-    $this->assertEquals($web_response, false);
   }
 }

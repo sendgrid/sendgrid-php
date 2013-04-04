@@ -4,7 +4,6 @@ namespace SendGrid;
 
 class Api
 {
-  
   protected $username,
             $password;
 
@@ -13,5 +12,4 @@ class Api
     $this->username = $username;
     $this->password = $password;
   }
-
 }
