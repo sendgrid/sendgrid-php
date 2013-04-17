@@ -26,9 +26,8 @@ class Smtp extends Api implements MailInterface
     // Catch any auth exceptions and make them more user friendly
     set_exception_handler(function($exception) {
       $is_transport_exception = ($exception instanceof \Swift_TransportException);
-      $is_auth_exception = strstr($exception->getMessage(), "Unauthenticated senders not allowed");
 
-      if($is_transport_exception && $is_auth_exception) {
+      if($is_transport_exception) {
         throw new AuthException("Invalid username or password. Please check your credentials.");
       } else {
         // Normal exception, keep on keepin' on
