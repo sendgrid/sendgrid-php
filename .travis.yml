@@ -2,5 +2,5 @@ language: php
 php:
  - 5.4
  - 5.3
-before_install: composer install
+before_install: composer install --prefer-source
 script: make test
