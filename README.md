@@ -152,6 +152,19 @@ $mail->addTo('foo@bar.com')->
        addAttachment("../path/to/file.txt");    
 ```
 
+### Using From-Name and Reply-To
+
+There are two handy helper methods for setting the From-Name and Reply-To for a
+message
+
+```php
+$mail = new SendGrid\Mail();
+$mail->addTo('foo@bar.com')->
+       setReplyTo('someone.else@example.com')->
+       setFromName('John Doe')->
+       ...
+```
+
 ### Using Substitutions ###
 
 Substitutions can be used to customize multi-recipient emails, and tailor them for the user
