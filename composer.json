@@ -8,7 +8,7 @@
       "files": ["SendGrid_loader.php"]
     },
     "require": {
-      "swiftmailer/swiftmailer": "v4.3.0"
+      "swiftmailer/swiftmailer": "v5.0.0"
     },
     "replace": {
       "sendgrid/sendgrid-php": "*"
