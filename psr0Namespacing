@@ -1,0 +1,3 @@
+Tweaking sendgrid to have propert psr0 namespacing. 
+
+This is to resolve conflicts with autoloaders built into frameworks such as Yii
