@@ -1,14 +1,14 @@
 {
     "name": "sendgrid/sendgrid",
     "description": "This library allows you to quickly and easily send emails through SendGrid using PHP.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "homepage": "http://sendgrid.com",
     "license": "MIT",
     "autoload": {
       "files": ["SendGrid_loader.php"]
     },
     "require": {
-      "swiftmailer/swiftmailer": "v5.0.0"
+      "swiftmailer/swiftmailer": "v5.0.1"
     },
     "require-dev": {
       "phpunit/phpunit": "3.7.*"
