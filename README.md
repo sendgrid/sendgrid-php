@@ -244,3 +244,7 @@ or if you already have PHPUnit installed globally.
 ```bash
 phpunit Test/
 ```
+
+## Known Issues
+
+* When using the smtp version (which is built on top of swiftmailer), any FROM names with parentheses will have the content of the parentheses stripped out. If this happens please use the web version of the library. Read more about this in [issue #27](https://github.com/sendgrid/sendgrid-php/issues/27).
