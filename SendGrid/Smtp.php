@@ -149,10 +149,16 @@ class Smtp extends Api implements MailInterface
   public function send(Mail $mail)
   {
     $swift = $this->_getSwiftInstance($this->port);
-
     $message = $this->_mapToSwift($mail);
 
-    $swift->send($message, $failures);
+    try 
+    {
+      $swift->send($message, $failures);
+    }
+    catch(\Swift_TransportException $e)
+    {
+      throw new AuthException('Bad username / password');
+    }
 
     return true;
   }
