@@ -236,7 +236,7 @@ The existing tests in the `Test` directory can be run using [PHPUnit](https://gi
 
 ````bash
 composer update --dev
-phpunit Test/
+vendor/bin/phpunit Test/
 ```
 
 or if you already have PHPUnit installed globally.
