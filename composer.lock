@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "13c82cfe13da69c7684e4be1769517a3",
+    "hash": "cb3df83d41c263d53451ee2620e4a779",
     "packages": [
         {
             "name": "swiftmailer/swiftmailer",
