@@ -1,86 +1,76 @@
 # sendgrid-php
+
 This library allows you to quickly and easily send emails through SendGrid using PHP.
+
+```php
+$sendgrid = new SendGrid('username', 'password');
+$mail     = new SendGrid\Mail();
+$mail->addTo('foo@bar.com')->
+       setFrom('me@bar.com')->
+       setSubject('Subject goes here')->
+       setText('Hello World!')->
+       setHtml('<strong>Hello World!</strong>');
+
+$sendgrid->smtp->send($mail);
+```
 
 ## Installation
 
-There are a number of ways to install the SendGrid PHP helper library.  Choose from the options outlined below:
+The following recommended installation requires [composer](http://getcomposer.org/). If you are unfamiliar with composer see the [composer installation instructions](http://getcomposer.org/doc/01-basic-usage.md#installation).
 
-### Composer
-
-The easier way to install the SendGrid php library is using [Composer](http://getcomposer.org/).  Composer makes it easy
-to install the library and all of its dependencies:
-
-#### 1. Update your composer.json
-
-If you already have a `composer.json`, just add the following to your require section:
+Add the following to your `composer.json` file:
 
 ```json
-{
+{  
   "require": {
     "sendgrid/sendgrid": "~1.0.0"
   }
 }
 ```
-*For more info on creating a `composer.json`, check out [this guide](http://getcomposer.org/doc/01-basic-usage.md#composer-json-project-setup).*
 
-#### 2. Install from packagist
-
-To install the library and it's dependencies, make sure you have [composer installed](http://getcomposer.org/doc/01-basic-usage.md#installation) and type the following:
+Install sendgrid-php and its dependencies:
 
 ```bash
 composer install
 ```
 
-#### 3. Include autoload.php
-
-Now that we have everything installed, all we need to do is require it from our php script.  Add the following to the top of your php script:
+Load sendgrid-php and its dependencies into your project:
 
 ```php
 require 'vendor/autoload.php';
 ```
 
-This will include both the SendGrid library, and the SwiftMailer dependency.
+### Alternative Installation
 
-### Git
-
-You can also install the package from github, although you will have to manually install the dependencies (see the section on installing dependencies below):
+If you choose not to use composer you can do the following alternative installation using git:
 
 ```bash
 git clone https://github.com/sendgrid/sendgrid-php.git
 ```
 
-And the require the autoloader from your php script:
+Then require the autoloader from your php script:
 
 ```php
 require '../path/to/sendgrid-php/SendGrid_loader.php';
 ```
 
-## Installing Dependenices
-
-If you installed the library using composer or you're not planning on sending using SMTP, you can skip this section.  Otherwise, you will need to install
-SwiftMailer (which sendgrid-php depends on).  You can install from pear using the following:
+Finally, install SwiftMailer using pear.
 
 ```bash
 pear channel-discover pear.swiftmailer.org
 pear install swift/swift
 ```
 
-
-## Testing ##
-
-The existing tests in the `Test` directory can be run using [PHPUnit](https://github.com/sebastianbergmann/phpunit/) with the following command:
-
-````
-phpunit Test/
-```
+*Note: If you do not plan on sending using SMTP, you can skip installation of swiftmailer.*
 
 ## SendGrid APIs ##
+
 SendGrid provides two methods of sending email: the Web API, and SMTP API.  SendGrid recommends using the SMTP API for sending emails.
 For an explanation of the benefits of each, refer to http://docs.sendgrid.com/documentation/get-started/integrate/examples/smtp-vs-rest/.
 
 This library implements a common interface to make it very easy to use either API.
 
-## Mail Pre-Usage ##
+## Pre-Usage ##
 
 Before we begin using the library, its important to understand a few things about the library architecture...
 
@@ -94,15 +84,15 @@ Before we begin using the library, its important to understand a few things abou
   1. Creating a SendGrid Mail object, and setting its data
   1. Sending the mail using either SMTP API or Web API.
 
-## Mail Usage ##
+## Usage
 
-To begin using this library, initialize the SendGrid object with your SendGrid credentials
+To begin using this library, initialize the SendGrid object with your SendGrid credentials.
 
 ```php
 $sendgrid = new SendGrid('username', 'password');
 ```
 
-Create a new SendGrid Mail object and add your message details
+Create a new SendGrid Mail object and add your message details.
 
 ```php
 $mail = new SendGrid\Mail();
@@ -124,7 +114,7 @@ Or
 $sendgrid->web->send($mail);
 ```
 
-### Using Categories ###
+### Categories ###
 
 Categories are used to group email statistics provided by SendGrid.
 
@@ -138,8 +128,7 @@ $mail->addTo('foo@bar.com')->
        addCategory("Category 2");
 ```
 
-
-### Using Attachments ###
+### Attachments ###
 
 Attachments are currently file based only, with future plans for an in memory implementation as well.
 
@@ -152,7 +141,7 @@ $mail->addTo('foo@bar.com')->
        addAttachment("../path/to/file.txt");    
 ```
 
-### Using From-Name and Reply-To
+### From-Name and Reply-To
 
 There are two handy helper methods for setting the From-Name and Reply-To for a
 message
@@ -165,7 +154,7 @@ $mail->addTo('foo@bar.com')->
        ...
 ```
 
-### Using Substitutions ###
+### Substitutions ###
 
 Substitutions can be used to customize multi-recipient emails, and tailor them for the user
 
@@ -179,7 +168,7 @@ $mail->addTo('john@somewhere.com')->
        addSubstitution("%name%", array("John", "Harry", "Bob"));
 ```
 
-### Using Sections ###
+### Sections ###
 
 Sections can be used to further customize messages for the end users. A section is only useful in conjunction with a substition value.
 
@@ -196,7 +185,7 @@ $mail->addTo('john@somewhere.com')->
        addSection("%home%", "your house");
 ```
 
-### Using Unique Arguments ###
+### Unique Arguments ###
 
 Unique Arguments are used for tracking purposes
 
@@ -208,7 +197,7 @@ $mail->addTo('foo@bar.com')->
        addUniqueArgument("location", "Somewhere");
 ```
 
-### Using Filter Settings ###
+### Filter Settings ###
 
 Filter Settings are used to enable and disable apps, and to pass parameters to those apps.
 
@@ -222,7 +211,7 @@ $mail->addTo('foo@bar.com')->
        addFilterSetting("footer", "text/html", "<p style='color:red;'>Here is an HTML footer</p>");
 ```
 
-### Using Headers ###
+### Headers ###
 
 Headers can be used to add existing sendgrid functionality (such as for categories or filters), or custom headers can be added as necessary.
 
@@ -231,4 +220,27 @@ $mail = new SendGrid\Mail();
 $mail->addTo('foo@bar.com')->
        ...
        addHeader("category", "My New Category");
+```
+
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Added some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
+
+## Running Tests ##
+
+The existing tests in the `Test` directory can be run using [PHPUnit](https://github.com/sebastianbergmann/phpunit/) with the following command:
+
+````bash
+composer update --dev
+vendor/bin/phpunit Test/
+```
+
+or if you already have PHPUnit installed globally.
+
+```bash
+phpunit Test/
 ```
