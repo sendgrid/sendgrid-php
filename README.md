@@ -235,5 +235,12 @@ $mail->addTo('foo@bar.com')->
 The existing tests in the `Test` directory can be run using [PHPUnit](https://github.com/sebastianbergmann/phpunit/) with the following command:
 
 ````bash
+composer update --dev
+phpunit Test/
+```
+
+or if you already have PHPUnit installed globally.
+
+```bash
 phpunit Test/
 ```
