@@ -31,6 +31,10 @@ class SendGridTest extends PHPUnit_Framework_TestCase
     }
 
     $this->fail('A non object was instanciated');
-    
+  }
+
+  public function testVersion()
+  {
+    $this->assertEquals(SendGrid::VERSION, "1.0.0");
   }
 }
