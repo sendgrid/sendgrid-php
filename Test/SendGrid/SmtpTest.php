@@ -21,7 +21,7 @@ class SmtpTest extends PHPUnit_Framework_TestCase
 
     $this->assertEquals(get_class($smtp), 'SendGrid\Smtp');
 
-    $this->setExpectedException('Swift_TransportException');
+    $this->setExpectedException('SendGrid\AuthException');
     $smtp->send($message);
   }
 
