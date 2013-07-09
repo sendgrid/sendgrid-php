@@ -1,4 +1,4 @@
-# sendgrid-php
+
 
 This library allows you to quickly and easily send emails through SendGrid using PHP.
 
@@ -6,6 +6,7 @@ This library allows you to quickly and easily send emails through SendGrid using
 $sendgrid = new SendGrid('username', 'password');
 $mail     = new SendGrid\Mail();
 $mail->addTo('foo@bar.com')->
+       addTo('dude@bar.com')->
        setFrom('me@bar.com')->
        setSubject('Subject goes here')->
        setText('Hello World!')->
@@ -140,6 +141,24 @@ $mail->addTo('foo@bar.com')->
        ...
        addAttachment("../path/to/file.txt");    
 ```
+
+**Important Gotcha**: `setBcc` is not supported with attachments. This is by design. Instead use multiple `addTo`s. Each user will receive their own personalized email with that setup, and only see their own email.
+
+### Bcc
+
+Use multiple `addTo`s as a superior alternative to `setBcc`.
+
+```php
+$mail = new SendGrid\Mail();
+$mail->addTo('foo@bar.com')->
+       addTo('someotheraddress@bar.com')->
+       addTo('another@another.com')->
+       ...
+```
+
+Standard `setBcc` will hide who the email is addressed to. If you use the multiple addTo, each user will receive a personalized email showing **only* their email. This is more friendly and more personal. Additionally, it is a good idea to use multiple `addTo`s because setBcc is not supported with attachments. This is by design.
+
+So just remember, when thinking 'bcc', instead use multiple `addTo`s.
 
 ### From-Name and Reply-To
 
