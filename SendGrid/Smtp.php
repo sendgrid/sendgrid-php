@@ -13,6 +13,8 @@ class Smtp extends Api implements MailInterface
   private $swift_instances = array();
   protected $port;
 
+  private $hostname = 'smtp.sendgrid.net';
+
   public function __construct($username, $password)
   {
     /* check for SwiftMailer,
@@ -40,6 +42,13 @@ class Smtp extends Api implements MailInterface
     return $this;
   }
 
+  public function setHostname($hostname)
+  {
+    $this->hostname = $hostname;
+
+    return $this;
+  }
+
   /* _getSwiftInstance
    * initialize and return the swift transport instance
    * @return the Swift_Mailer instance
@@ -48,7 +57,7 @@ class Smtp extends Api implements MailInterface
   {
     if (!isset($this->swift_instances[$port]))
     {
-      $transport = \Swift_SmtpTransport::newInstance('smtp.sendgrid.net', $port);
+      $transport = \Swift_SmtpTransport::newInstance($this->hostname, $port);
       $transport->setUsername($this->username);
       $transport->setPassword($this->password);
 
