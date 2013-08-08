@@ -8,12 +8,12 @@ class Smtp extends Api implements MailInterface
   const TLS = 587;
   const TLS_ALTERNATIVE = 25;
   const SSL = 465;
+  const HOSTNAME = 'smtp.sendgrid.net';
 
   //the list of port instances, to be recycled
   private $swift_instances = array();
   protected $port;
-
-  private $hostname = 'smtp.sendgrid.net';
+  protected $hostname;
 
   public function __construct($username, $password)
   {
@@ -26,8 +26,9 @@ class Smtp extends Api implements MailInterface
     }
     call_user_func_array("parent::__construct", func_get_args());
 
-    //set the default port
+    //set the defaults
     $this->port = Smtp::TLS;
+    $this->hostname = Smtp::HOSTNAME;
   }
 
   /* setPort
