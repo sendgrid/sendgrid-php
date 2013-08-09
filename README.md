@@ -115,6 +115,17 @@ Or
 $sendgrid->web->send($mail);
 ```
 
+### Port and Hostname ###
+
+For the smtp API you can optionally choose to set the Port and the Hostname.
+
+```php
+$sendgrid->smtp->setPort('1234567');
+$sendgrid->smtp->setHostname('smtp.dude.com');
+```
+
+This is useful if you are using a local relay, as documented in [here](http://sendgrid.com/docs/Integrate/#--Power-Users-and-High-Volume-Senders).
+
 ### Categories ###
 
 Categories are used to group email statistics provided by SendGrid.
