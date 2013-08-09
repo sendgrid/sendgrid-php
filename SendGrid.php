@@ -10,7 +10,8 @@ class SendGrid
 
   // Available transport mechanisms
   protected $web,
-            $smtp;
+            $smtp,
+            $marketing;
   
   public function __construct($username, $password)
   {
