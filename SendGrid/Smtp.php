@@ -8,10 +8,12 @@ class Smtp extends Api implements MailInterface
   const TLS = 587;
   const TLS_ALTERNATIVE = 25;
   const SSL = 465;
+  const HOSTNAME = 'smtp.sendgrid.net';
 
   //the list of port instances, to be recycled
   private $swift_instances = array();
   protected $port;
+  protected $hostname;
 
   public function __construct($username, $password)
   {
@@ -24,8 +26,9 @@ class Smtp extends Api implements MailInterface
     }
     call_user_func_array("parent::__construct", func_get_args());
 
-    //set the default port
+    //set the defaults
     $this->port = Smtp::TLS;
+    $this->hostname = Smtp::HOSTNAME;
   }
 
   /* setPort
@@ -40,6 +43,13 @@ class Smtp extends Api implements MailInterface
     return $this;
   }
 
+  public function setHostname($hostname)
+  {
+    $this->hostname = $hostname;
+
+    return $this;
+  }
+
   /* _getSwiftInstance
    * initialize and return the swift transport instance
    * @return the Swift_Mailer instance
@@ -48,7 +58,7 @@ class Smtp extends Api implements MailInterface
   {
     if (!isset($this->swift_instances[$port]))
     {
-      $transport = \Swift_SmtpTransport::newInstance('smtp.sendgrid.net', $port);
+      $transport = \Swift_SmtpTransport::newInstance($this->hostname, $port);
       $transport->setUsername($this->username);
       $transport->setPassword($this->password);
 

@@ -46,6 +46,24 @@ class SmtpTest extends PHPUnit_Framework_TestCase
     $this->assertEquals('52', $mock->getPort());
   }
 
+  public function testHostname()
+  {
+    $this->assertEquals('smtp.sendgrid.net', SendGrid\Smtp::HOSTNAME);
+
+    $sendgrid = new SendGrid("foo", "bar");
+
+    //we can't check that the port works, but we can check that it doesn't throw an exception
+    $object = $sendgrid->smtp->setPort(SendGrid\Smtp::HOSTNAME);
+    
+    $this->assertEquals($sendgrid->smtp, $object);
+    $this->assertEquals(get_class($object), 'SendGrid\Smtp');
+
+    $mock = new SmtpMock('foo', 'bar');
+
+    $mock->setHostname('smtp.dude.com');
+    $this->assertEquals('smtp.dude.com', $mock->getHostname());
+  }
+
   public function testEmailBodyAttachments()
   {
     $_mapToSwift = new ReflectionMethod('SendGrid\Smtp', '_mapToSwift');

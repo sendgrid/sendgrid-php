@@ -11,4 +11,9 @@ class SmtpMock extends SendGrid\Smtp
   {
     return $this->port;
   }
+  public function getHostname()
+  {
+    return $this->hostname;
+  }
+
 }
