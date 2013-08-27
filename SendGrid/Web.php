@@ -78,7 +78,7 @@ class Web extends Api implements MailInterface
       if (function_exists("curl_file_create")) {
       	foreach($mail->getAttachments() as $attachment)
       	{
-      		$params['files['.$attachment['filename'].'.'.$attachment['extension'].']'] = new \CurlFile($attachment['file']);
+      		$params['files['.$attachment['filename'].'.'.$attachment['extension'].']'] = new \CURLFile($attachment['file']);
       	}
       }else{
       	foreach($mail->getAttachments() as $attachment)
