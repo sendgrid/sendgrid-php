@@ -75,9 +75,16 @@ class Web extends Api implements MailInterface
 
     if($mail->getAttachments())
     {
-      foreach($mail->getAttachments() as $attachment)
-      {
-        $params['files['.$attachment['filename'].'.'.$attachment['extension'].']'] = '@'.$attachment['file'];
+      if ( version_compare( PHP_VERSION, '5.5', '<' ) ) {
+      	foreach($mail->getAttachments() as $attachment)
+      	{
+      		$params['files['.$attachment['filename'].'.'.$attachment['extension'].']'] = '@'.$attachment['file'];
+      	}
+      }else{
+      	foreach($mail->getAttachments() as $attachment)
+      	{
+      		$params['files['.$attachment['filename'].'.'.$attachment['extension'].']'] = new \CurlFile($attachment['file']);
+      	}
       }
     }
 
