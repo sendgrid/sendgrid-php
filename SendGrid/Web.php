@@ -9,15 +9,6 @@ class Web extends Api implements MailInterface
   protected $endpoint = "api/mail.send.json";
 
   /**
-   * __construct
-   * Create a new Web instance
-   */
-  public function __construct($username, $password)
-  {
-    call_user_func_array("parent::__construct", func_get_args());
-  }
-
-  /**
    * _prepMessageData
    * Takes the mail message and returns a url friendly querystring
    * @param  Mail   $mail [description]
