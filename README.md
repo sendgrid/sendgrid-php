@@ -2,6 +2,8 @@
 
 This library allows you to quickly and easily send emails through SendGrid using PHP.
 
+[![BuildStatus](https://travis-ci.org/sendgrid/sendgrid-php.png?branch=master)](https://travis-ci.org/sendgrid/sendgrid-php)
+
 ```php
 $sendgrid = new SendGrid('username', 'password');
 $mail     = new SendGrid\Mail();
