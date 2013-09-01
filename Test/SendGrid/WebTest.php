@@ -37,8 +37,13 @@ class WebTest extends PHPUnit_Framework_TestCase
       'from' => 'bar@foo.com',
       'to' => 'bar@foo.com',
       'x-smtpapi' => '{"to":["foo@bar.com"]}',
-      'files[mynewattachment.jpg]' => '@mynewattachment.jpg'
     );
+	
+	if(function_exists("curl_file_create")){
+        $expected['files[mynewattachment.jpg]'] = new \CURLFile('mynewattachment.jpg');
+    }else{
+        $expected['files[mynewattachment.jpg]'] = '@mynewattachment.jpg';
+    }
 
     $this->assertEquals($expected, $data);
 
