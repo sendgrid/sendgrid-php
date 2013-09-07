@@ -119,7 +119,7 @@ $sendgrid->web->send($mail);
 
 ### To
 
-You can add one or multiple to addresses using `addTo`.
+You can add one or multiple TO addresses using `addTo`.
 
 ```php
 $mail = new SendGrid\Mail();
@@ -129,7 +129,7 @@ $mail->addTo('foo@bar.com')->
 
 ### Tos
 
-If you prefer, you can add multiple to addresses as an array using the `setTos` method.
+If you prefer, you can add multiple TO addresses as an array using the `setTos` method. This will unset any previous `addTo`s you appended.
 
 ```php
 $mail   = new SendGrid\Mail();
