@@ -14,7 +14,7 @@ $mail->addTo('foo@bar.com')->
        setText('Hello World!')->
        setHtml('<strong>Hello World!</strong>');
 
-$sendgrid->smtp->send($mail);
+$sendgrid->web->send($mail);
 ```
 
 ## Installation
@@ -106,18 +106,18 @@ $mail->addTo('foo@bar.com')->
        setHtml('<strong>Hello World!</strong>');
 ```
 
-Send it using the API of your choice (SMTP or Web)
-
-```php
-$sendgrid->smtp->send($mail);
-```
-Or 
+Send it using the API of your choice (Web or SMTP)
 
 ```php
 $sendgrid->web->send($mail);
 ```
+Or 
 
-### To
+```php
+$sendgrid->smtp->send($mail);
+```
+
+### addTo
 
 You can add one or multiple TO addresses using `addTo`.
 
@@ -125,9 +125,10 @@ You can add one or multiple TO addresses using `addTo`.
 $mail = new SendGrid\Mail();
 $mail->addTo('foo@bar.com')->
        addTo('another@another.com');
+$sendgrid->web->send($mail);
 ```
 
-### Tos
+### setTos
 
 If you prefer, you can add multiple TO addresses as an array using the `setTos` method. This will unset any previous `addTo`s you appended.
 
@@ -135,6 +136,106 @@ If you prefer, you can add multiple TO addresses as an array using the `setTos` 
 $mail   = new SendGrid\Mail();
 $emails = array("foo@bar.com", "another@another.com", "other@other.com");
 $mail->setTos($emails);
+$sendgrid->web->send($mail);
+```
+
+### getTos
+
+Sometimes you might find yourself wanting to list the currently set Tos. You can do that with `getTos`.
+
+```php
+$mail   = new SendGrid\Mail();
+$mail->addTo('foo@bar.com');
+$mail->getTos();
+```
+
+### removeTo 
+
+You might also find yourself wanting to remove a single TO from your set list of TOs. You can do that with `removeTo`. You can pass a string or regex to the removeTo method.
+
+```php
+$mail   = new SendGrid\Mail();
+$mail->addTo('foo@bar.com');
+$mail->removeTo('foo@bar.com');
+```
+
+### setFrom
+
+```php
+$mail   = new SendGrid\Mail();
+$mail->setFrom('foo@bar.com');
+$sendgrid->web->send($mail);
+```
+
+### setFromName
+
+```php
+$mail   = new SendGrid\Mail();
+$mail->setFrom('foo@bar.com');
+$mail->setFromName('Foo Bar');
+$mail->setFrom('other@example.com');
+$mail->setFromName('Other Guy');
+$sendgrid->web->send($mail);
+```
+
+### setReplyTo
+
+```php
+$mail   = new SendGrid\Mail();
+$mail->setReplyTo('foo@bar.com');
+$sendgrid->web->send($mail);
+```
+
+### addCc
+
+```php
+$mail   = new SendGrid\Mail();
+$mail->addCc('foo@bar.com');
+$sendgrid->web->send($mail);
+```
+
+### Bcc
+
+Use multiple `addTo`s as a superior alternative to `setBcc`.
+
+```php
+$mail = new SendGrid\Mail();
+$mail->addTo('foo@bar.com')->
+       addTo('someotheraddress@bar.com')->
+       addTo('another@another.com')->
+       ...
+```
+
+But if you do still have a need for Bcc you can do the following.
+
+```php
+$mail   = new SendGrid\Mail();
+$mail->addBcc('foo@bar.com');
+$sendgrid->web->send($mail);
+```
+
+### setSubject
+
+```php
+$mail   = new SendGrid\Mail();
+$mail->setSubject('This is a subject');
+$sendgrid->web->send($mail);
+```
+
+### setText
+
+```php
+$mail   = new SendGrid\Mail();
+$mail->setText('This is some text');
+$sendgrid->web->send($mail);
+```
+
+### setHtml
+
+```php
+$mail   = new SendGrid\Mail();
+$mail->setHtml('<h1>This is an html email</h1>');
+$sendgrid->web->send($mail);
 ```
 
 ### Port and Hostname ###
@@ -177,17 +278,6 @@ $mail->addTo('foo@bar.com')->
 
 **Important Gotcha**: `setBcc` is not supported with attachments. This is by design. Instead use multiple `addTo`s. Each user will receive their own personalized email with that setup, and only see their own email.
 
-### Bcc
-
-Use multiple `addTo`s as a superior alternative to `setBcc`.
-
-```php
-$mail = new SendGrid\Mail();
-$mail->addTo('foo@bar.com')->
-       addTo('someotheraddress@bar.com')->
-       addTo('another@another.com')->
-       ...
-```
 
 Standard `setBcc` will hide who the email is addressed to. If you use the multiple addTo, each user will receive a personalized email showing **only* their email. This is more friendly and more personal. Additionally, it is a good idea to use multiple `addTo`s because setBcc is not supported with attachments. This is by design.
 
