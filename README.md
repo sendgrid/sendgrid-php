@@ -117,6 +117,26 @@ Or
 $sendgrid->web->send($mail);
 ```
 
+### To
+
+You can add one or multiple to addresses using `addTo`.
+
+```php
+$mail = new SendGrid\Mail();
+$mail->addTo('foo@bar.com')->
+       addTo('another@another.com');
+```
+
+### Tos
+
+If you prefer, you can add multiple to addresses as an array using the `setTos` method.
+
+```php
+$mail   = new SendGrid\Mail();
+$emails = array("foo@bar.com", "another@another.com", "other@other.com");
+$mail->setTos($emails);
+```
+
 ### Port and Hostname ###
 
 For the smtp API you can optionally choose to set the Port and the Hostname.
