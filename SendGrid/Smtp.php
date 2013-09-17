@@ -163,7 +163,7 @@ class Smtp extends Api implements MailInterface
 
     try 
     {
-    $swift->send($message, $failures);
+      $swift->send($message, $failures);
     }
     catch(\Swift_TransportException $e)
     {
