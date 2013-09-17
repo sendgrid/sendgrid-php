@@ -140,7 +140,7 @@ class Smtp extends Api implements MailInterface
     {
       foreach ($attachments as $attachment)
       {
-        $message->attach(\Swift_Attachment::fromPath($attachment['file']));
+        $message->attach(\Swift_Attachment::fromPath($attachment['file'])->setFileName($attachment['customname']));
       }
     }
 
@@ -163,7 +163,7 @@ class Smtp extends Api implements MailInterface
 
     try 
     {
-      $swift->send($message, $failures);
+    $swift->send($message, $failures);
     }
     catch(\Swift_TransportException $e)
     {
