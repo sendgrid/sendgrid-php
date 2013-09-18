@@ -26,7 +26,7 @@ Add the following to your `composer.json` file:
 ```json
 {  
   "require": {
-    "sendgrid/sendgrid": "~1.0.0"
+    "sendgrid/sendgrid": "1.0.9"
   }
 }
 ```
