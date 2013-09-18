@@ -2,3 +2,4 @@ Test/coverage/*
 examples/*
 dist/
 vendor/*
+composer.lock
