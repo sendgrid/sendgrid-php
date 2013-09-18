@@ -79,6 +79,9 @@ class Web extends Api implements MailInterface
       }
     }
 
+    // Add the extra message headers (RFC 822)
+    $params['headers'] = $mail->getMessageHeadersJson();
+
     return $params;
   }
 

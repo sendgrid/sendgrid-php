@@ -15,7 +15,8 @@ class Mail
           $text,
           $html,
           $attachment_list,
-          $header_list = array();
+          $header_list = array(),
+          $message_header_list = array();          // RFC 822 message headers
 
   protected $use_headers;
 
@@ -718,4 +719,66 @@ class Mail
     return false;
   }
 
+
+  /**
+   * getMessageHeaders
+   * return the list of message headers (RFC 822)
+   * @return array the list of message headers
+   */
+  public function getMessageHeaders()
+  {
+    return $this->message_header_list;
+  }
+
+  /**
+   * getMessageHeadersJson
+   * return the list of message headers (RFC 822) encoded as JSON
+   * @return string
+   */
+  public function getMessageHeadersJson()
+  {
+    if (count($this->getMessageHeaders()) <= 0)
+    {
+      return "{}";
+    }
+    return json_encode($this->getMessageHeaders(), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
+  }
+
+  /**
+   * setMessageHeaders
+   * Sets a list of message headers (RFC 822)
+   * destroys previous message header data
+   * @param  array $key_value_pairs - the list of message header data
+   * @return self  the SendGrid\Mail object.
+   */
+  public function setMessageHeaders($key_value_pairs)
+  {
+    $this->message_header_list = $key_value_pairs;
+    return $this;
+  }
+
+  /**
+   * addMessageHeaders
+   * append the header to the list of message headers (RFC 822)
+   * @param  string $key - the header key
+   * @param  string $value - the header value
+   * @return self t he SendGrid\Mail object.
+   */
+  public function addMessageHeader($key, $value)
+  {
+    $this->message_header_list[$key] = $value;
+    return $this;
+  }
+
+  /**
+   * removeMessageHeaders
+   * remove a message header (RFC 822) by name
+   * @param  string $key - the name of the message header to remove
+   * @return self the SendGrid\Mail object.
+   */
+  public function removeMessageHeader($key)
+  {
+    unset($this->message_header_list[$key]);
+    return $this;
+  }
 }
