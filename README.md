@@ -375,7 +375,7 @@ $mail       = new SendGrid\Mail();
 $recipients = array("alpha@mailinator.com", "beta@mailinator.com", "zeta@mailinator.com");
 $names      = array("Alpha", "Beta", "Zeta");
 
-$mail-> setFrom("scott.motte@sendgrid.com")->
+$mail-> setFrom("from@mailinator.com")->
         setSubject('[sendgrid-php-batch-email]')->
         setTos($recipients)->
         addSubstitution("%name%", $names)->
