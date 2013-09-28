@@ -364,6 +364,27 @@ $mail->addTo('foo@bar.com')->
        addHeader("category", "My New Category");
 ```
 
+### Sending to 1,000s of emails in one batch
+
+Sometimes you might want to send 1,000s of emails in one request. You can do that. It is recommended you break each batch up in 1,000 increements. So if you need to send to 5,000 emails, then you'd break this into a loop of 1,000 emails at a time.
+
+```php
+$sendgrid   = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD);
+$mail       = new SendGrid\Mail();
+
+$recipients = array("alpha@mailinator.com", "beta@mailinator.com", "zeta@mailinator.com");
+$names      = array("Alpha", "Beta", "Zeta");
+
+$mail-> setFrom("scott.motte@sendgrid.com")->
+        setSubject('[sendgrid-php-batch-email]')->
+        setTos($recipients)->
+        addSubstitution("%name%", $names)->
+        setText("Hey %name, we have an email for you")->
+        setHtml("<h1>Hey %name%, we have an email for you</h1>");
+
+$result = $sendgrid->smtp->send($mail);
+```
+
 ## Contributing
 
 1. Fork it
