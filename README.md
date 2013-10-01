@@ -2,6 +2,8 @@
 
 This library allows you to quickly and easily send emails through SendGrid using PHP.
 
+Important: This library requires PHP 5.3 or higher.
+
 [![BuildStatus](https://travis-ci.org/sendgrid/sendgrid-php.png?branch=master)](https://travis-ci.org/sendgrid/sendgrid-php)
 
 ```php
