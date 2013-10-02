@@ -72,6 +72,12 @@ pear install swift/swift
 $sendgrid->web->send($mail);
 ```
 
+Instead of this.
+
+```php
+$sendgrid->smtp->send($mail);
+```
+
 ## SendGrid APIs ##
 
 SendGrid provides two methods of sending email: the Web API, and SMTP API.  SendGrid recommends using the SMTP API for sending emails.
