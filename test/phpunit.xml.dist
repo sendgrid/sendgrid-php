@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="bootstrap.php">
+  <testsuites>
+    <testsuite name="General">
+      <file>./SendGrid.php</file>
+      <file>./SendGrid/Api.php</file>
+      <file>./SendGrid/AuthException.php</file>
+      <file>./SendGrid/Email.php</file>
+      <file>./SendGrid/Web.php</file>
+      <file>./SendGrid/Smtp.php</file>
+    </testsuite>
+  </testsuites>
+</phpunit>
