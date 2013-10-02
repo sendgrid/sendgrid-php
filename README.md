@@ -66,7 +66,11 @@ pear channel-discover pear.swiftmailer.org
 pear install swift/swift
 ```
 
-*Note: If you do not plan on sending using SMTP, you can skip installation of swiftmailer.*
+*IMPORTANT: If you do not plan on sending using SMTP, you can skip installation of swiftmailer.* In which case your send line of code will look like this.
+
+```php
+$sendgrid->web->send($mail);
+```
 
 ## SendGrid APIs ##
 
@@ -81,9 +85,7 @@ Before we begin using the library, its important to understand a few things abou
 
 * The SendGrid Mail object is the means of setting mail data. In general, data can be set in three ways for most elements:
   1. set - reset the data, and initialize it to the given element. This will destroy previous data
-  2. set (List) - for array based elements, we provide a way of passing the entire array in at once. This will also destroy previous data.
-  3. add - append data to the list of elements.
-
+  2. set (List) - for array based elements, we provide a way of passing the entire array in at once. This will also destroy previous data.  3. add - append data to the list of elements.  
 * Sending an email is as simple as :
   1. Creating a SendGrid Instance
   1. Creating a SendGrid Mail object, and setting its data
