@@ -73,10 +73,12 @@ class WebTest extends PHPUnit_Framework_TestCase
     $this->assertArrayNotHasKey('text', $actual_without_optional_params);
     $this->assertArrayNotHasKey('fromname', $actual_without_optional_params);
     $this->assertArrayNotHasKey('replyto', $actual_without_optional_params);
+    $this->assertArrayNotHasKey('headers', $actual_without_optional_params);
 
     // Set optional params
     $message->setFromName('John Doe');
     $message->setReplyTo('swift@sendgrid.com');
+    $message->addMessageHeader('X-Sent-Using', 'SendGrid-API');
 
     $actual_with_optional_params = $mock->testPrepMessageData($message);
 
@@ -85,6 +87,10 @@ class WebTest extends PHPUnit_Framework_TestCase
 
     $this->assertArrayHasKey('replyto', $actual_with_optional_params);
     $this->assertEquals('swift@sendgrid.com', $actual_with_optional_params['replyto']);
+
+    $this->assertArrayHasKey('headers', $actual_with_optional_params);
+	$headers = json_decode($actual_with_optional_params['headers'], TRUE);
+    $this->assertEquals('SendGrid-API', $headers['X-Sent-Using']);
   }
 
   public function testSendResponse()

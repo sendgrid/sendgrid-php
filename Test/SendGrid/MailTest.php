@@ -546,4 +546,41 @@ class MailTest extends PHPUnit_Framework_TestCase
 
     $this->assertTrue($mail->useHeaders());
   }
+
+  public function testMessageHeaderAccessors()
+  {
+	// A new message shouldn't have any RFC-822 headers set
+    $message = new SendGrid\Mail();
+    $this->assertEquals('{}', $message->getMessageHeadersJson());
+
+	// Add some message headers, check they are correctly stored
+    $headers = array(
+      'X-Sent-Using' => 'SendGrid-API',
+	  'X-Transport'  => 'web',
+    );
+    $message->setMessageHeaders($headers);
+    $this->assertEquals($headers, $message->getMessageHeaders());
+
+	// Add another header, check if it is stored
+    $message->addMessageHeader('X-Another-Header', 'first_value');
+    $headers['X-Another-Header'] = 'first_value';
+    $this->assertEquals($headers, $message->getMessageHeaders());
+
+	// Replace a header
+    $message->addMessageHeader('X-Another-Header', 'second_value');
+    $headers['X-Another-Header'] = 'second_value';
+    $this->assertEquals($headers, $message->getMessageHeaders());
+
+	// Get the encoded headers; they must be a valid JSON
+	$json = $message->getMessageHeadersJson();
+	$decoded = json_decode($json, TRUE);
+	$this->assertInternalType('array', $decoded);
+	// Test we get the same message headers we put in the message
+	$this->assertEquals($headers, $decoded);
+
+    // Remove a header
+    $message->removeMessageHeader('X-Transport');
+    unset($headers['X-Transport']);
+	$this->assertEquals($headers, $message->getMessageHeaders());
+  }
 }
