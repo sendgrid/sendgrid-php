@@ -106,4 +106,20 @@ class SmtpTest extends PHPUnit_Framework_TestCase
     $swift_message = $_mapToSwift->invoke($sendgrid->smtp, $message);
     $this->assertEquals(count($swift_message->getChildren()), 0);
   }
+
+  public function testEmailMessageHeaders()
+  {
+    $_mapToSwift = new ReflectionMethod('SendGrid\Smtp', '_mapToSwift');
+    $_mapToSwift->setAccessible(true);
+
+    $sendgrid = new SendGrid("foo", "bar");
+    $message = new SendGrid\Mail();
+    $message->
+      addMessageHeader('X-Sent-Using', 'SendGrid-API')->
+      addMessageHeader('X-Transport', 'smtp');
+
+    $swift_headers = $_mapToSwift->invoke($sendgrid->smtp, $message)->getHeaders();
+	$this->assertEquals('SendGrid-API', $swift_headers->get('X-Sent-Using')->getFieldBody());
+	$this->assertEquals('smtp', $swift_headers->get('X-Transport')->getFieldBody());
+  }
 }
