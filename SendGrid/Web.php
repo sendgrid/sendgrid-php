@@ -138,8 +138,19 @@ class Web extends Api implements MailInterface
 
     // obtain response
     $response = curl_exec($session);
+    
+    $curlError = false;
+    if($response === false)
+    {
+        $curlError = curl_error($session);
+    }
+
     curl_close($session);
 
+    if($curlError !== false)
+    {
+        return $curlError;
+    }
     return $response;
   }
 }
