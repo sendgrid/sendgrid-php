@@ -1,9 +1,8 @@
 <?php 
 
-class WebTest extends PHPUnit_Framework_TestCase
-{
-  public function testConstruction()
-  {
+class SendGridTest_Web extends PHPUnit_Framework_TestCase {
+
+  public function testConstruction() {
     $sendgrid = new SendGrid("foo", "bar");
 
     $web = $sendgrid->web;
@@ -14,7 +13,7 @@ class WebTest extends PHPUnit_Framework_TestCase
 
   public function testMockFunctions()
   {
-    $message = new SendGrid\Mail();
+    $message = new SendGrid\Email();
 
     $message->
       setFrom('bar@foo.com')->
@@ -63,7 +62,7 @@ class WebTest extends PHPUnit_Framework_TestCase
 
   public function testOptionalParamters()
   {
-    $message = new SendGrid\Mail();
+    $message = new SendGrid\Email();
     $mock = new WebMock("foo", "bar");
 
     // Default Values
@@ -91,7 +90,7 @@ class WebTest extends PHPUnit_Framework_TestCase
   {
     $sendgrid = new SendGrid("foo", "bar");
 
-    $message = new SendGrid\Mail();
+    $message = new SendGrid\Email();
 
     $message->
       setFrom('bar@foo.com')->

@@ -1,5 +1,6 @@
-Test/coverage/*
+test/coverage/*
 examples/*
 dist/
-vendor/*
 composer.lock
+vendor
+.env*

@@ -2,13 +2,13 @@
 
 namespace SendGrid;
 
-class Smtp extends Api implements MailInterface
+class Smtp extends Api implements EmailInterface
 {
   //the available ports
-  const TLS = 587;
+  const TLS             = 587;
   const TLS_ALTERNATIVE = 25;
-  const SSL = 465;
-  const HOSTNAME = 'smtp.sendgrid.net';
+  const SSL             = 465;
+  const HOSTNAME        = 'smtp.sendgrid.net';
 
   //the list of port instances, to be recycled
   private $swift_instances = array();
@@ -72,10 +72,10 @@ class Smtp extends Api implements MailInterface
 
   /* _mapToSwift
    * Maps the SendGridMail Object to the SwiftMessage object
-   * @param Mail $mail - the SendGridMail object
+   * @param Email $email - the SendGridMail object
    * @return the SwiftMessage object
    */
-  protected function _mapToSwift(Mail $mail)
+  protected function _mapToSwift(Email $email)
   {
     $message = new \Swift_Message($mail->getSubject());
 
@@ -152,11 +152,11 @@ class Smtp extends Api implements MailInterface
   }
 
   /* send
-   * Send the Mail Message
+   * Send the Email Message
    * @param Mail $mail - the SendGridMailMessage to be sent
    * @return true if mail was sendable (not necessarily sent)
    */
-  public function send(Mail $mail)
+  public function send(Email $email)
   {
     $swift = $this->_getSwiftInstance($this->port);
     $message = $this->_mapToSwift($mail);

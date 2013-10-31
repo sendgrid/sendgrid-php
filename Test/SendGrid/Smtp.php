@@ -1,6 +1,6 @@
 <?php
 
-class SmtpTest extends PHPUnit_Framework_TestCase
+class SendGridTest_Smtp extends PHPUnit_Framework_TestCase
 {
   public function testConstruction()
   {
