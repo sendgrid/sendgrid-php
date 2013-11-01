@@ -258,6 +258,60 @@ class MailTest extends PHPUnit_Framework_TestCase
     $this->assertEquals(0, count($message->getAttachments()));
   }
 
+  public function testAttachmentCustomNameAccessors()
+  {
+    $message = new SendGrid\Mail();
+
+    $attachments = 
+      array(
+        "customName.txt" => "path/to/file/file_1.txt", 
+        'another_name_|.txt' => "../file_2.txt", 
+        'custom_name_2.zip' => "../file_3.txt"
+      );
+
+    foreach($attachments as $name => $file)
+    {
+      $message->addAttachment($file, $name);
+    }
+
+    $msg_attachments = $message->getAttachments();
+
+    $this->assertEquals(count($attachments), count($msg_attachments));
+    
+    $attachmentKeys = array_keys($attachments);
+    for($i = 0; $i < count($attachments); $i++)
+    {
+      $this->assertEquals($attachments[$attachmentKeys[$i]], $msg_attachments[$i]['file']);
+      $this->assertEquals($attachmentKeys[$i], $msg_attachments[$i]['customname']);
+    }
+    
+    //ensure that addAttachment appends to the list of attachments
+    //The custom filename here is not set, so will default to the filename without path
+    $message->addAttachment("../file_4.png");
+
+    //We need to set the $attachments element to have our expected filename with the path we passed in
+    $attachments['file_4'] = "../file_4.png";
+
+    $msg_attachments = $message->getAttachments();
+    $attachmentKeys = array_keys($attachments);
+    $this->assertEquals($attachments[$attachmentKeys[count($attachments) - 1]], $msg_attachments[count($msg_attachments) - 1]['file']);
+    $this->assertEquals($attachmentKeys[count($attachments) - 1], $msg_attachments[count($msg_attachments) - 1]['customname']);
+
+
+    //Setting an attachment removes all other files
+    $message->setAttachment("only_attachment.sad", 'The only one');
+
+    $msg_attachments = $message->getAttachments();
+    $this->assertEquals(1, count($msg_attachments));
+    $this->assertEquals('only_attachment.sad', $msg_attachments[0]['file']);
+    $this->assertEquals('The only one', $msg_attachments[0]['customname']);
+
+    //Remove an attachment
+    $message->removeAttachment("only_attachment.sad");
+    $this->assertEquals(0, count($message->getAttachments()));
+    
+  }
+
   public function testCategoryAccessors()
   {
     $message = new SendGrid\Mail();

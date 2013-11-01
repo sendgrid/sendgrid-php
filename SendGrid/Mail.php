@@ -411,9 +411,9 @@ class Mail
    * @param String $file - the file to attach
    * @return the SendGrid\Mail object.
    */
-  public function setAttachment($file)
+  public function setAttachment($file, $filename=null)
   {
-    $this->attachment_list = array($this->_getAttachmentInfo($file));
+    $this->attachment_list = array($this->_getAttachmentInfo($file, $filename));
     return $this;
   }
 
@@ -423,9 +423,9 @@ class Mail
    * @param String $file - The file to attach.
    * @return  the SendGrid\Mail object.
    */
-  public function addAttachment($file)
+  public function addAttachment($file, $filename=null)
   {
-    $this->attachment_list[] = $this->_getAttachmentInfo($file);
+    $this->attachment_list[] = $this->_getAttachmentInfo($file, $filename);
     return $this;
   }
 
@@ -441,10 +441,16 @@ class Mail
     return $this;
   }
 
-  private function _getAttachmentInfo($file)
+  private function _getAttachmentInfo($file, $filename =null)
   {
     $info = pathinfo($file);
     $info['file'] = $file;
+    $info['customname'] = $info['filename'];
+    if (!is_null($filename))
+    {
+      $info['customname'] = $filename;
+    }
+
     return $info;
   }
 
