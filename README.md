@@ -8,21 +8,20 @@ Important: This library requires PHP 5.3 or higher.
 
 ```php
 $sendgrid = new SendGrid('username', 'password');
-$mail     = new SendGrid\Email();
-$mail->addTo('foo@bar.com')->
+$email    = new SendGrid\Email();
+$email->addTo('foo@bar.com')->
        addTo('dude@bar.com')->
        setFrom('me@bar.com')->
        setSubject('Subject goes here')->
        setText('Hello World!')->
        setHtml('<strong>Hello World!</strong>');
 
-$sendgrid->web->send($mail);
+$sendgrid->web->send($email);
 ```
 
 ## Installation
 
-### Install with Composer
-
+### Install with Composer 
 If you are using [Composer](http://getcomposer.org) to manage dependencies, you can add SendGrid with it.
 
 ```json
@@ -31,7 +30,7 @@ If you are using [Composer](http://getcomposer.org) to manage dependencies, you 
     "sendgrid/sendgrid": "1.1.0"
   },
   "autoload": {
-    "psr-0": {"Requests": "lib/"}
+    "psr-0": {"SendGrid": "lib/"}
   }
 }
 ```
@@ -41,38 +40,30 @@ If you are using [Composer](http://getcomposer.org) to manage dependencies, you 
 To install the source code:
 
 ```bash
+git clone https://github.com/Mashape/unirest-php.git 
 git clone https://github.com/sendgrid/sendgrid-php.git
 ```
 
 And include it in your scripts:
 
 ```bash
-require_once '/path/to/Requests/library/Requests.php';
+require_once '/path/to/unirest-php/lib/Unirest.php';
+require_once '/path/to/sendgrid-php/lib/SendGrid.php';
 ```
 
 You'll probably also want to register an autoloader:
 
 ```bash
-Requests::register_autoloader();
+SendGrid::register_autoloader();
 ```
 
-Finally, install SwiftMailer using pear.
+#### Optional
+
+IF using the `smtp` option, you need [swiftmailer](https://github.com/swiftmailer/swiftmailer). This is not necessary if using the web API approach. 
 
 ```bash
-pear channel-discover pear.swiftmailer.org
-pear install swift/swift
-```
-
-*IMPORTANT: If you do not plan on sending using SMTP, you can skip installation of swiftmailer.* In which case your send line of code will look like this.
-
-```php
-$sendgrid->web->send($mail);
-```
-
-Instead of this.
-
-```php
-$sendgrid->smtp->send($mail);
+git clone git://github.com/swiftmailer/swiftmailer.git
+ln -s swiftmailer/lib/swift_required.php swift_required.php
 ```
 
 ## SendGrid APIs ##

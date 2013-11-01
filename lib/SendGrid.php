@@ -14,7 +14,7 @@ class SendGrid {
     $this->password = $password;
   }
 
-  public function register_autoloader() {
+  public static function register_autoloader() {
     spl_autoload_register(array('SendGrid', 'autoloader'));
   }
 

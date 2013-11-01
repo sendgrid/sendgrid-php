@@ -12,7 +12,8 @@ class Web extends Api implements EmailInterface {
     $form['api_user'] = $this->username; 
     $form['api_key']  = $this->password; 
 
-    $response = \Requests::post($this->url, array(), $form);
+    $response = \Unirest::post($this->url, array(), $form);
+
     return $response->body;
   }
 }

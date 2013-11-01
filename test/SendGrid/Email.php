@@ -9,7 +9,18 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
 
   public function testConstructionMailIsSendGridEmail() {
     $email = new SendGrid\Mail();
-    $this->assertEquals(get_class($email), "SendGrid\Email");
+    $this->assertEquals(get_class($email), "SendGrid\Mail");
+  }
+
+  public function testAddToWithDeprectedMailClass() {
+    $mail = new SendGrid\Mail();
+
+    $mail->addTo('p1@mailinator.com');
+    $this->assertEquals(array('p1@mailinator.com'), $mail->getTos());
+
+    $mail->addTo('p2@mailinator.com');
+    $this->assertEquals(array('p1@mailinator.com', 'p2@mailinator.com'), $mail->getTos());
+
   }
 
   public function testAddTo() {
@@ -535,5 +546,19 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $this->assertEquals($json['to'], array('p1@mailinator.com'));
     $this->assertEquals($json['bcc'], array('p2@mailinator.com'));
     $this->assertEquals($json["x-smtpapi"], '{}');
+  }
+
+  public function testToWebFormatWithAttachment() {
+    $email    = new SendGrid\Email();
+    $email->addAttachment('./gif.gif');
+    $json     = $email->toWebFormat();
+
+    // php 5.5 works differently. @filename has been deprecated for CurlFile in 5.5
+    if (class_exists('CurlFile')) {
+      $content = new \CurlFile('./gif.gif', 'gif', 'gif');
+      $this->assertEquals($json["files[gif.gif]"], $content);
+    } else {
+      $this->assertEquals($json["files[gif.gif]"], "@./gif.gif");
+    }
   }
 }

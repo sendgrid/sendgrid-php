@@ -8,7 +8,7 @@
   "require": {
     "php": ">=5.3",
     "swiftmailer/swiftmailer": "~5.0.1",
-    "rmccue/requests": "1.6.0"
+    "mashape/unirest-php": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "3.7.*",
@@ -19,6 +19,6 @@
   },
   "type": "library",
   "autoload": {
-    "psr-0": {"SendGrid": "lib/"}
+    "psr-0": {"Unirest": "lib/"}
   }
 }

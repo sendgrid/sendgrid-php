@@ -507,7 +507,14 @@ class Email {
 
     if ($this->getAttachments()) {
       foreach($this->getAttachments() as $file) {
-        $contents = file_get_contents($file['file']);
+        //$contents = '@' . $file['file']; //convenience from Unirest 
+        $contents = '';
+        if (class_exists('CurlFile')) {
+          $contents = new \CurlFile($file['file'], $file['extension'], $file['filename']);
+        } else {
+          $contents = '@' . $file['file']; //convenience from Unirest 
+        }
+
         $web['files['.$file['filename'].'.'.$file['extension'].']'] = $contents;
       };
     }
@@ -517,4 +524,4 @@ class Email {
 
 }
 
-class_alias('SendGrid\Email', 'SendGrid\Mail');
+//class_alias('SendGrid\Email', 'SendGrid\Mail');

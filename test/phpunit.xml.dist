@@ -6,6 +6,7 @@
       <file>./SendGrid/Api.php</file>
       <file>./SendGrid/AuthException.php</file>
       <file>./SendGrid/Email.php</file>
+      <file>./SendGrid/Web.php</file>
     </testsuite>
   </testsuites>
 </phpunit>
