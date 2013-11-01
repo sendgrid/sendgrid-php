@@ -8,74 +8,62 @@ Important: This library requires PHP 5.3 or higher.
 
 ```php
 $sendgrid = new SendGrid('username', 'password');
-$mail     = new SendGrid\Mail();
-$mail->addTo('foo@bar.com')->
+$email    = new SendGrid\Email();
+$email->addTo('foo@bar.com')->
        addTo('dude@bar.com')->
        setFrom('me@bar.com')->
        setSubject('Subject goes here')->
        setText('Hello World!')->
        setHtml('<strong>Hello World!</strong>');
 
-$sendgrid->web->send($mail);
+$sendgrid->web->send($email);
 ```
 
 ## Installation
 
-The following recommended installation requires [composer](http://getcomposer.org/). If you are unfamiliar with composer see the [composer installation instructions](http://getcomposer.org/doc/01-basic-usage.md#installation).
-
-Add the following to your `composer.json` file:
+### Install with Composer 
+If you are using [Composer](http://getcomposer.org) to manage dependencies, you can add SendGrid with it.
 
 ```json
 {  
   "require": {
-    "sendgrid/sendgrid": "1.0.9"
+    "sendgrid/sendgrid": "1.1.0"
+  },
+  "autoload": {
+    "psr-0": {"SendGrid": "lib/"}
   }
 }
 ```
 
-Install sendgrid-php and its dependencies:
+### Install source from GitHub
+
+To install the source code:
 
 ```bash
-composer install
-```
-
-Load sendgrid-php and its dependencies into your project:
-
-```php
-require 'vendor/autoload.php';
-```
-
-### Alternative Installation
-
-If you choose not to use composer you can do the following alternative installation using git:
-
-```bash
+git clone https://github.com/Mashape/unirest-php.git 
 git clone https://github.com/sendgrid/sendgrid-php.git
 ```
 
-Then require the autoloader from your php script:
-
-```php
-require '../path/to/sendgrid-php/SendGrid_loader.php';
-```
-
-Finally, install SwiftMailer using pear.
+And include it in your scripts:
 
 ```bash
-pear channel-discover pear.swiftmailer.org
-pear install swift/swift
+require_once '/path/to/unirest-php/lib/Unirest.php';
+require_once '/path/to/sendgrid-php/lib/SendGrid.php';
 ```
 
-*IMPORTANT: If you do not plan on sending using SMTP, you can skip installation of swiftmailer.* In which case your send line of code will look like this.
+You'll probably also want to register an autoloader:
 
-```php
-$sendgrid->web->send($mail);
+```bash
+SendGrid::register_autoloader();
 ```
 
-Instead of this.
+#### Optional
 
-```php
-$sendgrid->smtp->send($mail);
+IF using the `smtp` option, you need [swiftmailer](https://github.com/swiftmailer/swiftmailer). This is not necessary if using the web API approach. 
+
+```bash
+git clone git://github.com/swiftmailer/swiftmailer.git
+ln -s swiftmailer/lib/swift_required.php swift_required.php
 ```
 
 ## SendGrid APIs ##
@@ -89,12 +77,12 @@ This library implements a common interface to make it very easy to use either AP
 
 Before we begin using the library, its important to understand a few things about the library architecture...
 
-* The SendGrid Mail object is the means of setting mail data. In general, data can be set in three ways for most elements:
+* The SendGrid Email object is the means of setting mail data. In general, data can be set in three ways for most elements:
   1. set - reset the data, and initialize it to the given element. This will destroy previous data
   2. set (List) - for array based elements, we provide a way of passing the entire array in at once. This will also destroy previous data.  3. add - append data to the list of elements.  
 * Sending an email is as simple as :
   1. Creating a SendGrid Instance
-  1. Creating a SendGrid Mail object, and setting its data
+  1. Creating a SendGrid Email object, and setting its data
   1. Sending the mail using either SMTP API or Web API.
 
 ## Usage
@@ -105,10 +93,10 @@ To begin using this library, initialize the SendGrid object with your SendGrid c
 $sendgrid = new SendGrid('username', 'password');
 ```
 
-Create a new SendGrid Mail object and add your message details.
+Create a new SendGrid Email object and add your message details.
 
 ```php
-$mail = new SendGrid\Mail();
+$mail = new SendGrid\Email();
 $mail->addTo('foo@bar.com')->
        setFrom('me@bar.com')->
        setSubject('Subject goes here')->
@@ -132,7 +120,7 @@ $sendgrid->smtp->send($mail);
 You can add one or multiple TO addresses using `addTo`.
 
 ```php
-$mail = new SendGrid\Mail();
+$mail = new SendGrid\Email();
 $mail->addTo('foo@bar.com')->
        addTo('another@another.com');
 $sendgrid->web->send($mail);
@@ -143,7 +131,7 @@ $sendgrid->web->send($mail);
 If you prefer, you can add multiple TO addresses as an array using the `setTos` method. This will unset any previous `addTo`s you appended.
 
 ```php
-$mail   = new SendGrid\Mail();
+$mail   = new SendGrid\Email();
 $emails = array("foo@bar.com", "another@another.com", "other@other.com");
 $mail->setTos($emails);
 $sendgrid->web->send($mail);
@@ -154,7 +142,7 @@ $sendgrid->web->send($mail);
 Sometimes you might find yourself wanting to list the currently set Tos. You can do that with `getTos`.
 
 ```php
-$mail   = new SendGrid\Mail();
+$mail   = new SendGrid\Email();
 $mail->addTo('foo@bar.com');
 $mail->getTos();
 ```
@@ -164,7 +152,7 @@ $mail->getTos();
 You might also find yourself wanting to remove a single TO from your set list of TOs. You can do that with `removeTo`. You can pass a string or regex to the removeTo method.
 
 ```php
-$mail   = new SendGrid\Mail();
+$mail   = new SendGrid\Email();
 $mail->addTo('foo@bar.com');
 $mail->removeTo('foo@bar.com');
 ```
@@ -172,7 +160,7 @@ $mail->removeTo('foo@bar.com');
 ### setFrom
 
 ```php
-$mail   = new SendGrid\Mail();
+$mail   = new SendGrid\Email();
 $mail->setFrom('foo@bar.com');
 $sendgrid->web->send($mail);
 ```
@@ -180,7 +168,7 @@ $sendgrid->web->send($mail);
 ### setFromName
 
 ```php
-$mail   = new SendGrid\Mail();
+$mail   = new SendGrid\Email();
 $mail->setFrom('foo@bar.com');
 $mail->setFromName('Foo Bar');
 $mail->setFrom('other@example.com');
@@ -191,7 +179,7 @@ $sendgrid->web->send($mail);
 ### setReplyTo
 
 ```php
-$mail   = new SendGrid\Mail();
+$mail   = new SendGrid\Email();
 $mail->setReplyTo('foo@bar.com');
 $sendgrid->web->send($mail);
 ```
@@ -199,7 +187,7 @@ $sendgrid->web->send($mail);
 ### addCc
 
 ```php
-$mail   = new SendGrid\Mail();
+$mail   = new SendGrid\Email();
 $mail->addCc('foo@bar.com');
 $sendgrid->web->send($mail);
 ```
@@ -209,7 +197,7 @@ $sendgrid->web->send($mail);
 Use multiple `addTo`s as a superior alternative to `setBcc`.
 
 ```php
-$mail = new SendGrid\Mail();
+$mail = new SendGrid\Email();
 $mail->addTo('foo@bar.com')->
        addTo('someotheraddress@bar.com')->
        addTo('another@another.com')->
@@ -219,7 +207,7 @@ $mail->addTo('foo@bar.com')->
 But if you do still have a need for Bcc you can do the following.
 
 ```php
-$mail   = new SendGrid\Mail();
+$mail   = new SendGrid\Email();
 $mail->addBcc('foo@bar.com');
 $sendgrid->web->send($mail);
 ```
@@ -227,7 +215,7 @@ $sendgrid->web->send($mail);
 ### setSubject
 
 ```php
-$mail   = new SendGrid\Mail();
+$mail   = new SendGrid\Email();
 $mail->setSubject('This is a subject');
 $sendgrid->web->send($mail);
 ```
@@ -235,7 +223,7 @@ $sendgrid->web->send($mail);
 ### setText
 
 ```php
-$mail   = new SendGrid\Mail();
+$mail   = new SendGrid\Email();
 $mail->setText('This is some text');
 $sendgrid->web->send($mail);
 ```
@@ -243,7 +231,7 @@ $sendgrid->web->send($mail);
 ### setHtml
 
 ```php
-$mail   = new SendGrid\Mail();
+$mail   = new SendGrid\Email();
 $mail->setHtml('<h1>This is an html email</h1>');
 $sendgrid->web->send($mail);
 ```
@@ -266,7 +254,7 @@ Categories are used to group email statistics provided by SendGrid.
 To use a category, simply set the category name.  Note: there is a maximum of 10 categories per email.
 
 ```php
-$mail = new SendGrid\Mail();
+$mail = new SendGrid\Email();
 $mail->addTo('foo@bar.com')->
        ...
        addCategory("Category 1")->
@@ -280,7 +268,7 @@ Attachments are currently file based only, with future plans for an in memory im
 File attachments are limited to 7 MB per file.
 
 ```php
-$mail = new SendGrid\Mail();
+$mail = new SendGrid\Email();
 $mail->addTo('foo@bar.com')->
        ...
        addAttachment("../path/to/file.txt");    
@@ -299,7 +287,7 @@ There are two handy helper methods for setting the From-Name and Reply-To for a
 message
 
 ```php
-$mail = new SendGrid\Mail();
+$mail = new SendGrid\Email();
 $mail->addTo('foo@bar.com')->
        setReplyTo('someone.else@example.com')->
        setFromName('John Doe')->
@@ -311,7 +299,7 @@ $mail->addTo('foo@bar.com')->
 Substitutions can be used to customize multi-recipient emails, and tailor them for the user
 
 ```php
-$mail = new SendGrid\Mail();
+$mail = new SendGrid\Email();
 $mail->addTo('john@somewhere.com')->
        addTo("harry@somewhere.com")->
        addTo("Bob@somewhere.com")->
@@ -325,7 +313,7 @@ $mail->addTo('john@somewhere.com')->
 Sections can be used to further customize messages for the end users. A section is only useful in conjunction with a substition value.
 
 ```php
-$mail = new SendGrid\Mail();
+$mail = new SendGrid\Email();
 $mail->addTo('john@somewhere.com')->
        addTo("harry@somewhere.com")->
        addTo("Bob@somewhere.com")->
@@ -342,7 +330,7 @@ $mail->addTo('john@somewhere.com')->
 Unique Arguments are used for tracking purposes
 
 ```php
-$mail = new SendGrid\Mail();
+$mail = new SendGrid\Email();
 $mail->addTo('foo@bar.com')->
        ...
        addUniqueArgument("Customer", "Someone")->
@@ -354,7 +342,7 @@ $mail->addTo('foo@bar.com')->
 Filter Settings are used to enable and disable apps, and to pass parameters to those apps.
 
 ```php
-$mail = new SendGrid\Mail();
+$mail = new SendGrid\Email();
 $mail->addTo('foo@bar.com')->
        ...
        addFilterSetting("gravatar", "enable", 1)->
@@ -368,7 +356,7 @@ $mail->addTo('foo@bar.com')->
 Headers can be used to add existing sendgrid functionality (such as for categories or filters), or custom headers can be added as necessary.
 
 ```php
-$mail = new SendGrid\Mail();
+$mail = new SendGrid\Email();
 $mail->addTo('foo@bar.com')->
        ...
        addHeader("category", "My New Category");
@@ -380,7 +368,7 @@ Sometimes you might want to send 1,000s of emails in one request. You can do tha
 
 ```php
 $sendgrid   = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD);
-$mail       = new SendGrid\Mail();
+$mail       = new SendGrid\Email();
 
 $recipients = array("alpha@mailinator.com", "beta@mailinator.com", "zeta@mailinator.com");
 $names      = array("Alpha", "Beta", "Zeta");
@@ -405,17 +393,19 @@ $result = $sendgrid->smtp->send($mail);
 
 ## Running Tests ##
 
-The existing tests in the `Test` directory can be run using [PHPUnit](https://github.com/sebastianbergmann/phpunit/) with the following command:
+The existing tests in the `test` directory can be run using [PHPUnit](https://github.com/sebastianbergmann/phpunit/) with the following command:
 
 ````bash
 composer update --dev
-vendor/bin/phpunit Test/
+cd test
+../vendor/bin/phpunit test/
 ```
 
 or if you already have PHPUnit installed globally.
 
 ```bash
-phpunit Test/
+cd test
+phpunit
 ```
 
 ## Known Issues
