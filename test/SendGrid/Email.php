@@ -240,6 +240,18 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $this->assertEquals(0, count($email->getAttachments()));
   }
 
+  public function testAddAttachmentWithoutExtension() {
+    $email = new SendGrid\Email();
+
+    //ensure that addAttachment appends to the list of attachments
+    $email->addAttachment("../file_4");
+
+    $attachments[] = "../file_4";
+
+    $msg_attachments = $email->getAttachments();
+    $this->assertEquals($attachments[count($attachments) - 1], $msg_attachments[count($msg_attachments) - 1]['file']);
+  }
+
   public function testCategoryAccessors() {
     $email = new SendGrid\Email();
 

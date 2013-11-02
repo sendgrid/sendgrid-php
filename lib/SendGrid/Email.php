@@ -506,16 +506,25 @@ class Email {
     }
 
     if ($this->getAttachments()) {
-      foreach($this->getAttachments() as $file) {
-        //$contents = '@' . $file['file']; //convenience from Unirest 
-        $contents = '';
-        if (class_exists('CurlFile')) {
-          $contents = new \CurlFile($file['file'], $file['extension'], $file['filename']);
-        } else {
-          $contents = '@' . $file['file']; //convenience from Unirest 
+      foreach($this->getAttachments() as $f) {
+        $file             = $f['file'];
+        $extension        = null;
+        if (array_key_exists('extension', $f)) {
+          $extension      = $f['extension'];
+        };
+
+        $filename         = $f['filename'];
+        $full_filename    = $filename; 
+        if (isset($extension)) {
+          $full_filename  =  $filename.'.'.$extension;
         }
 
-        $web['files['.$file['filename'].'.'.$file['extension'].']'] = $contents;
+        $contents   = '@' . $file; 
+        if (class_exists('CurlFile')) { // php >= 5.5
+          $contents = new \CurlFile($file, $extension, $filename);
+        }
+
+        $web['files['.$full_filename.']'] = $contents;
       };
     }
 

@@ -39,4 +39,19 @@ class SendGridTest_Web extends PHPUnit_Framework_TestCase {
 
     $this->assertEquals("Bad username / password", $response->errors[0]);
   }
+
+  public function testSendResponseWithAttachmentMissingExtension() {
+    $sendgrid = new SendGrid("foo", "bar");
+
+    $email = new SendGrid\Email();
+    $email->setFrom('p1@mailinator.com')->
+            setSubject('foobar subject')->
+            setText('foobar text')->
+            addTo('p1@mailinator.com')->
+            addAttachment('./text');
+
+    $response = $sendgrid->web->send($email);
+
+    $this->assertEquals("Bad username / password", $response->errors[0]);
+  }
 }
