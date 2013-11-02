@@ -215,6 +215,24 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     }
   }
 
+  public function testSetAttachmentsWithCustomFilename() {
+    $email = new SendGrid\Email();
+
+    $array_of_attachments = 
+      array(
+        "customName.txt" => "path/to/file/file_1.txt", 
+        'another_name_|.txt' => "../file_2.txt", 
+        'custom_name_2.zip' => "../file_3.txt"
+      );
+
+    $email->setAttachments($array_of_attachments);
+    $attachments = $email->getAttachments();
+
+    $this->assertEquals($attachments[0]['custom_filename'], 'customName.txt');
+    $this->assertEquals($attachments[1]['custom_filename'], 'another_name_|.txt');
+    $this->assertEquals($attachments[2]['custom_filename'], 'custom_name_2.zip');
+  }
+
   public function testAddAttachment() {
     $email = new SendGrid\Email();
 
@@ -227,6 +245,17 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $this->assertEquals($attachments[count($attachments) - 1], $msg_attachments[count($msg_attachments) - 1]['file']);
   }
 
+  public function testAddAttachmentCustomFilename() {
+    $email = new SendGrid\Email();
+
+    $email->addAttachment("../file_4.png", "different.png");
+
+    $attachments = $email->getAttachments();
+    $this->assertEquals($attachments[0]['custom_filename'], 'different.png');
+    $this->assertEquals($attachments[0]['filename'], 'file_4');
+  }
+
+
   public function testSetAttachment() {
     $email = new SendGrid\Email();
 
@@ -234,6 +263,21 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $email->setAttachment("only_attachment.sad");
 
     $this->assertEquals(1, count($email->getAttachments()));
+
+    //Remove an attachment
+    $email->removeAttachment("only_attachment.sad");
+    $this->assertEquals(0, count($email->getAttachments()));
+  }
+
+  public function testSetAttachmentCustomFilename() {
+    $email = new SendGrid\Email();
+
+    //Setting an attachment removes all other files
+    $email->setAttachment("only_attachment.sad", "different");
+
+    $attachments = $email->getAttachments();
+    $this->assertEquals(1, count($attachments));
+    $this->assertEquals($attachments[0]['custom_filename'], 'different');
 
     //Remove an attachment
     $email->removeAttachment("only_attachment.sad");
@@ -573,4 +617,19 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
       $this->assertEquals($json["files[gif.gif]"], "@./gif.gif");
     }
   }
+
+  public function testToWebFormatWithAttachmentCustomFilename() {
+    $email    = new SendGrid\Email();
+    $email->addAttachment('./gif.gif', 'different.jpg');
+    $json     = $email->toWebFormat();
+
+    // php 5.5 works differently. @filename has been deprecated for CurlFile in 5.5
+    if (class_exists('CurlFile')) {
+      $content = new \CurlFile('./gif.gif', 'gif', 'gif');
+      $this->assertEquals($json["files[different.jpg]"], $content);
+    } else {
+      $this->assertEquals($json["files[different.jpg]"], "@./gif.gif");
+    }
+  }
+
 }

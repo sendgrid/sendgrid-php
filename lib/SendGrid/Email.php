@@ -181,21 +181,28 @@ class Email {
 
   public function setAttachments(array $files) {
     $this->attachment_list = array();
-    foreach($files as $file)
-    {
-      $this->addAttachment($file);
+    $is_associative = \SendGrid::is_associative($files);
+
+    if ($is_associative) {
+      foreach($files as $filename => $file) {
+        $this->addAttachment($file, $filename);
+      }
+    } else {
+      foreach($files as $file) {
+        $this->addAttachment($file);
+      }
     }
 
     return $this;
   }
 
-  public function setAttachment($file) {
-    $this->attachment_list = array($this->_getAttachmentInfo($file));
+  public function setAttachment($file, $custom_filename=null) {
+    $this->attachment_list = array($this->_getAttachmentInfo($file, $custom_filename));
     return $this;
   }
 
-  public function addAttachment($file) {
-    $this->attachment_list[] = $this->_getAttachmentInfo($file);
+  public function addAttachment($file, $custom_filename=null) {
+    $this->attachment_list[] = $this->_getAttachmentInfo($file, $custom_filename);
     return $this;
   }
 
@@ -208,9 +215,13 @@ class Email {
     return $this;
   }
 
-  private function _getAttachmentInfo($file) {
-    $info = pathinfo($file);
-    $info['file'] = $file;
+  private function _getAttachmentInfo($file, $custom_filename=null) {
+    $info                       = pathinfo($file);
+    $info['file']               = $file;
+    if (!is_null($custom_filename)) {
+      $info['custom_filename']  = $custom_filename;
+    }
+
     return $info;
   }
 
@@ -512,11 +523,14 @@ class Email {
         if (array_key_exists('extension', $f)) {
           $extension      = $f['extension'];
         };
-
         $filename         = $f['filename'];
         $full_filename    = $filename; 
+
         if (isset($extension)) {
           $full_filename  =  $filename.'.'.$extension;
+        }
+        if (array_key_exists('custom_filename', $f)) {
+          $full_filename  = $f['custom_filename'];
         }
 
         $contents   = '@' . $file; 
@@ -532,5 +546,3 @@ class Email {
   }
 
 }
-
-//class_alias('SendGrid\Email', 'SendGrid\Mail');

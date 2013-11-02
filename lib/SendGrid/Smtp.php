@@ -140,7 +140,11 @@ class Smtp extends Api implements EmailInterface
     {
       foreach ($attachments as $attachment)
       {
-        $message->attach(\Swift_Attachment::fromPath($attachment['file']));
+        if (array_key_exists('custom_filename', $attachment)) {
+          $message->attach(\Swift_Attachment::fromPath($attachment['file'])->setFileName($attachment['custom_filename']));
+        } else {
+          $message->attach(\Swift_Attachment::fromPath($attachment['file']));
+        }
       }
     }
 
