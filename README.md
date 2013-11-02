@@ -26,6 +26,7 @@ If you are using [Composer](http://getcomposer.org) to manage dependencies, you 
 
 ```json
 {  
+  "minimum-stability" : "dev",
   "require": {
     "sendgrid/sendgrid": "1.1.0"
   },
