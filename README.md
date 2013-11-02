@@ -31,9 +31,16 @@ If you are using [Composer](http://getcomposer.org) to manage dependencies, you 
     "sendgrid/sendgrid": "1.1.0"
   },
   "autoload": {
-    "psr-0": {"SendGrid": "lib/"}
+    "files": ["vendor/sendgrid/sendgrid/lib/SendGrid.php"]
   }
 }
+```
+
+Then at the top of your script register the autoloader:
+
+```bash
+require 'vendor/autoload.php';
+SendGrid::register_autoloader();
 ```
 
 ### Install source from GitHub
