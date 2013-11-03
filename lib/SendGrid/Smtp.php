@@ -2,13 +2,13 @@
 
 namespace SendGrid;
 
-class Smtp extends Api implements MailInterface
+class Smtp extends Api implements EmailInterface
 {
   //the available ports
-  const TLS = 587;
+  const TLS             = 587;
   const TLS_ALTERNATIVE = 25;
-  const SSL = 465;
-  const HOSTNAME = 'smtp.sendgrid.net';
+  const SSL             = 465;
+  const HOSTNAME        = 'smtp.sendgrid.net';
 
   //the list of port instances, to be recycled
   private $swift_instances = array();
@@ -72,12 +72,12 @@ class Smtp extends Api implements MailInterface
 
   /* _mapToSwift
    * Maps the SendGridMail Object to the SwiftMessage object
-   * @param Mail $mail - the SendGridMail object
+   * @param Email $email - the SendGridMail object
    * @return the SwiftMessage object
    */
-  protected function _mapToSwift(Mail $mail)
+  protected function _mapToSwift(Email $email)
   {
-    $message = new \Swift_Message($mail->getSubject());
+    $message = new \Swift_Message($email->getSubject());
 
     /*
      * Since we're sending transactional email, we want the message to go to one person at a time, rather
@@ -85,40 +85,40 @@ class Smtp extends Api implements MailInterface
      * but Swift still requires a 'to' address. So we'll falsify it with the from address, as it will be 
      * ignored anyway.
      */
-    $message->setTo($mail->getFrom());
-    $message->setFrom($mail->getFrom(true));
-    $message->setCc($mail->getCcs());
-    $message->setBcc($mail->getBccs());
+    $message->setTo($email->getFrom());
+    $message->setFrom($email->getFrom(true));
+    $message->setCc($email->getCcs());
+    $message->setBcc($email->getBccs());
 
-    if ($mail->getHtml())
+    if ($email->getHtml())
     {
-      $message->setBody($mail->getHtml(), 'text/html');
-      if ($mail->getText()) $message->addPart($mail->getText(), 'text/plain');
+      $message->setBody($email->getHtml(), 'text/html');
+      if ($email->getText()) $message->addPart($email->getText(), 'text/plain');
     }
     else
     {
-      $message->setBody($mail->getText(), 'text/plain');
+      $message->setBody($email->getText(), 'text/plain');
     }
 
-    if(($replyto = $mail->getReplyTo())) {
+    if(($replyto = $email->getReplyTo())) {
       $message->setReplyTo($replyto);
     }
 
     // determine whether or not we can use SMTP recipients (non header based)
-    if($mail->useHeaders())
+    if($email->useHeaders())
     {
       //send header based email
-      $message->setTo($mail->getFrom());
+      $message->setTo($email->getFrom());
 
        //here we'll add the recipients list to the headers
-      $headers = $mail->getHeaders();
-      $headers['to'] = $mail->getTos();
-      $mail->setHeaders($headers);
+      $headers = $email->getHeaders();
+      $headers['to'] = $email->getTos();
+      $email->setHeaders($headers);
     }
     else
     {
       $recipients = array();
-      foreach ($mail->getTos() as $recipient)
+      foreach ($email->getTos() as $recipient)
       {
         if(preg_match("/(.*)<(.*)>/", $recipient, $results))
         {
@@ -133,33 +133,37 @@ class Smtp extends Api implements MailInterface
       $message->setTo($recipients);
     }
 
-    $attachments = $mail->getAttachments();
+    $attachments = $email->getAttachments();
 
     //add any attachments that were added
     if ($attachments)
     {
       foreach ($attachments as $attachment)
       {
-        $message->attach(\Swift_Attachment::fromPath($attachment['file']));
+        if (array_key_exists('custom_filename', $attachment)) {
+          $message->attach(\Swift_Attachment::fromPath($attachment['file'])->setFileName($attachment['custom_filename']));
+        } else {
+          $message->attach(\Swift_Attachment::fromPath($attachment['file']));
+        }
       }
     }
 
     //add all the headers
     $headers = $message->getHeaders();
-    $headers->addTextHeader('X-SMTPAPI', $mail->getHeadersJson());
+    $headers->addTextHeader('X-SMTPAPI', $email->getHeadersJson());
 
     return $message;
   }
 
   /* send
-   * Send the Mail Message
-   * @param Mail $mail - the SendGridMailMessage to be sent
+   * Send the Email Message
+   * @param Mail $email - the SendGridMailMessage to be sent
    * @return true if mail was sendable (not necessarily sent)
    */
-  public function send(Mail $mail)
+  public function send(Email $email)
   {
     $swift = $this->_getSwiftInstance($this->port);
-    $message = $this->_mapToSwift($mail);
+    $message = $this->_mapToSwift($email);
 
     try 
     {
