@@ -7,19 +7,11 @@ class SmtpapiHeaders {
   private $category     = array();
   private $sub          = array();
   private $section      = array();
+  private $unique_args  = array();
   private $filters      = array();
   private $headers      = array();
 
-  //this.to = [];
-  //this.sub = {};
-  //this.unique_args = {};
-  //this.category = [];
-  //this.filters = {};
-  //this.section = {};
-
-  public function __construct() {
-
-  }
+  public function __construct() {}
 
   public function addTo($email, $name=null) {
     $this->to[] = ($name ? $name . " <" . $email . ">" : $email);
