@@ -48,8 +48,4 @@ class SendGrid {
     $this->$name = new $api($this->username, $this->password);
     return $this->$name;
   }
-
-  public static function is_associative($var) {
-    return is_array($var) && array_diff_key($var,array_keys(array_keys($var)));
-  }
 }

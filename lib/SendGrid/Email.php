@@ -14,7 +14,7 @@ class Email {
           $html,
           $headers,
           $smtpapi_headers,
-          $attachment_list;
+          $attachments;
 
   protected $use_headers;
 
@@ -179,15 +179,12 @@ class Email {
   }
 
   public function setAttachments(array $files) {
-    $this->attachment_list = array();
-    $is_associative = \SendGrid::is_associative($files);
+    $this->attachments = array();
 
-    if ($is_associative) {
-      foreach($files as $filename => $file) {
+    foreach($files as $filename => $file) {
+      if (is_string($filename)) {
         $this->addAttachment($file, $filename);
-      }
-    } else {
-      foreach($files as $file) {
+      } else {
         $this->addAttachment($file);
       }
     }
@@ -196,21 +193,21 @@ class Email {
   }
 
   public function setAttachment($file, $custom_filename=null) {
-    $this->attachment_list = array($this->_getAttachmentInfo($file, $custom_filename));
+    $this->attachments = array($this->_getAttachmentInfo($file, $custom_filename));
     return $this;
   }
 
   public function addAttachment($file, $custom_filename=null) {
-    $this->attachment_list[] = $this->_getAttachmentInfo($file, $custom_filename);
+    $this->attachments[] = $this->_getAttachmentInfo($file, $custom_filename);
     return $this;
   }
 
   public function getAttachments() {
-    return $this->attachment_list;
+    return $this->attachments;
   }
 
   public function removeAttachment($file) {
-    $this->_removeFromList($this->attachment_list, $file, "file");
+    $this->_removeFromList($this->attachments, $file, "file");
     return $this;
   }
 
@@ -285,7 +282,7 @@ class Email {
   }
   
   public function getHeaders() {
-    echo("DEPRECATION NOTICE: getHeaders is deprecated. Use getSmtpapiHeaders instead.\n");
+    syslog(LOG_NOTICE, "DEPRECATION NOTICE: getHeaders is deprecated. Use getSmtpapiHeaders instead.\n");
     return $this->getSmtpapiHeaders();
   }
 
@@ -294,7 +291,7 @@ class Email {
   }
 
   public function getHeadersJson() {
-    echo("DEPRECATION NOTICE: getHeadersJson is deprecated. Use getSmtpapiHeadersJson instead.\n");
+    syslog(LOG_NOTICE, "DEPRECATION NOTICE: getHeadersJson is deprecated. Use getSmtpapiHeadersJson instead.\n");
     return $this->getSmtpapiHeadersJson();
   }
 
@@ -307,7 +304,7 @@ class Email {
   }
 
   public function setHeaders($key_value_pairs) {
-    echo("DEPRECATION NOTICE: setHeaders is deprecated. Use setSmtpapiHeaders instead.\n");
+    syslog(LOG_NOTICE, "DEPRECATION NOTICE: setHeaders is deprecated. Use setSmtpapiHeaders instead.\n");
     $this->setSmtpapiHeaders($key_value_paris);
     return $this;
   }
@@ -318,7 +315,7 @@ class Email {
   }
 
   public function addHeader($key, $value) {
-    echo("DEPRECATION NOTICE: addHeader is deprecated. Use addSmtpapiHeader instead.\n");
+    syslog(LOG_NOTICE, "DEPRECATION NOTICE: addHeader is deprecated. Use addSmtpapiHeader instead.\n");
     $this->addSmtpapiHeader($key_value_paris);
     return $this;
   }
@@ -329,7 +326,7 @@ class Email {
   }
  
   public function removeHeader($key) {
-    echo("DEPRECATION NOTICE: removeHeader is deprecated. Use removeSmtpapiHeader instead.\n");
+    syslog(LOG_NOTICE, "DEPRECATION NOTICE: removeHeader is deprecated. Use removeSmtpapiHeader instead.\n");
     $this->removeSmtpapiHeader($key);
     return $this;
   }
