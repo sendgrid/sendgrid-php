@@ -19,6 +19,7 @@ $email->addTo('foo@bar.com')->
 $sendgrid->web->send($email);
 ```
 
+
 ## Installation
 
 ### Install with Composer 
@@ -81,17 +82,9 @@ For an explanation of the benefits of each, refer to http://docs.sendgrid.com/do
 
 This library implements a common interface to make it very easy to use either API.
 
-## Pre-Usage ##
+## Example App
 
-Before we begin using the library, its important to understand a few things about the library architecture...
-
-* The SendGrid Email object is the means of setting mail data. In general, data can be set in three ways for most elements:
-  1. set - reset the data, and initialize it to the given element. This will destroy previous data
-  2. set (List) - for array based elements, we provide a way of passing the entire array in at once. This will also destroy previous data.  3. add - append data to the list of elements.  
-* Sending an email is as simple as :
-  1. Creating a SendGrid Instance
-  1. Creating a SendGrid Email object, and setting its data
-  1. Sending the mail using either SMTP API or Web API.
+There is a [sendgrid-php-example app](https://github.com/scottmotte/sendgrid-php-example) to help jumpstart your development.
 
 ## Usage
 
