@@ -300,7 +300,7 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $email = new SendGrid\Email();
 
     $email->setCategory('category_0');
-    $this->assertEquals("{\"category\":[\"category_0\"]}", $email->getHeadersJson());
+    $this->assertEquals("{\"category\":[\"category_0\"]}", $email->getSmtpapiHeadersJson());
 
     $categories = array(
                     "category_1", 
@@ -311,19 +311,19 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
 
     $email->setCategories($categories);
 
-    $header = $email->getHeaders();
+    $header = $email->getSmtpapiHeaders();
 
     // ensure that the array is the same
     $this->assertEquals($categories, $header['category']);
 
     // uses valid json
-    $this->assertEquals("{\"category\":[\"category_1\",\"category_2\",\"category_3\",\"category_4\"]}", $email->getHeadersJson());
+    $this->assertEquals("{\"category\":[\"category_1\",\"category_2\",\"category_3\",\"category_4\"]}", $email->getSmtpapiHeadersJson());
 
     // ensure that addCategory appends to the list of categories
     $category = "category_5";
     $email->addCategory($category);
 
-    $header = $email->getHeaders();
+    $header = $email->getSmtpapiHeaders();
 
     $this->assertEquals(5, count($header['category']));
 
@@ -335,7 +335,7 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     // removeCategory removes all occurrences of a category
     $email->removeCategory("category_3");
 
-    $header = $email->getHeaders();
+    $header = $email->getSmtpapiHeaders();
 
     unset($categories[2]);
     $categories = array_values($categories);
@@ -345,8 +345,7 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $this->assertEquals($categories, $header['category']);
   }
 
-  public function testSubstitutionAccessors()
-  {
+  public function testSubstitutionAccessors() {
     $email = new SendGrid\Email();
 
     $substitutions = array(
@@ -358,11 +357,11 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
 
     $email->setSubstitutions($substitutions);
 
-    $header = $email->getHeaders();
+    $header = $email->getSmtpapiHeaders();
 
     $this->assertEquals($substitutions, $header['sub']);
 
-    $this->assertEquals("{\"sub\":{\"sub_1\":[\"val_1.1\",\"val_1.2\",\"val_1.3\"],\"sub_2\":[\"val_2.1\",\"val_2.2\"],\"sub_3\":[\"val_3.1\",\"val_3.2\",\"val_3.3\",\"val_3.4\"],\"sub_4\":[\"val_4.1\",\"val_4.2\",\"val_4.3\"]}}", $email->getHeadersJson());
+    $this->assertEquals("{\"sub\":{\"sub_1\":[\"val_1.1\",\"val_1.2\",\"val_1.3\"],\"sub_2\":[\"val_2.1\",\"val_2.2\"],\"sub_3\":[\"val_3.1\",\"val_3.2\",\"val_3.3\",\"val_3.4\"],\"sub_4\":[\"val_4.1\",\"val_4.2\",\"val_4.3\"]}}", $email->getSmtpapiHeadersJson());
 
     // ensure that addSubstitution appends to the list of substitutions
     
@@ -371,7 +370,7 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
 
     $substitutions["sub_5"] = $sub_vals;
 
-    $header = $email->getHeaders();
+    $header = $email->getSmtpapiHeaders();
 
     $this->assertEquals(5, count($header['sub']));
     $this->assertEquals($substitutions, $header['sub']);
@@ -390,11 +389,11 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
 
     $email->setSections($sections);
 
-    $header = $email->getHeaders();
+    $header = $email->getSmtpapiHeaders();
 
     $this->assertEquals($sections, $header['section']);
 
-    $this->assertEquals("{\"section\":{\"sub_1\":[\"val_1.1\",\"val_1.2\",\"val_1.3\"],\"sub_2\":[\"val_2.1\",\"val_2.2\"],\"sub_3\":[\"val_3.1\",\"val_3.2\",\"val_3.3\",\"val_3.4\"],\"sub_4\":[\"val_4.1\",\"val_4.2\",\"val_4.3\"]}}", $email->getHeadersJson());
+    $this->assertEquals("{\"section\":{\"sub_1\":[\"val_1.1\",\"val_1.2\",\"val_1.3\"],\"sub_2\":[\"val_2.1\",\"val_2.2\"],\"sub_3\":[\"val_3.1\",\"val_3.2\",\"val_3.3\",\"val_3.4\"],\"sub_4\":[\"val_4.1\",\"val_4.2\",\"val_4.3\"]}}", $email->getSmtpapiHeadersJson());
 
     // ensure that addSubstitution appends to the list of substitutions
     
@@ -403,7 +402,7 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
 
     $sections["sub_5"] = $section_vals;
 
-    $header = $email->getHeaders();
+    $header = $email->getSmtpapiHeaders();
 
     $this->assertEquals(5, count($header['section']));
     $this->assertEquals($sections, $header['section']);
@@ -422,11 +421,11 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
 
     $email->setUniqueArguments($unique_arguments);
 
-    $header = $email->getHeaders();
+    $header = $email->getSmtpapiHeaders();
 
     $this->assertEquals($unique_arguments, $header['unique_args']);
 
-    $this->assertEquals("{\"unique_args\":{\"sub_1\":[\"val_1.1\",\"val_1.2\",\"val_1.3\"],\"sub_2\":[\"val_2.1\",\"val_2.2\"],\"sub_3\":[\"val_3.1\",\"val_3.2\",\"val_3.3\",\"val_3.4\"],\"sub_4\":[\"val_4.1\",\"val_4.2\",\"val_4.3\"]}}", $email->getHeadersJson());
+    $this->assertEquals("{\"unique_args\":{\"sub_1\":[\"val_1.1\",\"val_1.2\",\"val_1.3\"],\"sub_2\":[\"val_2.1\",\"val_2.2\"],\"sub_3\":[\"val_3.1\",\"val_3.2\",\"val_3.3\",\"val_3.4\"],\"sub_4\":[\"val_4.1\",\"val_4.2\",\"val_4.3\"]}}", $email->getSmtpapiHeadersJson());
 
     // ensure that addSubstitution appends to the list of substitutions
     
@@ -435,7 +434,7 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
 
     $unique_arguments["sub_5"] = $unique_vals;
 
-    $header = $email->getHeaders();
+    $header = $email->getSmtpapiHeaders();
 
     $this->assertEquals(5, count($header['unique_args']));
     $this->assertEquals($unique_arguments, $header['unique_args']);
@@ -477,7 +476,7 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
 
     $email->setFilterSettings($filters);
 
-    $header = $email->getHeaders();
+    $header = $email->getSmtpapiHeaders();
 
     $this->assertEquals(count($filters), count($header['filters']));
 
@@ -499,7 +498,7 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
           )
       );
 
-    $header = $email->getHeaders();
+    $header = $email->getSmtpapiHeaders();
 
     $this->assertEquals($filters, $header['filters']);
   }
@@ -508,7 +507,7 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
   {
     $email = new SendGrid\Email();
 
-    $this->assertEquals("{}", $email->getHeadersJson());
+    $this->assertEquals("{}", $email->getSmtpapiHeadersJson());
 
 
     $headers = 
@@ -532,24 +531,24 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
       );
 
 
-      $email->setHeaders($headers);
+      $email->setSmtpapiHeaders($headers);
 
 
-      $this->assertEquals($headers, $email->getHeaders());
+      $this->assertEquals($headers, $email->getSmtpapiHeaders());
 
-      $email->addHeader("simple_header", "simple_value");
+      $email->addSmtpapiHeader("simple_header", "simple_value");
 
       $headers["simple_header"] = "simple_value";
 
-      $this->assertEquals($headers, $email->getHeaders());
-      $this->assertEquals("{\"header_1\":{\"item_1\":\"value_1\",\"item_2\":\"value_2\",\"item_3\":\"value_3\"},\"header_2\":\"value_4\",\"header_3\":\"value_4\",\"header_4\":{\"item_4\":{\"sub_item_1\":\"sub_value_1\",\"sub_item_2\":\"sub_value_2\"}},\"simple_header\":\"simple_value\"}", $email->getHeadersJson());
+      $this->assertEquals($headers, $email->getSmtpapiHeaders());
+      $this->assertEquals("{\"header_1\":{\"item_1\":\"value_1\",\"item_2\":\"value_2\",\"item_3\":\"value_3\"},\"header_2\":\"value_4\",\"header_3\":\"value_4\",\"header_4\":{\"item_4\":{\"sub_item_1\":\"sub_value_1\",\"sub_item_2\":\"sub_value_2\"}},\"simple_header\":\"simple_value\"}", $email->getSmtpapiHeadersJson());
 
       //remove a header
-      $email->removeHeader("simple_header");
+      $email->removeSmtpapiHeader("simple_header");
 
       unset($headers["simple_header"]);
 
-      $this->assertEquals($headers, $email->getHeaders());
+      $this->assertEquals($headers, $email->getSmtpapiHeaders());
   }
 
   public function testUseHeaders()

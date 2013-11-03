@@ -111,9 +111,9 @@ class Smtp extends Api implements EmailInterface
       $message->setTo($email->getFrom());
 
        //here we'll add the recipients list to the headers
-      $headers = $email->getHeaders();
+      $headers = $email->getSmtpapiHeaders();
       $headers['to'] = $email->getTos();
-      $email->setHeaders($headers);
+      $email->setSmtpapiHeaders($headers);
     }
     else
     {
@@ -150,7 +150,7 @@ class Smtp extends Api implements EmailInterface
 
     //add all the headers
     $headers = $message->getHeaders();
-    $headers->addTextHeader('X-SMTPAPI', $email->getHeadersJson());
+    $headers->addTextHeader('X-SMTPAPI', $email->getSmtpapiHeadersJson());
 
     return $message;
   }
