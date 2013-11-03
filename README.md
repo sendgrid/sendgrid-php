@@ -29,7 +29,7 @@ If you are using [Composer](http://getcomposer.org) to manage dependencies, you 
 {  
   "minimum-stability" : "dev",
   "require": {
-    "sendgrid/sendgrid": "1.1.1"
+    "sendgrid/sendgrid": "1.1.2"
   },
   "autoload": {
     "files": ["vendor/sendgrid/sendgrid/lib/SendGrid.php"]
@@ -361,6 +361,18 @@ $mail = new SendGrid\Email();
 $mail->addTo('foo@bar.com')->
        ...
        addSmtpapiHeader("category", "My New Category");
+```
+
+### Message Headers ###
+
+You can add standard email message headers as necessary.
+
+```php
+$mail = new SendGrid\Email();
+$mail->addTo('foo@bar.com')->
+       ...
+       addMessageHeader('X-Sent-Using', 'SendGrid-API')->
+       addMessageHeader('X-Transport', 'web');
 ```
 
 ### Sending to 1,000s of emails in one batch

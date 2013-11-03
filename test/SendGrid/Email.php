@@ -20,7 +20,6 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
 
     $mail->addTo('p2@mailinator.com');
     $this->assertEquals(array('p1@mailinator.com', 'p2@mailinator.com'), $mail->getTos());
-
   }
 
   public function testAddTo() {
@@ -503,8 +502,7 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $this->assertEquals($filters, $header['filters']);
   }
 
-  public function testHeaderAccessors()
-  {
+  public function testSmtpapiHeaderAccessors() {
     $email = new SendGrid\Email();
 
     $this->assertEquals("{}", $email->getSmtpapiHeadersJson());
@@ -549,6 +547,43 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
       unset($headers["simple_header"]);
 
       $this->assertEquals($headers, $email->getSmtpapiHeaders());
+  }
+
+
+  public function testMessageHeaderAccessors() {
+    // A new message shouldn't have any RFC-822 headers set
+    $message = new SendGrid\Email();
+    $this->assertEquals('{}', $message->getMessageHeadersJson());
+
+    // Add some message headers, check they are correctly stored
+    $headers = array(
+    'X-Sent-Using' => 'SendGrid-API',
+    'X-Transport'  => 'web',
+    );
+    $message->setMessageHeaders($headers);
+    $this->assertEquals($headers, $message->getMessageHeaders());
+
+    // Add another header, check if it is stored
+    $message->addMessageHeader('X-Another-Header', 'first_value');
+    $headers['X-Another-Header'] = 'first_value';
+    $this->assertEquals($headers, $message->getMessageHeaders());
+
+    // Replace a header
+    $message->addMessageHeader('X-Another-Header', 'second_value');
+    $headers['X-Another-Header'] = 'second_value';
+    $this->assertEquals($headers, $message->getMessageHeaders());
+
+    // Get the encoded headers; they must be a valid JSON
+    $json = $message->getMessageHeadersJson();
+    $decoded = json_decode($json, TRUE);
+    $this->assertInternalType('array', $decoded);
+    // Test we get the same message headers we put in the message
+    $this->assertEquals($headers, $decoded);
+
+    // Remove a header
+    $message->removeMessageHeader('X-Transport');
+    unset($headers['X-Transport']);
+    $this->assertEquals($headers, $message->getMessageHeaders());
   }
 
   public function testUseHeaders()
@@ -629,6 +664,15 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     } else {
       $this->assertEquals($json["files[different.jpg]"], "@./gif.gif");
     }
+  }
+
+  public function testToWebFormatWithMessageHeaders() {
+    $email    = new SendGrid\Email();
+    $email->addMessageHeader('X-Sent-Using', 'SendGrid-API');
+    $json     = $email->toWebFormat();
+
+    $headers = json_decode($json['headers'], TRUE);
+    $this->assertEquals('SendGrid-API', $headers['X-Sent-Using']);
   }
 
 }
