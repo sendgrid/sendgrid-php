@@ -152,6 +152,13 @@ class Smtp extends Api implements EmailInterface
     $headers = $message->getHeaders();
     $headers->addTextHeader('X-SMTPAPI', $email->getSmtpapiHeadersJson());
 
+    // Add the extra message headers (RFC 822)
+    if (count($email->getMessageHeaders())) {
+      foreach ($email->getMessageHeaders() as $name => $value) {
+        $headers->addTextHeader($name, $value);
+      }
+    }
+
     return $message;
   }
 

@@ -363,6 +363,18 @@ $mail->addTo('foo@bar.com')->
        addSmtpapiHeader("category", "My New Category");
 ```
 
+### Message Headers ###
+
+You can add standard email message headers as necessary.
+
+```php
+$mail = new SendGrid\Email();
+$mail->addTo('foo@bar.com')->
+       ...
+       addMessageHeader('X-Sent-Using', 'SendGrid-API')->
+       addMessageHeader('X-Transport', 'web');
+```
+
 ### Sending to 1,000s of emails in one batch
 
 Sometimes you might want to send 1,000s of emails in one request. You can do that. It is recommended you break each batch up in 1,000 increements. So if you need to send to 5,000 emails, then you'd break this into a loop of 1,000 emails at a time.

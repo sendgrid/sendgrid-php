@@ -12,9 +12,9 @@ class Email {
           $subject,
           $text,
           $html,
+          $headers,
+          $smtpapi_headers,
           $attachment_list;
-
-  private $smtpapi_headers;
 
   protected $use_headers;
 
@@ -339,6 +339,31 @@ class Email {
     return $this;
   }
 
+  public function getMessageHeaders() {
+    return $this->headers;
+  }
+ 
+  public function getMessageHeadersJson() {
+    if (count($this->getMessageHeaders()) <= 0) {
+      return "{}";
+    }
+    return json_encode($this->getMessageHeaders(), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
+  }
+ 
+  public function setMessageHeaders($key_value_pairs) {
+    $this->headers = $key_value_pairs;
+    return $this;
+  }
+ 
+  public function addMessageHeader($key, $value) {
+    $this->headers[$key] = $value;
+    return $this;
+  }
+ 
+  public function removeMessageHeader($key) {
+    unset($this->headers[$key]);
+    return $this;
+  }
 
   /**
    * useHeaders
@@ -403,6 +428,7 @@ class Email {
       'subject'     => $this->getSubject(),
       'text'        => $this->getText(),
       'html'        => $this->getHtml(),
+      'headers'     => $this->getMessageHeadersJson(),
       'x-smtpapi'   => $this->getSmtpapiHeadersJson(),
     );
 
