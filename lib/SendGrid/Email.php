@@ -2,6 +2,8 @@
 
 namespace SendGrid;
 
+require 'SmtpapiHeaders.php';
+
 class Email {
 
   private $to,
@@ -16,11 +18,14 @@ class Email {
           $attachment_list,
           $header_list = array();
 
+  private $smtpapi_headers;
+
   protected $use_headers;
 
   public function __construct() {
-    $this->from_name  = false;
-    $this->reply_to   = false;
+    $this->from_name        = false;
+    $this->reply_to         = false;
+    $this->smtpapi_headers  = new SmtpapiHeaders();
   }
 
   /**
@@ -47,29 +52,27 @@ class Email {
   }
 
   public function addTo($email, $name=null) {
-    $this->to[] = ($name ? $name . " <" . $email . ">" : $email);
+    $this->smtpapi_headers->addTo($email, $name);
     return $this;
   }
 
   public function setTo($email) {
-    $this->to = array($email);
+    $this->smtpapi_headers->setTo($email);
     return $this;
   }
 
-  public function setTos(array $email_list) { 
-    $this->to = $email_list;
+  public function setTos(array $emails) { 
+    $this->smtpapi_headers->setTos($email);
     return $this;
   }
   
   public function removeTo($search_term) {
-    $this->to = array_values(array_filter($this->to, function($item) use($search_term) {
-      return !preg_match("/" . $search_term . "/", $item);
-    }));
+    $this->smtpapi_headers->removeTo($search_term);
     return $this;
   }
 
   public function getTos() {
-    return $this->to;
+    return $this->smtpapi_headers->getTos();
   }
 
   public function setFrom($email) {
