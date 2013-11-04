@@ -19,6 +19,6 @@
   },
   "type": "library",
   "autoload": {
-    "psr-0": {"Unirest": "lib/"}
+    "psr-0": {"SendGrid": "lib/"}
   }
 }
