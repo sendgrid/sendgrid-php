@@ -29,10 +29,7 @@ If you are using [Composer](http://getcomposer.org) to manage dependencies, you 
 {  
   "minimum-stability" : "dev",
   "require": {
-    "sendgrid/sendgrid": "1.1.3"
-  },
-  "autoload": {
-    "files": ["vendor/sendgrid/sendgrid/lib/SendGrid.php"]
+    "sendgrid/sendgrid": "1.1.4"
   }
 }
 ```
