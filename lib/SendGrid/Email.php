@@ -58,7 +58,7 @@ class Email {
   }
 
   public function setTos(array $emails) { 
-    $this->smtpapi_headers->setTos($email);
+    $this->smtpapi_headers->setTos($emails);
     return $this;
   }
   
