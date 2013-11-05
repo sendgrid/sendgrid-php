@@ -49,6 +49,13 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $this->assertEquals(array('p1@mailinator.com'), $email->getTos());
   }
 
+  public function testSetTos() {
+    $email = new SendGrid\Email();
+
+    $email->setTos(array('p1@mailinator.com'));
+    $this->assertEquals(array('p1@mailinator.com'), $email->getTos());
+  }
+
   public function testRemoveTo() {
     $email = new SendGrid\Email();
 
