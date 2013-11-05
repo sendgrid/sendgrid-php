@@ -1,12 +1,9 @@
 <?php
 
-//include(dirname(dirname(__FILE__)) . '/lib/SendGrid.php');
-//SendGrid::register_autoloader();
-
 class SendGridTest_SendGrid extends PHPUnit_Framework_TestCase {
 
   public function testVersion() {
-    $this->assertEquals(SendGrid::VERSION, "1.1.4");
+    $this->assertEquals(SendGrid::VERSION, "1.1.5");
   }
 
   public function testInitialization() {
