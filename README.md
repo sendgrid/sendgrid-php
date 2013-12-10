@@ -30,7 +30,7 @@ If you are using [Composer](http://getcomposer.org) to manage dependencies, you 
 {  
   "minimum-stability" : "dev",
   "require": {
-    "sendgrid/sendgrid": "1.1.5"
+    "sendgrid/sendgrid": "1.1.6"
   }
 }
 ```

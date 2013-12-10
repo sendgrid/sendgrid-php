@@ -1,7 +1,7 @@
 <?php
 
 class SendGrid {
-  const VERSION = "1.1.5";
+  const VERSION = "1.1.6";
 
   protected $namespace = "SendGrid",
             $username,
