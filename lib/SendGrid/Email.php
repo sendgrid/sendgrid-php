@@ -305,7 +305,7 @@ class Email {
 
   public function setHeaders($key_value_pairs) {
     syslog(LOG_NOTICE, "DEPRECATION NOTICE: setHeaders is deprecated. Use setSmtpapiHeaders instead.\n");
-    $this->setSmtpapiHeaders($key_value_paris);
+    $this->setSmtpapiHeaders($key_value_pairs);
     return $this;
   }
 
@@ -316,7 +316,7 @@ class Email {
 
   public function addHeader($key, $value) {
     syslog(LOG_NOTICE, "DEPRECATION NOTICE: addHeader is deprecated. Use addSmtpapiHeader instead.\n");
-    $this->addSmtpapiHeader($key_value_paris);
+    $this->addSmtpapiHeader($key, $value);
     return $this;
   }
 
