@@ -30,7 +30,7 @@ If you are using [Composer](http://getcomposer.org) to manage dependencies, you 
 {  
   "minimum-stability" : "dev",
   "require": {
-    "sendgrid/sendgrid": "1.1.5"
+    "sendgrid/sendgrid": "1.1.6"
   }
 }
 ```
@@ -409,7 +409,7 @@ The existing tests in the `test` directory can be run using [PHPUnit](https://gi
 ````bash
 composer update --dev
 cd test
-../vendor/bin/phpunit test/
+../vendor/bin/phpunit
 ```
 
 or if you already have PHPUnit installed globally.
