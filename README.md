@@ -35,11 +35,10 @@ If you are using [Composer](http://getcomposer.org) to manage dependencies, you 
 }
 ```
 
-Then at the top of your script register the autoloader:
+Then at the top of your script require the autoloader:
 
 ```bash
 require 'vendor/autoload.php';
-SendGrid::register_autoloader();
 ```
 
 ### Install source from GitHub
