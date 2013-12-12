@@ -23,8 +23,7 @@ $sendgrid->web->send($email);
 
 ## Installation
 
-### Install with Composer 
-If you are using [Composer](http://getcomposer.org) to manage dependencies, you can add SendGrid with it.
+Add SendGrid to your `composer.json` file. If you are not using [Composer](http://getcomposer.org), you should be. It's an excellent way to manage dependencies in your PHP application.  
 
 ```json
 {  
@@ -35,31 +34,26 @@ If you are using [Composer](http://getcomposer.org) to manage dependencies, you 
 }
 ```
 
-Then at the top of your script require the autoloader:
+Then at the top of your PHP script require the autoloader:
 
 ```bash
 require 'vendor/autoload.php';
 ```
 
-### Install source from GitHub
+#### Alternative: Install source from GitHub
 
-To install the source code:
+If you don't want to use Composer, you can install from source.
 
 ```bash
 git clone https://github.com/Mashape/unirest-php.git 
 git clone https://github.com/sendgrid/sendgrid-php.git
 ```
 
-And include it in your scripts:
+And include it in your PHP script:
 
 ```bash
 require_once '/path/to/unirest-php/lib/Unirest.php';
 require_once '/path/to/sendgrid-php/lib/SendGrid.php';
-```
-
-You'll probably also want to register an autoloader:
-
-```bash
 SendGrid::register_autoloader();
 ```
 
