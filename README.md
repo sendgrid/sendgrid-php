@@ -35,11 +35,10 @@ If you are using [Composer](http://getcomposer.org) to manage dependencies, you 
 }
 ```
 
-Then at the top of your script register the autoloader:
+Then at the top of your script require the autoloader:
 
 ```bash
 require 'vendor/autoload.php';
-SendGrid::register_autoloader();
 ```
 
 ### Install source from GitHub
@@ -409,7 +408,7 @@ The existing tests in the `test` directory can be run using [PHPUnit](https://gi
 ````bash
 composer update --dev
 cd test
-../vendor/bin/phpunit test/
+../vendor/bin/phpunit
 ```
 
 or if you already have PHPUnit installed globally.
