@@ -17,20 +17,21 @@ $email->addTo('foo@bar.com')->
        setText('Hello World!')->
        setHtml('<strong>Hello World!</strong>');
 
-$sendgrid->web->send($email);
+$sendgrid->send($email);
 ```
 
 
 ## Installation
 
 ### Install with Composer 
+
 If you are using [Composer](http://getcomposer.org) to manage dependencies, you can add SendGrid with it.
 
 ```json
 {  
   "minimum-stability" : "dev",
   "require": {
-    "sendgrid/sendgrid": "1.1.6"
+    "sendgrid/sendgrid": "2.0.0-rc.1.0"
   }
 }
 ```
@@ -63,22 +64,6 @@ You'll probably also want to register an autoloader:
 SendGrid::register_autoloader();
 ```
 
-#### Optional
-
-IF using the `smtp` option, you need [swiftmailer](https://github.com/swiftmailer/swiftmailer). This is not necessary if using the web API approach. 
-
-```bash
-git clone git://github.com/swiftmailer/swiftmailer.git
-ln -s swiftmailer/lib/swift_required.php swift_required.php
-```
-
-## SendGrid APIs ##
-
-SendGrid provides two methods of sending email: the Web API, and SMTP API.  SendGrid recommends using the SMTP API for sending emails.
-For an explanation of the benefits of each, refer to http://docs.sendgrid.com/documentation/get-started/integrate/examples/smtp-vs-rest/.
-
-This library implements a common interface to make it very easy to use either API.
-
 ## Example App
 
 There is a [sendgrid-php-example app](https://github.com/scottmotte/sendgrid-php-example) to help jumpstart your development.
@@ -102,15 +87,10 @@ $mail->addTo('foo@bar.com')->
        setHtml('<strong>Hello World!</strong>');
 ```
 
-Send it using the API of your choice (Web or SMTP)
+Send it. 
 
 ```php
-$sendgrid->web->send($mail);
-```
-Or 
-
-```php
-$sendgrid->smtp->send($mail);
+$sendgrid->send($mail);
 ```
 
 ### addTo
@@ -121,7 +101,7 @@ You can add one or multiple TO addresses using `addTo`.
 $mail = new SendGrid\Email();
 $mail->addTo('foo@bar.com')->
        addTo('another@another.com');
-$sendgrid->web->send($mail);
+$sendgrid->send($mail);
 ```
 
 ### setTos
@@ -132,7 +112,7 @@ If you prefer, you can add multiple TO addresses as an array using the `setTos` 
 $mail   = new SendGrid\Email();
 $emails = array("foo@bar.com", "another@another.com", "other@other.com");
 $mail->setTos($emails);
-$sendgrid->web->send($mail);
+$sendgrid->send($mail);
 ```
 
 ### getTos
@@ -160,7 +140,7 @@ $mail->removeTo('foo@bar.com');
 ```php
 $mail   = new SendGrid\Email();
 $mail->setFrom('foo@bar.com');
-$sendgrid->web->send($mail);
+$sendgrid->send($mail);
 ```
 
 ### setFromName
@@ -171,7 +151,7 @@ $mail->setFrom('foo@bar.com');
 $mail->setFromName('Foo Bar');
 $mail->setFrom('other@example.com');
 $mail->setFromName('Other Guy');
-$sendgrid->web->send($mail);
+$sendgrid->send($mail);
 ```
 
 ### setReplyTo
@@ -179,7 +159,7 @@ $sendgrid->web->send($mail);
 ```php
 $mail   = new SendGrid\Email();
 $mail->setReplyTo('foo@bar.com');
-$sendgrid->web->send($mail);
+$sendgrid->send($mail);
 ```
 
 ### addCc
@@ -187,7 +167,7 @@ $sendgrid->web->send($mail);
 ```php
 $mail   = new SendGrid\Email();
 $mail->addCc('foo@bar.com');
-$sendgrid->web->send($mail);
+$sendgrid->send($mail);
 ```
 
 ### Bcc
@@ -207,7 +187,7 @@ But if you do still have a need for Bcc you can do the following.
 ```php
 $mail   = new SendGrid\Email();
 $mail->addBcc('foo@bar.com');
-$sendgrid->web->send($mail);
+$sendgrid->send($mail);
 ```
 
 ### setSubject
@@ -215,7 +195,7 @@ $sendgrid->web->send($mail);
 ```php
 $mail   = new SendGrid\Email();
 $mail->setSubject('This is a subject');
-$sendgrid->web->send($mail);
+$sendgrid->send($mail);
 ```
 
 ### setText
@@ -223,7 +203,7 @@ $sendgrid->web->send($mail);
 ```php
 $mail   = new SendGrid\Email();
 $mail->setText('This is some text');
-$sendgrid->web->send($mail);
+$sendgrid->send($mail);
 ```
 
 ### setHtml
@@ -231,19 +211,8 @@ $sendgrid->web->send($mail);
 ```php
 $mail   = new SendGrid\Email();
 $mail->setHtml('<h1>This is an html email</h1>');
-$sendgrid->web->send($mail);
+$sendgrid->send($mail);
 ```
-
-### Port and Hostname ###
-
-For the smtp API you can optionally choose to set the Port and the Hostname.
-
-```php
-$sendgrid->smtp->setPort('1234567');
-$sendgrid->smtp->setHostname('smtp.dude.com');
-```
-
-This is useful if you are using a local relay, as documented in [here](http://sendgrid.com/docs/Integrate/#--Power-Users-and-High-Volume-Senders).
 
 ### Categories ###
 
@@ -390,7 +359,7 @@ $mail-> setFrom("from@mailinator.com")->
         setText("Hey %name, we have an email for you")->
         setHtml("<h1>Hey %name%, we have an email for you</h1>");
 
-$result = $sendgrid->smtp->send($mail);
+$result = $sendgrid->send($mail);
 ```
 
 ## Contributing
@@ -417,7 +386,3 @@ or if you already have PHPUnit installed globally.
 cd test
 phpunit
 ```
-
-## Known Issues
-
-* When using the smtp version (which is built on top of swiftmailer), any FROM names with parentheses will have the content of the parentheses stripped out. If this happens please use the web version of the library. Read more about this in [issue #27](https://github.com/sendgrid/sendgrid-php/issues/27).

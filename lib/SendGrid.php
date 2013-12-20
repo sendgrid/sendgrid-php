@@ -1,17 +1,28 @@
 <?php
 
 class SendGrid {
-  const VERSION = "1.1.6";
+  const VERSION = "2.0.0-rc.1.0";
 
-  protected $namespace = "SendGrid",
+  protected $namespace  = "SendGrid",
+            $url        = "https://api.sendgrid.com/api/mail.send.json",
+            $headers    = array('Content-Type' => 'application/json'),
             $username,
             $password,
-            $web,
-            $smtp;
+            $web;
   
   public function __construct($username, $password) {
     $this->username = $username;
     $this->password = $password;
+  }
+
+  public function send(SendGrid\Email $email) {
+    $form             = $email->toWebFormat();
+    $form['api_user'] = $this->username; 
+    $form['api_key']  = $this->password; 
+
+    $response = \Unirest::post($this->url, array(), $form);
+
+    return $response->body;
   }
 
   public static function register_autoloader() {
@@ -27,25 +38,5 @@ class SendGrid {
         require_once(dirname(__FILE__) . '/' . $file . '.php');
       }
     }
-  }
-
-  public function __get($api) {
-    $name = $api;
-
-    if($this->$name != null) {
-      return $this->$name;
-    }
-
-    $api = $this->namespace . "\\" . ucwords($api);
-    $class_name = str_replace('\\', '/', "$api.php");
-    $file = __dir__ . DIRECTORY_SEPARATOR . $class_name;
-
-    if (!file_exists($file)) {
-      throw new Exception("Api '$class_name' not found.");
-    }
-    require_once $file;
-
-    $this->$name = new $api($this->username, $this->password);
-    return $this->$name;
   }
 }

@@ -7,13 +7,13 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $this->assertEquals(get_class($email), "SendGrid\Email");
   }
 
-  public function testConstructionMailIsSendGridEmail() {
-    $email = new SendGrid\Mail();
-    $this->assertEquals(get_class($email), "SendGrid\Mail");
+  public function testConstructionEmailIsSendGridEmail() {
+    $email = new SendGrid\Email();
+    $this->assertEquals(get_class($email), "SendGrid\Email");
   }
 
-  public function testAddToWithDeprectedMailClass() {
-    $mail = new SendGrid\Mail();
+  public function testAddToWithDeprectedEmailClass() {
+    $mail = new SendGrid\Email();
 
     $mail->addTo('p1@mailinator.com');
     $this->assertEquals(array('p1@mailinator.com'), $mail->getTos());

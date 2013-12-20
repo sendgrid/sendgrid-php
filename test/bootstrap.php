@@ -17,16 +17,3 @@ function autoload_tests($class) {
 }
 
 spl_autoload_register('autoload_tests');
-
-class SmtpMock extends SendGrid\Smtp {
-  public function __construct($username, $password) {
-    parent::__construct($username, $password);
-  }
-  
-  public function getPort() {
-    return $this->port;
-  }
-  public function getHostname() {
-    return $this->hostname;
-  }
-}
