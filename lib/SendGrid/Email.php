@@ -4,7 +4,8 @@ namespace SendGrid;
 
 class Email {
 
-  private $from,
+  public $to, 
+          $from,
           $from_name,
           $reply_to,
           $cc_list,
@@ -13,15 +14,13 @@ class Email {
           $text,
           $html,
           $headers,
-          $smtpapi_headers,
+          $smtpapi,
           $attachments;
-
-  protected $use_headers;
 
   public function __construct() {
     $this->from_name        = false;
     $this->reply_to         = false;
-    $this->smtpapi_headers  = new SmtpapiHeaders();
+    $this->smtpapi          = new \Smtpapi\Header();
   }
 
   /**
@@ -48,27 +47,27 @@ class Email {
   }
 
   public function addTo($email, $name=null) {
-    $this->smtpapi_headers->addTo($email, $name);
+    $this->smtpapi->addTo($email, $name);
     return $this;
   }
 
   public function setTo($email) {
-    $this->smtpapi_headers->setTo($email);
+    $this->smtpapi->setTo($email);
     return $this;
   }
 
   public function setTos(array $emails) { 
-    $this->smtpapi_headers->setTos($emails);
+    $this->smtpapi->setTos($emails);
     return $this;
   }
   
   public function removeTo($search_term) {
-    $this->smtpapi_headers->removeTo($search_term);
+    $this->smtpapi->removeTo($search_term);
     return $this;
   }
 
   public function getTos() {
-    return $this->smtpapi_headers->getTos();
+    return $this->smtpapi->to;
   }
 
   public function setFrom($email) {
@@ -222,229 +221,124 @@ class Email {
   }
 
   public function setCategories($categories) {
-    $this->smtpapi_headers->setCategories($categories);
+    $this->smtpapi->setCategories($categories);
     return $this;
   }
 
   public function setCategory($category) {
-    $this->smtpapi_headers->setCategory($category);
+    $this->smtpapi->setCategory($category);
     return $this;
   }
 
   public function addCategory($category) {
-    $this->smtpapi_headers->addCategory($category);
+    $this->smtpapi->addCategory($category);
     return $this;
   }
 
   public function removeCategory($category) {
-    $this->smtpapi_headers->removeCategory($category);
+    $this->smtpapi->removeCategory($category);
     return $this;
   }
 
   public function setSubstitutions($key_value_pairs) {
-    $this->smtpapi_headers->setSubstitutions($key_value_pairs);
+    $this->smtpapi->setSubstitutions($key_value_pairs);
     return $this;
   }
 
   public function addSubstitution($from_value, array $to_values) {
-    $this->smtpapi_headers->addSubstitution($from_value, $to_values);
+    $this->smtpapi->addSubstitution($from_value, $to_values);
     return $this;
   }
 
   public function setSections(array $key_value_pairs) {
-    $this->smtpapi_headers->setSections($key_value_pairs);
+    $this->smtpapi->setSections($key_value_pairs);
     return $this;
   }
   
   public function addSection($from_value, $to_value) {
-    $this->smtpapi_headers->addSection($from_value, $to_value);
+    $this->smtpapi->addSection($from_value, $to_value);
     return $this;
   }
 
   public function setUniqueArguments(array $key_value_pairs) {
-    $this->smtpapi_headers->setUniqueArguments($key_value_pairs);
+    $this->smtpapi->setUniqueArgs($key_value_pairs);
     return $this;
   }
     
   public function addUniqueArgument($key, $value) {
-    $this->smtpapi_headers->addUniqueArgument($key, $value);
+    $this->smtpapi->addUniqueArgs($key, $value);
     return $this;
   }
 
   public function setFilterSettings($filter_settings) {
-    $this->smtpapi_headers->setFilterSettings($filter_settings);
+    $this->smtpapi->setFilterSettings($filter_settings);
     return $this;
   }
   
   public function addFilterSetting($filter_name, $parameter_name, $parameter_value) {
-    $this->smtpapi_headers->addFilterSetting($filter_name, $parameter_name, $parameter_value);
-    return $this;
-  }
-  
-  public function getHeaders() {
-    syslog(LOG_NOTICE, "DEPRECATION NOTICE: getHeaders is deprecated. Use getSmtpapiHeaders instead.\n");
-    return $this->getSmtpapiHeaders();
-  }
-
-  public function getSmtpapiHeaders() {
-    return $this->smtpapi_headers->getHeaders();
-  }
-
-  public function getHeadersJson() {
-    syslog(LOG_NOTICE, "DEPRECATION NOTICE: getHeadersJson is deprecated. Use getSmtpapiHeadersJson instead.\n");
-    return $this->getSmtpapiHeadersJson();
-  }
-
-  public function getSmtpapiHeadersJson() {
-    if (count($this->getSmtpapiHeaders()) <= 0) {
-      return "{}";
-    }
-
-    return json_encode($this->getSmtpapiHeaders(), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
-  }
-
-  public function setHeaders($key_value_pairs) {
-    syslog(LOG_NOTICE, "DEPRECATION NOTICE: setHeaders is deprecated. Use setSmtpapiHeaders instead.\n");
-    $this->setSmtpapiHeaders($key_value_pairs);
+    $this->smtpapi->addFilterSetting($filter_name, $parameter_name, $parameter_value);
     return $this;
   }
 
   public function setSmtpapiHeaders($key_value_pairs) {
-    $this->smtpapi_headers->setHeaders($key_value_pairs);
-    return $this;
-  }
-
-  public function addHeader($key, $value) {
-    syslog(LOG_NOTICE, "DEPRECATION NOTICE: addHeader is deprecated. Use addSmtpapiHeader instead.\n");
-    $this->addSmtpapiHeader($key, $value);
+    $this->smtpapi->setHeaders($key_value_pairs);
     return $this;
   }
 
   public function addSmtpapiHeader($key, $value) {
-    $this->smtpapi_headers->addHeader($key, $value);
-    return $this;
-  }
- 
-  public function removeHeader($key) {
-    syslog(LOG_NOTICE, "DEPRECATION NOTICE: removeHeader is deprecated. Use removeSmtpapiHeader instead.\n");
-    $this->removeSmtpapiHeader($key);
+    $this->smtpapi->addHeader($key, $value);
     return $this;
   }
 
   public function removeSmtpapiHeader($key) {
-    $this->smtpapi_headers->removeHeader($key);
+    $this->smtpapi->removeHeader($key);
     return $this;
   }
 
-  public function getMessageHeaders() {
+  public function getHeaders() {
     return $this->headers;
   }
  
-  public function getMessageHeadersJson() {
-    if (count($this->getMessageHeaders()) <= 0) {
+  public function getHeadersJson() {
+    if (count($this->getHeaders()) <= 0) {
       return "{}";
     }
-    return json_encode($this->getMessageHeaders(), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
+    return json_encode($this->getHeaders(), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
   }
  
-  public function setMessageHeaders($key_value_pairs) {
+  public function setHeaders($key_value_pairs) {
     $this->headers = $key_value_pairs;
     return $this;
   }
  
-  public function addMessageHeader($key, $value) {
+  public function addHeader($key, $value) {
     $this->headers[$key] = $value;
     return $this;
   }
  
-  public function removeMessageHeader($key) {
+  public function removeHeader($key) {
     unset($this->headers[$key]);
     return $this;
   }
 
-  /**
-   * useHeaders
-   * Checks to see whether or not we can or should you headers. In most cases,
-   * we prefer to send our recipients through the headers, but in some cases,
-   * we actually don't want to. However, there are certain circumstances in 
-   * which we have to.
-   */
-  public function useHeaders()
-  {
-    return !($this->_preferNotToUseHeaders() && !$this->_isHeadersRequired());
-  }
-
-  public function setRecipientsInHeader($preference)
-  {
-    $this->use_headers = $preference;
-
-    return $this;
-  }
-
-  /**
-   * isHeaderRequired
-   * determines whether or not we need to force recipients through the smtpapi headers
-   * @return boolean, if true headers are required
-   */
-  protected function _isHeadersRequired()
-  {
-    if(count($this->getAttachments()) > 0 || $this->use_headers )
-    {
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * _preferNotToUseHeaders
-   * There are certain cases in which headers are not a preferred choice
-   * to send email, as it limits some basic email functionality. Here, we
-   * check for any of those rules, and add them in to decide whether or 
-   * not to use headers
-   * @return boolean, if true we don't 
-   */
-  protected function _preferNotToUseHeaders()
-  {
-    if (count($this->getBccs()) > 0 || count($this->getCcs()) > 0)
-    {
-      return true;
-    }
-    if ($this->use_headers !== null && !$this->use_headers)
-    {
-      return true;
-    }
-    
-    return false;
-  }
-
- 
   public function toWebFormat() {
     $web = array( 
-      'to'          => $this->getFrom(), // intentional, set below. 
+      'to'          => $this->to, 
       'from'        => $this->getFrom(),
+      'x-smtpapi'   => $this->smtpapi->toJsonString(),
       'subject'     => $this->getSubject(),
       'text'        => $this->getText(),
       'html'        => $this->getHtml(),
-      'headers'     => $this->getMessageHeadersJson(),
-      'x-smtpapi'   => $this->getSmtpapiHeadersJson(),
+      'headers'     => $this->getHeadersJson(),
     );
 
     if ($this->getCcs())          { $web['cc']          = $this->getCcs(); }
     if ($this->getBccs())         { $web['bcc']         = $this->getBccs(); }
     if ($this->getFromName())     { $web['fromname']    = $this->getFromName(); }
     if ($this->getReplyTo())      { $web['replyto']     = $this->getReplyTo(); }
+    if ($this->smtpapi->to && (count($this->smtpapi->to) > 0))  { $web['to'] = ""; }
 
-    // determine if we should send our recipients through our headers,
-    // and set the properties accordingly
-    if ($this->useHeaders()) {
-      $headers              = $this->getSmtpapiHeaders();
-      $headers['to']        = $this->getTos();
-      $this->setSmtpapiHeaders($headers);
-
-      $web['x-smtpapi']     = $this->getSmtpapiHeadersJson();
-    } else {
-      $web['to']            = $this->getTos();
-    }
+    $this->updateMissingTo($web);
 
     if ($this->getAttachments()) {
       foreach($this->getAttachments() as $f) {
@@ -475,4 +369,13 @@ class Email {
     return $web;
   }
 
+  /**
+   * There needs to be at least 1 to address, or else the mail won't send.
+   * This method modifies the data that will be sent via either Rest 
+   */
+  public function updateMissingTo($data) {
+    if ($this->smtpapi->to && (count($this->smtpapi->to) > 0)) {
+      $data['to'] = $this->getFrom();
+    } 
+  }
 }
