@@ -51,23 +51,9 @@ class Email {
     return $this;
   }
 
-  public function setTo($email) {
-    $this->smtpapi->setTo($email);
-    return $this;
-  }
-
   public function setTos(array $emails) { 
     $this->smtpapi->setTos($emails);
     return $this;
-  }
-  
-  public function removeTo($search_term) {
-    $this->smtpapi->removeTo($search_term);
-    return $this;
-  }
-
-  public function getTos() {
-    return $this->smtpapi->to;
   }
 
   public function setFrom($email) {
@@ -280,21 +266,6 @@ class Email {
     return $this;
   }
 
-  public function setSmtpapiHeaders($key_value_pairs) {
-    $this->smtpapi->setHeaders($key_value_pairs);
-    return $this;
-  }
-
-  public function addSmtpapiHeader($key, $value) {
-    $this->smtpapi->addHeader($key, $value);
-    return $this;
-  }
-
-  public function removeSmtpapiHeader($key) {
-    $this->smtpapi->removeHeader($key);
-    return $this;
-  }
-
   public function getHeaders() {
     return $this->headers;
   }
@@ -325,7 +296,7 @@ class Email {
     $web = array( 
       'to'          => $this->to, 
       'from'        => $this->getFrom(),
-      'x-smtpapi'   => $this->smtpapi->toJsonString(),
+      'x-smtpapi'   => $this->smtpapi->jsonString(),
       'subject'     => $this->getSubject(),
       'text'        => $this->getText(),
       'html'        => $this->getHtml(),

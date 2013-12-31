@@ -16,54 +16,51 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $mail = new SendGrid\Email();
 
     $mail->addTo('p1@mailinator.com');
-    $this->assertEquals(array('p1@mailinator.com'), $mail->getTos());
+    $this->assertEquals(array('p1@mailinator.com'), $mail->smtpapi->to);
 
     $mail->addTo('p2@mailinator.com');
-    $this->assertEquals(array('p1@mailinator.com', 'p2@mailinator.com'), $mail->getTos());
+    $this->assertEquals(array('p1@mailinator.com', 'p2@mailinator.com'), $mail->smtpapi->to);
   }
 
   public function testAddTo() {
     $email = new SendGrid\Email();
 
     $email->addTo('p1@mailinator.com');
-    $this->assertEquals(array('p1@mailinator.com'), $email->getTos());
+    $this->assertEquals(array('p1@mailinator.com'), $email->smtpapi->to);
 
     $email->addTo('p2@mailinator.com');
-    $this->assertEquals(array('p1@mailinator.com', 'p2@mailinator.com'), $email->getTos());
+    $this->assertEquals(array('p1@mailinator.com', 'p2@mailinator.com'), $email->smtpapi->to);
   }
 
   public function testAddToWithName() {
     $email = new SendGrid\Email();
 
     $email->addTo('p1@mailinator.com', 'Person One');
-    $this->assertEquals(array('Person One <p1@mailinator.com>'), $email->getTos());
+    $this->assertEquals(array('Person One <p1@mailinator.com>'), $email->smtpapi->to);
 
     $email->addTo('p2@mailinator.com');
-    $this->assertEquals(array('Person One <p1@mailinator.com>', 'p2@mailinator.com'), $email->getTos());
+    $this->assertEquals(array('Person One <p1@mailinator.com>', 'p2@mailinator.com'), $email->smtpapi->to);
   }
 
   public function testSetTo() {
     $email = new SendGrid\Email();
 
-    $email->setTo('p1@mailinator.com');
-    $this->assertEquals(array('p1@mailinator.com'), $email->getTos());
+    $email->setTos(array('p1@mailinator.com'));
+    $this->assertEquals(array('p1@mailinator.com'), $email->smtpapi->to);
   }
 
   public function testSetTos() {
     $email = new SendGrid\Email();
 
     $email->setTos(array('p1@mailinator.com'));
-    $this->assertEquals(array('p1@mailinator.com'), $email->getTos());
+    $this->assertEquals(array('p1@mailinator.com'), $email->smtpapi->to);
   }
 
   public function testRemoveTo() {
     $email = new SendGrid\Email();
 
     $email->addTo('p1@mailinator.com');
-    $this->assertEquals(array('p1@mailinator.com'), $email->getTos());
-
-    $email->removeTo('p1@mailinator.com');
-    $this->assertEquals(array(), $email->getTos());
+    $this->assertEquals(array('p1@mailinator.com'), $email->smtpapi->to);
   }
 
   public function testSetFrom() {
@@ -305,8 +302,8 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
   public function testCategoryAccessors() {
     $email = new SendGrid\Email();
 
-    $email->setCategory('category_0');
-    $this->assertEquals("{\"category\":[\"category_0\"]}", $email->smtpapi->toJsonString());
+    $email->setCategories(array('category_0'));
+    $this->assertEquals("{\"category\":[\"category_0\"]}", $email->smtpapi->jsonString());
 
     $categories = array(
                     "category_1", 
@@ -318,7 +315,7 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $email->setCategories($categories);
 
     // uses valid json
-    $this->assertEquals("{\"category\":[\"category_1\",\"category_2\",\"category_3\",\"category_4\"]}", $email->smtpapi->toJsonString());
+    $this->assertEquals("{\"category\":[\"category_1\",\"category_2\",\"category_3\",\"category_4\"]}", $email->smtpapi->jsonString());
   }
 
   public function testSubstitutionAccessors() {
@@ -333,7 +330,7 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
 
     $email->setSubstitutions($substitutions);
 
-    $this->assertEquals("{\"sub\":{\"sub_1\":[\"val_1.1\",\"val_1.2\",\"val_1.3\"],\"sub_2\":[\"val_2.1\",\"val_2.2\"],\"sub_3\":[\"val_3.1\",\"val_3.2\",\"val_3.3\",\"val_3.4\"],\"sub_4\":[\"val_4.1\",\"val_4.2\",\"val_4.3\"]}}", $email->smtpapi->toJsonString());
+    $this->assertEquals("{\"sub\":{\"sub_1\":[\"val_1.1\",\"val_1.2\",\"val_1.3\"],\"sub_2\":[\"val_2.1\",\"val_2.2\"],\"sub_3\":[\"val_3.1\",\"val_3.2\",\"val_3.3\",\"val_3.4\"],\"sub_4\":[\"val_4.1\",\"val_4.2\",\"val_4.3\"]}}", $email->smtpapi->jsonString());
   }
 
   public function testSectionAccessors()
@@ -349,7 +346,7 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
 
     $email->setSections($sections);
 
-    $this->assertEquals("{\"section\":{\"sub_1\":[\"val_1.1\",\"val_1.2\",\"val_1.3\"],\"sub_2\":[\"val_2.1\",\"val_2.2\"],\"sub_3\":[\"val_3.1\",\"val_3.2\",\"val_3.3\",\"val_3.4\"],\"sub_4\":[\"val_4.1\",\"val_4.2\",\"val_4.3\"]}}", $email->smtpapi->toJsonString());
+    $this->assertEquals("{\"section\":{\"sub_1\":[\"val_1.1\",\"val_1.2\",\"val_1.3\"],\"sub_2\":[\"val_2.1\",\"val_2.2\"],\"sub_3\":[\"val_3.1\",\"val_3.2\",\"val_3.3\",\"val_3.4\"],\"sub_4\":[\"val_4.1\",\"val_4.2\",\"val_4.3\"]}}", $email->smtpapi->jsonString());
   }
 
   public function testUniqueArgumentsAccessors()
@@ -365,48 +362,13 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
 
     $email->setUniqueArguments($unique_arguments);
 
-    $this->assertEquals("{\"unique_args\":{\"sub_1\":[\"val_1.1\",\"val_1.2\",\"val_1.3\"],\"sub_2\":[\"val_2.1\",\"val_2.2\"],\"sub_3\":[\"val_3.1\",\"val_3.2\",\"val_3.3\",\"val_3.4\"],\"sub_4\":[\"val_4.1\",\"val_4.2\",\"val_4.3\"]}}", $email->smtpapi->toJsonString());
+    $this->assertEquals("{\"unique_args\":{\"sub_1\":[\"val_1.1\",\"val_1.2\",\"val_1.3\"],\"sub_2\":[\"val_2.1\",\"val_2.2\"],\"sub_3\":[\"val_3.1\",\"val_3.2\",\"val_3.3\",\"val_3.4\"],\"sub_4\":[\"val_4.1\",\"val_4.2\",\"val_4.3\"]}}", $email->smtpapi->jsonString());
   }
-
-  public function testSmtpapiHeaderAccessors() {
-    $email = new SendGrid\Email();
-
-    $this->assertEquals("{}", $email->smtpapi->toJsonString());
-
-
-    $headers = 
-      array(
-        "header_1" => 
-          array(
-            "item_1" => "value_1", 
-            "item_2" => "value_2", 
-            "item_3" => "value_3"
-          ),
-        "header_2" => "value_4",
-        "header_3" => "value_4",
-        "header_4" => 
-          array(
-            "item_4" =>
-            array(
-              "sub_item_1" => "sub_value_1",
-              "sub_item_2" => "sub_value_2"
-            )
-          )
-      );
-
-
-      $email->setSmtpapiHeaders($headers);
-      $email->addSmtpapiHeader("simple_header", "simple_value");
-
-
-      $this->assertEquals("{\"header_1\":{\"item_1\":\"value_1\",\"item_2\":\"value_2\",\"item_3\":\"value_3\"},\"header_2\":\"value_4\",\"header_3\":\"value_4\",\"header_4\":{\"item_4\":{\"sub_item_1\":\"sub_value_1\",\"sub_item_2\":\"sub_value_2\"}},\"simple_header\":\"simple_value\"}", $email->smtpapi->toJsonString());
-  }
-
 
   public function testHeaderAccessors() {
     // A new message shouldn't have any RFC-822 headers set
     $message = new SendGrid\Email();
-    $this->assertEquals('{}', $message->smtpapi->toJsonString());
+    $this->assertEquals('{}', $message->smtpapi->jsonString());
 
     // Add some message headers, check they are correctly stored
     $headers = array(
