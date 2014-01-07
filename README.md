@@ -29,7 +29,7 @@ Add SendGrid to your `composer.json` file. If you are not using [Composer](http:
 {  
   "minimum-stability" : "dev",
   "require": {
-    "sendgrid/sendgrid": "1.1.6"
+    "sendgrid/sendgrid": "1.1.7"
   }
 }
 ```
@@ -377,14 +377,27 @@ $mail       = new SendGrid\Email();
 $recipients = array("alpha@mailinator.com", "beta@mailinator.com", "zeta@mailinator.com");
 $names      = array("Alpha", "Beta", "Zeta");
 
-$mail-> setFrom("from@mailinator.com")->
+$email->setFrom("from@mailinator.com")->
         setSubject('[sendgrid-php-batch-email]')->
         setTos($recipients)->
         addSubstitution("%name%", $names)->
         setText("Hey %name, we have an email for you")->
         setHtml("<h1>Hey %name%, we have an email for you</h1>");
 
-$result = $sendgrid->smtp->send($mail);
+$result = $sendgrid->smtp->send($email);
+```
+
+### Ignoring SSL certificate verification
+
+You can optionally ignore verification of SSL certificate when using the Web API.
+
+```
+var options = array("turn_off_ssl_verification" => true);
+$sendgrid   = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD, options);
+
+$email      = new SendGrid\Email();
+...
+$result     = $sendgrid->web->send($email);
 ```
 
 ## Contributing

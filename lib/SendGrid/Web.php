@@ -12,6 +12,11 @@ class Web extends Api implements EmailInterface {
     $form['api_user'] = $this->username; 
     $form['api_key']  = $this->password; 
 
+    // option to ignore verification of ssl certificate
+    if ($this->options['turn_off_ssl_verification'] == true) {
+      \Unirest::verifyPeer(false);
+    }
+
     $response = \Unirest::post($this->url, array(), $form);
 
     return $response->body;

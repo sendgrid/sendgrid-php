@@ -5,10 +5,12 @@ namespace SendGrid;
 class Api {
   
   protected $username,
-            $password;
+            $password,
+            $options;
 
-  public function __construct($username, $password) {
+  public function __construct($username, $password, $options=array("turn_off_ssl_verification" => false)) {
     $this->username = $username;
     $this->password = $password;
+    $this->options  = $options;
   }
 }
