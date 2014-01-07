@@ -391,7 +391,7 @@ $result = $sendgrid->smtp->send($email);
 
 You can optionally ignore verification of SSL certificate when using the Web API.
 
-```
+```php
 var options = array("turn_off_ssl_verification" => true);
 $sendgrid   = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD, options);
 
