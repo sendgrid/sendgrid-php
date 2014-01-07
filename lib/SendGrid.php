@@ -1,17 +1,19 @@
 <?php
 
 class SendGrid {
-  const VERSION = "1.1.6";
+  const VERSION = "1.1.7";
 
   protected $namespace = "SendGrid",
             $username,
             $password,
+            $options,
             $web,
             $smtp;
   
-  public function __construct($username, $password) {
+  public function __construct($username, $password, $options=array("turn_off_ssl_verification" => false)) {
     $this->username = $username;
     $this->password = $password;
+    $this->options  = $options;
   }
 
   public static function register_autoloader() {
@@ -45,7 +47,7 @@ class SendGrid {
     }
     require_once $file;
 
-    $this->$name = new $api($this->username, $this->password);
+    $this->$name = new $api($this->username, $this->password, $this->options);
     return $this->$name;
   }
 }
