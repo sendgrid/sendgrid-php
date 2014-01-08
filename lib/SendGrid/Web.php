@@ -13,7 +13,7 @@ class Web extends Api implements EmailInterface {
     $form['api_key']  = $this->password; 
 
     // option to ignore verification of ssl certificate
-    if ($this->options['turn_off_ssl_verification'] == true) {
+    if (isset($this->options['turn_off_ssl_verification']) && isset($this->options['turn_off_ssl_verification']) && $this->options['turn_off_ssl_verification'] == true) {
       \Unirest::verifyPeer(false);
     }
 
