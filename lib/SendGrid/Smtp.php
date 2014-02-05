@@ -181,6 +181,7 @@ class Smtp extends Api implements EmailInterface
     }
     catch(\Swift_TransportException $e)
     {
+      echo 'Exception: ',  $e->getMessage(), "\n";
       throw new AuthException('Bad username / password');
     }
 
