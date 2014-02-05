@@ -165,16 +165,19 @@ class Smtp extends Api implements EmailInterface
   /* send
    * Send the Email Message
    * @param Mail $email - the SendGridMailMessage to be sent
+   * @param $restartTransport - force the transport instance to be restarted
    * @return true if mail was sendable (not necessarily sent)
    */
-  public function send(Email $email)
+  public function send(Email $email, $restartTransport = false)
   {
     $swift = $this->_getSwiftInstance($this->port);
     $message = $this->_mapToSwift($email);
 
-    try 
+    try
     {
+      if ($restartTransport) $swift->getTransport()->start();
       $swift->send($message, $failures);
+      if ($restartTransport) $swift->getTransport()->stop();
     }
     catch(\Swift_TransportException $e)
     {
