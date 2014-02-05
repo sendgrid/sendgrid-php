@@ -82,7 +82,7 @@ class Smtp extends Api implements EmailInterface
     /*
      * Since we're sending transactional email, we want the message to go to one person at a time, rather
      * than a bulk send on one message. In order to do this, we'll have to send the list of recipients through the headers
-     * but Swift still requires a 'to' address. So we'll falsify it with the from address, as it will be 
+     * but Swift still requires a 'to' address. So we'll falsify it with the from address, as it will be
      * ignored anyway.
      */
     $message->setTo($email->getFrom());
