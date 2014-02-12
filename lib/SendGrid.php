@@ -1,7 +1,7 @@
 <?php
 
 class SendGrid {
-  const VERSION = "2.0.0-rc.1.0";
+  const VERSION = "2.0.0";
 
   protected $namespace  = "SendGrid",
             $url        = "https://api.sendgrid.com/api/mail.send.json",
