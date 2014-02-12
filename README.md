@@ -65,7 +65,7 @@ Smtpapi::register_autoloader();
 
 ## Example App
 
-There is a [sendgrid-php-example app](https://github.com/scottmotte/sendgrid-php-example) to help jumpstart your development.
+There is a [sendgrid-php-example app](https://github.com/sendgrid/sendgrid-php-example) to help jumpstart your development.
 
 ## Usage
 
