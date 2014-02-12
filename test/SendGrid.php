@@ -3,7 +3,7 @@
 class SendGridTest_SendGrid extends PHPUnit_Framework_TestCase {
 
   public function testVersion() {
-    $this->assertEquals(SendGrid::VERSION, "1.1.7");
+    $this->assertEquals(SendGrid::VERSION, "2.0.0-rc.1.0");
   }
 
   public function testInitialization() {
@@ -11,28 +11,64 @@ class SendGridTest_SendGrid extends PHPUnit_Framework_TestCase {
     $this->assertEquals("SendGrid", get_class($sendgrid));
   }
 
-  public function testWebInitialization() {
-    $sendgrid = new SendGrid("user", "pass");
-    $smtp     = $sendgrid->web; 
-    
-    $this->assertEquals("SendGrid\Web", get_class($smtp));
+  public function testSendResponse() {
+    $sendgrid = new SendGrid("foo", "bar");
+
+    $email = new SendGrid\Email();
+    $email->setFrom('bar@foo.com')->
+            setSubject('foobar subject')->
+            setText('foobar text')->
+            addTo('foo@bar.com');
+
+    $response = $sendgrid->send($email);
+
+    $this->assertEquals("Bad username / password", $response->errors[0]);
   }
 
-  public function testSmtpInitialization() {
-    $sendgrid = new SendGrid("user", "pass");
-    $smtp     = $sendgrid->smtp; 
-    
-    $this->assertEquals("SendGrid\Smtp", get_class($smtp));
+  public function testSendResponseWithAttachment() {
+    $sendgrid = new SendGrid("foo", "bar");
+
+    $email = new SendGrid\Email();
+    $email->setFrom('p1@mailinator.com')->
+            setSubject('foobar subject')->
+            setText('foobar text')->
+            addTo('p1@mailinator.com')->
+            addAttachment('./gif.gif');
+
+    $response = $sendgrid->send($email);
+
+    $this->assertEquals("Bad username / password", $response->errors[0]);
   }
 
-  public function testNonexistentInitialization() {
-    $sendgrid = new SendGrid("user", "pass");
+  public function testSendResponseWithAttachmentMissingExtension() {
+    $sendgrid = new SendGrid("foo", "bar");
 
-    try {
-      $smtp     = $sendgrid->nonexistent; 
-    } catch (Exception $e) {
-      return;
-    }
-    $this->fail('A non object was instanciated');
+    $email = new SendGrid\Email();
+    $email->setFrom('p1@mailinator.com')->
+            setSubject('foobar subject')->
+            setText('foobar text')->
+            addTo('p1@mailinator.com')->
+            addAttachment('./text');
+
+    $response = $sendgrid->send($email);
+
+    $this->assertEquals("Bad username / password", $response->errors[0]);
   }
+
+  public function testSendResponseWithSslOptionFalse() {
+    $sendgrid = new SendGrid("foo", "bar", array("switch_off_ssl_verification" => true));
+
+    $email = new SendGrid\Email();
+    $email->setFrom('p1@mailinator.com')->
+            setSubject('foobar subject')->
+            setText('foobar text')->
+            addTo('p1@mailinator.com')->
+            addAttachment('./text');
+
+    $response = $sendgrid->send($email);
+
+    $this->assertEquals("Bad username / password", $response->errors[0]);
+
+  }
+
 }
