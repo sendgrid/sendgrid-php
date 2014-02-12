@@ -8,17 +8,24 @@ class SendGrid {
             $headers    = array('Content-Type' => 'application/json'),
             $username,
             $password,
+            $options,
             $web;
   
-  public function __construct($username, $password) {
+  public function __construct($username, $password, $options=array("turn_off_ssl_verification" => false)) {
     $this->username = $username;
     $this->password = $password;
+    $this->options  = $options;
   }
 
   public function send(SendGrid\Email $email) {
     $form             = $email->toWebFormat();
     $form['api_user'] = $this->username; 
     $form['api_key']  = $this->password; 
+
+    // option to ignore verification of ssl certificate
+    if ($this->options['turn_off_ssl_verification'] == true) {
+      \Unirest::verifyPeer(false);
+    }
 
     $response = \Unirest::post($this->url, array(), $form);
 

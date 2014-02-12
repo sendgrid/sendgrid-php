@@ -55,4 +55,20 @@ class SendGridTest_SendGrid extends PHPUnit_Framework_TestCase {
     $this->assertEquals("Bad username / password", $response->errors[0]);
   }
 
+  public function testSendResponseWithSslOptionFalse() {
+    $sendgrid = new SendGrid("foo", "bar", array("switch_off_ssl_verification" => true));
+
+    $email = new SendGrid\Email();
+    $email->setFrom('p1@mailinator.com')->
+            setSubject('foobar subject')->
+            setText('foobar text')->
+            addTo('p1@mailinator.com')->
+            addAttachment('./text');
+
+    $response = $sendgrid->send($email);
+
+    $this->assertEquals("Bad username / password", $response->errors[0]);
+
+  }
+
 }

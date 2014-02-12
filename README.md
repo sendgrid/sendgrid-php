@@ -369,6 +369,19 @@ $mail-> setFrom("from@mailinator.com")->
 $result = $sendgrid->send($mail);
 ```
 
+### Ignoring SSL certificate verification
+
+You can optionally ignore verification of SSL certificate when using the Web API.
+
+```
+var options = array("turn_off_ssl_verification" => true);
+$sendgrid   = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD, options);
+
+$email      = new SendGrid\Email();
+...
+$result     = $sendgrid->send($email);
+```
+
 ## Contributing
 
 1. Fork it
