@@ -5,17 +5,17 @@ namespace SendGrid;
 class Email {
 
   public $to, 
-          $from,
-          $from_name,
-          $reply_to,
-          $cc_list,
-          $bcc_list,
-          $subject,
-          $text,
-          $html,
-          $headers,
-          $smtpapi,
-          $attachments;
+         $from,
+         $from_name,
+         $reply_to,
+         $cc_list,
+         $bcc_list,
+         $subject,
+         $text,
+         $html,
+         $headers,
+         $smtpapi,
+         $attachments;
 
   public function __construct() {
     $this->from_name        = false;
@@ -309,7 +309,7 @@ class Email {
     if ($this->getReplyTo())      { $web['replyto']     = $this->getReplyTo(); }
     if ($this->smtpapi->to && (count($this->smtpapi->to) > 0))  { $web['to'] = ""; }
 
-    $this->updateMissingTo($web);
+    $web = $this->updateMissingTo($web);
 
     if ($this->getAttachments()) {
       foreach($this->getAttachments() as $f) {
@@ -348,5 +348,6 @@ class Email {
     if ($this->smtpapi->to && (count($this->smtpapi->to) > 0)) {
       $data['to'] = $this->getFrom();
     } 
+    return $data;
   }
 }

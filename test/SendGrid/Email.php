@@ -404,10 +404,12 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
   public function testToWebFormatWithTo() {
     $email    = new SendGrid\Email();
     $email->addTo('foo@bar.com');
+    $email->setFrom('from@site.com');
     $json     = $email->toWebFormat();
     $xsmtpapi = json_decode($json["x-smtpapi"]); 
 
     $this->assertEquals($xsmtpapi->to, array('foo@bar.com'));
+    $this->assertEquals($json['to'], 'from@site.com');
   }
 
   public function testToWebFormatWithToAndBcc() {
