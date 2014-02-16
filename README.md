@@ -317,18 +317,7 @@ $mail->addTo('foo@bar.com')->
        addFilterSetting("footer", "text/html", "<p style='color:red;'>Here is an HTML footer</p>");
 ```
 
-### Smtp API Headers ###
-
-Smtp API Headers can be used to add existing sendgrid functionality (such as for categories or filters), or custom headers can be added as necessary.
-
-```php
-$mail = new SendGrid\Email();
-$mail->addTo('foo@bar.com')->
-       ...
-       addSmtpapiHeader("category", "My New Category");
-```
-
-### Message Headers ###
+### Headers ###
 
 You can add standard email message headers as necessary.
 
@@ -336,8 +325,8 @@ You can add standard email message headers as necessary.
 $mail = new SendGrid\Email();
 $mail->addTo('foo@bar.com')->
        ...
-       addMessageHeader('X-Sent-Using', 'SendGrid-API')->
-       addMessageHeader('X-Transport', 'web');
+       addHeader('X-Sent-Using', 'SendGrid-API')->
+       addHeader('X-Transport', 'web');
 ```
 
 ### Sending to 1,000s of emails in one batch
