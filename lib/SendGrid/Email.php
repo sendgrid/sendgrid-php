@@ -246,13 +246,25 @@ class Email {
     return $this;
   }
 
+  public function setUniqueArgs(array $key_value_pairs) {
+    $this->smtpapi->setUniqueArgs($key_value_pairs);
+    return $this;
+  }
+
+  ## synonym method
   public function setUniqueArguments(array $key_value_pairs) {
     $this->smtpapi->setUniqueArgs($key_value_pairs);
     return $this;
   }
-    
+
+  public function addUniqueArg($key, $value) {
+    $this->smtpapi->addUniqueArg($key, $value);
+    return $this;
+  }
+  
+  ## synonym method
   public function addUniqueArgument($key, $value) {
-    $this->smtpapi->addUniqueArgs($key, $value);
+    $this->smtpapi->addUniqueArg($key, $value);
     return $this;
   }
 

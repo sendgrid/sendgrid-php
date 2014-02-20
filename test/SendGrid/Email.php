@@ -349,8 +349,7 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $this->assertEquals("{\"section\":{\"sub_1\":[\"val_1.1\",\"val_1.2\",\"val_1.3\"],\"sub_2\":[\"val_2.1\",\"val_2.2\"],\"sub_3\":[\"val_3.1\",\"val_3.2\",\"val_3.3\",\"val_3.4\"],\"sub_4\":[\"val_4.1\",\"val_4.2\",\"val_4.3\"]}}", $email->smtpapi->jsonString());
   }
 
-  public function testUniqueArgumentsAccessors()
-  {
+  public function testUniqueArgsAccessors() {
     $email = new SendGrid\Email();
 
     $unique_arguments = array(
@@ -360,9 +359,13 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
                       "sub_4" => array("val_4.1", "val_4.2", "val_4.3")
                     );
 
-    $email->setUniqueArguments($unique_arguments);
+    $email->setUniqueArgs($unique_arguments);
 
     $this->assertEquals("{\"unique_args\":{\"sub_1\":[\"val_1.1\",\"val_1.2\",\"val_1.3\"],\"sub_2\":[\"val_2.1\",\"val_2.2\"],\"sub_3\":[\"val_3.1\",\"val_3.2\",\"val_3.3\",\"val_3.4\"],\"sub_4\":[\"val_4.1\",\"val_4.2\",\"val_4.3\"]}}", $email->smtpapi->jsonString());
+
+    $email->addUniqueArg('uncle', 'bob');
+
+    $this->assertEquals("{\"unique_args\":{\"sub_1\":[\"val_1.1\",\"val_1.2\",\"val_1.3\"],\"sub_2\":[\"val_2.1\",\"val_2.2\"],\"sub_3\":[\"val_3.1\",\"val_3.2\",\"val_3.3\",\"val_3.4\"],\"sub_4\":[\"val_4.1\",\"val_4.2\",\"val_4.3\"],\"uncle\":\"bob\"}}", $email->smtpapi->jsonString());
   }
 
   public function testHeaderAccessors() {
