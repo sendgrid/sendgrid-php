@@ -269,7 +269,7 @@ class Email {
   }
 
   public function setFilterSettings($filter_settings) {
-    $this->smtpapi->setFilterSettings($filter_settings);
+    $this->smtpapi->setFilters($filter_settings);
     return $this;
   }
   
