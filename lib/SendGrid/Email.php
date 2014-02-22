@@ -274,7 +274,7 @@ class Email {
   }
   
   public function addFilterSetting($filter_name, $parameter_name, $parameter_value) {
-    $this->smtpapi->addFilterSetting($filter_name, $parameter_name, $parameter_value);
+    $this->smtpapi->addFilter($filter_name, $parameter_name, $parameter_value);
     return $this;
   }
 
