@@ -2,7 +2,7 @@
 
 This library allows you to quickly and easily send emails through SendGrid using PHP.
 
-WARNING: This module was recently upgraded from [1.1.7](https://github.com/sendgrid/sendgrid-php/tree/v1.1.7) to 2.0.2. There were API breaking changes for various method names. See [usage](https://github.com/sendgrid/sendgrid-php#usage) for up to date method names.
+WARNING: This module was recently upgraded from [1.1.7](https://github.com/sendgrid/sendgrid-php/tree/v1.1.7) to 2.0.3. There were API breaking changes for various method names. See [usage](https://github.com/sendgrid/sendgrid-php#usage) for up to date method names.
 
 Important: This library requires PHP 5.3 or higher.
 
@@ -31,7 +31,7 @@ Add SendGrid to your `composer.json` file. If you are not using [Composer](http:
 {  
   "minimum-stability" : "dev",
   "require": {
-    "sendgrid/sendgrid": "2.0.2"
+    "sendgrid/sendgrid": "2.0.3"
   }
 }
 ```
