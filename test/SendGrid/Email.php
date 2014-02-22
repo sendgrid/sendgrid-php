@@ -461,4 +461,13 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $headers = json_decode($json['headers'], TRUE);
     $this->assertEquals('SendGrid-API', $headers['X-Sent-Using']);
   }
+
+  public function testToWebFormatWithFilters() {
+    $email    = new SendGrid\Email();
+    $email->addFilter("footer", "text/plain", "Here is a plain text footer");
+    $json     = $email->toWebFormat();
+
+    $xsmtpapi = json_decode($json['x-smtpapi'], TRUE);
+    $this->assertEquals('Here is a plain text footer', $xsmtpapi['filters']['footer']['settings']['text/plain']);
+  }
 }

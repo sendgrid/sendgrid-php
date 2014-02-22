@@ -268,11 +268,23 @@ class Email {
     return $this;
   }
 
-  public function setFilterSettings($filter_settings) {
-    $this->smtpapi->setFilterSettings($filter_settings);
+  public function setFilters($filter_settings) {
+    $this->smtpapi->setFilters($filter_settings);
     return $this;
   }
-  
+
+  ## synonym method
+  public function setFilterSettings($filter_settings) {
+    $this->smtpapi->setFilters($filter_settings);
+    return $this;
+  }
+
+  public function addFilter($filter_name, $parameter_name, $parameter_value) {
+    $this->smtpapi->addFilter($filter_name, $parameter_name, $parameter_value);
+    return $this;
+  }
+ 
+  ## synonym method
   public function addFilterSetting($filter_name, $parameter_name, $parameter_value) {
     $this->smtpapi->addFilter($filter_name, $parameter_name, $parameter_value);
     return $this;

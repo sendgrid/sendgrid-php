@@ -312,10 +312,10 @@ Filter Settings are used to enable and disable apps, and to pass parameters to t
 $mail = new SendGrid\Email();
 $mail->addTo('foo@bar.com')->
        ...
-       addFilterSetting("gravatar", "enable", 1)->
-       addFilterSetting("footer", "enable", 1)->
-       addFilterSetting("footer", "text/plain", "Here is a plain text footer")->
-       addFilterSetting("footer", "text/html", "<p style='color:red;'>Here is an HTML footer</p>");
+       addFilter("gravatar", "enable", 1)->
+       addFilter("footer", "enable", 1)->
+       addFilter("footer", "text/plain", "Here is a plain text footer")->
+       addFilter("footer", "text/html", "<p style='color:red;'>Here is an HTML footer</p>");
 ```
 
 ### Headers ###
