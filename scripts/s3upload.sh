@@ -7,15 +7,16 @@ GIT_VERSION=`git describe`
 
 rm -rf vendor composer.lock
 composer install --no-dev
-echo "require 'vendor/autoload.php';\nrequire 'lib/SendGrid.php';" > sendgrid-php.php
-rm composer.json composer.lock scripts test
+printf "<?php\nrequire 'vendor/autoload.php';\nrequire 'lib/SendGrid.php';\n?>" > sendgrid-php.php
 cd ..
-zip -r sendgrid-php.zip sendgrid-php
+zip -r sendgrid-php.zip sendgrid-php -x \*.git\* \*composer\* \*composer.json\* \*scripts\* \*test\* \*.travis.yml\*
 
 echo "CURRENT PATH"
+echo $S3_BUCKET
+echo $S3_POLICY
 pwd
 
-curl \
+curl -X POST \
   -F "key=sendgrid-php.zip" \
   -F "acl=public-read" \
   -F "AWSAccessKeyId=$S3_ACCESS_KEY" \
