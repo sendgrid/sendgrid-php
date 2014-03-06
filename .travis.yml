@@ -1,16 +1,24 @@
 language: php
 before_script:
- - phpenv local 5.4
- - composer install --dev --no-interaction
- - phpenv local --unset
- - cd test
+- phpenv local 5.4
+- composer install --dev --no-interaction
+- phpenv local --unset
+- cd test
 script:
- - ../vendor/bin/phpunit --coverage-clover clover.xml
+- ../vendor/bin/phpunit --coverage-clover clover.xml
 after_script:
- - cd ..
- - phpenv local 5.4
- - phpenv local --unset
+- cd ..
+- phpenv local 5.4
+- phpenv local --unset
+- ./scripts/s3upload.sh
 php:
-  - 5.3
-  - 5.4
-  - 5.5
+- 5.3
+- 5.4
+- 5.5
+env:
+  global:
+  - S3_POLICY="ewogICJleHBpcmF0aW9uIjogIjIxMDAtMDEtMDFUMTI6MDA6MDAuMDAwWiIsCiAgImNvbmRpdGlvbnMiOiBbCiAgICB7ImFjbCI6ICJwdWJsaWMtcmVhZCIgfSwKICAgIHsiYnVja2V0IjogInNlbmRncmlkLXBocC10ZXN0IiB9LAogICAgWyJzdGFydHMtd2l0aCIsICIka2V5IiwgIiJdLAogICAgWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsIDIwNDgsIDI2ODQzNTQ1Nl0sCiAgICBbImVxIiwgIiRDb250ZW50LVR5cGUiLCAiYXBwbGljYXRpb24vemlwIl0KICBdCn0KCg=="
+  - S3_BUCKET="sendgrid-php-test"
+  - secure: LibfANeO9snj4aght1WSy9PfpyHsx1Rce3latqtmtXbSlh6i5jFCThbuCqw3PZgL5CeZCKyJ1DZB9+wVqs/IusCVpiXOl5nw8VbQinJoST2LTdGR3ISM4rWONommpyK/niB8czmV6tbntW9E0/2xcDuMuM6Ra9J9skwhy4RSE6A=
+  - secure: W1ct5bbo4xEBmjKxpyZb+m4R7kdzainu4dSEtw+P0StixsBQDzarZt+JJYcZUeB6uRVW1uyMSXhOKoahHDp5XLFj4bh3HrR67K0cZYsUwmiCgSdBaswCswyfdKG0EqCKqk5St1el2HxkA5/rH7deuA4f1kgrdOUi6eb5ZrAaIow=
+  - secure: G2tqzWGdsvg4x4RjRiRGM5/cIukFYeMRmvYbuCI/gdZplvg4Fr98n948Ug4wcCxBFGfm1G0gE8AZmRJu+HyU3pw/YkezYbggF/AfAe+es+vDwaM/JS+EHVVDH2UOu1LrxNPZzSa7/hFdQEt8TekA/djUmOAyR6w9h56qJusNcWM=
