@@ -7,8 +7,8 @@ GIT_VERSION=`git describe`
 
 rm -rf vendor composer.lock
 composer install --no-dev
-rm composer.json composer.lock
 echo "require 'vendor/autoload.php';\nrequire 'lib/SendGrid.php';" > sendgrid-php.php
+rm composer.json composer.lock scripts test
 cd ..
 zip -r sendgrid-php.zip sendgrid-php
 
