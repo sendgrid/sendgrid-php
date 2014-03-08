@@ -10,7 +10,7 @@ rm -rf vendor composer.lock
 composer install --no-dev
 printf "<?php\nrequire 'vendor/autoload.php';\nrequire 'lib/SendGrid.php';\n?>" > sendgrid-php.php
 cd ..
-zip -r sendgrid-php.zip sendgrid-php -x \*.git\* \*composer\* \*composer.json\* \*scripts\* \*test\* \*.travis.yml\*
+zip -r sendgrid-php.zip sendgrid-php -x \*.git\* \*composer.json\* \*scripts\* \*test\* \*.travis.yml\*
 
 curl -X POST \
   -F "key=sendgrid-php/versions/sendgrid-php-$GIT_VERSION.zip" \
