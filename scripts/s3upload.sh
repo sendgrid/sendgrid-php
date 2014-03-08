@@ -12,8 +12,6 @@ printf "<?php\nrequire 'vendor/autoload.php';\nrequire 'lib/SendGrid.php';\n?>" 
 cd ..
 zip -r sendgrid-php.zip sendgrid-php -x \*.git\* \*composer\* \*composer.json\* \*scripts\* \*test\* \*.travis.yml\*
 
-echo $GIT_VERSION
-
 curl -X POST \
   -F "key=sendgrid-php/versions/sendgrid-php-$GIT_VERSION.zip" \
   -F "acl=public-read" \
