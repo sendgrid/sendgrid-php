@@ -42,26 +42,13 @@ Then at the top of your PHP script require the autoloader:
 require 'vendor/autoload.php';
 ```
 
-#### Alternative: Install source
+#### Alternative: Install from zip
 
-If you don't want to use Composer, you can install from source.
+If you are not using Composer, simply download and install the [latest release of the library as a zip](https://sendgrid-open-source.s3.amazonaws.com/sendgrid-php/sendgrid-php.zip). 
 
-```bash
-git clone https://github.com/Mashape/unirest-php.git 
-git clone https://github.com/sendgrid/sendgrid-php.git
-git clone https://github.com/sendgrid/smtpapi-php.git
-```
+Previous versions of the library can be found in the version index:
 
-And include it in your PHP script:
-
-```bash
-require_once '/path/to/unirest-php/lib/Unirest.php';
-require_once '/path/to/sendgrid-php/lib/SendGrid.php';
-require_once '/path/to/smtpapi-php/lib/Smtpapi.php';
-
-SendGrid::register_autoloader();
-Smtpapi::register_autoloader();
-```
+<https://sendgrid-open-source.s3.amazonaws.com/index.html>
 
 ## Example App
 
