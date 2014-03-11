@@ -379,3 +379,17 @@ or if you already have PHPUnit installed globally.
 cd test
 phpunit
 ```
+
+#### Testing uploading to Amazon S3
+
+If you want to test uploading the zipped file to Amazon S3 (SendGrid employees only), do the following.
+
+```
+export S3_SIGNATURE="secret_signature"
+export S3_POLICY="secret_policy"
+export S3_BUCKET="sendgrid-open-source"
+export S3_ACCESS_KEY="secret_access_key"
+./scripts/s3upload.sh
+```
+
+
