@@ -352,12 +352,7 @@ class Email {
           $full_filename  = $f['custom_filename'];
         }
 
-        $contents   = '@' . $file; 
-        if (class_exists('CurlFile')) { // php >= 5.5
-          $contents = new \CurlFile($file, $extension, $filename);
-        }
-
-        $web['files['.$full_filename.']'] = $contents;
+        $web['files['.$full_filename.']'] = '@' . $file;
       };
     }
 
