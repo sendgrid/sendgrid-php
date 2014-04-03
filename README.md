@@ -152,14 +152,6 @@ $mail->setReplyTo('foo@bar.com');
 $sendgrid->send($mail);
 ```
 
-### addCc
-
-```php
-$mail   = new SendGrid\Email();
-$mail->addCc('foo@bar.com');
-$sendgrid->send($mail);
-```
-
 ### Bcc
 
 Use multiple `addTo`s as a superior alternative to `setBcc`.
