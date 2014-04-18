@@ -29,7 +29,6 @@ Add SendGrid to your `composer.json` file. If you are not using [Composer](http:
 
 ```json
 {  
-  "minimum-stability" : "dev",
   "require": {
     "sendgrid/sendgrid": "2.0.5"
   }
