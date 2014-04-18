@@ -7,7 +7,7 @@
   "keywords": ["SendGrid", "sendgrid", "email", "send", "grid"],
   "require": {
     "php": ">=5.3",
-    "mashape/unirest-php": "dev-master",
+    "mashape/unirest-php": "1.2",
     "sendgrid/smtpapi": "0.0.1"
   },
   "require-dev": {
