@@ -1,6 +1,6 @@
 # Sendgrid-php
 
-This library allows you to quickly and easily send emails through SendGrid using PHP.
+This library allows you to quickly and easily send emails through SendGrid using PHP. You can also retrieve information about your account such as bounces, spam reports, unsubscribes, and other information.
 
 WARNING: This module was recently upgraded from [1.1.7](https://github.com/sendgrid/sendgrid-php/tree/v1.1.7) to 2.0.3. There were API breaking changes for various method names. See [usage](https://github.com/sendgrid/sendgrid-php#usage) for up to date method names.
 
@@ -81,6 +81,50 @@ Send it.
 ```php
 $sendgrid->send($email);
 ```
+
+For reports, create a new Sendgrid Report object and your method details. 
+
+```php
+$report = new SendGrid\Report();
+$report->spamreports()->email('foo@bar.com');
+$result = $sendgrid->report($report);
+```
+
+You can get Spam Reports, Blocks, Bounces, Invalid Emails, and Unsubscribes as defined in the [SendGrid Web API](https://sendgrid.com/docs/API_Reference/Web_API/index.html). Parameters are chainable to the method. The get action is used unless otherwise specified.
+
+For example, this GET request hast a date action.
+
+	https://api.sendgrid.com/api/spamreports.get.json?api_user=your_sendgrid_username&api_key=your_sendgrid_password&date=1
+
+The equivalent would look like this:
+
+```php
+$sendgrid = new SendGrid('your_sendgrid_username', 'your_sendgrid_password');
+$report = new SendGrid\Report();
+$report->spamreports()->date();
+$result = $sendgrid->report($report);
+```
+
+You can keep linking parameters:
+
+```php
+$sendgrid = new SendGrid('your_sendgrid_username', 'your_sendgrid_password');
+$report = new SendGrid\Report();
+$report->spamreports()->date()->days(1)->startDate('2014-01-01')->email('foo@bar.com');
+$result = $sendgrid->report($report);
+```
+
+
+If you want to use another action like `delete`, `add` or `count`, just add it to the chain like this:
+
+```php
+$sendgrid = new SendGrid('your_sendgrid_username', 'your_sendgrid_password');
+$report = new SendGrid\Report();
+$report->blocks()->delete()->email('foo@bar.com');
+$result = $sendgrid->report($report);
+```
+
+
 
 ### addTo
 
@@ -345,6 +389,66 @@ $email      = new SendGrid\Email();
 ...
 $result     = $sendgrid->send($email);
 ```
+
+### Blocks
+
+Returns list of blocks with the status, reason and email
+
+```php
+$report = new SendGrid\Report();
+$report->blocks();
+$result = $sendgrid->report($report);
+```
+
+
+### Bounces
+
+Returns list of bounces with the status, reason and email.
+
+```php
+$report = new SendGrid\Report();
+$report->bounces();
+$result = $sendgrid->report($report);
+```
+
+Optional email address to search for.
+
+```php
+$report = new SendGrid\Report();
+$report->bounces()->email('foo@bar.com');
+$result = $sendgrid->report($report);
+```
+
+
+### Invalid Emails
+
+Returns list of invalid emails with the reason and email.
+
+```php
+$report = new SendGrid\Report();
+$report->invalidemails();
+$result = $sendgrid->report($report);
+```
+### Spam Reports
+
+Returns list of spam reports with the ip and email.
+
+```php
+$report = new SendGrid\Report();
+$report->spamreports();
+$result = $sendgrid->report($report);
+```
+
+### Unsubscribes
+
+Requires API access for unsubscribes.
+
+```php
+$report = new SendGrid\Report();
+$report->unsubscribes();
+$result = $sendgrid->report($report);
+```
+
 
 ## Contributing
 
