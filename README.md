@@ -1,6 +1,6 @@
 # Sendgrid-php
 
-This library allows you to quickly and easily send emails through SendGrid using PHP. You can also retrieve information about your account such as bounces, spam reports, unsubscribes, and other information.
+This library allows you to quickly and easily send emails and manage reports through SendGrid using PHP.
 
 WARNING: This module was recently upgraded from [1.1.7](https://github.com/sendgrid/sendgrid-php/tree/v1.1.7) to 2.0.3. There were API breaking changes for various method names. See [usage](https://github.com/sendgrid/sendgrid-php#usage) for up to date method names.
 
@@ -90,9 +90,9 @@ $report->spamreports()->email('foo@bar.com');
 $result = $sendgrid->report($report);
 ```
 
-You can get Spam Reports, Blocks, Bounces, Invalid Emails, and Unsubscribes as defined in the [SendGrid Web API](https://sendgrid.com/docs/API_Reference/Web_API/index.html). Parameters are chainable to the method. The get action is used unless otherwise specified.
+You can get Spam Reports, Blocks, Bounces, Invalid Emails, and Unsubscribes as defined in the [SendGrid Web API](https://sendgrid.com/docs/API_Reference/Web_API/index.html). Actions and parameters are chainable to the method. The get action is inferred by default.
 
-For example, this GET request hast a date action.
+For example, this GET request has a date parameter.
 
 	https://api.sendgrid.com/api/spamreports.get.json?api_user=your_sendgrid_username&api_key=your_sendgrid_password&date=1
 
@@ -403,7 +403,7 @@ $result = $sendgrid->report($report);
 
 ### Bounces
 
-Returns list of bounces with the status, reason and email.
+Returns list of bounces with status, reason and email.
 
 ```php
 $report = new SendGrid\Report();
@@ -411,7 +411,7 @@ $report->bounces();
 $result = $sendgrid->report($report);
 ```
 
-Optional email address to search for.
+With parameter, an optional email address to search for.
 
 ```php
 $report = new SendGrid\Report();
