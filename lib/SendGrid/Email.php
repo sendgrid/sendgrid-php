@@ -353,7 +353,7 @@ class Email {
         }
 
         $contents   = '@' . $file; 
-        if (class_exists('CurlFile')) { // php >= 5.5
+        if (class_exists('CurlFile', false)) { // php >= 5.5
           $contents = new \CurlFile($file, $extension, $filename);
         }
 
