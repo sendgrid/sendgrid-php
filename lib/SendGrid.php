@@ -32,6 +32,17 @@ class SendGrid {
     return $response->body;
   }
 
+  public function report(SendGrid\Report $report)
+  {
+    $form             = $report->toWebFormat();
+    $form['api_user'] = $this->username; 
+    $form['api_key']  = $this->password; 
+
+    $response = Unirest::post($report->getUrl(), array(), $form );
+
+    return $response->body;
+  }
+
   public static function register_autoloader() {
     spl_autoload_register(array('SendGrid', 'autoloader'));
   }

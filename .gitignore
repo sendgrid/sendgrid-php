@@ -5,3 +5,4 @@ composer.lock
 vendor
 .env*
 sendgrid-php.php
+.DS_Store

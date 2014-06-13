@@ -4,6 +4,7 @@
     <testsuite name="General">
       <file>./SendGrid.php</file>
       <file>./SendGrid/Email.php</file>
+      <file>./SendGrid/Report.php</file>
     </testsuite>
   </testsuites>
 </phpunit>
