@@ -13,7 +13,6 @@ Important: This library requires PHP 5.3 or higher.
 $sendgrid = new SendGrid('username', 'password');
 $email    = new SendGrid\Email();
 $email->addTo('foo@bar.com')->
-       addTo('dude@bar.com')->
        setFrom('me@bar.com')->
        setSubject('Subject goes here')->
        setText('Hello World!')->
