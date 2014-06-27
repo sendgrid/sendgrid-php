@@ -69,6 +69,7 @@ Create a new SendGrid Email object and add your message details.
 ```php
 $email = new SendGrid\Email();
 $email->addTo('foo@bar.com')->
+       addTo('bar@foo.com')->
        setFrom('me@bar.com')->
        setSubject('Subject goes here')->
        setText('Hello World!')->
