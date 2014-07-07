@@ -20,6 +20,14 @@ class SendGrid {
     if( !isset($options["turn_off_ssl_verification"]) ){
       $options["turn_off_ssl_verification"] = false;
     }
+    
+
+    $protocol = isset($options['protocol']) ? $options['protocol'] : 'https';
+    $host = isset($options['host']) ? $options['host'] : 'api.sendgrid.com';
+    $port = isset($options['port']) ? $options['port'] : '';
+    $endpoint = isset($options['endpoint']) ? $options['endpoint'] : '/api/mail.send.json';
+
+    $this->url = isset($options['url']) ? $options['url'] : $protocol . "://" . $host . ($port ? ":" . $port : "") . $endpoint;
 
     $this->options  = $options;
   }

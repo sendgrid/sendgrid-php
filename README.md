@@ -312,6 +312,43 @@ $email->addTo('foo@bar.com')->
        addHeader('X-Transport', 'web');
 ```
 
+### Options
+Options may be passed to the library when initializing the SendGrid object:
+
+```php
+$options = array(
+  'turn_off_ssl_verification' => false,
+  'protocol' => 'https',
+  'host' => 'api.sendgrid.com',
+  'endpoint' => '/api/mail.send.json',
+  'port' => null,
+  'url' => null
+);
+$sendgrid = new SendGrid('username', 'password', $options);
+```
+
+#### Changing URL
+You may change the URL sendgrid-php uses to send email by supplying various parameters to `options`, all parameters are optional:
+
+```php
+$sendgrid = new SendGrid('username', 'password', array( 'protocol' => 'http', 'host' => 'sendgrid.org', 'endpoint' => '/send', 'port' => '80' ));
+```
+
+A full URL may also be provided:
+
+```php
+$sendgrid = new SendGrid('username', 'password', array( 'url' => 'http://sendgrid.org:80/send'));
+```
+
+#### Ignoring SSL certificate verification
+
+You can optionally ignore verification of SSL certificate when using the Web API.
+
+```php
+$sendgrid   = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD,  array("turn_off_ssl_verification" => true));
+```
+
+
 ### Sending to 1,000s of emails in one batch
 
 Sometimes you might want to send 1,000s of emails in one request. You can do that. It is recommended you break each batch up in 1,000 increements. So if you need to send to 5,000 emails, then you'd break this into a loop of 1,000 emails at a time.
@@ -333,18 +370,6 @@ $email->setFrom("from@mailinator.com")->
 $result = $sendgrid->send($email);
 ```
 
-### Ignoring SSL certificate verification
-
-You can optionally ignore verification of SSL certificate when using the Web API.
-
-```php
-$options = array("turn_off_ssl_verification" => true);
-$sendgrid   = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD, $options);
-
-$email      = new SendGrid\Email();
-...
-$result     = $sendgrid->send($email);
-```
 
 ## Contributing
 
