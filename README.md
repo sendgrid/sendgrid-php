@@ -104,26 +104,6 @@ $email->setTos($emails);
 $sendgrid->send($email);
 ```
 
-### getTos
-
-Sometimes you might find yourself wanting to list the currently set Tos. You can do that with `getTos`.
-
-```php
-$email   = new SendGrid\Email();
-$email->addTo('foo@bar.com');
-$email->getTos();
-```
-
-### removeTo 
-
-You might also find yourself wanting to remove a single TO from your set list of TOs. You can do that with `removeTo`. You can pass a string or regex to the removeTo method.
-
-```php
-$email   = new SendGrid\Email();
-$email->addTo('foo@bar.com');
-$email->removeTo('foo@bar.com');
-```
-
 ### setFrom
 
 ```php
