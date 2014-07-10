@@ -29,7 +29,7 @@ Add SendGrid to your `composer.json` file. If you are not using [Composer](http:
 ```json
 {  
   "require": {
-    "sendgrid/sendgrid": "2.0.6"
+    "sendgrid/sendgrid": "2.1.0"
   }
 }
 ```
@@ -379,7 +379,7 @@ $result = $sendgrid->send($email);
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-## Running Tests ##
+## Running Tests
 
 The existing tests in the `test` directory can be run using [PHPUnit](https://github.com/sebastianbergmann/phpunit/) with the following command:
 
@@ -395,6 +395,10 @@ or if you already have PHPUnit installed globally.
 cd test
 phpunit
 ```
+
+## Releasing
+
+To release a new version of this library, update the version in all locations, tag the version, and then push the tag up. Packagist.org takes care of the rest.
 
 #### Testing uploading to Amazon S3
 

@@ -1,7 +1,7 @@
 <?php
 
 class SendGrid {
-  const VERSION = "2.0.6";
+  const VERSION = "2.1.0";
 
   protected $namespace  = "SendGrid",
             $headers    = array('Content-Type' => 'application/json'),
