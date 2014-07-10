@@ -3,7 +3,7 @@
 class SendGridTest_SendGrid extends PHPUnit_Framework_TestCase {
 
   public function testVersion() {
-    $this->assertEquals(SendGrid::VERSION, "2.0.6");
+    $this->assertEquals(SendGrid::VERSION, "2.1.0");
   }
 
   public function testInitialization() {
