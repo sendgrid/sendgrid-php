@@ -42,7 +42,7 @@ class SendGrid {
       \Unirest::verifyPeer(false);
     }
 
-    $response = \Unirest::post($this->url, array(), $form);
+    $response = \Unirest::post($this->url, array('User-Agent' => 'sendgrid/' . $this->version . ';php'), $form);
 
     return $response->body;
   }
