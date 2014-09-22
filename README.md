@@ -238,7 +238,7 @@ $email->addTo('john@somewhere.com')->
 
 ### Sections ###
 
-Sections can be used to further customize messages for the end users. A section is only useful in conjunction with a substition value.
+Sections can be used to further customize messages for the end users. A section is only useful in conjunction with a substitution value.
 
 ```php
 $email = new SendGrid\Email();
@@ -331,7 +331,7 @@ $sendgrid   = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD,  array("turn_of
 
 ### Sending to 1,000s of emails in one batch
 
-Sometimes you might want to send 1,000s of emails in one request. You can do that. It is recommended you break each batch up in 1,000 increements. So if you need to send to 5,000 emails, then you'd break this into a loop of 1,000 emails at a time.
+Sometimes you might want to send 1,000s of emails in one request. You can do that. It is recommended you break each batch up in 1,000 increments. So if you need to send to 5,000 emails, then you'd break this into a loop of 1,000 emails at a time.
 
 ```php
 $sendgrid   = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD);
