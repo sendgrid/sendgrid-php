@@ -1,4 +1,4 @@
-<?php 
+ <?php
 
 class SendGridTest_Web extends PHPUnit_Framework_TestCase {
 

@@ -300,9 +300,8 @@ $options = array(
   'turn_off_ssl_verification' => false,
   'protocol' => 'https',
   'host' => 'api.sendgrid.com',
-  'endpoint' => '/api/mail.send.json',
-  'port' => null,
-  'url' => null
+  'port' => 443,
+  'use_concise_answers' => false
 );
 $sendgrid = new SendGrid('username', 'password', $options);
 ```
@@ -311,13 +310,7 @@ $sendgrid = new SendGrid('username', 'password', $options);
 You may change the URL sendgrid-php uses to send email by supplying various parameters to `options`, all parameters are optional:
 
 ```php
-$sendgrid = new SendGrid('username', 'password', array( 'protocol' => 'http', 'host' => 'sendgrid.org', 'endpoint' => '/send', 'port' => '80' ));
-```
-
-A full URL may also be provided:
-
-```php
-$sendgrid = new SendGrid('username', 'password', array( 'url' => 'http://sendgrid.org:80/send'));
+$sendgrid = new SendGrid('username', 'password', array( 'protocol' => 'http', 'host' => 'sendgrid.org', 'port' => '80' ));
 ```
 
 #### Ignoring SSL certificate verification
@@ -327,6 +320,17 @@ You can optionally ignore verification of SSL certificate when using the Web API
 ```php
 $sendgrid   = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD,  array("turn_off_ssl_verification" => true));
 ```
+
+#### Concise answers
+
+By default an instance of the \stdClass is returned.
+For getting boolean responses you can set an option "use_concise_answers" to TRUE.
+
+```php
+$sendgrid   = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD,  array("use_concise_answers" => true));
+```
+
+In this case for getting errors you can use "getLastErrors" method.
 
 
 ### Sending to 1,000s of emails in one batch
