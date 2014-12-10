@@ -238,6 +238,16 @@ $email->addTo('john@somewhere.com')->
        addSubstitution("%name%", array("John", "Harry", "Bob"));
 ```
 
+Substitutions can also be used to customize multi-recipient subjects.
+
+```php
+$email = new SendGrid\Email();
+$email->addTos(array('john@somewhere.com', 'harry@somewhere.com', 'bob@somewhere.com'))
+    ->setSubject('%subject%')
+    ->addSubstitution('%subject%', array('Subject to John', 'Subject to Harry', 'Subject to Bob'))
+    ...;
+```
+
 ### Sections ###
 
 Sections can be used to further customize messages for the end users. A section is only useful in conjunction with a substitution value.
