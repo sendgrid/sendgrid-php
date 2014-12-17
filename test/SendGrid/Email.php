@@ -182,6 +182,37 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $email->setSubject("Test Subject");
     $this->assertEquals("Test Subject", $email->getSubject());
   }
+  
+  public function testSetDate() {
+    $email = new SendGrid\Email();
+
+    date_default_timezone_set('America/Los_Angeles');
+    $date = date('r');
+    $email->setDate($date);
+    $this->assertEquals($date, $email->getDate());
+  }
+  
+  public function testSetSendAt() {
+    $email = new SendGrid\Email();
+    
+    $email->setSendAt(1409348513);
+    $this->assertEquals("{\"send_at\":1409348513}", $email->smtpapi->jsonString());
+  }
+  
+  public function testSetSendEachAt() {
+    $email = new SendGrid\Email();
+    
+    $email->setSendEachAt(array(1409348513, 1409348514, 1409348515));
+    $this->assertEquals("{\"send_each_at\":[1409348513,1409348514,1409348515]}", $email->smtpapi->jsonString());
+  }
+  
+  public function testAddSendEachAt() {
+    $email = new SendGrid\Email();
+    $email->addSendEachAt(1409348513);
+    $email->addSendEachAt(1409348514);
+    $email->addSendEachAt(1409348515);
+    $this->assertEquals("{\"send_each_at\":[1409348513,1409348514,1409348515]}", $email->smtpapi->jsonString());
+  }
 
   public function testSetText() {
     $email = new SendGrid\Email();
@@ -404,6 +435,44 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $this->assertEquals($headers, $message->getHeaders());
   }
 
+  public function testToWebFormatWithDate() {
+    $email    = new SendGrid\Email();
+    date_default_timezone_set('America/Los_Angeles');
+    $date = date('r');
+    $email->setDate($date);
+    $json     = $email->toWebFormat(); 
+
+    $this->assertEquals($json['date'], $date);
+  }
+  
+  public function testToWebFormatWithSetSendAt() {
+    $email = new SendGrid\Email();
+    $email->setSendAt(1409348513);
+    $json     = $email->toWebFormat(); 
+    $xsmtpapi = json_decode($json["x-smtpapi"]);
+    
+    $this->assertEquals(1409348513, $xsmtpapi->send_at);
+  }
+
+  public function testToWebFormatWithSetSendEachAt() {
+    $email = new SendGrid\Email();
+    $email->setSendEachAt(array(1409348513, 1409348514));
+    $json     = $email->toWebFormat(); 
+    $xsmtpapi = json_decode($json["x-smtpapi"]);
+    
+    $this->assertEquals(array(1409348513, 1409348514), $xsmtpapi->send_each_at);
+  }
+  
+  public function testToWebFormatWithAddSendEachAt() {
+    $email = new SendGrid\Email();
+    $email->addSendEachAt(1409348513);
+    $email->addSendEachAt(1409348514);
+    $json     = $email->toWebFormat(); 
+    $xsmtpapi = json_decode($json["x-smtpapi"]);
+    
+    $this->assertEquals(array(1409348513, 1409348514), $xsmtpapi->send_each_at);
+  }
+
   public function testToWebFormatWithTo() {
     $email    = new SendGrid\Email();
     $email->addTo('foo@bar.com');
@@ -437,6 +506,38 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     } else {
       $this->assertEquals($json["files[gif.gif]"], "@./gif.gif");
     }
+  }
+  
+  public function testToWebFormatWithAttachmentAndCid() {
+    $email    = new SendGrid\Email();
+    $email->addAttachment('./gif.gif', null, 'sample-cid');
+    $email->addAttachment('./gif.gif', 'gif2.gif', 'sample-cid-2');
+    $json     = $email->toWebFormat();
+
+    // php 5.5 works differently. @filename has been deprecated for CurlFile in 5.5
+    if (class_exists('CurlFile')) {
+      $content = new \CurlFile('./gif.gif', 'gif', 'gif');
+      $this->assertEquals($json["files[gif.gif]"], $content);
+    } else {
+      $this->assertEquals($json["files[gif.gif]"], "@./gif.gif");
+    }
+    $this->assertEquals($json["content[gif.gif]"], "sample-cid");
+    $this->assertEquals($json["content[gif2.gif]"], "sample-cid-2");
+  }
+  
+  public function testToWebFormatWithSetAttachmentAndCid() {
+    $email    = new SendGrid\Email();
+    $email->setAttachment('./gif.gif', null, 'sample-cid');
+    $json     = $email->toWebFormat();
+
+    // php 5.5 works differently. @filename has been deprecated for CurlFile in 5.5
+    if (class_exists('CurlFile')) {
+      $content = new \CurlFile('./gif.gif', 'gif', 'gif');
+      $this->assertEquals($json["files[gif.gif]"], $content);
+    } else {
+      $this->assertEquals($json["files[gif.gif]"], "@./gif.gif");
+    }
+    $this->assertEquals($json["content[gif.gif]"], "sample-cid");
   }
 
   public function testToWebFormatWithAttachmentCustomFilename() {

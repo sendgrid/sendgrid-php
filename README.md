@@ -177,6 +177,40 @@ $email->setHtml('<h1>This is an html email</h1>');
 $sendgrid->send($email);
 ```
 
+### setDate
+
+```php
+$email   = new SendGrid\Email();
+$email->setDate('Wed, 17 Dec 2014 19:21:16 +0000');
+$sendgrid->send($email);
+```
+
+### setSendAt
+
+```php
+$email   = new SendGrid\Email();
+$email->setSendAt(1409348513);
+$sendgrid->send($email);
+```
+
+### setSendEachAt
+
+```php
+$email   = new SendGrid\Email();
+$email->setSendEachAt(array(1409348513, 1409348514, 1409348515));
+$sendgrid->send($email);
+```
+
+### addSendEachAt
+
+```php
+$email   = new SendGrid\Email();
+$email->addSendEachAt(1409348513);
+$email->addSendEachAt(1409348514);
+$email->addSendEachAt(1409348515);
+$sendgrid->send($email);
+```
+
 ### Categories ###
 
 Categories are used to group email statistics provided by SendGrid.
@@ -201,7 +235,16 @@ File attachments are limited to 7 MB per file.
 $email = new SendGrid\Email();
 $email->addTo('foo@bar.com')->
        ...
-       addAttachment("../path/to/file.txt");    
+       addAttachment("../path/to/file.txt");
+```
+
+You can tag files for use as inline HTML content. It will mark the file for inline disposition using the specified "cid".
+
+```php
+$email = new SendGrid\Email();
+$email->addTo('foo@bar.com')
+      ->setHtml('<div>Our logo:<img src="cid:file-cid"></div>')
+      ->addAttachment("../path/to/file.txt", "super_file.txt", "file-cid");
 ```
 
 **Important Gotcha**: `setBcc` is not supported with attachments. This is by design. Instead use multiple `addTo`s. Each user will receive their own personalized email with that setup, and only see their own email.
