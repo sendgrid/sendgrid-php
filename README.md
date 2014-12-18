@@ -12,11 +12,13 @@ Important: This library requires PHP 5.3 or higher.
 ```php
 $sendgrid = new SendGrid('username', 'password');
 $email    = new SendGrid\Email();
-$email->addTo('foo@bar.com')->
-       setFrom('me@bar.com')->
-       setSubject('Subject goes here')->
-       setText('Hello World!')->
-       setHtml('<strong>Hello World!</strong>');
+$email
+    ->addTo('foo@bar.com')
+    ->setFrom('me@bar.com')
+    ->setSubject('Subject goes here')
+    ->setText('Hello World!')
+    ->setHtml('<strong>Hello World!</strong>')
+;
 
 $sendgrid->send($email);
 ```
@@ -70,12 +72,14 @@ Create a new SendGrid Email object and add your message details.
 
 ```php
 $email = new SendGrid\Email();
-$email->addTo('foo@bar.com')->
-       addTo('bar@foo.com')->
-       setFrom('me@bar.com')->
-       setSubject('Subject goes here')->
-       setText('Hello World!')->
-       setHtml('<strong>Hello World!</strong>');
+$email
+    ->addTo('foo@bar.com')
+    ->addTo('bar@foo.com')
+    ->setFrom('me@bar.com')
+    ->setSubject('Subject goes here')
+    ->setText('Hello World!')
+    ->setHtml('<strong>Hello World!</strong>')
+;
 ```
 
 Send it. 
@@ -90,8 +94,10 @@ You can add one or multiple TO addresses using `addTo`.
 
 ```php
 $email = new SendGrid\Email();
-$email->addTo('foo@bar.com')->
-       addTo('another@another.com');
+$email
+    ->addTo('foo@bar.com')
+    ->addTo('another@another.com')
+;
 $sendgrid->send($email);
 ```
 
@@ -100,7 +106,7 @@ $sendgrid->send($email);
 If you prefer, you can add multiple TO addresses as an array using the `setTos` method. This will unset any previous `addTo`s you appended.
 
 ```php
-$email   = new SendGrid\Email();
+$email  = new SendGrid\Email();
 $emails = array("foo@bar.com", "another@another.com", "other@other.com");
 $email->setTos($emails);
 $sendgrid->send($email);
@@ -109,7 +115,7 @@ $sendgrid->send($email);
 ### setFrom
 
 ```php
-$email   = new SendGrid\Email();
+$email = new SendGrid\Email();
 $email->setFrom('foo@bar.com');
 $sendgrid->send($email);
 ```
@@ -117,7 +123,7 @@ $sendgrid->send($email);
 ### setFromName
 
 ```php
-$email   = new SendGrid\Email();
+$email = new SendGrid\Email();
 $email->setFrom('foo@bar.com');
 $email->setFromName('Foo Bar');
 $email->setFrom('other@example.com');
@@ -128,7 +134,7 @@ $sendgrid->send($email);
 ### setReplyTo
 
 ```php
-$email   = new SendGrid\Email();
+$email = new SendGrid\Email();
 $email->setReplyTo('foo@bar.com');
 $sendgrid->send($email);
 ```
@@ -139,16 +145,18 @@ Use multiple `addTo`s as a superior alternative to `setBcc`.
 
 ```php
 $email = new SendGrid\Email();
-$email->addTo('foo@bar.com')->
-       addTo('someotheraddress@bar.com')->
-       addTo('another@another.com')->
-       ...
+$email
+    ->addTo('foo@bar.com')
+    ->addTo('someotheraddress@bar.com')
+    ->addTo('another@another.com')
+    ->
+    ...
 ```
 
 But if you do still have a need for Bcc you can do the following.
 
 ```php
-$email   = new SendGrid\Email();
+$email = new SendGrid\Email();
 $email->addBcc('foo@bar.com');
 $sendgrid->send($email);
 ```
@@ -156,7 +164,7 @@ $sendgrid->send($email);
 ### setSubject
 
 ```php
-$email   = new SendGrid\Email();
+$email = new SendGrid\Email();
 $email->setSubject('This is a subject');
 $sendgrid->send($email);
 ```
@@ -164,7 +172,7 @@ $sendgrid->send($email);
 ### setText
 
 ```php
-$email   = new SendGrid\Email();
+$email = new SendGrid\Email();
 $email->setText('This is some text');
 $sendgrid->send($email);
 ```
@@ -172,7 +180,7 @@ $sendgrid->send($email);
 ### setHtml
 
 ```php
-$email   = new SendGrid\Email();
+$email = new SendGrid\Email();
 $email->setHtml('<h1>This is an html email</h1>');
 $sendgrid->send($email);
 ```
@@ -185,10 +193,12 @@ To use a category, simply set the category name.  Note: there is a maximum of 10
 
 ```php
 $email = new SendGrid\Email();
-$email->addTo('foo@bar.com')->
-       ...
-       addCategory("Category 1")->
-       addCategory("Category 2");
+$email
+    ->addTo('foo@bar.com')
+    ...
+    ->addCategory("Category 1")
+    ->addCategory("Category 2")
+;
 ```
 
 ### Attachments ###
@@ -199,9 +209,11 @@ File attachments are limited to 7 MB per file.
 
 ```php
 $email = new SendGrid\Email();
-$email->addTo('foo@bar.com')->
-       ...
-       addAttachment("../path/to/file.txt");    
+$email
+    ->addTo('foo@bar.com')
+    ...
+    ->addAttachment("../path/to/file.txt")
+;
 ```
 
 **Important Gotcha**: `setBcc` is not supported with attachments. This is by design. Instead use multiple `addTo`s. Each user will receive their own personalized email with that setup, and only see their own email.
@@ -218,10 +230,11 @@ message
 
 ```php
 $email = new SendGrid\Email();
-$email->addTo('foo@bar.com')->
-       setReplyTo('someone.else@example.com')->
-       setFromName('John Doe')->
-       ...
+$email
+    ->addTo('foo@bar.com')
+    ->setReplyTo('someone.else@example.com')
+    ->setFromName('John Doe')
+    ...
 ```
 
 ### Substitutions ###
@@ -230,22 +243,26 @@ Substitutions can be used to customize multi-recipient emails, and tailor them f
 
 ```php
 $email = new SendGrid\Email();
-$email->addTo('john@somewhere.com')->
-       addTo("harry@somewhere.com")->
-       addTo("Bob@somewhere.com")->
-       ...
-       setHtml("Hey %name%, we've seen that you've been gone for a while")->
-       addSubstitution("%name%", array("John", "Harry", "Bob"));
+$email
+    ->addTo('john@somewhere.com')
+    ->addTo("harry@somewhere.com")
+    ->addTo("Bob@somewhere.com")
+    ...
+    ->setHtml("Hey %name%, we've seen that you've been gone for a while")
+    ->addSubstitution("%name%", array("John", "Harry", "Bob"))
+;
 ```
 
 Substitutions can also be used to customize multi-recipient subjects.
 
 ```php
 $email = new SendGrid\Email();
-$email->addTos(array('john@somewhere.com', 'harry@somewhere.com', 'bob@somewhere.com'))
+$email
+    ->addTos(array('john@somewhere.com', 'harry@somewhere.com', 'bob@somewhere.com'))
     ->setSubject('%subject%')
     ->addSubstitution('%subject%', array('Subject to John', 'Subject to Harry', 'Subject to Bob'))
-    ...;
+    ...
+;
 ```
 
 ### Sections ###
@@ -254,15 +271,17 @@ Sections can be used to further customize messages for the end users. A section 
 
 ```php
 $email = new SendGrid\Email();
-$email->addTo('john@somewhere.com')->
-       addTo("harry@somewhere.com")->
-       addTo("Bob@somewhere.com")->
-       ...
-       setHtml("Hey %name%, you work at %place%")->
-       addSubstitution("%name%", array("John", "Harry", "Bob"))->
-       addSubstitution("%place%", array("%office%", "%office%", "%home%"))->
-       addSection("%office%", "an office")->
-       addSection("%home%", "your house");
+$email
+    ->addTo('john@somewhere.com')
+    ->addTo("harry@somewhere.com")
+    ->addTo("Bob@somewhere.com")
+    ...
+    ->setHtml("Hey %name%, you work at %place%")
+    ->addSubstitution("%name%", array("John", "Harry", "Bob"))
+    ->addSubstitution("%place%", array("%office%", "%office%", "%home%"))
+    ->addSection("%office%", "an office")
+    ->addSection("%home%", "your house")
+;
 ```
 
 ### Unique Arguments ###
@@ -271,11 +290,13 @@ Unique Arguments are used for tracking purposes
 
 ```php
 $email = new SendGrid\Email();
-$email->addTo('foo@bar.com')->
-       ...
-       addUniqueArg("Customer", "Someone")->
-       addUniqueArg("location", "Somewhere")->
-       setUniqueArgs(array('cow' => 'chicken'));
+$email
+    ->addTo('foo@bar.com')
+    ...
+    ->addUniqueArg("Customer", "Someone")
+    ->addUniqueArg("location", "Somewhere")
+    ->setUniqueArgs(array('cow' => 'chicken'))
+;
 ```
 
 ### Filter Settings ###
@@ -284,12 +305,14 @@ Filter Settings are used to enable and disable apps, and to pass parameters to t
 
 ```php
 $email = new SendGrid\Email();
-$email->addTo('foo@bar.com')->
-       ...
-       addFilter("gravatar", "enable", 1)->
-       addFilter("footer", "enable", 1)->
-       addFilter("footer", "text/plain", "Here is a plain text footer")->
-       addFilter("footer", "text/html", "<p style='color:red;'>Here is an HTML footer</p>");
+$email
+    ->addTo('foo@bar.com')
+    ...
+    ->addFilter("gravatar", "enable", 1)
+    ->addFilter("footer", "enable", 1)
+    ->addFilter("footer", "text/plain", "Here is a plain text footer")
+    ->addFilter("footer", "text/html", "<p style='color:red;'>Here is an HTML footer</p>")
+;
 ```
 
 ### Headers ###
@@ -298,10 +321,12 @@ You can add standard email message headers as necessary.
 
 ```php
 $email = new SendGrid\Email();
-$email->addTo('foo@bar.com')->
-       ...
-       addHeader('X-Sent-Using', 'SendGrid-API')->
-       addHeader('X-Transport', 'web');
+$email
+    ->addTo('foo@bar.com')
+    ...
+    ->addHeader('X-Sent-Using', 'SendGrid-API')
+    ->addHeader('X-Transport', 'web')
+;
 ```
 
 ### Options
@@ -309,12 +334,12 @@ Options may be passed to the library when initializing the SendGrid object:
 
 ```php
 $options = array(
-  'turn_off_ssl_verification' => false,
-  'protocol' => 'https',
-  'host' => 'api.sendgrid.com',
-  'endpoint' => '/api/mail.send.json',
-  'port' => null,
-  'url' => null
+    'turn_off_ssl_verification' => false,
+    'protocol' => 'https',
+    'host' => 'api.sendgrid.com',
+    'endpoint' => '/api/mail.send.json',
+    'port' => null,
+    'url' => null,
 );
 $sendgrid = new SendGrid('username', 'password', $options);
 ```
@@ -323,7 +348,12 @@ $sendgrid = new SendGrid('username', 'password', $options);
 You may change the URL sendgrid-php uses to send email by supplying various parameters to `options`, all parameters are optional:
 
 ```php
-$sendgrid = new SendGrid('username', 'password', array( 'protocol' => 'http', 'host' => 'sendgrid.org', 'endpoint' => '/send', 'port' => '80' ));
+$sendgrid = new SendGrid('username', 'password', array(
+    'protocol' => 'http',
+    'host' => 'sendgrid.org',
+    'endpoint' => '/send',
+    'port' => '80'
+));
 ```
 
 A full URL may also be provided:
@@ -346,18 +376,20 @@ $sendgrid   = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD,  array("turn_of
 Sometimes you might want to send 1,000s of emails in one request. You can do that. It is recommended you break each batch up in 1,000 increments. So if you need to send to 5,000 emails, then you'd break this into a loop of 1,000 emails at a time.
 
 ```php
-$sendgrid   = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD);
-$email       = new SendGrid\Email();
+$sendgrid = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD);
+$email = new SendGrid\Email();
 
 $recipients = array("alpha@mailinator.com", "beta@mailinator.com", "zeta@mailinator.com");
-$names      = array("Alpha", "Beta", "Zeta");
+$names = array("Alpha", "Beta", "Zeta");
 
-$email->setFrom("from@mailinator.com")->
-        setSubject('[sendgrid-php-batch-email]')->
-        setTos($recipients)->
-        addSubstitution("%name%", $names)->
-        setText("Hey %name, we have an email for you")->
-        setHtml("<h1>Hey %name%, we have an email for you</h1>");
+$email
+    ->setFrom("from@mailinator.com")
+    ->setSubject('[sendgrid-php-batch-email]')
+    ->setTos($recipients)
+    ->addSubstitution("%name%", $names)
+    ->setText("Hey %name, we have an email for you")
+    ->setHtml("<h1>Hey %name%, we have an email for you</h1>")
+;
 
 $result = $sendgrid->send($email);
 ```
