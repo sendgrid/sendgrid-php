@@ -11,7 +11,7 @@ Important: This library requires PHP 5.3 or higher.
 
 ```php
 $sendgrid = new SendGrid('username', 'password');
-$email    = new SendGrid\Email();
+$email = new SendGrid\Email();
 $email
     ->addTo('foo@bar.com')
     ->setFrom('me@bar.com')
@@ -149,7 +149,6 @@ $email
     ->addTo('foo@bar.com')
     ->addTo('someotheraddress@bar.com')
     ->addTo('another@another.com')
-    ->
     ...
 ```
 
@@ -367,7 +366,7 @@ $sendgrid = new SendGrid('username', 'password', array( 'url' => 'http://sendgri
 You can optionally ignore verification of SSL certificate when using the Web API.
 
 ```php
-$sendgrid   = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD,  array("turn_off_ssl_verification" => true));
+$sendgrid = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD,  array("turn_off_ssl_verification" => true));
 ```
 
 
