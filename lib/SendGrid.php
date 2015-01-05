@@ -1,64 +1,76 @@
 <?php
 
-class SendGrid {
-  const VERSION = "2.1.1";
+class SendGrid
+{
+    const VERSION = "2.1.1";
 
-  protected $namespace  = "SendGrid",
-            $headers    = array('Content-Type' => 'application/json'),
-            $options,
-            $web;
-  public    $api_user,
-            $api_key,
-            $url,
-            $version = self::VERSION;
+    protected $namespace = "SendGrid";
+    protected $headers = array('Content-Type' => 'application/json');
+    protected $options;
+    protected $web;
 
-  
-  public function __construct($api_user, $api_key, $options=array()) {
-    $this->api_user = $api_user;
-    $this->api_key = $api_key;
+    public $api_user;
+    public $api_key;
+    public $url;
+    public $version = self::VERSION;
 
-    if( !isset($options["turn_off_ssl_verification"]) ){
-      $options["turn_off_ssl_verification"] = false;
-    }
-    
+    public function __construct($api_user, $api_key, $options = array())
+    {
+        $this->api_user = $api_user;
+        $this->api_key = $api_key;
 
-    $protocol = isset($options['protocol']) ? $options['protocol'] : 'https';
-    $host = isset($options['host']) ? $options['host'] : 'api.sendgrid.com';
-    $port = isset($options['port']) ? $options['port'] : '';
-    $endpoint = isset($options['endpoint']) ? $options['endpoint'] : '/api/mail.send.json';
+        if (!isset($options["turn_off_ssl_verification"])) {
+            $options["turn_off_ssl_verification"] = false;
+        }
 
-    $this->url = isset($options['url']) ? $options['url'] : $protocol . "://" . $host . ($port ? ":" . $port : "") . $endpoint;
+        $protocol = isset($options['protocol']) ? $options['protocol'] : 'https';
+        $host = isset($options['host']) ? $options['host'] : 'api.sendgrid.com';
+        $port = isset($options['port']) ? $options['port'] : '';
+        $endpoint = isset($options['endpoint']) ? $options['endpoint'] : '/api/mail.send.json';
 
-    $this->options  = $options;
-  }
+        $this->url = isset($options['url'])
+            ? $options['url']
+            : $protocol."://".$host.($port ? ":".$port : "").$endpoint;
 
-  public function send(SendGrid\Email $email) {
-    $form             = $email->toWebFormat();
-    $form['api_user'] = $this->api_user; 
-    $form['api_key']  = $this->api_key; 
-
-    // option to ignore verification of ssl certificate
-    if (isset($this->options['turn_off_ssl_verification']) && $this->options['turn_off_ssl_verification'] == true) {
-      \Unirest::verifyPeer(false);
+        $this->options  = $options;
     }
 
-    $response = \Unirest::post($this->url, array('User-Agent' => 'sendgrid/' . $this->version . ';php'), $form);
+    public function send(SendGrid\Email $email)
+    {
+        $form             = $email->toWebFormat();
+        $form['api_user'] = $this->api_user;
+        $form['api_key']  = $this->api_key;
 
-    return $response->body;
-  }
+        // option to ignore verification of ssl certificate
+        if (
+            isset($this->options['turn_off_ssl_verification']) &&
+            $this->options['turn_off_ssl_verification'] == true
+        ) {
+            \Unirest::verifyPeer(false);
+        }
 
-  public static function register_autoloader() {
-    spl_autoload_register(array('SendGrid', 'autoloader'));
-  }
+        $response = \Unirest::post(
+            $this->url, array('User-Agent' => 'sendgrid/'.$this->version.';php'),
+            $form
+        );
 
-  public static function autoloader($class) {
-    // Check that the class starts with "SendGrid"
-    if ($class == 'SendGrid' || stripos($class, 'SendGrid\\') === 0) {
-      $file = str_replace('\\', '/', $class);
-
-      if (file_exists(dirname(__FILE__) . '/' . $file . '.php')) {
-        require_once(dirname(__FILE__) . '/' . $file . '.php');
-      }
+        return $response->body;
     }
-  }
+
+    public static function register_autoloader()
+    {
+        spl_autoload_register(array('SendGrid', 'autoloader'));
+    }
+
+    public static function autoloader($class)
+    {
+        // Check that the class starts with "SendGrid"
+        if ($class == 'SendGrid' || stripos($class, 'SendGrid\\') === 0) {
+            $file = str_replace('\\', '/', $class);
+
+            if (file_exists(dirname(__FILE__).'/'.$file.'.php')) {
+                require_once(dirname(__FILE__).'/'.$file.'.php');
+            }
+        }
+    }
 }
