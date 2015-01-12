@@ -1,9 +1,9 @@
 <?php
 
 class SendGrid {
-  const VERSION = "2.1.1";
+  const VERSION = '2.1.1';
 
-  protected $namespace  = "SendGrid",
+  protected $namespace  = 'SendGrid',
             $headers    = array('Content-Type' => 'application/json'),
             $options,
             $web;
@@ -17,17 +17,13 @@ class SendGrid {
     $this->api_user = $api_user;
     $this->api_key = $api_key;
 
-    if( !isset($options["turn_off_ssl_verification"]) ){
-      $options["turn_off_ssl_verification"] = false;
-    }
-    
-
+    $options['turn_off_ssl_verification'] = (isset($options['turn_off_ssl_verification']) && $options['turn_off_ssl_verification'] == true);
     $protocol = isset($options['protocol']) ? $options['protocol'] : 'https';
     $host = isset($options['host']) ? $options['host'] : 'api.sendgrid.com';
     $port = isset($options['port']) ? $options['port'] : '';
     $endpoint = isset($options['endpoint']) ? $options['endpoint'] : '/api/mail.send.json';
 
-    $this->url = isset($options['url']) ? $options['url'] : $protocol . "://" . $host . ($port ? ":" . $port : "") . $endpoint;
+    $this->url = isset($options['url']) ? $options['url'] : $protocol . '://' . $host . ($port ? ':' . $port : '') . $endpoint;
 
     $this->options  = $options;
   }
@@ -37,14 +33,36 @@ class SendGrid {
     $form['api_user'] = $this->api_user; 
     $form['api_key']  = $this->api_key; 
 
-    // option to ignore verification of ssl certificate
-    if (isset($this->options['turn_off_ssl_verification']) && $this->options['turn_off_ssl_verification'] == true) {
-      \Unirest::verifyPeer(false);
+    $response = $this->makeRequest($form);
+
+    return $response;
+  }
+
+  /**
+   * Makes the actual HTTP request to SendGrid
+   * @param $form array web ready version of SendGrid\Email
+   * @return string
+   */
+  private function makeRequest($form) {
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, $this->url);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $form);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_USERAGENT, 'sendgrid/' . $this->version . ';php');
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->options['turn_off_ssl_verification']);
+
+    $response = curl_exec($ch);
+
+    $error = curl_error($ch);
+    if ($error) {
+      throw new Exception($error);
     }
 
-    $response = \Unirest::post($this->url, array('User-Agent' => 'sendgrid/' . $this->version . ';php'), $form);
+    curl_close($ch);
 
-    return $response->body;
+    return json_decode($response);
   }
 
   public static function register_autoloader() {
@@ -52,7 +70,7 @@ class SendGrid {
   }
 
   public static function autoloader($class) {
-    // Check that the class starts with "SendGrid"
+    // Check that the class starts with 'SendGrid'
     if ($class == 'SendGrid' || stripos($class, 'SendGrid\\') === 0) {
       $file = str_replace('\\', '/', $class);
 
