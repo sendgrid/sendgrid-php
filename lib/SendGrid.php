@@ -41,7 +41,7 @@ class SendGrid {
   /**
    * Makes the actual HTTP request to SendGrid
    * @param $form array web ready version of SendGrid\Email
-   * @return string
+   * @return stdClass parsed JSON returned from SendGrid
    */
   private function makeRequest($form) {
     $ch = curl_init();
