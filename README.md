@@ -427,7 +427,10 @@ $email = new SendGrid\Email();
 $email
     ->addTos(array('john@somewhere.com', 'harry@somewhere.com', 'bob@somewhere.com'))
     ->setSubject('%subject%')
-    ->addSubstitution('%subject%', array('Subject to John', 'Subject to Harry', 'Subject to Bob'))
+    ->addSubstitution(
+        '%subject%',
+        array('Subject to John', 'Subject to Harry', 'Subject to Bob')
+    )
     ...
 ;
 ```
@@ -525,7 +528,11 @@ $email
     addFilter("gravatar", "enable", 1)
     ->addFilter("footer", "enable", 1)
     ->addFilter("footer", "text/plain", "Here is a plain text footer")
-    ->addFilter("footer", "text/html", "<p style='color:red;'>Here is an HTML footer</p>")
+    ->addFilter(
+        "footer", 
+        "text/html", 
+        "<p style='color:red;'>Here is an HTML footer</p>"
+    )
 ;
 ```
 
@@ -614,7 +621,11 @@ $sendgrid = new SendGrid(
 A full URL may also be provided:
 
 ```php
-$sendgrid = new SendGrid('username', 'password', array( 'url' => 'http://sendgrid.org:80/send'));
+$sendgrid = new SendGrid(
+    'username', 
+    'password', 
+    array( 'url' => 'http://sendgrid.org:80/send')
+);
 ```
 
 #### Ignoring SSL certificate verification
@@ -637,7 +648,11 @@ Sometimes you might want to send 1,000s of emails in one request. You can do tha
 $sendgrid = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD);
 $email = new SendGrid\Email();
 
-$recipients = array("alpha@mailinator.com", "beta@mailinator.com", "zeta@mailinator.com");
+$recipients = array(
+    "alpha@mailinator.com", 
+    "beta@mailinator.com", 
+    "zeta@mailinator.com"
+);
 $names = array("Alpha", "Beta", "Zeta");
 
 $email
