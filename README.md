@@ -141,6 +141,7 @@ $email
     ->setReplyTo('someone.else@example.com')
     ->setFromName('John Doe')
    ...
+;
 ```
 
 ### Cc
@@ -187,6 +188,7 @@ $email
     ->addTo('someotheraddress@bar.com')
     ->addTo('another@another.com')
    ...
+;
 ```
 
 But if you do still have a need for Bcc you can do the following:
