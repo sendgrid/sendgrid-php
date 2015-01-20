@@ -5,8 +5,7 @@ class SendGrid {
 
   protected $namespace  = 'SendGrid',
             $headers    = array('Content-Type' => 'application/json'),
-            $options,
-            $web;
+            $options;
   public    $api_user,
             $api_key,
             $url,
@@ -28,6 +27,19 @@ class SendGrid {
     $this->options  = $options;
   }
 
+  /**
+   * @return array The protected options array
+   */
+  public function getOptions() {
+    return $this->options;
+  }
+
+  /**
+   * Makes a post request to SendGrid to send an email
+   * @param SendGrid\Email $email Email object built
+   * @throws SendGrid\Exception if the response code is not 200
+   * @return stdClass Parsed json of response
+   */
   public function send(SendGrid\Email $email) {
     $form             = $email->toWebFormat();
     $form['api_user'] = $this->api_user; 
@@ -35,15 +47,19 @@ class SendGrid {
 
     $response = $this->makeRequest($form);
 
+    if ($response->code != 200) {
+      throw new SendGrid\Exception($response->raw_body);
+    }
+
     return $response;
   }
 
   /**
    * Makes the actual HTTP request to SendGrid
    * @param $form array web ready version of SendGrid\Email
-   * @return stdClass parsed JSON returned from SendGrid
+   * @return TODO: Class? array parsed JSON returned from SendGrid
    */
-  private function makeRequest($form) {
+  public function makeRequest($form) {
     $ch = curl_init();
 
     curl_setopt($ch, CURLOPT_URL, $this->url);
@@ -60,9 +76,14 @@ class SendGrid {
       throw new Exception($error);
     }
 
+    $result = new stdClass();
+    $result->code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $result->raw_body = $response;
+    $result->body = json_decode($response);
+
     curl_close($ch);
 
-    return json_decode($response);
+    return $result;
   }
 
   public static function register_autoloader() {
