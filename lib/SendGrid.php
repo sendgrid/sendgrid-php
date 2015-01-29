@@ -51,7 +51,7 @@ class SendGrid {
     curl_setopt($ch, CURLOPT_POSTFIELDS, $form);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_USERAGENT, 'sendgrid/' . $this->version . ';php');
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->options['turn_off_ssl_verification']);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, !$this->options['turn_off_ssl_verification']);
 
     $response = curl_exec($ch);
 
