@@ -17,7 +17,7 @@ class SendGrid {
     $this->api_user = $api_user;
     $this->api_key = $api_key;
 
-    $options['turn_off_ssl_verification'] = (isset($options['turn_off_ssl_verification']) && $options['turn_off_ssl_verification'] === true);
+    $options['turn_off_ssl_verification'] = (isset($options['turn_off_ssl_verification']) && $options['turn_off_ssl_verification'] == true);
     $protocol = isset($options['protocol']) ? $options['protocol'] : 'https';
     $host = isset($options['host']) ? $options['host'] : 'api.sendgrid.com';
     $port = isset($options['port']) ? $options['port'] : '';
