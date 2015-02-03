@@ -415,7 +415,7 @@ $email
     ->addTo('harry@somewhere.com')
     ->addTo('Bob@somewhere.com')
        ...
-    ->setHtml('Hey %name%, we've seen that you've been gone for a while')
+    ->setHtml('Hey %name%, we\'ve seen that you\'ve been gone for a while')
     ->addSubstitution('%name%', array('John', 'Harry', 'Bob'))
 ;
 ```
