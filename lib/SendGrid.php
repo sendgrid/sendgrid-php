@@ -2,7 +2,7 @@
 
 class SendGrid
 {
-    const VERSION = '2.2.0';
+    const VERSION = '2.2.1';
 
     protected $namespace = 'SendGrid';
     protected $headers = array('Content-Type' => 'application/json');
@@ -26,7 +26,7 @@ class SendGrid
 
         $options['turn_off_ssl_verification'] = (
             isset($options['turn_off_ssl_verification']) &&
-            $options['turn_off_ssl_verification'] === true
+            $options['turn_off_ssl_verification'] == true
         );
         $protocol = isset($options['protocol']) ? $options['protocol'] : 'https';
         $host = isset($options['host']) ? $options['host'] : 'api.sendgrid.com';
@@ -75,7 +75,7 @@ class SendGrid
         curl_setopt($ch, CURLOPT_POSTFIELDS, $form);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_USERAGENT, 'sendgrid/'.$this->version.';php');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->options['turn_off_ssl_verification']);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, !$this->options['turn_off_ssl_verification']);
 
         $response = curl_exec($ch);
         $error = curl_error($ch);
