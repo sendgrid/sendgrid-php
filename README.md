@@ -425,7 +425,9 @@ Substitutions can also be used to customize multi-recipient subjects.
 ```php
 $email = new SendGrid\Email();
 $email
-    ->addTos(array('john@somewhere.com', 'harry@somewhere.com', 'bob@somewhere.com'))
+    ->addTo('john@somewhere.com')
+    ->addTo('harry@somewhere.com')
+    ->addTo('bob@somewhere.com')
     ->setSubject('%subject%')
     ->addSubstitution(
         '%subject%',
@@ -440,7 +442,9 @@ $email
 ```php
 $email = new SendGrid\Email();
 $email
-    ->addTos(array('john@somewhere.com', 'harry@somewhere.com', 'bob@somewhere.com'))
+    ->addTo('john@somewhere.com')
+    ->addTo('harry@somewhere.com')
+    ->addTo('bob@somewhere.com')
     ->setSubject('%subject%')
     ->setSubstitutions(array(
         '%name%' => array('John', 'Harry', 'Bob'), 
