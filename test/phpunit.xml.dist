@@ -5,6 +5,7 @@
       <file>./SendGrid.php</file>
       <file>./SendGrid/Email.php</file>
       <file>./SendGrid/Response.php</file>
+      <file>./SendGrid/Exception.php</file>
     </testsuite>
   </testsuites>
 </phpunit>

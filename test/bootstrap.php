@@ -1,6 +1,10 @@
 <?php 
 
 include(dirname(dirname(__FILE__)) . '/lib/SendGrid.php');
+
+// Not sure why this is required
+include(dirname(dirname(__FILE__)) . '/vendor/eddiezane/tinyhttp/src/TinyHttp.php');
+
 SendGrid::register_autoloader();
 
 function autoload_tests($class) {

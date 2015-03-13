@@ -9,7 +9,7 @@ class SendGridTest_SendGrid extends PHPUnit_Framework_TestCase {
   }
 
   public function testVersion() {
-    $this->assertEquals(SendGrid::VERSION, '2.2.0');
+    $this->assertEquals(SendGrid::VERSION, '3.0.0');
     $this->assertEquals(json_decode(file_get_contents('../composer.json'))->version, SendGrid::VERSION);
   }
 
@@ -20,13 +20,19 @@ class SendGridTest_SendGrid extends PHPUnit_Framework_TestCase {
 
   public function testDefaultURL() {
     $sendgrid = new SendGrid('user', 'pass');
-    $this->assertEquals('https://api.sendgrid.com/api/mail.send.json', $sendgrid->url);
+    $this->assertEquals('https://api.sendgrid.com', $sendgrid->url);
+  }
+
+  public function testDefaultEndpoint() {
+    $sendgrid = new SendGrid('user', 'pass');
+    $this->assertEquals('/api/mail.send.json', $sendgrid->endpoint);
+    
   }
 
   public function testCustomURL() {
     $options = array( 'protocol' => 'http', 'host' => 'sendgrid.org', 'endpoint' => '/send', 'port' => '80' );
     $sendgrid = new SendGrid('user', 'pass', $options);
-    $this->assertEquals('http://sendgrid.org:80/send', $sendgrid->url);
+    $this->assertEquals('http://sendgrid.org:80', $sendgrid->url);
   }
 
   public function testSwitchOffSSLVerification() {
@@ -41,8 +47,8 @@ class SendGridTest_SendGrid extends PHPUnit_Framework_TestCase {
   public function testSendGridExceptionThrownWhenNot200() {
     $mockResponse = (object)array('code' => 400, 'raw_body' => "{'message': 'error', 'errors': ['Bad username / password']}");
 
-    $sendgrid = m::mock('SendGrid[makeRequest]', array('foo', 'bar'));
-    $sendgrid->shouldReceive('makeRequest')->once()->andReturn($mockResponse);
+    $sendgrid = m::mock('SendGrid[postRequest]', array('foo', 'bar'));
+    $sendgrid->shouldReceive('postRequest')->once()->andReturn($mockResponse);
 
     $email = new SendGrid\Email();
     $email->setFrom('bar@foo.com')->
@@ -56,8 +62,8 @@ class SendGridTest_SendGrid extends PHPUnit_Framework_TestCase {
   public function testSendGridExceptionNotThrownWhen200() {
     $mockResponse = (object)array('code' => 200, 'body' => (object)array('message' => 'success'));
 
-    $sendgrid = m::mock('SendGrid[makeRequest]', array('foo', 'bar'));
-    $sendgrid->shouldReceive('makeRequest')->once()->andReturn($mockResponse);
+    $sendgrid = m::mock('SendGrid[postRequest]', array('foo', 'bar'));
+    $sendgrid->shouldReceive('postRequest')->once()->andReturn($mockResponse);
 
     $email = new SendGrid\Email();
     $email->setFrom('bar@foo.com')->
