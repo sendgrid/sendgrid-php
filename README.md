@@ -547,6 +547,27 @@ $email
 ;
 ```
 
+### Using templates ###
+
+
+You can use templates by applying filters:
+
+```php
+$email = new SendGrid\Email();
+$email
+    ->addTo('someone@example.com')
+    ->setFrom('support@example.com')
+    ->setFromName('Support')
+    ->setSubject('Subject goes here')
+    // set html or text to an empty space (see http://git.io/hCNy)
+    ->setHtml(' ') // <-- triggers the html version of the template
+    // OR
+    ->setText(' ') // <-- triggers the plaintext version of the template
+    ->addFilter('templates', 'enabled', 1)
+    ->addFilter('templates', 'template_id', $templateId)
+;
+```
+
 ### Headers ###
 
 You can add standard email message headers as necessary.
