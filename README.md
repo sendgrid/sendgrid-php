@@ -547,10 +547,9 @@ $email
 ;
 ```
 
-### Using templates ###
+### Templates ###
 
-
-You can use templates by applying filters:
+You can easily use SendGrid's [template engine](https://sendgrid.com/docs/User_Guide/Apps/template_engine.html) by applying filters.
 
 ```php
 $email = new SendGrid\Email();
