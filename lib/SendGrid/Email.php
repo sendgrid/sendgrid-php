@@ -55,7 +55,7 @@ class Email {
       $this->to = array();
     }
 
-    array_push($this->to, $email);
+    $this->to[] = $email;
 
     if ($name) {
       $this->addToName($name);
@@ -87,7 +87,7 @@ class Email {
       $this->to_name = array();
     }
 
-    array_push($this->to_name, $name);
+    $this->to_name[] = $name;
     return $this;
   }
 
