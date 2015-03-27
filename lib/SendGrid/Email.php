@@ -4,7 +4,8 @@ namespace SendGrid;
 
 class Email {
 
-  public $to, 
+  public $to,
+         $to_name,
          $from,
          $from_name,
          $reply_to,
@@ -48,13 +49,45 @@ class Email {
     $list = array_values($list);
   }
 
+  // TODO: Test
   public function addTo($email, $name=null) {
+    if ($this->to == null) {
+      $this->to = array();
+    }
+
+    array_push($this->to, $email);
+
+    if ($name) {
+      $this->addToName($name);
+    }
+
+    return $this;
+  }
+
+  // TODO: Test
+  public function addSmtpapiTo($email, $name=null) {
     $this->smtpapi->addTo($email, $name);
     return $this;
   }
 
+  // TODO: Test
   public function setTos(array $emails) { 
+    $this->to = $emails;
+    return $this;
+  }
+
+  public function setSmtpapiTos(array $emails) { 
     $this->smtpapi->setTos($emails);
+    return $this;
+  }
+
+  // TODO: Test
+  public function addToName($name) {
+    if ($this->to_name == null) {
+      $this->to_name = array();
+    }
+
+    array_push($this->to_name, $name);
     return $this;
   }
 
