@@ -33,7 +33,7 @@ class SendGrid {
     $form['api_user'] = $this->api_user; 
     $form['api_key']  = $this->api_key; 
 
-    $response = $this->makeRequest($form);
+    $response = $this->makeRequest(http_build_query($form));
 
     return $response;
   }
