@@ -15,51 +15,51 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
   public function testAddToWithDeprectedEmailClass() {
     $mail = new SendGrid\Email();
 
-    $mail->addTo('p1@mailinator.com');
+    $mail->addSmtpapiTo('p1@mailinator.com');
     $this->assertEquals(array('p1@mailinator.com'), $mail->smtpapi->to);
 
-    $mail->addTo('p2@mailinator.com');
+    $mail->addSmtpapiTo('p2@mailinator.com');
     $this->assertEquals(array('p1@mailinator.com', 'p2@mailinator.com'), $mail->smtpapi->to);
   }
 
-  public function testAddTo() {
+  public function testAddSmtpapiTo() {
     $email = new SendGrid\Email();
 
-    $email->addTo('p1@mailinator.com');
+    $email->addSmtpapiTo('p1@mailinator.com');
     $this->assertEquals(array('p1@mailinator.com'), $email->smtpapi->to);
 
-    $email->addTo('p2@mailinator.com');
+    $email->addSmtpapiTo('p2@mailinator.com');
     $this->assertEquals(array('p1@mailinator.com', 'p2@mailinator.com'), $email->smtpapi->to);
   }
 
-  public function testAddToWithName() {
+  public function testAddSmtpapiToWithName() {
     $email = new SendGrid\Email();
 
-    $email->addTo('p1@mailinator.com', 'Person One');
+    $email->addSmtpapiTo('p1@mailinator.com', 'Person One');
     $this->assertEquals(array('Person One <p1@mailinator.com>'), $email->smtpapi->to);
 
-    $email->addTo('p2@mailinator.com');
+    $email->addSmtpapiTo('p2@mailinator.com');
     $this->assertEquals(array('Person One <p1@mailinator.com>', 'p2@mailinator.com'), $email->smtpapi->to);
   }
 
-  public function testSetTo() {
+  public function testSetSmtpapiTo() {
     $email = new SendGrid\Email();
 
-    $email->setTos(array('p1@mailinator.com'));
+    $email->setSmtpapiTos(array('p1@mailinator.com'));
     $this->assertEquals(array('p1@mailinator.com'), $email->smtpapi->to);
   }
 
-  public function testSetTos() {
+  public function testSetSmtpapiTos() {
     $email = new SendGrid\Email();
 
-    $email->setTos(array('p1@mailinator.com'));
+    $email->setSmtpapiTos(array('p1@mailinator.com'));
     $this->assertEquals(array('p1@mailinator.com'), $email->smtpapi->to);
   }
 
   public function testRemoveTo() {
     $email = new SendGrid\Email();
 
-    $email->addTo('p1@mailinator.com');
+    $email->addSmtpapiTo('p1@mailinator.com');
     $this->assertEquals(array('p1@mailinator.com'), $email->smtpapi->to);
   }
 
@@ -473,9 +473,9 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $this->assertEquals(array(1409348513, 1409348514), $xsmtpapi->send_each_at);
   }
 
-  public function testToWebFormatWithTo() {
+  public function testToWebFormatWithSmtpapiTo() {
     $email    = new SendGrid\Email();
-    $email->addTo('foo@bar.com');
+    $email->addSmtpapiTo('foo@bar.com');
     $email->setFrom('from@site.com');
     $json     = $email->toWebFormat();
     $xsmtpapi = json_decode($json["x-smtpapi"]); 
@@ -484,9 +484,9 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $this->assertEquals($json['to'], 'from@site.com');
   }
 
-  public function testToWebFormatWithToAndBcc() {
+  public function testToWebFormatWithSmtpapiToAndBcc() {
     $email    = new SendGrid\Email();
-    $email->addTo('p1@mailinator.com');
+    $email->addSmtpapiTo('p1@mailinator.com');
     $email->addBcc('p2@mailinator.com');
     $json     = $email->toWebFormat();
 
