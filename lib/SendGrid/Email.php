@@ -49,7 +49,6 @@ class Email {
     $list = array_values($list);
   }
 
-  // TODO: Test
   public function addTo($email, $name=null) {
     if ($this->to == null) {
       $this->to = array();
@@ -64,13 +63,11 @@ class Email {
     return $this;
   }
 
-  // TODO: Test
   public function addSmtpapiTo($email, $name=null) {
     $this->smtpapi->addTo($email, $name);
     return $this;
   }
 
-  // TODO: Test
   public function setTos(array $emails) { 
     $this->to = $emails;
     return $this;
@@ -81,7 +78,6 @@ class Email {
     return $this;
   }
 
-  // TODO: Test
   public function addToName($name) {
     if ($this->to_name == null) {
       $this->to_name = array();

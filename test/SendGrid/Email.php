@@ -22,6 +22,16 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $this->assertEquals(array('p1@mailinator.com', 'p2@mailinator.com'), $mail->smtpapi->to);
   }
 
+  public function testAddTo() {
+    $email = new SendGrid\Email();
+
+    $email->addTo('p1@mailinator.com');
+    $this->assertEquals(array('p1@mailinator.com'), $email->to);
+
+    $email->addTo('p2@mailinator.com');
+    $this->assertEquals(array('p1@mailinator.com', 'p2@mailinator.com'), $email->to);
+  }
+
   public function testAddSmtpapiTo() {
     $email = new SendGrid\Email();
 
@@ -32,6 +42,18 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $this->assertEquals(array('p1@mailinator.com', 'p2@mailinator.com'), $email->smtpapi->to);
   }
 
+  public function testAddToWithName() {
+    $email = new SendGrid\Email();
+
+    $email->addTo('p1@mailinator.com', 'Person One');
+    $this->assertEquals(array('p1@mailinator.com'), $email->to);
+    $this->assertEquals(array('Person One'), $email->to_name);
+
+    $email->addTo('p2@mailinator.com');
+    $this->assertEquals(array('p1@mailinator.com', 'p2@mailinator.com'), $email->to);
+    $this->assertEquals(array('Person One'), $email->to_name);
+  }
+
   public function testAddSmtpapiToWithName() {
     $email = new SendGrid\Email();
 
@@ -40,6 +62,23 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
 
     $email->addSmtpapiTo('p2@mailinator.com');
     $this->assertEquals(array('Person One <p1@mailinator.com>', 'p2@mailinator.com'), $email->smtpapi->to);
+  }
+
+  public function testAddToName() {
+    $email = new SendGrid\Email();
+
+    $email->addToName('Foo Bar');
+    $this->assertEquals(array('Foo Bar'), $email->to_name);
+
+    $email->addToName('Baz Bar');
+    $this->assertEquals(array('Foo Bar', 'Baz Bar'), $email->to_name);
+  }
+
+  public function testSetTos() {
+    $email = new SendGrid\Email();
+
+    $email->setTos(array('foo@bar.com', 'baz@bar.com'));
+    $this->assertEquals(array('foo@bar.com', 'baz@bar.com'), $email->to);
   }
 
   public function testSetSmtpapiTo() {
