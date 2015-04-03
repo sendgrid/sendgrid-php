@@ -17,4 +17,24 @@ class Response
     $this->raw_body = $raw_body;
     $this->body     = $body;
   }
+
+  public function getCode()
+  {
+    return $this->code;
+  }
+
+  public function getHeaders()
+  {
+    return $this->headers;
+  }
+
+  public function getRawBody()
+  {
+    return $this->raw_body;
+  }
+
+  public function getBody()
+  {
+    return $this->body;
+  }
 }

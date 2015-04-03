@@ -18,4 +18,12 @@ class SendGridTest_Response extends PHPUnit_Framework_TestCase {
     $this->assertEquals($res->body, 'body');
   }
 
+  public function testGetters() {
+    $res = new SendGrid\Response(200, 'headers', 'raw_body', 'body');
+    $this->assertEquals($res->getCode(), 200);
+    $this->assertEquals($res->getHeaders(), 'headers');
+    $this->assertEquals($res->getRawBody(), 'raw_body');
+    $this->assertEquals($res->getBody(), 'body');
+  }
+
 }

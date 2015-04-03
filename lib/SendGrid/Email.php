@@ -133,6 +133,11 @@ class Email {
     return $this;
   }
 
+  // public function addSmtpapiCc($email) {
+    // TODO: Need to merge smtpapi-php PR#6
+    // $this->smtpapi->addCc($email);
+  // }
+
   public function removeCc($email) {
     $this->_removeFromList($this->cc_list, $email);
 
@@ -416,9 +421,12 @@ class Email {
         }
 
         $contents   = '@' . $file; 
-        if (class_exists('CurlFile', false)) { // php >= 5.5
-          $contents = new \CurlFile($file, $extension, $filename);
-        }
+
+        // Guzzle handles this for us.
+        // http://guzzle3.readthedocs.org/en/latest/http-client/request.html#post-requests
+        // if (class_exists('CurlFile', false)) { // php >= 5.5
+          // $contents = new \CurlFile($file, $extension, $filename);
+        // }
 
         $web['files['.$full_filename.']'] = $contents;
       };

@@ -14,7 +14,7 @@ class SendGrid {
             $version = self::VERSION;
 
   
-  public function __construct($api_user, $api_key, $options=array()) {
+  public function __construct($api_user, $api_key, $options = array()) {
     $this->api_user = $api_user;
     $this->api_key = $api_key;
 
@@ -27,8 +27,13 @@ class SendGrid {
     $this->url = isset($options['url']) ? $options['url'] : $protocol . '://' . $host . ($port ? ':' . $port : '');
     $this->endpoint = isset($options['endpoint']) ? $options['endpoint'] : '/api/mail.send.json';
 
-    $this->client = new \TinyHttp($this->url, array('curlopts' => array(CURLOPT_USERAGENT => 'sendgrid/' . $this->version . ';php',
-      CURLOPT_SSL_VERIFYPEER => !$this->options['turn_off_ssl_verification'])));
+    $this->client = new \Guzzle\Http\Client($this->url, array(
+      'request.options' => array(
+        'verify' => !$this->options['turn_off_ssl_verification'],
+        'exceptions' => false // FIXME: This might not be wise but we don't want guzzle throwing
+      )
+    ));
+    $this->client->setUserAgent('sendgrid/' . $this->version . ';php');
   }
 
   /**
@@ -65,9 +70,11 @@ class SendGrid {
    * @return SendGrid\Response
    */
   public function postRequest($endpoint, $form) {
-    $res = $this->client->post($endpoint, null, $form);
+    $req = $this->client->post($endpoint, null, $form);
 
-    $response = new SendGrid\Response($res->code, $res->headers, $res->body, json_decode($res->body));
+    $res = $req->send();
+
+    $response = new SendGrid\Response($res->getStatusCode(), $res->getHeaders(), $res->getBody(true), $res->json());
 
     return $response;
   }

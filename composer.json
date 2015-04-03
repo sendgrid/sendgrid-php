@@ -8,7 +8,7 @@
   "require": {
     "php": ">=5.3",
     "sendgrid/smtpapi": "0.*",
-    "eddiezane/tinyhttp": "0.*"
+    "guzzle/guzzle": "~3.9"
   },
   "require-dev": {
     "mockery/mockery": "~0.9",
