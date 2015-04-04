@@ -1,13 +1,25 @@
-# SendGrid-php
+# SendGrid-PHP
 
 This library allows you to quickly and easily send emails through SendGrid using PHP.
 
-WARNING: This module was recently upgraded from [1.1.7](https://github.com/sendgrid/sendgrid-php/tree/v1.1.7) to 2.X. There were API breaking changes for various method names. See [usage](https://github.com/sendgrid/sendgrid-php#usage) for up to date method names.
+WARNING: This module was recently upgraded from [2.2.x](https://github.com/sendgrid/sendgrid-php/tree/v2.2.1) to 3.X. There were API breaking changes for various method names. See [usage](https://github.com/sendgrid/sendgrid-php#usage) for up to date method names.
+
+## PLEASE READ THIS
+
+One of the most notable changes is how `addTo()` behaves. We are now using our Web API parameters instead of the X-SMTPAPI header. What this means is that if you call `addTo()` multiple times for an email, **ONE** email will be sent with each email address visible to everyone. To utilize the original behavior of having and individual email sent to each recipient, this includes using substitutions, you must now use `addSmtpapiTo()`.
+
+Smtpapi addressing methods cannot be mixed with non Smtpapi addressing methods.
+
+Please read [this](#) for further information on the difference. // TODO: Create something.
+
+Also, the `send()` method now raises a `SendGrid\Exception` if the response code is not 200.
+
+---
 
 Important: This library requires PHP 5.3 or higher.
 
-[![BuildStatus](https://travis-ci.org/sendgrid/sendgrid-php.png?branch=master)](https://travis-ci.org/sendgrid/sendgrid-php)
-[![Latest Stable Version](https://poser.pugx.org/sendgrid/sendgrid/version.png)](https://packagist.org/packages/sendgrid/sendgrid)
+[![BuildStatus](https://travis-ci.org/sendgrid/sendgrid-php.svg?branch=master)](https://travis-ci.org/sendgrid/sendgrid-php)
+[![Latest Stable Version](https://poser.pugx.org/sendgrid/sendgrid/version.svg)](https://packagist.org/packages/sendgrid/sendgrid)
 
 ```php
 $sendgrid = new SendGrid('username', 'password');
@@ -30,7 +42,7 @@ Add SendGrid to your `composer.json` file. If you are not using [Composer](http:
 ```json
 {  
   "require": {
-    "sendgrid/sendgrid": "2.2.1"
+    "sendgrid/sendgrid": "3.0.0"
   }
 }
 ```
@@ -89,13 +101,34 @@ $sendgrid->send($email);
 
 #### addTo
 
-You can add one or multiple TO addresses using `addTo`.
+You can add one or multiple TO addresses using `addTo` along with an optional TO name. Note: If using TO names, each address needs a name.
 
 ```php
 $email = new SendGrid\Email();
 $email
     ->addTo('foo@bar.com')
     ->addTo('another@another.com')
+;
+$sendgrid->send($email);
+
+// With names
+$email = new SendGrid\Email();
+$email
+    ->addTo('foo@bar.com', 'Frank Foo')
+    ->addTo('another@another.com', 'Joe Bar')
+;
+$sendgrid->send($email);
+```
+
+#### addSmtpapiTo
+
+Add a TO address to the smtpapi header.
+
+```php
+$email = new SendGrid\Email();
+$email
+    ->addSmtpapiTo('foo@bar.com')
+    ->addSmtpapiTo('another@another.com')
 ;
 $sendgrid->send($email);
 ```
