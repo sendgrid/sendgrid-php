@@ -75,7 +75,7 @@ class Email {
     return $this;
   }
 
-  public function addSmtpapiTo($email, $name=null) {
+  public function addSmtpapiTo($email, $name = null) {
     $this->smtpapi->addTo($email, $name);
     return $this;
   }
@@ -312,12 +312,12 @@ class Email {
     return $this;
   }
 
-  public function setAttachment($file, $custom_filename=null, $cid=null) {
+  public function setAttachment($file, $custom_filename = null, $cid = null) {
     $this->attachments = array($this->_getAttachmentInfo($file, $custom_filename, $cid));
     return $this;
   }
 
-  public function addAttachment($file, $custom_filename=null, $cid=null) {
+  public function addAttachment($file, $custom_filename = null, $cid = null) {
     $this->attachments[] = $this->_getAttachmentInfo($file, $custom_filename, $cid);
     return $this;
   }
@@ -331,7 +331,7 @@ class Email {
     return $this;
   }
 
-  private function _getAttachmentInfo($file, $custom_filename=null, $cid=null) {
+  private function _getAttachmentInfo($file, $custom_filename = null, $cid = null) {
     $info                       = pathinfo($file);
     $info['file']               = $file;
     if (!is_null($custom_filename)) {
@@ -452,6 +452,10 @@ class Email {
   public function removeHeader($key) {
     unset($this->headers[$key]);
     return $this;
+  }
+
+  public function getSmtpapi() {
+    return $this->smtpapi;
   }
 
   public function toWebFormat() {
