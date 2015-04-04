@@ -9,8 +9,10 @@ class Email {
          $from,
          $from_name,
          $reply_to,
-         $cc_list,
-         $bcc_list,
+         $cc,
+         $cc_name,
+         $bcc,
+         $bcc_name,
          $subject,
          $text,
          $html,
@@ -49,14 +51,24 @@ class Email {
     $list = array_values($list);
   }
 
-  public function addTo($email, $name=null) {
+  public function addTo($email, $name = null) {
     if ($this->to == null) {
       $this->to = array();
     }
 
-    $this->to[] = $email;
+    if (is_array($email)) {
+      foreach ($email as $e) {
+        $this->to[] = $e;
+      }
+    } else {
+      $this->to[] = $email;
+    }
 
-    if ($name) {
+    if (is_array($name)) {
+      foreach ($name as $n) {
+        $this->addToName($n);
+      }
+    } elseif ($name) {
       $this->addToName($name);
     }
 
@@ -85,6 +97,10 @@ class Email {
 
     $this->to_name[] = $name;
     return $this;
+  }
+
+  public function getToNames() {
+    return $this->to_name;
   }
 
   public function setFrom($email) {
@@ -119,57 +135,116 @@ class Email {
   }
 
   public function setCc($email) {
-    $this->cc_list = array($email);
+    $this->cc = array($email);
     return $this;
   }
 
   public function setCcs(array $email_list) {
-    $this->cc_list = $email_list;
+    $this->cc = $email_list;
     return $this;
   }
 
-  public function addCc($email) {
-    $this->cc_list[] = $email;
+  public function addCc($email, $name = null) {
+    if ($this->cc == null) {
+      $this->cc = array();
+    }
+
+    if (is_array($email)) {
+      foreach ($email as $e) {
+        $this->cc[] = $e;
+      }
+    } else {
+      $this->cc[] = $email;
+    }
+
+    if (is_array($name)) {
+      foreach ($name as $n) {
+        $this->addCcName($n);
+      }
+    } elseif ($name) {
+      $this->addCcName($name);
+    }
+
     return $this;
   }
 
-  // public function addSmtpapiCc($email) {
-    // TODO: Need to merge smtpapi-php PR#6
-    // $this->smtpapi->addCc($email);
-  // }
+  public function addCcName($name) {
+    if ($this->cc_name == null) {
+      $this->cc_name = array();
+    }
+
+    $this->cc_name[] = $name;
+    return $this;
+  }
 
   public function removeCc($email) {
-    $this->_removeFromList($this->cc_list, $email);
+    $this->_removeFromList($this->cc, $email);
 
     return $this;
   }
 
   public function getCcs() {
-    return $this->cc_list;
+    return $this->cc;
+  }
+
+  public function getCcNames() {
+    return $this->cc_name;
   }
 
   public function setBcc($email) {
-    $this->bcc_list = array($email);
+    $this->bcc = array($email);
     return $this;
   }
 
   public function setBccs($email_list) {
-    $this->bcc_list = $email_list;
+    $this->bcc = $email_list;
     return $this;
   }
  
-  public function addBcc($email) {
-    $this->bcc_list[] = $email;
+  public function addBcc($email, $name = null) {
+    if ($this->bcc == null) {
+      $this->bcc = array();
+    }
+
+    if (is_array($email)) {
+      foreach ($email as $e) {
+        $this->bcc[] = $e;
+      }
+    } else {
+      $this->bcc[] = $email;
+    }
+
+    if (is_array($name)) {
+      foreach ($name as $n) {
+        $this->addBccName($n);
+      }
+    } elseif ($name) {
+      $this->addBccName($name);
+    }
+
     return $this;
   }
 
+  public function addBccName($name) {
+    if ($this->bcc_name == null) {
+      $this->bcc_name = array();
+    }
+
+    $this->bcc_name[] = $name;
+    return $this;
+  }
+
+  public function getBccNames() {
+    return $this->bcc_name;
+  }
+
   public function removeBcc($email) {
-    $this->_removeFromList($this->bcc_list, $email);
+    $this->_removeFromList($this->bcc, $email);
     return $this;
   }
 
   public function getBccs() {
-    return $this->bcc_list;
+    return $this->bcc;
   }
 
   public function setSubject($subject) {
@@ -390,8 +465,11 @@ class Email {
       'headers'     => $this->getHeadersJson(),
     );
 
+    if ($this->getToNames())      { $web['toname']      = $this->getToNames(); }
     if ($this->getCcs())          { $web['cc']          = $this->getCcs(); }
+    if ($this->getCcNames())      { $web['ccname']      = $this->getCcNames(); }
     if ($this->getBccs())         { $web['bcc']         = $this->getBccs(); }
+    if ($this->getBccNames())     { $web['bccname']     = $this->getBccNames(); }
     if ($this->getFromName())     { $web['fromname']    = $this->getFromName(); }
     if ($this->getReplyTo())      { $web['replyto']     = $this->getReplyTo(); }
     if ($this->getDate())         { $web['date']        = $this->getDate(); }
