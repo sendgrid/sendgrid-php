@@ -1,19 +1,20 @@
 <?php
 
 class SendGrid {
-  const VERSION = '2.2.1';
+  const VERSION = '3.0.0-RC1';
 
   protected $namespace  = 'SendGrid',
             $headers    = array('Content-Type' => 'application/json'),
-            $options,
-            $web;
+            $client,
+            $options;
   public    $api_user,
             $api_key,
             $url,
+            $endpoint,
             $version = self::VERSION;
 
   
-  public function __construct($api_user, $api_key, $options=array()) {
+  public function __construct($api_user, $api_key, $options = array()) {
     $this->api_user = $api_user;
     $this->api_key = $api_key;
 
@@ -21,48 +22,61 @@ class SendGrid {
     $protocol = isset($options['protocol']) ? $options['protocol'] : 'https';
     $host = isset($options['host']) ? $options['host'] : 'api.sendgrid.com';
     $port = isset($options['port']) ? $options['port'] : '';
-    $endpoint = isset($options['endpoint']) ? $options['endpoint'] : '/api/mail.send.json';
-
-    $this->url = isset($options['url']) ? $options['url'] : $protocol . '://' . $host . ($port ? ':' . $port : '') . $endpoint;
-
     $this->options  = $options;
+
+    $this->url = isset($options['url']) ? $options['url'] : $protocol . '://' . $host . ($port ? ':' . $port : '');
+    $this->endpoint = isset($options['endpoint']) ? $options['endpoint'] : '/api/mail.send.json';
+
+    $this->client = new \Guzzle\Http\Client($this->url, array(
+      'request.options' => array(
+        'verify' => !$this->options['turn_off_ssl_verification'],
+        'exceptions' => false // FIXME: This might not be wise but we don't want guzzle throwing
+      )
+    ));
+    $this->client->setUserAgent('sendgrid/' . $this->version . ';php');
   }
 
+  /**
+   * @return array The protected options array
+   */
+  public function getOptions() {
+    return $this->options;
+  }
+
+  /**
+   * Makes a post request to SendGrid to send an email
+   * @param SendGrid\Email $email Email object built
+   * @throws SendGrid\Exception if the response code is not 200
+   * @return stdClass SendGrid response object
+   */
   public function send(SendGrid\Email $email) {
     $form             = $email->toWebFormat();
     $form['api_user'] = $this->api_user; 
     $form['api_key']  = $this->api_key; 
 
-    $response = $this->makeRequest($form);
+    $response = $this->postRequest($this->endpoint, $form);
+
+    if ($response->code != 200) {
+      throw new SendGrid\Exception($response->raw_body, $response->code);
+    }
 
     return $response;
   }
 
   /**
    * Makes the actual HTTP request to SendGrid
+   * @param $endpoint string endpoint to post to
    * @param $form array web ready version of SendGrid\Email
-   * @return stdClass parsed JSON returned from SendGrid
+   * @return SendGrid\Response
    */
-  private function makeRequest($form) {
-    $ch = curl_init();
+  public function postRequest($endpoint, $form) {
+    $req = $this->client->post($endpoint, null, $form);
 
-    curl_setopt($ch, CURLOPT_URL, $this->url);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $form);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_USERAGENT, 'sendgrid/' . $this->version . ';php');
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, !$this->options['turn_off_ssl_verification']);
+    $res = $req->send();
 
-    $response = curl_exec($ch);
+    $response = new SendGrid\Response($res->getStatusCode(), $res->getHeaders(), $res->getBody(true), $res->json());
 
-    $error = curl_error($ch);
-    if ($error) {
-      throw new Exception($error);
-    }
-
-    curl_close($ch);
-
-    return json_decode($response);
+    return $response;
   }
 
   public static function register_autoloader() {
