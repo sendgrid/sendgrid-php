@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 include(dirname(dirname(__FILE__)) . '/lib/SendGrid.php');
 
 SendGrid::register_autoloader();
 
-function autoload_tests($class) {
+function autoload_tests($class)
+{
 
   if (strpos($class, 'SendGridTest_') !== 0) {
     return;

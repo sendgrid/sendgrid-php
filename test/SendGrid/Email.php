@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 class SendGridTest_Email extends PHPUnit_Framework_TestCase {
-  
+
   public function testConstructionEmail() {
     $email = new SendGrid\Email();
     $this->assertEquals(get_class($email), "SendGrid\Email");
@@ -47,11 +47,11 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
 
     $email->addTo('p1@mailinator.com', 'Person One');
     $this->assertEquals(array('p1@mailinator.com'), $email->to);
-    $this->assertEquals(array('Person One'), $email->to_name);
+    $this->assertEquals(array('Person One'), $email->toName);
 
     $email->addTo('p2@mailinator.com');
     $this->assertEquals(array('p1@mailinator.com', 'p2@mailinator.com'), $email->to);
-    $this->assertEquals(array('Person One'), $email->to_name);
+    $this->assertEquals(array('Person One'), $email->toName);
   }
 
   public function testAddSmtpapiToWithName() {
@@ -78,20 +78,20 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $email = new SendGrid\Email();
 
     $email->addTo(array('foo@bar.com', 'bar@bar.com'), array('Mike Foo', 'Joe Bar'));
-    $this->assertEquals(array('Mike Foo', 'Joe Bar'), $email->to_name);
+    $this->assertEquals(array('Mike Foo', 'Joe Bar'), $email->toName);
 
     $email->addTo('baz@bar.com', 'Ben Baz');
-    $this->assertEquals(array('Mike Foo', 'Joe Bar', 'Ben Baz'), $email->to_name);
+    $this->assertEquals(array('Mike Foo', 'Joe Bar', 'Ben Baz'), $email->toName);
   }
 
   public function testAddToName() {
     $email = new SendGrid\Email();
 
     $email->addToName('Foo Bar');
-    $this->assertEquals(array('Foo Bar'), $email->to_name);
+    $this->assertEquals(array('Foo Bar'), $email->toName);
 
     $email->addToName('Baz Bar');
-    $this->assertEquals(array('Foo Bar', 'Baz Bar'), $email->to_name);
+    $this->assertEquals(array('Foo Bar', 'Baz Bar'), $email->toName);
   }
 
 
@@ -201,21 +201,21 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
 
     $email->addCc('p1@mailinator.com', 'Person One');
     $this->assertEquals(array('p1@mailinator.com'), $email->cc);
-    $this->assertEquals(array('Person One'), $email->cc_name);
+    $this->assertEquals(array('Person One'), $email->ccName);
 
     $email->addCc('p2@mailinator.com');
     $this->assertEquals(array('p1@mailinator.com', 'p2@mailinator.com'), $email->cc);
-    $this->assertEquals(array('Person One'), $email->cc_name);
+    $this->assertEquals(array('Person One'), $email->ccName);
   }
 
   public function testAddCcName() {
     $email = new SendGrid\Email();
 
     $email->addCcName('Foo Bar');
-    $this->assertEquals(array('Foo Bar'), $email->cc_name);
+    $this->assertEquals(array('Foo Bar'), $email->ccName);
 
     $email->addCcName('Baz Bar');
-    $this->assertEquals(array('Foo Bar', 'Baz Bar'), $email->cc_name);
+    $this->assertEquals(array('Foo Bar', 'Baz Bar'), $email->ccName);
   }
 
   public function testSetBcc() {
@@ -263,21 +263,21 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
 
     $email->addBcc('p1@mailinator.com', 'Person One');
     $this->assertEquals(array('p1@mailinator.com'), $email->bcc);
-    $this->assertEquals(array('Person One'), $email->bcc_name);
+    $this->assertEquals(array('Person One'), $email->bccName);
 
     $email->addBcc('p2@mailinator.com');
     $this->assertEquals(array('p1@mailinator.com', 'p2@mailinator.com'), $email->bcc);
-    $this->assertEquals(array('Person One'), $email->bcc_name);
+    $this->assertEquals(array('Person One'), $email->bccName);
   }
 
   public function testAddBccName() {
     $email = new SendGrid\Email();
 
     $email->addBccName('Foo Bar');
-    $this->assertEquals(array('Foo Bar'), $email->bcc_name);
+    $this->assertEquals(array('Foo Bar'), $email->bccName);
 
     $email->addBccName('Baz Bar');
-    $this->assertEquals(array('Foo Bar', 'Baz Bar'), $email->bcc_name);
+    $this->assertEquals(array('Foo Bar', 'Baz Bar'), $email->bccName);
   }
 
   public function testSetSubject() {
@@ -286,7 +286,7 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $email->setSubject("Test Subject");
     $this->assertEquals("Test Subject", $email->getSubject());
   }
-  
+
   public function testSetDate() {
     $email = new SendGrid\Email();
 
@@ -295,21 +295,21 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $email->setDate($date);
     $this->assertEquals($date, $email->getDate());
   }
-  
+
   public function testSetSendAt() {
     $email = new SendGrid\Email();
-    
+
     $email->setSendAt(1409348513);
     $this->assertEquals("{\"send_at\":1409348513}", $email->getSmtpapi()->jsonString());
   }
-  
+
   public function testSetSendEachAt() {
     $email = new SendGrid\Email();
-    
+
     $email->setSendEachAt(array(1409348513, 1409348514, 1409348515));
     $this->assertEquals("{\"send_each_at\":[1409348513,1409348514,1409348515]}", $email->getSmtpapi()->jsonString());
   }
-  
+
   public function testAddSendEachAt() {
     $email = new SendGrid\Email();
     $email->addSendEachAt(1409348513);
@@ -337,10 +337,10 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
   public function testSetAttachments() {
     $email = new SendGrid\Email();
 
-    $attachments = 
+    $attachments =
       array(
-        "path/to/file/file_1.txt", 
-        "../file_2.txt", 
+        "path/to/file/file_1.txt",
+        "../file_2.txt",
         "../file_3.txt"
       );
 
@@ -356,10 +356,10 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
   public function testSetAttachmentsWithCustomFilename() {
     $email = new SendGrid\Email();
 
-    $array_of_attachments = 
+    $array_of_attachments =
       array(
-        "customName.txt" => "path/to/file/file_1.txt", 
-        'another_name_|.txt' => "../file_2.txt", 
+        "customName.txt" => "path/to/file/file_1.txt",
+        'another_name_|.txt' => "../file_2.txt",
         'custom_name_2.zip' => "../file_3.txt"
       );
 
@@ -441,9 +441,9 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $this->assertEquals("{\"category\":[\"category_0\"]}", $email->getSmtpapi()->jsonString());
 
     $categories = array(
-                    "category_1", 
-                    "category_2", 
-                    "category_3", 
+                    "category_1",
+                    "category_2",
+                    "category_3",
                     "category_4"
                   );
 
@@ -544,36 +544,36 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     date_default_timezone_set('America/Los_Angeles');
     $date = date('r');
     $email->setDate($date);
-    $json     = $email->toWebFormat(); 
+    $json     = $email->toWebFormat();
 
     $this->assertEquals($json['date'], $date);
   }
-  
+
   public function testToWebFormatWithSetSendAt() {
     $email = new SendGrid\Email();
     $email->setSendAt(1409348513);
-    $json     = $email->toWebFormat(); 
+    $json     = $email->toWebFormat();
     $xsmtpapi = json_decode($json["x-smtpapi"]);
-    
+
     $this->assertEquals(1409348513, $xsmtpapi->send_at);
   }
 
   public function testToWebFormatWithSetSendEachAt() {
     $email = new SendGrid\Email();
     $email->setSendEachAt(array(1409348513, 1409348514));
-    $json     = $email->toWebFormat(); 
+    $json     = $email->toWebFormat();
     $xsmtpapi = json_decode($json["x-smtpapi"]);
-    
+
     $this->assertEquals(array(1409348513, 1409348514), $xsmtpapi->send_each_at);
   }
-  
+
   public function testToWebFormatWithAddSendEachAt() {
     $email = new SendGrid\Email();
     $email->addSendEachAt(1409348513);
     $email->addSendEachAt(1409348514);
-    $json     = $email->toWebFormat(); 
+    $json     = $email->toWebFormat();
     $xsmtpapi = json_decode($json["x-smtpapi"]);
-    
+
     $this->assertEquals(array(1409348513, 1409348514), $xsmtpapi->send_each_at);
   }
 
@@ -591,7 +591,7 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $email->addSmtpapiTo('foo@bar.com');
     $email->setFrom('from@site.com');
     $json     = $email->toWebFormat();
-    $xsmtpapi = json_decode($json["x-smtpapi"]); 
+    $xsmtpapi = json_decode($json["x-smtpapi"]);
 
     $this->assertEquals($xsmtpapi->to, array('foo@bar.com'));
     $this->assertEquals($json['to'], 'from@site.com');
@@ -625,7 +625,7 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $this->assertEquals($json["x-smtpapi"], '{"to":["p1@mailinator.com"]}');
   }
 
-  /* 
+  /*
    * Guzzle handles this for use. Keeping in case we drop guzzle
    *
   public function testToWebFormatWithAttachment() {
@@ -650,7 +650,7 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
 
     $this->assertEquals($json["files[gif.gif]"], "@./gif.gif");
   }
-  
+
   /*
    * Guzzle handles this for use. Keeping in case we drop guzzle
    *
@@ -682,7 +682,7 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $this->assertEquals($json["content[gif.gif]"], "sample-cid");
     $this->assertEquals($json["content[gif2.gif]"], "sample-cid-2");
   }
-  
+
 
   /*
    * Guzzle handles this for use. Keeping in case we drop guzzle
