@@ -12,7 +12,7 @@ One of the most notable changes is how `addTo()` behaves. We are now using our W
 
 Smtpapi addressing methods cannot be mixed with non Smtpapi addressing methods. Meaning you cannot currently use cc and bcc with `addSmtpapiTo()`.
 
-The `send()` method now raises a `SendGrid\Exception` if the response code is not 200.
+The `send()` method now raises a `\SendGrid\Exception` if the response code is not 200 and returns an instance of `\SendGrid\Response`.
 
 ---
 
@@ -246,7 +246,13 @@ try {
 Permission denied, wrong credentials
 ```
 
-### Methods
+### SMTPAPI ###
+
+This library makes use of [sendgrid/smtpapi-php](https://github.com/sendgrid/smtpapi-php/) for all things related to the [X-SMTPAPI Header](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
+
+---
+
+### Library Methods ###
 
 #### addTo
 
@@ -263,8 +269,15 @@ $sendgrid->send($email);
 // With names
 $email = new SendGrid\Email();
 $email
-    ->addTo('foo@bar.com', 'Frank Foo')
-    ->addTo('another@another.com', 'Joe Bar')
+	->addTo('foo@bar.com', 'Frank Foo')
+	->addTo('another@another.com', 'Joe Bar')
+;
+$sendgrid->send($email);
+
+// As an array
+$email = new SendGrid\Email();
+$email
+    ->addTo(array('foo@bar.com', 'bar@example'), array('Frank Foo', 'Brian Bar'))
 ;
 $sendgrid->send($email);
 ```
@@ -416,6 +429,10 @@ $sendgrid->send($email);
 ```php
 $email->removeBcc('foo@bar.com');
 ```
+
+**Important Gotcha**: Using multiple `addSmtpapiTo`s is recommended over bcc whenever possible. Each user will receive their own personalized email with that setup, and only see their own email.
+
+Standard `setBcc` will hide who the email is addressed to. If you use multiple `addSmtpapiTo`'s, each user will receive a personalized email showing *only* their email. This is more friendly and more personal.
 
 #### setSubject
 
@@ -587,10 +604,6 @@ $email
     ->addAttachment("../path/to/file.txt", "super_file.txt", "file-cid")
 ;
 ```
-
-**Important Gotcha**: Using multiple `addSmtpapiTo`s is recommended over bcc whenever possible. Each user will receive their own personalized email with that setup, and only see their own email.
-
-Standard `setBcc` will hide who the email is addressed to. If you use multiple `addSmtpapiTo`'s, each user will receive a personalized email showing *only* their email. This is more friendly and more personal.
 
 ### Substitutions ###
 
