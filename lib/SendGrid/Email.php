@@ -338,6 +338,28 @@ class Email
         return $this;
     }
 
+    /**
+     * Convenience method to add template
+     * @param string The id of the template
+     * @return $this
+     */
+    public function setTemplateId($templateId)
+    {
+        $this->addFilter('templates', 'enabled', 1);
+        $this->addFilter('templates', 'template_id', $templateId);
+        return $this;
+    }
+
+    /** Convenience method to set asm group id
+     * @param string the group id
+     * @return $this
+     */
+    public function setAsmGroupId($groupId)
+    {
+        $this->smtpapi->setASMGroupID($groupId);
+        return $this;
+    }
+
     public function setAttachments(array $files)
     {
         $this->attachments = array();

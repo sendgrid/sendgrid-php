@@ -94,6 +94,12 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $this->assertEquals(array('Foo Bar', 'Baz Bar'), $email->toName);
   }
 
+    public function testSetAsmGroupId()
+    {
+        $email = new SendGrid\Email();
+        $email->setAsmGroupId('my_id');
+        $this->assertEquals('my_id', $email->smtpapi->asm_group_id);
+    }
 
   public function testSetTos() {
     $email = new SendGrid\Email();
@@ -393,6 +399,13 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase {
     $this->assertEquals($attachments[0]['filename'], 'file_4');
   }
 
+    public function testSetTemplateId()
+    {
+        $email = new SendGrid\Email();
+        $email->setTemplateId('123-456');
+        $filter = array('templates' => array('settings' => array('enabled' => 1, 'template_id' => '123-456')));
+        $this->assertEquals($email->smtpapi->getFilters(), $filter);
+    }
 
   public function testSetAttachment() {
     $email = new SendGrid\Email();
