@@ -162,6 +162,90 @@ $sendgrid = new SendGrid(
 );
 ```
 
+#### Response ####
+
+An instance of `\SendGrid\Response` is returned from the `send()` method.
+
+```php
+$email = new SendGrid\Email();
+$email
+    ->addTo('foo@bar.com')
+    ->setFrom('me@bar.com')
+    ->setSubject('Subject goes here')
+    ->setText('Hello World!');
+$res = sendgrid->send($email);
+
+var_dump($res);
+
+// Output
+object(SendGrid\Response)#31 (4) {
+  ["code"]=>
+  int(200)
+  ["headers"]=>
+  object(Guzzle\Http\Message\Header\HeaderCollection)#48 (1) {
+    ["headers":protected]=>
+    array(6) {
+	...
+      ["content-type"]=>
+      object(Guzzle\Http\Message\Header)#41 (3) {
+        ["values":protected]=>
+        array(1) {
+          [0]=>
+          string(16) "application/json"
+        }
+        ["header":protected]=>
+        string(12) "Content-Type"
+        ["glue":protected]=>
+        string(1) ","
+      }
+   ...
+    }
+  }
+  ["raw_body"]=>
+  string(21) "{"message":"success"}"
+  ["body"]=>
+  array(1) {
+    ["message"]=>
+    string(7) "success"
+  }
+}
+```
+
+#### getCode ####
+
+Returns the status code of the response.
+
+#### getHeaders ####
+
+Returns the headers of the response as a [Guzzle\Http\Message\Header\HeaderCollection object](http://api.guzzlephp.org/class-Guzzle.Http.Message.Header.HeaderCollection.html).
+
+#### getRawBody ####
+
+Returns the unparsed JSON response from SendGrid.
+
+#### getBody ####
+
+Returns the parsed JSON from SendGrid.
+
+### Exception ###
+
+A `\SendGrid\Exception` is raised if the response code is not 200. Catching it is optional but highly recommended.
+
+```php
+try {
+    $sendgrid->send($email);
+} catch(\SendGrid\Exception $e) {
+    echo $e->getCode() . "\n";
+    foreach($e->getErrors() as $er) {
+        echo $er;
+    }
+}
+
+// Output
+400
+Permission denied, wrong credentials
+```
+
 ### Methods
 
 #### addTo
