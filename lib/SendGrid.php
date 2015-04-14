@@ -56,9 +56,9 @@ class SendGrid
      */
     public function send(SendGrid\Email $email)
     {
-        $form            = $email->toWebFormat();
-        $form['apiUser'] = $this->apiUser;
-        $form['apiKey']  = $this->apiKey;
+        $form             = $email->toWebFormat();
+        $form['api_user'] = $this->apiUser;
+        $form['api_key']  = $this->apiKey;
 
         $response = $this->postRequest($this->endpoint, $form);
 
