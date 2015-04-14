@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [v3.0.0] - (Unreleased)
+## [v3.0.0] - (2015-04-14)
 ### Fixed
 - CC and BCC not working with SMTPAPI To
 
