@@ -377,13 +377,13 @@ class Email
 
     public function setAttachment($file, $custom_filename = null, $cid = null)
     {
-        $this->attachments = array($this->_getAttachmentInfo($file, $custom_filename, $cid));
+        $this->attachments = array($this->getAttachmentInfo($file, $custom_filename, $cid));
         return $this;
     }
 
     public function addAttachment($file, $custom_filename = null, $cid = null)
     {
-        $this->attachments[] = $this->_getAttachmentInfo($file, $custom_filename, $cid);
+        $this->attachments[] = $this->getAttachmentInfo($file, $custom_filename, $cid);
         return $this;
     }
 
@@ -398,10 +398,10 @@ class Email
         return $this;
     }
 
-    private function _getAttachmentInfo($file, $custom_filename = null, $cid = null)
+    private function getAttachmentInfo($file, $custom_filename = null, $cid = null)
     {
-        $info                       = pathinfo($file);
-        $info['file']               = $file;
+        $info = pathinfo($file);
+        $info['file'] = $file;
         if (!is_null($custom_filename)) {
             $info['custom_filename']  = $custom_filename;
         }
