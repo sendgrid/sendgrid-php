@@ -7,7 +7,7 @@
   "keywords": ["SendGrid", "sendgrid", "email", "send", "grid"],
   "require": {
     "php": ">=5.3",
-    "sendgrid/smtpapi": "~0.4",
+    "sendgrid/smtpapi": "~0.5",
     "guzzle/guzzle": "~3.9"
   },
   "require-dev": {
