@@ -6,13 +6,13 @@ WARNING: This module was recently upgraded from [2.2.x](https://github.com/sendg
 
 ## PLEASE READ THIS
 
-One of the most notable changes is how `addTo()` behaves. We are now using our Web API parameters instead of the X-SMTPAPI header. What this means is that if you call `addTo()` multiple times for an email, **ONE** email will be sent with each email address visible to everyone. To utilize the original behavior of having and individual email sent to each recipient, this includes using substitutions, you must now use `addSmtpapiTo()`.
+**TLDR: If you upgrade and don't change your code appropriately, things *WILL* break.**
 
-Smtpapi addressing methods cannot be mixed with non Smtpapi addressing methods.
+One of the most notable changes is how `addTo()` behaves. We are now using our Web API parameters instead of the X-SMTPAPI header. What this means is that if you call `addTo()` multiple times for an email, **ONE** email will be sent with each email address visible to everyone. To utilize the original behavior of having and individual email sent to each recipient, this includes using substitutions, you must now use `addSmtpapiTo()`. **This will break any type of substitution unless you update to use `addSmtpapiTo()`.** 
 
-Please read [this](#) for further information on the difference. // TODO: Create something.
+Smtpapi addressing methods cannot be mixed with non Smtpapi addressing methods. Meaning you cannot currently use cc and bcc with `addSmtpapiTo()`.
 
-Also, the `send()` method now raises a `SendGrid\Exception` if the response code is not 200.
+The `send()` method now raises a `SendGrid\Exception` if the response code is not 200.
 
 ---
 
@@ -33,6 +33,17 @@ $email
 ;
 
 $sendgrid->send($email);
+
+// Or catch the error
+
+try {
+	$sendgrid->send($email);
+} catch(\SendGrid\Exception $e) {
+	echo $e->getCode();
+	foreach($e->getErrors() as $er) {
+		echo $er;
+	}
+}
 ```
 
 ## Installation
@@ -42,7 +53,7 @@ Add SendGrid to your `composer.json` file. If you are not using [Composer](http:
 ```json
 {  
   "require": {
-    "sendgrid/sendgrid": "3.0.0"
+    "sendgrid/sendgrid": "~3.0"
   }
 }
 ```
@@ -98,6 +109,60 @@ Send it.
 ```php
 $sendgrid->send($email);
 ```
+### Options
+Options may be passed to the library when initializing the SendGrid object:
+
+```php
+$options = array(
+    'turn_off_ssl_verification' => false,
+    'protocol' => 'https',
+    'host' => 'api.sendgrid.com',
+    'endpoint' => '/api/mail.send.json',
+    'port' => null,
+    'url' => null,
+);
+$sendgrid = new SendGrid('username', 'password', $options);
+```
+
+#### Changing URL
+You may change the URL sendgrid-php uses to send email by supplying various parameters to `options`, all parameters are optional:
+
+```php
+$sendgrid = new SendGrid(
+    'username', 
+    'password', 
+    array(
+        'protocol' => 'http', 
+        'host' => 'sendgrid.org', 
+        'endpoint' => '/send', 
+        'port' => '80' 
+    )
+);
+```
+
+A full URL may also be provided:
+
+```php
+$sendgrid = new SendGrid(
+    'username', 
+    'password', 
+    array( 'url' => 'http://sendgrid.org:80/send')
+);
+```
+
+#### Ignoring SSL certificate verification
+
+You can optionally ignore verification of SSL certificate when using the Web API.
+
+```php
+$sendgrid = new SendGrid(
+    SENDGRID_USERNAME, 
+    SENDGRID_PASSWORD, 
+    array("turn_off_ssl_verification" => true)
+);
+```
+
+### Methods
 
 #### addTo
 
@@ -122,13 +187,13 @@ $sendgrid->send($email);
 
 #### addSmtpapiTo
 
-Add a TO address to the smtpapi header.
+Add a TO address to the smtpapi header along with an optional name.
 
 ```php
 $email = new SendGrid\Email();
 $email
     ->addSmtpapiTo('foo@bar.com')
-    ->addSmtpapiTo('another@another.com')
+    ->addSmtpapiTo('another@another.com', 'Mike Bar')
 ;
 $sendgrid->send($email);
 ```
@@ -143,6 +208,16 @@ $emails = array("foo@bar.com", "another@another.com", "other@other.com");
 $email->setTos($emails);
 $sendgrid->send($email);
 ```
+
+#### setSmtpapiTos
+
+```php
+$email = new SendGrid\Email();
+$emails = array("foo@bar.com", "Brian Bar <bar@example.com>", "other@example.com");
+$email->setSmtpapiTos($emails);
+$sendgrid->send($email);
+```
+
 
 #### setFrom
 
@@ -212,14 +287,14 @@ $email->removeCc('foo@bar.com');
 
 ### Bcc
 
-Use multiple `addTo`s as a superior alternative to `setBcc`.
+Use multiple `addSmtpapiTo`s as a superior alternative to `setBcc`.
 
 ```php
 $email = new SendGrid\Email();
 $email
-    ->addTo('foo@bar.com')
-    ->addTo('someotheraddress@bar.com')
-    ->addTo('another@another.com')
+    ->addSmtpapiTo('foo@bar.com')
+    ->addSmtpapiTo('someotheraddress@bar.com')
+    ->addSmtpapiTo('another@another.com')
    ...
 ;
 ```
@@ -230,6 +305,7 @@ But if you do still have a need for Bcc you can do the following:
 
 ```php
 $email = new SendGrid\Email();
+$email->addTo('bar@example.com');
 $email->addBcc('foo@bar.com');
 $sendgrid->send($email);
 ```
@@ -428,25 +504,24 @@ $email
 ;
 ```
 
-**Important Gotcha**: `setBcc` is not supported with attachments. This is by design. Instead use multiple `addTo`s. Each user will receive their own personalized email with that setup, and only see their own email.
+**Important Gotcha**: Using multiple `addSmtpapiTo`s is recommended over bcc whenever possible. Each user will receive their own personalized email with that setup, and only see their own email.
 
-
-Standard `setBcc` will hide who the email is addressed to. If you use the multiple addTo, each user will receive a personalized email showing **only* their email. This is more friendly and more personal. Additionally, it is a good idea to use multiple `addTo`s because setBcc is not supported with attachments. This is by design.
-
-So just remember, when thinking 'bcc', instead use multiple `addTo`s.
+Standard `setBcc` will hide who the email is addressed to. If you use multiple `addSmtpapiTo`'s, each user will receive a personalized email showing *only* their email. This is more friendly and more personal.
 
 ### Substitutions ###
 
-Substitutions can be used to customize multi-recipient emails, and tailor them for the user
+Substitutions can be used to customize multi-recipient emails, and tailor them for the user.
+
+Unless you are only sending to one recipient, please make sure to use `addSmtpapiTo()`.
 
 #### addSubstitution
 
 ```php
 $email = new SendGrid\Email();
 $email
-    ->addTo('john@somewhere.com')
-    ->addTo('harry@somewhere.com')
-    ->addTo('Bob@somewhere.com')
+    ->addSmtpapiTo('john@somewhere.com')
+    ->addSmtpapiTo('harry@somewhere.com')
+    ->addSmtpapiTo('Bob@somewhere.com')
        ...
     ->setHtml("Hey %name%, we've seen that you've been gone for a while")
     ->addSubstitution('%name%', array('John', 'Harry', 'Bob'))
@@ -458,7 +533,7 @@ Substitutions can also be used to customize multi-recipient subjects.
 ```php
 $email = new SendGrid\Email();
 $email
-    ->addTo(array('john@somewhere.com', 'harry@somewhere.com', 'bob@somewhere.com'))
+    ->addSmtpapiTo(array('john@somewhere.com', 'harry@somewhere.com', 'bob@somewhere.com'))
     ->setSubject('%subject%')
     ->addSubstitution(
         '%subject%',
@@ -473,7 +548,7 @@ $email
 ```php
 $email = new SendGrid\Email();
 $email
-    ->addTo(array('john@somewhere.com', 'harry@somewhere.com', 'bob@somewhere.com'))
+    ->addSmtpapiTo(array('john@somewhere.com', 'harry@somewhere.com', 'bob@somewhere.com'))
     ->setSubject('%subject%')
     ->setSubstitutions(array(
         '%name%' => array('John', 'Harry', 'Bob'), 
@@ -492,9 +567,9 @@ Sections can be used to further customize messages for the end users. A section 
 ```php
 $email = new SendGrid\Email();
 $email
-    ->addTo('john@somewhere.com')
-    ->addTo("harry@somewhere.com")
-    ->addTo("Bob@somewhere.com")
+    ->addSmtpapiTo('john@somewhere.com')
+    ->addSmtpapiTo("harry@somewhere.com")
+    ->addSmtpapiTo("Bob@somewhere.com")
     ...
     ->setHtml("Hey %name%, you work at %place%")
     ->addSubstitution("%name%", array("John", "Harry", "Bob"))
@@ -509,9 +584,9 @@ $email
 ```php
 $email = new SendGrid\Email();
 $email
-    ->addTo('john@somewhere.com')
-    ->addTo("harry@somewhere.com")
-    ->addTo("Bob@somewhere.com")
+    ->addSmtpapiTo('john@somewhere.com')
+    ->addSmtpapiTo("harry@somewhere.com")
+    ->addSmtpapiTo("Bob@somewhere.com")
     ...
     ->setHtml("Hey %name%, you work at %place%")
     ->addSubstitution("%name%", array("John", "Harry", "Bob"))
@@ -584,6 +659,8 @@ $email
 
 You can easily use SendGrid's [template engine](https://sendgrid.com/docs/User_Guide/Apps/template_engine.html) by applying filters.
 
+#### setTemplateId
+
 ```php
 $email = new SendGrid\Email();
 $email
@@ -593,11 +670,30 @@ $email
     ->setSubject('Subject goes here')
     // set html or text to an empty space (see http://git.io/hCNy)
     ->setHtml(' ') // <-- triggers the html version of the template
-    // OR
+    // AND / OR
     ->setText(' ') // <-- triggers the plaintext version of the template
+    ->setTemplateId($templateId);
+```
+
+This is simply a convenience method for:
+
+```php
+$email = new SendGrid\Email();
+$email
     ->addFilter('templates', 'enabled', 1)
     ->addFilter('templates', 'template_id', $templateId)
 ;
+```
+
+### Advanced Suppression Manager ###
+
+[ASM](https://sendgrid.com/docs/User_Guide/advanced_suppression_manager.html) is used to handle suppression groups.
+
+#### setAsmGroupId ####
+
+```php
+$email = new SendGrid\Email();
+$email->setAsmGroupId('my_group_id');
 ```
 
 ### Headers ###
@@ -640,59 +736,6 @@ $email
 $email->removeHeader('X-Transport');
 ```
 
-### Options
-Options may be passed to the library when initializing the SendGrid object:
-
-```php
-$options = array(
-    'turn_off_ssl_verification' => false,
-    'protocol' => 'https',
-    'host' => 'api.sendgrid.com',
-    'endpoint' => '/api/mail.send.json',
-    'port' => null,
-    'url' => null,
-);
-$sendgrid = new SendGrid('username', 'password', $options);
-```
-
-#### Changing URL
-You may change the URL sendgrid-php uses to send email by supplying various parameters to `options`, all parameters are optional:
-
-```php
-$sendgrid = new SendGrid(
-    'username', 
-    'password', 
-    array(
-        'protocol' => 'http', 
-        'host' => 'sendgrid.org', 
-        'endpoint' => '/send', 
-        'port' => '80' 
-    )
-);
-```
-
-A full URL may also be provided:
-
-```php
-$sendgrid = new SendGrid(
-    'username', 
-    'password', 
-    array( 'url' => 'http://sendgrid.org:80/send')
-);
-```
-
-#### Ignoring SSL certificate verification
-
-You can optionally ignore verification of SSL certificate when using the Web API.
-
-```php
-$sendgrid = new SendGrid(
-    SENDGRID_USERNAME, 
-    SENDGRID_PASSWORD, 
-    array("turn_off_ssl_verification" => true)
-);
-```
-
 ### Sending to 1,000s of emails in one batch
 
 Sometimes you might want to send 1,000s of emails in one request. You can do that. It is recommended you break each batch up in 1,000 increments. So if you need to send to 5,000 emails, then you'd break this into a loop of 1,000 emails at a time.
@@ -711,9 +754,9 @@ $names = array("Alpha", "Beta", "Zeta");
 $email
     ->setFrom("from@mailinator.com")
     ->setSubject('[sendgrid-php-batch-email]')
-    ->setTos($recipients)
+    ->setSmtpapiTos($recipients)
     ->addSubstitution("%name%", $names)
-    ->setText("Hey %name, we have an email for you")
+    ->setText("Hey %name%, we have an email for you")
     ->setHtml("<h1>Hey %name%, we have an email for you</h1>")
 ;
 
