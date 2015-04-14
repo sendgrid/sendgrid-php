@@ -8,9 +8,9 @@ WARNING: This module was recently upgraded from [2.2.x](https://github.com/sendg
 
 **TLDR: If you upgrade and don't change your code appropriately, things *WILL* break.**
 
-One of the most notable changes is how `addTo()` behaves. We are now using our Web API parameters instead of the X-SMTPAPI header. What this means is that if you call `addTo()` multiple times for an email, **ONE** email will be sent with each email address visible to everyone. To utilize the original behavior of having and individual email sent to each recipient, this includes using substitutions, you must now use `addSmtpapiTo()`. **This will break any type of substitution unless you update to use `addSmtpapiTo()`.** 
+One of the most notable changes is how `addTo()` behaves. We are now using our Web API parameters instead of the X-SMTPAPI header. What this means is that if you call `addTo()` multiple times for an email, **ONE** email will be sent with each email address visible to everyone. To utilize the original behavior of having an individual personalized email sent to each recipient you must now use `addSmtpapiTo()`. **This will break substitutions if there is more than one To address added unless you update to use `addSmtpapiTo()`.** 
 
-Smtpapi addressing methods cannot be mixed with non Smtpapi addressing methods. Meaning you cannot currently use cc and bcc with `addSmtpapiTo()`.
+Smtpapi addressing methods cannot be mixed with non Smtpapi addressing methods. Meaning you cannot currently use Cc and Bcc with `addSmtpapiTo()`.
 
 The `send()` method now raises a `\SendGrid\Exception` if the response code is not 200 and returns an instance of `\SendGrid\Response`.
 
