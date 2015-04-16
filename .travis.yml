@@ -5,12 +5,12 @@ before_script:
 - phpenv local --unset
 - cd test
 script:
-- ../vendor/bin/phpunit --coverage-clover clover.xml
+- "../vendor/bin/phpunit --coverage-clover clover.xml"
 after_script:
 - cd ..
 - phpenv local 5.4
 - phpenv local --unset
-- ./scripts/s3upload.sh
+- "./scripts/s3upload.sh"
 php:
 - 5.3
 - 5.4
@@ -26,9 +26,4 @@ env:
 notifications:
   hipchat:
     rooms:
-      secure: ehnzqeiOsHiR9cne5YNgMMmQT+e5WOb3gDuVOqee91I7JQvrKYxGDGMR9xQs5YtK2Xcr3KmvcyzX0kdeusuDMw+ro0LK54Wup7vKYrhhdx/sdINw9ETc8OzNa/0FfL74oDXZQNOvAIFUdiE1gtbj+Fzb3UmuAP5iBxWcdlw8kgQ=
-    template:
-    - '<a href="https://travis-ci.org/%{repository}/builds/%{build_id}">%{repository}
-      Build %{build_number}</a> on branch <i>%{branch}</i> by %{author}: <strong>%{message}</strong>
-      <a href="https://github.com/sendgrid/docs/commits/%{commit}">View on GitHub</a>'
-    format: html
+      secure: OAKV4Hfxjmntr3/DTyDxhOG/GOo9f7h/BeL/SXjvhON0NjmXArIVjfaWR14uvusCFTLmaxFzD3JS00Z+I1wFWoK6MXoK/J8spTBt/UnXFymYuZZzcaPKV3FcGtJB3F5cUoHwH2GZWwgVLBvbKNdrzCcHZ1TPBT2zWfjuOUKYots=
