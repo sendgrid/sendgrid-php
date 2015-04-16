@@ -27,3 +27,5 @@ notifications:
   hipchat:
     rooms:
       secure: OAKV4Hfxjmntr3/DTyDxhOG/GOo9f7h/BeL/SXjvhON0NjmXArIVjfaWR14uvusCFTLmaxFzD3JS00Z+I1wFWoK6MXoK/J8spTBt/UnXFymYuZZzcaPKV3FcGtJB3F5cUoHwH2GZWwgVLBvbKNdrzCcHZ1TPBT2zWfjuOUKYots=
+    template:
+      - '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}'
