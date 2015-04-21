@@ -16,9 +16,27 @@ class SendGridTest_SendGrid extends PHPUnit_Framework_TestCase
         $this->assertEquals(json_decode(file_get_contents('../composer.json'))->version, SendGrid::VERSION);
     }
 
-    public function testInitialization()
+    public function testInitWithUsernamePassword()
     {
         $sendgrid = new SendGrid('user', 'pass');
+        $this->assertEquals('SendGrid', get_class($sendgrid));
+    }
+
+    public function testInitWithUsernamePasswordOptions()
+    {
+        $sendgrid = new SendGrid('user', 'pass', array('foo' => 'bar'));
+        $this->assertEquals('SendGrid', get_class($sendgrid));
+    }
+
+    public function testInitWithApiKey()
+    {
+        $sendgrid = new SendGrid('token1234');
+        $this->assertEquals('SendGrid', get_class($sendgrid));
+    }
+
+    public function testInitWithApiKeyOptions()
+    {
+        $sendgrid = new SendGrid('token1234', array('foo' => 'bar'));
         $this->assertEquals('SendGrid', get_class($sendgrid));
     }
 
