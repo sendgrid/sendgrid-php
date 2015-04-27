@@ -12,7 +12,7 @@ class SendGridTest_SendGrid extends PHPUnit_Framework_TestCase
 
     public function testVersion()
     {
-        $this->assertEquals(SendGrid::VERSION, '3.0.0');
+        $this->assertEquals(SendGrid::VERSION, '3.1.0');
         $this->assertEquals(json_decode(file_get_contents('../composer.json'))->version, SendGrid::VERSION);
     }
 
@@ -32,6 +32,8 @@ class SendGridTest_SendGrid extends PHPUnit_Framework_TestCase
     {
         $sendgrid = new SendGrid('token1234');
         $this->assertEquals('SendGrid', get_class($sendgrid));
+        $this->assertNull($sendgrid->apiUser);
+        $this->assertEquals($sendgrid->apiKey, 'token1234');
     }
 
     public function testInitWithApiKeyOptions()

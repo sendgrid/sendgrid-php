@@ -53,7 +53,7 @@ Add SendGrid to your `composer.json` file. If you are not using [Composer](http:
 ```json
 {  
   "require": {
-    "sendgrid/sendgrid": "~3.0"
+    "sendgrid/sendgrid": "~3.1"
   }
 }
 ```
@@ -84,10 +84,12 @@ There is a [sendgrid-php-example app](https://github.com/sendgrid/sendgrid-php-e
 
 ## Usage
 
-To begin using this library, initialize the SendGrid object with your SendGrid credentials.
+To begin using this library, initialize the SendGrid object with your SendGrid credentials OR a SendGrid API Key. API Key is the preferred method. API Keys are in beta. To configure API keys, visit https://sendgrid.com/beta/settings/api_key.
 
 ```php
 $sendgrid = new SendGrid('username', 'password');
+// OR
+$sendgrid = new SendGrid('sendgrid api key');
 ```
 
 Create a new SendGrid Email object and add your message details.
