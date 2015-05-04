@@ -603,7 +603,7 @@ $email = new SendGrid\Email();
 $email
     ->addTo('foo@bar.com')
     ->setHtml('<div>Our logo:<img src="cid:file-cid"></div>')
-    ->addAttachment("../path/to/file.txt", "super_file.txt", "file-cid")
+    ->addAttachment("../path/to/file.png", "super_file.png", "file-cid")
 ;
 ```
 
