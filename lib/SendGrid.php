@@ -68,6 +68,11 @@ class SendGrid
             $guzzleOption['request.options']['headers'] = array('Authorization' => 'Bearer ' . $this->apiKey);
         }
 
+        // Using http proxy
+        if (isset($this->options['proxy'])) {
+            $guzzleOption['request.options']['proxy'] = $this->options['proxy'];
+        }
+
         $client = new \Guzzle\Http\Client($this->url, $guzzleOption);
         $client->setUserAgent('sendgrid/' . $this->version . ';php');
 
