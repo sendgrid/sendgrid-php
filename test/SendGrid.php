@@ -42,6 +42,14 @@ class SendGridTest_SendGrid extends PHPUnit_Framework_TestCase
         $this->assertEquals('SendGrid', get_class($sendgrid));
     }
 
+    public function testInitWithProxyOption()
+    {
+        $sendgrid = new SendGrid('user', 'pass', array('proxy' => 'myproxy.net:3128'));
+        $this->assertEquals('SendGrid', get_class($sendgrid));
+        $options = $sendgrid->getOptions();
+        $this->assertTrue(isset($options['proxy']));
+    }
+
     public function testDefaultURL()
     {
         $sendgrid = new SendGrid('user', 'pass');
