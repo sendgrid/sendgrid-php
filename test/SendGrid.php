@@ -96,6 +96,22 @@ class SendGridTest_SendGrid extends PHPUnit_Framework_TestCase
         $response = $sendgrid->send($email);
     }
 
+    public function testDisableSendGridException()
+    {
+        $mockResponse = (object)array('code' => 400, 'raw_body' => "{'message': 'error', 'errors': ['Bad username / password']}");
+
+        $sendgrid = m::mock('SendGrid[postRequest]', array('foo', 'bar', array('raise_exceptions' => false)));
+        $sendgrid->shouldReceive('postRequest')->once()->andReturn($mockResponse);
+
+        $email = new SendGrid\Email();
+        $email->setFrom('bar@foo.com')
+            ->setSubject('foobar subject')
+            ->setText('foobar text')
+            ->addTo('foo@bar.com');
+
+        $response = $sendgrid->send($email);
+    }
+
     public function testSendGridExceptionNotThrownWhen200()
     {
         $mockResponse = (object)array('code' => 200, 'body' => (object)array('message' => 'success'));

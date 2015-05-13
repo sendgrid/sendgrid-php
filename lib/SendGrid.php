@@ -40,6 +40,9 @@ class SendGrid
         }
 
         $this->options['turn_off_ssl_verification'] = (isset($this->options['turn_off_ssl_verification']) && $this->options['turn_off_ssl_verification'] == true);
+        if (!isset($this->options['raise_exceptions'])) {
+            $this->options['raise_exceptions'] = true;
+        }
         $protocol = isset($this->options['protocol']) ? $this->options['protocol'] : 'https';
         $host = isset($this->options['host']) ? $this->options['host'] : 'api.sendgrid.com';
         $port = isset($this->options['port']) ? $this->options['port'] : '';
@@ -59,7 +62,7 @@ class SendGrid
         $guzzleOption = array(
             'request.options' => array(
                 'verify' => !$this->options['turn_off_ssl_verification'],
-                'exceptions' => false // FIXME: This might not be wise but we don't want guzzle throwing
+                'exceptions' => (isset($this->options['enable_guzzle_exceptions']) && $this->options['enable_guzzle_exceptions'] == true)
             )
         );
 
@@ -105,7 +108,7 @@ class SendGrid
 
         $response = $this->postRequest($this->endpoint, $form);
 
-        if ($response->code != 200) {
+        if ($response->code != 200 && $this->options['raise_exceptions']) {
             throw new SendGrid\Exception($response->raw_body, $response->code);
         }
 
