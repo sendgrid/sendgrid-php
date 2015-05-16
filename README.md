@@ -345,8 +345,6 @@ $email = new SendGrid\Email();
 $email
     ->setFrom('foo@bar.com')
     ->setFromName('Foo Bar')
-    ->setFrom('other@example.com')
-    ->setFromName('Other Guy')
 ;
 $sendgrid->send($email);
 ```
