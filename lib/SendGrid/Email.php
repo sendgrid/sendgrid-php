@@ -25,23 +25,24 @@ class Email
 
     public function __construct()
     {
-        $this->fromName        = false;
-        $this->replyTo         = false;
-        $this->smtpapi          = new \Smtpapi\Header();
+        $this->fromName = false;
+        $this->replyTo = false;
+        $this->smtpapi = new \Smtpapi\Header();
     }
 
     /**
      * _removeFromList
      * Given a list of key/value pairs, removes the associated keys
      * where a value matches the given string ($item)
+     *
      * @param Array $list - the list of key/value pairs
      * @param String $item - the value to be removed
      */
     private function _removeFromList(&$list, $item, $key_field = null)
     {
         foreach ($list as $key => $val) {
-            if($key_field) {
-                if($val[$key_field] == $item) {
+            if ($key_field) {
+                if ($val[$key_field] == $item) {
                     unset($list[$key]);
                 }
             } else {
@@ -82,18 +83,21 @@ class Email
     public function addSmtpapiTo($email, $name = null)
     {
         $this->smtpapi->addTo($email, $name);
+
         return $this;
     }
 
     public function setTos(array $emails)
     {
         $this->to = $emails;
+
         return $this;
     }
 
     public function setSmtpapiTos(array $emails)
     {
         $this->smtpapi->setTos($emails);
+
         return $this;
     }
 
@@ -104,6 +108,7 @@ class Email
         }
 
         $this->toName[] = $name;
+
         return $this;
     }
 
@@ -115,12 +120,13 @@ class Email
     public function setFrom($email)
     {
         $this->from = $email;
+
         return $this;
     }
 
     public function getFrom($as_array = false)
     {
-        if($as_array && ($name = $this->getFromName())) {
+        if ($as_array && ($name = $this->getFromName())) {
             return array("$this->from" => $name);
         } else {
             return $this->from;
@@ -130,6 +136,7 @@ class Email
     public function setFromName($name)
     {
         $this->fromName = $name;
+
         return $this;
     }
 
@@ -141,6 +148,7 @@ class Email
     public function setReplyTo($email)
     {
         $this->replyTo = $email;
+
         return $this;
     }
 
@@ -152,12 +160,14 @@ class Email
     public function setCc($email)
     {
         $this->cc = array($email);
+
         return $this;
     }
 
     public function setCcs(array $email_list)
     {
         $this->cc = $email_list;
+
         return $this;
     }
 
@@ -193,6 +203,7 @@ class Email
         }
 
         $this->ccName[] = $name;
+
         return $this;
     }
 
@@ -216,12 +227,14 @@ class Email
     public function setBcc($email)
     {
         $this->bcc = array($email);
+
         return $this;
     }
 
     public function setBccs($email_list)
     {
         $this->bcc = $email_list;
+
         return $this;
     }
 
@@ -257,6 +270,7 @@ class Email
         }
 
         $this->bccName[] = $name;
+
         return $this;
     }
 
@@ -268,6 +282,7 @@ class Email
     public function removeBcc($email)
     {
         $this->_removeFromList($this->bcc, $email);
+
         return $this;
     }
 
@@ -279,6 +294,7 @@ class Email
     public function setSubject($subject)
     {
         $this->subject = $subject;
+
         return $this;
     }
 
@@ -290,6 +306,7 @@ class Email
     public function setDate($date)
     {
         $this->date = $date;
+
         return $this;
     }
 
@@ -301,6 +318,7 @@ class Email
     public function setText($text)
     {
         $this->text = $text;
+
         return $this;
     }
 
@@ -312,6 +330,7 @@ class Email
     public function setHtml($html)
     {
         $this->html = $html;
+
         return $this;
     }
 
@@ -323,40 +342,49 @@ class Email
     public function setSendAt($timestamp)
     {
         $this->smtpapi->setSendAt($timestamp);
+
         return $this;
     }
 
     public function setSendEachAt(array $timestamps)
     {
         $this->smtpapi->setSendEachAt($timestamps);
+
         return $this;
     }
 
     public function addSendEachAt($timestamp)
     {
         $this->smtpapi->addSendEachAt($timestamp);
+
         return $this;
     }
 
     /**
      * Convenience method to add template
+     *
      * @param string The id of the template
+     *
      * @return $this
      */
     public function setTemplateId($templateId)
     {
         $this->addFilter('templates', 'enabled', 1);
         $this->addFilter('templates', 'template_id', $templateId);
+
         return $this;
     }
 
     /** Convenience method to set asm group id
+     *
      * @param string the group id
+     *
      * @return $this
      */
     public function setAsmGroupId($groupId)
     {
         $this->smtpapi->setASMGroupID($groupId);
+
         return $this;
     }
 
@@ -364,7 +392,7 @@ class Email
     {
         $this->attachments = array();
 
-        foreach($files as $filename => $file) {
+        foreach ($files as $filename => $file) {
             if (is_string($filename)) {
                 $this->addAttachment($file, $filename);
             } else {
@@ -378,12 +406,14 @@ class Email
     public function setAttachment($file, $custom_filename = null, $cid = null)
     {
         $this->attachments = array($this->getAttachmentInfo($file, $custom_filename, $cid));
+
         return $this;
     }
 
     public function addAttachment($file, $custom_filename = null, $cid = null)
     {
         $this->attachments[] = $this->getAttachmentInfo($file, $custom_filename, $cid);
+
         return $this;
     }
 
@@ -395,6 +425,7 @@ class Email
     public function removeAttachment($file)
     {
         $this->_removeFromList($this->attachments, $file, "file");
+
         return $this;
     }
 
@@ -403,7 +434,7 @@ class Email
         $info = pathinfo($file);
         $info['file'] = $file;
         if (!is_null($custom_filename)) {
-            $info['custom_filename']  = $custom_filename;
+            $info['custom_filename'] = $custom_filename;
         }
         if ($cid !== null) {
             $info['cid'] = $cid;
@@ -415,54 +446,63 @@ class Email
     public function setCategories($categories)
     {
         $this->smtpapi->setCategories($categories);
+
         return $this;
     }
 
     public function setCategory($category)
     {
         $this->smtpapi->setCategory($category);
+
         return $this;
     }
 
     public function addCategory($category)
     {
         $this->smtpapi->addCategory($category);
+
         return $this;
     }
 
     public function removeCategory($category)
     {
         $this->smtpapi->removeCategory($category);
+
         return $this;
     }
 
     public function setSubstitutions($key_value_pairs)
     {
         $this->smtpapi->setSubstitutions($key_value_pairs);
+
         return $this;
     }
 
     public function addSubstitution($from_value, array $to_values)
     {
         $this->smtpapi->addSubstitution($from_value, $to_values);
+
         return $this;
     }
 
     public function setSections(array $key_value_pairs)
     {
         $this->smtpapi->setSections($key_value_pairs);
+
         return $this;
     }
 
     public function addSection($from_value, $to_value)
     {
         $this->smtpapi->addSection($from_value, $to_value);
+
         return $this;
     }
 
     public function setUniqueArgs(array $key_value_pairs)
     {
         $this->smtpapi->setUniqueArgs($key_value_pairs);
+
         return $this;
     }
 
@@ -470,12 +510,14 @@ class Email
     public function setUniqueArguments(array $key_value_pairs)
     {
         $this->smtpapi->setUniqueArgs($key_value_pairs);
+
         return $this;
     }
 
     public function addUniqueArg($key, $value)
     {
         $this->smtpapi->addUniqueArg($key, $value);
+
         return $this;
     }
 
@@ -483,12 +525,14 @@ class Email
     public function addUniqueArgument($key, $value)
     {
         $this->smtpapi->addUniqueArg($key, $value);
+
         return $this;
     }
 
     public function setFilters($filter_settings)
     {
         $this->smtpapi->setFilters($filter_settings);
+
         return $this;
     }
 
@@ -496,12 +540,14 @@ class Email
     public function setFilterSettings($filter_settings)
     {
         $this->smtpapi->setFilters($filter_settings);
+
         return $this;
     }
 
     public function addFilter($filter_name, $parameter_name, $parameter_value)
     {
         $this->smtpapi->addFilter($filter_name, $parameter_name, $parameter_value);
+
         return $this;
     }
 
@@ -509,6 +555,7 @@ class Email
     public function addFilterSetting($filter_name, $parameter_name, $parameter_value)
     {
         $this->smtpapi->addFilter($filter_name, $parameter_name, $parameter_value);
+
         return $this;
     }
 
@@ -522,24 +569,28 @@ class Email
         if (count($this->getHeaders()) <= 0) {
             return "{}";
         }
+
         return json_encode($this->getHeaders(), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
     }
 
     public function setHeaders($key_value_pairs)
     {
         $this->headers = $key_value_pairs;
+
         return $this;
     }
 
     public function addHeader($key, $value)
     {
         $this->headers[$key] = $value;
+
         return $this;
     }
 
     public function removeHeader($key)
     {
         unset($this->headers[$key]);
+
         return $this;
     }
 
@@ -551,49 +602,67 @@ class Email
     public function toWebFormat()
     {
         $web = array(
-            'to'          => $this->to,
-            'from'        => $this->getFrom(),
-            'x-smtpapi'   => $this->smtpapi->jsonString(),
-            'subject'     => $this->getSubject(),
-            'text'        => $this->getText(),
-            'html'        => $this->getHtml(),
-            'headers'     => $this->getHeadersJson(),
+            'to' => $this->to,
+            'from' => $this->getFrom(),
+            'x-smtpapi' => $this->smtpapi->jsonString(),
+            'subject' => $this->getSubject(),
+            'text' => $this->getText(),
+            'html' => $this->getHtml(),
+            'headers' => $this->getHeadersJson(),
         );
 
-        if ($this->getToNames())      { $web['toname']      = $this->getToNames(); }
-        if ($this->getCcs())          { $web['cc']          = $this->getCcs(); }
-        if ($this->getCcNames())      { $web['ccname']      = $this->getCcNames(); }
-        if ($this->getBccs())         { $web['bcc']         = $this->getBccs(); }
-        if ($this->getBccNames())     { $web['bccname']     = $this->getBccNames(); }
-        if ($this->getFromName())     { $web['fromname']    = $this->getFromName(); }
-        if ($this->getReplyTo())      { $web['replyto']     = $this->getReplyTo(); }
-        if ($this->getDate())         { $web['date']        = $this->getDate(); }
-        if ($this->smtpapi->to && (count($this->smtpapi->to) > 0))  { $web['to'] = ""; }
+        if ($this->getToNames()) {
+            $web['toname'] = $this->getToNames();
+        }
+        if ($this->getCcs()) {
+            $web['cc'] = $this->getCcs();
+        }
+        if ($this->getCcNames()) {
+            $web['ccname'] = $this->getCcNames();
+        }
+        if ($this->getBccs()) {
+            $web['bcc'] = $this->getBccs();
+        }
+        if ($this->getBccNames()) {
+            $web['bccname'] = $this->getBccNames();
+        }
+        if ($this->getFromName()) {
+            $web['fromname'] = $this->getFromName();
+        }
+        if ($this->getReplyTo()) {
+            $web['replyto'] = $this->getReplyTo();
+        }
+        if ($this->getDate()) {
+            $web['date'] = $this->getDate();
+        }
+        if ($this->smtpapi->to && (count($this->smtpapi->to) > 0)) {
+            $web['to'] = "";
+        }
 
         $web = $this->updateMissingTo($web);
 
         if ($this->getAttachments()) {
-            foreach($this->getAttachments() as $f) {
-                $file             = $f['file'];
-                $extension        = null;
+            foreach ($this->getAttachments() as $f) {
+                $file = $f['file'];
+                $extension = null;
                 if (array_key_exists('extension', $f)) {
-                    $extension      = $f['extension'];
+                    $extension = $f['extension'];
                 };
-                $filename         = $f['filename'];
-                $full_filename    = $filename;
+                $filename = $f['filename'];
+                $full_filename = $filename;
 
                 if (isset($extension)) {
-                    $full_filename  =  $filename.'.'.$extension;
+                    $full_filename = $filename . '.' . $extension;
                 }
                 if (array_key_exists('custom_filename', $f)) {
-                    $full_filename  = $f['custom_filename'];
+                    $full_filename = $f['custom_filename'];
                 }
 
                 if (array_key_exists('cid', $f)) {
-                    $web['content['.$full_filename.']'] = $f['cid'];
+                    $web['content[' . $full_filename . ']'] = $f['cid'];
                 }
 
-                $contents   = '@' . $file;
+                $contents = '@' . $file;
 
                 // Guzzle handles this for us.
                 // http://guzzle3.readthedocs.org/en/latest/http-client/request.html#post-requests
@@ -601,7 +670,7 @@ class Email
                 // $contents = new \CurlFile($file, $extension, $filename);
                 // }
 
-                $web['files['.$full_filename.']'] = $contents;
+                $web['files[' . $full_filename . ']'] = $contents;
             };
         }
 
@@ -617,6 +686,7 @@ class Email
         if ($this->smtpapi->to && (count($this->smtpapi->to) > 0)) {
             $data['to'] = $this->getFrom();
         }
+
         return $data;
     }
 }
