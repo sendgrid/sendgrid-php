@@ -7,8 +7,8 @@ namespace SendGrid;
  */
 class Exception extends \Exception
 {
-  public function getErrors()
-  {
-    return json_decode($this->message)->errors;
-  }
+    public function getErrors()
+    {
+        return json_decode($this->message)->errors;
+    }
 }

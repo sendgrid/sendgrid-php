@@ -5,8 +5,8 @@ class SendGrid
     const VERSION = '3.2.0';
 
     protected
-        $namespace  = 'SendGrid',
-        $headers    = array('Content-Type' => 'application/json'),
+        $namespace = 'SendGrid',
+        $headers = array('Content-Type' => 'application/json'),
         $client,
         $options;
 
@@ -15,7 +15,7 @@ class SendGrid
         $apiKey,
         $url,
         $endpoint,
-        $version    = self::VERSION;
+        $version = self::VERSION;
 
     public function __construct($apiUserOrKey, $apiKeyOrOptions = null, $options = array())
     {
@@ -23,11 +23,11 @@ class SendGrid
         if (is_string($apiKeyOrOptions)) {
             // Username and password
             $this->apiUser = $apiUserOrKey;
-            $this->apiKey  = $apiKeyOrOptions;
+            $this->apiKey = $apiKeyOrOptions;
             $this->options = $options;
         } elseif (is_array($apiKeyOrOptions) || $apiKeyOrOptions === null) {
             // API key
-            $this->apiKey  = $apiUserOrKey;
+            $this->apiKey = $apiUserOrKey;
             $this->apiUser = null;
 
             // With options
@@ -55,6 +55,7 @@ class SendGrid
 
     /**
      * Prepares the HTTP client
+     *
      * @return \Guzzle\Http\Client
      */
     private function prepareHttpClient()
@@ -92,18 +93,20 @@ class SendGrid
 
     /**
      * Makes a post request to SendGrid to send an email
+     *
      * @param SendGrid\Email $email Email object built
+     *
      * @throws SendGrid\Exception if the response code is not 200
      * @return stdClass SendGrid response object
      */
     public function send(SendGrid\Email $email)
     {
-        $form             = $email->toWebFormat();
+        $form = $email->toWebFormat();
 
         // Using username password
         if ($this->apiUser !== null) {
             $form['api_user'] = $this->apiUser;
-            $form['api_key']  = $this->apiKey;
+            $form['api_key'] = $this->apiKey;
         }
 
         $response = $this->postRequest($this->endpoint, $form);
@@ -117,8 +120,10 @@ class SendGrid
 
     /**
      * Makes the actual HTTP request to SendGrid
+     *
      * @param $endpoint string endpoint to post to
      * @param $form array web ready version of SendGrid\Email
+     *
      * @return SendGrid\Response
      */
     public function postRequest($endpoint, $form)
