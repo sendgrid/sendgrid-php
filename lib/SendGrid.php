@@ -77,7 +77,7 @@ class SendGrid
             $guzzleOption['request.options']['proxy'] = $this->options['proxy'];
         }
 
-        $client = new \Guzzle\Http\Client($this->url, $guzzleOption);
+        $client = new \GuzzleHttp\Client($this->url, $guzzleOption);
         $client->setUserAgent('sendgrid/' . $this->version . ';php');
 
         return $client;
