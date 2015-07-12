@@ -56,29 +56,24 @@ class SendGrid
     /**
      * Prepares the HTTP client
      *
-     * @return \Guzzle\Http\Client
+     * @return \GuzzleHttp\Client
      */
     private function prepareHttpClient()
     {
-        $guzzleOption = array(
-            'request.options' => array(
-                'verify' => !$this->options['turn_off_ssl_verification'],
-                'exceptions' => (isset($this->options['enable_guzzle_exceptions']) && $this->options['enable_guzzle_exceptions'] == true)
-            )
-        );
-
+        $headers = array();
+        $headers['verify'] = !$this->options['turn_off_ssl_verification'];
         // Using api key
         if ($this->apiUser === null) {
-            $guzzleOption['request.options']['headers'] = array('Authorization' => 'Bearer ' . $this->apiKey);
+            $headers['Authorizaton'] = 'Bearer' . ' ' . $this->apiKey;
         }
 
         // Using http proxy
         if (isset($this->options['proxy'])) {
-            $guzzleOption['request.options']['proxy'] = $this->options['proxy'];
+            $headers['proxy'] = $this->options['proxy'];
         }
+        $headers['User-Agent'] = 'sendgrid/' . $this->version . ';php';
 
-        $client = new \GuzzleHttp\Client($this->url, $guzzleOption);
-        $client->setUserAgent('sendgrid/' . $this->version . ';php');
+        $client = new \GuzzleHttp\Client(['base_uri' => $this->url, 'headers' => [$headers]]);
 
         return $client;
     }
