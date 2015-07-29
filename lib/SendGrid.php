@@ -77,6 +77,11 @@ class SendGrid
             $guzzleOption['request.options']['proxy'] = $this->options['proxy'];
         }
 
+        // Using timeout
+        if (isset($this->options['timeout'])) {
+            $guzzleOption['request.options']['timeout'] = $this->options['timeout'];
+        }
+
         $client = new \Guzzle\Http\Client($this->url, $guzzleOption);
         $client->setUserAgent('sendgrid/' . $this->version . ';php');
 
