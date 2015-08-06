@@ -231,7 +231,7 @@ Returns the status code of the response.
 
 #### getHeaders ####
 
-Returns the headers of the response as a [Guzzle\Http\Message\Header\HeaderCollection object](http://api.guzzlephp.org/class-Guzzle.Http.Message.Header.HeaderCollection.html).
+Returns the headers of the response as a array. Keys are the response identifiers such as "Authorization"
 
 #### getRawBody ####
 
