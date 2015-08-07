@@ -16,7 +16,7 @@ The `send()` method now raises a `\SendGrid\Exception` by default if the respons
 
 ---
 
-Important: This library requires PHP 5.3 or higher.
+Important: This library requires PHP 5.5 or higher.
 
 [![BuildStatus](https://travis-ci.org/sendgrid/sendgrid-php.svg?branch=master)](https://travis-ci.org/sendgrid/sendgrid-php)
 [![Latest Stable Version](https://poser.pugx.org/sendgrid/sendgrid/version.svg)](https://packagist.org/packages/sendgrid/sendgrid)
@@ -196,12 +196,12 @@ object(SendGrid\Response)#31 (4) {
   ["code"]=>
   int(200)
   ["headers"]=>
-  object(Guzzle\Http\Message\Header\HeaderCollection)#48 (1) {
+  object(GuzzleHttp\Message\Header\HeaderCollection)#48 (1) {
     ["headers":protected]=>
     array(6) {
 	...
       ["content-type"]=>
-      object(Guzzle\Http\Message\Header)#41 (3) {
+      object(GuzzleHttp\Message\Header)#41 (3) {
         ["values":protected]=>
         array(1) {
           [0]=>
