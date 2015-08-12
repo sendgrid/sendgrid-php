@@ -135,6 +135,7 @@ class SendGrid {
         catch (GuzzleHttp\Exception\ClientException $e) {
             echo 'Sendgrid API has experienced and error completing your request.';
             var_dump($e);
+            return FALSE;
         }
         $response = new SendGrid\Response($res->getStatusCode(), $res->getHeaders(), $res->getBody(TRUE), json_decode($res->getBody(TRUE)));
 
