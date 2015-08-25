@@ -130,7 +130,7 @@ class SendGrid {
      */
     public function postRequest($endpoint, $form) {
         try {
-            $res = $this->client->post($endpoint, ['query' => $form]);
+            $res = $this->client->post($endpoint, ['form_params' => $form]);
         }
         catch (GuzzleHttp\Exception\ClientException $e) {
             echo 'Sendgrid API has experienced and error completing your request.';
