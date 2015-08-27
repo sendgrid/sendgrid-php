@@ -1,5 +1,7 @@
 # SendGrid-PHP
 
+**This is a forked version of SendGrid-PHP which uses Guzzle 6.x**
+
 This library allows you to quickly and easily send emails through SendGrid using PHP.
 
 WARNING: This module was recently upgraded from [2.2.x](https://github.com/sendgrid/sendgrid-php/tree/v2.2.1) to 3.X. There were API breaking changes for various method names. See [usage](https://github.com/sendgrid/sendgrid-php#usage) for up to date method names.
