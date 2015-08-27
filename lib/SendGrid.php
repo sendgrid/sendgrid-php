@@ -46,11 +46,11 @@ class SendGrid {
             $this->options['raise_exceptions'] = TRUE;
         }
         $protocol = isset($this->options['protocol']) ? $this->options['protocol'] : 'https';
-        $host = isset($this->options['host']) ? $this->options['host'] : 'api.sendgrid.com/api/';
+        $host = isset($this->options['host']) ? $this->options['host'] : 'api.sendgrid.com';
         $port = isset($this->options['port']) ? $this->options['port'] : '';
 
         $this->url = isset($this->options['url']) ? $this->options['url'] : $protocol . '://' . $host . ($port ? ':' . $port : '');
-        $this->endpoint = isset($this->options['endpoint']) ? $this->options['endpoint'] : 'mail.send.json';
+        $this->endpoint = isset($this->options['endpoint']) ? $this->options['endpoint'] : '/api/mail.send.json';
 
         $this->client = $this->prepareHttpClient();
     }
