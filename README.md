@@ -1,5 +1,7 @@
 # SendGrid-PHP
 
+**This is a forked version of SendGrid-PHP which uses Guzzle 6.x**
+
 This library allows you to quickly and easily send emails through SendGrid using PHP.
 
 WARNING: This module was recently upgraded from [2.2.x](https://github.com/sendgrid/sendgrid-php/tree/v2.2.1) to 3.X. There were API breaking changes for various method names. See [usage](https://github.com/sendgrid/sendgrid-php#usage) for up to date method names.
@@ -16,10 +18,10 @@ The `send()` method now raises a `\SendGrid\Exception` by default if the respons
 
 ---
 
-Important: This library requires PHP 5.3 or higher.
+Important: This library requires PHP 5.5 or higher.
 
-[![BuildStatus](https://travis-ci.org/sendgrid/sendgrid-php.svg?branch=master)](https://travis-ci.org/sendgrid/sendgrid-php)
-[![Latest Stable Version](https://poser.pugx.org/sendgrid/sendgrid/version.svg)](https://packagist.org/packages/sendgrid/sendgrid)
+[![BuildStatus](https://travis-ci.org/taz77/sendgrid-php.svg?branch=master)](https://travis-ci.org/taz77/sendgrid-php.svg?branch=master)
+
 
 ```php
 $sendgrid = new SendGrid('username', 'password');
@@ -196,12 +198,12 @@ object(SendGrid\Response)#31 (4) {
   ["code"]=>
   int(200)
   ["headers"]=>
-  object(Guzzle\Http\Message\Header\HeaderCollection)#48 (1) {
+  object(GuzzleHttp\Message\Header\HeaderCollection)#48 (1) {
     ["headers":protected]=>
     array(6) {
 	...
       ["content-type"]=>
-      object(Guzzle\Http\Message\Header)#41 (3) {
+      object(GuzzleHttp\Message\Header)#41 (3) {
         ["values":protected]=>
         array(1) {
           [0]=>
@@ -231,7 +233,7 @@ Returns the status code of the response.
 
 #### getHeaders ####
 
-Returns the headers of the response as a [Guzzle\Http\Message\Header\HeaderCollection object](http://api.guzzlephp.org/class-Guzzle.Http.Message.Header.HeaderCollection.html).
+Returns the headers of the response as a array. Keys are the response identifiers such as "Authorization"
 
 #### getRawBody ####
 
