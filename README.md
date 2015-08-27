@@ -20,8 +20,8 @@ The `send()` method now raises a `\SendGrid\Exception` by default if the respons
 
 Important: This library requires PHP 5.5 or higher.
 
-[![BuildStatus](https://travis-ci.org/sendgrid/sendgrid-php.svg?branch=master)](https://travis-ci.org/sendgrid/sendgrid-php)
-[![Latest Stable Version](https://poser.pugx.org/sendgrid/sendgrid/version.svg)](https://packagist.org/packages/sendgrid/sendgrid)
+[![BuildStatus](https://travis-ci.org/taz77/sendgrid-php.svg?branch=master)](https://travis-ci.org/taz77/sendgrid-php.svg?branch=master)
+
 
 ```php
 $sendgrid = new SendGrid('username', 'password');
