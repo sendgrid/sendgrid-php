@@ -84,7 +84,7 @@ There is a [sendgrid-php-example app](https://github.com/sendgrid/sendgrid-php-e
 
 ## Usage
 
-To begin using this library, initialize the SendGrid object with your SendGrid credentials OR a SendGrid [API Key](https://sendgrid.com/docs/User_Guide/Account/api_keys.html). API Key is the preferred method. API Keys are in beta. To configure API keys, visit https://sendgrid.com/beta/settings/api_key.
+To begin using this library, initialize the SendGrid object with your SendGrid credentials OR a SendGrid [API Key](https://sendgrid.com/docs/Classroom/Send/api_keys.html). API Key is the preferred method. To configure API keys, visit https://app.sendgrid.com/settings/api_keys.
 
 ```php
 $sendgrid = new SendGrid('username', 'password');
@@ -136,6 +136,8 @@ $options = array(
     'raise_exceptions' => false
 );
 $sendgrid = new SendGrid('username', 'password', $options);
+// OR
+$sendgrid = new SendGrid('sendgrid api key', $options);
 ```
 
 #### Changing URL
@@ -145,6 +147,16 @@ You may change the URL sendgrid-php uses to send email by supplying various para
 $sendgrid = new SendGrid(
     'username', 
     'password', 
+    array(
+        'protocol' => 'http', 
+        'host' => 'sendgrid.org', 
+        'endpoint' => '/send', 
+        'port' => '80' 
+    )
+);
+// OR
+$sendgrid = new SendGrid(
+    'sendgrid_api_key', 
     array(
         'protocol' => 'http', 
         'host' => 'sendgrid.org', 
@@ -162,6 +174,11 @@ $sendgrid = new SendGrid(
     'password', 
     array( 'url' => 'http://sendgrid.org:80/send')
 );
+// OR
+$sendgrid = new SendGrid(
+    'sendgrid_api_key', 
+    array( 'url' => 'http://sendgrid.org:80/send')
+);
 ```
 
 #### Ignoring SSL certificate verification
@@ -170,8 +187,13 @@ You can optionally ignore verification of SSL certificate when using the Web API
 
 ```php
 $sendgrid = new SendGrid(
-    SENDGRID_USERNAME, 
-    SENDGRID_PASSWORD, 
+    'username', 
+    'password', 
+    array("turn_off_ssl_verification" => true)
+);
+// OR
+$sendgrid = new SendGrid(
+    'sendgrid_api_key', 
     array("turn_off_ssl_verification" => true)
 );
 ```
@@ -229,17 +251,38 @@ object(SendGrid\Response)#31 (4) {
 
 Returns the status code of the response.
 
+```
+$res = sendgrid->send($email);
+echo $res->getCode()
+```
+
 #### getHeaders ####
 
-Returns the headers of the response as a [Guzzle\Http\Message\Header\HeaderCollection object](http://api.guzzlephp.org/class-Guzzle.Http.Message.Header.HeaderCollection.html).
+Returns the headers of the response as a [Guzzle\Http\Message\Header\HeaderCollection object](https://docs.aws.amazon.com/aws-sdk-php/v2/api/class-Guzzle.Http.Message.Header.HeaderCollection.html).
+
+```
+$res = sendgrid->send($email);
+$guzzle = $res->getHeaders();
+echo var_dump($guzzle);
+```
 
 #### getRawBody ####
 
 Returns the unparsed JSON response from SendGrid.
 
+```
+$res = sendgrid->send($email);
+echo $res->getRawBody()
+```
+
 #### getBody ####
 
 Returns the parsed JSON from SendGrid.
+
+```
+$res = sendgrid->send($email);
+echo var_dump($res->getBody());
+```
 
 ### Exception ###
 
@@ -328,7 +371,6 @@ $emails = array("foo@bar.com", "Brian Bar <bar@example.com>", "other@example.com
 $email->setSmtpapiTos($emails);
 $sendgrid->send($email);
 ```
-
 
 #### setFrom
 
@@ -706,7 +748,7 @@ $email
 
 ### Unique Arguments ###
 
-Unique Arguments are used for tracking purposes
+[Unique Arguments](https://sendgrid.com/docs/API_Reference/SMTP_API/unique_arguments.html) are used for tracking purposes.
 
 #### addUniqueArg / addUniqueArgument
 
@@ -733,7 +775,7 @@ $email
 
 ### Filter Settings ###
 
-Filter Settings are used to enable and disable apps, and to pass parameters to those apps.
+[Filter Settings](https://sendgrid.com/docs/API_Reference/SMTP_API/apps.html) are used to enable and disable apps, and to pass parameters to those apps.
 
 #### addFilter / addFilterSetting
 
@@ -851,6 +893,8 @@ Sometimes you might want to send 1,000s of emails in one request. You can do tha
 
 ```php
 $sendgrid = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD);
+// OR
+$sendgrid = new SendGrid(SENDGRID_APIKEY);
 $email = new SendGrid\Email();
 
 $recipients = array(
