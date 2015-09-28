@@ -98,7 +98,7 @@ Create a new SendGrid Email object and add your message details.
 $email = new SendGrid\Email();
 $email
     ->addTo('foo@bar.com')
-    ->addTo('bar@foo.com')
+    //->addTo('bar@foo.com') //One of the most notable changes is how `addTo()` behaves. We are now using our Web API parameters instead of the X-SMTPAPI header. What this means is that if you call `addTo()` multiple times for an email, **ONE** email will be sent with each email address visible to everyone.
     ->setFrom('me@bar.com')
     ->setSubject('Subject goes here')
     ->setText('Hello World!')
