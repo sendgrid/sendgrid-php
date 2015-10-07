@@ -252,7 +252,7 @@ object(SendGrid\Response)#31 (4) {
 Returns the status code of the response.
 
 ```
-$res = sendgrid->send($email);
+$res = $sendgrid->send($email);
 echo $res->getCode()
 ```
 
@@ -261,7 +261,7 @@ echo $res->getCode()
 Returns the headers of the response as a [Guzzle\Http\Message\Header\HeaderCollection object](https://docs.aws.amazon.com/aws-sdk-php/v2/api/class-Guzzle.Http.Message.Header.HeaderCollection.html).
 
 ```
-$res = sendgrid->send($email);
+$res = $sendgrid->send($email);
 $guzzle = $res->getHeaders();
 echo var_dump($guzzle);
 ```
@@ -271,7 +271,7 @@ echo var_dump($guzzle);
 Returns the unparsed JSON response from SendGrid.
 
 ```
-$res = sendgrid->send($email);
+$res = $sendgrid->send($email);
 echo $res->getRawBody()
 ```
 
@@ -280,7 +280,7 @@ echo $res->getRawBody()
 Returns the parsed JSON from SendGrid.
 
 ```
-$res = sendgrid->send($email);
+$res = $sendgrid->send($email);
 echo var_dump($res->getBody());
 ```
 
