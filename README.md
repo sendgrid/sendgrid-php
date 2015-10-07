@@ -112,6 +112,8 @@ Send it.
 $sendgrid->send($email);
 ```
 
+NOTE: The total message size is limited to 20,480,000 bytes, or approximately 19.5MB. This includes all the headers, body, and attachments. [Reference](https://sendgrid.com/docs/Classroom/Build/attachments.html)
+
 ### Exceptions
 
 A `SendGrid\Exception` is raised by default if the response is not 200 OK.
