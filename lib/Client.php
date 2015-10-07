@@ -8,7 +8,6 @@ class Client
 
     protected
         $namespace = 'SendGrid',
-        $headers = array('Content-Type' => 'application/json'),
         $client,
         $options;
 
@@ -21,7 +20,7 @@ class Client
 
     public function __construct($apiKey, $options = array())
     {
-        // Check if given a username + password or api key
+        // Check if api key is present
         if (is_string($apiKey)) {
             $this->apiKey = $apiKey;
             $this->options = $options;
@@ -59,7 +58,7 @@ class Client
             )
         );
 
-        $guzzleOption['request.options']['headers'] = array('Authorization' => 'Bearer ' . $this->apiKey);
+        $guzzleOption['request.options']['headers'] = array('Authorization' => 'Bearer ' . $this->apiKey, 'Content-Type' => 'application/json');
 
         // Using http proxy
         if (isset($this->options['proxy'])) {
@@ -73,28 +72,38 @@ class Client
     }
 
     /**
-     * Makes the actual HTTP request to SendGrid
+     * The following *Request functions make the HTTP API requests to SendGrid
      *
-     * @param $endpoint string endpoint to post to
-     * @param $form array web ready version of SendGrid\Email
+     * @param $api is an endpoint object defined in the resources 
+     * @param $data is array of parameters
      *
-     * @return SendGrid\Response
+     * @return Guzzle Response object: http://guzzle3.readthedocs.org/http-client/response.html
      */
-    public function postRequest($endpoint, $form)
+    
+    public function postRequest($api, $data)
     {
-        $req = $this->client->post($endpoint, null, $form);
-
-        $res = $req->send();
-
-        $response = new SendGrid\Response($res->getStatusCode(), $res->getHeaders(), $res->getBody(true), $res->json());
-
+        $url = $this->url . $api->getBaseEndpoint();
+        $response = $this->client->post($url, null, json_encode($data))->send();
+        return $response;
+    }
+  
+    public function patchRequest($api, $data)
+    {
+        $url = $this->url . $api->getEndpoint();
+        $response = $this->client->patch($url, null, json_encode($data))->send();
         return $response;
     }
     
     public function getRequest($api){
-      $url = $this->url . $api->getEndpoint();
-      $response = $this->client->get($url)->send();
-      return $response;
+        $url = $this->url . $api->getBaseEndpoint();
+        $response = $this->client->get($url)->send();
+        return $response;
+    }
+
+    public function deleteRequest($api){
+        $url = $this->url . $api->getEndpoint();
+        $response = $this->client->delete($url)->send();
+        return $response;
     }
 
     public static function register_autoloader()
