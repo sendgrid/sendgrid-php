@@ -12,7 +12,7 @@ One of the most notable changes is how `addTo()` behaves. We are now using our W
 
 Smtpapi addressing methods cannot be mixed with non Smtpapi addressing methods. Meaning you cannot currently use Cc and Bcc with `addSmtpapiTo()`.
 
-The `send()` method now raises a `\SendGrid\Exception` if the response code is not 200 and returns an instance of `\SendGrid\Response`.
+The `send()` method now raises a `\SendGrid\Exception` by default if the response code is not 200 and returns an instance of `\SendGrid\Response`.
 
 ---
 
@@ -53,7 +53,7 @@ Add SendGrid to your `composer.json` file. If you are not using [Composer](http:
 ```json
 {  
   "require": {
-    "sendgrid/sendgrid": "~3.0"
+    "sendgrid/sendgrid": "~3.2"
   }
 }
 ```
@@ -84,10 +84,12 @@ There is a [sendgrid-php-example app](https://github.com/sendgrid/sendgrid-php-e
 
 ## Usage
 
-To begin using this library, initialize the SendGrid object with your SendGrid credentials.
+To begin using this library, initialize the SendGrid object with your SendGrid credentials OR a SendGrid [API Key](https://sendgrid.com/docs/Classroom/Send/api_keys.html). API Key is the preferred method. To configure API keys, visit https://app.sendgrid.com/settings/api_keys.
 
 ```php
 $sendgrid = new SendGrid('username', 'password');
+// OR
+$sendgrid = new SendGrid('sendgrid api key');
 ```
 
 Create a new SendGrid Email object and add your message details.
@@ -96,7 +98,7 @@ Create a new SendGrid Email object and add your message details.
 $email = new SendGrid\Email();
 $email
     ->addTo('foo@bar.com')
-    ->addTo('bar@foo.com')
+    //->addTo('bar@foo.com') //One of the most notable changes is how `addTo()` behaves. We are now using our Web API parameters instead of the X-SMTPAPI header. What this means is that if you call `addTo()` multiple times for an email, **ONE** email will be sent with each email address visible to everyone.
     ->setFrom('me@bar.com')
     ->setSubject('Subject goes here')
     ->setText('Hello World!')
@@ -109,6 +111,19 @@ Send it.
 ```php
 $sendgrid->send($email);
 ```
+
+NOTE: The total message size is limited to 20,480,000 bytes, or approximately 19.5MB. This includes all the headers, body, and attachments. [Reference](https://sendgrid.com/docs/Classroom/Build/attachments.html)
+
+### Exceptions
+
+A `SendGrid\Exception` is raised by default if the response is not 200 OK.
+
+To disable exceptions, pass in the `raise_exceptions => false` option when creating a `SendGrid\Client`.
+
+```php
+$client = new SendGrid('SENDGRID_APIKEY', array('raise_exceptions' => false));
+```
+
 ### Options
 Options may be passed to the library when initializing the SendGrid object:
 
@@ -120,8 +135,11 @@ $options = array(
     'endpoint' => '/api/mail.send.json',
     'port' => null,
     'url' => null,
+    'raise_exceptions' => false
 );
 $sendgrid = new SendGrid('username', 'password', $options);
+// OR
+$sendgrid = new SendGrid('sendgrid api key', $options);
 ```
 
 #### Changing URL
@@ -131,6 +149,16 @@ You may change the URL sendgrid-php uses to send email by supplying various para
 $sendgrid = new SendGrid(
     'username', 
     'password', 
+    array(
+        'protocol' => 'http', 
+        'host' => 'sendgrid.org', 
+        'endpoint' => '/send', 
+        'port' => '80' 
+    )
+);
+// OR
+$sendgrid = new SendGrid(
+    'sendgrid_api_key', 
     array(
         'protocol' => 'http', 
         'host' => 'sendgrid.org', 
@@ -148,6 +176,11 @@ $sendgrid = new SendGrid(
     'password', 
     array( 'url' => 'http://sendgrid.org:80/send')
 );
+// OR
+$sendgrid = new SendGrid(
+    'sendgrid_api_key', 
+    array( 'url' => 'http://sendgrid.org:80/send')
+);
 ```
 
 #### Ignoring SSL certificate verification
@@ -156,8 +189,13 @@ You can optionally ignore verification of SSL certificate when using the Web API
 
 ```php
 $sendgrid = new SendGrid(
-    SENDGRID_USERNAME, 
-    SENDGRID_PASSWORD, 
+    'username', 
+    'password', 
+    array("turn_off_ssl_verification" => true)
+);
+// OR
+$sendgrid = new SendGrid(
+    'sendgrid_api_key', 
     array("turn_off_ssl_verification" => true)
 );
 ```
@@ -215,17 +253,38 @@ object(SendGrid\Response)#31 (4) {
 
 Returns the status code of the response.
 
+```
+$res = $sendgrid->send($email);
+echo $res->getCode()
+```
+
 #### getHeaders ####
 
-Returns the headers of the response as a [Guzzle\Http\Message\Header\HeaderCollection object](http://api.guzzlephp.org/class-Guzzle.Http.Message.Header.HeaderCollection.html).
+Returns the headers of the response as a [Guzzle\Http\Message\Header\HeaderCollection object](https://docs.aws.amazon.com/aws-sdk-php/v2/api/class-Guzzle.Http.Message.Header.HeaderCollection.html).
+
+```
+$res = $sendgrid->send($email);
+$guzzle = $res->getHeaders();
+echo var_dump($guzzle);
+```
 
 #### getRawBody ####
 
 Returns the unparsed JSON response from SendGrid.
 
+```
+$res = $sendgrid->send($email);
+echo $res->getRawBody()
+```
+
 #### getBody ####
 
 Returns the parsed JSON from SendGrid.
+
+```
+$res = $sendgrid->send($email);
+echo var_dump($res->getBody());
+```
 
 ### Exception ###
 
@@ -315,7 +374,6 @@ $email->setSmtpapiTos($emails);
 $sendgrid->send($email);
 ```
 
-
 #### setFrom
 
 ```php
@@ -331,8 +389,6 @@ $email = new SendGrid\Email();
 $email
     ->setFrom('foo@bar.com')
     ->setFromName('Foo Bar')
-    ->setFrom('other@example.com')
-    ->setFromName('Other Guy')
 ;
 $sendgrid->send($email);
 ```
@@ -601,7 +657,7 @@ $email = new SendGrid\Email();
 $email
     ->addTo('foo@bar.com')
     ->setHtml('<div>Our logo:<img src="cid:file-cid"></div>')
-    ->addAttachment("../path/to/file.txt", "super_file.txt", "file-cid")
+    ->addAttachment("../path/to/file.png", "super_file.png", "file-cid")
 ;
 ```
 
@@ -694,7 +750,15 @@ $email
 
 ### Unique Arguments ###
 
-Unique Arguments are used for tracking purposes
+[Unique Arguments](https://sendgrid.com/docs/API_Reference/SMTP_API/unique_arguments.html) are used for tracking purposes.
+
+NOTE: While you can attach an unlimited number of unique arguments to your email, there is an upper bound of 10,000 bytes. Before passing an email into the `send` function, you should do the following:
+
+```
+if (mb_strlen($myEmail->smtpapi->jsonString(), 'UTF-8') > 10000) {
+    // throw Exception
+}
+```
 
 #### addUniqueArg / addUniqueArgument
 
@@ -721,7 +785,7 @@ $email
 
 ### Filter Settings ###
 
-Filter Settings are used to enable and disable apps, and to pass parameters to those apps.
+[Filter Settings](https://sendgrid.com/docs/API_Reference/SMTP_API/apps.html) are used to enable and disable apps, and to pass parameters to those apps.
 
 #### addFilter / addFilterSetting
 
@@ -839,6 +903,8 @@ Sometimes you might want to send 1,000s of emails in one request. You can do tha
 
 ```php
 $sendgrid = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD);
+// OR
+$sendgrid = new SendGrid(SENDGRID_APIKEY);
 $email = new SendGrid\Email();
 
 $recipients = array(

@@ -2,11 +2,11 @@
 
 class SendGrid
 {
-    const VERSION = '3.0.0';
+    const VERSION = '3.2.0';
 
     protected
-        $namespace  = 'SendGrid',
-        $headers    = array('Content-Type' => 'application/json'),
+        $namespace = 'SendGrid',
+        $headers = array('Content-Type' => 'application/json'),
         $client,
         $options;
 
@@ -15,29 +15,77 @@ class SendGrid
         $apiKey,
         $url,
         $endpoint,
-        $version    = self::VERSION;
+        $version = self::VERSION;
 
-    public function __construct($apiUser, $apiKey, $options = array())
+    public function __construct($apiUserOrKey, $apiKeyOrOptions = null, $options = array())
     {
-        $this->apiUser = $apiUser;
-        $this->apiKey = $apiKey;
+        // Check if given a username + password or api key
+        if (is_string($apiKeyOrOptions)) {
+            // Username and password
+            $this->apiUser = $apiUserOrKey;
+            $this->apiKey = $apiKeyOrOptions;
+            $this->options = $options;
+        } elseif (is_array($apiKeyOrOptions) || $apiKeyOrOptions === null) {
+            // API key
+            $this->apiKey = $apiUserOrKey;
+            $this->apiUser = null;
 
-        $options['turn_off_ssl_verification'] = (isset($options['turn_off_ssl_verification']) && $options['turn_off_ssl_verification'] == true);
-        $protocol = isset($options['protocol']) ? $options['protocol'] : 'https';
-        $host = isset($options['host']) ? $options['host'] : 'api.sendgrid.com';
-        $port = isset($options['port']) ? $options['port'] : '';
-        $this->options  = $options;
+            // With options
+            if (is_array($apiKeyOrOptions)) {
+                $this->options = $apiKeyOrOptions;
+            }
+        } else {
+            // Won't be thrown?
+            throw new InvalidArgumentException('Need a username + password or api key!');
+        }
 
-        $this->url = isset($options['url']) ? $options['url'] : $protocol . '://' . $host . ($port ? ':' . $port : '');
-        $this->endpoint = isset($options['endpoint']) ? $options['endpoint'] : '/api/mail.send.json';
+        $this->options['turn_off_ssl_verification'] = (isset($this->options['turn_off_ssl_verification']) && $this->options['turn_off_ssl_verification'] == true);
+        if (!isset($this->options['raise_exceptions'])) {
+            $this->options['raise_exceptions'] = true;
+        }
+        $protocol = isset($this->options['protocol']) ? $this->options['protocol'] : 'https';
+        $host = isset($this->options['host']) ? $this->options['host'] : 'api.sendgrid.com';
+        $port = isset($this->options['port']) ? $this->options['port'] : '';
 
-        $this->client = new \Guzzle\Http\Client($this->url, array(
+        $this->url = isset($this->options['url']) ? $this->options['url'] : $protocol . '://' . $host . ($port ? ':' . $port : '');
+        $this->endpoint = isset($this->options['endpoint']) ? $this->options['endpoint'] : '/api/mail.send.json';
+
+        $this->client = $this->prepareHttpClient();
+    }
+
+    /**
+     * Prepares the HTTP client
+     *
+     * @return \Guzzle\Http\Client
+     */
+    private function prepareHttpClient()
+    {
+        $guzzleOption = array(
             'request.options' => array(
                 'verify' => !$this->options['turn_off_ssl_verification'],
-                'exceptions' => false // FIXME: This might not be wise but we don't want guzzle throwing
+                'exceptions' => (isset($this->options['enable_guzzle_exceptions']) && $this->options['enable_guzzle_exceptions'] == true)
             )
-        ));
-        $this->client->setUserAgent('sendgrid/' . $this->version . ';php');
+        );
+
+        // Using api key
+        if ($this->apiUser === null) {
+            $guzzleOption['request.options']['headers'] = array('Authorization' => 'Bearer ' . $this->apiKey);
+        }
+
+        // Using http proxy
+        if (isset($this->options['proxy'])) {
+            $guzzleOption['request.options']['proxy'] = $this->options['proxy'];
+        }
+
+        // Using timeout
+        if (isset($this->options['timeout'])) {
+            $guzzleOption['request.options']['timeout'] = $this->options['timeout'];
+        }
+
+        $client = new \Guzzle\Http\Client($this->url, $guzzleOption);
+        $client->setUserAgent('sendgrid/' . $this->version . ';php');
+
+        return $client;
     }
 
     /**
@@ -50,19 +98,25 @@ class SendGrid
 
     /**
      * Makes a post request to SendGrid to send an email
+     *
      * @param SendGrid\Email $email Email object built
+     *
      * @throws SendGrid\Exception if the response code is not 200
      * @return stdClass SendGrid response object
      */
     public function send(SendGrid\Email $email)
     {
-        $form             = $email->toWebFormat();
-        $form['api_user'] = $this->apiUser;
-        $form['api_key']  = $this->apiKey;
+        $form = $email->toWebFormat();
+
+        // Using username password
+        if ($this->apiUser !== null) {
+            $form['api_user'] = $this->apiUser;
+            $form['api_key'] = $this->apiKey;
+        }
 
         $response = $this->postRequest($this->endpoint, $form);
 
-        if ($response->code != 200) {
+        if ($response->code != 200 && $this->options['raise_exceptions']) {
             throw new SendGrid\Exception($response->raw_body, $response->code);
         }
 
@@ -71,8 +125,10 @@ class SendGrid
 
     /**
      * Makes the actual HTTP request to SendGrid
+     *
      * @param $endpoint string endpoint to post to
      * @param $form array web ready version of SendGrid\Email
+     *
      * @return SendGrid\Response
      */
     public function postRequest($endpoint, $form)

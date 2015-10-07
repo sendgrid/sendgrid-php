@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v3.2.0] - (2015-05-13)
+### Added
+- Specify Guzzle proxy via [#149](https://github.com/sendgrid/sendgrid-php/pull/149)
+- Option to disable exception raising
+
+## [v3.1.0] - (2015-04-27)
+### Added
+- Support for API keys
+
 ## [v3.0.0] - (2015-04-14)
 ### Fixed
 - CC and BCC not working with SMTPAPI To

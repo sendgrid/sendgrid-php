@@ -5,3 +5,5 @@ composer.lock
 vendor
 .env*
 sendgrid-php.php
+composer.phar
+example.php

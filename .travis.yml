@@ -26,6 +26,8 @@ env:
 notifications:
   hipchat:
     rooms:
-      secure: OAKV4Hfxjmntr3/DTyDxhOG/GOo9f7h/BeL/SXjvhON0NjmXArIVjfaWR14uvusCFTLmaxFzD3JS00Z+I1wFWoK6MXoK/J8spTBt/UnXFymYuZZzcaPKV3FcGtJB3F5cUoHwH2GZWwgVLBvbKNdrzCcHZ1TPBT2zWfjuOUKYots=
+      secure: l4RUOBY44kVhSxx54NU3cmvn598rRMB7Y272Ct/W0fBm1tdGncp42A/rwg7JkiZH9EWXs3tKtoSjqw5xT6QeScUGQDdykS5QVO8lEIkDRGD4WwQ3VDJmRy1+04WtgqFEK8SyYTCcCl4ZJ0rtOcJZgDMvigkOJuLxwGXTDuvfu1k=
     template:
       - '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}'
+    format: html
+    notify: true
