@@ -1,6 +1,7 @@
 <?php
 
 include(dirname(dirname(__FILE__)) . '/lib/SendGrid.php');
+require __DIR__ . '/../vendor/autoload.php';
 
 SendGrid::register_autoloader();
 
