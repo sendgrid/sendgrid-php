@@ -750,6 +750,14 @@ $email
 
 [Unique Arguments](https://sendgrid.com/docs/API_Reference/SMTP_API/unique_arguments.html) are used for tracking purposes.
 
+NOTE: While you can attach an unlimited number of unique arguments to your email, there is an upper bound of 10,000 bytes. Before passing an email into the `send` function, you should do the following:
+
+```
+if (mb_strlen($myEmail->smtpapi->jsonString(), 'UTF-8') > 10000) {
+    // throw Exception
+}
+```
+
 #### addUniqueArg / addUniqueArgument
 
 ```php
