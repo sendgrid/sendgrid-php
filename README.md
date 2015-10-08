@@ -98,7 +98,7 @@ Create a new SendGrid Email object and add your message details.
 $email = new SendGrid\Email();
 $email
     ->addTo('foo@bar.com')
-    ->addTo('bar@foo.com')
+    //->addTo('bar@foo.com') //One of the most notable changes is how `addTo()` behaves. We are now using our Web API parameters instead of the X-SMTPAPI header. What this means is that if you call `addTo()` multiple times for an email, **ONE** email will be sent with each email address visible to everyone.
     ->setFrom('me@bar.com')
     ->setSubject('Subject goes here')
     ->setText('Hello World!')
@@ -111,6 +111,8 @@ Send it.
 ```php
 $sendgrid->send($email);
 ```
+
+NOTE: The total message size is limited to 20,480,000 bytes, or approximately 19.5MB. This includes all the headers, body, and attachments. [Reference](https://sendgrid.com/docs/Classroom/Build/attachments.html)
 
 ### Exceptions
 
@@ -749,6 +751,14 @@ $email
 ### Unique Arguments ###
 
 [Unique Arguments](https://sendgrid.com/docs/API_Reference/SMTP_API/unique_arguments.html) are used for tracking purposes.
+
+NOTE: While you can attach an unlimited number of unique arguments to your email, there is an upper bound of 10,000 bytes. Before passing an email into the `send` function, you should do the following:
+
+```
+if (mb_strlen($myEmail->smtpapi->jsonString(), 'UTF-8') > 10000) {
+    // throw Exception
+}
+```
 
 #### addUniqueArg / addUniqueArgument
 
