@@ -930,15 +930,14 @@ The existing tests in the `test` directory can be run using [PHPUnit](https://gi
 
 ````bash
 composer update --dev
-cd test
-../vendor/bin/phpunit
+./vendor/bin/phpunit --bootstrap test/unit/bootstrap.php test/unit
 ```
 
 or if you already have PHPUnit installed globally.
 
 ```bash
 cd test
-phpunit
+phpunit --bootstrap test/unit/bootstrap.php test/unit
 ```
 
 ## Releasing
