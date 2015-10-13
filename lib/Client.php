@@ -70,6 +70,11 @@ class Client
 
         return $client;
     }
+    
+    public function setClient($client)
+    {
+      $this->client = $client;
+    }
 
     /**
      * The following *Request functions make the HTTP API requests to SendGrid
