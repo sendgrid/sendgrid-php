@@ -28,6 +28,8 @@ notifications:
     rooms:
       secure: l4RUOBY44kVhSxx54NU3cmvn598rRMB7Y272Ct/W0fBm1tdGncp42A/rwg7JkiZH9EWXs3tKtoSjqw5xT6QeScUGQDdykS5QVO8lEIkDRGD4WwQ3VDJmRy1+04WtgqFEK8SyYTCcCl4ZJ0rtOcJZgDMvigkOJuLxwGXTDuvfu1k=
     template:
-      - '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}'
+      - '<a href="https://travis-ci.org/%{repository}/builds/%{build_id}">%{repository}
+            Build %{build_number}</a> on branch <i>%{branch}</i> by %{author}: <strong>%{message}</strong>
+            <a href="https://github.com/%{repository}/commits/%{commit}">View on GitHub</a>'
     format: html
     notify: true
