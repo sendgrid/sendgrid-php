@@ -26,4 +26,42 @@ class SendGridTest_ASMSuppressions extends GuzzleTestCase
     $this->assertEquals(200, $response->getStatusCode());
     $this->assertEquals('["elmer.thomas+test-add-unsub@gmail.com","elmer.thomas+test1@gmail.com"]', $response->getBody());
   }
+  public function testPOST()
+  { 
+    $response = new Response(
+        201,
+        array('Content-Type' => 'application/json'),
+        '{"recipient_emails":["elmer.thomas+test1@gmail.com"]}'
+    );
+    
+    $client = new HTTPClient('https://api.sendgrid.com');
+    $mock = new MockPlugin();
+    $mock->addResponse($response);
+    $client->addSubscriber($mock);
+    $sendgrid = new Client('sendgrid_apikey');
+    $sendgrid->setClient($client);
+    $group_id = 70;
+    $email = 'elmer.thomas+test1@gmail.com';
+    $response = $sendgrid->asm_suppressions->post($group_id, $email);
+    $this->assertEquals(201, $response->getStatusCode());
+    $this->assertEquals('{"recipient_emails":["elmer.thomas+test1@gmail.com"]}', $response->getBody());
+    
+    $response = new Response(
+        201,
+        array('Content-Type' => 'application/json'),
+        '{"recipient_emails":["elmer.thomas+test2@gmail.com","elmer.thomas+test3@gmail.com"]}'
+    );
+    
+    $client = new HTTPClient('https://api.sendgrid.com');
+    $mock = new MockPlugin();
+    $mock->addResponse($response);
+    $client->addSubscriber($mock);
+    $sendgrid = new Client('sendgrid_apikey');
+    $sendgrid->setClient($client);
+    $group_id = 70;
+    $email = array('elmer.thomas+test2@gmail.com', 'elmer.thomas+test3@gmail.com');
+    $response = $sendgrid->asm_suppressions->post($group_id, $email);
+    $this->assertEquals(201, $response->getStatusCode());
+    $this->assertEquals('{"recipient_emails":["elmer.thomas+test2@gmail.com","elmer.thomas+test3@gmail.com"]}', $response->getBody());
+  }
 }
