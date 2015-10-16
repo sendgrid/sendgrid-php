@@ -46,7 +46,15 @@ try {
 }
 ```
 
-## Installation
+## Announcements ##
+
+For users of our [Web API v3 endpoints](https://sendgrid.com/docs/API_Reference/Web_API_v3/API_Keys/index.html), we have begun integrating v3 endpoints into this library. We are also updating and enhancing the core library code.
+
+In no particular order, we have implemented a [few of the v3](#webapiv3) endpoints already and would appreciate your feedback.
+
+Thank you for your continued support! 
+
+## Installation ##
 
 Add SendGrid to your `composer.json` file. If you are not using [Composer](http://getcomposer.org), you should be. It's an excellent way to manage dependencies in your PHP application. 
 
@@ -304,6 +312,74 @@ try {
 400
 Permission denied, wrong credentials
 ```
+
+### <a name="webapiv3"></a>WEB API v3 ###
+
+[APIKeys](https://sendgrid.com/docs/API_Reference/Web_API_v3/API_Keys/index.html)
+
+List all API Keys belonging to the authenticated user.
+
+```
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$response = $sendgrid->api_keys->get();
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+
+[ASMGroups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html)
+
+Retrieve all suppression groups associated with the user.
+
+```
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$response = $sendgrid->asm_groups->get();
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+
+[ASMSuppressions](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/suppressions.html)
+
+Get suppressed addresses for a given group.
+
+```
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$group_id = 70;
+$response = $sendgrid->asm_suppressions->get($group_id);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+
+Add recipient addresses to the suppressions list for a given group.
+
+```
+$group_id = 70;
+$email = 'elmer.thomas+test1@gmail.com';
+$response = $sendgrid->asm_suppressions->post($group_id, $email);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+
+$email = array('elmer.thomas+test5@gmail.com', 'elmer.thomas+test6@gmail.com');
+$response = $sendgrid->asm_suppressions->post($group_id, $email);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+
+Delete a recipient email from the suppressions list for a group.
+
+$group_id = 70;
+$email = 'elmer.thomas+test1@gmail.com';
+$response = $sendgrid->asm_suppressions->delete($group_id, $email);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
 
 ### SMTPAPI ###
 
@@ -940,15 +1016,13 @@ The existing tests in the `test` directory can be run using [PHPUnit](https://gi
 
 ````bash
 composer update --dev
-cd test
-../vendor/bin/phpunit
+./vendor/bin/phpunit --bootstrap test/unit/bootstrap.php --filter test* test/unit
 ```
 
 or if you already have PHPUnit installed globally.
 
 ```bash
-cd test
-phpunit
+phpunit --bootstrap test/unit/bootstrap.php --filter test* test/unit
 ```
 
 ## Releasing
