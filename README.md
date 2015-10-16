@@ -321,13 +321,24 @@ List all API Keys belonging to the authenticated user.
 
 ```
 require 'vendor/autoload.php';
-require 'lib/SendGrid.php';
-require 'lib/Client.php';
-  
 Dotenv::load(__DIR__);
 $sendgrid_apikey = getenv('SG_KEY');
 $sendgrid = new Client($sendgrid_apikey);
 $response = $sendgrid->api_keys->get();
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+
+[ASMGroups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html)
+
+Retrieve all suppression groups associated with the user.
+
+```
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$response = $sendgrid->asm_groups->get();
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
 ```

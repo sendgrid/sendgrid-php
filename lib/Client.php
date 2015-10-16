@@ -1,6 +1,7 @@
 <?php
 
 require 'resources/api_keys.php';
+require 'resources/asm_groups.php';
 
 class Client
 {
@@ -16,6 +17,7 @@ class Client
         $url,
         $endpoint,
         $api_keys,
+        $asm_groups,
         $version = self::VERSION;
 
     public function __construct($apiKey, $options = array())
@@ -42,6 +44,7 @@ class Client
         }
         $this->client = $this->prepareHttpClient();
         $this->api_keys = new APIKeys($this);
+        $this->asm_groups = new ASMGroups($this);
     }
 
     /**

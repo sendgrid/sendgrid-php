@@ -24,6 +24,6 @@ class SendGridTest_APIKeys extends GuzzleTestCase
     $sendgrid->setClient($client);
     $response = $sendgrid->api_keys->get();
     $this->assertEquals(200, $response->getStatusCode());
-    $this->assertEquals("{\"result\": [{\"name\": \"default\", \"api_key_id\": \"XXXXXXXXXX\"}]}", $response->getBody());
+    $this->assertEquals('{"result": [{"name": "default", "api_key_id": "XXXXXXXXXX"}]}', $response->getBody());
   }
 }
