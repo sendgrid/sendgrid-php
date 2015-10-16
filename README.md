@@ -261,7 +261,7 @@ object(SendGrid\Response)#31 (4) {
 
 Returns the status code of the response.
 
-```
+```php
 $res = $sendgrid->send($email);
 echo $res->getCode()
 ```
@@ -270,7 +270,7 @@ echo $res->getCode()
 
 Returns the headers of the response as a [Guzzle\Http\Message\Header\HeaderCollection object](https://docs.aws.amazon.com/aws-sdk-php/v2/api/class-Guzzle.Http.Message.Header.HeaderCollection.html).
 
-```
+```php
 $res = $sendgrid->send($email);
 $guzzle = $res->getHeaders();
 echo var_dump($guzzle);
@@ -280,7 +280,7 @@ echo var_dump($guzzle);
 
 Returns the unparsed JSON response from SendGrid.
 
-```
+```php
 $res = $sendgrid->send($email);
 echo $res->getRawBody()
 ```
@@ -289,7 +289,7 @@ echo $res->getRawBody()
 
 Returns the parsed JSON from SendGrid.
 
-```
+```php
 $res = $sendgrid->send($email);
 echo var_dump($res->getBody());
 ```
@@ -319,7 +319,7 @@ Permission denied, wrong credentials
 
 List all API Keys belonging to the authenticated user.
 
-```
+```php
 require 'vendor/autoload.php';
 Dotenv::load(__DIR__);
 $sendgrid_apikey = getenv('SG_KEY');
@@ -333,7 +333,7 @@ print("Body: " . $response->getBody() . "\n");
 
 Retrieve all suppression groups associated with the user.
 
-```
+```php
 require 'vendor/autoload.php';
 Dotenv::load(__DIR__);
 $sendgrid_apikey = getenv('SG_KEY');
@@ -347,7 +347,7 @@ print("Body: " . $response->getBody() . "\n");
 
 Get suppressed addresses for a given group.
 
-```
+```php
 require 'vendor/autoload.php';
 Dotenv::load(__DIR__);
 $sendgrid_apikey = getenv('SG_KEY');
@@ -360,7 +360,7 @@ print("Body: " . $response->getBody() . "\n");
 
 Add recipient addresses to the suppressions list for a given group.
 
-```
+```php
 $group_id = 70;
 $email = 'elmer.thomas+test1@gmail.com';
 $response = $sendgrid->asm_suppressions->post($group_id, $email);
@@ -375,11 +375,13 @@ print("Body: " . $response->getBody() . "\n");
 
 Delete a recipient email from the suppressions list for a group.
 
+```php
 $group_id = 70;
 $email = 'elmer.thomas+test1@gmail.com';
 $response = $sendgrid->asm_suppressions->delete($group_id, $email);
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
+```
 
 ### SMTPAPI ###
 
