@@ -1031,6 +1031,15 @@ phpunit --bootstrap test/unit/bootstrap.php --filter test* test/unit
 
 To release a new version of this library, update the version in all locations, tag the version, and then push the tag up. Packagist.org takes care of the rest.
 
+1. Confirm tests pass
+2. Bump the version in composer.json, lib/Client.php, lib/SendGrid.php, test/unit/SendGridTest.php
+3. Update CHANGELOG.md
+4. Confirm tests pass
+5. Commit Version bump vX.X.X
+6. Push changes to GitHub
+7. Release tag on GitHub vX.X.X
+8. Packagist.org takes care of the rest
+
 #### Testing uploading to Amazon S3
 
 If you want to test uploading the zipped file to Amazon S3 (SendGrid employees only), do the following.
