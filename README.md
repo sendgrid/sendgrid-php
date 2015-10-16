@@ -1008,13 +1008,13 @@ The existing tests in the `test` directory can be run using [PHPUnit](https://gi
 
 ````bash
 composer update --dev
-./vendor/bin/phpunit --bootstrap test/unit/bootstrap.php test/unit
+./vendor/bin/phpunit --bootstrap test/unit/bootstrap.php --filter test* test/unit
 ```
 
 or if you already have PHPUnit installed globally.
 
 ```bash
-phpunit --bootstrap test/unit/bootstrap.php test/unit
+phpunit --bootstrap test/unit/bootstrap.php --filter test* test/unit
 ```
 
 ## Releasing
