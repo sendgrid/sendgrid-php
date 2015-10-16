@@ -373,6 +373,14 @@ print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
 ```
 
+Delete a recipient email from the suppressions list for a group.
+
+$group_id = 70;
+$email = 'elmer.thomas+test1@gmail.com';
+$response = $sendgrid->asm_suppressions->delete($group_id, $email);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+
 ### SMTPAPI ###
 
 This library makes use of [sendgrid/smtpapi-php](https://github.com/sendgrid/smtpapi-php/) for all things related to the [X-SMTPAPI Header](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).

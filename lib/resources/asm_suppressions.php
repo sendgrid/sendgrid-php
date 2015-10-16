@@ -32,6 +32,7 @@ class ASMSuppressions
     }
     return $this->client->getRequest($this);
   }
+  
   public function post($group_id=Null, $email=Null){
     if ( !is_array($email) ) {
       $email = array($email);
@@ -41,5 +42,10 @@ class ASMSuppressions
       'recipient_emails' => $email,
     );
     return $this->client->postRequest($this, $data);
+  }
+  
+  public function delete($group_id=Null, $email=Null){
+    $this->endpoint = $this->base_endpoint . "/groups/" . $group_id . "/suppressions/" . $email;
+    return $this->client->deleteRequest($this);
   }
 }
