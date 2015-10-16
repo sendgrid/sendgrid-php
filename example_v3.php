@@ -7,11 +7,17 @@ Dotenv::load(__DIR__);
 $sendgrid_apikey = getenv('SG_KEY');
 $sendgrid = new Client($sendgrid_apikey);
 
-$response = $sendgrid->asm_groups->get();
+$group_id = 70;
+$response = $sendgrid->asm_suppressions->get($group_id);
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
 
 /*
+
+$response = $sendgrid->asm_groups->get();
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+
 $response = $sendgrid->api_keys->post("Magic Key");
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
