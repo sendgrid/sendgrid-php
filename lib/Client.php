@@ -2,6 +2,7 @@
 
 require 'resources/api_keys.php';
 require 'resources/asm_groups.php';
+require 'resources/asm_suppressions.php';
 
 class Client
 {
@@ -18,6 +19,7 @@ class Client
         $endpoint,
         $api_keys,
         $asm_groups,
+        $asm_suppressions,
         $version = self::VERSION;
 
     public function __construct($apiKey, $options = array())
@@ -45,6 +47,7 @@ class Client
         $this->client = $this->prepareHttpClient();
         $this->api_keys = new APIKeys($this);
         $this->asm_groups = new ASMGroups($this);
+        $this->asm_suppressions = new ASMSuppressions($this);
     }
 
     /**
@@ -103,7 +106,7 @@ class Client
     }
     
     public function getRequest($api){
-        $url = $this->url . $api->getBaseEndpoint();
+        $url = $this->url . $api->getEndpoint();
         $response = $this->client->get($url)->send();
         return $response;
     }
