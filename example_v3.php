@@ -7,12 +7,19 @@ Dotenv::load(__DIR__);
 $sendgrid_apikey = getenv('SG_KEY');
 $sendgrid = new Client($sendgrid_apikey);
 
+
 $group_id = 70;
-$response = $sendgrid->asm_suppressions->get($group_id);
+$email = 'elmer.thomas+test1@gmail.com';
+$response = $sendgrid->asm_suppressions->post($group_id, $email);
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
-
 /*
+
+$group_id = 70;
+$email = array('elmer.thomas+test5@gmail.com', 'elmer.thomas+test6@gmail.com');
+$response = $sendgrid->asm_suppressions->post($group_id, $email);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
 
 $response = $sendgrid->asm_groups->get();
 print("Status Code: " . $response->getStatusCode() . "\n");

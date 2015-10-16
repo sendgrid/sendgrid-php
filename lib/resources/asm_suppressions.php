@@ -27,9 +27,19 @@ class ASMSuppressions
   }
   
   public function get($group_id=Null){
-    if ($group_id != Null ) {
+    if ( $group_id != Null ) {
       $this->endpoint = $this->base_endpoint . "/groups/" . $group_id . "/suppressions"; 
     }
     return $this->client->getRequest($this);
+  }
+  public function post($group_id=Null, $email=Null){
+    if ( !is_array($email) ) {
+      $email = array($email);
+    }
+    $this->endpoint = $this->base_endpoint . "/groups/" . $group_id . "/suppressions"; 
+    $data = array(
+      'recipient_emails' => $email,
+    );
+    return $this->client->postRequest($this, $data);
   }
 }

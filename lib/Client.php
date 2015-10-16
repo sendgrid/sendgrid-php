@@ -93,7 +93,7 @@ class Client
     
     public function postRequest($api, $data)
     {
-        $url = $this->url . $api->getBaseEndpoint();
+        $url = $this->url . $api->getEndpoint();
         $response = $this->client->post($url, null, json_encode($data))->send();
         return $response;
     }
