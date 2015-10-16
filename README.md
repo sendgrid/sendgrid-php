@@ -46,7 +46,15 @@ try {
 }
 ```
 
-## Installation
+## Announcements ##
+
+For users of our [Web API v3 endpoints](https://sendgrid.com/docs/API_Reference/Web_API_v3/API_Keys/index.html), we have begun integrating v3 endpoints into this library. We are also updating and enhancing the core library code.
+
+In no particular order, we have implemented a [few of the v3](#webapiv3) endpoints already and would appreciate your feedback.
+
+Thank you for your continued support! 
+
+## Installation ##
 
 Add SendGrid to your `composer.json` file. If you are not using [Composer](http://getcomposer.org), you should be. It's an excellent way to manage dependencies in your PHP application. 
 
@@ -303,6 +311,25 @@ try {
 // Output
 400
 Permission denied, wrong credentials
+```
+
+### <a name="webapiv3"></a>WEB API v3 ###
+
+[APIKeys](https://sendgrid.com/docs/API_Reference/Web_API_v3/API_Keys/index.html)
+
+List all API Keys belonging to the authenticated user.
+
+```
+require 'vendor/autoload.php';
+require 'lib/SendGrid.php';
+require 'lib/Client.php';
+  
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$response = $sendgrid->api_keys->get();
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
 ```
 
 ### SMTPAPI ###
@@ -946,7 +973,6 @@ composer update --dev
 or if you already have PHPUnit installed globally.
 
 ```bash
-cd test
 phpunit --bootstrap test/unit/bootstrap.php test/unit
 ```
 
