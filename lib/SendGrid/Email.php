@@ -388,6 +388,19 @@ class Email
         return $this;
     }
 
+    /** Convenience method to set asm groups to display on the manage preferences page
+     *
+     * @param array the group ids
+     *
+     * @return $this
+     */
+    public function setAsmGroupsToDisplay(array $groupIds)
+    {
+        $this->smtpapi->setASMGroupsToDisplay($groupIds);
+
+        return $this;
+    }
+
     public function setAttachments(array $files)
     {
         $this->attachments = array();
