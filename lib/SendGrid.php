@@ -6,7 +6,7 @@ class SendGrid
 
     protected
         $namespace = 'SendGrid',
-        $headers = array('Content-Type' => 'application/json'),
+        $headers = array('Content-Type' => 'application/json', 'Accept'=> '*/*'),
         $client,
         $options;
 
