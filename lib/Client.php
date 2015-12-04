@@ -6,7 +6,7 @@ require 'resources/asm_suppressions.php';
 
 class Client
 {
-    const VERSION = '4.0.0';
+    const VERSION = '4.0.1';
 
     protected
         $namespace = 'SendGrid',
