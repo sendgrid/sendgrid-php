@@ -2,11 +2,11 @@
 
 class SendGrid
 {
-    const VERSION = '4.0.0';
+    const VERSION = '4.0.1';
 
     protected
         $namespace = 'SendGrid',
-        $headers = array('Content-Type' => 'application/json'),
+        $headers = array('Content-Type' => 'application/json', 'Accept'=> '*/*'),
         $client,
         $options;
 

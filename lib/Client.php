@@ -6,7 +6,7 @@ require 'resources/asm_suppressions.php';
 
 class Client
 {
-    const VERSION = '4.0.0';
+    const VERSION = '4.0.1';
 
     protected
         $namespace = 'SendGrid',
@@ -64,7 +64,7 @@ class Client
             )
         );
 
-        $guzzleOption['request.options']['headers'] = array('Authorization' => 'Bearer ' . $this->apiKey, 'Content-Type' => 'application/json');
+        $guzzleOption['request.options']['headers'] = array('Authorization' => 'Bearer ' . $this->apiKey, 'Content-Type' => 'application/json', 'Accept'=> '*/*');
 
         // Using http proxy
         if (isset($this->options['proxy'])) {

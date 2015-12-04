@@ -2,7 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v4.0.1] - (2015-12-03) ##
+### Fixed
+- HTTP 406 Not Acceptable Errors [#177](https://github.com/sendgrid/sendgrid-php/issues/177)
+
 ## [v4.0.0] - (2015-10-16) ##
+### Added
 - Added support for accessing the [SendGrid Web API v3 endpoints](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html)
 - Implemented part of the /api_keys, /groups and /suppressions endpoints
 
