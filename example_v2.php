@@ -13,8 +13,8 @@ $templateId = '<template_id>';
 $name = array('Elmer');
 
 $email
-    ->addTo('elmer.thomas@sendgrid.com')
-    ->setFrom('dx@sendgrid.com')
+    ->addTo('example@example.com')
+    ->setFrom('example@example.com')
     ->setSubject('Testing the PHP Library')
     ->setText('I\'m text!')
     ->setHtml('<strong>I\'m HTML!</strong>')

@@ -7,21 +7,21 @@ Dotenv::load(__DIR__);
 $sendgrid_apikey = getenv('SG_KEY');
 $sendgrid = new Client($sendgrid_apikey);
 
-$group_id = 70;
-$email = 'elmer.thomas+test2@gmail.com';
-$response = $sendgrid->asm_suppressions->delete($group_id, $email);
-print("Status Code: " . $response->getStatusCode() . "\n");
-
 /*
 
 $group_id = 70;
-$email = 'elmer.thomas+test1@gmail.com';
+$email = 'example@example.com';
+$response = $sendgrid->asm_suppressions->delete($group_id, $email);
+print("Status Code: " . $response->getStatusCode() . "\n");
+
+$group_id = 70;
+$email = 'example@example.com';
 $response = $sendgrid->asm_suppressions->post($group_id, $email);
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
 
 $group_id = 70;
-$email = array('elmer.thomas+test5@gmail.com', 'elmer.thomas+test6@gmail.com');
+$email = array('example@example.com', 'example@example.com');
 $response = $sendgrid->asm_suppressions->post($group_id, $email);
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
@@ -35,13 +35,11 @@ print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
 
 
-$response = $sendgrid->api_keys->patch("VlgpNJUeTSaAM8KNJ0vlLA", "Magic Key Updated");
+$response = $sendgrid->api_keys->patch("<API Key ID>", "Magic Key Updated");
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
-*/
 
-/*
-$response = $sendgrid->api_keys->delete("VlgpNJUeTSaAM8KNJ0vlLA");
+$response = $sendgrid->api_keys->delete("<API Key ID>);
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
 
