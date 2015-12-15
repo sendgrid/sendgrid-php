@@ -39,7 +39,7 @@ $response = $sendgrid->api_keys->patch("<API Key ID>", "Magic Key Updated");
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
 
-$response = $sendgrid->api_keys->delete("<API Key ID>);
+$response = $sendgrid->api_keys->delete("<API Key ID>");
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
 

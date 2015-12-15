@@ -317,7 +317,7 @@ Permission denied, wrong credentials
 
 [APIKeys](https://sendgrid.com/docs/API_Reference/Web_API_v3/API_Keys/index.html)
 
-List all API Keys belonging to the authenticated user.
+List all API Keys belonging to the authenticated user. [GET]
 
 ```php
 require 'vendor/autoload.php';
@@ -328,6 +328,40 @@ $response = $sendgrid->api_keys->get();
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
 ```
+
+Generate a new API Key for the authenticated user. [POST]
+
+```php
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$response = $sendgrid->api_keys->post("Key Name");
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+
+Update the name of an existing API Key
+
+```php
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$response = $sendgrid->api_keys->patch("<API Key ID>", "Updated API Key Name");
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+Revoke an existing API Key [DELETE]
+
+```php
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$response = $sendgrid->api_keys->delete("<API Key ID>");
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
 
 [ASMGroups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html)
 
