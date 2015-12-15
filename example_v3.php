@@ -9,6 +9,31 @@ $sendgrid = new Client($sendgrid_apikey);
 
 /*
 
+$start_date = "2015-12-01";
+$response = $sendgrid->global_stats->get($start_date);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n\n");
+
+$end_date = "2015-12-14";
+$response = $sendgrid->global_stats->get($start_date, $end_date);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n\n");
+
+$aggregated_by = "day";
+$response = $sendgrid->global_stats->get($start_date, $end_date, $aggregated_by);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n\n");
+
+$aggregated_by = "week";
+$response = $sendgrid->global_stats->get($start_date, $end_date, $aggregated_by);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n\n");
+
+$aggregated_by = "month";
+$response = $sendgrid->global_stats->get($start_date, $end_date, $aggregated_by);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n\n");
+
 $group_id = 70;
 $email = 'example@example.com';
 $response = $sendgrid->asm_suppressions->delete($group_id, $email);

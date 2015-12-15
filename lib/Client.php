@@ -3,6 +3,7 @@
 require 'resources/api_keys.php';
 require 'resources/asm_groups.php';
 require 'resources/asm_suppressions.php';
+require 'resources/global_stats.php';
 
 class Client
 {
@@ -48,6 +49,7 @@ class Client
         $this->api_keys = new APIKeys($this);
         $this->asm_groups = new ASMGroups($this);
         $this->asm_suppressions = new ASMSuppressions($this);
+        $this->global_stats = new GlobalStats($this);
     }
 
     /**
