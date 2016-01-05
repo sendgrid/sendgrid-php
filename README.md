@@ -219,7 +219,7 @@ $email
     ->setFrom('me@bar.com')
     ->setSubject('Subject goes here')
     ->setText('Hello World!');
-$res = sendgrid->send($email);
+$res = $sendgrid->send($email);
 
 var_dump($res);
 
