@@ -22,7 +22,7 @@ Important: This library requires PHP 5.3 or higher.
 [![Latest Stable Version](https://poser.pugx.org/sendgrid/sendgrid/version.svg)](https://packagist.org/packages/sendgrid/sendgrid)
 
 ```php
-$sendgrid = new SendGrid('username', 'password');
+$sendgrid = new SendGrid('YOUR_SENDGRID_APIKEY');
 $email = new SendGrid\Email();
 $email
     ->addTo('foo@bar.com')
@@ -92,12 +92,10 @@ There is a [sendgrid-php-example app](https://github.com/sendgrid/sendgrid-php-e
 
 ## Usage
 
-To begin using this library, initialize the SendGrid object with your SendGrid credentials OR a SendGrid [API Key](https://sendgrid.com/docs/Classroom/Send/api_keys.html). API Key is the preferred method. To configure API keys, visit https://app.sendgrid.com/settings/api_keys.
+To begin using this library, initialize the SendGrid object with your SendGrid [API Key](https://sendgrid.com/docs/Classroom/Send/api_keys.html). To configure API keys, visit https://app.sendgrid.com/settings/api_keys.
 
 ```php
-$sendgrid = new SendGrid('username', 'password');
-// OR
-$sendgrid = new SendGrid('sendgrid api key');
+$sendgrid = new SendGrid('YOUR_SENDGRID_APIKEY');
 ```
 
 Create a new SendGrid Email object and add your message details.
@@ -129,7 +127,7 @@ A `SendGrid\Exception` is raised by default if the response is not 200 OK.
 To disable exceptions, pass in the `raise_exceptions => false` option when creating a `SendGrid\Client`.
 
 ```php
-$client = new SendGrid('SENDGRID_APIKEY', array('raise_exceptions' => false));
+$client = new SendGrid('YOUR_SENDGRID_APIKEY', array('raise_exceptions' => false));
 ```
 
 ### Options
@@ -145,9 +143,7 @@ $options = array(
     'url' => null,
     'raise_exceptions' => false
 );
-$sendgrid = new SendGrid('username', 'password', $options);
-// OR
-$sendgrid = new SendGrid('sendgrid api key', $options);
+$sendgrid = new SendGrid('YOUR_SENDGRID_APIKEY', $options);
 ```
 
 #### Changing URL
@@ -155,18 +151,7 @@ You may change the URL sendgrid-php uses to send email by supplying various para
 
 ```php
 $sendgrid = new SendGrid(
-    'username', 
-    'password', 
-    array(
-        'protocol' => 'http', 
-        'host' => 'sendgrid.org', 
-        'endpoint' => '/send', 
-        'port' => '80' 
-    )
-);
-// OR
-$sendgrid = new SendGrid(
-    'sendgrid_api_key', 
+    'YOUR_SENDGRID_APIKEY', 
     array(
         'protocol' => 'http', 
         'host' => 'sendgrid.org', 
@@ -180,13 +165,7 @@ A full URL may also be provided:
 
 ```php
 $sendgrid = new SendGrid(
-    'username', 
-    'password', 
-    array( 'url' => 'http://sendgrid.org:80/send')
-);
-// OR
-$sendgrid = new SendGrid(
-    'sendgrid_api_key', 
+    'YOUR_SENDGRID_APIKEY', 
     array( 'url' => 'http://sendgrid.org:80/send')
 );
 ```
@@ -197,13 +176,7 @@ You can optionally ignore verification of SSL certificate when using the Web API
 
 ```php
 $sendgrid = new SendGrid(
-    'username', 
-    'password', 
-    array("turn_off_ssl_verification" => true)
-);
-// OR
-$sendgrid = new SendGrid(
-    'sendgrid_api_key', 
+    'YOUR_SENDGRID_APIKEY', 
     array("turn_off_ssl_verification" => true)
 );
 ```
@@ -1014,9 +987,7 @@ $email->removeHeader('X-Transport');
 Sometimes you might want to send 1,000s of emails in one request. You can do that. It is recommended you break each batch up in 1,000 increments. So if you need to send to 5,000 emails, then you'd break this into a loop of 1,000 emails at a time.
 
 ```php
-$sendgrid = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD);
-// OR
-$sendgrid = new SendGrid(SENDGRID_APIKEY);
+$sendgrid = new SendGrid('YOUR_SENDGRID_APIKEY');
 $email = new SendGrid\Email();
 
 $recipients = array(
