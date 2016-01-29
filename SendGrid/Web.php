@@ -123,7 +123,7 @@ class Web extends Api implements MailInterface
     $request.= "?" .
       substr($this->_arrayToUrlPart($mail->getBccs(), "bcc"), 1) .
       $this->_arrayToUrlPart($mail->getCcs(), "cc");
-
+    error_log("The request to Sendgrid: " . $request);
     $session = curl_init($request);
     curl_setopt ($session, CURLOPT_POST, true);
     curl_setopt ($session, CURLOPT_POSTFIELDS, $data);
