@@ -130,9 +130,12 @@ class Web extends Api implements MailInterface
 
     curl_setopt($session, CURLOPT_HEADER, false);
     curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($session, CURLINFO_HEADER_OUT, true);
 
     // obtain response
     $response = curl_exec($session);
+    $info = curl_getinfo($session);
+    error_log("SendGrid curl output: " . json_encode($info));
     curl_close($session);
 
     return $response;
