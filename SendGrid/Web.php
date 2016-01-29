@@ -5,8 +5,8 @@ namespace SendGrid;
 class Web extends Api implements MailInterface
 {
 
-  protected $domain = "http://sendgrid.com/";
-  protected $endpoint = "api/mail.send.json";
+  protected $domain = "https://api.sendgrid.com/";
+  protected $endpoint = "mail.send.json";
 
   /**
    * __construct
@@ -30,7 +30,7 @@ class Web extends Api implements MailInterface
      * since we're sending the recipients through the header. The from
      * address will be used as a placeholder.
      */
-    $params = 
+    $params =
     array(
       'api_user'  => $this->username,
       'api_key'   => $this->password,
@@ -130,11 +130,11 @@ class Web extends Api implements MailInterface
 
     curl_setopt($session, CURLOPT_HEADER, false);
     curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
-     
+
     // obtain response
     $response = curl_exec($session);
     curl_close($session);
 
     return $response;
-  }  
+  }
 }
