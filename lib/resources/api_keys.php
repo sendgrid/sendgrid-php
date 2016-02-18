@@ -38,11 +38,14 @@ class APIKeys
     return $this->client->getRequest($this);
   }
   
-  public function post($name){
+  public function post($name, $scopes = NULL){
     $this->endpoint = $this->base_endpoint;
     $data = array(
       'name' => $name,
     );
+    if ($scopes)
+        $data["scopes"] = $scopes;
+    
     return $this->client->postRequest($this, $data);
   }
   
