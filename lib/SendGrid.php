@@ -2,7 +2,7 @@
 
 class SendGrid
 {
-    const VERSION = '4.0.2';
+    const VERSION = '4.0.3';
 
     protected
         $namespace = 'SendGrid',
