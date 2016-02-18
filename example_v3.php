@@ -6,6 +6,12 @@ require 'lib/Client.php';
 Dotenv::load(__DIR__);
 $sendgrid_apikey = getenv('SG_KEY');
 $sendgrid = new Client($sendgrid_apikey);
+$api_key_id = "Q5xdErWiSO6b8fYUgtYY8g";
+$name = "My API Key 2";
+$scopes = array("user.profile.read", "user.profile.update");
+$response = $sendgrid->api_keys->put($api_key_id, $name, $scopes);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
 
 /*
 

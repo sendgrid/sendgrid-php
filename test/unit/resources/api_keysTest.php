@@ -48,6 +48,25 @@ class SendGridTest_APIKeys extends baseTest
     $this->assertEquals($body, $response->getBody());
   }
   
+  public function testPUT()
+  { 
+    $code = 200;
+    $headers = array('Content-Type' => 'application/json');
+    $body = '{
+              "api_key_id": "qfTQ6KG0QBiwWdJ0-pCLCA",
+              "name": "A New Hope",
+              "scopes": [
+                "user.profile.read",
+                "user.profile.update"
+              ]
+             }';
+    $scopes = array("user.profile.read", "user.profile.update");
+    $sendgrid = $this->buildClient($code, $headers, $body);
+    $response = $sendgrid->api_keys->put("qfTQ6KG0QBiwWdJ0-pCLCA", "A New Hope", $scopes);
+    $this->assertEquals($code, $response->getStatusCode());
+    $this->assertEquals($body, $response->getBody());
+  }
+  
   public function testDELETE()
   { 
     $code = 204;
