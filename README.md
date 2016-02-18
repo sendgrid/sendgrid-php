@@ -314,7 +314,7 @@ print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
 ```
 
-Update the name of an existing API Key
+Update the name of an existing API Key [PATCH]
 
 ```php
 require 'vendor/autoload.php';
@@ -325,6 +325,22 @@ $response = $sendgrid->api_keys->patch("<API Key ID>", "Updated API Key Name");
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
 ```
+
+Update the name & scopes of an API Key [PUT]
+
+```php
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$api_key_id = "Q5xdErWiSO6b8fYUgtYY8g";
+$name = "Updated API Key Name";
+$scopes = array("user.profile.read", "user.profile.update");
+$response = $sendgrid->api_keys->put(<API Key ID>, $name, $scopes);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```php
+
 Revoke an existing API Key [DELETE]
 
 ```php

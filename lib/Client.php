@@ -99,6 +99,13 @@ class Client
         $response = $this->client->post($url, null, json_encode($data))->send();
         return $response;
     }
+    
+    public function putRequest($api, $data)
+    {
+        $url = $this->url . $api->getEndpoint();
+        $response = $this->client->put($url, null, json_encode($data))->send();
+        return $response;
+    }
   
     public function patchRequest($api, $data)
     {
