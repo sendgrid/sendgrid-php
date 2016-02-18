@@ -305,11 +305,12 @@ print("Body: " . $response->getBody() . "\n");
 Generate a new API Key for the authenticated user. [POST]
 
 ```php
-require 'vendor/autoload.php';
 Dotenv::load(__DIR__);
 $sendgrid_apikey = getenv('SG_KEY');
 $sendgrid = new Client($sendgrid_apikey);
-$response = $sendgrid->api_keys->post("Key Name");
+$api_key = "My API Key";
+$scopes = array("mail.send", "alerts.create", "alerts.read"); // optional
+$response = $sendgrid->api_keys->post($api_key, $scopes);
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
 ```
@@ -321,7 +322,8 @@ require 'vendor/autoload.php';
 Dotenv::load(__DIR__);
 $sendgrid_apikey = getenv('SG_KEY');
 $sendgrid = new Client($sendgrid_apikey);
-$response = $sendgrid->api_keys->patch("<API Key ID>", "Updated API Key Name");
+$api_key_id = "Q5xdErWiSO6b8fYUgtYY8g";
+$response = $sendgrid->api_keys->patch($api_key_id, "Updated API Key Name");
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
 ```
@@ -336,7 +338,7 @@ $sendgrid = new Client($sendgrid_apikey);
 $api_key_id = "Q5xdErWiSO6b8fYUgtYY8g";
 $name = "Updated API Key Name";
 $scopes = array("user.profile.read", "user.profile.update");
-$response = $sendgrid->api_keys->put(<API Key ID>, $name, $scopes);
+$response = $sendgrid->api_keys->put($api_key_id, $name, $scopes);
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
 ```php
@@ -348,7 +350,8 @@ require 'vendor/autoload.php';
 Dotenv::load(__DIR__);
 $sendgrid_apikey = getenv('SG_KEY');
 $sendgrid = new Client($sendgrid_apikey);
-$response = $sendgrid->api_keys->delete("<API Key ID>");
+$api_key_id = "Q5xdErWiSO6b8fYUgtYY8g";
+$response = $sendgrid->api_keys->delete($api_key_id);
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
 

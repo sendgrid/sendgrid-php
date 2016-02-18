@@ -21,6 +21,22 @@ class SendGridTest_APIKeys extends baseTest
     $body = '{
                 "api_key": "SG.xxxxxxxx.yyyyyyyy",
                 "api_key_id": "xxxxxxxx",
+                "name": "My API Key"
+            }';
+    $sendgrid = $this->buildClient($code, $headers, $body);
+    $name = "My API Key";
+    $response = $sendgrid->api_keys->post($name);
+    $this->assertEquals($code, $response->getStatusCode());
+    $this->assertEquals($body, $response->getBody());
+  }
+  
+  public function testPOST_withScope()
+  { 
+    $code = 200;
+    $headers = array('Content-Type' => 'application/json');
+    $body = '{
+                "api_key": "SG.xxxxxxxx.yyyyyyyy",
+                "api_key_id": "xxxxxxxx",
                 "name": "My API Key",
                 "scopes": [
                   "mail.send",
@@ -29,10 +45,12 @@ class SendGridTest_APIKeys extends baseTest
                   ]
             }';
     $sendgrid = $this->buildClient($code, $headers, $body);
-    $response = $sendgrid->api_keys->post("My API Key");
+    $name = "My API Key";
+    $scopes = array("mail.send", "alerts.create", "alerts.read");
+    $response = $sendgrid->api_keys->post($name, $scopes);
     $this->assertEquals($code, $response->getStatusCode());
     $this->assertEquals($body, $response->getBody());
-  }
+  }  
   
   public function testPATCH()
   { 
