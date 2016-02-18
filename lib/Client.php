@@ -7,7 +7,7 @@ require 'resources/global_stats.php';
 
 class Client
 {
-    const VERSION = '4.0.3';
+    const VERSION = '4.0.4';
 
     protected
         $namespace = 'SendGrid',
