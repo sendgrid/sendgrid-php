@@ -38,7 +38,7 @@ class APIKeys
     return $this->client->getRequest($this);
   }
   
-  public function post($name, $scopes = NULL){
+  public function post($name, $scopes = NULL, $headers = NULL){
     $this->endpoint = $this->base_endpoint;
     $data = array(
       'name' => $name,
@@ -46,7 +46,7 @@ class APIKeys
     if ($scopes)
         $data["scopes"] = $scopes;
     
-    return $this->client->postRequest($this, $data);
+    return $this->client->postRequest($this, $data, $headers);
   }
   
   public function put($api_key_id, $name, $scopes){

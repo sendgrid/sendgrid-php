@@ -38,7 +38,7 @@ class Client
             $this->options['raise_exceptions'] = true;
         }
         $protocol = isset($this->options['protocol']) ? $this->options['protocol'] : 'https';
-        $host = isset($this->options['host']) ? $this->options['host'] : 'api.sendgrid.com';
+        $host = isset($this->options['host']) ? $this->options['host'] : 'e9sk3d3bfaikbpdq7.stoplight-proxy.io';
         $port = isset($this->options['port']) ? $this->options['port'] : '';
 
         $this->url = isset($this->options['url']) ? $this->options['url'] : $protocol . '://' . $host . ($port ? ':' . $port : '');
@@ -93,10 +93,16 @@ class Client
      * @return Guzzle Response object: http://guzzle3.readthedocs.org/http-client/response.html
      */
     
-    public function postRequest($api, $data)
+    public function postRequest($api, $data, $headers=NULL)
     {
         $url = $this->url . $api->getEndpoint();
-        $response = $this->client->post($url, null, json_encode($data))->send();
+        $request = $this->client->post($url, null, json_encode($data));
+        if ($headers != NULL) {
+            foreach ($headers as $k => $v ){
+                $request->setHeader($k, $v);
+            }
+        }
+        $response = $request->send();
         return $response;
     }
     
