@@ -38,7 +38,7 @@ class Client
             $this->options['raise_exceptions'] = true;
         }
         $protocol = isset($this->options['protocol']) ? $this->options['protocol'] : 'https';
-        $host = isset($this->options['host']) ? $this->options['host'] : 'e9sk3d3bfaikbpdq7.stoplight-proxy.io';
+        $host = isset($this->options['host']) ? $this->options['host'] : 'api.sendgrid.com';
         $port = isset($this->options['port']) ? $this->options['port'] : '';
 
         $this->url = isset($this->options['url']) ? $this->options['url'] : $protocol . '://' . $host . ($port ? ':' . $port : '');
