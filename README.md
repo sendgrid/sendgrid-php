@@ -341,7 +341,7 @@ $scopes = array("user.profile.read", "user.profile.update");
 $response = $sendgrid->api_keys->put($api_key_id, $name, $scopes);
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
-```php
+```
 
 Revoke an existing API Key [DELETE]
 
@@ -354,6 +354,7 @@ $api_key_id = "Q5xdErWiSO6b8fYUgtYY8g";
 $response = $sendgrid->api_keys->delete($api_key_id);
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
+```
 
 [ASMGroups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html)
 
