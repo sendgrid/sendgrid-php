@@ -1,5 +1,7 @@
 <?php
 
+namespace Resources;
+
 class APIKeys
 {
   protected

@@ -1,5 +1,7 @@
 <?php
 
+namespace Resources;
+
 class ASMGroups
 {
   protected
