@@ -459,7 +459,7 @@ $sendgrid_apikey = getenv('SG_KEY');
 $sendgrid = new Client($sendgrid_apikey);
 $template_id = 'e8ac01d5-a07a-4a71-b14c-4721136fe6aa';
 $name = 'updated_example_name';
-$response = $sendgrid->templates->post($template_id, $name);
+$response = $sendgrid->templates->patch($template_id, $name);
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
 ```
