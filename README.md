@@ -410,6 +410,73 @@ print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
 ```
 
+[Recipients](https://sendgrid.com/docs/API_Reference/Web_API_v3/Marketing_Campaigns/contactdb.html#-Recipients)
+
+Add Recipients [POST]
+
+```php
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$response = $sendgrid->recipients->add(
+	array(
+		array( "email" => 'jones@example.com', "last_name" => "jones" ),
+		array( "email" => 'james@example.com', "last_name" => "james" )
+	)
+);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+
+Update Recipient [PATCH]
+
+```php
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$response = $sendgrid->recipients->patch(
+	array(
+		array( "email" => 'jones@example.com', "last_name" => "jones2" ),
+		array( "email" => 'james@example.com', "last_name" => "james2" )
+	)
+);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+
+Delete Recipient [DELETE]
+
+```php
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$response = $sendgrid->recipients->delete(
+	array(
+		"am9uZXNAZXhhbXBsZS5jb20=",
+		"amFtZXNAZXhhbXBsZS5jb20="
+	)
+);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+
+List Recipients [GET]
+
+```php
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$page = 1;
+$page_size = 100;
+$response = $sendgrid->recipients->get($page,$page_size);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+
 ### SMTPAPI ###
 
 This library makes use of [sendgrid/smtpapi-php](https://github.com/sendgrid/smtpapi-php/) for all things related to the [X-SMTPAPI Header](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
