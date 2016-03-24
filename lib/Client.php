@@ -4,6 +4,7 @@ require 'resources/api_keys.php';
 require 'resources/asm_groups.php';
 require 'resources/asm_suppressions.php';
 require 'resources/global_stats.php';
+require 'resources/lists.php';
 
 class Client
 {
@@ -21,6 +22,7 @@ class Client
         $api_keys,
         $asm_groups,
         $asm_suppressions,
+        $lists,
         $version = self::VERSION;
 
     public function __construct($apiKey, $options = array())
@@ -50,6 +52,7 @@ class Client
         $this->asm_groups = new ASMGroups($this);
         $this->asm_suppressions = new ASMSuppressions($this);
         $this->global_stats = new GlobalStats($this);
+        $this->lists = new Lists($this);
     }
 
     /**
@@ -120,9 +123,14 @@ class Client
         return $response;
     }
 
-    public function deleteRequest($api){
+    public function deleteRequest($api, $data=null){
         $url = $this->url . $api->getEndpoint();
-        $response = $this->client->delete($url)->send();
+
+        if(!is_null($data))
+            $response = $this->client->delete($url, null, json_encode($data))->send();
+        else
+            $response = $this->client->delete($url)->send();
+
         return $response;
     }
 
