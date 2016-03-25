@@ -73,7 +73,7 @@ class Email
             foreach ($name as $n) {
                 $this->addToName($n);
             }
-        } elseif ($name) {
+        } elseif (is_string($name)) {
             $this->addToName($name);
         }
 
@@ -189,7 +189,7 @@ class Email
             foreach ($name as $n) {
                 $this->addCcName($n);
             }
-        } elseif ($name) {
+        } elseif (is_string($name)) {
             $this->addCcName($name);
         }
 
@@ -256,7 +256,7 @@ class Email
             foreach ($name as $n) {
                 $this->addBccName($n);
             }
-        } elseif ($name) {
+        } elseif (is_string($name)) {
             $this->addBccName($name);
         }
 
