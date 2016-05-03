@@ -12,7 +12,6 @@ after_script:
 - phpenv local --unset
 - "./scripts/s3upload.sh"
 php:
-- 5.3
 - 5.4
 - 5.5
 - 5.6

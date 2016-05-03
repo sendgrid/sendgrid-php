@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0.0] - XXXX-XX-XX
+### Added
+- Breaking change to support the v3 Web API
+- New HTTP client
+- v3 Mail Send helper
+
 ## [v4.0.4] - (2016-02-18) ##
 ### Added
 - Ability to add scopes to API Keys endpoint [POST]
