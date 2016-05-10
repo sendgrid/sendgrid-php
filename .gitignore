@@ -5,3 +5,4 @@ vendor
 .env*
 sendgrid-php.php
 composer.phar
+.editorconfig

@@ -6,7 +6,7 @@ require dirname(__DIR__).'/lib/SendGrid.php';
 
 // Configuration
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new SendGrid($apiKey, array('host' => 'https://e9sk3d3bfaikbpdq7.stoplight-proxy.io'));
+$sg = new SendGrid($apiKey);
 
 // GET Collection
 $query_params = array('limit' => 100, 'offset' => 0);

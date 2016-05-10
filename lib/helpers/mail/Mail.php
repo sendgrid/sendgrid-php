@@ -1,5 +1,5 @@
 <?php
-/** 
+/**
   * This helper builds the request body for a /mail/send API call.
   *
   * PHP version 5.3
@@ -18,17 +18,17 @@ class ReplyTo implements \jsonSerializable
 {
     private
         $email;
-    
+
     public function __construct($email)
     {
         $this->email = $email;
     }
-        
+
     public function setEmail($email)
     {
         $this->email = $email;
     }
-    
+
     public function getEmail()
     {
         return $this->email;
@@ -41,14 +41,14 @@ class ReplyTo implements \jsonSerializable
                 'email' => $this->getEmail()
             ]
         );
-    } 
+    }
 }
 
 class ClickTracking implements \jsonSerializable
 {
     private
         $enable,
-        $enable_text;   
+        $enable_text;
 
     public function setEnable($enable)
     {
@@ -69,7 +69,7 @@ class ClickTracking implements \jsonSerializable
     {
         return $this->enable_text;
     }
-    
+
     public function jsonSerialize()
     {
         return array_filter(
@@ -78,14 +78,14 @@ class ClickTracking implements \jsonSerializable
                 'enable_text' => $this->getEnableText()
             ]
         );
-    } 
+    }
 }
 
 class OpenTracking implements \jsonSerializable
 {
     private
         $enable,
-        $substitution_tag; 
+        $substitution_tag;
 
     public function setEnable($enable)
     {
@@ -96,7 +96,7 @@ class OpenTracking implements \jsonSerializable
     {
         return $this->enable;
     }
-    
+
     public function setSubstitutionTag($substitution_tag)
     {
         $this->substitution_tag = $substitution_tag;
@@ -106,7 +106,7 @@ class OpenTracking implements \jsonSerializable
     {
         return $this->substitution_tag;
     }
-    
+
     public function jsonSerialize()
     {
         return array_filter(
@@ -115,7 +115,7 @@ class OpenTracking implements \jsonSerializable
                 'substitution_tag' => $this->getSubstitutionTag()
             ]
         );
-    } 
+    }
 }
 
 class SubscriptionTracking implements \jsonSerializable
@@ -135,7 +135,7 @@ class SubscriptionTracking implements \jsonSerializable
     {
         return $this->enable;
     }
-    
+
     public function setText($text)
     {
         $this->text = $text;
@@ -145,7 +145,7 @@ class SubscriptionTracking implements \jsonSerializable
     {
         return $this->text;
     }
-    
+
     public function setHtml($html)
     {
         $this->html = $html;
@@ -155,7 +155,7 @@ class SubscriptionTracking implements \jsonSerializable
     {
         return $this->html;
     }
-    
+
     public function setSubstitutionTag($substitution_tag)
     {
         $this->substitution_tag = $substitution_tag;
@@ -165,7 +165,7 @@ class SubscriptionTracking implements \jsonSerializable
     {
         return $this->substitution_tag;
     }
-    
+
     public function jsonSerialize()
     {
         return array_filter(
@@ -176,7 +176,7 @@ class SubscriptionTracking implements \jsonSerializable
                 'substitution_tag' => $this->getSubstitutionTag()
             ]
         );
-    } 
+    }
 }
 
 class Ganalytics implements \jsonSerializable
@@ -198,7 +198,7 @@ class Ganalytics implements \jsonSerializable
     {
         return $this->enable;
     }
-    
+
     public function setCampaignSource($utm_source)
     {
         $this->utm_source = $utm_source;
@@ -208,7 +208,7 @@ class Ganalytics implements \jsonSerializable
     {
         return $this->utm_source;
     }
-    
+
     public function setCampaignMedium($utm_medium)
     {
         $this->utm_medium = $utm_medium;
@@ -218,7 +218,7 @@ class Ganalytics implements \jsonSerializable
     {
         return $this->utm_medium;
     }
-    
+
     public function setCampaignTerm($utm_term)
     {
         $this->utm_term = $utm_term;
@@ -228,7 +228,7 @@ class Ganalytics implements \jsonSerializable
     {
         return $this->utm_term;
     }
-    
+
     public function setCampaignContent($utm_content)
     {
         $this->utm_content = $utm_content;
@@ -238,7 +238,7 @@ class Ganalytics implements \jsonSerializable
     {
         return $this->utm_content;
     }
-    
+
     public function setCampaignName($utm_campaign)
     {
         $this->utm_campaign = $utm_campaign;
@@ -248,7 +248,7 @@ class Ganalytics implements \jsonSerializable
     {
         return $this->utm_campaign;
     }
-    
+
     public function jsonSerialize()
     {
         return array_filter(
@@ -261,7 +261,7 @@ class Ganalytics implements \jsonSerializable
                 'utm_campaign' => $this->getCampaignName()
             ]
         );
-    } 
+    }
 }
 
 class TrackingSettings implements \jsonSerializable
@@ -280,8 +280,8 @@ class TrackingSettings implements \jsonSerializable
     public function getClickTracking()
     {
         return $this->click_tracking;
-    }  
-    
+    }
+
     public function setOpenTracking($open_tracking)
     {
         $this->open_tracking = $open_tracking;
@@ -290,8 +290,8 @@ class TrackingSettings implements \jsonSerializable
     public function getOpenTracking()
     {
         return $this->open_tracking;
-    }    
-    
+    }
+
     public function setSubscriptionTracking($subscription_tracking)
     {
         $this->subscription_tracking = $subscription_tracking;
@@ -300,7 +300,7 @@ class TrackingSettings implements \jsonSerializable
     public function getSubscriptionTracking()
     {
         return $this->subscription_tracking;
-    }   
+    }
 
     public function setGanalytics($ganalytics)
     {
@@ -310,8 +310,8 @@ class TrackingSettings implements \jsonSerializable
     public function getGanalytics()
     {
         return $this->ganalytics;
-    } 
-    
+    }
+
     public function jsonSerialize()
     {
         return array_filter(
@@ -322,7 +322,7 @@ class TrackingSettings implements \jsonSerializable
                 'ganalytics' => $this->getGanalytics()
             ]
         );
-    } 
+    }
 }
 
 class BccSettings implements \jsonSerializable
@@ -330,7 +330,7 @@ class BccSettings implements \jsonSerializable
     private
         $enable,
         $email;
-    
+
     public function setEnable($enable)
     {
         $this->enable = $enable;
@@ -359,14 +359,14 @@ class BccSettings implements \jsonSerializable
                 'email' => $this->getEmail()
             ]
         );
-    } 
+    }
 }
 
 class BypassListManagement implements \jsonSerializable
 {
     private
-        $enable;    
-        
+        $enable;
+
     public function setEnable($enable)
     {
         $this->enable = $enable;
@@ -384,7 +384,7 @@ class BypassListManagement implements \jsonSerializable
                 'enable' => $this->getEnable()
             ]
         );
-    } 
+    }
 }
 
 class Footer implements \jsonSerializable
@@ -393,7 +393,7 @@ class Footer implements \jsonSerializable
         $enable,
         $text,
         $html;
-    
+
     public function setEnable($enable)
     {
         $this->enable = $enable;
@@ -413,7 +413,7 @@ class Footer implements \jsonSerializable
     {
         return $this->text;
     }
-    
+
     public function setHtml($html)
     {
         $this->html = $html;
@@ -423,7 +423,7 @@ class Footer implements \jsonSerializable
     {
         return $this->html;
     }
-    
+
     public function jsonSerialize()
     {
         return array_filter(
@@ -433,14 +433,14 @@ class Footer implements \jsonSerializable
                 'html' => $this->getHtml()
             ]
         );
-    } 
+    }
 }
 
 class SandBoxMode implements \jsonSerializable
 {
     private
         $enable;
-        
+
     public function setEnable($enable)
     {
         $this->enable = $enable;
@@ -457,7 +457,7 @@ class SandBoxMode implements \jsonSerializable
                 'enable' => $this->getEnable()
             ]
         );
-    } 
+    }
 }
 
 class SpamCheck implements \jsonSerializable
@@ -465,8 +465,8 @@ class SpamCheck implements \jsonSerializable
     private
         $enable,
         $threshold,
-        $post_to_url;   
-        
+        $post_to_url;
+
     public function setEnable($enable)
     {
         $this->enable = $enable;
@@ -475,8 +475,8 @@ class SpamCheck implements \jsonSerializable
     public function getEnable()
     {
         return $this->enable;
-    } 
-    
+    }
+
     public function setThreshold($threshold)
     {
         $this->threshold = $threshold;
@@ -485,8 +485,8 @@ class SpamCheck implements \jsonSerializable
     public function getThreshold()
     {
         return $this->threshold;
-    } 
-    
+    }
+
     public function setPostToUrl($post_to_url)
     {
         $this->post_to_url = $post_to_url;
@@ -495,8 +495,8 @@ class SpamCheck implements \jsonSerializable
     public function getPostToUrl()
     {
         return $this->post_to_url;
-    } 
-    
+    }
+
     public function jsonSerialize()
     {
         return array_filter(
@@ -506,7 +506,7 @@ class SpamCheck implements \jsonSerializable
                 'post_to_url' => $this->getPostToUrl()
             ]
         );
-    } 
+    }
 }
 
 class MailSettings implements \jsonSerializable
@@ -517,12 +517,12 @@ class MailSettings implements \jsonSerializable
         $footer,
         $sandbox_mode,
         $spam_check;
-        
+
     public function setBccSettings($bcc)
     {
         $this->bcc = $bcc;
     }
-    
+
     public function getBccSettings()
     {
         return $this->bcc;
@@ -532,42 +532,42 @@ class MailSettings implements \jsonSerializable
     {
         $this->bypass_list_management = $bypass_list_management;
     }
-    
+
     public function getBypassListManagement()
     {
         return $this->bypass_list_management;
     }
-    
+
     public function setFooter($footer)
     {
         $this->footer = $footer;
     }
-    
+
     public function getFooter()
     {
         return $this->footer;
     }
-    
+
     public function setSandboxMode($sandbox_mode)
     {
         $this->sandbox_mode = $sandbox_mode;
     }
-    
+
     public function getSandboxMode()
     {
         return $this->sandbox_mode;
     }
-    
+
     public function setSpamCheck($spam_check)
     {
         $this->spam_check = $spam_check;
     }
-    
+
     public function getSpamCheck()
     {
         return $this->spam_check;
-    }  
-    
+    }
+
     public function jsonSerialize()
     {
         return array_filter(
@@ -579,7 +579,7 @@ class MailSettings implements \jsonSerializable
                 'spam_check' => $this->getSpamCheck()
             ]
         );
-    }    
+    }
 }
 
 class ASM implements \jsonSerializable
@@ -587,17 +587,17 @@ class ASM implements \jsonSerializable
     private
         $group_id,
         $groups_to_display;
-        
+
     public function setGroupId($group_id)
     {
         $this->group_id = $group_id;
     }
-    
+
     public function getGroupId()
     {
         return $this->group_id;
     }
-    
+
     public function setGroupsToDisplay($group_ids)
     {
         $this->groups_to_display = $group_ids;
@@ -607,7 +607,7 @@ class ASM implements \jsonSerializable
     {
         return $this->groups_to_display;
     }
-    
+
     public function jsonSerialize()
     {
         return array_filter(
@@ -616,7 +616,7 @@ class ASM implements \jsonSerializable
                 'groups_to_display' => $this->getGroupsToDisplay()
             ]
         );
-    }   
+    }
 }
 
 class Attachment implements \jsonSerializable
@@ -627,57 +627,57 @@ class Attachment implements \jsonSerializable
         $filename,
         $disposition,
         $content_id;
-    
+
     public function setContent($content)
     {
         $this->content = $content;
     }
-    
+
     public function getContent()
     {
         return $this->content;
-    }     
- 
+    }
+
     public function setType($type)
     {
         $this->type = $type;
     }
-    
+
     public function getType()
     {
         return $this->type;
-    }  
+    }
 
     public function setFilename($filename)
     {
         $this->filename = $filename;
     }
-    
+
     public function getFilename()
     {
         return $this->filename;
-    }  
+    }
 
     public function setDisposition($disposition)
     {
         $this->disposition = $disposition;
     }
-    
+
     public function getDisposition()
     {
         return $this->disposition;
-    } 
+    }
 
     public function setContentID($content_id)
     {
         $this->content_id = $content_id;
     }
-    
+
     public function getContentID()
     {
         return $this->content_id;
-    } 
-        
+    }
+
     public function jsonSerialize()
     {
         return array_filter(
@@ -689,7 +689,7 @@ class Attachment implements \jsonSerializable
                 'content_id' => $this->getContentID()
             ]
         );
-    }         
+    }
 }
 
 class Content implements \jsonSerializable
@@ -697,33 +697,33 @@ class Content implements \jsonSerializable
     private
         $type,
         $value;
- 
+
     public function __construct($type, $value)
     {
         $this->type = $type;
         $this->value = $value;
     }
-     
+
     public function setType($type)
     {
         $this->type = $type;
     }
-    
+
     public function getType()
     {
         return $this->type;
-    }   
-    
+    }
+
     public function setValue($value)
     {
         $this->value = $value;
     }
-    
+
     public function getValue()
     {
         return $this->value;
-    }  
-        
+    }
+
     public function jsonSerialize()
     {
         return array_filter(
@@ -732,96 +732,96 @@ class Content implements \jsonSerializable
                 'value' => $this->getValue()
             ]
         );
-    }   
+    }
 }
 
 class Personalization implements \jsonSerializable
 {
     private
-        $to,
-        $cc,
-        $bcc,
+        $tos,
+        $ccs,
+        $bccs,
         $subject,
         $headers,
         $substitutions,
         $custom_args,
         $send_at;
-    
+
     public function addTo($email)
     {
-        $this->to[] = $email;
+        $this->tos[] = $email;
     }
-    
+
     public function getTos()
     {
-        return $this->to;
-    }  
+        return $this->tos;
+    }
 
     public function addCc($email)
     {
-        $this->cc[] = $email;
+        $this->ccs[] = $email;
     }
-    
+
     public function getCcs()
     {
-        return $this->cc;
-    } 
+        return $this->ccs;
+    }
 
     public function addBcc($email)
     {
-        $this->bcc[] = $email;
+        $this->bccs[] = $email;
     }
-    
+
     public function getBccs()
     {
-        return $this->bcc;
-    } 
-    
+        return $this->bccs;
+    }
+
     public function setSubject($subject)
     {
         $this->subject = $subject;
     }
-    
+
     public function getSubject()
     {
         return $this->subject;
     }
- 
+
     public function addHeader($key, $value)
     {
         $this->headers[$key] = $value;
     }
-    
+
     public function getHeaders()
     {
         return $this->headers;
-    } 
+    }
 
     public function addSubstitution($key, $value)
     {
         $this->substitutions[$key] = $value;
     }
-    
+
     public function getSubstitutions()
     {
         return $this->substitutions;
-    } 
+    }
 
     public function addCustomArg($key, $value)
     {
         $this->custom_args[$key] = $value;
     }
-    
+
     public function getCustomArgs()
     {
         return $this->custom_args;
-    } 
+    }
 
     public function setSendAt($send_at)
     {
         $this->send_at = $send_at;
     }
-    
+
     public function getSendAt()
     {
         return $this->send_at;
@@ -841,7 +841,7 @@ class Personalization implements \jsonSerializable
                 'send_at' => $this->getSendAt()
             ]
         );
-    }   
+    }
 }
 
 class Email implements \jsonSerializable
@@ -849,23 +849,23 @@ class Email implements \jsonSerializable
     private
         $name,
         $email;
-    
+
     public function __construct($name, $email)
     {
         $this->name = $name;
         $this->email = $email;
     }
-    
+
     public function setName($name)
     {
         $this->name = $name;
     }
-    
+
     public function getName()
     {
         return $this->name;
-    } 
-    
+    }
+
     public function setEmail($email)
     {
         $this->email = $email;
@@ -897,11 +897,11 @@ class Mail implements \jsonSerializable
     protected
         $namespace = 'SendGrid';
 
-    private
+    public
         $from,
         $personalization,
         $subject,
-        $content,
+        $contents,
         $attachments,
         $template_id,
         $sections,
@@ -915,15 +915,25 @@ class Mail implements \jsonSerializable
         $tracking_settings,
         $reply_to;
 
-    public function __construct()
+    public function __construct($from = null, $subject = null, $to = null, $content = null)
     {
+        if (!empty($from) &&  !empty($subject) && !empty($to) && !empty($content))
+        {
+            $this->setFrom($from);
+            $personalization = new Personalization();
+            $personalization->addTo($to);
+            $this->addPersonalization($personalization);
+            $this->setSubject($subject);
+            $this->addContent($content);
+        }
+
     }
-    
+
     public function setFrom($email)
     {
         $this->from = $email;
     }
-    
+
     public function getFrom()
     {
         return $this->from;
@@ -933,142 +943,142 @@ class Mail implements \jsonSerializable
     {
         $this->personalization[] = $personalization;
     }
-    
+
     public function getPersonalizations()
     {
         return $this->personalization;
     }
-    
+
     public function setSubject($subject)
     {
         $this->subject = $subject;
     }
-    
+
     public function getSubject()
     {
         return $this->subject;
     }
-    
+
     public function addContent($content)
     {
-        $this->content[] = $content;
+        $this->contents[] = $content;
     }
-    
+
     public function getContents()
     {
-        return $this->content;
-    }  
+        return $this->contents;
+    }
 
     public function addAttachment($attachment)
     {
         $this->attachments[] = $attachment;
     }
-    
+
     public function getAttachments()
     {
         return $this->attachments;
-    } 
+    }
 
     public function setTemplateId($template_id)
     {
         $this->template_id = $template_id;
     }
-    
+
     public function getTemplateId()
     {
         return $this->template_id;
-    } 
-    
+    }
+
     public function addSection($key, $value)
     {
         $this->sections[$key] = $value;
     }
-    
+
     public function getSections()
     {
         return $this->sections;
-    } 
+    }
 
     public function addHeader($key, $value)
     {
         $this->headers[$key] = $value;
     }
-    
+
     public function getHeaders()
     {
         return $this->headers;
     }
-    
+
     public function addCategory($category)
     {
         $this->categories[] = $category;
     }
-    
+
     public function getCategories()
     {
         return $this->categories;
-    } 
-    
+    }
+
     public function addCustomArg($key, $value)
     {
         $this->custom_args[$key] = $value;
     }
-    
+
     public function getCustomArgs()
     {
         return $this->custom_args;
-    } 
- 
+    }
+
      public function setSendAt($send_at)
      {
         $this->send_at = $send_at;
     }
-    
+
     public function getSendAt()
     {
         return $this->send_at;
     }
-    
+
     public function setASM($asm)
     {
         $this->asm = $asm;
     }
-    
+
     public function getASM()
     {
         return $this->asm;
-    } 
+    }
 
     public function setIpPoolName($ip_pool_name)
     {
         $this->ip_pool_name = $ip_pool_name;
     }
-    
+
     public function getIpPoolName()
     {
         return $this->ip_pool_name;
-    } 
-    
+    }
+
     public function setMailSettings($mail_settings)
     {
         $this->mail_settings = $mail_settings;
     }
-    
+
     public function getMailSettings()
     {
         return $this->mail_settings;
-    } 
+    }
 
     public function setTrackingSettings($tracking_settings)
     {
         $this->tracking_settings = $tracking_settings;
     }
-    
+
     public function getTrackingSettings()
     {
         return $this->tracking_settings;
-    } 
-    
+    }
+
     public function setReplyTo($reply_to)
     {
         $this->reply_to = $reply_to;
@@ -1078,7 +1088,7 @@ class Mail implements \jsonSerializable
     {
         return $this->reply_to;
     }
-          
+
     public function jsonSerialize()
     {
         return array_filter(

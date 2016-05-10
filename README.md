@@ -3,12 +3,20 @@
 
 **This library allows you to quickly and easily use the SendGrid Web API via PHP.**
 
+**NOTE: The `/mail/send/beta` endpoint is currently in beta!
+
+Since this is not a general release, we do not recommend POSTing production level traffic through this endpoint or integrating your production servers with this endpoint.
+
+When this endpoint is ready for general release, your code will require an update in order to use the official URI.
+
+By using this endpoint, you accept that you may encounter bugs and that the endpoint may be taken down for maintenance at any time. We cannot guarantee the continued availability of this beta endpoint. We hope that you like this new endpoint and we appreciate any [feedback](dx+mail-beta@sendgrid.com) that you can send our way.**
+
 # Installation
 
-Add SendGrid to your `composer.json` file. If you are not using [Composer](http://getcomposer.org), you should be. It's an excellent way to manage dependencies in your PHP application. 
+Add SendGrid to your `composer.json` file. If you are not using [Composer](http://getcomposer.org), you should be. It's an excellent way to manage dependencies in your PHP application.
 
 ```json
-{  
+{
   "require": {
     "sendgrid/sendgrid": "~4.0"
   }
@@ -23,7 +31,7 @@ require 'vendor/autoload.php';
 
 #### Alternative: Install from zip
 
-If you are not using Composer, simply download and install the **[latest packaged release of the library as a zip](https://sendgrid-open-source.s3.amazonaws.com/sendgrid-php/sendgrid-php.zip)**. 
+If you are not using Composer, simply download and install the **[latest packaged release of the library as a zip](https://sendgrid-open-source.s3.amazonaws.com/sendgrid-php/sendgrid-php.zip)**.
 
 [**⬇︎ Download Packaged Library ⬇︎**](https://sendgrid-open-source.s3.amazonaws.com/sendgrid-php/sendgrid-php.zip)
 
@@ -39,7 +47,7 @@ Previous versions of the library can be found in the [version index](https://sen
 
 - [php-HTTP-Client](https://github.com/sendgrid/php-http-client)
 
-## Environment Variables 
+## Environment Variables
 
 First, get your free SendGrid account [here](https://sendgrid.com/free?source=sendgrid-php).
 
@@ -53,6 +61,32 @@ source ./sendgrid.env
 
 # Quick Start
 
+## Hello Email
+
+```php
+namespace SendGrid;
+
+require dirname(__DIR__).'/vendor/autoload.php';
+require dirname(__DIR__).'/lib/SendGrid.php';
+require dirname(__DIR__).'/lib/helpers/mail/Mail.php';
+
+$from = new Email(null, "dx@sendgrid.com");
+$subject = "Hello World from the SendGrid PHP Library";
+$to = new Email(null, "elmer.thomas@sendgrid.com");
+$content = new Content("text/plain", "some text here");
+$mail = new Mail($from, $subject, $to, $content);
+
+$apiKey = getenv('SENDGRID_API_KEY');
+$sg = new \SendGrid($apiKey);
+
+$response = $sg->client->mail()->send()->beta()->post($mail);
+echo $response->statusCode();
+echo $response->responseBody();
+echo $response->responseHeaders();
+```
+
+## General v3 Web API Usage
+
 ```php
 namespace SendGrid;
 
@@ -60,7 +94,7 @@ require dirname(__DIR__).'/vendor/autoload.php';
 require dirname(__DIR__).'/lib/SendGrid.php';
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new SendGrid($apiKey, array('host' => 'https://api.sendgrid.com'));
+$sg = new \SendGrid($apiKey, array('host' => 'https://api.sendgrid.com'));
 
 $response = $sg->client->api_keys()->get(null, $query_params, $request_headers);
 
