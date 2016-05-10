@@ -5,7 +5,7 @@ before_script:
 - phpenv local --unset
 - cd test/unit
 script:
-- ../../vendor/bin/phpunit . --bootstrap bootstrap.php --filter test* --coverage-clover clover.xml
+- ../../vendor/bin/phpunit . --bootstrap test/unit/bootstrap.php --filter test* test/unit
 after_script:
 - cd ..
 - phpenv local 5.4
