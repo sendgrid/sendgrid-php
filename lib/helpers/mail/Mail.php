@@ -909,6 +909,7 @@ class Mail implements \jsonSerializable
         $categories,
         $custom_args,
         $send_at,
+        $batch_id,
         $asm,
         $ip_pool_name,
         $mail_settings,
@@ -1039,6 +1040,16 @@ class Mail implements \jsonSerializable
         return $this->send_at;
     }
 
+    public function setBatchId($batch_id)
+    {
+        $this->batch_id = $batch_id;
+    }
+
+    public function getBatchId()
+    {
+        return $this->batch_id;
+    }
+
     public function setASM($asm)
     {
         $this->asm = $asm;
@@ -1094,7 +1105,7 @@ class Mail implements \jsonSerializable
         return array_filter(
             [
                 'from' => $this->getFrom(),
-                'personalization' => $this->getPersonalizations(),
+                'personalizations' => $this->getPersonalizations(),
                 'subject' => $this->getSubject(),
                 'content' => $this->getContents(),
                 'attachments' => $this->getAttachments(),
@@ -1104,6 +1115,7 @@ class Mail implements \jsonSerializable
                 'categories' => $this->getCategories(),
                 'custom_args' => $this->getCustomArgs(),
                 'send_at' => $this->getSendAt(),
+                'batch_id' => $this->getBatchId(),
                 'asm' => $this->getASM(),
                 'ip_pool_name' => $this->getIpPoolName(),
                 'mail_settings' => $this->getMailSettings(),
