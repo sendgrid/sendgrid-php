@@ -10,7 +10,6 @@
   * @version   GIT: <git_id>
   * @link      http://packagist.org/packages/sendgrid/sendgrid
   */
-
 require dirname(__DIR__).'/vendor/autoload.php';
 
 /**
