@@ -4,7 +4,7 @@ before_script:
 - composer install --dev --no-interaction
 - phpenv local --unset
 script:
-- ../../vendor/bin/phpunit . --bootstrap ./test/unit/bootstrap.php --filter test* test/unit
+- ./vendor/bin/phpunit . --bootstrap ./test/unit/bootstrap.php --filter test* test/unit
 php:
 - 5.4
 - 5.5
