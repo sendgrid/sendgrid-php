@@ -13,9 +13,6 @@
 namespace SendGrid;
 
 require dirname(__DIR__).'/vendor/autoload.php';
-if(getenv('TRAVIS')) {
-    require dirname(__DIR__).'/vendor/sendgrid/php-http-client/lib/SendGrid/client.php';
-}
 
 /**
   * Interface to the SendGrid Web API
