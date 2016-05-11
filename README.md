@@ -1,5 +1,4 @@
 [![BuildStatus](https://travis-ci.org/sendgrid/sendgrid-php.svg?branch=v3beta)](https://travis-ci.org/sendgrid/sendgrid-php)
-[![Latest Stable Version](https://poser.pugx.org/sendgrid/sendgrid/version.svg)](https://packagist.org/packages/sendgrid/sendgrid)
 
 **This library allows you to quickly and easily use the SendGrid Web API via PHP.**
 
@@ -18,7 +17,7 @@ Add SendGrid to your `composer.json` file. If you are not using [Composer](http:
 ```json
 {
   "require": {
-    "sendgrid/sendgrid": "~4.0"
+    "sendgrid/sendgrid": "~5.0"
   }
 }
 ```
