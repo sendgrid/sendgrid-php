@@ -40,7 +40,7 @@ class SendGrid
             'User-Agent: sendgrid/' . $this->version . ';php'
             );
         $host = isset($options['host']) ? $options['host'] : 'https://api.sendgrid.com';
-        $this->client = new SendGrid\Client($host, $headers, '/v3', null);
+        $this->client = new \SendGrid\Client($host, $headers, '/v3', null);
     }
 
     public static function register_autoloader()
