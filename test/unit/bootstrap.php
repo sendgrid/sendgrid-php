@@ -1,9 +1,9 @@
 <?php
-require __DIR__ . '/../../vendor/autoload.php';
 include(dirname(dirname(__FILE__)) . '/../lib/SendGrid.php');
 include(dirname(dirname(__FILE__)) . '/../lib/helpers/mail/Mail.php');
+require __DIR__ . '/../../vendor/autoload.php';
 
-SendGrid::register_autoloader();
+//SendGrid::register_autoloader();
 
 function autoload_tests($class)
 {

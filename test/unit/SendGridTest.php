@@ -1,6 +1,7 @@
 <?php
+namespace SendGrid;
 
-class SendGridTest_SendGrid extends PHPUnit_Framework_TestCase
+class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
 {
     public function testVersion()
     {
@@ -11,7 +12,7 @@ class SendGridTest_SendGrid extends PHPUnit_Framework_TestCase
     public function testSendGrid()
     {
         $apiKey = "SENDGRID_API_KEY";
-        $sg = new \SendGrid($apiKey);
+        $sg = new SendGrid($apiKey);
         $headers = array(
             'Content-Type: application/json',
             'Authorization: Bearer '.$apiKey,
@@ -22,7 +23,7 @@ class SendGridTest_SendGrid extends PHPUnit_Framework_TestCase
         $this->assertEquals($sg->client->version, "/v3");
 
         $apiKey = "SENDGRID_API_KEY";
-        $sg2 = new \SendGrid($apiKey, array('host' => 'https://api.test.com'));
+        $sg2 = new SendGrid($apiKey, array('host' => 'https://api.test.com'));
         $this->assertEquals($sg2->client->host, "https://api.test.com");
     }
 }
