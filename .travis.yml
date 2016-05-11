@@ -1,7 +1,7 @@
 language: php
 before_script:
 - phpenv local 5.4
-- composer install --dev --no-interaction
+- composer install
 - phpenv local --unset
 - cd test/unit
 script:
