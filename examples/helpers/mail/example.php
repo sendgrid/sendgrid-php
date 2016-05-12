@@ -8,12 +8,12 @@ require  __DIR__ . '/../../../lib/helpers/mail/Mail.php';
 
 function helloEmail()
 {
-    $from = new Email(null, "dx@sendgrid.com");
+    $from = new Email(null, "test@example.com");
     $subject = "Hello World from the SendGrid PHP Library";
-    $to = new Email(null, "elmer.thomas@sendgrid.com");
+    $to = new Email(null, "test@example.com");
     $content = new Content("text/plain", "some text here");
     $mail = new Mail($from, $subject, $to, $content);
-    $to = new Email(null, "elmer.thomas+add_second_email@sendgrid.com");
+    $to = new Email(null, "test2@example.com");
     $mail->personalization[0]->addTo($to);
 
     //echo json_encode($mail, JSON_PRETTY_PRINT), "\n";
@@ -24,52 +24,52 @@ function kitchenSink()
 {
     $mail = new Mail();
 
-    $email = new Email("DX", "dx@sendgrid.com");
+    $email = new Email("DX", "test@example.com");
     $mail->setFrom($email);
 
     $mail->setSubject("Hello World from the SendGrid PHP Library");
 
     $personalization = new Personalization();
-    $email = new Email("Elmer Thomas", "elmer.thomas@sendgrid.com");
+    $email = new Email("Example User", "test1@example.com");
     $personalization->addTo($email);
-    $email = new Email("Elmer Thomas Alias", "elmer.thomas@gmail.com");
+    $email = new Email("Example User", "test2@example.com");
     $personalization->addTo($email);
-    $email = new Email("Matt Bernier", "matt.bernier@sendgrid.com");
+    $email = new Email("Example User", "test3@example.com");
     $personalization->addCc($email);
-    $email = new Email("Eric Shallock", "eric.shallock@gmail.com");
+    $email = new Email("Example User", "test4@example.com");
     $personalization->addCc($email);
-    $email = new Email("DX Matt Bernier", "matt.bernier+dx@sendgrid.com");
+    $email = new Email("Example User", "test5@example.com");
     $personalization->addBcc($email);
-    $email = new Email("DX Eric Shallock", "eric.shallock+dx@gmail.com");
+    $email = new Email("Example User", "test6@example.com");
     $personalization->addBcc($email);
     $personalization->setSubject("Hello World from the SendGrid PHP Library");
     $personalization->addHeader("X-Test", "test");
     $personalization->addHeader("X-Mock", "true");
-    $personalization->addSubstitution("%name%", "Tim");
-    $personalization->addSubstitution("%city%", "Riverside");
+    $personalization->addSubstitution("%name%", "Example User");
+    $personalization->addSubstitution("%city%", "Denver");
     $personalization->addCustomArg("user_id", "343");
     $personalization->addCustomArg("type", "marketing");
     $personalization->setSendAt(1443636843);
     $mail->addPersonalization($personalization);
 
     $personalization2 = new Personalization();
-    $email = new Email("Elmer Thomas", "elmer.thomas@sendgrid.com");
+    $email = new Email("Example User", "test1@example.com");
     $personalization2->addTo($email);
-    $email = new Email("Elmer Thomas Alias", "elmer.thomas@gmail.com");
+    $email = new Email("Example User", "test2@example.com");
     $personalization2->addTo($email);
-    $email = new Email("Matt Bernier", "matt.bernier@sendgrid.com");
+    $email = new Email("Example User", "test3@example.com");
     $personalization2->addCc($email);
-    $email = new Email("Eric Shallock", "eric.shallock@gmail.com");
+    $email = new Email("Example User", "test4@example.com");
     $personalization2->addCc($email);
-    $email = new Email("DX Matt Bernier", "matt.bernier+dx@sendgrid.com");
+    $email = new Email("Example User", "test5@example.com");
     $personalization2->addBcc($email);
-    $email = new Email("DX Eric Shallock", "eric.shallock+dx@gmail.com");
+    $email = new Email("Example User", "test6@example.com");
     $personalization2->addBcc($email);
     $personalization2->setSubject("Hello World from the SendGrid PHP Library");
     $personalization2->addHeader("X-Test", "test");
     $personalization2->addHeader("X-Mock", "true");
-    $personalization2->addSubstitution("%name%", "Tim");
-    $personalization2->addSubstitution("%city%", "Riverside");
+    $personalization2->addSubstitution("%name%", "Example User");
+    $personalization2->addSubstitution("%city%", "Denver");
     $personalization2->addCustomArg("user_id", "343");
     $personalization2->addCustomArg("type", "marketing");
     $personalization2->setSendAt(1443636843);
@@ -125,7 +125,7 @@ function kitchenSink()
     $mail_settings = new MailSettings();
     $bcc_settings = new BccSettings();
     $bcc_settings->setEnable(true);
-    $bcc_settings->setEmail("dx@sendgrid.com");
+    $bcc_settings->setEmail("test@example.com");
     $mail_settings->setBccSettings($bcc_settings);
     $sandbox_mode = new SandBoxMode();
     $sandbox_mode->setEnable(true);
@@ -170,7 +170,7 @@ function kitchenSink()
     $tracking_settings->setGanalytics($ganalytics);
     $mail->setTrackingSettings($tracking_settings);
 
-    $reply_to = new ReplyTo("dx+reply@sendgrid.com");
+    $reply_to = new ReplyTo("test@example.com");
     $mail->setReplyTo($reply_to);
 
     //echo json_encode($mail, JSON_PRETTY_PRINT), "\n";

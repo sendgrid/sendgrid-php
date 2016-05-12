@@ -136,11 +136,6 @@ Generally, we follow the style guidelines as suggested by the official language.
 
 Please run your code through [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer)
 
-### Directory Structure
-
-* `examples` for example calls
-* `test/unit`, for all tests
-
 ## Creating a Pull Request<a name="creating_a_pull_request"></a>
 
 1. [Fork](https://help.github.com/fork-a-repo/) the project, clone your fork,

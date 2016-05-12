@@ -12,6 +12,48 @@ By using this endpoint, you accept that you may encounter bugs and that the endp
 
 # Installation
 
+## Environment Variables
+
+First, get your free SendGrid account [here](https://sendgrid.com/free?source=sendgrid-php).
+
+Next, update your environment with your [SENDGRID_API_KEY](https://app.sendgrid.com/settings/api_keys).
+
+```bash
+echo "export SENDGRID_API_KEY='YOUR_API_KEY'" > sendgrid.env
+echo "sendgrid.env" >> .gitignore
+source ./sendgrid.env
+```
+
+## TRYING OUT THE V3 BETA MAIL SEND
+
+```bash
+git clone -b v3beta --single-branch https://github.com/sendgrid/sendgrid-php.git
+cd sendgrid-php
+composer install
+```
+
+* Update the to and from [emails](https://github.com/sendgrid/sendgrid-php/blob/v3beta/examples/helpers/mail/example.php#L11).
+
+```bash
+php examples/helpers/mail/example.php
+```
+
+## TRYING OUT THE V3 BETA WEB API
+
+```bash
+git clone -b v3beta --single-branch https://github.com/sendgrid/sendgrid-php.git
+```
+
+* Check out the documentation for [Web API v3 endpoints](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html).
+* Review the corresponding [examples](https://github.com/sendgrid/sendgrid-php/blob/v3beta/examples).
+* From the root directory of this repo, use
+```php
+require './vendor/autoload.php';
+require './lib/SendGrid.php';
+```
+
+## Once we are out of v3 BETA, the following will apply
+
 Add SendGrid to your `composer.json` file. If you are not using [Composer](http://getcomposer.org), you should be. It's an excellent way to manage dependencies in your PHP application.
 
 ```json
@@ -46,18 +88,6 @@ Previous versions of the library can be found in the [version index](https://sen
 
 - [php-HTTP-Client](https://github.com/sendgrid/php-http-client)
 
-## Environment Variables
-
-First, get your free SendGrid account [here](https://sendgrid.com/free?source=sendgrid-php).
-
-Next, update your environment with your [SENDGRID_API_KEY](https://app.sendgrid.com/settings/api_keys).
-
-```bash
-echo "export SENDGRID_API_KEY='YOUR_API_KEY'" > sendgrid.env
-echo "sendgrid.env" >> .gitignore
-source ./sendgrid.env
-```
-
 # Quick Start
 
 ## Hello Email
@@ -69,9 +99,9 @@ require dirname(__DIR__).'/vendor/autoload.php';
 require dirname(__DIR__).'/lib/SendGrid.php';
 require dirname(__DIR__).'/lib/helpers/mail/Mail.php';
 
-$from = new Email(null, "dx@sendgrid.com");
+$from = new Email(null, "test@example.com");
 $subject = "Hello World from the SendGrid PHP Library";
-$to = new Email(null, "elmer.thomas@sendgrid.com");
+$to = new Email(null, "test@example.com");
 $content = new Content("text/plain", "some text here");
 $mail = new Mail($from, $subject, $to, $content);
 

@@ -7,11 +7,11 @@ class MailTest_Mail extends \PHPUnit_Framework_TestCase
     {
         $mail = new Mail();
 
-        $email = new Email(null, "dx@sendgrid.com");
+        $email = new Email(null, "test@example.com");
         $mail->setFrom($email);
 
         $personalization = new Personalization();
-        $email = new Email(null, "elmer.thomas@sendgrid.com");
+        $email = new Email(null, "test@example.com");
         $personalization->addTo($email);
         $mail->addPersonalization($personalization);
 
@@ -24,59 +24,59 @@ class MailTest_Mail extends \PHPUnit_Framework_TestCase
 
         $json = json_encode($mail);
 
-        $this->assertEquals($json, '{"from":{"email":"dx@sendgrid.com"},"personalizations":[{"to":[{"email":"elmer.thomas@sendgrid.com"}]}],"subject":"Hello World from the SendGrid PHP Library","content":[{"type":"text\/plain","value":"some text here"},{"type":"text\/html","value":"<html><body>some text here<\/body><\/html>"}]}');
+        $this->assertEquals($json, '{"from":{"email":"test@example.com"},"personalizations":[{"to":[{"email":"test@example.com"}]}],"subject":"Hello World from the SendGrid PHP Library","content":[{"type":"text\/plain","value":"some text here"},{"type":"text\/html","value":"<html><body>some text here<\/body><\/html>"}]}');
     }
 
     public function testKitchenSinkExample()
     {
         $mail = new Mail();
 
-        $email = new Email("DX", "dx@sendgrid.com");
+        $email = new Email("DX", "test@example.com");
         $mail->setFrom($email);
 
         $mail->setSubject("Hello World from the SendGrid PHP Library");
 
         $personalization = new Personalization();
-        $email = new Email("Elmer Thomas", "elmer.thomas@sendgrid.com");
+        $email = new Email("Example User", "test@example.com");
         $personalization->addTo($email);
-        $email = new Email("Elmer Thomas Alias", "elmer.thomas@gmail.com");
+        $email = new Email("Example User", "test@example.com");
         $personalization->addTo($email);
-        $email = new Email("Matt Bernier", "matt.bernier@sendgrid.com");
+        $email = new Email("Example User", "test@example.com");
         $personalization->addCc($email);
-        $email = new Email("Eric Shallock", "eric.shallock@gmail.com");
+        $email = new Email("Example User", "test@example.com");
         $personalization->addCc($email);
-        $email = new Email("DX Matt Bernier", "matt.bernier+dx@sendgrid.com");
+        $email = new Email("Example User", "test@example.com");
         $personalization->addBcc($email);
-        $email = new Email("DX Eric Shallock", "eric.shallock+dx@gmail.com");
+        $email = new Email("Example User", "test@example.com");
         $personalization->addBcc($email);
         $personalization->setSubject("Hello World from the SendGrid PHP Library");
         $personalization->addHeader("X-Test", "test");
         $personalization->addHeader("X-Mock", "true");
-        $personalization->addSubstitution("%name%", "Tim");
-        $personalization->addSubstitution("%city%", "Riverside");
+        $personalization->addSubstitution("%name%", "Example User");
+        $personalization->addSubstitution("%city%", "Denver");
         $personalization->addCustomArg("user_id", "343");
         $personalization->addCustomArg("type", "marketing");
         $personalization->setSendAt(1443636843);
         $mail->addPersonalization($personalization);
 
         $personalization2 = new Personalization();
-        $email = new Email("Elmer Thomas", "elmer.thomas@sendgrid.com");
+        $email = new Email("Example User", "test@example.com");
         $personalization2->addTo($email);
-        $email = new Email("Elmer Thomas Alias", "elmer.thomas@gmail.com");
+        $email = new Email("Example User", "test@example.com");
         $personalization2->addTo($email);
-        $email = new Email("Matt Bernier", "matt.bernier@sendgrid.com");
+        $email = new Email("Example User", "test@example.com");
         $personalization2->addCc($email);
-        $email = new Email("Eric Shallock", "eric.shallock@gmail.com");
+        $email = new Email("Example User", "test@example.com");
         $personalization2->addCc($email);
-        $email = new Email("DX Matt Bernier", "matt.bernier+dx@sendgrid.com");
+        $email = new Email("Example User", "test@example.com");
         $personalization2->addBcc($email);
-        $email = new Email("DX Eric Shallock", "eric.shallock+dx@gmail.com");
+        $email = new Email("Example User", "test@example.com");
         $personalization2->addBcc($email);
         $personalization2->setSubject("Hello World from the SendGrid PHP Library");
         $personalization2->addHeader("X-Test", "test");
         $personalization2->addHeader("X-Mock", "true");
-        $personalization2->addSubstitution("%name%", "Tim");
-        $personalization2->addSubstitution("%city%", "Riverside");
+        $personalization2->addSubstitution("%name%", "Example User");
+        $personalization2->addSubstitution("%city%", "Denver");
         $personalization2->addCustomArg("user_id", "343");
         $personalization2->addCustomArg("type", "marketing");
         $personalization2->setSendAt(1443636843);
@@ -129,7 +129,7 @@ class MailTest_Mail extends \PHPUnit_Framework_TestCase
         $mail_settings = new MailSettings();
         $bcc_settings = new BccSettings();
         $bcc_settings->setEnable(True);
-        $bcc_settings->setEmail("dx@sendgrid.com");
+        $bcc_settings->setEmail("test@example.com");
         $mail_settings->setBccSettings($bcc_settings);
         $sandbox_mode = new SandBoxMode();
         $sandbox_mode->setEnable(True);
@@ -174,11 +174,11 @@ class MailTest_Mail extends \PHPUnit_Framework_TestCase
         $tracking_settings->setGanalytics($ganalytics);
         $mail->setTrackingSettings($tracking_settings);
 
-        $reply_to = new ReplyTo("dx+reply@sendgrid.com");
+        $reply_to = new ReplyTo("test@example.com");
         $mail->setReplyTo($reply_to);
 
         $json = json_encode($mail);
 
-        $this->assertEquals($json, '{"from":{"name":"DX","email":"dx@sendgrid.com"},"personalizations":[{"to":[{"name":"Elmer Thomas","email":"elmer.thomas@sendgrid.com"},{"name":"Elmer Thomas Alias","email":"elmer.thomas@gmail.com"}],"cc":[{"name":"Matt Bernier","email":"matt.bernier@sendgrid.com"},{"name":"Eric Shallock","email":"eric.shallock@gmail.com"}],"bcc":[{"name":"DX Matt Bernier","email":"matt.bernier+dx@sendgrid.com"},{"name":"DX Eric Shallock","email":"eric.shallock+dx@gmail.com"}],"subject":"Hello World from the SendGrid PHP Library","headers":{"X-Test":"test","X-Mock":"true"},"substitutions":{"%name%":"Tim","%city%":"Riverside"},"custom_args":{"user_id":"343","type":"marketing"},"send_at":1443636843},{"to":[{"name":"Elmer Thomas","email":"elmer.thomas@sendgrid.com"},{"name":"Elmer Thomas Alias","email":"elmer.thomas@gmail.com"}],"cc":[{"name":"Matt Bernier","email":"matt.bernier@sendgrid.com"},{"name":"Eric Shallock","email":"eric.shallock@gmail.com"}],"bcc":[{"name":"DX Matt Bernier","email":"matt.bernier+dx@sendgrid.com"},{"name":"DX Eric Shallock","email":"eric.shallock+dx@gmail.com"}],"subject":"Hello World from the SendGrid PHP Library","headers":{"X-Test":"test","X-Mock":"true"},"substitutions":{"%name%":"Tim","%city%":"Riverside"},"custom_args":{"user_id":"343","type":"marketing"},"send_at":1443636843}],"subject":"Hello World from the SendGrid PHP Library","content":[{"type":"text\/plain","value":"some text here"},{"type":"text\/html","value":"<html><body>some text here<\/body><\/html>"}],"attachments":[{"content":"TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2NpbmcgZWxpdC4gQ3JhcyBwdW12","type":"application\/pdf","filename":"balance_001.pdf","disposition":"attachment","content_id":"Balance Sheet"},{"content":"BwdW","type":"image\/png","filename":"banner.png","disposition":"inline","content_id":"Banner"}],"template_id":"439b6d66-4408-4ead-83de-5c83c2ee313a","sections":{"%section1%":"Substitution Text for Section 1","%section2%":"Substitution Text for Section 2"},"headers":{"X-Test1":"1","X-Test2":"2"},"categories":["May","2016"],"custom_args":{"campaign":"welcome","weekday":"morning"},"send_at":1443636842,"asm":{"group_id":99,"groups_to_display":[4,5,6,7,8]},"ip_pool_name":"23","mail_settings":{"bcc":{"enable":true,"email":"dx@sendgrid.com"},"bypass_list_management":{"enable":true},"footer":{"enable":true,"text":"Footer Text","html":"<html><body>Footer Text<\/body><\/html>"},"sandbox_mode":{"enable":true},"spam_check":{"enable":true,"threshold":1,"post_to_url":"https:\/\/spamcatcher.sendgrid.com"}},"tracking_settings":{"click_tracking":{"enable":true,"enable_text":true},"open_tracking":{"enable":true,"substitution_tag":"Optional tag to replace with the open image in the body of the message"},"subscription_tracking":{"enable":true,"text":"text to insert into the text\/plain portion of the message","html":"<html><body>html to insert into the text\/html portion of the message<\/body><\/html>","substitution_tag":"Optional tag to replace with the open image in the body of the message"},"ganalytics":{"enable":true,"utm_source":"some source","utm_medium":"some medium","utm_term":"some term","utm_content":"some content","utm_campaign":"some name"}},"reply_to":{"email":"dx+reply@sendgrid.com"}}');
+        $this->assertEquals($json, '{"from":{"name":"DX","email":"test@example.com"},"personalizations":[{"to":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"cc":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"bcc":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"subject":"Hello World from the SendGrid PHP Library","headers":{"X-Test":"test","X-Mock":"true"},"substitutions":{"%name%":"Example User","%city%":"Denver"},"custom_args":{"user_id":"343","type":"marketing"},"send_at":1443636843},{"to":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"cc":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"bcc":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"subject":"Hello World from the SendGrid PHP Library","headers":{"X-Test":"test","X-Mock":"true"},"substitutions":{"%name%":"Example User","%city%":"Denver"},"custom_args":{"user_id":"343","type":"marketing"},"send_at":1443636843}],"subject":"Hello World from the SendGrid PHP Library","content":[{"type":"text\/plain","value":"some text here"},{"type":"text\/html","value":"<html><body>some text here<\/body><\/html>"}],"attachments":[{"content":"TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2NpbmcgZWxpdC4gQ3JhcyBwdW12","type":"application\/pdf","filename":"balance_001.pdf","disposition":"attachment","content_id":"Balance Sheet"},{"content":"BwdW","type":"image\/png","filename":"banner.png","disposition":"inline","content_id":"Banner"}],"template_id":"439b6d66-4408-4ead-83de-5c83c2ee313a","sections":{"%section1%":"Substitution Text for Section 1","%section2%":"Substitution Text for Section 2"},"headers":{"X-Test1":"1","X-Test2":"2"},"categories":["May","2016"],"custom_args":{"campaign":"welcome","weekday":"morning"},"send_at":1443636842,"asm":{"group_id":99,"groups_to_display":[4,5,6,7,8]},"ip_pool_name":"23","mail_settings":{"bcc":{"enable":true,"email":"test@example.com"},"bypass_list_management":{"enable":true},"footer":{"enable":true,"text":"Footer Text","html":"<html><body>Footer Text<\/body><\/html>"},"sandbox_mode":{"enable":true},"spam_check":{"enable":true,"threshold":1,"post_to_url":"https:\/\/spamcatcher.sendgrid.com"}},"tracking_settings":{"click_tracking":{"enable":true,"enable_text":true},"open_tracking":{"enable":true,"substitution_tag":"Optional tag to replace with the open image in the body of the message"},"subscription_tracking":{"enable":true,"text":"text to insert into the text\/plain portion of the message","html":"<html><body>html to insert into the text\/html portion of the message<\/body><\/html>","substitution_tag":"Optional tag to replace with the open image in the body of the message"},"ganalytics":{"enable":true,"utm_source":"some source","utm_medium":"some medium","utm_term":"some term","utm_content":"some content","utm_campaign":"some name"}},"reply_to":{"email":"test@example.com"}}');
     }
 }
