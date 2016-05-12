@@ -95,9 +95,7 @@ Previous versions of the library can be found in the [version index](https://sen
 ```php
 namespace SendGrid;
 
-require dirname(__DIR__).'/vendor/autoload.php';
-require dirname(__DIR__).'/lib/SendGrid.php';
-require dirname(__DIR__).'/lib/helpers/mail/Mail.php';
+require 'vendor/autoload.php';
 
 $from = new Email(null, "test@example.com");
 $subject = "Hello World from the SendGrid PHP Library";
@@ -119,8 +117,7 @@ echo $response->responseHeaders();
 ```php
 namespace SendGrid;
 
-require dirname(__DIR__).'/vendor/autoload.php';
-require dirname(__DIR__).'/lib/SendGrid.php';
+require 'vendor/autoload.php';
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey, array('host' => 'https://api.sendgrid.com'));

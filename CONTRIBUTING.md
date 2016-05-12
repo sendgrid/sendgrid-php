@@ -119,7 +119,7 @@ The interface to the SendGrid API.
 
 All PRs require passing tests before the PR will be reviewed.
 
-All test files are in the `[tests](https://github.com/sendgrid/sendgrid-php/tree/master/test/unit)` directory.
+All test files are in the [`tests`](https://github.com/sendgrid/sendgrid-php/tree/master/test/unit) directory.
 
 For the purposes of contributing to this repo, please update the [`SendGridTest.php`](https://github.com/sendgrid/sendgrid-php/blob/master/test/unit/SendGridTest.php) file with unit tests as you modify the code.
 
