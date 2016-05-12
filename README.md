@@ -38,6 +38,8 @@ composer install
 php examples/helpers/mail/example.php
 ```
 
+* Check out the documentation for [Web API v3 /mail/send/beta endpoint](https://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/index.html).
+
 ## TRYING OUT THE V3 BETA WEB API
 
 ```bash
