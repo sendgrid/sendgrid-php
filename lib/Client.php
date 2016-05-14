@@ -4,6 +4,7 @@ require 'resources/api_keys.php';
 require 'resources/asm_groups.php';
 require 'resources/asm_suppressions.php';
 require 'resources/global_stats.php';
+require 'resources/templates.php';
 
 class Client
 {
@@ -21,6 +22,7 @@ class Client
         $api_keys,
         $asm_groups,
         $asm_suppressions,
+        $templates,
         $version = self::VERSION;
 
     public function __construct($apiKey, $options = array())
@@ -50,6 +52,7 @@ class Client
         $this->asm_groups = new ASMGroups($this);
         $this->asm_suppressions = new ASMSuppressions($this);
         $this->global_stats = new GlobalStats($this);
+        $this->templates = new Templates($this);
     }
 
     /**

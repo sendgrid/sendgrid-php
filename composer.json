@@ -20,6 +20,7 @@
   },
   "type": "library",
   "autoload": {
-    "psr-0": {"SendGrid": "lib/"}
+    "psr-0": {"SendGrid": "lib/"},
+    "classmap": ["lib/Client.php"]
   }
 }
