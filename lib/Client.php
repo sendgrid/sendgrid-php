@@ -93,10 +93,16 @@ class Client
      * @return Guzzle Response object: http://guzzle3.readthedocs.org/http-client/response.html
      */
     
-    public function postRequest($api, $data)
+    public function postRequest($api, $data, $headers=NULL)
     {
         $url = $this->url . $api->getEndpoint();
-        $response = $this->client->post($url, null, json_encode($data))->send();
+        $request = $this->client->post($url, null, json_encode($data));
+        if ($headers != NULL) {
+            foreach ($headers as $k => $v ){
+                $request->setHeader($k, $v);
+            }
+        }
+        $response = $request->send();
         return $response;
     }
     

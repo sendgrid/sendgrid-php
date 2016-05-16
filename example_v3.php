@@ -9,7 +9,8 @@ $sendgrid = new Client($sendgrid_apikey);
 
 $api_key = "My API Key";
 $scopes = array("mail.send", "alerts.create", "alerts.read");
-$response = $sendgrid->api_keys->post($api_key, $scopes);
+$headers = array('X-Header' => 'header', 'X-Header2' => 'header2');
+$response = $sendgrid->api_keys->post($api_key, $scopes, $headers);
 print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
 
