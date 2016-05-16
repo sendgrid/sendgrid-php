@@ -21,7 +21,8 @@ class Email
         $content,
         $headers,
         $smtpapi,
-        $attachments;
+        $attachments,
+        $attachmentsByContent;
 
     public function __construct()
     {
@@ -422,6 +423,38 @@ class Email
         return $this->attachments;
     }
 
+    /**
+     * @author Pankaj Garg <pankaj.garg@kayako.com>
+     *
+     * @param string $fileName
+     * @param string $content
+     * @param string $cid (OPTIONAL)
+     *
+     * @return Email
+     * @throws \Exception
+     */
+    public function addAttachmentByContent($fileName, $content, $cid = null)
+    {
+        if (empty($fileName)) {
+            throw new \Exception('File name cannot be empty');
+        }
+
+        $this->attachmentsByContent[] = array('file_name' => $fileName,
+                                              'content'   => $content,
+                                              'cid'       => $cid);
+
+        return $this;
+    }
+
+    /**
+     * @author Pankaj Garg <pankaj.garg@kayako.com>
+     * @return array
+     */
+    public function getAttachmentsByContent()
+    {
+        return $this->attachmentsByContent;
+    }
+
     public function removeAttachment($file)
     {
         $this->_removeFromList($this->attachments, $file, "file");
@@ -671,6 +704,19 @@ class Email
                 // }
 
                 $web['files[' . $full_filename . ']'] = $contents;
+            };
+        }
+
+        // Add attachments added using file content
+        if ($this->getAttachmentsByContent()) {
+            foreach ($this->getAttachmentsByContent() as $contentFile) {
+                $filename = $contentFile['file_name'];
+
+                if (array_key_exists('cid', $contentFile)) {
+                    $web['content[' . $filename . ']'] = $contentFile['cid'];
+                }
+
+                $web['files[' . $filename . ']'] = $contentFile['content'];
             };
         }
 
