@@ -366,6 +366,20 @@ class SendGridTest_Email extends PHPUnit_Framework_TestCase
         $this->assertEquals('my_id', $email->smtpapi->asm_group_id);
     }
 
+    public function testSetAsmGroupsToDisplay()
+    {
+        $email = new SendGrid\Email();
+
+        $ids = array(1,2,3);
+
+        $email->setAsmGroupsToDisplay($ids);
+        $this->assertEquals(count($ids), count($email->smtpapi->asm_groups_to_display));
+
+        for($i = 0; $i < count($ids); $i++) {
+            $this->assertEquals($ids[$i], $email->smtpapi->asm_groups_to_display[$i]);
+        }
+    }
+
     public function testSetText()
     {
         $email = new SendGrid\Email();
