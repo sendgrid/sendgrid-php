@@ -7,3 +7,4 @@ vendor
 sendgrid-php.php
 composer.phar
 example.php
+.idea/
