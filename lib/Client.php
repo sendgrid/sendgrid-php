@@ -1,10 +1,5 @@
 <?php
 
-require 'resources/api_keys.php';
-require 'resources/asm_groups.php';
-require 'resources/asm_suppressions.php';
-require 'resources/global_stats.php';
-
 class Client
 {
     const VERSION = '4.0.4';
@@ -46,10 +41,10 @@ class Client
           $this->endpoint = $this->options['endpoint'];
         }
         $this->client = $this->prepareHttpClient();
-        $this->api_keys = new APIKeys($this);
-        $this->asm_groups = new ASMGroups($this);
-        $this->asm_suppressions = new ASMSuppressions($this);
-        $this->global_stats = new GlobalStats($this);
+        $this->api_keys = new \Resources\APIKeys($this);
+        $this->asm_groups = new \Resources\ASMGroups($this);
+        $this->asm_suppressions = new \Resources\ASMSuppressions($this);
+        $this->global_stats = new \Resources\GlobalStats($this);
     }
 
     /**
@@ -124,22 +119,5 @@ class Client
         $url = $this->url . $api->getEndpoint();
         $response = $this->client->delete($url)->send();
         return $response;
-    }
-
-    public static function register_autoloader()
-    {
-        spl_autoload_register(array('Client', 'autoloader'));
-    }
-
-    public static function autoloader($class)
-    {
-        // Check that the class starts with 'Client'
-        if ($class == 'Client' || stripos($class, 'Client\\') === 0) {
-            $file = str_replace('\\', '/', $class);
-
-            if (file_exists(dirname(__FILE__) . '/' . $file . '.php')) {
-                require_once(dirname(__FILE__) . '/' . $file . '.php');
-            }
-        }
     }
 }

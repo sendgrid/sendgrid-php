@@ -141,21 +141,4 @@ class SendGrid
 
         return $response;
     }
-
-    public static function register_autoloader()
-    {
-        spl_autoload_register(array('SendGrid', 'autoloader'));
-    }
-
-    public static function autoloader($class)
-    {
-        // Check that the class starts with 'SendGrid'
-        if ($class == 'SendGrid' || stripos($class, 'SendGrid\\') === 0) {
-            $file = str_replace('\\', '/', $class);
-
-            if (file_exists(dirname(__FILE__) . '/' . $file . '.php')) {
-                require_once(dirname(__FILE__) . '/' . $file . '.php');
-            }
-        }
-    }
 }
