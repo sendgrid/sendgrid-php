@@ -422,6 +422,104 @@ print("Status Code: " . $response->getStatusCode() . "\n");
 print("Body: " . $response->getBody() . "\n");
 ```
 
+[Campaigns](https://sendgrid.com/docs/API_Reference/Web_API_v3/Marketing_Campaigns/campaigns.html)
+
+Create a Campaign [POST]
+
+```php
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$title   = "Test Newsletter #".time();
+$subject = "Testing #".time();
+$sender_id = SENDER_ID;
+$list_ids  = array(LIST_ID);
+$html_content = "<html><head><title></title></head><body><p>Hello this is your first name: [%first_name%]<BR>
+<BR><BR>
+Enjoy,<BR>[sender_name]</p>
+<BR><BR>
+<p><a href='[Unsubscribe]'>Unsubscribe From This List</a> | <a href='[Unsubscribe_Preferences]'>Manage Email Preferences</a></p>
+</body></html>";
+$response = $sendgrid->campaigns->create( $sender_id, $title, $subject, $list_ids, SUPPRESSION_GROUP_ID, $html_content );
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+
+Get all Campaigns [GET]
+
+```php
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$response = $sendgrid->campaigns->get();
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+
+View a Campaign [GET]
+
+```php
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$campaign_id = 999;
+$response = $sendgrid->campaigns->get($campaign_id);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+
+Delete a Campaign [DELETE]
+
+```php
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$campaignID = 999;
+$response = $sendgrid->campaigns->delete($campaignID);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+
+Update a Campaign [PATCH]
+
+```php
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$campaignID = 999;
+$title   = "Test Newsletter #".time();
+$subject = "Testing #".time();
+$sender_id = SENDER_ID;
+$list_ids  = array(LIST_ID);
+$html_content = "<html><head><title></title></head><body><p>Hello this is your first name: [%first_name%]<BR>
+<BR><BR>
+Enjoy,<BR>[sender_name]</p>
+<BR><BR>
+<p><a href='[Unsubscribe]'>Unsubscribe From This List</a> | <a href='[Unsubscribe_Preferences]'>Manage Email Preferences</a></p>
+</body></html>";
+$response = $sendgrid->campaigns->patch( $campaignID, $sender_id, $title, $subject, $list_ids, SUPPRESSION_GROUP_ID, $html_content );
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+
+Send a Campaign [POST]
+
+```php
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$campaignID = 999;
+$response = $sendgrid->campaigns->send($campaignID);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+
 ### SMTPAPI ###
 
 This library makes use of [sendgrid/smtpapi-php](https://github.com/sendgrid/smtpapi-php/) for all things related to the [X-SMTPAPI Header](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
