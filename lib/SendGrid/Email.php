@@ -21,8 +21,8 @@ class Email
         $content,
         $headers,
         $smtpapi,
-        $attachments;
-
+        $attachments,
+        $attachmentsRaw;
     public function __construct()
     {
         $this->fromName = false;
@@ -429,6 +429,25 @@ class Email
         return $this;
     }
 
+    public function setAttachmentRaw($raw_data, $filename , $cid = null)
+    {
+        $this->attachmentsRaw = array('filename' => $filename, 'raw_data' => $raw_data);
+
+        return $this;
+    }
+
+    public function addAttachmentRaw($raw_data, $filename, $cid = null)
+    {
+        $this->attachmentsRaw[] = array('filename' => $filename, 'raw_data' => $raw_data);
+
+        return $this;
+    }
+
+    public function getAttachmentsRaw()
+    {
+        return $this->attachmentsRaw;
+    }
+
     private function getAttachmentInfo($file, $custom_filename = null, $cid = null)
     {
         $info = pathinfo($file);
@@ -669,6 +688,18 @@ class Email
                 // if (class_exists('CurlFile', false)) { // php >= 5.5
                 // $contents = new \CurlFile($file, $extension, $filename);
                 // }
+
+                $web['files[' . $full_filename . ']'] = $contents;
+            };
+        }
+        if ($this->getAttachmentsRaw()) {
+            foreach ($this->getAttachmentsRaw() as $f) {
+                $full_filename = $f['filename'];
+                $contents = $f['raw_data'];
+                
+                if (array_key_exists('cid', $f)) {
+                    $web['content[' . $full_filename . ']'] = $f['cid'];
+                }
 
                 $web['files[' . $full_filename . ']'] = $contents;
             };
