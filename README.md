@@ -106,7 +106,7 @@ Previous versions of the library can be found in the [version index](https://sen
 
 ## Dependencies
 
-- The SendGrid Service, starting at the [free level](https://sendgrid.com/free?source=sendgrid-php))
+- The SendGrid Service, starting at the [free level](https://sendgrid.com/free?source=sendgrid-php)
 - [php-HTTP-Client](https://github.com/sendgrid/php-http-client)
 
 # Quick Start
