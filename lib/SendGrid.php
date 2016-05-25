@@ -10,9 +10,6 @@
   * @version   GIT: <git_id>
   * @link      http://packagist.org/packages/sendgrid/sendgrid
   */
-namespace SendGrid;
-
-require dirname(__DIR__).'/vendor/autoload.php';
 
 /**
   * Interface to the SendGrid Web API
@@ -42,23 +39,6 @@ class SendGrid
             'User-Agent: sendgrid/' . $this->version . ';php'
             );
         $host = isset($options['host']) ? $options['host'] : 'https://api.sendgrid.com';
-        $this->client = new Client($host, $headers, '/v3', null);
+        $this->client = new \SendGrid\Client($host, $headers, '/v3', null);
     }
-
-    public static function register_autoloader()
-    {
-        spl_autoload_register(array('SendGrid', 'autoloader'));
-    }
-
-    public static function autoloader($class)
-    {
-        // Check that the class starts with 'SendGrid'
-        if ($class == 'SendGrid' || stripos($class, 'SendGrid\\') === 0) {
-            $file = str_replace('\\', '/', $class);
-            if (file_exists(dirname(__FILE__) . '/' . $file . '.php')) {
-                require_once(dirname(__FILE__) . '/' . $file . '.php');
-            }
-        }
-    }
-
 }
