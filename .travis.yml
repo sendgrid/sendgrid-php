@@ -5,7 +5,7 @@ before_script:
 - phpenv local --unset
 - cd test/unit
 script:
-- ../../vendor/bin/phpunit . --bootstrap bootstrap.php --filter test*
+- "../../vendor/bin/phpunit . --bootstrap bootstrap.php --filter test*"
 after_script:
 - cd ..
 - phpenv local 5.4
@@ -21,14 +21,14 @@ env:
   - secure: j38xzMNmzYXR/JJdVumPmDoDVxb6FUDF497AuVPHowGh0egFW8XHWCOMeQWqWZI4Gg17pViQNIJ3xC6WBvob70AF8fsNm0+vxF2s7abXDMcbq5flLTS6ydKLgNu+na/RAkOBbTwxJAGIH/fQh8BH8iGKerCwoqf8sDErAge4NMw=
   - secure: h3HlxBOsNXBDrIJ0yl467ST6Q8R2TmbL7PltlPcRoHy5gAxn5UiDv5W2+6DSXrwQrTjOUunZ+O9ckcaQGQy1JNhGMwgIkJpyWAHDIHhTYGU289uUIDTHQW/soX0qHJSHSx3iMgDOIc7XnfTz6W7Nv1gYKZFedOMsZ5uBMeGyiXE=
   - secure: SKSl/RHFQNhGT7OUj7E0AbrQnuDhhCRI/4jC76mmzvy8EJBDgUNevAKJGtug+LVilHrlbk9fLC8rayPW6SGv0s3PowTGm8NMOc48aRBLOr7QRo/sMikJCmRuU6HWptr0NKuf2fq6lV94WDm/pDdyOSNyLga9/eaIDs/Sacp78sw=
-  - secure: CYhmQGIhXrefDruEOBzMo1jZ+NPyFjDqPeqsnLHoGcYhkbp3GW+fCPHEypRMG72K/f1+Vc2/6ka76dvu6/NpflO8ooyYKzXEhds/oemGUuvcsZdVOFeGeIu3h9lpdHgeOjB3N3l7rwJU0nFTk7Bmb0bY7AVH5qfFqLJ6syEfjVU=
+  - secure: TWensopm9VbcvfIGh4bkzrGIRrnJ/XCRqCGq95HU9LDBtlXOeV6yJ+cmbr/FsaZ6QIBFuvsnYZeDUhJYuVLF0WWVfNHLCrAn9ai9/yc7qkkszCpGfsMq7tqTsl8MRF8wc0JpNwEafW2gQvkwSunqhciqxx9B73z3cd4I7JCkTjs=
 notifications:
   hipchat:
     rooms:
       secure: l4RUOBY44kVhSxx54NU3cmvn598rRMB7Y272Ct/W0fBm1tdGncp42A/rwg7JkiZH9EWXs3tKtoSjqw5xT6QeScUGQDdykS5QVO8lEIkDRGD4WwQ3VDJmRy1+04WtgqFEK8SyYTCcCl4ZJ0rtOcJZgDMvigkOJuLxwGXTDuvfu1k=
     template:
-      - '<a href="https://travis-ci.org/%{repository}/builds/%{build_id}">%{repository}
-            Build %{build_number}</a> on branch <i>%{branch}</i> by %{author}: <strong>%{message}</strong>
-            <a href="https://github.com/%{repository}/commits/%{commit}">View on GitHub</a>'
+    - '<a href="https://travis-ci.org/%{repository}/builds/%{build_id}">%{repository}
+      Build %{build_number}</a> on branch <i>%{branch}</i> by %{author}: <strong>%{message}</strong>
+      <a href="https://github.com/%{repository}/commits/%{commit}">View on GitHub</a>'
     format: html
     notify: true
