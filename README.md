@@ -66,7 +66,7 @@ git clone -b v3beta --single-branch https://github.com/sendgrid/sendgrid-php.git
 
 * Check out the documentation for [Web API v3 endpoints](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html).
 * Review the corresponding [examples](https://github.com/sendgrid/sendgrid-php/blob/v3beta/examples).
-* From the root directory of this repo, use
+* From the root directory of this repo, replace `require 'vendor/autoload.php';` with:
 ```php
 require './vendor/autoload.php';
 require './lib/SendGrid.php';

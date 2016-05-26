@@ -9,7 +9,7 @@ $sg = new \SendGrid($apiKey);
 # Create a batch ID #
 # POST /mail/batch #
 
-$response = $this->sg->client->mail()->batch()->post();
+$response = $sg->client->mail()->batch()->post();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -19,7 +19,7 @@ echo $response->responseHeaders();
 # GET /mail/batch/{batch_id} #
 
 $batch_id = "test_url_param";
-$response = $this->sg->client->mail()->batch()->_($batch_id)->get();
+$response = $sg->client->mail()->batch()->_($batch_id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -72,21 +72,21 @@ $request_body = json_decode('{
   "mail_settings": {
     "bcc": {
       "email": "ben.doe@example.com", 
-      "enable": true
+      "enable": True
     }, 
     "bypass_list_management": {
-      "enable": true
+      "enable": True
     }, 
     "footer": {
-      "enable": true, 
+      "enable": True, 
       "html": "<p>Thanks</br>The SendGrid Team</p>", 
       "text": "Thanks,/n The SendGrid Team"
     }, 
     "sandbox_mode": {
-      "enable": false
+      "enable": False
     }, 
     "spam_check": {
-      "enable": true, 
+      "enable": True, 
       "post_to_url": "http://example.com/compliance", 
       "threshold": 3
     }
@@ -148,11 +148,11 @@ $request_body = json_decode('{
   "template_id": "[YOUR TEMPLATE ID GOES HERE]", 
   "tracking_settings": {
     "click_tracking": {
-      "enable": true, 
-      "enable_text": true
+      "enable": True, 
+      "enable_text": True
     }, 
     "ganalytics": {
-      "enable": true, 
+      "enable": True, 
       "utm_campaign": "[NAME OF YOUR REFERRER SOURCE]", 
       "utm_content": "[USE THIS SPACE TO DIFFERENTIATE YOUR EMAIL FROM ADS]", 
       "utm_medium": "[NAME OF YOUR MARKETING MEDIUM e.g. email]", 
@@ -160,18 +160,18 @@ $request_body = json_decode('{
       "utm_term": "[IDENTIFY PAID KEYWORDS HERE]"
     }, 
     "open_tracking": {
-      "enable": true, 
+      "enable": True, 
       "substitution_tag": "%opentrack"
     }, 
     "subscription_tracking": {
-      "enable": true, 
+      "enable": True, 
       "html": "If you would like to unsubscribe and stop receiving these emails <% clickhere %>.", 
       "substitution_tag": "<%click here%>", 
       "text": "If you would like to unsubscribe and stop receiveing these emails <% click here %>."
     }
   }
 }');
-$response = $this->sg->client->mail()->send()->beta()->post($request_body);
+$response = $sg->client->mail()->send()->beta()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();

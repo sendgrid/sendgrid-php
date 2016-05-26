@@ -9,7 +9,7 @@ $sg = new \SendGrid($apiKey);
 # Get a user's account information. #
 # GET /user/account #
 
-$response = $this->sg->client->user()->account()->get();
+$response = $sg->client->user()->account()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -18,7 +18,7 @@ echo $response->responseHeaders();
 # Retrieve your credit balance #
 # GET /user/credits #
 
-$response = $this->sg->client->user()->credits()->get();
+$response = $sg->client->user()->credits()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -30,7 +30,7 @@ echo $response->responseHeaders();
 $request_body = json_decode('{
   "email": "example@example.com"
 }');
-$response = $this->sg->client->user()->email()->put($request_body);
+$response = $sg->client->user()->email()->put($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -39,7 +39,7 @@ echo $response->responseHeaders();
 # Retrieve your account email address #
 # GET /user/email #
 
-$response = $this->sg->client->user()->email()->get();
+$response = $sg->client->user()->email()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -52,7 +52,7 @@ $request_body = json_decode('{
   "new_password": "new_password", 
   "old_password": "old_password"
 }');
-$response = $this->sg->client->user()->password()->put($request_body);
+$response = $sg->client->user()->password()->put($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -66,7 +66,7 @@ $request_body = json_decode('{
   "first_name": "Example", 
   "last_name": "User"
 }');
-$response = $this->sg->client->user()->profile()->patch($request_body);
+$response = $sg->client->user()->profile()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -75,7 +75,7 @@ echo $response->responseHeaders();
 # Get a user's profile #
 # GET /user/profile #
 
-$response = $this->sg->client->user()->profile()->get();
+$response = $sg->client->user()->profile()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -88,7 +88,7 @@ $request_body = json_decode('{
   "batch_id": "YOUR_BATCH_ID", 
   "status": "pause"
 }');
-$response = $this->sg->client->user()->scheduled_sends()->post($request_body);
+$response = $sg->client->user()->scheduled_sends()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -97,7 +97,7 @@ echo $response->responseHeaders();
 # Retrieve all scheduled sends #
 # GET /user/scheduled_sends #
 
-$response = $this->sg->client->user()->scheduled_sends()->get();
+$response = $sg->client->user()->scheduled_sends()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -110,7 +110,7 @@ $request_body = json_decode('{
   "status": "pause"
 }');
 $batch_id = "test_url_param";
-$response = $this->sg->client->user()->scheduled_sends()->_($batch_id)->patch($request_body);
+$response = $sg->client->user()->scheduled_sends()->_($batch_id)->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -120,7 +120,7 @@ echo $response->responseHeaders();
 # GET /user/scheduled_sends/{batch_id} #
 
 $batch_id = "test_url_param";
-$response = $this->sg->client->user()->scheduled_sends()->_($batch_id)->get();
+$response = $sg->client->user()->scheduled_sends()->_($batch_id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -130,7 +130,7 @@ echo $response->responseHeaders();
 # DELETE /user/scheduled_sends/{batch_id} #
 
 $batch_id = "test_url_param";
-$response = $this->sg->client->user()->scheduled_sends()->_($batch_id)->delete();
+$response = $sg->client->user()->scheduled_sends()->_($batch_id)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -140,10 +140,10 @@ echo $response->responseHeaders();
 # PATCH /user/settings/enforced_tls #
 
 $request_body = json_decode('{
-  "require_tls": true, 
-  "require_valid_cert": false
+  "require_tls": True, 
+  "require_valid_cert": False
 }');
-$response = $this->sg->client->user()->settings()->enforced_tls()->patch($request_body);
+$response = $sg->client->user()->settings()->enforced_tls()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -152,7 +152,7 @@ echo $response->responseHeaders();
 # Retrieve current Enforced TLS settings. #
 # GET /user/settings/enforced_tls #
 
-$response = $this->sg->client->user()->settings()->enforced_tls()->get();
+$response = $sg->client->user()->settings()->enforced_tls()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -164,7 +164,7 @@ echo $response->responseHeaders();
 $request_body = json_decode('{
   "username": "test_username"
 }');
-$response = $this->sg->client->user()->username()->put($request_body);
+$response = $sg->client->user()->username()->put($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -173,7 +173,7 @@ echo $response->responseHeaders();
 # Retrieve your username #
 # GET /user/username #
 
-$response = $this->sg->client->user()->username()->get();
+$response = $sg->client->user()->username()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -183,21 +183,21 @@ echo $response->responseHeaders();
 # PATCH /user/webhooks/event/settings #
 
 $request_body = json_decode('{
-  "bounce": true, 
-  "click": true, 
-  "deferred": true, 
-  "delivered": true, 
-  "dropped": true, 
-  "enabled": true, 
-  "group_resubscribe": true, 
-  "group_unsubscribe": true, 
-  "open": true, 
-  "processed": true, 
-  "spam_report": true, 
-  "unsubscribe": true, 
+  "bounce": True, 
+  "click": True, 
+  "deferred": True, 
+  "delivered": True, 
+  "dropped": True, 
+  "enabled": True, 
+  "group_resubscribe": True, 
+  "group_unsubscribe": True, 
+  "open": True, 
+  "processed": True, 
+  "spam_report": True, 
+  "unsubscribe": True, 
   "url": "url"
 }');
-$response = $this->sg->client->user()->webhooks()->event()->settings()->patch($request_body);
+$response = $sg->client->user()->webhooks()->event()->settings()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -206,7 +206,7 @@ echo $response->responseHeaders();
 # Retrieve Event Webhook settings #
 # GET /user/webhooks/event/settings #
 
-$response = $this->sg->client->user()->webhooks()->event()->settings()->get();
+$response = $sg->client->user()->webhooks()->event()->settings()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -218,7 +218,7 @@ echo $response->responseHeaders();
 $request_body = json_decode('{
   "url": "url"
 }');
-$response = $this->sg->client->user()->webhooks()->event()->test()->post($request_body);
+$response = $sg->client->user()->webhooks()->event()->test()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -227,7 +227,7 @@ echo $response->responseHeaders();
 # Retrieve Parse Webhook settings #
 # GET /user/webhooks/parse/settings #
 
-$response = $this->sg->client->user()->webhooks()->parse()->settings()->get();
+$response = $sg->client->user()->webhooks()->parse()->settings()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -237,7 +237,7 @@ echo $response->responseHeaders();
 # GET /user/webhooks/parse/stats #
 
 $query_params = json_decode('{"aggregated_by": "day", "limit": "test_string", "start_date": "2016-01-01", "end_date": "2016-04-01", "offset": "test_string"}');
-$response = $this->sg->client->user()->webhooks()->parse()->stats()->get(null, $query_params);
+$response = $sg->client->user()->webhooks()->parse()->stats()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();

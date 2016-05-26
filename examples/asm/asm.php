@@ -11,10 +11,10 @@ $sg = new \SendGrid($apiKey);
 
 $request_body = json_decode('{
   "description": "A group description", 
-  "is_default": false, 
+  "is_default": False, 
   "name": "A group name"
 }');
-$response = $this->sg->client->asm()->groups()->post($request_body);
+$response = $sg->client->asm()->groups()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -23,7 +23,7 @@ echo $response->responseHeaders();
 # Retrieve all suppression groups associated with the user. #
 # GET /asm/groups #
 
-$response = $this->sg->client->asm()->groups()->get();
+$response = $sg->client->asm()->groups()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -38,7 +38,7 @@ $request_body = json_decode('{
   "name": "Item Suggestions"
 }');
 $group_id = "test_url_param";
-$response = $this->sg->client->asm()->groups()->_($group_id)->patch($request_body);
+$response = $sg->client->asm()->groups()->_($group_id)->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -48,7 +48,7 @@ echo $response->responseHeaders();
 # GET /asm/groups/{group_id} #
 
 $group_id = "test_url_param";
-$response = $this->sg->client->asm()->groups()->_($group_id)->get();
+$response = $sg->client->asm()->groups()->_($group_id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -58,7 +58,7 @@ echo $response->responseHeaders();
 # DELETE /asm/groups/{group_id} #
 
 $group_id = "test_url_param";
-$response = $this->sg->client->asm()->groups()->_($group_id)->delete();
+$response = $sg->client->asm()->groups()->_($group_id)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -74,7 +74,7 @@ $request_body = json_decode('{
   ]
 }');
 $group_id = "test_url_param";
-$response = $this->sg->client->asm()->groups()->_($group_id)->suppressions()->post($request_body);
+$response = $sg->client->asm()->groups()->_($group_id)->suppressions()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -84,7 +84,7 @@ echo $response->responseHeaders();
 # GET /asm/groups/{group_id}/suppressions #
 
 $group_id = "test_url_param";
-$response = $this->sg->client->asm()->groups()->_($group_id)->suppressions()->get();
+$response = $sg->client->asm()->groups()->_($group_id)->suppressions()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -95,7 +95,7 @@ echo $response->responseHeaders();
 
 $group_id = "test_url_param";
         $email = "test_url_param";
-$response = $this->sg->client->asm()->groups()->_($group_id)->suppressions()->_($email)->delete();
+$response = $sg->client->asm()->groups()->_($group_id)->suppressions()->_($email)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -110,7 +110,7 @@ $request_body = json_decode('{
     "test2@example.com"
   ]
 }');
-$response = $this->sg->client->asm()->suppressions()->global()->post($request_body);
+$response = $sg->client->asm()->suppressions()->global()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -120,7 +120,7 @@ echo $response->responseHeaders();
 # GET /asm/suppressions/global/{email} #
 
 $email = "test_url_param";
-$response = $this->sg->client->asm()->suppressions()->global()->_($email)->get();
+$response = $sg->client->asm()->suppressions()->global()->_($email)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -130,7 +130,7 @@ echo $response->responseHeaders();
 # DELETE /asm/suppressions/global/{email} #
 
 $email = "test_url_param";
-$response = $this->sg->client->asm()->suppressions()->global()->_($email)->delete();
+$response = $sg->client->asm()->suppressions()->global()->_($email)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();

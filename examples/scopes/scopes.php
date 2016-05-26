@@ -9,7 +9,7 @@ $sg = new \SendGrid($apiKey);
 # Retrieve a list of scopes for which this user has access. #
 # GET /scopes #
 
-$response = $this->sg->client->scopes()->get();
+$response = $sg->client->scopes()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();

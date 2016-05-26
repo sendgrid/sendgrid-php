@@ -91,6 +91,12 @@ source ./sendgrid.env
 
 See the [examples folder](https://github.com/sendgrid/sendgrid-php/tree/v3beta/examples) to get started quickly.
 
+From the root directory of this repo, replace `require 'vendor/autoload.php';` with:
+```php
+require './vendor/autoload.php';
+require './lib/SendGrid.php';
+```
+
 <a name="understanding_the_codebase"></a>
 ## Understanding the Code Base
 

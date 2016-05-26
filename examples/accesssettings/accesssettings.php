@@ -10,7 +10,7 @@ $sg = new \SendGrid($apiKey);
 # GET /access_settings/activity #
 
 $query_params = json_decode('{"limit": 1}');
-$response = $this->sg->client->access_settings()->activity()->get(null, $query_params);
+$response = $sg->client->access_settings()->activity()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -32,7 +32,7 @@ $request_body = json_decode('{
     }
   ]
 }');
-$response = $this->sg->client->access_settings()->whitelist()->post($request_body);
+$response = $sg->client->access_settings()->whitelist()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -41,7 +41,7 @@ echo $response->responseHeaders();
 # Retrieve a list of currently whitelisted IPs #
 # GET /access_settings/whitelist #
 
-$response = $this->sg->client->access_settings()->whitelist()->get();
+$response = $sg->client->access_settings()->whitelist()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -50,7 +50,7 @@ echo $response->responseHeaders();
 # Remove one or more IPs from the whitelist #
 # DELETE /access_settings/whitelist #
 
-$response = $this->sg->client->access_settings()->whitelist()->delete($request_body);
+$response = $sg->client->access_settings()->whitelist()->delete($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -60,7 +60,7 @@ echo $response->responseHeaders();
 # GET /access_settings/whitelist/{rule_id} #
 
 $rule_id = "test_url_param";
-$response = $this->sg->client->access_settings()->whitelist()->_($rule_id)->get();
+$response = $sg->client->access_settings()->whitelist()->_($rule_id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -70,7 +70,7 @@ echo $response->responseHeaders();
 # DELETE /access_settings/whitelist/{rule_id} #
 
 $rule_id = "test_url_param";
-$response = $this->sg->client->access_settings()->whitelist()->_($rule_id)->delete();
+$response = $sg->client->access_settings()->whitelist()->_($rule_id)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();

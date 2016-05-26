@@ -12,7 +12,7 @@ $sg = new \SendGrid($apiKey);
 $request_body = json_decode('{
   "name": "example_name"
 }');
-$response = $this->sg->client->templates()->post($request_body);
+$response = $sg->client->templates()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -21,7 +21,7 @@ echo $response->responseHeaders();
 # Retrieve all transactional templates. #
 # GET /templates #
 
-$response = $this->sg->client->templates()->get();
+$response = $sg->client->templates()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -34,7 +34,7 @@ $request_body = json_decode('{
   "name": "new_example_name"
 }');
 $template_id = "test_url_param";
-$response = $this->sg->client->templates()->_($template_id)->patch($request_body);
+$response = $sg->client->templates()->_($template_id)->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -44,7 +44,7 @@ echo $response->responseHeaders();
 # GET /templates/{template_id} #
 
 $template_id = "test_url_param";
-$response = $this->sg->client->templates()->_($template_id)->get();
+$response = $sg->client->templates()->_($template_id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -54,7 +54,7 @@ echo $response->responseHeaders();
 # DELETE /templates/{template_id} #
 
 $template_id = "test_url_param";
-$response = $this->sg->client->templates()->_($template_id)->delete();
+$response = $sg->client->templates()->_($template_id)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -72,7 +72,7 @@ $request_body = json_decode('{
   "template_id": "ddb96bbc-9b92-425e-8979-99464621b543"
 }');
 $template_id = "test_url_param";
-$response = $this->sg->client->templates()->_($template_id)->versions()->post($request_body);
+$response = $sg->client->templates()->_($template_id)->versions()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -90,7 +90,7 @@ $request_body = json_decode('{
 }');
 $template_id = "test_url_param";
         $version_id = "test_url_param";
-$response = $this->sg->client->templates()->_($template_id)->versions()->_($version_id)->patch($request_body);
+$response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -101,7 +101,7 @@ echo $response->responseHeaders();
 
 $template_id = "test_url_param";
         $version_id = "test_url_param";
-$response = $this->sg->client->templates()->_($template_id)->versions()->_($version_id)->get();
+$response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -112,7 +112,7 @@ echo $response->responseHeaders();
 
 $template_id = "test_url_param";
         $version_id = "test_url_param";
-$response = $this->sg->client->templates()->_($template_id)->versions()->_($version_id)->delete();
+$response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -123,7 +123,7 @@ echo $response->responseHeaders();
 
 $template_id = "test_url_param";
         $version_id = "test_url_param";
-$response = $this->sg->client->templates()->_($template_id)->versions()->_($version_id)->activate()->post();
+$response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->activate()->post();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();

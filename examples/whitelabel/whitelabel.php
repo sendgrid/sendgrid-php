@@ -10,9 +10,9 @@ $sg = new \SendGrid($apiKey);
 # POST /whitelabel/domains #
 
 $request_body = json_decode('{
-  "automatic_security": false, 
-  "custom_spf": true, 
-  "default": true, 
+  "automatic_security": False, 
+  "custom_spf": True, 
+  "default": True, 
   "domain": "example.com", 
   "ips": [
     "192.168.1.1", 
@@ -21,7 +21,7 @@ $request_body = json_decode('{
   "subdomain": "news", 
   "username": "john@example.com"
 }');
-$response = $this->sg->client->whitelabel()->domains()->post($request_body);
+$response = $sg->client->whitelabel()->domains()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -31,7 +31,7 @@ echo $response->responseHeaders();
 # GET /whitelabel/domains #
 
 $query_params = json_decode('{"username": "test_string", "domain": "test_string", "exclude_subusers": "true", "limit": 1, "offset": 1}');
-$response = $this->sg->client->whitelabel()->domains()->get(null, $query_params);
+$response = $sg->client->whitelabel()->domains()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -40,7 +40,7 @@ echo $response->responseHeaders();
 # Get the default domain whitelabel. #
 # GET /whitelabel/domains/default #
 
-$response = $this->sg->client->whitelabel()->domains()->default()->get();
+$response = $sg->client->whitelabel()->domains()->default()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -49,7 +49,7 @@ echo $response->responseHeaders();
 # List the domain whitelabel associated with the given user. #
 # GET /whitelabel/domains/subuser #
 
-$response = $this->sg->client->whitelabel()->domains()->subuser()->get();
+$response = $sg->client->whitelabel()->domains()->subuser()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -58,7 +58,7 @@ echo $response->responseHeaders();
 # Disassociate a domain whitelabel from a given user. #
 # DELETE /whitelabel/domains/subuser #
 
-$response = $this->sg->client->whitelabel()->domains()->subuser()->delete();
+$response = $sg->client->whitelabel()->domains()->subuser()->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -68,11 +68,11 @@ echo $response->responseHeaders();
 # PATCH /whitelabel/domains/{domain_id} #
 
 $request_body = json_decode('{
-  "custom_spf": true, 
-  "default": false
+  "custom_spf": True, 
+  "default": False
 }');
 $domain_id = "test_url_param";
-$response = $this->sg->client->whitelabel()->domains()->_($domain_id)->patch($request_body);
+$response = $sg->client->whitelabel()->domains()->_($domain_id)->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -82,7 +82,7 @@ echo $response->responseHeaders();
 # GET /whitelabel/domains/{domain_id} #
 
 $domain_id = "test_url_param";
-$response = $this->sg->client->whitelabel()->domains()->_($domain_id)->get();
+$response = $sg->client->whitelabel()->domains()->_($domain_id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -92,7 +92,7 @@ echo $response->responseHeaders();
 # DELETE /whitelabel/domains/{domain_id} #
 
 $domain_id = "test_url_param";
-$response = $this->sg->client->whitelabel()->domains()->_($domain_id)->delete();
+$response = $sg->client->whitelabel()->domains()->_($domain_id)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -105,7 +105,7 @@ $request_body = json_decode('{
   "username": "jane@example.com"
 }');
 $domain_id = "test_url_param";
-$response = $this->sg->client->whitelabel()->domains()->_($domain_id)->subuser()->post($request_body);
+$response = $sg->client->whitelabel()->domains()->_($domain_id)->subuser()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -118,7 +118,7 @@ $request_body = json_decode('{
   "ip": "192.168.0.1"
 }');
 $id = "test_url_param";
-$response = $this->sg->client->whitelabel()->domains()->_($id)->ips()->post($request_body);
+$response = $sg->client->whitelabel()->domains()->_($id)->ips()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -129,7 +129,7 @@ echo $response->responseHeaders();
 
 $id = "test_url_param";
         $ip = "test_url_param";
-$response = $this->sg->client->whitelabel()->domains()->_($id)->ips()->_($ip)->delete();
+$response = $sg->client->whitelabel()->domains()->_($id)->ips()->_($ip)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -139,7 +139,7 @@ echo $response->responseHeaders();
 # POST /whitelabel/domains/{id}/validate #
 
 $id = "test_url_param";
-$response = $this->sg->client->whitelabel()->domains()->_($id)->validate()->post();
+$response = $sg->client->whitelabel()->domains()->_($id)->validate()->post();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -153,7 +153,7 @@ $request_body = json_decode('{
   "ip": "192.168.1.1", 
   "subdomain": "email"
 }');
-$response = $this->sg->client->whitelabel()->ips()->post($request_body);
+$response = $sg->client->whitelabel()->ips()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -163,7 +163,7 @@ echo $response->responseHeaders();
 # GET /whitelabel/ips #
 
 $query_params = json_decode('{"ip": "test_string", "limit": 1, "offset": 1}');
-$response = $this->sg->client->whitelabel()->ips()->get(null, $query_params);
+$response = $sg->client->whitelabel()->ips()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -173,7 +173,7 @@ echo $response->responseHeaders();
 # GET /whitelabel/ips/{id} #
 
 $id = "test_url_param";
-$response = $this->sg->client->whitelabel()->ips()->_($id)->get();
+$response = $sg->client->whitelabel()->ips()->_($id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -183,7 +183,7 @@ echo $response->responseHeaders();
 # DELETE /whitelabel/ips/{id} #
 
 $id = "test_url_param";
-$response = $this->sg->client->whitelabel()->ips()->_($id)->delete();
+$response = $sg->client->whitelabel()->ips()->_($id)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -193,7 +193,7 @@ echo $response->responseHeaders();
 # POST /whitelabel/ips/{id}/validate #
 
 $id = "test_url_param";
-$response = $this->sg->client->whitelabel()->ips()->_($id)->validate()->post();
+$response = $sg->client->whitelabel()->ips()->_($id)->validate()->post();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -203,12 +203,12 @@ echo $response->responseHeaders();
 # POST /whitelabel/links #
 
 $request_body = json_decode('{
-  "default": true, 
+  "default": True, 
   "domain": "example.com", 
   "subdomain": "mail"
 }');
 $query_params = json_decode('{"limit": 1, "offset": 1}');
-$response = $this->sg->client->whitelabel()->links()->post($request_body, $query_params);
+$response = $sg->client->whitelabel()->links()->post($request_body, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -218,7 +218,7 @@ echo $response->responseHeaders();
 # GET /whitelabel/links #
 
 $query_params = json_decode('{"limit": 1}');
-$response = $this->sg->client->whitelabel()->links()->get(null, $query_params);
+$response = $sg->client->whitelabel()->links()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -228,7 +228,7 @@ echo $response->responseHeaders();
 # GET /whitelabel/links/default #
 
 $query_params = json_decode('{"domain": "test_string"}');
-$response = $this->sg->client->whitelabel()->links()->default()->get(null, $query_params);
+$response = $sg->client->whitelabel()->links()->default()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -238,7 +238,7 @@ echo $response->responseHeaders();
 # GET /whitelabel/links/subuser #
 
 $query_params = json_decode('{"username": "test_string"}');
-$response = $this->sg->client->whitelabel()->links()->subuser()->get(null, $query_params);
+$response = $sg->client->whitelabel()->links()->subuser()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -248,7 +248,7 @@ echo $response->responseHeaders();
 # DELETE /whitelabel/links/subuser #
 
 $query_params = json_decode('{"username": "test_string"}');
-$response = $this->sg->client->whitelabel()->links()->subuser()->delete(null, $query_params);
+$response = $sg->client->whitelabel()->links()->subuser()->delete(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -258,10 +258,10 @@ echo $response->responseHeaders();
 # PATCH /whitelabel/links/{id} #
 
 $request_body = json_decode('{
-  "default": true
+  "default": True
 }');
 $id = "test_url_param";
-$response = $this->sg->client->whitelabel()->links()->_($id)->patch($request_body);
+$response = $sg->client->whitelabel()->links()->_($id)->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -271,7 +271,7 @@ echo $response->responseHeaders();
 # GET /whitelabel/links/{id} #
 
 $id = "test_url_param";
-$response = $this->sg->client->whitelabel()->links()->_($id)->get();
+$response = $sg->client->whitelabel()->links()->_($id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -281,7 +281,7 @@ echo $response->responseHeaders();
 # DELETE /whitelabel/links/{id} #
 
 $id = "test_url_param";
-$response = $this->sg->client->whitelabel()->links()->_($id)->delete();
+$response = $sg->client->whitelabel()->links()->_($id)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -291,7 +291,7 @@ echo $response->responseHeaders();
 # POST /whitelabel/links/{id}/validate #
 
 $id = "test_url_param";
-$response = $this->sg->client->whitelabel()->links()->_($id)->validate()->post();
+$response = $sg->client->whitelabel()->links()->_($id)->validate()->post();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -304,7 +304,7 @@ $request_body = json_decode('{
   "username": "jane@example.com"
 }');
 $link_id = "test_url_param";
-$response = $this->sg->client->whitelabel()->links()->_($link_id)->subuser()->post($request_body);
+$response = $sg->client->whitelabel()->links()->_($link_id)->subuser()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();

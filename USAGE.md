@@ -52,7 +52,7 @@ For more information, please see our [User Guide](http://sendgrid.com/docs/User_
 
 ```php
 $query_params = json_decode('{"limit": 1}');
-$response = $this->sg->client->access_settings()->activity()->get(null, $query_params);
+$response = $sg->client->access_settings()->activity()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -83,7 +83,7 @@ $request_body = json_decode('{
     }
   ]
 }');
-$response = $this->sg->client->access_settings()->whitelist()->post($request_body);
+$response = $sg->client->access_settings()->whitelist()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -99,7 +99,7 @@ For more information, please see our [User Guide](http://sendgrid.com/docs/User_
 ### GET /access_settings/whitelist
 
 ```php
-$response = $this->sg->client->access_settings()->whitelist()->get();
+$response = $sg->client->access_settings()->whitelist()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -117,7 +117,7 @@ For more information, please see our [User Guide](http://sendgrid.com/docs/User_
 ### DELETE /access_settings/whitelist
 
 ```php
-$response = $this->sg->client->access_settings()->whitelist()->delete($request_body);
+$response = $sg->client->access_settings()->whitelist()->delete($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -136,7 +136,7 @@ For more information, please see our [User Guide](http://sendgrid.com/docs/User_
 
 ```php
 $rule_id = "test_url_param";
-$response = $this->sg->client->access_settings()->whitelist()->_($rule_id)->get();
+$response = $sg->client->access_settings()->whitelist()->_($rule_id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -155,7 +155,7 @@ For more information, please see our [User Guide](http://sendgrid.com/docs/User_
 
 ```php
 $rule_id = "test_url_param";
-$response = $this->sg->client->access_settings()->whitelist()->_($rule_id)->delete();
+$response = $sg->client->access_settings()->whitelist()->_($rule_id)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -186,7 +186,7 @@ $request_body = json_decode('{
     "alerts.read"
   ]
 }');
-$response = $this->sg->client->api_keys()->post($request_body);
+$response = $sg->client->api_keys()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -200,7 +200,7 @@ The API Keys feature allows customers to be able to generate an API Key credenti
 ### GET /api_keys
 
 ```php
-$response = $this->sg->client->api_keys()->get();
+$response = $sg->client->api_keys()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -226,7 +226,7 @@ $request_body = json_decode('{
   ]
 }');
 $api_key_id = "test_url_param";
-$response = $this->sg->client->api_keys()->_($api_key_id)->put($request_body);
+$response = $sg->client->api_keys()->_($api_key_id)->put($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -252,7 +252,7 @@ $request_body = json_decode('{
   "name": "A New Hope"
 }');
 $api_key_id = "test_url_param";
-$response = $this->sg->client->api_keys()->_($api_key_id)->patch($request_body);
+$response = $sg->client->api_keys()->_($api_key_id)->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -267,7 +267,7 @@ If the API Key ID does not exist an HTTP 404 will be returned.
 
 ```php
 $api_key_id = "test_url_param";
-$response = $this->sg->client->api_keys()->_($api_key_id)->get();
+$response = $sg->client->api_keys()->_($api_key_id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -290,7 +290,7 @@ The API Keys feature allows customers to be able to generate an API Key credenti
 
 ```php
 $api_key_id = "test_url_param";
-$response = $this->sg->client->api_keys()->_($api_key_id)->delete();
+$response = $sg->client->api_keys()->_($api_key_id)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -313,10 +313,10 @@ Each user can create up to 25 different suppression groups.
 ```php
 $request_body = json_decode('{
   "description": "A group description",
-  "is_default": false,
+  "is_default": False,
   "name": "A group name"
 }');
-$response = $this->sg->client->asm()->groups()->post($request_body);
+$response = $sg->client->asm()->groups()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -334,7 +334,7 @@ Each user can create up to 25 different suppression groups.
 ### GET /asm/groups
 
 ```php
-$response = $this->sg->client->asm()->groups()->get();
+$response = $sg->client->asm()->groups()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -358,7 +358,7 @@ $request_body = json_decode('{
   "name": "Item Suggestions"
 }');
 $group_id = "test_url_param";
-$response = $this->sg->client->asm()->groups()->_($group_id)->patch($request_body);
+$response = $sg->client->asm()->groups()->_($group_id)->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -377,7 +377,7 @@ Each user can create up to 25 different suppression groups.
 
 ```php
 $group_id = "test_url_param";
-$response = $this->sg->client->asm()->groups()->_($group_id)->get();
+$response = $sg->client->asm()->groups()->_($group_id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -398,7 +398,7 @@ Each user can create up to 25 different suppression groups.
 
 ```php
 $group_id = "test_url_param";
-$response = $this->sg->client->asm()->groups()->_($group_id)->delete();
+$response = $sg->client->asm()->groups()->_($group_id)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -421,7 +421,7 @@ $request_body = json_decode('{
   ]
 }');
 $group_id = "test_url_param";
-$response = $this->sg->client->asm()->groups()->_($group_id)->suppressions()->post($request_body);
+$response = $sg->client->asm()->groups()->_($group_id)->suppressions()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -436,7 +436,7 @@ Suppressions are recipient email addresses that are added to [unsubscribe groups
 
 ```php
 $group_id = "test_url_param";
-$response = $this->sg->client->asm()->groups()->_($group_id)->suppressions()->get();
+$response = $sg->client->asm()->groups()->_($group_id)->suppressions()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -452,7 +452,7 @@ Suppressions are recipient email addresses that are added to [unsubscribe groups
 ```php
 $group_id = "test_url_param";
 $email = "test_url_param";
-$response = $this->sg->client->asm()->groups()->_($group_id)->suppressions()->_($email)->delete();
+$response = $sg->client->asm()->groups()->_($group_id)->suppressions()->_($email)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -472,7 +472,7 @@ $request_body = json_decode('{
     "test2@example.com"
   ]
 }');
-$response = $this->sg->client->asm()->suppressions()->global()->post($request_body);
+$response = $sg->client->asm()->suppressions()->global()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -489,7 +489,7 @@ A global suppression (or global unsubscribe) is an email address of a recipient 
 
 ```php
 $email = "test_url_param";
-$response = $this->sg->client->asm()->suppressions()->global()->_($email)->get();
+$response = $sg->client->asm()->suppressions()->global()->_($email)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -504,7 +504,7 @@ A global suppression (or global unsubscribe) is an email address of a recipient 
 
 ```php
 $email = "test_url_param";
-$response = $this->sg->client->asm()->suppressions()->global()->_($email)->delete();
+$response = $sg->client->asm()->suppressions()->global()->_($email)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -524,7 +524,7 @@ Advanced Stats provide a more in-depth view of your email statistics and the act
 
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "browsers": "test_string", "limit": "test_string", "offset": "test_string", "start_date": "2016-01-01"}');
-$response = $this->sg->client->browsers()->stats()->get(null, $query_params);
+$response = $sg->client->browsers()->stats()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -567,7 +567,7 @@ $request_body = json_decode('{
   "suppression_group_id": 42,
   "title": "March Newsletter"
 }');
-$response = $this->sg->client->campaigns()->post($request_body);
+$response = $sg->client->campaigns()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -588,7 +588,7 @@ For more information:
 
 ```php
 $query_params = json_decode('{"limit": 0, "offset": 0}');
-$response = $this->sg->client->campaigns()->get(null, $query_params);
+$response = $sg->client->campaigns()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -614,7 +614,7 @@ $request_body = json_decode('{
   "title": "May Newsletter"
 }');
 $campaign_id = "test_url_param";
-$response = $this->sg->client->campaigns()->_($campaign_id)->patch($request_body);
+$response = $sg->client->campaigns()->_($campaign_id)->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -633,7 +633,7 @@ For more information:
 
 ```php
 $campaign_id = "test_url_param";
-$response = $this->sg->client->campaigns()->_($campaign_id)->get();
+$response = $sg->client->campaigns()->_($campaign_id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -652,7 +652,7 @@ For more information:
 
 ```php
 $campaign_id = "test_url_param";
-$response = $this->sg->client->campaigns()->_($campaign_id)->delete();
+$response = $sg->client->campaigns()->_($campaign_id)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -672,7 +672,7 @@ $request_body = json_decode('{
   "send_at": 1489451436
 }');
 $campaign_id = "test_url_param";
-$response = $this->sg->client->campaigns()->_($campaign_id)->schedules()->patch($request_body);
+$response = $sg->client->campaigns()->_($campaign_id)->schedules()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -692,7 +692,7 @@ $request_body = json_decode('{
   "send_at": 1489771528
 }');
 $campaign_id = "test_url_param";
-$response = $this->sg->client->campaigns()->_($campaign_id)->schedules()->post($request_body);
+$response = $sg->client->campaigns()->_($campaign_id)->schedules()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -709,7 +709,7 @@ For more information:
 
 ```php
 $campaign_id = "test_url_param";
-$response = $this->sg->client->campaigns()->_($campaign_id)->schedules()->get();
+$response = $sg->client->campaigns()->_($campaign_id)->schedules()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -729,7 +729,7 @@ For more information:
 
 ```php
 $campaign_id = "test_url_param";
-$response = $this->sg->client->campaigns()->_($campaign_id)->schedules()->delete();
+$response = $sg->client->campaigns()->_($campaign_id)->schedules()->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -748,7 +748,7 @@ For more information:
 
 ```php
 $campaign_id = "test_url_param";
-$response = $this->sg->client->campaigns()->_($campaign_id)->schedules()->now()->post();
+$response = $sg->client->campaigns()->_($campaign_id)->schedules()->now()->post();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -770,7 +770,7 @@ $request_body = json_decode('{
   "to": "your.email@example.com"
 }');
 $campaign_id = "test_url_param";
-$response = $this->sg->client->campaigns()->_($campaign_id)->schedules()->test()->post($request_body);
+$response = $sg->client->campaigns()->_($campaign_id)->schedules()->test()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -788,7 +788,7 @@ Categories can help organize your email analytics by enabling you to tag emails 
 
 ```php
 $query_params = json_decode('{"category": "test_string", "limit": 1, "offset": 1}');
-$response = $this->sg->client->categories()->get(null, $query_params);
+$response = $sg->client->categories()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -805,7 +805,7 @@ Categories allow you to group your emails together according to broad topics tha
 
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "limit": 1, "offset": 1, "start_date": "2016-01-01", "categories": "test_string"}');
-$response = $this->sg->client->categories()->stats()->get(null, $query_params);
+$response = $sg->client->categories()->stats()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -822,7 +822,7 @@ Categories allow you to group your emails together according to broad topics tha
 
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "limit": 1, "sort_by_metric": "test_string", "offset": 1, "start_date": "2016-01-01", "sort_by_direction": "asc"}');
-$response = $this->sg->client->categories()->stats()->sums()->get(null, $query_params);
+$response = $sg->client->categories()->stats()->sums()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -842,7 +842,7 @@ Advanced Stats provide a more in-depth view of your email statistics and the act
 
 ```php
 $query_params = json_decode('{"aggregated_by": "day", "start_date": "2016-01-01", "end_date": "2016-04-01"}');
-$response = $this->sg->client->clients()->stats()->get(null, $query_params);
+$response = $sg->client->clients()->stats()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -866,7 +866,7 @@ Advanced Stats provide a more in-depth view of your email statistics and the act
 ```php
 $query_params = json_decode('{"aggregated_by": "day", "start_date": "2016-01-01", "end_date": "2016-04-01"}');
 $client_type = "test_url_param";
-$response = $this->sg->client->clients()->_($client_type)->stats()->get(null, $query_params);
+$response = $sg->client->clients()->_($client_type)->stats()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -887,7 +887,7 @@ $request_body = json_decode('{
   "name": "pet",
   "type": "text"
 }');
-$response = $this->sg->client->contactdb()->custom_fields()->post($request_body);
+$response = $sg->client->contactdb()->custom_fields()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -901,7 +901,7 @@ The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](
 ### GET /contactdb/custom_fields
 
 ```php
-$response = $this->sg->client->contactdb()->custom_fields()->get();
+$response = $sg->client->contactdb()->custom_fields()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -916,7 +916,7 @@ The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](
 
 ```php
 $custom_field_id = "test_url_param";
-$response = $this->sg->client->contactdb()->custom_fields()->_($custom_field_id)->get();
+$response = $sg->client->contactdb()->custom_fields()->_($custom_field_id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -931,7 +931,7 @@ The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](
 
 ```php
 $custom_field_id = "test_url_param";
-$response = $this->sg->client->contactdb()->custom_fields()->_($custom_field_id)->delete();
+$response = $sg->client->contactdb()->custom_fields()->_($custom_field_id)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -948,7 +948,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 $request_body = json_decode('{
   "name": "your list name"
 }');
-$response = $this->sg->client->contactdb()->lists()->post($request_body);
+$response = $sg->client->contactdb()->lists()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -962,7 +962,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 ### GET /contactdb/lists
 
 ```php
-$response = $this->sg->client->contactdb()->lists()->get();
+$response = $sg->client->contactdb()->lists()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -976,7 +976,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 ### DELETE /contactdb/lists
 
 ```php
-$response = $this->sg->client->contactdb()->lists()->delete($request_body);
+$response = $sg->client->contactdb()->lists()->delete($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -996,7 +996,7 @@ $request_body = json_decode('{
 }');
 $query_params = json_decode('{"list_id": 0}');
 $list_id = "test_url_param";
-$response = $this->sg->client->contactdb()->lists()->_($list_id)->patch($request_body, $query_params);
+$response = $sg->client->contactdb()->lists()->_($list_id)->patch($request_body, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1012,7 +1012,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 ```php
 $query_params = json_decode('{"list_id": 0}');
 $list_id = "test_url_param";
-$response = $this->sg->client->contactdb()->lists()->_($list_id)->get(null, $query_params);
+$response = $sg->client->contactdb()->lists()->_($list_id)->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1028,7 +1028,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 ```php
 $query_params = json_decode('{"delete_contacts": "true"}');
 $list_id = "test_url_param";
-$response = $this->sg->client->contactdb()->lists()->_($list_id)->delete(null, $query_params);
+$response = $sg->client->contactdb()->lists()->_($list_id)->delete(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1049,7 +1049,7 @@ $request_body = json_decode('[
   "recipient_id2"
 ]');
 $list_id = "test_url_param";
-$response = $this->sg->client->contactdb()->lists()->_($list_id)->recipients()->post($request_body);
+$response = $sg->client->contactdb()->lists()->_($list_id)->recipients()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1065,7 +1065,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 ```php
 $query_params = json_decode('{"page": 1, "page_size": 1, "list_id": 0}');
 $list_id = "test_url_param";
-$response = $this->sg->client->contactdb()->lists()->_($list_id)->recipients()->get(null, $query_params);
+$response = $sg->client->contactdb()->lists()->_($list_id)->recipients()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1081,7 +1081,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 ```php
 $list_id = "test_url_param";
 $recipient_id = "test_url_param";
-$response = $this->sg->client->contactdb()->lists()->_($list_id)->recipients()->_($recipient_id)->post();
+$response = $sg->client->contactdb()->lists()->_($list_id)->recipients()->_($recipient_id)->post();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1098,7 +1098,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 $query_params = json_decode('{"recipient_id": 0, "list_id": 0}');
 $list_id = "test_url_param";
 $recipient_id = "test_url_param";
-$response = $this->sg->client->contactdb()->lists()->_($list_id)->recipients()->_($recipient_id)->delete(null, $query_params);
+$response = $sg->client->contactdb()->lists()->_($list_id)->recipients()->_($recipient_id)->delete(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1123,7 +1123,7 @@ $request_body = json_decode('[
     "last_name": "Jones"
   }
 ]');
-$response = $this->sg->client->contactdb()->recipients()->patch($request_body);
+$response = $sg->client->contactdb()->recipients()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1153,7 +1153,7 @@ $request_body = json_decode('[
     "last_name": "User"
   }
 ]');
-$response = $this->sg->client->contactdb()->recipients()->post($request_body);
+$response = $sg->client->contactdb()->recipients()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1171,7 +1171,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 
 ```php
 $query_params = json_decode('{"page": 1, "page_size": 1}');
-$response = $this->sg->client->contactdb()->recipients()->get(null, $query_params);
+$response = $sg->client->contactdb()->recipients()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1187,7 +1187,7 @@ The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](
 ### DELETE /contactdb/recipients
 
 ```php
-$response = $this->sg->client->contactdb()->recipients()->delete($request_body);
+$response = $sg->client->contactdb()->recipients()->delete($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1203,7 +1203,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 ### GET /contactdb/recipients/billable_count
 
 ```php
-$response = $this->sg->client->contactdb()->recipients()->billable_count()->get();
+$response = $sg->client->contactdb()->recipients()->billable_count()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1217,7 +1217,7 @@ The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](
 ### GET /contactdb/recipients/count
 
 ```php
-$response = $this->sg->client->contactdb()->recipients()->count()->get();
+$response = $sg->client->contactdb()->recipients()->count()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1241,7 +1241,7 @@ The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](
 
 ```php
 $query_params = json_decode('{"{field_name}": "test_string"}');
-$response = $this->sg->client->contactdb()->recipients()->search()->get(null, $query_params);
+$response = $sg->client->contactdb()->recipients()->search()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1256,7 +1256,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 
 ```php
 $recipient_id = "test_url_param";
-$response = $this->sg->client->contactdb()->recipients()->_($recipient_id)->get();
+$response = $sg->client->contactdb()->recipients()->_($recipient_id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1271,7 +1271,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 
 ```php
 $recipient_id = "test_url_param";
-$response = $this->sg->client->contactdb()->recipients()->_($recipient_id)->delete();
+$response = $sg->client->contactdb()->recipients()->_($recipient_id)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1288,7 +1288,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 
 ```php
 $recipient_id = "test_url_param";
-$response = $this->sg->client->contactdb()->recipients()->_($recipient_id)->lists()->get();
+$response = $sg->client->contactdb()->recipients()->_($recipient_id)->lists()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1302,7 +1302,7 @@ The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](
 ### GET /contactdb/reserved_fields
 
 ```php
-$response = $this->sg->client->contactdb()->reserved_fields()->get();
+$response = $sg->client->contactdb()->reserved_fields()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1360,7 +1360,7 @@ $request_body = json_decode('{
   "list_id": 4,
   "name": "Last Name Miller"
 }');
-$response = $this->sg->client->contactdb()->segments()->post($request_body);
+$response = $sg->client->contactdb()->segments()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1376,7 +1376,7 @@ For more information about segments in Marketing Campaigns, please see our [User
 ### GET /contactdb/segments
 
 ```php
-$response = $this->sg->client->contactdb()->segments()->get();
+$response = $sg->client->contactdb()->segments()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1406,7 +1406,7 @@ $request_body = json_decode('{
 }');
 $query_params = json_decode('{"segment_id": "test_string"}');
 $segment_id = "test_url_param";
-$response = $this->sg->client->contactdb()->segments()->_($segment_id)->patch($request_body, $query_params);
+$response = $sg->client->contactdb()->segments()->_($segment_id)->patch($request_body, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1424,7 +1424,7 @@ For more information about segments in Marketing Campaigns, please see our [User
 ```php
 $query_params = json_decode('{"segment_id": 0}');
 $segment_id = "test_url_param";
-$response = $this->sg->client->contactdb()->segments()->_($segment_id)->get(null, $query_params);
+$response = $sg->client->contactdb()->segments()->_($segment_id)->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1444,7 +1444,7 @@ For more information about segments in Marketing Campaigns, please see our [User
 ```php
 $query_params = json_decode('{"delete_contacts": "true"}');
 $segment_id = "test_url_param";
-$response = $this->sg->client->contactdb()->segments()->_($segment_id)->delete(null, $query_params);
+$response = $sg->client->contactdb()->segments()->_($segment_id)->delete(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1462,7 +1462,7 @@ For more information about segments in Marketing Campaigns, please see our [User
 ```php
 $query_params = json_decode('{"page": 1, "page_size": 1}');
 $segment_id = "test_url_param";
-$response = $this->sg->client->contactdb()->segments()->_($segment_id)->recipients()->get(null, $query_params);
+$response = $sg->client->contactdb()->segments()->_($segment_id)->recipients()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1491,7 +1491,7 @@ Advanced Stats provide a more in-depth view of your email statistics and the act
 
 ```php
 $query_params = json_decode('{"aggregated_by": "day", "limit": 1, "start_date": "2016-01-01", "end_date": "2016-04-01", "offset": 1}');
-$response = $this->sg->client->devices()->stats()->get(null, $query_params);
+$response = $sg->client->devices()->stats()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1511,7 +1511,7 @@ Advanced Stats provide a more in-depth view of your email statistics and the act
 
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "country": "US", "aggregated_by": "day", "limit": 1, "offset": 1, "start_date": "2016-01-01"}');
-$response = $this->sg->client->geo()->stats()->get(null, $query_params);
+$response = $sg->client->geo()->stats()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1531,7 +1531,7 @@ A single IP address or a range of IP addresses may be dedicated to an account in
 
 ```php
 $query_params = json_decode('{"subuser": "test_string", "ip": "test_string", "limit": 1, "exclude_whitelabels": "true", "offset": 1}');
-$response = $this->sg->client->ips()->get(null, $query_params);
+$response = $sg->client->ips()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1545,7 +1545,7 @@ A single IP address or a range of IP addresses may be dedicated to an account in
 ### GET /ips/assigned
 
 ```php
-$response = $this->sg->client->ips()->assigned()->get();
+$response = $sg->client->ips()->assigned()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1568,7 +1568,7 @@ If an IP pool is NOT specified for an email, it will use any IP available, inclu
 $request_body = json_decode('{
   "name": "marketing"
 }');
-$response = $this->sg->client->ips()->pools()->post($request_body);
+$response = $sg->client->ips()->pools()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1586,7 +1586,7 @@ If an IP pool is NOT specified for an email, it will use any IP available, inclu
 ### GET /ips/pools
 
 ```php
-$response = $this->sg->client->ips()->pools()->get();
+$response = $sg->client->ips()->pools()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1608,7 +1608,7 @@ $request_body = json_decode('{
   "name": "new_pool_name"
 }');
 $pool_name = "test_url_param";
-$response = $this->sg->client->ips()->pools()->_($pool_name)->put($request_body);
+$response = $sg->client->ips()->pools()->_($pool_name)->put($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1627,7 +1627,7 @@ If an IP pool is NOT specified for an email, it will use any IP available, inclu
 
 ```php
 $pool_name = "test_url_param";
-$response = $this->sg->client->ips()->pools()->_($pool_name)->get();
+$response = $sg->client->ips()->pools()->_($pool_name)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1646,7 +1646,7 @@ If an IP pool is NOT specified for an email, it will use any IP available, inclu
 
 ```php
 $pool_name = "test_url_param";
-$response = $this->sg->client->ips()->pools()->_($pool_name)->delete();
+$response = $sg->client->ips()->pools()->_($pool_name)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1666,7 +1666,7 @@ $request_body = json_decode('{
   "ip": "0.0.0.0"
 }');
 $pool_name = "test_url_param";
-$response = $this->sg->client->ips()->pools()->_($pool_name)->ips()->post($request_body);
+$response = $sg->client->ips()->pools()->_($pool_name)->ips()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1684,7 +1684,7 @@ A single IP address or a range of IP addresses may be dedicated to an account in
 ```php
 $pool_name = "test_url_param";
 $ip = "test_url_param";
-$response = $this->sg->client->ips()->pools()->_($pool_name)->ips()->_($ip)->delete();
+$response = $sg->client->ips()->pools()->_($pool_name)->ips()->_($ip)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1703,7 +1703,7 @@ For more general information about warming up IPs, please see our [Classroom](ht
 $request_body = json_decode('{
   "ip": "0.0.0.0"
 }');
-$response = $this->sg->client->ips()->warmup()->post($request_body);
+$response = $sg->client->ips()->warmup()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1719,7 +1719,7 @@ For more general information about warming up IPs, please see our [Classroom](ht
 ### GET /ips/warmup
 
 ```php
-$response = $this->sg->client->ips()->warmup()->get();
+$response = $sg->client->ips()->warmup()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1736,7 +1736,7 @@ For more general information about warming up IPs, please see our [Classroom](ht
 
 ```php
 $ip_address = "test_url_param";
-$response = $this->sg->client->ips()->warmup()->_($ip_address)->get();
+$response = $sg->client->ips()->warmup()->_($ip_address)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1753,7 +1753,7 @@ For more general information about warming up IPs, please see our [Classroom](ht
 
 ```php
 $ip_address = "test_url_param";
-$response = $this->sg->client->ips()->warmup()->_($ip_address)->delete();
+$response = $sg->client->ips()->warmup()->_($ip_address)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1770,7 +1770,7 @@ A single IP address or a range of IP addresses may be dedicated to an account in
 
 ```php
 $ip_address = "test_url_param";
-$response = $this->sg->client->ips()->_($ip_address)->get();
+$response = $sg->client->ips()->_($ip_address)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1791,7 +1791,7 @@ More Information:
 ### POST /mail/batch
 
 ```php
-$response = $this->sg->client->mail()->batch()->post();
+$response = $sg->client->mail()->batch()->post();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1810,7 +1810,7 @@ More Information:
 
 ```php
 $batch_id = "test_url_param";
-$response = $this->sg->client->mail()->batch()->_($batch_id)->get();
+$response = $sg->client->mail()->batch()->_($batch_id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1873,21 +1873,21 @@ $request_body = json_decode('{
   "mail_settings": {
     "bcc": {
       "email": "ben.doe@example.com",
-      "enable": true
+      "enable": True
     },
     "bypass_list_management": {
-      "enable": true
+      "enable": True
     },
     "footer": {
-      "enable": true,
+      "enable": True,
       "html": "<p>Thanks</br>The SendGrid Team</p>",
       "text": "Thanks,/n The SendGrid Team"
     },
     "sandbox_mode": {
-      "enable": false
+      "enable": False
     },
     "spam_check": {
-      "enable": true,
+      "enable": True,
       "post_to_url": "http://example.com/compliance",
       "threshold": 3
     }
@@ -1949,11 +1949,11 @@ $request_body = json_decode('{
   "template_id": "[YOUR TEMPLATE ID GOES HERE]",
   "tracking_settings": {
     "click_tracking": {
-      "enable": true,
-      "enable_text": true
+      "enable": True,
+      "enable_text": True
     },
     "ganalytics": {
-      "enable": true,
+      "enable": True,
       "utm_campaign": "[NAME OF YOUR REFERRER SOURCE]",
       "utm_content": "[USE THIS SPACE TO DIFFERENTIATE YOUR EMAIL FROM ADS]",
       "utm_medium": "[NAME OF YOUR MARKETING MEDIUM e.g. email]",
@@ -1961,18 +1961,18 @@ $request_body = json_decode('{
       "utm_term": "[IDENTIFY PAID KEYWORDS HERE]"
     },
     "open_tracking": {
-      "enable": true,
+      "enable": True,
       "substitution_tag": "%opentrack"
     },
     "subscription_tracking": {
-      "enable": true,
+      "enable": True,
       "html": "If you would like to unsubscribe and stop receiving these emails <% clickhere %>.",
       "substitution_tag": "<%click here%>",
       "text": "If you would like to unsubscribe and stop receiveing these emails <% click here %>."
     }
   }
 }');
-$response = $this->sg->client->mail()->send()->beta()->post($request_body);
+$response = $sg->client->mail()->send()->beta()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -1990,7 +1990,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ```php
 $query_params = json_decode('{"limit": 1, "offset": 1}');
-$response = $this->sg->client->mail_settings()->get(null, $query_params);
+$response = $sg->client->mail_settings()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2007,13 +2007,13 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ```php
 $request_body = json_decode('{
-  "enabled": true,
+  "enabled": True,
   "list": [
     "email1@example.com",
     "example.com"
   ]
 }');
-$response = $this->sg->client->mail_settings()->address_whitelist()->patch($request_body);
+$response = $sg->client->mail_settings()->address_whitelist()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2029,7 +2029,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 ### GET /mail_settings/address_whitelist
 
 ```php
-$response = $this->sg->client->mail_settings()->address_whitelist()->get();
+$response = $sg->client->mail_settings()->address_whitelist()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2047,9 +2047,9 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 ```php
 $request_body = json_decode('{
   "email": "email@example.com",
-  "enabled": false
+  "enabled": False
 }');
-$response = $this->sg->client->mail_settings()->bcc()->patch($request_body);
+$response = $sg->client->mail_settings()->bcc()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2065,7 +2065,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 ### GET /mail_settings/bcc
 
 ```php
-$response = $this->sg->client->mail_settings()->bcc()->get();
+$response = $sg->client->mail_settings()->bcc()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2082,11 +2082,11 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ```php
 $request_body = json_decode('{
-  "enabled": true,
+  "enabled": True,
   "hard_bounces": 5,
   "soft_bounces": 5
 }');
-$response = $this->sg->client->mail_settings()->bounce_purge()->patch($request_body);
+$response = $sg->client->mail_settings()->bounce_purge()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2102,7 +2102,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 ### GET /mail_settings/bounce_purge
 
 ```php
-$response = $this->sg->client->mail_settings()->bounce_purge()->get();
+$response = $sg->client->mail_settings()->bounce_purge()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2119,11 +2119,11 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ```php
 $request_body = json_decode('{
-  "enabled": true,
+  "enabled": True,
   "html_content": "...",
   "plain_content": "..."
 }');
-$response = $this->sg->client->mail_settings()->footer()->patch($request_body);
+$response = $sg->client->mail_settings()->footer()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2139,7 +2139,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 ### GET /mail_settings/footer
 
 ```php
-$response = $this->sg->client->mail_settings()->footer()->get();
+$response = $sg->client->mail_settings()->footer()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2157,9 +2157,9 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 ```php
 $request_body = json_decode('{
   "email": "example@example.com",
-  "enabled": true
+  "enabled": True
 }');
-$response = $this->sg->client->mail_settings()->forward_bounce()->patch($request_body);
+$response = $sg->client->mail_settings()->forward_bounce()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2175,7 +2175,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 ### GET /mail_settings/forward_bounce
 
 ```php
-$response = $this->sg->client->mail_settings()->forward_bounce()->get();
+$response = $sg->client->mail_settings()->forward_bounce()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2193,9 +2193,9 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 ```php
 $request_body = json_decode('{
   "email": "",
-  "enabled": false
+  "enabled": False
 }');
-$response = $this->sg->client->mail_settings()->forward_spam()->patch($request_body);
+$response = $sg->client->mail_settings()->forward_spam()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2211,7 +2211,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 ### GET /mail_settings/forward_spam
 
 ```php
-$response = $this->sg->client->mail_settings()->forward_spam()->get();
+$response = $sg->client->mail_settings()->forward_spam()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2228,9 +2228,9 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ```php
 $request_body = json_decode('{
-  "enabled": false
+  "enabled": False
 }');
-$response = $this->sg->client->mail_settings()->plain_content()->patch($request_body);
+$response = $sg->client->mail_settings()->plain_content()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2246,7 +2246,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 ### GET /mail_settings/plain_content
 
 ```php
-$response = $this->sg->client->mail_settings()->plain_content()->get();
+$response = $sg->client->mail_settings()->plain_content()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2263,11 +2263,11 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ```php
 $request_body = json_decode('{
-  "enabled": true,
+  "enabled": True,
   "max_score": 5,
   "url": "url"
 }');
-$response = $this->sg->client->mail_settings()->spam_check()->patch($request_body);
+$response = $sg->client->mail_settings()->spam_check()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2283,7 +2283,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 ### GET /mail_settings/spam_check
 
 ```php
-$response = $this->sg->client->mail_settings()->spam_check()->get();
+$response = $sg->client->mail_settings()->spam_check()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2302,10 +2302,10 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ```php
 $request_body = json_decode('{
-  "enabled": true,
+  "enabled": True,
   "html_content": "<% body %>"
 }');
-$response = $this->sg->client->mail_settings()->template()->patch($request_body);
+$response = $sg->client->mail_settings()->template()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2323,7 +2323,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 ### GET /mail_settings/template
 
 ```php
-$response = $this->sg->client->mail_settings()->template()->get();
+$response = $sg->client->mail_settings()->template()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2343,7 +2343,7 @@ Advanced Stats provide a more in-depth view of your email statistics and the act
 
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "mailbox_providers": "test_string", "aggregated_by": "day", "limit": 1, "offset": 1, "start_date": "2016-01-01"}');
-$response = $this->sg->client->mailbox_providers()->stats()->get(null, $query_params);
+$response = $sg->client->mailbox_providers()->stats()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2361,7 +2361,7 @@ Our partner settings allow you to integrate your SendGrid account with our partn
 
 ```php
 $query_params = json_decode('{"limit": 1, "offset": 1}');
-$response = $this->sg->client->partner_settings()->get(null, $query_params);
+$response = $sg->client->partner_settings()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2378,11 +2378,11 @@ By integrating with New Relic, you can send your SendGrid email statistics to yo
 
 ```php
 $request_body = json_decode('{
-  "enable_subuser_statistics": true,
-  "enabled": true,
+  "enable_subuser_statistics": True,
+  "enabled": True,
   "license_key": ""
 }');
-$response = $this->sg->client->partner_settings()->new_relic()->patch($request_body);
+$response = $sg->client->partner_settings()->new_relic()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2398,7 +2398,7 @@ By integrating with New Relic, you can send your SendGrid email statistics to yo
 ### GET /partner_settings/new_relic
 
 ```php
-$response = $this->sg->client->partner_settings()->new_relic()->get();
+$response = $sg->client->partner_settings()->new_relic()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2415,7 +2415,7 @@ API Keys can be used to authenticate the use of [SendGrids v3 Web API](https://s
 ### GET /scopes
 
 ```php
-$response = $this->sg->client->scopes()->get();
+$response = $sg->client->scopes()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2433,7 +2433,7 @@ Parent accounts will see aggregated stats for their account and all subuser acco
 
 ```php
 $query_params = json_decode('{"aggregated_by": "day", "limit": 1, "start_date": "2016-01-01", "end_date": "2016-04-01", "offset": 1}');
-$response = $this->sg->client->stats()->get(null, $query_params);
+$response = $sg->client->stats()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2462,7 +2462,7 @@ $request_body = json_decode('{
   "password": "johns_password",
   "username": "John@example.com"
 }');
-$response = $this->sg->client->subusers()->post($request_body);
+$response = $sg->client->subusers()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2480,7 +2480,7 @@ For more information about Subusers:
 
 ```php
 $query_params = json_decode('{"username": "test_string", "limit": 0, "offset": 0}');
-$response = $this->sg->client->subusers()->get(null, $query_params);
+$response = $sg->client->subusers()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2495,7 +2495,7 @@ This endpoint allows you to request the reputations for your subusers.
 
 ```php
 $query_params = json_decode('{"usernames": "test_string"}');
-$response = $this->sg->client->subusers()->reputations()->get(null, $query_params);
+$response = $sg->client->subusers()->reputations()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2514,7 +2514,7 @@ For more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/
 
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "limit": 1, "offset": 1, "start_date": "2016-01-01", "subusers": "test_string"}');
-$response = $this->sg->client->subusers()->stats()->get(null, $query_params);
+$response = $sg->client->subusers()->stats()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2534,7 +2534,7 @@ For more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/
 
 ```php
 $query_params = json_decode('{"subuser": "test_string", "limit": 1, "sort_by_metric": "test_string", "offset": 1, "date": "test_string", "sort_by_direction": "asc"}');
-$response = $this->sg->client->subusers()->stats()->monthly()->get(null, $query_params);
+$response = $sg->client->subusers()->stats()->monthly()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2552,7 +2552,7 @@ For more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/
 
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "limit": 1, "sort_by_metric": "test_string", "offset": 1, "start_date": "2016-01-01", "sort_by_direction": "asc"}');
-$response = $this->sg->client->subusers()->stats()->sums()->get(null, $query_params);
+$response = $sg->client->subusers()->stats()->sums()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2570,10 +2570,10 @@ For more information about Subusers:
 
 ```php
 $request_body = json_decode('{
-  "disabled": false
+  "disabled": False
 }');
 $subuser_name = "test_url_param";
-$response = $this->sg->client->subusers()->_($subuser_name)->patch($request_body);
+$response = $sg->client->subusers()->_($subuser_name)->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2591,7 +2591,7 @@ For more information about Subusers:
 
 ```php
 $subuser_name = "test_url_param";
-$response = $this->sg->client->subusers()->_($subuser_name)->delete();
+$response = $sg->client->subusers()->_($subuser_name)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2612,7 +2612,7 @@ $request_body = json_decode('[
   "127.0.0.1"
 ]');
 $subuser_name = "test_url_param";
-$response = $this->sg->client->subusers()->_($subuser_name)->ips()->put($request_body);
+$response = $sg->client->subusers()->_($subuser_name)->ips()->put($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2629,7 +2629,7 @@ $request_body = json_decode('{
   "frequency": 500
 }');
 $subuser_name = "test_url_param";
-$response = $this->sg->client->subusers()->_($subuser_name)->monitor()->put($request_body);
+$response = $sg->client->subusers()->_($subuser_name)->monitor()->put($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2646,7 +2646,7 @@ $request_body = json_decode('{
   "frequency": 50000
 }');
 $subuser_name = "test_url_param";
-$response = $this->sg->client->subusers()->_($subuser_name)->monitor()->post($request_body);
+$response = $sg->client->subusers()->_($subuser_name)->monitor()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2659,7 +2659,7 @@ Subuser monitor settings allow you to receive a sample of an outgoing message by
 
 ```php
 $subuser_name = "test_url_param";
-$response = $this->sg->client->subusers()->_($subuser_name)->monitor()->get();
+$response = $sg->client->subusers()->_($subuser_name)->monitor()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2672,7 +2672,7 @@ Subuser monitor settings allow you to receive a sample of an outgoing message by
 
 ```php
 $subuser_name = "test_url_param";
-$response = $this->sg->client->subusers()->_($subuser_name)->monitor()->delete();
+$response = $sg->client->subusers()->_($subuser_name)->monitor()->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2693,7 +2693,7 @@ For more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/
 ```php
 $query_params = json_decode('{"date": "test_string", "sort_by_direction": "asc", "limit": 0, "sort_by_metric": "test_string", "offset": 1}');
 $subuser_name = "test_url_param";
-$response = $this->sg->client->subusers()->_($subuser_name)->stats()->monthly()->get(null, $query_params);
+$response = $sg->client->subusers()->_($subuser_name)->stats()->monthly()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2713,7 +2713,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 
 ```php
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
-$response = $this->sg->client->suppression()->blocks()->get(null, $query_params);
+$response = $sg->client->suppression()->blocks()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2734,7 +2734,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 ### DELETE /suppression/blocks
 
 ```php
-$response = $this->sg->client->suppression()->blocks()->delete($request_body);
+$response = $sg->client->suppression()->blocks()->delete($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2751,7 +2751,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 
 ```php
 $email = "test_url_param";
-$response = $this->sg->client->suppression()->blocks()->_($email)->get();
+$response = $sg->client->suppression()->blocks()->_($email)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2768,7 +2768,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 
 ```php
 $email = "test_url_param";
-$response = $this->sg->client->suppression()->blocks()->_($email)->delete();
+$response = $sg->client->suppression()->blocks()->_($email)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2788,7 +2788,7 @@ For more information see:
 
 ```php
 $query_params = json_decode('{"start_time": 0, "end_time": 0}');
-$response = $this->sg->client->suppression()->bounces()->get(null, $query_params);
+$response = $sg->client->suppression()->bounces()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2810,7 +2810,7 @@ Note: the `delete_all` and `emails` parameters should be used independently of e
 ### DELETE /suppression/bounces
 
 ```php
-$response = $this->sg->client->suppression()->bounces()->delete($request_body);
+$response = $sg->client->suppression()->bounces()->delete($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2831,7 +2831,7 @@ For more information see:
 
 ```php
 $email = "test_url_param";
-$response = $this->sg->client->suppression()->bounces()->_($email)->get();
+$response = $sg->client->suppression()->bounces()->_($email)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2853,7 +2853,7 @@ For more information see:
 ```php
 $query_params = json_decode('{"email_address": "example@example.com"}');
 $email = "test_url_param";
-$response = $this->sg->client->suppression()->bounces()->_($email)->delete(null, $query_params);
+$response = $sg->client->suppression()->bounces()->_($email)->delete(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2872,7 +2872,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 
 ```php
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
-$response = $this->sg->client->suppression()->invalid_emails()->get(null, $query_params);
+$response = $sg->client->suppression()->invalid_emails()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2895,7 +2895,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 ### DELETE /suppression/invalid_emails
 
 ```php
-$response = $this->sg->client->suppression()->invalid_emails()->delete($request_body);
+$response = $sg->client->suppression()->invalid_emails()->delete($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2914,7 +2914,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 
 ```php
 $email = "test_url_param";
-$response = $this->sg->client->suppression()->invalid_emails()->_($email)->get();
+$response = $sg->client->suppression()->invalid_emails()->_($email)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2933,7 +2933,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 
 ```php
 $email = "test_url_param";
-$response = $this->sg->client->suppression()->invalid_emails()->_($email)->delete();
+$response = $sg->client->suppression()->invalid_emails()->_($email)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2950,7 +2950,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 
 ```php
 $email = "test_url_param";
-$response = $this->sg->client->suppression()->spam_report()->_($email)->get();
+$response = $sg->client->suppression()->spam_report()->_($email)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2967,7 +2967,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 
 ```php
 $email = "test_url_param";
-$response = $this->sg->client->suppression()->spam_report()->_($email)->delete();
+$response = $sg->client->suppression()->spam_report()->_($email)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -2984,7 +2984,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 
 ```php
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
-$response = $this->sg->client->suppression()->spam_reports()->get(null, $query_params);
+$response = $sg->client->suppression()->spam_reports()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3005,7 +3005,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 ### DELETE /suppression/spam_reports
 
 ```php
-$response = $this->sg->client->suppression()->spam_reports()->delete($request_body);
+$response = $sg->client->suppression()->spam_reports()->delete($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3020,7 +3020,7 @@ A global suppression (or global unsubscribe) is an email address of a recipient 
 
 ```php
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
-$response = $this->sg->client->suppression()->unsubscribes()->get(null, $query_params);
+$response = $sg->client->suppression()->unsubscribes()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3042,7 +3042,7 @@ Transactional templates are templates created specifically for transactional ema
 $request_body = json_decode('{
   "name": "example_name"
 }');
-$response = $this->sg->client->templates()->post($request_body);
+$response = $sg->client->templates()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3058,7 +3058,7 @@ Transactional templates are templates created specifically for transactional ema
 ### GET /templates
 
 ```php
-$response = $this->sg->client->templates()->get();
+$response = $sg->client->templates()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3079,7 +3079,7 @@ $request_body = json_decode('{
   "name": "new_example_name"
 }');
 $template_id = "test_url_param";
-$response = $this->sg->client->templates()->_($template_id)->patch($request_body);
+$response = $sg->client->templates()->_($template_id)->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3097,7 +3097,7 @@ Transactional templates are templates created specifically for transactional ema
 
 ```php
 $template_id = "test_url_param";
-$response = $this->sg->client->templates()->_($template_id)->get();
+$response = $sg->client->templates()->_($template_id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3115,7 +3115,7 @@ Transactional templates are templates created specifically for transactional ema
 
 ```php
 $template_id = "test_url_param";
-$response = $this->sg->client->templates()->_($template_id)->delete();
+$response = $sg->client->templates()->_($template_id)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3141,7 +3141,7 @@ $request_body = json_decode('{
   "template_id": "ddb96bbc-9b92-425e-8979-99464621b543"
 }');
 $template_id = "test_url_param";
-$response = $this->sg->client->templates()->_($template_id)->versions()->post($request_body);
+$response = $sg->client->templates()->_($template_id)->versions()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3172,7 +3172,7 @@ $request_body = json_decode('{
 }');
 $template_id = "test_url_param";
 $version_id = "test_url_param";
-$response = $this->sg->client->templates()->_($template_id)->versions()->_($version_id)->patch($request_body);
+$response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3196,7 +3196,7 @@ For more information about transactional templates, please see our [User Guide](
 ```php
 $template_id = "test_url_param";
 $version_id = "test_url_param";
-$response = $this->sg->client->templates()->_($template_id)->versions()->_($version_id)->get();
+$response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3220,7 +3220,7 @@ For more information about transactional templates, please see our [User Guide](
 ```php
 $template_id = "test_url_param";
 $version_id = "test_url_param";
-$response = $this->sg->client->templates()->_($template_id)->versions()->_($version_id)->delete();
+$response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3245,7 +3245,7 @@ For more information about transactional templates, please see our [User Guide](
 ```php
 $template_id = "test_url_param";
 $version_id = "test_url_param";
-$response = $this->sg->client->templates()->_($template_id)->versions()->_($version_id)->activate()->post();
+$response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->activate()->post();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3265,7 +3265,7 @@ For more information about tracking, please see our [User Guide](https://sendgri
 
 ```php
 $query_params = json_decode('{"limit": 1, "offset": 1}');
-$response = $this->sg->client->tracking_settings()->get(null, $query_params);
+$response = $sg->client->tracking_settings()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3282,9 +3282,9 @@ For more information about tracking, please see our [User Guide](https://sendgri
 
 ```php
 $request_body = json_decode('{
-  "enabled": true
+  "enabled": True
 }');
-$response = $this->sg->client->tracking_settings()->click()->patch($request_body);
+$response = $sg->client->tracking_settings()->click()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3300,7 +3300,7 @@ For more information about tracking, please see our [User Guide](https://sendgri
 ### GET /tracking_settings/click
 
 ```php
-$response = $this->sg->client->tracking_settings()->click()->get();
+$response = $sg->client->tracking_settings()->click()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3321,14 +3321,14 @@ For more information about tracking, please see our [User Guide](https://sendgri
 
 ```php
 $request_body = json_decode('{
-  "enabled": true,
+  "enabled": True,
   "utm_campaign": "website",
   "utm_content": "",
   "utm_medium": "email",
   "utm_source": "sendgrid.com",
   "utm_term": ""
 }');
-$response = $this->sg->client->tracking_settings()->google_analytics()->patch($request_body);
+$response = $sg->client->tracking_settings()->google_analytics()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3348,7 +3348,7 @@ For more information about tracking, please see our [User Guide](https://sendgri
 ### GET /tracking_settings/google_analytics
 
 ```php
-$response = $this->sg->client->tracking_settings()->google_analytics()->get();
+$response = $sg->client->tracking_settings()->google_analytics()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3367,9 +3367,9 @@ For more information about tracking, please see our [User Guide](https://sendgri
 
 ```php
 $request_body = json_decode('{
-  "enabled": true
+  "enabled": True
 }');
-$response = $this->sg->client->tracking_settings()->open()->patch($request_body);
+$response = $sg->client->tracking_settings()->open()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3387,7 +3387,7 @@ For more information about tracking, please see our [User Guide](https://sendgri
 ### GET /tracking_settings/open
 
 ```php
-$response = $this->sg->client->tracking_settings()->open()->get();
+$response = $sg->client->tracking_settings()->open()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3406,14 +3406,14 @@ For more information about tracking, please see our [User Guide](https://sendgri
 
 ```php
 $request_body = json_decode('{
-  "enabled": true,
+  "enabled": True,
   "html_content": "html content",
   "landing": "landing page html",
   "plain_content": "text content",
   "replace": "replacement tag",
   "url": "url"
 }');
-$response = $this->sg->client->tracking_settings()->subscription()->patch($request_body);
+$response = $sg->client->tracking_settings()->subscription()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3431,7 +3431,7 @@ For more information about tracking, please see our [User Guide](https://sendgri
 ### GET /tracking_settings/subscription
 
 ```php
-$response = $this->sg->client->tracking_settings()->subscription()->get();
+$response = $sg->client->tracking_settings()->subscription()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3454,7 +3454,7 @@ For more information about your user profile:
 ### GET /user/account
 
 ```php
-$response = $this->sg->client->user()->account()->get();
+$response = $sg->client->user()->account()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3468,7 +3468,7 @@ Your monthly credit allotment limits the number of emails you may send before in
 ### GET /user/credits
 
 ```php
-$response = $this->sg->client->user()->credits()->get();
+$response = $sg->client->user()->credits()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3489,7 +3489,7 @@ For more information about your user profile:
 $request_body = json_decode('{
   "email": "example@example.com"
 }');
-$response = $this->sg->client->user()->email()->put($request_body);
+$response = $sg->client->user()->email()->put($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3507,7 +3507,7 @@ For more information about your user profile:
 ### GET /user/email
 
 ```php
-$response = $this->sg->client->user()->email()->get();
+$response = $sg->client->user()->email()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3529,7 +3529,7 @@ $request_body = json_decode('{
   "new_password": "new_password",
   "old_password": "old_password"
 }');
-$response = $this->sg->client->user()->password()->put($request_body);
+$response = $sg->client->user()->password()->put($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3554,7 +3554,7 @@ $request_body = json_decode('{
   "first_name": "Example",
   "last_name": "User"
 }');
-$response = $this->sg->client->user()->profile()->patch($request_body);
+$response = $sg->client->user()->profile()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3570,7 +3570,7 @@ For more information about your user profile:
 ### GET /user/profile
 
 ```php
-$response = $this->sg->client->user()->profile()->get();
+$response = $sg->client->user()->profile()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3591,7 +3591,7 @@ $request_body = json_decode('{
   "batch_id": "YOUR_BATCH_ID",
   "status": "pause"
 }');
-$response = $this->sg->client->user()->scheduled_sends()->post($request_body);
+$response = $sg->client->user()->scheduled_sends()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3605,7 +3605,7 @@ The Cancel Scheduled Sends feature allows the customer to cancel a scheduled sen
 ### GET /user/scheduled_sends
 
 ```php
-$response = $this->sg->client->user()->scheduled_sends()->get();
+$response = $sg->client->user()->scheduled_sends()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3623,7 +3623,7 @@ $request_body = json_decode('{
   "status": "pause"
 }');
 $batch_id = "test_url_param";
-$response = $this->sg->client->user()->scheduled_sends()->_($batch_id)->patch($request_body);
+$response = $sg->client->user()->scheduled_sends()->_($batch_id)->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3638,7 +3638,7 @@ The Cancel Scheduled Sends feature allows the customer to cancel a scheduled sen
 
 ```php
 $batch_id = "test_url_param";
-$response = $this->sg->client->user()->scheduled_sends()->_($batch_id)->get();
+$response = $sg->client->user()->scheduled_sends()->_($batch_id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3653,7 +3653,7 @@ The Cancel Scheduled Sends feature allows the customer to cancel a scheduled sen
 
 ```php
 $batch_id = "test_url_param";
-$response = $this->sg->client->user()->scheduled_sends()->_($batch_id)->delete();
+$response = $sg->client->user()->scheduled_sends()->_($batch_id)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3670,10 +3670,10 @@ The Enforced TLS settings specify whether or not the recipient is required to su
 
 ```php
 $request_body = json_decode('{
-  "require_tls": true,
-  "require_valid_cert": false
+  "require_tls": True,
+  "require_valid_cert": False
 }');
-$response = $this->sg->client->user()->settings()->enforced_tls()->patch($request_body);
+$response = $sg->client->user()->settings()->enforced_tls()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3689,7 +3689,7 @@ The Enforced TLS settings specify whether or not the recipient is required to su
 ### GET /user/settings/enforced_tls
 
 ```php
-$response = $this->sg->client->user()->settings()->enforced_tls()->get();
+$response = $sg->client->user()->settings()->enforced_tls()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3710,7 +3710,7 @@ For more information about your user profile:
 $request_body = json_decode('{
   "username": "test_username"
 }');
-$response = $this->sg->client->user()->username()->put($request_body);
+$response = $sg->client->user()->username()->put($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3728,7 +3728,7 @@ For more information about your user profile:
 ### GET /user/username
 
 ```php
-$response = $this->sg->client->user()->username()->get();
+$response = $sg->client->user()->username()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3747,21 +3747,21 @@ Common uses of this data are to remove unsubscribes, react to spam reports, dete
 
 ```php
 $request_body = json_decode('{
-  "bounce": true,
-  "click": true,
-  "deferred": true,
-  "delivered": true,
-  "dropped": true,
-  "enabled": true,
-  "group_resubscribe": true,
-  "group_unsubscribe": true,
-  "open": true,
-  "processed": true,
-  "spam_report": true,
-  "unsubscribe": true,
+  "bounce": True,
+  "click": True,
+  "deferred": True,
+  "delivered": True,
+  "dropped": True,
+  "enabled": True,
+  "group_resubscribe": True,
+  "group_unsubscribe": True,
+  "open": True,
+  "processed": True,
+  "spam_report": True,
+  "unsubscribe": True,
   "url": "url"
 }');
-$response = $this->sg->client->user()->webhooks()->event()->settings()->patch($request_body);
+$response = $sg->client->user()->webhooks()->event()->settings()->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3779,7 +3779,7 @@ Common uses of this data are to remove unsubscribes, react to spam reports, dete
 ### GET /user/webhooks/event/settings
 
 ```php
-$response = $this->sg->client->user()->webhooks()->event()->settings()->get();
+$response = $sg->client->user()->webhooks()->event()->settings()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3798,7 +3798,7 @@ Common uses of this data are to remove unsubscribes, react to spam reports, dete
 $request_body = json_decode('{
   "url": "url"
 }');
-$response = $this->sg->client->user()->webhooks()->event()->test()->post($request_body);
+$response = $sg->client->user()->webhooks()->event()->test()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3812,7 +3812,7 @@ SendGrid can parse the attachments and contents of incoming emails. The Parse AP
 ### GET /user/webhooks/parse/settings
 
 ```php
-$response = $this->sg->client->user()->webhooks()->parse()->settings()->get();
+$response = $sg->client->user()->webhooks()->parse()->settings()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3829,7 +3829,7 @@ There are a number of pre-made integrations for the SendGrid Parse Webhook which
 
 ```php
 $query_params = json_decode('{"aggregated_by": "day", "limit": "test_string", "start_date": "2016-01-01", "end_date": "2016-04-01", "offset": "test_string"}');
-$response = $this->sg->client->user()->webhooks()->parse()->stats()->get(null, $query_params);
+$response = $sg->client->user()->webhooks()->parse()->stats()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3853,9 +3853,9 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 
 ```php
 $request_body = json_decode('{
-  "automatic_security": false,
-  "custom_spf": true,
-  "default": true,
+  "automatic_security": False,
+  "custom_spf": True,
+  "default": True,
   "domain": "example.com",
   "ips": [
     "192.168.1.1",
@@ -3864,7 +3864,7 @@ $request_body = json_decode('{
   "subdomain": "news",
   "username": "john@example.com"
 }');
-$response = $this->sg->client->whitelabel()->domains()->post($request_body);
+$response = $sg->client->whitelabel()->domains()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3882,7 +3882,7 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 
 ```php
 $query_params = json_decode('{"username": "test_string", "domain": "test_string", "exclude_subusers": "true", "limit": 1, "offset": 1}');
-$response = $this->sg->client->whitelabel()->domains()->get(null, $query_params);
+$response = $sg->client->whitelabel()->domains()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3903,7 +3903,7 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 ### GET /whitelabel/domains/default
 
 ```php
-$response = $this->sg->client->whitelabel()->domains()->default()->get();
+$response = $sg->client->whitelabel()->domains()->default()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3926,7 +3926,7 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 ### GET /whitelabel/domains/subuser
 
 ```php
-$response = $this->sg->client->whitelabel()->domains()->subuser()->get();
+$response = $sg->client->whitelabel()->domains()->subuser()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3949,7 +3949,7 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 ### DELETE /whitelabel/domains/subuser
 
 ```php
-$response = $this->sg->client->whitelabel()->domains()->subuser()->delete();
+$response = $sg->client->whitelabel()->domains()->subuser()->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3966,11 +3966,11 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 
 ```php
 $request_body = json_decode('{
-  "custom_spf": true,
-  "default": false
+  "custom_spf": True,
+  "default": False
 }');
 $domain_id = "test_url_param";
-$response = $this->sg->client->whitelabel()->domains()->_($domain_id)->patch($request_body);
+$response = $sg->client->whitelabel()->domains()->_($domain_id)->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -3988,7 +3988,7 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 
 ```php
 $domain_id = "test_url_param";
-$response = $this->sg->client->whitelabel()->domains()->_($domain_id)->get();
+$response = $sg->client->whitelabel()->domains()->_($domain_id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -4005,7 +4005,7 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 
 ```php
 $domain_id = "test_url_param";
-$response = $this->sg->client->whitelabel()->domains()->_($domain_id)->delete();
+$response = $sg->client->whitelabel()->domains()->_($domain_id)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -4032,7 +4032,7 @@ $request_body = json_decode('{
   "username": "jane@example.com"
 }');
 $domain_id = "test_url_param";
-$response = $this->sg->client->whitelabel()->domains()->_($domain_id)->subuser()->post($request_body);
+$response = $sg->client->whitelabel()->domains()->_($domain_id)->subuser()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -4057,7 +4057,7 @@ $request_body = json_decode('{
   "ip": "192.168.0.1"
 }');
 $id = "test_url_param";
-$response = $this->sg->client->whitelabel()->domains()->_($id)->ips()->post($request_body);
+$response = $sg->client->whitelabel()->domains()->_($id)->ips()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -4081,7 +4081,7 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 ```php
 $id = "test_url_param";
 $ip = "test_url_param";
-$response = $this->sg->client->whitelabel()->domains()->_($id)->ips()->_($ip)->delete();
+$response = $sg->client->whitelabel()->domains()->_($id)->ips()->_($ip)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -4103,7 +4103,7 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 
 ```php
 $id = "test_url_param";
-$response = $this->sg->client->whitelabel()->domains()->_($id)->validate()->post();
+$response = $sg->client->whitelabel()->domains()->_($id)->validate()->post();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -4126,7 +4126,7 @@ $request_body = json_decode('{
   "ip": "192.168.1.1",
   "subdomain": "email"
 }');
-$response = $this->sg->client->whitelabel()->ips()->post($request_body);
+$response = $sg->client->whitelabel()->ips()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -4145,7 +4145,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ```php
 $query_params = json_decode('{"ip": "test_string", "limit": 1, "offset": 1}');
-$response = $this->sg->client->whitelabel()->ips()->get(null, $query_params);
+$response = $sg->client->whitelabel()->ips()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -4162,7 +4162,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ```php
 $id = "test_url_param";
-$response = $this->sg->client->whitelabel()->ips()->_($id)->get();
+$response = $sg->client->whitelabel()->ips()->_($id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -4179,7 +4179,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ```php
 $id = "test_url_param";
-$response = $this->sg->client->whitelabel()->ips()->_($id)->delete();
+$response = $sg->client->whitelabel()->ips()->_($id)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -4196,7 +4196,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ```php
 $id = "test_url_param";
-$response = $this->sg->client->whitelabel()->ips()->_($id)->validate()->post();
+$response = $sg->client->whitelabel()->ips()->_($id)->validate()->post();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -4213,12 +4213,12 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ```php
 $request_body = json_decode('{
-  "default": true,
+  "default": True,
   "domain": "example.com",
   "subdomain": "mail"
 }');
 $query_params = json_decode('{"limit": 1, "offset": 1}');
-$response = $this->sg->client->whitelabel()->links()->post($request_body, $query_params);
+$response = $sg->client->whitelabel()->links()->post($request_body, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -4235,7 +4235,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ```php
 $query_params = json_decode('{"limit": 1}');
-$response = $this->sg->client->whitelabel()->links()->get(null, $query_params);
+$response = $sg->client->whitelabel()->links()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -4259,7 +4259,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ```php
 $query_params = json_decode('{"domain": "test_string"}');
-$response = $this->sg->client->whitelabel()->links()->default()->get(null, $query_params);
+$response = $sg->client->whitelabel()->links()->default()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -4280,7 +4280,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ```php
 $query_params = json_decode('{"username": "test_string"}');
-$response = $this->sg->client->whitelabel()->links()->subuser()->get(null, $query_params);
+$response = $sg->client->whitelabel()->links()->subuser()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -4301,7 +4301,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ```php
 $query_params = json_decode('{"username": "test_string"}');
-$response = $this->sg->client->whitelabel()->links()->subuser()->delete(null, $query_params);
+$response = $sg->client->whitelabel()->links()->subuser()->delete(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -4318,10 +4318,10 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ```php
 $request_body = json_decode('{
-  "default": true
+  "default": True
 }');
 $id = "test_url_param";
-$response = $this->sg->client->whitelabel()->links()->_($id)->patch($request_body);
+$response = $sg->client->whitelabel()->links()->_($id)->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -4338,7 +4338,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ```php
 $id = "test_url_param";
-$response = $this->sg->client->whitelabel()->links()->_($id)->get();
+$response = $sg->client->whitelabel()->links()->_($id)->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -4355,7 +4355,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ```php
 $id = "test_url_param";
-$response = $this->sg->client->whitelabel()->links()->_($id)->delete();
+$response = $sg->client->whitelabel()->links()->_($id)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -4372,7 +4372,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ```php
 $id = "test_url_param";
-$response = $this->sg->client->whitelabel()->links()->_($id)->validate()->post();
+$response = $sg->client->whitelabel()->links()->_($id)->validate()->post();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -4396,7 +4396,7 @@ $request_body = json_decode('{
   "username": "jane@example.com"
 }');
 $link_id = "test_url_param";
-$response = $this->sg->client->whitelabel()->links()->_($link_id)->subuser()->post($request_body);
+$response = $sg->client->whitelabel()->links()->_($link_id)->subuser()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();

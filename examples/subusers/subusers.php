@@ -18,7 +18,7 @@ $request_body = json_decode('{
   "password": "johns_password", 
   "username": "John@example.com"
 }');
-$response = $this->sg->client->subusers()->post($request_body);
+$response = $sg->client->subusers()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -28,7 +28,7 @@ echo $response->responseHeaders();
 # GET /subusers #
 
 $query_params = json_decode('{"username": "test_string", "limit": 0, "offset": 0}');
-$response = $this->sg->client->subusers()->get(null, $query_params);
+$response = $sg->client->subusers()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -38,7 +38,7 @@ echo $response->responseHeaders();
 # GET /subusers/reputations #
 
 $query_params = json_decode('{"usernames": "test_string"}');
-$response = $this->sg->client->subusers()->reputations()->get(null, $query_params);
+$response = $sg->client->subusers()->reputations()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -48,7 +48,7 @@ echo $response->responseHeaders();
 # GET /subusers/stats #
 
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "limit": 1, "offset": 1, "start_date": "2016-01-01", "subusers": "test_string"}');
-$response = $this->sg->client->subusers()->stats()->get(null, $query_params);
+$response = $sg->client->subusers()->stats()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -58,7 +58,7 @@ echo $response->responseHeaders();
 # GET /subusers/stats/monthly #
 
 $query_params = json_decode('{"subuser": "test_string", "limit": 1, "sort_by_metric": "test_string", "offset": 1, "date": "test_string", "sort_by_direction": "asc"}');
-$response = $this->sg->client->subusers()->stats()->monthly()->get(null, $query_params);
+$response = $sg->client->subusers()->stats()->monthly()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -68,7 +68,7 @@ echo $response->responseHeaders();
 # GET /subusers/stats/sums #
 
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "limit": 1, "sort_by_metric": "test_string", "offset": 1, "start_date": "2016-01-01", "sort_by_direction": "asc"}');
-$response = $this->sg->client->subusers()->stats()->sums()->get(null, $query_params);
+$response = $sg->client->subusers()->stats()->sums()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -78,10 +78,10 @@ echo $response->responseHeaders();
 # PATCH /subusers/{subuser_name} #
 
 $request_body = json_decode('{
-  "disabled": false
+  "disabled": False
 }');
 $subuser_name = "test_url_param";
-$response = $this->sg->client->subusers()->_($subuser_name)->patch($request_body);
+$response = $sg->client->subusers()->_($subuser_name)->patch($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -91,7 +91,7 @@ echo $response->responseHeaders();
 # DELETE /subusers/{subuser_name} #
 
 $subuser_name = "test_url_param";
-$response = $this->sg->client->subusers()->_($subuser_name)->delete();
+$response = $sg->client->subusers()->_($subuser_name)->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -104,7 +104,7 @@ $request_body = json_decode('[
   "127.0.0.1"
 ]');
 $subuser_name = "test_url_param";
-$response = $this->sg->client->subusers()->_($subuser_name)->ips()->put($request_body);
+$response = $sg->client->subusers()->_($subuser_name)->ips()->put($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -118,7 +118,7 @@ $request_body = json_decode('{
   "frequency": 500
 }');
 $subuser_name = "test_url_param";
-$response = $this->sg->client->subusers()->_($subuser_name)->monitor()->put($request_body);
+$response = $sg->client->subusers()->_($subuser_name)->monitor()->put($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -132,7 +132,7 @@ $request_body = json_decode('{
   "frequency": 50000
 }');
 $subuser_name = "test_url_param";
-$response = $this->sg->client->subusers()->_($subuser_name)->monitor()->post($request_body);
+$response = $sg->client->subusers()->_($subuser_name)->monitor()->post($request_body);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -142,7 +142,7 @@ echo $response->responseHeaders();
 # GET /subusers/{subuser_name}/monitor #
 
 $subuser_name = "test_url_param";
-$response = $this->sg->client->subusers()->_($subuser_name)->monitor()->get();
+$response = $sg->client->subusers()->_($subuser_name)->monitor()->get();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -152,7 +152,7 @@ echo $response->responseHeaders();
 # DELETE /subusers/{subuser_name}/monitor #
 
 $subuser_name = "test_url_param";
-$response = $this->sg->client->subusers()->_($subuser_name)->monitor()->delete();
+$response = $sg->client->subusers()->_($subuser_name)->monitor()->delete();
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
@@ -163,7 +163,7 @@ echo $response->responseHeaders();
 
 $query_params = json_decode('{"date": "test_string", "sort_by_direction": "asc", "limit": 0, "sort_by_metric": "test_string", "offset": 1}');
 $subuser_name = "test_url_param";
-$response = $this->sg->client->subusers()->_($subuser_name)->stats()->monthly()->get(null, $query_params);
+$response = $sg->client->subusers()->_($subuser_name)->stats()->monthly()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();

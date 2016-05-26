@@ -10,7 +10,7 @@ $sg = new \SendGrid($apiKey);
 # GET /geo/stats #
 
 $query_params = json_decode('{"end_date": "2016-04-01", "country": "US", "aggregated_by": "day", "limit": 1, "offset": 1, "start_date": "2016-01-01"}');
-$response = $this->sg->client->geo()->stats()->get(null, $query_params);
+$response = $sg->client->geo()->stats()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->responseBody();
 echo $response->responseHeaders();
