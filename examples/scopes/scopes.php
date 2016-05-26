@@ -1,0 +1,16 @@
+<?php
+require 'vendor/autoload.php';
+
+
+$apiKey = getenv('SENDGRID_API_KEY');
+$sg = new \SendGrid($apiKey);
+
+##################################################
+# Retrieve a list of scopes for which this user has access. #
+# GET /scopes #
+
+$response = $this->sg->client->scopes()->get();
+echo $response->statusCode();
+echo $response->responseBody();
+echo $response->responseHeaders();
+

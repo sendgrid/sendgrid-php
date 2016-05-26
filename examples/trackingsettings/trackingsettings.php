@@ -1,0 +1,111 @@
+<?php
+require 'vendor/autoload.php';
+
+
+$apiKey = getenv('SENDGRID_API_KEY');
+$sg = new \SendGrid($apiKey);
+
+##################################################
+# Retrieve Tracking Settings #
+# GET /tracking_settings #
+
+$query_params = json_decode('{"limit": 1, "offset": 1}');
+$response = $this->sg->client->tracking_settings()->get(null, $query_params);
+echo $response->statusCode();
+echo $response->responseBody();
+echo $response->responseHeaders();
+
+##################################################
+# Update Click Tracking Settings #
+# PATCH /tracking_settings/click #
+
+$request_body = json_decode('{
+  "enabled": true
+}');
+$response = $this->sg->client->tracking_settings()->click()->patch($request_body);
+echo $response->statusCode();
+echo $response->responseBody();
+echo $response->responseHeaders();
+
+##################################################
+# Retrieve Click Track Settings #
+# GET /tracking_settings/click #
+
+$response = $this->sg->client->tracking_settings()->click()->get();
+echo $response->statusCode();
+echo $response->responseBody();
+echo $response->responseHeaders();
+
+##################################################
+# Update Google Analytics Settings #
+# PATCH /tracking_settings/google_analytics #
+
+$request_body = json_decode('{
+  "enabled": true, 
+  "utm_campaign": "website", 
+  "utm_content": "", 
+  "utm_medium": "email", 
+  "utm_source": "sendgrid.com", 
+  "utm_term": ""
+}');
+$response = $this->sg->client->tracking_settings()->google_analytics()->patch($request_body);
+echo $response->statusCode();
+echo $response->responseBody();
+echo $response->responseHeaders();
+
+##################################################
+# Retrieve Google Analytics Settings #
+# GET /tracking_settings/google_analytics #
+
+$response = $this->sg->client->tracking_settings()->google_analytics()->get();
+echo $response->statusCode();
+echo $response->responseBody();
+echo $response->responseHeaders();
+
+##################################################
+# Update Open Tracking Settings #
+# PATCH /tracking_settings/open #
+
+$request_body = json_decode('{
+  "enabled": true
+}');
+$response = $this->sg->client->tracking_settings()->open()->patch($request_body);
+echo $response->statusCode();
+echo $response->responseBody();
+echo $response->responseHeaders();
+
+##################################################
+# Get Open Tracking Settings #
+# GET /tracking_settings/open #
+
+$response = $this->sg->client->tracking_settings()->open()->get();
+echo $response->statusCode();
+echo $response->responseBody();
+echo $response->responseHeaders();
+
+##################################################
+# Update Subscription Tracking Settings #
+# PATCH /tracking_settings/subscription #
+
+$request_body = json_decode('{
+  "enabled": true, 
+  "html_content": "html content", 
+  "landing": "landing page html", 
+  "plain_content": "text content", 
+  "replace": "replacement tag", 
+  "url": "url"
+}');
+$response = $this->sg->client->tracking_settings()->subscription()->patch($request_body);
+echo $response->statusCode();
+echo $response->responseBody();
+echo $response->responseHeaders();
+
+##################################################
+# Retrieve Subscription Tracking Settings #
+# GET /tracking_settings/subscription #
+
+$response = $this->sg->client->tracking_settings()->subscription()->get();
+echo $response->statusCode();
+echo $response->responseBody();
+echo $response->responseHeaders();
+
