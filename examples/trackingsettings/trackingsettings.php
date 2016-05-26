@@ -20,7 +20,7 @@ echo $response->responseHeaders();
 # PATCH /tracking_settings/click #
 
 $request_body = json_decode('{
-  "enabled": True
+  "enabled": true
 }');
 $response = $sg->client->tracking_settings()->click()->patch($request_body);
 echo $response->statusCode();
@@ -41,7 +41,7 @@ echo $response->responseHeaders();
 # PATCH /tracking_settings/google_analytics #
 
 $request_body = json_decode('{
-  "enabled": True, 
+  "enabled": true, 
   "utm_campaign": "website", 
   "utm_content": "", 
   "utm_medium": "email", 
@@ -67,7 +67,7 @@ echo $response->responseHeaders();
 # PATCH /tracking_settings/open #
 
 $request_body = json_decode('{
-  "enabled": True
+  "enabled": true
 }');
 $response = $sg->client->tracking_settings()->open()->patch($request_body);
 echo $response->statusCode();
@@ -88,7 +88,7 @@ echo $response->responseHeaders();
 # PATCH /tracking_settings/subscription #
 
 $request_body = json_decode('{
-  "enabled": True, 
+  "enabled": true, 
   "html_content": "html content", 
   "landing": "landing page html", 
   "plain_content": "text content", 

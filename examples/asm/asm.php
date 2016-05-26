@@ -11,7 +11,7 @@ $sg = new \SendGrid($apiKey);
 
 $request_body = json_decode('{
   "description": "A group description", 
-  "is_default": False, 
+  "is_default": false, 
   "name": "A group name"
 }');
 $response = $sg->client->asm()->groups()->post($request_body);

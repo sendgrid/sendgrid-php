@@ -20,7 +20,7 @@ echo $response->responseHeaders();
 # PATCH /mail_settings/address_whitelist #
 
 $request_body = json_decode('{
-  "enabled": True, 
+  "enabled": true, 
   "list": [
     "email1@example.com", 
     "example.com"
@@ -46,7 +46,7 @@ echo $response->responseHeaders();
 
 $request_body = json_decode('{
   "email": "email@example.com", 
-  "enabled": False
+  "enabled": false
 }');
 $response = $sg->client->mail_settings()->bcc()->patch($request_body);
 echo $response->statusCode();
@@ -67,7 +67,7 @@ echo $response->responseHeaders();
 # PATCH /mail_settings/bounce_purge #
 
 $request_body = json_decode('{
-  "enabled": True, 
+  "enabled": true, 
   "hard_bounces": 5, 
   "soft_bounces": 5
 }');
@@ -90,7 +90,7 @@ echo $response->responseHeaders();
 # PATCH /mail_settings/footer #
 
 $request_body = json_decode('{
-  "enabled": True, 
+  "enabled": true, 
   "html_content": "...", 
   "plain_content": "..."
 }');
@@ -114,7 +114,7 @@ echo $response->responseHeaders();
 
 $request_body = json_decode('{
   "email": "example@example.com", 
-  "enabled": True
+  "enabled": true
 }');
 $response = $sg->client->mail_settings()->forward_bounce()->patch($request_body);
 echo $response->statusCode();
@@ -136,7 +136,7 @@ echo $response->responseHeaders();
 
 $request_body = json_decode('{
   "email": "", 
-  "enabled": False
+  "enabled": false
 }');
 $response = $sg->client->mail_settings()->forward_spam()->patch($request_body);
 echo $response->statusCode();
@@ -157,7 +157,7 @@ echo $response->responseHeaders();
 # PATCH /mail_settings/plain_content #
 
 $request_body = json_decode('{
-  "enabled": False
+  "enabled": false
 }');
 $response = $sg->client->mail_settings()->plain_content()->patch($request_body);
 echo $response->statusCode();
@@ -178,7 +178,7 @@ echo $response->responseHeaders();
 # PATCH /mail_settings/spam_check #
 
 $request_body = json_decode('{
-  "enabled": True, 
+  "enabled": true, 
   "max_score": 5, 
   "url": "url"
 }');
@@ -201,7 +201,7 @@ echo $response->responseHeaders();
 # PATCH /mail_settings/template #
 
 $request_body = json_decode('{
-  "enabled": True, 
+  "enabled": true, 
   "html_content": "<% body %>"
 }');
 $response = $sg->client->mail_settings()->template()->patch($request_body);

@@ -20,8 +20,8 @@ echo $response->responseHeaders();
 # PATCH /partner_settings/new_relic #
 
 $request_body = json_decode('{
-  "enable_subuser_statistics": True, 
-  "enabled": True, 
+  "enable_subuser_statistics": true, 
+  "enabled": true, 
   "license_key": ""
 }');
 $response = $sg->client->partner_settings()->new_relic()->patch($request_body);

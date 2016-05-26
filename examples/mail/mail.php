@@ -72,21 +72,21 @@ $request_body = json_decode('{
   "mail_settings": {
     "bcc": {
       "email": "ben.doe@example.com", 
-      "enable": True
+      "enable": true
     }, 
     "bypass_list_management": {
-      "enable": True
+      "enable": true
     }, 
     "footer": {
-      "enable": True, 
+      "enable": true, 
       "html": "<p>Thanks</br>The SendGrid Team</p>", 
       "text": "Thanks,/n The SendGrid Team"
     }, 
     "sandbox_mode": {
-      "enable": False
+      "enable": false
     }, 
     "spam_check": {
-      "enable": True, 
+      "enable": true, 
       "post_to_url": "http://example.com/compliance", 
       "threshold": 3
     }
@@ -148,11 +148,11 @@ $request_body = json_decode('{
   "template_id": "[YOUR TEMPLATE ID GOES HERE]", 
   "tracking_settings": {
     "click_tracking": {
-      "enable": True, 
-      "enable_text": True
+      "enable": true, 
+      "enable_text": true
     }, 
     "ganalytics": {
-      "enable": True, 
+      "enable": true, 
       "utm_campaign": "[NAME OF YOUR REFERRER SOURCE]", 
       "utm_content": "[USE THIS SPACE TO DIFFERENTIATE YOUR EMAIL FROM ADS]", 
       "utm_medium": "[NAME OF YOUR MARKETING MEDIUM e.g. email]", 
@@ -160,11 +160,11 @@ $request_body = json_decode('{
       "utm_term": "[IDENTIFY PAID KEYWORDS HERE]"
     }, 
     "open_tracking": {
-      "enable": True, 
+      "enable": true, 
       "substitution_tag": "%opentrack"
     }, 
     "subscription_tracking": {
-      "enable": True, 
+      "enable": true, 
       "html": "If you would like to unsubscribe and stop receiving these emails <% clickhere %>.", 
       "substitution_tag": "<%click here%>", 
       "text": "If you would like to unsubscribe and stop receiveing these emails <% click here %>."

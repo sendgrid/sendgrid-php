@@ -140,8 +140,8 @@ echo $response->responseHeaders();
 # PATCH /user/settings/enforced_tls #
 
 $request_body = json_decode('{
-  "require_tls": True, 
-  "require_valid_cert": False
+  "require_tls": true, 
+  "require_valid_cert": false
 }');
 $response = $sg->client->user()->settings()->enforced_tls()->patch($request_body);
 echo $response->statusCode();
@@ -183,18 +183,18 @@ echo $response->responseHeaders();
 # PATCH /user/webhooks/event/settings #
 
 $request_body = json_decode('{
-  "bounce": True, 
-  "click": True, 
-  "deferred": True, 
-  "delivered": True, 
-  "dropped": True, 
-  "enabled": True, 
-  "group_resubscribe": True, 
-  "group_unsubscribe": True, 
-  "open": True, 
-  "processed": True, 
-  "spam_report": True, 
-  "unsubscribe": True, 
+  "bounce": true, 
+  "click": true, 
+  "deferred": true, 
+  "delivered": true, 
+  "dropped": true, 
+  "enabled": true, 
+  "group_resubscribe": true, 
+  "group_unsubscribe": true, 
+  "open": true, 
+  "processed": true, 
+  "spam_report": true, 
+  "unsubscribe": true, 
   "url": "url"
 }');
 $response = $sg->client->user()->webhooks()->event()->settings()->patch($request_body);

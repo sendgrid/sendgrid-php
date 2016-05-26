@@ -313,7 +313,7 @@ Each user can create up to 25 different suppression groups.
 ```php
 $request_body = json_decode('{
   "description": "A group description",
-  "is_default": False,
+  "is_default": false,
   "name": "A group name"
 }');
 $response = $sg->client->asm()->groups()->post($request_body);
@@ -1873,21 +1873,21 @@ $request_body = json_decode('{
   "mail_settings": {
     "bcc": {
       "email": "ben.doe@example.com",
-      "enable": True
+      "enable": true
     },
     "bypass_list_management": {
-      "enable": True
+      "enable": true
     },
     "footer": {
-      "enable": True,
+      "enable": true,
       "html": "<p>Thanks</br>The SendGrid Team</p>",
       "text": "Thanks,/n The SendGrid Team"
     },
     "sandbox_mode": {
-      "enable": False
+      "enable": false
     },
     "spam_check": {
-      "enable": True,
+      "enable": true,
       "post_to_url": "http://example.com/compliance",
       "threshold": 3
     }
@@ -1949,11 +1949,11 @@ $request_body = json_decode('{
   "template_id": "[YOUR TEMPLATE ID GOES HERE]",
   "tracking_settings": {
     "click_tracking": {
-      "enable": True,
-      "enable_text": True
+      "enable": true,
+      "enable_text": true
     },
     "ganalytics": {
-      "enable": True,
+      "enable": true,
       "utm_campaign": "[NAME OF YOUR REFERRER SOURCE]",
       "utm_content": "[USE THIS SPACE TO DIFFERENTIATE YOUR EMAIL FROM ADS]",
       "utm_medium": "[NAME OF YOUR MARKETING MEDIUM e.g. email]",
@@ -1961,11 +1961,11 @@ $request_body = json_decode('{
       "utm_term": "[IDENTIFY PAID KEYWORDS HERE]"
     },
     "open_tracking": {
-      "enable": True,
+      "enable": true,
       "substitution_tag": "%opentrack"
     },
     "subscription_tracking": {
-      "enable": True,
+      "enable": true,
       "html": "If you would like to unsubscribe and stop receiving these emails <% clickhere %>.",
       "substitution_tag": "<%click here%>",
       "text": "If you would like to unsubscribe and stop receiveing these emails <% click here %>."
@@ -2007,7 +2007,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ```php
 $request_body = json_decode('{
-  "enabled": True,
+  "enabled": true,
   "list": [
     "email1@example.com",
     "example.com"
@@ -2047,7 +2047,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 ```php
 $request_body = json_decode('{
   "email": "email@example.com",
-  "enabled": False
+  "enabled": false
 }');
 $response = $sg->client->mail_settings()->bcc()->patch($request_body);
 echo $response->statusCode();
@@ -2082,7 +2082,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ```php
 $request_body = json_decode('{
-  "enabled": True,
+  "enabled": true,
   "hard_bounces": 5,
   "soft_bounces": 5
 }');
@@ -2119,7 +2119,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ```php
 $request_body = json_decode('{
-  "enabled": True,
+  "enabled": true,
   "html_content": "...",
   "plain_content": "..."
 }');
@@ -2157,7 +2157,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 ```php
 $request_body = json_decode('{
   "email": "example@example.com",
-  "enabled": True
+  "enabled": true
 }');
 $response = $sg->client->mail_settings()->forward_bounce()->patch($request_body);
 echo $response->statusCode();
@@ -2193,7 +2193,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 ```php
 $request_body = json_decode('{
   "email": "",
-  "enabled": False
+  "enabled": false
 }');
 $response = $sg->client->mail_settings()->forward_spam()->patch($request_body);
 echo $response->statusCode();
@@ -2228,7 +2228,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ```php
 $request_body = json_decode('{
-  "enabled": False
+  "enabled": false
 }');
 $response = $sg->client->mail_settings()->plain_content()->patch($request_body);
 echo $response->statusCode();
@@ -2263,7 +2263,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ```php
 $request_body = json_decode('{
-  "enabled": True,
+  "enabled": true,
   "max_score": 5,
   "url": "url"
 }');
@@ -2302,7 +2302,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ```php
 $request_body = json_decode('{
-  "enabled": True,
+  "enabled": true,
   "html_content": "<% body %>"
 }');
 $response = $sg->client->mail_settings()->template()->patch($request_body);
@@ -2378,8 +2378,8 @@ By integrating with New Relic, you can send your SendGrid email statistics to yo
 
 ```php
 $request_body = json_decode('{
-  "enable_subuser_statistics": True,
-  "enabled": True,
+  "enable_subuser_statistics": true,
+  "enabled": true,
   "license_key": ""
 }');
 $response = $sg->client->partner_settings()->new_relic()->patch($request_body);
@@ -2570,7 +2570,7 @@ For more information about Subusers:
 
 ```php
 $request_body = json_decode('{
-  "disabled": False
+  "disabled": false
 }');
 $subuser_name = "test_url_param";
 $response = $sg->client->subusers()->_($subuser_name)->patch($request_body);
@@ -3282,7 +3282,7 @@ For more information about tracking, please see our [User Guide](https://sendgri
 
 ```php
 $request_body = json_decode('{
-  "enabled": True
+  "enabled": true
 }');
 $response = $sg->client->tracking_settings()->click()->patch($request_body);
 echo $response->statusCode();
@@ -3321,7 +3321,7 @@ For more information about tracking, please see our [User Guide](https://sendgri
 
 ```php
 $request_body = json_decode('{
-  "enabled": True,
+  "enabled": true,
   "utm_campaign": "website",
   "utm_content": "",
   "utm_medium": "email",
@@ -3367,7 +3367,7 @@ For more information about tracking, please see our [User Guide](https://sendgri
 
 ```php
 $request_body = json_decode('{
-  "enabled": True
+  "enabled": true
 }');
 $response = $sg->client->tracking_settings()->open()->patch($request_body);
 echo $response->statusCode();
@@ -3406,7 +3406,7 @@ For more information about tracking, please see our [User Guide](https://sendgri
 
 ```php
 $request_body = json_decode('{
-  "enabled": True,
+  "enabled": true,
   "html_content": "html content",
   "landing": "landing page html",
   "plain_content": "text content",
@@ -3670,8 +3670,8 @@ The Enforced TLS settings specify whether or not the recipient is required to su
 
 ```php
 $request_body = json_decode('{
-  "require_tls": True,
-  "require_valid_cert": False
+  "require_tls": true,
+  "require_valid_cert": false
 }');
 $response = $sg->client->user()->settings()->enforced_tls()->patch($request_body);
 echo $response->statusCode();
@@ -3747,18 +3747,18 @@ Common uses of this data are to remove unsubscribes, react to spam reports, dete
 
 ```php
 $request_body = json_decode('{
-  "bounce": True,
-  "click": True,
-  "deferred": True,
-  "delivered": True,
-  "dropped": True,
-  "enabled": True,
-  "group_resubscribe": True,
-  "group_unsubscribe": True,
-  "open": True,
-  "processed": True,
-  "spam_report": True,
-  "unsubscribe": True,
+  "bounce": true,
+  "click": true,
+  "deferred": true,
+  "delivered": true,
+  "dropped": true,
+  "enabled": true,
+  "group_resubscribe": true,
+  "group_unsubscribe": true,
+  "open": true,
+  "processed": true,
+  "spam_report": true,
+  "unsubscribe": true,
   "url": "url"
 }');
 $response = $sg->client->user()->webhooks()->event()->settings()->patch($request_body);
@@ -3853,9 +3853,9 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 
 ```php
 $request_body = json_decode('{
-  "automatic_security": False,
-  "custom_spf": True,
-  "default": True,
+  "automatic_security": false,
+  "custom_spf": true,
+  "default": true,
   "domain": "example.com",
   "ips": [
     "192.168.1.1",
@@ -3966,8 +3966,8 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 
 ```php
 $request_body = json_decode('{
-  "custom_spf": True,
-  "default": False
+  "custom_spf": true,
+  "default": false
 }');
 $domain_id = "test_url_param";
 $response = $sg->client->whitelabel()->domains()->_($domain_id)->patch($request_body);
@@ -4213,7 +4213,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ```php
 $request_body = json_decode('{
-  "default": True,
+  "default": true,
   "domain": "example.com",
   "subdomain": "mail"
 }');
@@ -4318,7 +4318,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ```php
 $request_body = json_decode('{
-  "default": True
+  "default": true
 }');
 $id = "test_url_param";
 $response = $sg->client->whitelabel()->links()->_($id)->patch($request_body);

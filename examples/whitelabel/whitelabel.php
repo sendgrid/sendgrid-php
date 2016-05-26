@@ -10,9 +10,9 @@ $sg = new \SendGrid($apiKey);
 # POST /whitelabel/domains #
 
 $request_body = json_decode('{
-  "automatic_security": False, 
-  "custom_spf": True, 
-  "default": True, 
+  "automatic_security": false, 
+  "custom_spf": true, 
+  "default": true, 
   "domain": "example.com", 
   "ips": [
     "192.168.1.1", 
@@ -68,8 +68,8 @@ echo $response->responseHeaders();
 # PATCH /whitelabel/domains/{domain_id} #
 
 $request_body = json_decode('{
-  "custom_spf": True, 
-  "default": False
+  "custom_spf": true, 
+  "default": false
 }');
 $domain_id = "test_url_param";
 $response = $sg->client->whitelabel()->domains()->_($domain_id)->patch($request_body);
@@ -203,7 +203,7 @@ echo $response->responseHeaders();
 # POST /whitelabel/links #
 
 $request_body = json_decode('{
-  "default": True, 
+  "default": true, 
   "domain": "example.com", 
   "subdomain": "mail"
 }');
@@ -258,7 +258,7 @@ echo $response->responseHeaders();
 # PATCH /whitelabel/links/{id} #
 
 $request_body = json_decode('{
-  "default": True
+  "default": true
 }');
 $id = "test_url_param";
 $response = $sg->client->whitelabel()->links()->_($id)->patch($request_body);

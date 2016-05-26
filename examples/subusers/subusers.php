@@ -78,7 +78,7 @@ echo $response->responseHeaders();
 # PATCH /subusers/{subuser_name} #
 
 $request_body = json_decode('{
-  "disabled": False
+  "disabled": false
 }');
 $subuser_name = "test_url_param";
 $response = $sg->client->subusers()->_($subuser_name)->patch($request_body);
