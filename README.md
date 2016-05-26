@@ -153,6 +153,8 @@ print $response->responseBody();
 # Usage
 
 - [SendGrid Docs](https://sendgrid.com/docs/API_Reference/index.html)
+- [Usage
+    Documentation](https://github.com/sendgrid/sendgrid-php/tree/v3beta/USAGE.md)
 - [Example Code](https://github.com/sendgrid/sendgrid-php/tree/v3beta/examples)
 - [v3 Web API Mail Send Helper](https://github.com/sendgrid/sendgrid-php/tree/v3beta/lib/helpers/mail/README.md) - build a request object payload for a v3 /mail/send API call.
 
