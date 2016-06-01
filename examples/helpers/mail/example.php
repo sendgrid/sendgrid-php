@@ -1,10 +1,7 @@
 <?php
 namespace SendGrid;
 
-require __DIR__ . '/../../../vendor/autoload.php';
-require  __DIR__ . '/../../../lib/SendGrid.php';
-require  __DIR__ . '/../../../lib/helpers/mail/Mail.php';
-
+require_once __DIR__ . '/../../../vendor/autoload.php';
 
 function helloEmail()
 {
@@ -180,7 +177,7 @@ function kitchenSink()
 function sendHelloEmail()
 {
     $apiKey = getenv('SENDGRID_API_KEY');
-    $sg = new SendGrid($apiKey);
+    $sg = new \SendGrid($apiKey);
 
     $request_body = helloEmail();
     $response = $sg->client->mail()->send()->beta()->post($request_body);
@@ -192,7 +189,7 @@ function sendHelloEmail()
 function sendKitchenSink()
 {
     $apiKey = getenv('SENDGRID_API_KEY');
-    $sg = new SendGrid($apiKey);
+    $sg = new \SendGrid($apiKey);
 
     $request_body = kitchenSink();
     $response = $sg->client->mail()->send()->beta()->post($request_body);
