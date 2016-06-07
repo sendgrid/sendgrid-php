@@ -175,9 +175,9 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
   "is_default": false,
   "name": "A group name"
 }');
-        $request_headers = array("X-Mock: 200");
+        $request_headers = array("X-Mock: 201");
         $response = $this->sg->client->asm()->groups()->post($request_body, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 200);
+        $this->assertEquals($response->statusCode(), 201);
     }
 
     public function test_asm_groups_get()
