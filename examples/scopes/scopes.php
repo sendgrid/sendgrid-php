@@ -11,6 +11,6 @@ $sg = new \SendGrid($apiKey);
 
 $response = $sg->client->scopes()->get();
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 

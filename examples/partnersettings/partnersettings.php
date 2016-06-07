@@ -12,8 +12,8 @@ $sg = new \SendGrid($apiKey);
 $query_params = json_decode('{"limit": 1, "offset": 1}');
 $response = $sg->client->partner_settings()->get(null, $query_params);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Updates New Relic partner settings. #
@@ -26,8 +26,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->partner_settings()->new_relic()->patch($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Returns all New Relic partner settings. #
@@ -35,6 +35,6 @@ echo $response->responseHeaders();
 
 $response = $sg->client->partner_settings()->new_relic()->get();
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 

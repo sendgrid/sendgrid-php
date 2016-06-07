@@ -12,6 +12,6 @@ $sg = new \SendGrid($apiKey);
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "browsers": "test_string", "limit": "test_string", "offset": "test_string", "start_date": "2016-01-01"}');
 $response = $sg->client->browsers()->stats()->get(null, $query_params);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 

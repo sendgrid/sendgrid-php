@@ -11,8 +11,8 @@ $sg = new \SendGrid($apiKey);
 
 $response = $sg->client->user()->account()->get();
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Retrieve your credit balance #
@@ -20,8 +20,8 @@ echo $response->responseHeaders();
 
 $response = $sg->client->user()->credits()->get();
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Update your account email address #
@@ -32,8 +32,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->email()->put($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Retrieve your account email address #
@@ -41,8 +41,8 @@ echo $response->responseHeaders();
 
 $response = $sg->client->user()->email()->get();
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Update your password #
@@ -54,8 +54,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->password()->put($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Update a user's profile #
@@ -68,8 +68,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->profile()->patch($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Get a user's profile #
@@ -77,8 +77,8 @@ echo $response->responseHeaders();
 
 $response = $sg->client->user()->profile()->get();
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Cancel or pause a scheduled send #
@@ -90,8 +90,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->scheduled_sends()->post($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Retrieve all scheduled sends #
@@ -99,8 +99,8 @@ echo $response->responseHeaders();
 
 $response = $sg->client->user()->scheduled_sends()->get();
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Update user scheduled send information #
@@ -112,8 +112,8 @@ $request_body = json_decode('{
 $batch_id = "test_url_param";
 $response = $sg->client->user()->scheduled_sends()->_($batch_id)->patch($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Retrieve scheduled send #
@@ -122,18 +122,18 @@ echo $response->responseHeaders();
 $batch_id = "test_url_param";
 $response = $sg->client->user()->scheduled_sends()->_($batch_id)->get();
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Delete a cancellation or pause of a scheduled send #
 # DELETE /user/scheduled_sends/{batch_id} #
 
 $batch_id = "test_url_param";
-$response = $sg->client->user()->scheduled_sends()->_($batch_id)->delete();
+$response = $sg->client->user()->scheduled_sends()->_($batch_id)->delete($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Update Enforced TLS settings #
@@ -145,8 +145,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->settings()->enforced_tls()->patch($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Retrieve current Enforced TLS settings. #
@@ -154,8 +154,8 @@ echo $response->responseHeaders();
 
 $response = $sg->client->user()->settings()->enforced_tls()->get();
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Update your username #
@@ -166,8 +166,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->username()->put($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Retrieve your username #
@@ -175,8 +175,8 @@ echo $response->responseHeaders();
 
 $response = $sg->client->user()->username()->get();
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Update Event Notification Settings #
@@ -199,8 +199,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->webhooks()->event()->settings()->patch($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Retrieve Event Webhook settings #
@@ -208,8 +208,8 @@ echo $response->responseHeaders();
 
 $response = $sg->client->user()->webhooks()->event()->settings()->get();
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Test Event Notification Settings  #
@@ -220,8 +220,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->webhooks()->event()->test()->post($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Retrieve Parse Webhook settings #
@@ -229,8 +229,8 @@ echo $response->responseHeaders();
 
 $response = $sg->client->user()->webhooks()->parse()->settings()->get();
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Retrieves Inbound Parse Webhook statistics. #
@@ -239,6 +239,6 @@ echo $response->responseHeaders();
 $query_params = json_decode('{"aggregated_by": "day", "limit": "test_string", "start_date": "2016-01-01", "end_date": "2016-04-01", "offset": "test_string"}');
 $response = $sg->client->user()->webhooks()->parse()->stats()->get(null, $query_params);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 

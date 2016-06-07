@@ -20,8 +20,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->subusers()->post($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # List all Subusers #
@@ -30,8 +30,8 @@ echo $response->responseHeaders();
 $query_params = json_decode('{"username": "test_string", "limit": 0, "offset": 0}');
 $response = $sg->client->subusers()->get(null, $query_params);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Retrieve Subuser Reputations #
@@ -40,8 +40,8 @@ echo $response->responseHeaders();
 $query_params = json_decode('{"usernames": "test_string"}');
 $response = $sg->client->subusers()->reputations()->get(null, $query_params);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Retrieve email statistics for your subusers. #
@@ -50,8 +50,8 @@ echo $response->responseHeaders();
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "limit": 1, "offset": 1, "start_date": "2016-01-01", "subusers": "test_string"}');
 $response = $sg->client->subusers()->stats()->get(null, $query_params);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Retrieve monthly stats for all subusers #
@@ -60,8 +60,8 @@ echo $response->responseHeaders();
 $query_params = json_decode('{"subuser": "test_string", "limit": 1, "sort_by_metric": "test_string", "offset": 1, "date": "test_string", "sort_by_direction": "asc"}');
 $response = $sg->client->subusers()->stats()->monthly()->get(null, $query_params);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 #  Retrieve the totals for each email statistic metric for all subusers. #
@@ -70,8 +70,8 @@ echo $response->responseHeaders();
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "limit": 1, "sort_by_metric": "test_string", "offset": 1, "start_date": "2016-01-01", "sort_by_direction": "asc"}');
 $response = $sg->client->subusers()->stats()->sums()->get(null, $query_params);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Enable/disable a subuser #
@@ -83,18 +83,18 @@ $request_body = json_decode('{
 $subuser_name = "test_url_param";
 $response = $sg->client->subusers()->_($subuser_name)->patch($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Delete a subuser #
 # DELETE /subusers/{subuser_name} #
 
 $subuser_name = "test_url_param";
-$response = $sg->client->subusers()->_($subuser_name)->delete();
+$response = $sg->client->subusers()->_($subuser_name)->delete($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Update IPs assigned to a subuser #
@@ -106,8 +106,8 @@ $request_body = json_decode('[
 $subuser_name = "test_url_param";
 $response = $sg->client->subusers()->_($subuser_name)->ips()->put($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Update Monitor Settings for a subuser #
@@ -120,8 +120,8 @@ $request_body = json_decode('{
 $subuser_name = "test_url_param";
 $response = $sg->client->subusers()->_($subuser_name)->monitor()->put($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Create monitor settings #
@@ -134,8 +134,8 @@ $request_body = json_decode('{
 $subuser_name = "test_url_param";
 $response = $sg->client->subusers()->_($subuser_name)->monitor()->post($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Retrieve monitor settings for a subuser #
@@ -144,18 +144,18 @@ echo $response->responseHeaders();
 $subuser_name = "test_url_param";
 $response = $sg->client->subusers()->_($subuser_name)->monitor()->get();
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Delete monitor settings #
 # DELETE /subusers/{subuser_name}/monitor #
 
 $subuser_name = "test_url_param";
-$response = $sg->client->subusers()->_($subuser_name)->monitor()->delete();
+$response = $sg->client->subusers()->_($subuser_name)->monitor()->delete($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Retrieve the monthly email statistics for a single subuser #
@@ -165,6 +165,6 @@ $query_params = json_decode('{"date": "test_string", "sort_by_direction": "asc",
 $subuser_name = "test_url_param";
 $response = $sg->client->subusers()->_($subuser_name)->stats()->monthly()->get(null, $query_params);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 

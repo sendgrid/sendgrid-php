@@ -19,8 +19,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->api_keys()->post($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Retrieve all API Keys belonging to the authenticated user #
@@ -28,8 +28,8 @@ echo $response->responseHeaders();
 
 $response = $sg->client->api_keys()->get();
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Update the name & scopes of an API Key #
@@ -45,8 +45,8 @@ $request_body = json_decode('{
 $api_key_id = "test_url_param";
 $response = $sg->client->api_keys()->_($api_key_id)->put($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Update API keys #
@@ -58,8 +58,8 @@ $request_body = json_decode('{
 $api_key_id = "test_url_param";
 $response = $sg->client->api_keys()->_($api_key_id)->patch($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Retrieve an existing API Key #
@@ -68,16 +68,16 @@ echo $response->responseHeaders();
 $api_key_id = "test_url_param";
 $response = $sg->client->api_keys()->_($api_key_id)->get();
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Delete API keys #
 # DELETE /api_keys/{api_key_id} #
 
 $api_key_id = "test_url_param";
-$response = $sg->client->api_keys()->_($api_key_id)->delete();
+$response = $sg->client->api_keys()->_($api_key_id)->delete($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 

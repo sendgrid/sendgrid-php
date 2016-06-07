@@ -31,8 +31,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->campaigns()->post($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Retrieve all Campaigns #
@@ -41,8 +41,8 @@ echo $response->responseHeaders();
 $query_params = json_decode('{"limit": 0, "offset": 0}');
 $response = $sg->client->campaigns()->get(null, $query_params);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Update a Campaign #
@@ -60,8 +60,8 @@ $request_body = json_decode('{
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->patch($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Retrieve a single campaign #
@@ -70,18 +70,18 @@ echo $response->responseHeaders();
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->get();
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Delete a Campaign #
 # DELETE /campaigns/{campaign_id} #
 
 $campaign_id = "test_url_param";
-$response = $sg->client->campaigns()->_($campaign_id)->delete();
+$response = $sg->client->campaigns()->_($campaign_id)->delete($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Update a Scheduled Campaign #
@@ -93,8 +93,8 @@ $request_body = json_decode('{
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->patch($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Schedule a Campaign #
@@ -106,8 +106,8 @@ $request_body = json_decode('{
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->post($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # View Scheduled Time of a Campaign #
@@ -116,28 +116,29 @@ echo $response->responseHeaders();
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->get();
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Unschedule a Scheduled Campaign #
 # DELETE /campaigns/{campaign_id}/schedules #
 
 $campaign_id = "test_url_param";
-$response = $sg->client->campaigns()->_($campaign_id)->schedules()->delete();
+$response = $sg->client->campaigns()->_($campaign_id)->schedules()->delete($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Send a Campaign #
 # POST /campaigns/{campaign_id}/schedules/now #
 
+$request_body = json_decode('null');
 $campaign_id = "test_url_param";
-$response = $sg->client->campaigns()->_($campaign_id)->schedules()->now()->post();
+$response = $sg->client->campaigns()->_($campaign_id)->schedules()->now()->post($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 
 ##################################################
 # Send a Test Campaign #
@@ -149,6 +150,6 @@ $request_body = json_decode('{
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->test()->post($request_body);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->body();
+echo $response->headers();
 

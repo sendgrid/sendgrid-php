@@ -7,7 +7,7 @@
   "keywords": ["SendGrid", "sendgrid", "email", "send", "grid"],
   "require": {
     "php": ">=5.3",
-    "sendgrid/php-http-client": "2.0.2"
+    "sendgrid/php-http-client": "3.0.0"
   },
   "require-dev": {
     "phpunit/phpunit": "4.*",
@@ -18,6 +18,6 @@
   },
   "type": "library",
   "autoload": {
-    "psr-0": {"SendGrid": "lib/"}
+    "files": ["lib/SendGrid.php", "lib/helpers/mail/Mail.php"]
   }
 }
