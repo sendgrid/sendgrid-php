@@ -143,7 +143,7 @@ require 'vendor/autoload.php';
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey, array('host' => 'https://api.sendgrid.com'));
 
-$response = $sg->client->api_keys()->get(null, $query_params, $request_headers);
+$response = $sg->client->api_keys()->get();
 
 print $response->statusCode();
 print $response->responseHeaders();
