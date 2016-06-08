@@ -114,8 +114,6 @@ Previous versions of the library can be found in the [version index](https://sen
 ## Hello Email
 
 ```php
-namespace SendGrid;
-
 require 'vendor/autoload.php';
 
 $from = new Email(null, "test@example.com");
@@ -129,25 +127,23 @@ $sg = new \SendGrid($apiKey);
 
 $response = $sg->client->mail()->send()->beta()->post($mail);
 echo $response->statusCode();
-echo $response->responseBody();
-echo $response->responseHeaders();
+echo $response->headers();
+echo $response->body();
 ```
 
 ## General v3 Web API Usage
 
 ```php
-namespace SendGrid;
-
 require 'vendor/autoload.php';
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey, array('host' => 'https://api.sendgrid.com'));
+$sg = new \SendGrid($apiKey);
 
 $response = $sg->client->api_keys()->get();
 
 print $response->statusCode();
-print $response->responseHeaders();
-print $response->responseBody();
+print $response->headers();
+print $response->body();
 ```
 
 # Usage
