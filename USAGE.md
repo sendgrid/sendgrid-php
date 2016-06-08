@@ -51,6 +51,7 @@ For more information, please see our [User Guide](http://sendgrid.com/docs/User_
 
 ### GET /access_settings/activity
 
+
 ```php
 $query_params = json_decode('{"limit": 1}');
 $response = $sg->client->access_settings()->activity()->get(null, $query_params);
@@ -69,6 +70,7 @@ IP Access Management allows you to control which IP addresses can be used to acc
 For more information, please see our [User Guide](http://sendgrid.com/docs/User_Guide/Settings/ip_access_management.html).
 
 ### POST /access_settings/whitelist
+
 
 ```php
 $request_body = json_decode('{
@@ -99,6 +101,7 @@ For more information, please see our [User Guide](http://sendgrid.com/docs/User_
 
 ### GET /access_settings/whitelist
 
+
 ```php
 $response = $sg->client->access_settings()->whitelist()->get();
 echo $response->statusCode();
@@ -116,6 +119,7 @@ IP Access Management allows you to control which IP addresses can be used to acc
 For more information, please see our [User Guide](http://sendgrid.com/docs/User_Guide/Settings/ip_access_management.html).
 
 ### DELETE /access_settings/whitelist
+
 
 ```php
 $response = $sg->client->access_settings()->whitelist()->delete($request_body);
@@ -135,6 +139,7 @@ For more information, please see our [User Guide](http://sendgrid.com/docs/User_
 
 ### GET /access_settings/whitelist/{rule_id}
 
+
 ```php
 $rule_id = "test_url_param";
 $response = $sg->client->access_settings()->whitelist()->_($rule_id)->get();
@@ -153,6 +158,7 @@ IP Access Management allows you to control which IP addresses can be used to acc
 For more information, please see our [User Guide](http://sendgrid.com/docs/User_Guide/Settings/ip_access_management.html).
 
 ### DELETE /access_settings/whitelist/{rule_id}
+
 
 ```php
 $rule_id = "test_url_param";
@@ -178,6 +184,7 @@ See the [API Key Permissions List](https://sendgrid.com/docs/API_Reference/Web_A
 
 ### POST /api_keys
 
+
 ```php
 $request_body = json_decode('{
   "name": "My API Key",
@@ -200,6 +207,7 @@ The API Keys feature allows customers to be able to generate an API Key credenti
 
 ### GET /api_keys
 
+
 ```php
 $response = $sg->client->api_keys()->get();
 echo $response->statusCode();
@@ -217,6 +225,7 @@ The API Keys feature allows customers to be able to generate an API Key credenti
 
 
 ### PUT /api_keys/{api_key_id}
+
 
 ```php
 $request_body = json_decode('{
@@ -248,6 +257,7 @@ The API Keys feature allows customers to be able to generate an API Key credenti
 
 ### PATCH /api_keys/{api_key_id}
 
+
 ```php
 $request_body = json_decode('{
   "name": "A New Hope"
@@ -265,6 +275,7 @@ echo $response->headers();
 If the API Key ID does not exist an HTTP 404 will be returned.
 
 ### GET /api_keys/{api_key_id}
+
 
 ```php
 $api_key_id = "test_url_param";
@@ -289,6 +300,7 @@ The API Keys feature allows customers to be able to generate an API Key credenti
 
 ### DELETE /api_keys/{api_key_id}
 
+
 ```php
 $api_key_id = "test_url_param";
 $response = $sg->client->api_keys()->_($api_key_id)->delete($request_body);
@@ -311,6 +323,7 @@ Each user can create up to 25 different suppression groups.
 
 ### POST /asm/groups
 
+
 ```php
 $request_body = json_decode('{
   "description": "Suggestions for products our users might like.",
@@ -330,6 +343,7 @@ This endpoint will return information for each group ID that you include in your
 
 ### GET /asm/groups
 
+
 ```php
 $query_params = json_decode('{"id": 1}');
 $response = $sg->client->asm()->groups()->get(null, $query_params);
@@ -348,6 +362,7 @@ The **name** and **description** of the unsubscribe group will be visible by rec
 Each user can create up to 25 different suppression groups.
 
 ### PATCH /asm/groups/{group_id}
+
 
 ```php
 $request_body = json_decode('{
@@ -373,6 +388,7 @@ Each user can create up to 25 different suppression groups.
 
 ### GET /asm/groups/{group_id}
 
+
 ```php
 $group_id = "test_url_param";
 $response = $sg->client->asm()->groups()->_($group_id)->get();
@@ -394,6 +410,7 @@ Each user can create up to 25 different suppression groups.
 
 ### DELETE /asm/groups/{group_id}
 
+
 ```php
 $group_id = "test_url_param";
 $response = $sg->client->asm()->groups()->_($group_id)->delete($request_body);
@@ -410,6 +427,7 @@ If you attempt to add suppressions to a group that has been deleted or does not 
 Suppressions are recipient email addresses that are added to [unsubscribe groups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html). Once a recipient's address is on the suppressions list for an unsubscribe group, they will not receive any emails that are tagged with that unsubscribe group.
 
 ### POST /asm/groups/{group_id}/suppressions
+
 
 ```php
 $request_body = json_decode('{
@@ -432,6 +450,7 @@ Suppressions are recipient email addresses that are added to [unsubscribe groups
 
 ### GET /asm/groups/{group_id}/suppressions
 
+
 ```php
 $group_id = "test_url_param";
 $response = $sg->client->asm()->groups()->_($group_id)->suppressions()->get();
@@ -446,6 +465,7 @@ echo $response->headers();
 Suppressions are recipient email addresses that are added to [unsubscribe groups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html). Once a recipient's address is on the suppressions list for an unsubscribe group, they will not receive any emails that are tagged with that unsubscribe group.
 
 ### DELETE /asm/groups/{group_id}/suppressions/{email}
+
 
 ```php
 $group_id = "test_url_param";
@@ -463,6 +483,7 @@ Suppressions are email addresses that can be added to [groups](https://sendgrid.
 
 ### GET /asm/suppressions
 
+
 ```php
 $response = $sg->client->asm()->suppressions()->get();
 echo $response->statusCode();
@@ -476,6 +497,7 @@ echo $response->headers();
 A global suppression (or global unsubscribe) is an email address of a recipient who does not want to receive any of your messages. A globally suppressed recipient will be removed from any email you send. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/global_unsubscribes.html).
 
 ### POST /asm/suppressions/global
+
 
 ```php
 $request_body = json_decode('{
@@ -499,6 +521,7 @@ A global suppression (or global unsubscribe) is an email address of a recipient 
 
 ### GET /asm/suppressions/global/{email}
 
+
 ```php
 $email = "test_url_param";
 $response = $sg->client->asm()->suppressions()->global()->_($email)->get();
@@ -514,6 +537,7 @@ A global suppression (or global unsubscribe) is an email address of a recipient 
 
 ### DELETE /asm/suppressions/global/{email}
 
+
 ```php
 $email = "test_url_param";
 $response = $sg->client->asm()->suppressions()->global()->_($email)->delete($request_body);
@@ -528,6 +552,7 @@ echo $response->headers();
 Suppressions are email addresses that can be added to [groups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html) to prevent certain types of emails from being delivered to those addresses.
 
 ### GET /asm/suppressions/{email}
+
 
 ```php
 $email = "test_url_param";
@@ -548,6 +573,7 @@ echo $response->headers();
 Advanced Stats provide a more in-depth view of your email statistics and the actions taken by your recipients. You can segment these statistics by geographic location, device type, client type, browser, and mailbox provider. For more information about statistics, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/index.html).
 
 ### GET /browsers/stats
+
 
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "browsers": "test_string", "limit": "test_string", "offset": "test_string", "start_date": "2016-01-01"}');
@@ -572,6 +598,7 @@ For more information:
 * [User Guide > Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html)
 
 ### POST /campaigns
+
 
 ```php
 $request_body = json_decode('{
@@ -613,6 +640,7 @@ For more information:
 
 ### GET /campaigns
 
+
 ```php
 $query_params = json_decode('{"limit": 0, "offset": 0}');
 $response = $sg->client->campaigns()->get(null, $query_params);
@@ -629,6 +657,7 @@ For more information:
 * [User Guide > Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html)
 
 ### PATCH /campaigns/{campaign_id}
+
 
 ```php
 $request_body = json_decode('{
@@ -658,6 +687,7 @@ For more information:
 
 ### GET /campaigns/{campaign_id}
 
+
 ```php
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->get();
@@ -677,6 +707,7 @@ For more information:
 
 ### DELETE /campaigns/{campaign_id}
 
+
 ```php
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->delete($request_body);
@@ -693,6 +724,7 @@ For more information:
 * [User Guide > Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html)
 
 ### PATCH /campaigns/{campaign_id}/schedules
+
 
 ```php
 $request_body = json_decode('{
@@ -714,6 +746,7 @@ For more information:
 
 ### POST /campaigns/{campaign_id}/schedules
 
+
 ```php
 $request_body = json_decode('{
   "send_at": 1489771528
@@ -733,6 +766,7 @@ For more information:
 * [User Guide > Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html)
 
 ### GET /campaigns/{campaign_id}/schedules
+
 
 ```php
 $campaign_id = "test_url_param";
@@ -754,6 +788,7 @@ For more information:
 
 ### DELETE /campaigns/{campaign_id}/schedules
 
+
 ```php
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->delete($request_body);
@@ -772,6 +807,7 @@ For more information:
 * [User Guide > Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html)
 
 ### POST /campaigns/{campaign_id}/schedules/now
+
 
 ```php
 $request_body = json_decode('null');
@@ -792,6 +828,7 @@ For more information:
 * [User Guide > Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html)
 
 ### POST /campaigns/{campaign_id}/schedules/test
+
 
 ```php
 $request_body = json_decode('{
@@ -814,6 +851,7 @@ Categories can help organize your email analytics by enabling you to tag emails 
 
 ### GET /categories
 
+
 ```php
 $query_params = json_decode('{"category": "test_string", "limit": 1, "offset": 1}');
 $response = $sg->client->categories()->get(null, $query_params);
@@ -831,6 +869,7 @@ Categories allow you to group your emails together according to broad topics tha
 
 ### GET /categories/stats
 
+
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "limit": 1, "offset": 1, "start_date": "2016-01-01", "categories": "test_string"}');
 $response = $sg->client->categories()->stats()->get(null, $query_params);
@@ -847,6 +886,7 @@ If you do not define any query parameters, this endpoint will return a sum for e
 Categories allow you to group your emails together according to broad topics that you define. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/categories.html).
 
 ### GET /categories/stats/sums
+
 
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "limit": 1, "sort_by_metric": "test_string", "offset": 1, "start_date": "2016-01-01", "sort_by_direction": "asc"}');
@@ -867,6 +907,7 @@ echo $response->headers();
 Advanced Stats provide a more in-depth view of your email statistics and the actions taken by your recipients. You can segment these statistics by geographic location, device type, client type, browser, and mailbox provider. For more information about statistics, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/index.html).
 
 ### GET /clients/stats
+
 
 ```php
 $query_params = json_decode('{"aggregated_by": "day", "start_date": "2016-01-01", "end_date": "2016-04-01"}');
@@ -891,6 +932,7 @@ Advanced Stats provide a more in-depth view of your email statistics and the act
 
 ### GET /clients/{client_type}/stats
 
+
 ```php
 $query_params = json_decode('{"aggregated_by": "day", "start_date": "2016-01-01", "end_date": "2016-04-01"}');
 $client_type = "test_url_param";
@@ -910,6 +952,7 @@ The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](
 
 ### POST /contactdb/custom_fields
 
+
 ```php
 $request_body = json_decode('{
   "name": "pet",
@@ -928,6 +971,7 @@ The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](
 
 ### GET /contactdb/custom_fields
 
+
 ```php
 $response = $sg->client->contactdb()->custom_fields()->get();
 echo $response->statusCode();
@@ -941,6 +985,7 @@ echo $response->headers();
 The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
 
 ### GET /contactdb/custom_fields/{custom_field_id}
+
 
 ```php
 $custom_field_id = "test_url_param";
@@ -957,6 +1002,7 @@ The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](
 
 ### DELETE /contactdb/custom_fields/{custom_field_id}
 
+
 ```php
 $custom_field_id = "test_url_param";
 $response = $sg->client->contactdb()->custom_fields()->_($custom_field_id)->delete($request_body);
@@ -971,6 +1017,7 @@ echo $response->headers();
 The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
 
 ### POST /contactdb/lists
+
 
 ```php
 $request_body = json_decode('{
@@ -989,6 +1036,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 
 ### GET /contactdb/lists
 
+
 ```php
 $response = $sg->client->contactdb()->lists()->get();
 echo $response->statusCode();
@@ -1002,6 +1050,7 @@ echo $response->headers();
 The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
 
 ### DELETE /contactdb/lists
+
 
 ```php
 $response = $sg->client->contactdb()->lists()->delete($request_body);
@@ -1017,6 +1066,7 @@ echo $response->headers();
 The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
 
 ### PATCH /contactdb/lists/{list_id}
+
 
 ```php
 $request_body = json_decode('{
@@ -1037,6 +1087,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 
 ### GET /contactdb/lists/{list_id}
 
+
 ```php
 $query_params = json_decode('{"list_id": 0}');
 $list_id = "test_url_param";
@@ -1052,6 +1103,7 @@ echo $response->headers();
 The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
 
 ### DELETE /contactdb/lists/{list_id}
+
 
 ```php
 $query_params = json_decode('{"delete_contacts": "true"}');
@@ -1070,6 +1122,7 @@ Adds existing recipients to a list, passing in the recipient IDs to add. Recipie
 The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
 
 ### POST /contactdb/lists/{list_id}/recipients
+
 
 ```php
 $request_body = json_decode('[
@@ -1090,6 +1143,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 
 ### GET /contactdb/lists/{list_id}/recipients
 
+
 ```php
 $query_params = json_decode('{"page": 1, "page_size": 1, "list_id": 0}');
 $list_id = "test_url_param";
@@ -1105,6 +1159,7 @@ echo $response->headers();
 The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
 
 ### POST /contactdb/lists/{list_id}/recipients/{recipient_id}
+
 
 ```php
 $request_body = json_decode('null');
@@ -1122,6 +1177,7 @@ echo $response->headers();
 The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
 
 ### DELETE /contactdb/lists/{list_id}/recipients/{recipient_id}
+
 
 ```php
 $query_params = json_decode('{"recipient_id": 0, "list_id": 0}');
@@ -1143,6 +1199,7 @@ It is of note that you can add custom field data as parameters on recipient obje
 The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
 
 ### PATCH /contactdb/recipients
+
 
 ```php
 $request_body = json_decode('[
@@ -1166,6 +1223,7 @@ It is of note that you can add custom field data as a parameter on this endpoint
 The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
 
 ### POST /contactdb/recipients
+
 
 ```php
 $request_body = json_decode('[
@@ -1198,6 +1256,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 
 ### GET /contactdb/recipients
 
+
 ```php
 $query_params = json_decode('{"page": 1, "page_size": 1}');
 $response = $sg->client->contactdb()->recipients()->get(null, $query_params);
@@ -1215,6 +1274,7 @@ The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](
 
 ### DELETE /contactdb/recipients
 
+
 ```php
 $response = $sg->client->contactdb()->recipients()->delete($request_body);
 echo $response->statusCode();
@@ -1231,6 +1291,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 
 ### GET /contactdb/recipients/billable_count
 
+
 ```php
 $response = $sg->client->contactdb()->recipients()->billable_count()->get();
 echo $response->statusCode();
@@ -1244,6 +1305,7 @@ echo $response->headers();
 The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
 
 ### GET /contactdb/recipients/count
+
 
 ```php
 $response = $sg->client->contactdb()->recipients()->count()->get();
@@ -1268,6 +1330,7 @@ The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](
 
 ### GET /contactdb/recipients/search
 
+
 ```php
 $query_params = json_decode('{"{field_name}": "test_string"}');
 $response = $sg->client->contactdb()->recipients()->search()->get(null, $query_params);
@@ -1283,6 +1346,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 
 ### GET /contactdb/recipients/{recipient_id}
 
+
 ```php
 $recipient_id = "test_url_param";
 $response = $sg->client->contactdb()->recipients()->_($recipient_id)->get();
@@ -1297,6 +1361,7 @@ echo $response->headers();
 The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
 
 ### DELETE /contactdb/recipients/{recipient_id}
+
 
 ```php
 $recipient_id = "test_url_param";
@@ -1315,6 +1380,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 
 ### GET /contactdb/recipients/{recipient_id}/lists
 
+
 ```php
 $recipient_id = "test_url_param";
 $response = $sg->client->contactdb()->recipients()->_($recipient_id)->lists()->get();
@@ -1329,6 +1395,7 @@ echo $response->headers();
 The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
 
 ### GET /contactdb/reserved_fields
+
 
 ```php
 $response = $sg->client->contactdb()->reserved_fields()->get();
@@ -1363,6 +1430,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 For more information about segments in Marketing Campaigns, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/lists.html#-Create-a-Segment).
 
 ### POST /contactdb/segments
+
 
 ```php
 $request_body = json_decode('{
@@ -1404,6 +1472,7 @@ For more information about segments in Marketing Campaigns, please see our [User
 
 ### GET /contactdb/segments
 
+
 ```php
 $response = $sg->client->contactdb()->segments()->get();
 echo $response->statusCode();
@@ -1419,6 +1488,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 For more information about segments in Marketing Campaigns, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/lists.html#-Create-a-Segment).
 
 ### PATCH /contactdb/segments/{segment_id}
+
 
 ```php
 $request_body = json_decode('{
@@ -1450,6 +1520,7 @@ For more information about segments in Marketing Campaigns, please see our [User
 
 ### GET /contactdb/segments/{segment_id}
 
+
 ```php
 $query_params = json_decode('{"segment_id": 0}');
 $segment_id = "test_url_param";
@@ -1470,6 +1541,7 @@ For more information about segments in Marketing Campaigns, please see our [User
 
 ### DELETE /contactdb/segments/{segment_id}
 
+
 ```php
 $query_params = json_decode('{"delete_contacts": "true"}');
 $segment_id = "test_url_param";
@@ -1487,6 +1559,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 For more information about segments in Marketing Campaigns, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/lists.html#-Create-a-Segment).
 
 ### GET /contactdb/segments/{segment_id}/recipients
+
 
 ```php
 $query_params = json_decode('{"page": 1, "page_size": 1}');
@@ -1518,6 +1591,7 @@ Advanced Stats provide a more in-depth view of your email statistics and the act
 
 ### GET /devices/stats
 
+
 ```php
 $query_params = json_decode('{"aggregated_by": "day", "limit": 1, "start_date": "2016-01-01", "end_date": "2016-04-01", "offset": 1}');
 $response = $sg->client->devices()->stats()->get(null, $query_params);
@@ -1537,6 +1611,7 @@ echo $response->headers();
 Advanced Stats provide a more in-depth view of your email statistics and the actions taken by your recipients. You can segment these statistics by geographic location, device type, client type, browser, and mailbox provider. For more information about statistics, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/index.html).
 
 ### GET /geo/stats
+
 
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "country": "US", "aggregated_by": "day", "limit": 1, "offset": 1, "start_date": "2016-01-01"}');
@@ -1558,6 +1633,7 @@ A single IP address or a range of IP addresses may be dedicated to an account in
 
 ### GET /ips
 
+
 ```php
 $query_params = json_decode('{"subuser": "test_string", "ip": "test_string", "limit": 1, "exclude_whitelabels": "true", "offset": 1}');
 $response = $sg->client->ips()->get(null, $query_params);
@@ -1572,6 +1648,7 @@ echo $response->headers();
 A single IP address or a range of IP addresses may be dedicated to an account in order to send email for multiple domains. The reputation of this IP is based on the aggregate performance of all the senders who use it.
 
 ### GET /ips/assigned
+
 
 ```php
 $response = $sg->client->ips()->assigned()->get();
@@ -1592,6 +1669,7 @@ IP pools can only be used with whitelabeled IP addresses.
 If an IP pool is NOT specified for an email, it will use any IP available, including ones in pools.
 
 ### POST /ips/pools
+
 
 ```php
 $request_body = json_decode('{
@@ -1614,6 +1692,7 @@ If an IP pool is NOT specified for an email, it will use any IP available, inclu
 
 ### GET /ips/pools
 
+
 ```php
 $response = $sg->client->ips()->pools()->get();
 echo $response->statusCode();
@@ -1631,6 +1710,7 @@ IP pools can only be used with whitelabeled IP addresses.
 If an IP pool is NOT specified for an email, it will use any IP available, including ones in pools.
 
 ### PUT /ips/pools/{pool_name}
+
 
 ```php
 $request_body = json_decode('{
@@ -1654,6 +1734,7 @@ If an IP pool is NOT specified for an email, it will use any IP available, inclu
 
 ### GET /ips/pools/{pool_name}
 
+
 ```php
 $pool_name = "test_url_param";
 $response = $sg->client->ips()->pools()->_($pool_name)->get();
@@ -1673,6 +1754,7 @@ If an IP pool is NOT specified for an email, it will use any IP available, inclu
 
 ### DELETE /ips/pools/{pool_name}
 
+
 ```php
 $pool_name = "test_url_param";
 $response = $sg->client->ips()->pools()->_($pool_name)->delete($request_body);
@@ -1689,6 +1771,7 @@ You can add the same IP address to multiple pools. It may take up to 60 seconds 
 A single IP address or a range of IP addresses may be dedicated to an account in order to send email for multiple domains. The reputation of this IP is based on the aggregate performance of all the senders who use it.
 
 ### POST /ips/pools/{pool_name}/ips
+
 
 ```php
 $request_body = json_decode('{
@@ -1710,6 +1793,7 @@ A single IP address or a range of IP addresses may be dedicated to an account in
 
 ### DELETE /ips/pools/{pool_name}/ips/{ip}
 
+
 ```php
 $pool_name = "test_url_param";
 $ip = "test_url_param";
@@ -1727,6 +1811,7 @@ SendGrid can automatically warm up dedicated IP addresses by limiting the amount
 For more general information about warming up IPs, please see our [Classroom](https://sendgrid.com/docs/Classroom/Deliver/Delivery_Introduction/warming_up_ips.html).
 
 ### POST /ips/warmup
+
 
 ```php
 $request_body = json_decode('{
@@ -1747,6 +1832,7 @@ For more general information about warming up IPs, please see our [Classroom](ht
 
 ### GET /ips/warmup
 
+
 ```php
 $response = $sg->client->ips()->warmup()->get();
 echo $response->statusCode();
@@ -1762,6 +1848,7 @@ SendGrid can automatically warm up dedicated IP addresses by limiting the amount
 For more general information about warming up IPs, please see our [Classroom](https://sendgrid.com/docs/Classroom/Deliver/Delivery_Introduction/warming_up_ips.html).
 
 ### GET /ips/warmup/{ip_address}
+
 
 ```php
 $ip_address = "test_url_param";
@@ -1780,6 +1867,7 @@ For more general information about warming up IPs, please see our [Classroom](ht
 
 ### DELETE /ips/warmup/{ip_address}
 
+
 ```php
 $ip_address = "test_url_param";
 $response = $sg->client->ips()->warmup()->_($ip_address)->delete($request_body);
@@ -1796,6 +1884,7 @@ The same IP address can be added to multiple IP pools.
 A single IP address or a range of IP addresses may be dedicated to an account in order to send email for multiple domains. The reputation of this IP is based on the aggregate performance of all the senders who use it.
 
 ### GET /ips/{ip_address}
+
 
 ```php
 $ip_address = "test_url_param";
@@ -1819,6 +1908,7 @@ More Information:
 
 ### POST /mail/batch
 
+
 ```php
 $request_body = json_decode('null');
 $response = $sg->client->mail()->batch()->post($request_body);
@@ -1837,6 +1927,7 @@ More Information:
 * [Scheduling Parameters > Batch ID](https://sendgrid.com/docs/API_Reference/SMTP_API/scheduling_parameters.html)
 
 ### GET /mail/batch/{batch_id}
+
 
 ```php
 $batch_id = "test_url_param";
@@ -1857,6 +1948,8 @@ For an overview of the v3 Mail Send endpoint, please visit our [v3 API Reference
 For more detailed information about how to use the v3 Mail Send endpoint, please visit our [Classroom](https://sendgrid.com/docs/Classroom/Send/v3_Mail_Send/index.html).
 
 ### POST /mail/send/beta
+
+This endpoint has a helper, check it out [here](https://github.com/sendgrid/sendgrid-php/blob/v3beta/lib/helpers/mail/README.md).
 
 ```php
 $request_body = json_decode('{
@@ -2018,6 +2111,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ### GET /mail_settings
 
+
 ```php
 $query_params = json_decode('{"limit": 1, "offset": 1}');
 $response = $sg->client->mail_settings()->get(null, $query_params);
@@ -2034,6 +2128,7 @@ The address whitelist setting whitelists a specified email address or domain for
 Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### PATCH /mail_settings/address_whitelist
+
 
 ```php
 $request_body = json_decode('{
@@ -2058,6 +2153,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ### GET /mail_settings/address_whitelist
 
+
 ```php
 $response = $sg->client->mail_settings()->address_whitelist()->get();
 echo $response->statusCode();
@@ -2073,6 +2169,7 @@ When the BCC mail setting is enabled, SendGrid will automatically send a blind c
 Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### PATCH /mail_settings/bcc
+
 
 ```php
 $request_body = json_decode('{
@@ -2094,6 +2191,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ### GET /mail_settings/bcc
 
+
 ```php
 $response = $sg->client->mail_settings()->bcc()->get();
 echo $response->statusCode();
@@ -2109,6 +2207,7 @@ This setting allows you to set a schedule for SendGrid to automatically delete c
 Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### PATCH /mail_settings/bounce_purge
+
 
 ```php
 $request_body = json_decode('{
@@ -2131,6 +2230,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ### GET /mail_settings/bounce_purge
 
+
 ```php
 $response = $sg->client->mail_settings()->bounce_purge()->get();
 echo $response->statusCode();
@@ -2146,6 +2246,7 @@ The footer setting will insert a custom footer at the bottom of the text and HTM
 Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### PATCH /mail_settings/footer
+
 
 ```php
 $request_body = json_decode('{
@@ -2168,6 +2269,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ### GET /mail_settings/footer
 
+
 ```php
 $response = $sg->client->mail_settings()->footer()->get();
 echo $response->statusCode();
@@ -2183,6 +2285,7 @@ Activating this setting allows you to specify an email address to which bounce r
 Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### PATCH /mail_settings/forward_bounce
+
 
 ```php
 $request_body = json_decode('{
@@ -2204,6 +2307,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ### GET /mail_settings/forward_bounce
 
+
 ```php
 $response = $sg->client->mail_settings()->forward_bounce()->get();
 echo $response->statusCode();
@@ -2219,6 +2323,7 @@ Enabling the forward spam setting allows you to specify an email address to whic
 Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### PATCH /mail_settings/forward_spam
+
 
 ```php
 $request_body = json_decode('{
@@ -2240,6 +2345,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ### GET /mail_settings/forward_spam
 
+
 ```php
 $response = $sg->client->mail_settings()->forward_spam()->get();
 echo $response->statusCode();
@@ -2255,6 +2361,7 @@ The plain content setting will automatically convert any plain text emails that 
 Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### PATCH /mail_settings/plain_content
+
 
 ```php
 $request_body = json_decode('{
@@ -2275,6 +2382,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ### GET /mail_settings/plain_content
 
+
 ```php
 $response = $sg->client->mail_settings()->plain_content()->get();
 echo $response->statusCode();
@@ -2290,6 +2398,7 @@ The spam checker filter notifies you when emails are detected that exceed a pred
 Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### PATCH /mail_settings/spam_check
+
 
 ```php
 $request_body = json_decode('{
@@ -2312,6 +2421,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ### GET /mail_settings/spam_check
 
+
 ```php
 $response = $sg->client->mail_settings()->spam_check()->get();
 echo $response->statusCode();
@@ -2329,6 +2439,7 @@ The legacy email template setting wraps an HTML template around your email conte
 Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### PATCH /mail_settings/template
+
 
 ```php
 $request_body = json_decode('{
@@ -2352,6 +2463,7 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 
 ### GET /mail_settings/template
 
+
 ```php
 $response = $sg->client->mail_settings()->template()->get();
 echo $response->statusCode();
@@ -2371,6 +2483,7 @@ Advanced Stats provide a more in-depth view of your email statistics and the act
 
 ### GET /mailbox_providers/stats
 
+
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "mailbox_providers": "test_string", "aggregated_by": "day", "limit": 1, "offset": 1, "start_date": "2016-01-01"}');
 $response = $sg->client->mailbox_providers()->stats()->get(null, $query_params);
@@ -2389,6 +2502,7 @@ Our partner settings allow you to integrate your SendGrid account with our partn
 
 ### GET /partner_settings
 
+
 ```php
 $query_params = json_decode('{"limit": 1, "offset": 1}');
 $response = $sg->client->partner_settings()->get(null, $query_params);
@@ -2405,6 +2519,7 @@ Our partner settings allow you to integrate your SendGrid account with our partn
 By integrating with New Relic, you can send your SendGrid email statistics to your New Relic Dashboard. If you enable this setting, your stats will be sent to New Relic every 5 minutes. You will need your New Relic License Key to enable this setting. For more information, please see our [Classroom](https://sendgrid.com/docs/Classroom/Track/Collecting_Data/new_relic.html).
 
 ### PATCH /partner_settings/new_relic
+
 
 ```php
 $request_body = json_decode('{
@@ -2427,6 +2542,7 @@ By integrating with New Relic, you can send your SendGrid email statistics to yo
 
 ### GET /partner_settings/new_relic
 
+
 ```php
 $response = $sg->client->partner_settings()->new_relic()->get();
 echo $response->statusCode();
@@ -2444,6 +2560,7 @@ API Keys can be used to authenticate the use of [SendGrids v3 Web API](https://s
 
 ### GET /scopes
 
+
 ```php
 $response = $sg->client->scopes()->get();
 echo $response->statusCode();
@@ -2460,6 +2577,7 @@ echo $response->headers();
 Parent accounts will see aggregated stats for their account and all subuser accounts. Subuser accounts will only see their own stats.
 
 ### GET /stats
+
 
 ```php
 $query_params = json_decode('{"aggregated_by": "day", "limit": 1, "start_date": "2016-01-01", "end_date": "2016-04-01", "offset": 1}');
@@ -2481,6 +2599,7 @@ For more information about Subusers:
 * [Classroom > How do I add more subusers to my account?](https://sendgrid.com/docs/Classroom/Basics/Account/how_do_i_add_more_subusers_to_my_account.html)
 
 ### POST /subusers
+
 
 ```php
 $request_body = json_decode('{
@@ -2508,6 +2627,7 @@ For more information about Subusers:
 
 ### GET /subusers
 
+
 ```php
 $query_params = json_decode('{"username": "test_string", "limit": 0, "offset": 0}');
 $response = $sg->client->subusers()->get(null, $query_params);
@@ -2522,6 +2642,7 @@ Subuser sender reputations give a good idea how well a sender is doing with rega
 This endpoint allows you to request the reputations for your subusers.
 
 ### GET /subusers/reputations
+
 
 ```php
 $query_params = json_decode('{"usernames": "test_string"}');
@@ -2541,6 +2662,7 @@ While you can always view the statistics for all email activity on your account,
 For more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/subuser.html).
 
 ### GET /subusers/stats
+
 
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "limit": 1, "offset": 1, "start_date": "2016-01-01", "subusers": "test_string"}');
@@ -2562,6 +2684,7 @@ For more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/
 
 ### GET /subusers/stats/monthly
 
+
 ```php
 $query_params = json_decode('{"subuser": "test_string", "limit": 1, "sort_by_metric": "test_string", "offset": 1, "date": "test_string", "sort_by_direction": "asc"}');
 $response = $sg->client->subusers()->stats()->monthly()->get(null, $query_params);
@@ -2580,6 +2703,7 @@ For more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/
 
 ### GET /subusers/stats/sums
 
+
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "limit": 1, "sort_by_metric": "test_string", "offset": 1, "start_date": "2016-01-01", "sort_by_direction": "asc"}');
 $response = $sg->client->subusers()->stats()->sums()->get(null, $query_params);
@@ -2597,6 +2721,7 @@ For more information about Subusers:
 * [Classroom > How do I add more subusers to my account?](https://sendgrid.com/docs/Classroom/Basics/Account/how_do_i_add_more_subusers_to_my_account.html)
 
 ### PATCH /subusers/{subuser_name}
+
 
 ```php
 $request_body = json_decode('{
@@ -2619,6 +2744,7 @@ For more information about Subusers:
 
 ### DELETE /subusers/{subuser_name}
 
+
 ```php
 $subuser_name = "test_url_param";
 $response = $sg->client->subusers()->_($subuser_name)->delete($request_body);
@@ -2637,6 +2763,7 @@ More information:
 
 ### PUT /subusers/{subuser_name}/ips
 
+
 ```php
 $request_body = json_decode('[
   "127.0.0.1"
@@ -2652,6 +2779,7 @@ echo $response->headers();
 Subuser monitor settings allow you to receive a sample of an outgoing message by a specific customer at a specific frequency of emails.
 
 ### PUT /subusers/{subuser_name}/monitor
+
 
 ```php
 $request_body = json_decode('{
@@ -2670,6 +2798,7 @@ Subuser monitor settings allow you to receive a sample of an outgoing message by
 
 ### POST /subusers/{subuser_name}/monitor
 
+
 ```php
 $request_body = json_decode('{
   "email": "example@example.com",
@@ -2687,6 +2816,7 @@ Subuser monitor settings allow you to receive a sample of an outgoing message by
 
 ### GET /subusers/{subuser_name}/monitor
 
+
 ```php
 $subuser_name = "test_url_param";
 $response = $sg->client->subusers()->_($subuser_name)->monitor()->get();
@@ -2699,6 +2829,7 @@ echo $response->headers();
 Subuser monitor settings allow you to receive a sample of an outgoing message by a specific customer at a specific frequency of emails.
 
 ### DELETE /subusers/{subuser_name}/monitor
+
 
 ```php
 $subuser_name = "test_url_param";
@@ -2720,6 +2851,7 @@ For more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/
 
 ### GET /subusers/{subuser_name}/stats/monthly
 
+
 ```php
 $query_params = json_decode('{"date": "test_string", "sort_by_direction": "asc", "limit": 0, "sort_by_metric": "test_string", "offset": 1}');
 $subuser_name = "test_url_param";
@@ -2740,6 +2872,7 @@ echo $response->headers();
 For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/blocks.html).
 
 ### GET /suppression/blocks
+
 
 ```php
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
@@ -2763,6 +2896,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 
 ### DELETE /suppression/blocks
 
+
 ```php
 $response = $sg->client->suppression()->blocks()->delete($request_body);
 echo $response->statusCode();
@@ -2778,6 +2912,7 @@ echo $response->headers();
 For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/blocks.html).
 
 ### GET /suppression/blocks/{email}
+
 
 ```php
 $email = "test_url_param";
@@ -2795,6 +2930,7 @@ echo $response->headers();
 For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/blocks.html).
 
 ### DELETE /suppression/blocks/{email}
+
 
 ```php
 $email = "test_url_param";
@@ -2815,6 +2951,7 @@ For more information see:
 * [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)
 
 ### GET /suppression/bounces
+
 
 ```php
 $query_params = json_decode('{"start_time": 0, "end_time": 0}');
@@ -2839,6 +2976,7 @@ Note: the `delete_all` and `emails` parameters should be used independently of e
 
 ### DELETE /suppression/bounces
 
+
 ```php
 $response = $sg->client->suppression()->bounces()->delete($request_body);
 echo $response->statusCode();
@@ -2858,6 +2996,7 @@ For more information see:
 * [Classroom > List Scrubbing Guide](https://sendgrid.com/docs/Classroom/Deliver/list_scrubbing.html)
 
 ### GET /suppression/bounces/{email}
+
 
 ```php
 $email = "test_url_param";
@@ -2880,6 +3019,7 @@ For more information see:
 
 ### DELETE /suppression/bounces/{email}
 
+
 ```php
 $query_params = json_decode('{"email_address": "example@example.com"}');
 $email = "test_url_param";
@@ -2899,6 +3039,7 @@ Examples include addresses without the @ sign or addresses that include certain 
 For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/invalid_emails.html).
 
 ### GET /suppression/invalid_emails
+
 
 ```php
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
@@ -2924,6 +3065,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 
 ### DELETE /suppression/invalid_emails
 
+
 ```php
 $response = $sg->client->suppression()->invalid_emails()->delete($request_body);
 echo $response->statusCode();
@@ -2941,6 +3083,7 @@ Examples include addresses without the @ sign or addresses that include certain 
 For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/invalid_emails.html).
 
 ### GET /suppression/invalid_emails/{email}
+
 
 ```php
 $email = "test_url_param";
@@ -2961,6 +3104,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 
 ### DELETE /suppression/invalid_emails/{email}
 
+
 ```php
 $email = "test_url_param";
 $response = $sg->client->suppression()->invalid_emails()->_($email)->delete($request_body);
@@ -2977,6 +3121,7 @@ echo $response->headers();
 For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/spam_reports.html).
 
 ### GET /suppression/spam_report/{email}
+
 
 ```php
 $email = "test_url_param";
@@ -2995,6 +3140,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 
 ### DELETE /suppression/spam_report/{email}
 
+
 ```php
 $email = "test_url_param";
 $response = $sg->client->suppression()->spam_report()->_($email)->delete($request_body);
@@ -3011,6 +3157,7 @@ echo $response->headers();
 For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/spam_reports.html).
 
 ### GET /suppression/spam_reports
+
 
 ```php
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
@@ -3034,6 +3181,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 
 ### DELETE /suppression/spam_reports
 
+
 ```php
 $response = $sg->client->suppression()->spam_reports()->delete($request_body);
 echo $response->statusCode();
@@ -3047,6 +3195,7 @@ echo $response->headers();
 A global suppression (or global unsubscribe) is an email address of a recipient who does not want to receive any of your messages. A globally suppressed recipient will be removed from any email you send. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/global_unsubscribes.html).
 
 ### GET /suppression/unsubscribes
+
 
 ```php
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
@@ -3068,6 +3217,7 @@ Transactional templates are templates created specifically for transactional ema
 
 ### POST /templates
 
+
 ```php
 $request_body = json_decode('{
   "name": "example_name"
@@ -3087,6 +3237,7 @@ Transactional templates are templates created specifically for transactional ema
 
 ### GET /templates
 
+
 ```php
 $response = $sg->client->templates()->get();
 echo $response->statusCode();
@@ -3103,6 +3254,7 @@ Transactional templates are templates created specifically for transactional ema
 
 
 ### PATCH /templates/{template_id}
+
 
 ```php
 $request_body = json_decode('{
@@ -3125,6 +3277,7 @@ Transactional templates are templates created specifically for transactional ema
 
 ### GET /templates/{template_id}
 
+
 ```php
 $template_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->get();
@@ -3143,6 +3296,7 @@ Transactional templates are templates created specifically for transactional ema
 
 ### DELETE /templates/{template_id}
 
+
 ```php
 $template_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->delete($request_body);
@@ -3160,6 +3314,7 @@ For more information about transactional templates, please see our [User Guide](
 
 
 ### POST /templates/{template_id}/versions
+
 
 ```php
 $request_body = json_decode('{
@@ -3192,6 +3347,7 @@ For more information about transactional templates, please see our [User Guide](
 
 ### PATCH /templates/{template_id}/versions/{version_id}
 
+
 ```php
 $request_body = json_decode('{
   "active": 1,
@@ -3223,6 +3379,7 @@ For more information about transactional templates, please see our [User Guide](
 
 ### GET /templates/{template_id}/versions/{version_id}
 
+
 ```php
 $template_id = "test_url_param";
 $version_id = "test_url_param";
@@ -3246,6 +3403,7 @@ For more information about transactional templates, please see our [User Guide](
 | version_id | string | The ID of the template version |
 
 ### DELETE /templates/{template_id}/versions/{version_id}
+
 
 ```php
 $template_id = "test_url_param";
@@ -3272,6 +3430,7 @@ For more information about transactional templates, please see our [User Guide](
 
 ### POST /templates/{template_id}/versions/{version_id}/activate
 
+
 ```php
 $request_body = json_decode('null');
 $template_id = "test_url_param";
@@ -3294,6 +3453,7 @@ For more information about tracking, please see our [User Guide](https://sendgri
 
 ### GET /tracking_settings
 
+
 ```php
 $query_params = json_decode('{"limit": 1, "offset": 1}');
 $response = $sg->client->tracking_settings()->get(null, $query_params);
@@ -3310,6 +3470,7 @@ You can track a variety of the actions your recipients may take when interacting
 For more information about tracking, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/tracking.html).
 
 ### PATCH /tracking_settings/click
+
 
 ```php
 $request_body = json_decode('{
@@ -3330,6 +3491,7 @@ For more information about tracking, please see our [User Guide](https://sendgri
 
 ### GET /tracking_settings/click
 
+
 ```php
 $response = $sg->client->tracking_settings()->click()->get();
 echo $response->statusCode();
@@ -3349,6 +3511,7 @@ You can track a variety of the actions your recipients may take when interacting
 For more information about tracking, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/tracking.html).
 
 ### PATCH /tracking_settings/google_analytics
+
 
 ```php
 $request_body = json_decode('{
@@ -3378,6 +3541,7 @@ For more information about tracking, please see our [User Guide](https://sendgri
 
 ### GET /tracking_settings/google_analytics
 
+
 ```php
 $response = $sg->client->tracking_settings()->google_analytics()->get();
 echo $response->statusCode();
@@ -3395,6 +3559,7 @@ You can track a variety of the actions your recipients may take when interacting
 For more information about tracking, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/tracking.html).
 
 ### PATCH /tracking_settings/open
+
 
 ```php
 $request_body = json_decode('{
@@ -3417,6 +3582,7 @@ For more information about tracking, please see our [User Guide](https://sendgri
 
 ### GET /tracking_settings/open
 
+
 ```php
 $response = $sg->client->tracking_settings()->open()->get();
 echo $response->statusCode();
@@ -3434,6 +3600,7 @@ You can track a variety of the actions your recipients may take when interacting
 For more information about tracking, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/tracking.html).
 
 ### PATCH /tracking_settings/subscription
+
 
 ```php
 $request_body = json_decode('{
@@ -3461,6 +3628,7 @@ For more information about tracking, please see our [User Guide](https://sendgri
 
 ### GET /tracking_settings/subscription
 
+
 ```php
 $response = $sg->client->tracking_settings()->subscription()->get();
 echo $response->statusCode();
@@ -3484,6 +3652,7 @@ For more information about your user profile:
 
 ### GET /user/account
 
+
 ```php
 $response = $sg->client->user()->account()->get();
 echo $response->statusCode();
@@ -3497,6 +3666,7 @@ echo $response->headers();
 Your monthly credit allotment limits the number of emails you may send before incurring overage charges. For more information about credits and billing, please visit our [Clssroom](https://sendgrid.com/docs/Classroom/Basics/Billing/billing_info_and_faqs.html).
 
 ### GET /user/credits
+
 
 ```php
 $response = $sg->client->user()->credits()->get();
@@ -3515,6 +3685,7 @@ For more information about your user profile:
 * [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
 
 ### PUT /user/email
+
 
 ```php
 $request_body = json_decode('{
@@ -3537,6 +3708,7 @@ For more information about your user profile:
 
 ### GET /user/email
 
+
 ```php
 $response = $sg->client->user()->email()->get();
 echo $response->statusCode();
@@ -3554,6 +3726,7 @@ For more information about your user profile:
 * [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
 
 ### PUT /user/password
+
 
 ```php
 $request_body = json_decode('{
@@ -3579,6 +3752,7 @@ It should be noted that any one or more of the parameters can be updated via the
 
 ### PATCH /user/profile
 
+
 ```php
 $request_body = json_decode('{
   "city": "Orange",
@@ -3600,6 +3774,7 @@ For more information about your user profile:
 
 ### GET /user/profile
 
+
 ```php
 $response = $sg->client->user()->profile()->get();
 echo $response->statusCode();
@@ -3616,6 +3791,7 @@ be returned.
 The Cancel Scheduled Sends feature allows the customer to cancel a scheduled send based on a Batch ID included in the SMTPAPI header.Scheduled sends cancelled less than 10 minutes before the scheduled time are not guaranteed to be cancelled.
 
 ### POST /user/scheduled_sends
+
 
 ```php
 $request_body = json_decode('{
@@ -3635,6 +3811,7 @@ The Cancel Scheduled Sends feature allows the customer to cancel a scheduled sen
 
 ### GET /user/scheduled_sends
 
+
 ```php
 $response = $sg->client->user()->scheduled_sends()->get();
 echo $response->statusCode();
@@ -3648,6 +3825,7 @@ echo $response->headers();
 The Cancel Scheduled Sends feature allows the customer to cancel a scheduled send based on a Batch ID included in the SMTPAPI header.Scheduled sends cancelled less than 10 minutes before the scheduled time are not guaranteed to be cancelled.
 
 ### PATCH /user/scheduled_sends/{batch_id}
+
 
 ```php
 $request_body = json_decode('{
@@ -3667,6 +3845,7 @@ The Cancel Scheduled Sends feature allows the customer to cancel a scheduled sen
 
 ### GET /user/scheduled_sends/{batch_id}
 
+
 ```php
 $batch_id = "test_url_param";
 $response = $sg->client->user()->scheduled_sends()->_($batch_id)->get();
@@ -3681,6 +3860,7 @@ echo $response->headers();
 The Cancel Scheduled Sends feature allows the customer to cancel a scheduled send based on a Batch ID included in the SMTPAPI header.Scheduled sends cancelled less than 10 minutes before the scheduled time are not guaranteed to be cancelled.
 
 ### DELETE /user/scheduled_sends/{batch_id}
+
 
 ```php
 $batch_id = "test_url_param";
@@ -3698,6 +3878,7 @@ The Enforced TLS settings specify whether or not the recipient is required to su
 **Note:** If either setting is enabled and the recipient does not support TLS or have a valid certificate, we drop the message and send a block event with TLS required but not supported as the description.
 
 ### PATCH /user/settings/enforced_tls
+
 
 ```php
 $request_body = json_decode('{
@@ -3719,6 +3900,7 @@ The Enforced TLS settings specify whether or not the recipient is required to su
 
 ### GET /user/settings/enforced_tls
 
+
 ```php
 $response = $sg->client->user()->settings()->enforced_tls()->get();
 echo $response->statusCode();
@@ -3736,6 +3918,7 @@ For more information about your user profile:
 * [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
 
 ### PUT /user/username
+
 
 ```php
 $request_body = json_decode('{
@@ -3758,6 +3941,7 @@ For more information about your user profile:
 
 ### GET /user/username
 
+
 ```php
 $response = $sg->client->user()->username()->get();
 echo $response->statusCode();
@@ -3775,6 +3959,7 @@ SendGrids Event Webhook will notify a URL of your choice via HTTP POST with info
 Common uses of this data are to remove unsubscribes, react to spam reports, determine unengaged recipients, identify bounced email addresses, or create advanced analytics of your email program.
 
 ### PATCH /user/webhooks/event/settings
+
 
 ```php
 $request_body = json_decode('{
@@ -3809,6 +3994,7 @@ Common uses of this data are to remove unsubscribes, react to spam reports, dete
 
 ### GET /user/webhooks/event/settings
 
+
 ```php
 $response = $sg->client->user()->webhooks()->event()->settings()->get();
 echo $response->statusCode();
@@ -3824,6 +4010,7 @@ SendGrids Event Webhook will notify a URL of your choice via HTTP POST with info
 Common uses of this data are to remove unsubscribes, react to spam reports, determine unengaged recipients, identify bounced email addresses, or create advanced analytics of your email program.
 
 ### POST /user/webhooks/event/test
+
 
 ```php
 $request_body = json_decode('{
@@ -3842,6 +4029,7 @@ SendGrid can parse the attachments and contents of incoming emails. The Parse AP
 
 ### GET /user/webhooks/parse/settings
 
+
 ```php
 $response = $sg->client->user()->webhooks()->parse()->settings()->get();
 echo $response->statusCode();
@@ -3857,6 +4045,7 @@ SendGrid's Inbound Parse Webhook allows you to parse the contents and attachment
 There are a number of pre-made integrations for the SendGrid Parse Webhook which make processing events easy. You can find these integrations in the [Library Index](https://sendgrid.com/docs/Integrate/libraries.html#-Webhook-Libraries).
 
 ### GET /user/webhooks/parse/stats
+
 
 ```php
 $query_params = json_decode('{"aggregated_by": "day", "limit": "test_string", "start_date": "2016-01-01", "end_date": "2016-04-01", "offset": "test_string"}');
@@ -3881,6 +4070,7 @@ A domain whitelabel allows you to remove the via or sent on behalf of message th
 For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
 
 ### POST /whitelabel/domains
+
 
 ```php
 $request_body = json_decode('{
@@ -3911,6 +4101,7 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 
 ### GET /whitelabel/domains
 
+
 ```php
 $query_params = json_decode('{"username": "test_string", "domain": "test_string", "exclude_subusers": "true", "limit": 1, "offset": 1}');
 $response = $sg->client->whitelabel()->domains()->get(null, $query_params);
@@ -3932,6 +4123,7 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 | domain | string  |The domain to find a default domain whitelabel for. |
 
 ### GET /whitelabel/domains/default
+
 
 ```php
 $response = $sg->client->whitelabel()->domains()->default()->get();
@@ -3956,6 +4148,7 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 
 ### GET /whitelabel/domains/subuser
 
+
 ```php
 $response = $sg->client->whitelabel()->domains()->subuser()->get();
 echo $response->statusCode();
@@ -3979,6 +4172,7 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 
 ### DELETE /whitelabel/domains/subuser
 
+
 ```php
 $response = $sg->client->whitelabel()->domains()->subuser()->delete($request_body);
 echo $response->statusCode();
@@ -3994,6 +4188,7 @@ A domain whitelabel allows you to remove the via or sent on behalf of message th
 For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
 
 ### PATCH /whitelabel/domains/{domain_id}
+
 
 ```php
 $request_body = json_decode('{
@@ -4017,6 +4212,7 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 
 ### GET /whitelabel/domains/{domain_id}
 
+
 ```php
 $domain_id = "test_url_param";
 $response = $sg->client->whitelabel()->domains()->_($domain_id)->get();
@@ -4033,6 +4229,7 @@ A domain whitelabel allows you to remove the via or sent on behalf of message th
 For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
 
 ### DELETE /whitelabel/domains/{domain_id}
+
 
 ```php
 $domain_id = "test_url_param";
@@ -4058,6 +4255,7 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 
 ### POST /whitelabel/domains/{domain_id}/subuser
 
+
 ```php
 $request_body = json_decode('{
   "username": "jane@example.com"
@@ -4082,6 +4280,7 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 | id | integer  | ID of the domain to which you are adding an IP |
 
 ### POST /whitelabel/domains/{id}/ips
+
 
 ```php
 $request_body = json_decode('{
@@ -4109,6 +4308,7 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 
 ### DELETE /whitelabel/domains/{id}/ips/{ip}
 
+
 ```php
 $id = "test_url_param";
 $ip = "test_url_param";
@@ -4132,6 +4332,7 @@ For more information on whitelabeling, please see our [User Guide](https://sendg
 
 ### POST /whitelabel/domains/{id}/validate
 
+
 ```php
 $request_body = json_decode('null');
 $id = "test_url_param";
@@ -4151,6 +4352,7 @@ A IP whitelabel consists of a subdomain and domain that will be used to generate
 For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/ips.html).
 
 ### POST /whitelabel/ips
+
 
 ```php
 $request_body = json_decode('{
@@ -4175,6 +4377,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ### GET /whitelabel/ips
 
+
 ```php
 $query_params = json_decode('{"ip": "test_string", "limit": 1, "offset": 1}');
 $response = $sg->client->whitelabel()->ips()->get(null, $query_params);
@@ -4191,6 +4394,7 @@ A IP whitelabel consists of a subdomain and domain that will be used to generate
 For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/ips.html).
 
 ### GET /whitelabel/ips/{id}
+
 
 ```php
 $id = "test_url_param";
@@ -4209,6 +4413,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ### DELETE /whitelabel/ips/{id}
 
+
 ```php
 $id = "test_url_param";
 $response = $sg->client->whitelabel()->ips()->_($id)->delete($request_body);
@@ -4225,6 +4430,7 @@ A IP whitelabel consists of a subdomain and domain that will be used to generate
 For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/ips.html).
 
 ### POST /whitelabel/ips/{id}/validate
+
 
 ```php
 $request_body = json_decode('null');
@@ -4243,6 +4449,7 @@ Email link whitelabels allow all of the click-tracked links you send in your ema
 For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).
 
 ### POST /whitelabel/links
+
 
 ```php
 $request_body = json_decode('{
@@ -4265,6 +4472,7 @@ Email link whitelabels allow all of the click-tracked links you send in your ema
 For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).
 
 ### GET /whitelabel/links
+
 
 ```php
 $query_params = json_decode('{"limit": 1}');
@@ -4290,6 +4498,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ### GET /whitelabel/links/default
 
+
 ```php
 $query_params = json_decode('{"domain": "test_string"}');
 $response = $sg->client->whitelabel()->links()->default()->get(null, $query_params);
@@ -4310,6 +4519,7 @@ Email link whitelabels allow all of the click-tracked links you send in your ema
 For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).
 
 ### GET /whitelabel/links/subuser
+
 
 ```php
 $query_params = json_decode('{"username": "test_string"}');
@@ -4332,6 +4542,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ### DELETE /whitelabel/links/subuser
 
+
 ```php
 $query_params = json_decode('{"username": "test_string"}');
 $response = $sg->client->whitelabel()->links()->subuser()->delete($request_body, $query_params);
@@ -4348,6 +4559,7 @@ Email link whitelabels allow all of the click-tracked links you send in your ema
 For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).
 
 ### PATCH /whitelabel/links/{id}
+
 
 ```php
 $request_body = json_decode('{
@@ -4369,6 +4581,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ### GET /whitelabel/links/{id}
 
+
 ```php
 $id = "test_url_param";
 $response = $sg->client->whitelabel()->links()->_($id)->get();
@@ -4386,6 +4599,7 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/API_
 
 ### DELETE /whitelabel/links/{id}
 
+
 ```php
 $id = "test_url_param";
 $response = $sg->client->whitelabel()->links()->_($id)->delete($request_body);
@@ -4402,6 +4616,7 @@ Email link whitelabels allow all of the click-tracked links you send in your ema
 For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).
 
 ### POST /whitelabel/links/{id}/validate
+
 
 ```php
 $request_body = json_decode('null');
@@ -4424,6 +4639,7 @@ Email link whitelabels allow all of the click-tracked links you send in your ema
 For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).
 
 ### POST /whitelabel/links/{link_id}/subuser
+
 
 ```php
 $request_body = json_decode('{

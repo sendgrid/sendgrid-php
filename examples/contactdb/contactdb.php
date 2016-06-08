@@ -6,9 +6,9 @@ require 'vendor/autoload.php';
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
 
-##################################################
-# Create a Custom Field #
-# POST /contactdb/custom_fields #
+////////////////////////////////////////////////////
+// Create a Custom Field #
+// POST /contactdb/custom_fields #
 
 $request_body = json_decode('{
   "name": "pet", 
@@ -19,18 +19,18 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Retrieve all custom fields #
-# GET /contactdb/custom_fields #
+////////////////////////////////////////////////////
+// Retrieve all custom fields #
+// GET /contactdb/custom_fields #
 
 $response = $sg->client->contactdb()->custom_fields()->get();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Retrieve a Custom Field #
-# GET /contactdb/custom_fields/{custom_field_id} #
+////////////////////////////////////////////////////
+// Retrieve a Custom Field #
+// GET /contactdb/custom_fields/{custom_field_id} #
 
 $custom_field_id = "test_url_param";
 $response = $sg->client->contactdb()->custom_fields()->_($custom_field_id)->get();
@@ -38,9 +38,9 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Delete a Custom Field #
-# DELETE /contactdb/custom_fields/{custom_field_id} #
+////////////////////////////////////////////////////
+// Delete a Custom Field #
+// DELETE /contactdb/custom_fields/{custom_field_id} #
 
 $custom_field_id = "test_url_param";
 $response = $sg->client->contactdb()->custom_fields()->_($custom_field_id)->delete($request_body);
@@ -48,9 +48,9 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Create a List #
-# POST /contactdb/lists #
+////////////////////////////////////////////////////
+// Create a List #
+// POST /contactdb/lists #
 
 $request_body = json_decode('{
   "name": "your list name"
@@ -60,27 +60,27 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Retrieve all lists #
-# GET /contactdb/lists #
+////////////////////////////////////////////////////
+// Retrieve all lists #
+// GET /contactdb/lists #
 
 $response = $sg->client->contactdb()->lists()->get();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Delete Multiple lists #
-# DELETE /contactdb/lists #
+////////////////////////////////////////////////////
+// Delete Multiple lists #
+// DELETE /contactdb/lists #
 
 $response = $sg->client->contactdb()->lists()->delete($request_body);
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Update a List #
-# PATCH /contactdb/lists/{list_id} #
+////////////////////////////////////////////////////
+// Update a List #
+// PATCH /contactdb/lists/{list_id} #
 
 $request_body = json_decode('{
   "name": "newlistname"
@@ -92,9 +92,9 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Retrieve a single list #
-# GET /contactdb/lists/{list_id} #
+////////////////////////////////////////////////////
+// Retrieve a single list #
+// GET /contactdb/lists/{list_id} #
 
 $query_params = json_decode('{"list_id": 0}');
 $list_id = "test_url_param";
@@ -103,9 +103,9 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Delete a List #
-# DELETE /contactdb/lists/{list_id} #
+////////////////////////////////////////////////////
+// Delete a List #
+// DELETE /contactdb/lists/{list_id} #
 
 $query_params = json_decode('{"delete_contacts": "true"}');
 $list_id = "test_url_param";
@@ -114,9 +114,9 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Add Multiple Recipients to a List #
-# POST /contactdb/lists/{list_id}/recipients #
+////////////////////////////////////////////////////
+// Add Multiple Recipients to a List #
+// POST /contactdb/lists/{list_id}/recipients #
 
 $request_body = json_decode('[
   "recipient_id1", 
@@ -128,9 +128,9 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Retrieve all recipients on a List #
-# GET /contactdb/lists/{list_id}/recipients #
+////////////////////////////////////////////////////
+// Retrieve all recipients on a List #
+// GET /contactdb/lists/{list_id}/recipients #
 
 $query_params = json_decode('{"page": 1, "page_size": 1, "list_id": 0}');
 $list_id = "test_url_param";
@@ -139,33 +139,33 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Add a Single Recipient to a List #
-# POST /contactdb/lists/{list_id}/recipients/{recipient_id} #
+////////////////////////////////////////////////////
+// Add a Single Recipient to a List #
+// POST /contactdb/lists/{list_id}/recipients/{recipient_id} #
 
 $request_body = json_decode('null');
 $list_id = "test_url_param";
-        $recipient_id = "test_url_param";
+$recipient_id = "test_url_param";
 $response = $sg->client->contactdb()->lists()->_($list_id)->recipients()->_($recipient_id)->post($request_body);
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Delete a Single Recipient from a Single List #
-# DELETE /contactdb/lists/{list_id}/recipients/{recipient_id} #
+////////////////////////////////////////////////////
+// Delete a Single Recipient from a Single List #
+// DELETE /contactdb/lists/{list_id}/recipients/{recipient_id} #
 
 $query_params = json_decode('{"recipient_id": 0, "list_id": 0}');
 $list_id = "test_url_param";
-        $recipient_id = "test_url_param";
+$recipient_id = "test_url_param";
 $response = $sg->client->contactdb()->lists()->_($list_id)->recipients()->_($recipient_id)->delete($request_body, $query_params);
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Update Recipient #
-# PATCH /contactdb/recipients #
+////////////////////////////////////////////////////
+// Update Recipient #
+// PATCH /contactdb/recipients #
 
 $request_body = json_decode('[
   {
@@ -179,9 +179,9 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Add recipients #
-# POST /contactdb/recipients #
+////////////////////////////////////////////////////
+// Add recipients #
+// POST /contactdb/recipients #
 
 $request_body = json_decode('[
   {
@@ -202,9 +202,9 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Retrieve recipients #
-# GET /contactdb/recipients #
+////////////////////////////////////////////////////
+// Retrieve recipients #
+// GET /contactdb/recipients #
 
 $query_params = json_decode('{"page": 1, "page_size": 1}');
 $response = $sg->client->contactdb()->recipients()->get(null, $query_params);
@@ -212,36 +212,36 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Delete Recipient #
-# DELETE /contactdb/recipients #
+////////////////////////////////////////////////////
+// Delete Recipient #
+// DELETE /contactdb/recipients #
 
 $response = $sg->client->contactdb()->recipients()->delete($request_body);
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Retrieve the count of billable recipients #
-# GET /contactdb/recipients/billable_count #
+////////////////////////////////////////////////////
+// Retrieve the count of billable recipients #
+// GET /contactdb/recipients/billable_count #
 
 $response = $sg->client->contactdb()->recipients()->billable_count()->get();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Retrieve a Count of Recipients #
-# GET /contactdb/recipients/count #
+////////////////////////////////////////////////////
+// Retrieve a Count of Recipients #
+// GET /contactdb/recipients/count #
 
 $response = $sg->client->contactdb()->recipients()->count()->get();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Retrieve recipients matching search criteria #
-# GET /contactdb/recipients/search #
+////////////////////////////////////////////////////
+// Retrieve recipients matching search criteria #
+// GET /contactdb/recipients/search #
 
 $query_params = json_decode('{"{field_name}": "test_string"}');
 $response = $sg->client->contactdb()->recipients()->search()->get(null, $query_params);
@@ -249,9 +249,9 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Retrieve a single recipient #
-# GET /contactdb/recipients/{recipient_id} #
+////////////////////////////////////////////////////
+// Retrieve a single recipient #
+// GET /contactdb/recipients/{recipient_id} #
 
 $recipient_id = "test_url_param";
 $response = $sg->client->contactdb()->recipients()->_($recipient_id)->get();
@@ -259,9 +259,9 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Delete a Recipient #
-# DELETE /contactdb/recipients/{recipient_id} #
+////////////////////////////////////////////////////
+// Delete a Recipient #
+// DELETE /contactdb/recipients/{recipient_id} #
 
 $recipient_id = "test_url_param";
 $response = $sg->client->contactdb()->recipients()->_($recipient_id)->delete($request_body);
@@ -269,9 +269,9 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Retrieve the lists that a recipient is on #
-# GET /contactdb/recipients/{recipient_id}/lists #
+////////////////////////////////////////////////////
+// Retrieve the lists that a recipient is on #
+// GET /contactdb/recipients/{recipient_id}/lists #
 
 $recipient_id = "test_url_param";
 $response = $sg->client->contactdb()->recipients()->_($recipient_id)->lists()->get();
@@ -279,18 +279,18 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Retrieve reserved fields #
-# GET /contactdb/reserved_fields #
+////////////////////////////////////////////////////
+// Retrieve reserved fields #
+// GET /contactdb/reserved_fields #
 
 $response = $sg->client->contactdb()->reserved_fields()->get();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Create a Segment #
-# POST /contactdb/segments #
+////////////////////////////////////////////////////
+// Create a Segment #
+// POST /contactdb/segments #
 
 $request_body = json_decode('{
   "conditions": [
@@ -321,18 +321,18 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Retrieve all segments #
-# GET /contactdb/segments #
+////////////////////////////////////////////////////
+// Retrieve all segments #
+// GET /contactdb/segments #
 
 $response = $sg->client->contactdb()->segments()->get();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Update a segment #
-# PATCH /contactdb/segments/{segment_id} #
+////////////////////////////////////////////////////
+// Update a segment #
+// PATCH /contactdb/segments/{segment_id} #
 
 $request_body = json_decode('{
   "conditions": [
@@ -353,9 +353,9 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Retrieve a segment #
-# GET /contactdb/segments/{segment_id} #
+////////////////////////////////////////////////////
+// Retrieve a segment #
+// GET /contactdb/segments/{segment_id} #
 
 $query_params = json_decode('{"segment_id": 0}');
 $segment_id = "test_url_param";
@@ -364,9 +364,9 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Delete a segment #
-# DELETE /contactdb/segments/{segment_id} #
+////////////////////////////////////////////////////
+// Delete a segment #
+// DELETE /contactdb/segments/{segment_id} #
 
 $query_params = json_decode('{"delete_contacts": "true"}');
 $segment_id = "test_url_param";
@@ -375,9 +375,9 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Retrieve recipients on a segment #
-# GET /contactdb/segments/{segment_id}/recipients #
+////////////////////////////////////////////////////
+// Retrieve recipients on a segment #
+// GET /contactdb/segments/{segment_id}/recipients #
 
 $query_params = json_decode('{"page": 1, "page_size": 1}');
 $segment_id = "test_url_param";

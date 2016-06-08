@@ -6,9 +6,9 @@ require 'vendor/autoload.php';
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
 
-##################################################
-# Create a batch ID #
-# POST /mail/batch #
+////////////////////////////////////////////////////
+// Create a batch ID #
+// POST /mail/batch #
 
 $request_body = json_decode('null');
 $response = $sg->client->mail()->batch()->post($request_body);
@@ -16,9 +16,9 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# Validate batch ID #
-# GET /mail/batch/{batch_id} #
+////////////////////////////////////////////////////
+// Validate batch ID #
+// GET /mail/batch/{batch_id} #
 
 $batch_id = "test_url_param";
 $response = $sg->client->mail()->batch()->_($batch_id)->get();
@@ -26,9 +26,10 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 
-##################################################
-# v3 Mail Send Beta #
-# POST /mail/send/beta #
+////////////////////////////////////////////////////
+// v3 Mail Send Beta #
+// POST /mail/send/beta #
+// This endpoint has a helper, check it out [here](https://github.com/sendgrid/sendgrid-php/blob/v3beta/lib/helpers/mail/README.md).
 
 $request_body = json_decode('{
   "asm": {
