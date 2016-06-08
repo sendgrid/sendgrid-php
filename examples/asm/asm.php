@@ -1,4 +1,5 @@
 <?php
+// If you are using Composer
 require 'vendor/autoload.php';
 
 
@@ -6,13 +7,13 @@ $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
 
 ##################################################
-# Create a Group #
+# Create a new suppression group #
 # POST /asm/groups #
 
 $request_body = json_decode('{
-  "description": "A group description", 
-  "is_default": false, 
-  "name": "A group name"
+  "description": "Suggestions for products our users might like.", 
+  "is_default": true, 
+  "name": "Product Suggestions"
 }');
 $response = $sg->client->asm()->groups()->post($request_body);
 echo $response->statusCode();
@@ -20,10 +21,11 @@ echo $response->body();
 echo $response->headers();
 
 ##################################################
-# Retrieve all suppression groups associated with the user. #
+# Retrieve information about multiple suppression groups #
 # GET /asm/groups #
 
-$response = $sg->client->asm()->groups()->get();
+$query_params = json_decode('{"id": 1}');
+$response = $sg->client->asm()->groups()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -101,6 +103,15 @@ echo $response->body();
 echo $response->headers();
 
 ##################################################
+# Retrieve all suppressions #
+# GET /asm/suppressions #
+
+$response = $sg->client->asm()->suppressions()->get();
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+
+##################################################
 # Add recipient addresses to the global suppression group. #
 # POST /asm/suppressions/global #
 
@@ -131,6 +142,16 @@ echo $response->headers();
 
 $email = "test_url_param";
 $response = $sg->client->asm()->suppressions()->global()->_($email)->delete($request_body);
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+
+##################################################
+# Retrieve all suppression groups for an email address #
+# GET /asm/suppressions/{email} #
+
+$email = "test_url_param";
+$response = $sg->client->asm()->suppressions()->_($email)->get();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();

@@ -1,6 +1,7 @@
 <?php
 namespace SendGrid;
 
+// If you are using Composer
 require __DIR__ . '/../../../vendor/autoload.php';
 
 

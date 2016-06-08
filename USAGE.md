@@ -3,6 +3,7 @@ This documentation is based on our [OAI specification](https://github.com/sendgr
 # INITIALIZATION
 
 ```php
+// If you are using Composer
 require 'vendor/autoload.php';
 
 
@@ -298,9 +299,9 @@ echo $response->headers();
 <a name="asm"></a>
 # ASM
 
-## Create a Group
+## Create a new suppression group
 
-**This endoint allows you to create a new suppression group.**
+**This endpoint allows you to create a new suppression group.**
 
 Suppression groups, or unsubscribe groups, are specific types or categories of email that you would like your recipients to be able to unsubscribe from. For example: Daily Newsletters, Invoices, System Alerts.
 
@@ -312,29 +313,26 @@ Each user can create up to 25 different suppression groups.
 
 ```php
 $request_body = json_decode('{
-  "description": "A group description",
-  "is_default": false,
-  "name": "A group name"
+  "description": "Suggestions for products our users might like.",
+  "is_default": true,
+  "name": "Product Suggestions"
 }');
 $response = $sg->client->asm()->groups()->post($request_body);
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 ```
-## Retrieve all suppression groups associated with the user.
+## Retrieve information about multiple suppression groups
 
-**This endpoint allows you to retrieve a list of all suppression groups created by this user.**
+**This endpoint allows you to retrieve information about multiple suppression groups.**
 
-Suppression groups, or unsubscribe groups, are specific types or categories of email that you would like your recipients to be able to unsubscribe from. For example: Daily Newsletters, Invoices, System Alerts.
-
-The **name** and **description** of the unsubscribe group will be visible by recipients when they are managing their subscriptions.
-
-Each user can create up to 25 different suppression groups.
+This endpoint will return information for each group ID that you include in your request. To add a group ID to your request, simply append `&id=` followed by the group ID.
 
 ### GET /asm/groups
 
 ```php
-$response = $sg->client->asm()->groups()->get();
+$query_params = json_decode('{"id": 1}');
+$response = $sg->client->asm()->groups()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -457,6 +455,20 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 ```
+## Retrieve all suppressions
+
+**This endpoint allows you to retrieve a list of all suppressions.**
+
+Suppressions are email addresses that can be added to [groups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html) to prevent certain types of emails from being delivered to those addresses.
+
+### GET /asm/suppressions
+
+```php
+$response = $sg->client->asm()->suppressions()->get();
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+```
 ## Add recipient addresses to the global suppression group.
 
 **This endpoint allows you to add one or more email addresses to the global suppressions group.**
@@ -505,6 +517,21 @@ A global suppression (or global unsubscribe) is an email address of a recipient 
 ```php
 $email = "test_url_param";
 $response = $sg->client->asm()->suppressions()->global()->_($email)->delete($request_body);
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+```
+## Retrieve all suppression groups for an email address
+
+**This endpoint will return a list of all suppression groups, indicating if the given email address is suppressed for each group.**
+
+Suppressions are email addresses that can be added to [groups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html) to prevent certain types of emails from being delivered to those addresses.
+
+### GET /asm/suppressions/{email}
+
+```php
+$email = "test_url_param";
+$response = $sg->client->asm()->suppressions()->_($email)->get();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();

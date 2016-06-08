@@ -114,6 +114,7 @@ Previous versions of the library can be found in the [version index](https://sen
 ## Hello Email
 
 ```php
+// If you are using Composer
 require 'vendor/autoload.php';
 
 $from = new Email(null, "test@example.com");
@@ -134,6 +135,7 @@ echo $response->body();
 ## General v3 Web API Usage
 
 ```php
+// If you are using Composer
 require 'vendor/autoload.php';
 
 $apiKey = getenv('SENDGRID_API_KEY');
