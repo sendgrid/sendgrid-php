@@ -26,7 +26,6 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
         $apiKey = "SENDGRID_API_KEY";
         $sg = new SendGrid($apiKey);
         $headers = array(
-            'Content-Type: application/json',
             'Authorization: Bearer '.$apiKey,
             'User-Agent: sendgrid/' . $sg->version . ';php'
             );
