@@ -34,7 +34,6 @@ class SendGrid
     public function __construct($apiKey, $options = array())
     {
         $headers = array(
-            'Content-Type: application/json',
             'Authorization: Bearer '.$apiKey,
             'User-Agent: sendgrid/' . $this->version . ';php'
             );
