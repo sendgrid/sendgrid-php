@@ -89,13 +89,9 @@ source ./sendgrid.env
 
 ##### Execute: #####
 
-See the [examples folder](https://github.com/sendgrid/sendgrid-php/tree/v3beta/examples) to get started quickly.
+See the [examples folder](https://github.com/sendgrid/sendgrid-php/tree/master/examples) to get started quickly.
 
-From the root directory of this repo, replace `require 'vendor/autoload.php';` with:
-```php
-require './vendor/autoload.php';
-require './lib/SendGrid.php';
-```
+If you are using composer, replace <PATH_TO> with the path to your `vendor/autoload.php`. Otherwise, include lib/SendGrid.php and lib/helpers/mail/Mail.php.
 
 <a name="understanding_the_codebase"></a>
 ## Understanding the Code Base
@@ -121,9 +117,9 @@ The interface to the SendGrid API.
 
 All PRs require passing tests before the PR will be reviewed.
 
-All test files are in the [`/test/unit`](https://github.com/sendgrid/sendgrid-php/tree/v3beta/test/unit) directory.
+All test files are in the [`/test/unit`](https://github.com/sendgrid/sendgrid-php/tree/master/test/unit) directory.
 
-For the purposes of contributing to this repo, please update the [`SendGridTest.php`](https://github.com/sendgrid/sendgrid-php/tree/v3beta/test/unit/SendGridTest.php) file with unit tests as you modify the code.
+For the purposes of contributing to this repo, please update the [`SendGridTest.php`](https://github.com/sendgrid/sendgrid-php/tree/master/test/unit/SendGridTest.php) file with unit tests as you modify the code.
 
 ```bash
 cd test/unit

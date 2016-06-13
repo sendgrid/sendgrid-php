@@ -2,7 +2,7 @@
 namespace SendGrid;
 
 // If you are using Composer
-require __DIR__ . '/../../../vendor/autoload.php';
+require __DIR__ . '<PATH_TO>/vendor/autoload.php';
 
 
 function helloEmail()
@@ -182,7 +182,7 @@ function sendHelloEmail()
     $sg = new \SendGrid($apiKey);
 
     $request_body = helloEmail();
-    $response = $sg->client->mail()->send()->beta()->post($request_body);
+    $response = $sg->client->mail()->send()->post($request_body);
     echo $response->statusCode();
     echo $response->body();
     echo $response->headers();
@@ -194,7 +194,7 @@ function sendKitchenSink()
     $sg = new \SendGrid($apiKey);
 
     $request_body = kitchenSink();
-    $response = $sg->client->mail()->send()->beta()->post($request_body);
+    $response = $sg->client->mail()->send()->post($request_body);
     echo $response->statusCode();
     echo $response->body();
     echo $response->headers();
