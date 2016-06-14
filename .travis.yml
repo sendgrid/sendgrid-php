@@ -10,6 +10,7 @@ after_script:
 - cd ..
 - phpenv local 5.4
 - phpenv local --unset
+- ./scripts/s3upload.sh
 php:
 - 5.4
 - 5.5
