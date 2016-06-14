@@ -55,7 +55,7 @@ echo $response->headers();
 // DELETE /templates/{template_id} #
 
 $template_id = "test_url_param";
-$response = $sg->client->templates()->_($template_id)->delete($request_body);
+$response = $sg->client->templates()->_($template_id)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -113,7 +113,7 @@ echo $response->headers();
 
 $template_id = "test_url_param";
 $version_id = "test_url_param";
-$response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->delete($request_body);
+$response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -122,10 +122,9 @@ echo $response->headers();
 // Activate a transactional template version. #
 // POST /templates/{template_id}/versions/{version_id}/activate #
 
-$request_body = json_decode('null');
 $template_id = "test_url_param";
 $version_id = "test_url_param";
-$response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->activate()->post($request_body);
+$response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->activate()->post();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();

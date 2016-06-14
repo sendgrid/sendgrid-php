@@ -20,6 +20,13 @@ echo $response->headers();
 // Delete blocks #
 // DELETE /suppression/blocks #
 
+$request_body = json_decode('{
+  "delete_all": false, 
+  "emails": [
+    "example1@example.com", 
+    "example2@example.com"
+  ]
+}');
 $response = $sg->client->suppression()->blocks()->delete($request_body);
 echo $response->statusCode();
 echo $response->body();
@@ -40,7 +47,7 @@ echo $response->headers();
 // DELETE /suppression/blocks/{email} #
 
 $email = "test_url_param";
-$response = $sg->client->suppression()->blocks()->_($email)->delete($request_body);
+$response = $sg->client->suppression()->blocks()->_($email)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -59,6 +66,13 @@ echo $response->headers();
 // Delete bounces #
 // DELETE /suppression/bounces #
 
+$request_body = json_decode('{
+  "delete_all": true, 
+  "emails": [
+    "example@example.com", 
+    "example2@example.com"
+  ]
+}');
 $response = $sg->client->suppression()->bounces()->delete($request_body);
 echo $response->statusCode();
 echo $response->body();
@@ -80,7 +94,7 @@ echo $response->headers();
 
 $query_params = json_decode('{"email_address": "example@example.com"}');
 $email = "test_url_param";
-$response = $sg->client->suppression()->bounces()->_($email)->delete($request_body, $query_params);
+$response = $sg->client->suppression()->bounces()->_($email)->delete(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -99,6 +113,13 @@ echo $response->headers();
 // Delete invalid emails #
 // DELETE /suppression/invalid_emails #
 
+$request_body = json_decode('{
+  "delete_all": false, 
+  "emails": [
+    "example1@example.com", 
+    "example2@example.com"
+  ]
+}');
 $response = $sg->client->suppression()->invalid_emails()->delete($request_body);
 echo $response->statusCode();
 echo $response->body();
@@ -119,7 +140,7 @@ echo $response->headers();
 // DELETE /suppression/invalid_emails/{email} #
 
 $email = "test_url_param";
-$response = $sg->client->suppression()->invalid_emails()->_($email)->delete($request_body);
+$response = $sg->client->suppression()->invalid_emails()->_($email)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -139,7 +160,7 @@ echo $response->headers();
 // DELETE /suppression/spam_report/{email} #
 
 $email = "test_url_param";
-$response = $sg->client->suppression()->spam_report()->_($email)->delete($request_body);
+$response = $sg->client->suppression()->spam_report()->_($email)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -158,6 +179,13 @@ echo $response->headers();
 // Delete spam reports #
 // DELETE /suppression/spam_reports #
 
+$request_body = json_decode('{
+  "delete_all": false, 
+  "emails": [
+    "example1@example.com", 
+    "example2@example.com"
+  ]
+}');
 $response = $sg->client->suppression()->spam_reports()->delete($request_body);
 echo $response->statusCode();
 echo $response->body();

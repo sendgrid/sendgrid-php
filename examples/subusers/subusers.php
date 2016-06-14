@@ -92,7 +92,7 @@ echo $response->headers();
 // DELETE /subusers/{subuser_name} #
 
 $subuser_name = "test_url_param";
-$response = $sg->client->subusers()->_($subuser_name)->delete($request_body);
+$response = $sg->client->subusers()->_($subuser_name)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -153,7 +153,7 @@ echo $response->headers();
 // DELETE /subusers/{subuser_name}/monitor #
 
 $subuser_name = "test_url_param";
-$response = $sg->client->subusers()->_($subuser_name)->monitor()->delete($request_body);
+$response = $sg->client->subusers()->_($subuser_name)->monitor()->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();

@@ -60,7 +60,7 @@ echo $response->headers();
 // DELETE /asm/groups/{group_id} #
 
 $group_id = "test_url_param";
-$response = $sg->client->asm()->groups()->_($group_id)->delete($request_body);
+$response = $sg->client->asm()->groups()->_($group_id)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -97,7 +97,7 @@ echo $response->headers();
 
 $group_id = "test_url_param";
 $email = "test_url_param";
-$response = $sg->client->asm()->groups()->_($group_id)->suppressions()->_($email)->delete($request_body);
+$response = $sg->client->asm()->groups()->_($group_id)->suppressions()->_($email)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -141,7 +141,7 @@ echo $response->headers();
 // DELETE /asm/suppressions/global/{email} #
 
 $email = "test_url_param";
-$response = $sg->client->asm()->suppressions()->global()->_($email)->delete($request_body);
+$response = $sg->client->asm()->suppressions()->global()->_($email)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();

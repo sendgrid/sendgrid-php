@@ -51,6 +51,13 @@ echo $response->headers();
 // Remove one or more IPs from the whitelist #
 // DELETE /access_settings/whitelist #
 
+$request_body = json_decode('{
+  "ids": [
+    1, 
+    2, 
+    3
+  ]
+}');
 $response = $sg->client->access_settings()->whitelist()->delete($request_body);
 echo $response->statusCode();
 echo $response->body();
@@ -71,7 +78,7 @@ echo $response->headers();
 // DELETE /access_settings/whitelist/{rule_id} #
 
 $rule_id = "test_url_param";
-$response = $sg->client->access_settings()->whitelist()->_($rule_id)->delete($request_body);
+$response = $sg->client->access_settings()->whitelist()->_($rule_id)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();

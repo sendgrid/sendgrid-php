@@ -79,7 +79,7 @@ echo $response->headers();
 // DELETE /campaigns/{campaign_id} #
 
 $campaign_id = "test_url_param";
-$response = $sg->client->campaigns()->_($campaign_id)->delete($request_body);
+$response = $sg->client->campaigns()->_($campaign_id)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -125,7 +125,7 @@ echo $response->headers();
 // DELETE /campaigns/{campaign_id}/schedules #
 
 $campaign_id = "test_url_param";
-$response = $sg->client->campaigns()->_($campaign_id)->schedules()->delete($request_body);
+$response = $sg->client->campaigns()->_($campaign_id)->schedules()->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -134,9 +134,8 @@ echo $response->headers();
 // Send a Campaign #
 // POST /campaigns/{campaign_id}/schedules/now #
 
-$request_body = json_decode('null');
 $campaign_id = "test_url_param";
-$response = $sg->client->campaigns()->_($campaign_id)->schedules()->now()->post($request_body);
+$response = $sg->client->campaigns()->_($campaign_id)->schedules()->now()->post();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();

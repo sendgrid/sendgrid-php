@@ -77,7 +77,7 @@ echo $response->headers();
 // DELETE /api_keys/{api_key_id} #
 
 $api_key_id = "test_url_param";
-$response = $sg->client->api_keys()->_($api_key_id)->delete($request_body);
+$response = $sg->client->api_keys()->_($api_key_id)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();

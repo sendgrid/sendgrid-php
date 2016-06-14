@@ -78,14 +78,15 @@ Previous versions of the library can be found in the [version index](https://sen
 ## Hello Email
 
 ```php
+<?php
 // If you are using Composer
 require 'vendor/autoload.php';
 
-$from = new Email(null, "test@example.com");
+$from = new SendGrid\Email(null, "test@example.com");
 $subject = "Hello World from the SendGrid PHP Library";
-$to = new Email(null, "test@example.com");
-$content = new Content("text/plain", "some text here");
-$mail = new Mail($from, $subject, $to, $content);
+$to = new SendGrid\Email(null, "test@example.com");
+$content = new SendGrid\Content("text/plain", "some text here");
+$mail = new SendGrid\Mail($from, $subject, $to, $content);
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
@@ -99,6 +100,7 @@ echo $response->body();
 ## General v3 Web API Usage
 
 ```php
+<?php
 // If you are using Composer
 require 'vendor/autoload.php';
 

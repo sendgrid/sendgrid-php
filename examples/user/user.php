@@ -131,7 +131,7 @@ echo $response->headers();
 // DELETE /user/scheduled_sends/{batch_id} #
 
 $batch_id = "test_url_param";
-$response = $sg->client->user()->scheduled_sends()->_($batch_id)->delete($request_body);
+$response = $sg->client->user()->scheduled_sends()->_($batch_id)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();

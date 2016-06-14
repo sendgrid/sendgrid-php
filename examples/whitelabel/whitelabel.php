@@ -59,7 +59,7 @@ echo $response->headers();
 // Disassociate a domain whitelabel from a given user. #
 // DELETE /whitelabel/domains/subuser #
 
-$response = $sg->client->whitelabel()->domains()->subuser()->delete($request_body);
+$response = $sg->client->whitelabel()->domains()->subuser()->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -93,7 +93,7 @@ echo $response->headers();
 // DELETE /whitelabel/domains/{domain_id} #
 
 $domain_id = "test_url_param";
-$response = $sg->client->whitelabel()->domains()->_($domain_id)->delete($request_body);
+$response = $sg->client->whitelabel()->domains()->_($domain_id)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -130,7 +130,7 @@ echo $response->headers();
 
 $id = "test_url_param";
 $ip = "test_url_param";
-$response = $sg->client->whitelabel()->domains()->_($id)->ips()->_($ip)->delete($request_body);
+$response = $sg->client->whitelabel()->domains()->_($id)->ips()->_($ip)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -139,9 +139,8 @@ echo $response->headers();
 // Validate a domain whitelabel. #
 // POST /whitelabel/domains/{id}/validate #
 
-$request_body = json_decode('null');
 $id = "test_url_param";
-$response = $sg->client->whitelabel()->domains()->_($id)->validate()->post($request_body);
+$response = $sg->client->whitelabel()->domains()->_($id)->validate()->post();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -185,7 +184,7 @@ echo $response->headers();
 // DELETE /whitelabel/ips/{id} #
 
 $id = "test_url_param";
-$response = $sg->client->whitelabel()->ips()->_($id)->delete($request_body);
+$response = $sg->client->whitelabel()->ips()->_($id)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -194,9 +193,8 @@ echo $response->headers();
 // Validate an IP whitelabel #
 // POST /whitelabel/ips/{id}/validate #
 
-$request_body = json_decode('null');
 $id = "test_url_param";
-$response = $sg->client->whitelabel()->ips()->_($id)->validate()->post($request_body);
+$response = $sg->client->whitelabel()->ips()->_($id)->validate()->post();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -251,7 +249,7 @@ echo $response->headers();
 // DELETE /whitelabel/links/subuser #
 
 $query_params = json_decode('{"username": "test_string"}');
-$response = $sg->client->whitelabel()->links()->subuser()->delete($request_body, $query_params);
+$response = $sg->client->whitelabel()->links()->subuser()->delete(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -284,7 +282,7 @@ echo $response->headers();
 // DELETE /whitelabel/links/{id} #
 
 $id = "test_url_param";
-$response = $sg->client->whitelabel()->links()->_($id)->delete($request_body);
+$response = $sg->client->whitelabel()->links()->_($id)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -293,9 +291,8 @@ echo $response->headers();
 // Validate a Link Whitelabel #
 // POST /whitelabel/links/{id}/validate #
 
-$request_body = json_decode('null');
 $id = "test_url_param";
-$response = $sg->client->whitelabel()->links()->_($id)->validate()->post($request_body);
+$response = $sg->client->whitelabel()->links()->_($id)->validate()->post();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();

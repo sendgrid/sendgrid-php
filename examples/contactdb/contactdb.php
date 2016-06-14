@@ -43,7 +43,7 @@ echo $response->headers();
 // DELETE /contactdb/custom_fields/{custom_field_id} #
 
 $custom_field_id = "test_url_param";
-$response = $sg->client->contactdb()->custom_fields()->_($custom_field_id)->delete($request_body);
+$response = $sg->client->contactdb()->custom_fields()->_($custom_field_id)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -73,6 +73,12 @@ echo $response->headers();
 // Delete Multiple lists #
 // DELETE /contactdb/lists #
 
+$request_body = json_decode('[
+  1, 
+  2, 
+  3, 
+  4
+]');
 $response = $sg->client->contactdb()->lists()->delete($request_body);
 echo $response->statusCode();
 echo $response->body();
@@ -109,7 +115,7 @@ echo $response->headers();
 
 $query_params = json_decode('{"delete_contacts": "true"}');
 $list_id = "test_url_param";
-$response = $sg->client->contactdb()->lists()->_($list_id)->delete($request_body, $query_params);
+$response = $sg->client->contactdb()->lists()->_($list_id)->delete(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -143,10 +149,9 @@ echo $response->headers();
 // Add a Single Recipient to a List #
 // POST /contactdb/lists/{list_id}/recipients/{recipient_id} #
 
-$request_body = json_decode('null');
 $list_id = "test_url_param";
 $recipient_id = "test_url_param";
-$response = $sg->client->contactdb()->lists()->_($list_id)->recipients()->_($recipient_id)->post($request_body);
+$response = $sg->client->contactdb()->lists()->_($list_id)->recipients()->_($recipient_id)->post();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -158,7 +163,7 @@ echo $response->headers();
 $query_params = json_decode('{"recipient_id": 0, "list_id": 0}');
 $list_id = "test_url_param";
 $recipient_id = "test_url_param";
-$response = $sg->client->contactdb()->lists()->_($list_id)->recipients()->_($recipient_id)->delete($request_body, $query_params);
+$response = $sg->client->contactdb()->lists()->_($list_id)->recipients()->_($recipient_id)->delete(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -216,6 +221,10 @@ echo $response->headers();
 // Delete Recipient #
 // DELETE /contactdb/recipients #
 
+$request_body = json_decode('[
+  "recipient_id1", 
+  "recipient_id2"
+]');
 $response = $sg->client->contactdb()->recipients()->delete($request_body);
 echo $response->statusCode();
 echo $response->body();
@@ -264,7 +273,7 @@ echo $response->headers();
 // DELETE /contactdb/recipients/{recipient_id} #
 
 $recipient_id = "test_url_param";
-$response = $sg->client->contactdb()->recipients()->_($recipient_id)->delete($request_body);
+$response = $sg->client->contactdb()->recipients()->_($recipient_id)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -370,7 +379,7 @@ echo $response->headers();
 
 $query_params = json_decode('{"delete_contacts": "true"}');
 $segment_id = "test_url_param";
-$response = $sg->client->contactdb()->segments()->_($segment_id)->delete($request_body, $query_params);
+$response = $sg->client->contactdb()->segments()->_($segment_id)->delete(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
