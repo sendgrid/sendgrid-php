@@ -10,20 +10,28 @@
   * @version   GIT: <git_id>
   * @link      http://packagist.org/packages/sendgrid/sendgrid
   */
-
+  
 /**
-  * Interface to the SendGrid Web API
-  */
+ * Interface to the SendGrid Web API
+ */
 class SendGrid
 {
     const VERSION = '5.0.0';
 
-    protected
-        $namespace = 'SendGrid';
+    /**
+     * @var string
+     */
+    protected $namespace = 'SendGrid';
 
-    public
-        $client,
-        $version = self::VERSION;
+    /**
+     * @var \SendGrid\Client
+     */
+    public $client;
+
+    /**
+     * @var string
+     */
+    public $version = self::VERSION;
 
     /**
       * Setup the HTTP Client
@@ -36,7 +44,8 @@ class SendGrid
         $headers = array(
             'Authorization: Bearer '.$apiKey,
             'User-Agent: sendgrid/' . $this->version . ';php'
-            );
+        );
+
         $host = isset($options['host']) ? $options['host'] : 'https://api.sendgrid.com';
         $this->client = new \SendGrid\Client($host, $headers, '/v3', null);
     }
