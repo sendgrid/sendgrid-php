@@ -56,7 +56,7 @@ require 'vendor/autoload.php';
 
 #### Alternative: Install package from zip
 
-If you are not using Composer, simply download and install the **[latest packaged release of the library as a zip](https://sendgrid-open-source.s3.amazonaws.com/sendgrid-php/sendgrid-php.zip)**.
+If you are not using Composer, simply download and install the **[latest packaged release of the library as a zip](https://github.com/sendgrid/sendgrid-php/archive/master.zip)**.
 
 [**⬇︎ Download Packaged Library ⬇︎**](https://github.com/sendgrid/sendgrid-php/archive/master.zip)
 
