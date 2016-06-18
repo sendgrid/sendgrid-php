@@ -7,7 +7,7 @@ before_script:
 script:
 - "../../vendor/bin/phpunit . --bootstrap bootstrap.php --filter test*"
 after_script:
-- cd ..
+- cd ../..
 - phpenv local 5.4
 - phpenv local --unset
 - ./scripts/s3upload.sh
