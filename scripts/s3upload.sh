@@ -7,7 +7,7 @@ GIT_VERSION=`git rev-parse --short HEAD`
 
 rm -rf vendor composer.lock
 composer install --no-dev
-printf "<?php\nrequire 'vendor/autoload.php';\nrequire 'lib/SendGrid.php';\n?>" > sendgrid-php.php
+printf "<?php\nrequire 'vendor/autoload.php';\n?>" > sendgrid-php.php
 cd ..
 zip -r sendgrid-php.zip sendgrid-php -x \*.git\* \*composer.json\* \*scripts\* \*test\* \*.travis.yml\*
 
@@ -22,7 +22,7 @@ curl -X POST \
   https://s3.amazonaws.com/$S3_BUCKET
 
 if [ "$TRAVIS_BRANCH" = "master" ]
-then 
+then
   curl -X POST \
     -F "key=sendgrid-php/sendgrid-php.zip" \
     -F "acl=public-read" \

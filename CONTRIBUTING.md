@@ -122,6 +122,7 @@ All test files are in the [`/test/unit`](https://github.com/sendgrid/sendgrid-ph
 For the purposes of contributing to this repo, please update the [`SendGridTest.php`](https://github.com/sendgrid/sendgrid-php/tree/master/test/unit/SendGridTest.php) file with unit tests as you modify the code.
 
 ```bash
+composer install
 cd test/unit
 ../../vendor/bin/phpunit . --bootstrap bootstrap.php --filter test*
 ```
