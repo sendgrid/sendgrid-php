@@ -82,8 +82,8 @@ Previous versions of the library can be found in the [version index](https://sen
 // If you are using Composer
 require 'vendor/autoload.php';
 
-// If you are not using Composer
-require("path/to/sendgrid-php/sendgrid-php.php");
+// If you are not using Composer (recommended)
+// require("path/to/sendgrid-php/sendgrid-php.php");
 
 $from = new SendGrid\Email(null, "test@example.com");
 $subject = "Hello World from the SendGrid PHP Library";
@@ -104,11 +104,11 @@ echo $response->body();
 
 ```php
 <?php
-// If you are using Composer
+// If you are using Composer (recommended)
 require 'vendor/autoload.php';
 
 // If you are not using Composer
-require("path/to/sendgrid-php/sendgrid-php.php");
+// require("path/to/sendgrid-php/sendgrid-php.php");
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
