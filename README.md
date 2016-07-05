@@ -6,9 +6,9 @@
 
 **BREAKING CHANGE as of 2016.06.14**
 
-Version `5.0.0` is a breaking change for the entire library.
+Version `5.X.X` is a breaking change for the entire library.
 
-Version 5.0.0 brings you full support for all Web API v3 endpoints. We
+Version 5.X.X brings you full support for all Web API v3 endpoints. We
 have the following resources to get you started quickly:
 
 -   [SendGrid
@@ -17,6 +17,7 @@ have the following resources to get you started quickly:
     Documentation](https://github.com/sendgrid/sendgrid-php/tree/master/USAGE.md)
 -   [Example
     Code](https://github.com/sendgrid/sendgrid-php/tree/master/examples)
+-   [Migration from v2 to v3](https://sendgrid.com/docs/Classroom/Send/v3_Mail_Send/how_to_migrate_from_v2_to_v3_mail_send.html)
 
 Thank you for your continued support!
 
@@ -43,7 +44,7 @@ Add SendGrid to your `composer.json` file. If you are not using [Composer](http:
 ```json
 {
   "require": {
-    "sendgrid/sendgrid": "~5.0"
+    "sendgrid/sendgrid": "~5.0.2"
   }
 }
 ```

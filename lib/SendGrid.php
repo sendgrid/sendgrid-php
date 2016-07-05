@@ -16,7 +16,7 @@
   */
 class SendGrid
 {
-    const VERSION = '5.0.1';
+    const VERSION = '5.0.2';
 
     protected
         $namespace = 'SendGrid';
@@ -35,7 +35,8 @@ class SendGrid
     {
         $headers = array(
             'Authorization: Bearer '.$apiKey,
-            'User-Agent: sendgrid/' . $this->version . ';php'
+            'User-Agent: sendgrid/' . $this->version . ';php',
+            'Accept: application/json'
             );
         $host = isset($options['host']) ? $options['host'] : 'https://api.sendgrid.com';
         $this->client = new \SendGrid\Client($host, $headers, '/v3', null);
