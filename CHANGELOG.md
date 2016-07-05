@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0.3] - 2016-07-05 ##
+### Updated
+- Content based on our updated [Swagger/OAI doc](https://github.com/sendgrid/sendgrid-oai)
+
 ## [5.0.2] - 2016-07-05 ##
 ### Added
 - Accept: application/json header per https://sendgrid.com/docs/API_Reference/Web_API_v3/How_To_Use_The_Web_API_v3/requests.html

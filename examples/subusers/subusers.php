@@ -28,7 +28,7 @@ echo $response->headers();
 // List all Subusers #
 // GET /subusers #
 
-$query_params = json_decode('{"username": "test_string", "limit": 0, "offset": 0}');
+$query_params = json_decode('{"username": "test_string", "limit": 1, "offset": 1}');
 $response = $sg->client->subusers()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
@@ -162,7 +162,7 @@ echo $response->headers();
 // Retrieve the monthly email statistics for a single subuser #
 // GET /subusers/{subuser_name}/stats/monthly #
 
-$query_params = json_decode('{"date": "test_string", "sort_by_direction": "asc", "limit": 0, "sort_by_metric": "test_string", "offset": 1}');
+$query_params = json_decode('{"date": "test_string", "sort_by_direction": "asc", "limit": 1, "sort_by_metric": "test_string", "offset": 1}');
 $subuser_name = "test_url_param";
 $response = $sg->client->subusers()->_($subuser_name)->stats()->monthly()->get(null, $query_params);
 echo $response->statusCode();

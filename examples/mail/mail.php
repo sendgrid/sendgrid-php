@@ -26,8 +26,9 @@ echo $response->body();
 echo $response->headers();
 
 ////////////////////////////////////////////////////
-// v3 Mail Send Beta #
-// POST /mail/send/beta #
+// v3 Mail Send #
+// POST /mail/send #
+// This endpoint has a helper, check it out [here](https://github.com/sendgrid/sendgrid-php/blob/master/lib/helpers/mail/README.md).
 
 $request_body = json_decode('{
   "asm": {
@@ -118,13 +119,8 @@ $request_body = json_decode('{
       "send_at": 1409348513, 
       "subject": "Hello, World!", 
       "substitutions": {
-        "sub": {
-          "%name%": [
-            "John", 
-            "Jane", 
-            "Sam"
-          ]
-        }
+        "id": "substitutions", 
+        "type": "object"
       }, 
       "to": [
         {
@@ -172,7 +168,7 @@ $request_body = json_decode('{
     }
   }
 }');
-$response = $sg->client->mail()->send()->beta()->post($request_body);
+$response = $sg->client->mail()->send()->post($request_body);
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();

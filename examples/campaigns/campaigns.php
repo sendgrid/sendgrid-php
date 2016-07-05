@@ -39,7 +39,7 @@ echo $response->headers();
 // Retrieve all Campaigns #
 // GET /campaigns #
 
-$query_params = json_decode('{"limit": 0, "offset": 0}');
+$query_params = json_decode('{"limit": 1, "offset": 1}');
 $response = $sg->client->campaigns()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();

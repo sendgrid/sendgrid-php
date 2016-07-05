@@ -92,6 +92,23 @@ echo $response->body();
 echo $response->headers();
 
 ////////////////////////////////////////////////////
+// Search for suppressions within a group #
+// POST /asm/groups/{group_id}/suppressions/search #
+
+$request_body = json_decode('{
+  "recipient_emails": [
+    "exists1@example.com", 
+    "exists2@example.com", 
+    "doesnotexists@example.com"
+  ]
+}');
+$group_id = "test_url_param";
+$response = $sg->client->asm()->groups()->_($group_id)->suppressions()->search()->post($request_body);
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+
+////////////////////////////////////////////////////
 // Delete a suppression from a suppression group #
 // DELETE /asm/groups/{group_id}/suppressions/{email} #
 

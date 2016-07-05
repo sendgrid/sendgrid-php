@@ -56,7 +56,7 @@ echo $response->headers();
 // Retrieve all bounces #
 // GET /suppression/bounces #
 
-$query_params = json_decode('{"start_time": 0, "end_time": 0}');
+$query_params = json_decode('{"start_time": 1, "end_time": 1}');
 $response = $sg->client->suppression()->bounces()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();

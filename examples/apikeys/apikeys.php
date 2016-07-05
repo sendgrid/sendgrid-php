@@ -12,6 +12,7 @@ $sg = new \SendGrid($apiKey);
 
 $request_body = json_decode('{
   "name": "My API Key", 
+  "sample": "data", 
   "scopes": [
     "mail.send", 
     "alerts.create", 
@@ -27,7 +28,8 @@ echo $response->headers();
 // Retrieve all API Keys belonging to the authenticated user #
 // GET /api_keys #
 
-$response = $sg->client->api_keys()->get();
+$query_params = json_decode('{"limit": 1}');
+$response = $sg->client->api_keys()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
