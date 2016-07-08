@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0.4] - 2016-07-07 ##
+### Added
+- Tests now mocked automatically against [prism](https://stoplight.io/prism/)
+
 ## [5.0.3] - 2016-07-05 ##
 ### Updated
 - Content based on our updated [Swagger/OAI doc](https://github.com/sendgrid/sendgrid-oai)
