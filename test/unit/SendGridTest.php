@@ -13,7 +13,6 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
         if( file_exists( '/usr/local/bin/prism' ) == false ) {
             if(strtoupper(substr(php_uname('s'), 0, 3)) != 'WIN'){
                 try {
-                    print("here");
                     $proc_ls = proc_open("curl https://raw.githubusercontent.com/stoplightio/prism/master/install.sh",
                                         array(
                                             array("pipe","r"), //stdin
@@ -2396,6 +2395,6 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
     {
         $command = 'kill '.self::$pid;
         exec($command);
-        print("Prism shut down");
+        print("\nPrism shut down");
     }
 }
