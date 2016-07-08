@@ -1,5 +1,10 @@
 language: php
 before_script:
+before_script:
+- mkdir prism
+- mkdir prism/bin
+- export PATH=$PATH:$PWD/prism/bin/
+- ./test/prism.sh
 - phpenv local 5.4
 - composer install
 - phpenv local --unset
