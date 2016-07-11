@@ -6,7 +6,7 @@
   "license": "MIT",
   "keywords": ["SendGrid", "sendgrid", "email", "send", "grid"],
   "require": {
-    "php": ">=5.3",
+    "php": ">=5.6",
     "sendgrid/php-http-client": "3.1.0"
   },
   "require-dev": {
