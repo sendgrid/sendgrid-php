@@ -5,19 +5,13 @@ before_script:
 - mkdir prism/bin
 - export PATH=$PATH:$PWD/prism/bin/
 - ./test/prism.sh
-- phpenv local 5.4
 - composer install
-- phpenv local --unset
 - cd test/unit
 script:
-- phpenv local 5.6
 - "../../vendor/bin/phpunit . --bootstrap bootstrap.php --filter test*"
-- phpenv local --unset
 after_script:
 - cd ../..
-- phpenv local 5.4
 - ./scripts/s3upload.sh
-- phpenv local --unset
 php:
 - 5.6
 - 7.0
