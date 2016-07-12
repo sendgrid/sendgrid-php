@@ -14,6 +14,7 @@ $sg = new \SendGrid($apiKey);
 # Table of Contents
 
 * [ACCESS SETTINGS](#access_settings)
+* [ALERTS](#alerts)
 * [API KEYS](#api_keys)
 * [ASM](#asm)
 * [BROWSERS](#browsers)
@@ -29,6 +30,7 @@ $sg = new \SendGrid($apiKey);
 * [MAILBOX PROVIDERS](#mailbox_providers)
 * [PARTNER SETTINGS](#partner_settings)
 * [SCOPES](#scopes)
+* [SENDERS](#senders)
 * [STATS](#stats)
 * [SUBUSERS](#subusers)
 * [SUPPRESSION](#suppression)
@@ -174,6 +176,115 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 ```
+<a name="alerts"></a>
+# ALERTS
+
+## Create a new Alert
+
+**This endpoint allows you to create a new alert.**
+
+Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics.
+* Usage alerts allow you to set the threshold at which an alert will be sent.
+* Stats notifications allow you to set how frequently you would like to receive email statistics reports. For example, "daily", "weekly", or "monthly".
+
+For more information about alerts, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/alerts.html).
+
+### POST /alerts
+
+
+```php
+$request_body = json_decode('{
+  "email_to": "example@example.com",
+  "frequency": "daily",
+  "type": "stats_notification"
+}');
+$response = $sg->client->alerts()->post($request_body);
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+```
+## Retrieve all alerts
+
+**This endpoint allows you to retieve all of your alerts.**
+
+Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics.
+* Usage alerts allow you to set the threshold at which an alert will be sent.
+* Stats notifications allow you to set how frequently you would like to receive email statistics reports. For example, "daily", "weekly", or "monthly".
+
+For more information about alerts, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/alerts.html).
+
+### GET /alerts
+
+
+```php
+$response = $sg->client->alerts()->get();
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+```
+## Update an alert
+
+**This endpoint allows you to update an alert.**
+
+Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics.
+* Usage alerts allow you to set the threshold at which an alert will be sent.
+* Stats notifications allow you to set how frequently you would like to receive email statistics reports. For example, "daily", "weekly", or "monthly".
+
+For more information about alerts, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/alerts.html).
+
+### PATCH /alerts/{alert_id}
+
+
+```php
+$request_body = json_decode('{
+  "email_to": "example@example.com"
+}');
+$alert_id = "test_url_param";
+$response = $sg->client->alerts()->_($alert_id)->patch($request_body);
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+```
+## Retrieve a specific alert
+
+**This endpoint allows you to retrieve a specific alert.**
+
+Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics.
+* Usage alerts allow you to set the threshold at which an alert will be sent.
+* Stats notifications allow you to set how frequently you would like to receive email statistics reports. For example, "daily", "weekly", or "monthly".
+
+For more information about alerts, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/alerts.html).
+
+### GET /alerts/{alert_id}
+
+
+```php
+$alert_id = "test_url_param";
+$response = $sg->client->alerts()->_($alert_id)->get();
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+```
+## Delete an alert
+
+**This endpoint allows you to delete an alert.**
+
+Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics.
+* Usage alerts allow you to set the threshold at which an alert will be sent.
+* Stats notifications allow you to set how frequently you would like to receive email statistics reports. For example, "daily", "weekly", or "monthly".
+
+For more information about alerts, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/alerts.html).
+
+### DELETE /alerts/{alert_id}
+
+
+```php
+$alert_id = "test_url_param";
+$response = $sg->client->alerts()->_($alert_id)->delete();
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+```
 <a name="api_keys"></a>
 # API KEYS
 
@@ -195,6 +306,7 @@ See the [API Key Permissions List](https://sendgrid.com/docs/API_Reference/Web_A
 ```php
 $request_body = json_decode('{
   "name": "My API Key",
+  "sample": "data",
   "scopes": [
     "mail.send",
     "alerts.create",
@@ -216,7 +328,8 @@ The API Keys feature allows customers to be able to generate an API Key credenti
 
 
 ```php
-$response = $sg->client->api_keys()->get();
+$query_params = json_decode('{"limit": 1}');
+$response = $sg->client->api_keys()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
@@ -348,6 +461,10 @@ echo $response->headers();
 
 This endpoint will return information for each group ID that you include in your request. To add a group ID to your request, simply append `&id=` followed by the group ID.
 
+Suppressions are a list of email addresses that will not receive content sent under a given [group](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html).
+
+Suppression groups, or [unsubscribe groups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html), allow you to label a category of content that you regularly send. This gives your recipients the ability to opt out of a specific set of your email. For example, you might define a group for your transactional email, and one for your marketing email so that your users can continue recieving your transactional email witout having to receive your marketing content.
+
 ### GET /asm/groups
 
 
@@ -465,6 +582,31 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 ```
+## Search for suppressions within a group
+
+**This endpoint allows you to search a suppression group for multiple suppressions.**
+
+When given a list of email addresses and a group ID, this endpoint will return only the email addresses that have been unsubscribed from the given group.
+
+Suppressions are a list of email addresses that will not receive content sent under a given [group](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html).
+
+### POST /asm/groups/{group_id}/suppressions/search
+
+
+```php
+$request_body = json_decode('{
+  "recipient_emails": [
+    "exists1@example.com",
+    "exists2@example.com",
+    "doesnotexists@example.com"
+  ]
+}');
+$group_id = "test_url_param";
+$response = $sg->client->asm()->groups()->_($group_id)->suppressions()->search()->post($request_body);
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+```
 ## Delete a suppression from a suppression group
 
 **This endpoint allows you to remove a suppressed email address from the given suppression group.**
@@ -486,7 +628,7 @@ echo $response->headers();
 
 **This endpoint allows you to retrieve a list of all suppressions.**
 
-Suppressions are email addresses that can be added to [groups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html) to prevent certain types of emails from being delivered to those addresses.
+Suppressions are a list of email addresses that will not receive content sent under a given [group](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html).
 
 ### GET /asm/suppressions
 
@@ -554,9 +696,9 @@ echo $response->headers();
 ```
 ## Retrieve all suppression groups for an email address
 
-**This endpoint will return a list of all suppression groups, indicating if the given email address is suppressed for each group.**
+**This endpoint returns the list of all groups that the given email address has been unsubscribed from.**
 
-Suppressions are email addresses that can be added to [groups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html) to prevent certain types of emails from being delivered to those addresses.
+Suppressions are a list of email addresses that will not receive content sent under a given [group](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html).
 
 ### GET /asm/suppressions/{email}
 
@@ -649,7 +791,7 @@ For more information:
 
 
 ```php
-$query_params = json_decode('{"limit": 0, "offset": 0}');
+$query_params = json_decode('{"limit": 1, "offset": 1}');
 $response = $sg->client->campaigns()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
@@ -1084,7 +1226,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 $request_body = json_decode('{
   "name": "newlistname"
 }');
-$query_params = json_decode('{"list_id": 0}');
+$query_params = json_decode('{"list_id": 1}');
 $list_id = "test_url_param";
 $response = $sg->client->contactdb()->lists()->_($list_id)->patch($request_body, $query_params);
 echo $response->statusCode();
@@ -1101,7 +1243,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 
 
 ```php
-$query_params = json_decode('{"list_id": 0}');
+$query_params = json_decode('{"list_id": 1}');
 $list_id = "test_url_param";
 $response = $sg->client->contactdb()->lists()->_($list_id)->get(null, $query_params);
 echo $response->statusCode();
@@ -1157,7 +1299,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 
 
 ```php
-$query_params = json_decode('{"page": 1, "page_size": 1, "list_id": 0}');
+$query_params = json_decode('{"page": 1, "page_size": 1, "list_id": 1}');
 $list_id = "test_url_param";
 $response = $sg->client->contactdb()->lists()->_($list_id)->recipients()->get(null, $query_params);
 echo $response->statusCode();
@@ -1191,7 +1333,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 
 
 ```php
-$query_params = json_decode('{"recipient_id": 0, "list_id": 0}');
+$query_params = json_decode('{"recipient_id": 1, "list_id": 1}');
 $list_id = "test_url_param";
 $recipient_id = "test_url_param";
 $response = $sg->client->contactdb()->lists()->_($list_id)->recipients()->_($recipient_id)->delete(null, $query_params);
@@ -1537,7 +1679,7 @@ For more information about segments in Marketing Campaigns, please see our [User
 
 
 ```php
-$query_params = json_decode('{"segment_id": 0}');
+$query_params = json_decode('{"segment_id": 1}');
 $segment_id = "test_url_param";
 $response = $sg->client->contactdb()->segments()->_($segment_id)->get(null, $query_params);
 echo $response->statusCode();
@@ -2055,13 +2197,8 @@ $request_body = json_decode('{
       "send_at": 1409348513,
       "subject": "Hello, World!",
       "substitutions": {
-        "sub": {
-          "%name%": [
-            "John",
-            "Jane",
-            "Sam"
-          ]
-        }
+        "id": "substitutions",
+        "type": "object"
       },
       "to": [
         {
@@ -2581,6 +2718,141 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 ```
+<a name="senders"></a>
+# SENDERS
+
+## Create a Sender Identity
+
+**This endpoint allows you to create a new sender identity.**
+
+*You may create up to 100 unique sender identities.*
+
+Sender Identities are required to be verified before use. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+
+### POST /senders
+
+
+```php
+$request_body = json_decode('{
+  "address": "123 Elm St.",
+  "address_2": "Apt. 456",
+  "city": "Denver",
+  "country": "United States",
+  "from": {
+    "email": "from@example.com",
+    "name": "Example INC"
+  },
+  "nickname": "My Sender ID",
+  "reply_to": {
+    "email": "replyto@example.com",
+    "name": "Example INC"
+  },
+  "state": "Colorado",
+  "zip": "80202"
+}');
+$response = $sg->client->senders()->post($request_body);
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+```
+## Get all Sender Identities
+
+**This endpoint allows you to retrieve a list of all sender identities that have been created for your account.**
+
+Sender Identities are required to be verified before use. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+
+### GET /senders
+
+
+```php
+$response = $sg->client->senders()->get();
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+```
+## Update a Sender Identity
+
+**This endpoint allows you to update a sender identity.**
+
+Updates to `from.email` require re-verification. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+
+Partial updates are allowed, but fields that are marked as "required" in the POST (create) endpoint must not be nil if that field is included in the PATCH request.
+
+### PATCH /senders/{sender_id}
+
+
+```php
+$request_body = json_decode('{
+  "address": "123 Elm St.",
+  "address_2": "Apt. 456",
+  "city": "Denver",
+  "country": "United States",
+  "from": {
+    "email": "from@example.com",
+    "name": "Example INC"
+  },
+  "nickname": "My Sender ID",
+  "reply_to": {
+    "email": "replyto@example.com",
+    "name": "Example INC"
+  },
+  "state": "Colorado",
+  "zip": "80202"
+}');
+$sender_id = "test_url_param";
+$response = $sg->client->senders()->_($sender_id)->patch($request_body);
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+```
+## View a Sender Identity
+
+**This endpoint allows you to retrieve a specific sender identity.**
+
+Sender Identities are required to be verified before use. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+
+### GET /senders/{sender_id}
+
+
+```php
+$sender_id = "test_url_param";
+$response = $sg->client->senders()->_($sender_id)->get();
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+```
+## Delete a Sender Identity
+
+**This endoint allows you to delete one of your sender identities.**
+
+Sender Identities are required to be verified before use. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+
+### DELETE /senders/{sender_id}
+
+
+```php
+$sender_id = "test_url_param";
+$response = $sg->client->senders()->_($sender_id)->delete();
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+```
+## Resend Sender Identity Verification
+
+**This enpdoint allows you to resend a sender identity verification email.**
+
+Sender Identities are required to be verified before use. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+
+### POST /senders/{sender_id}/resend_verification
+
+
+```php
+$sender_id = "test_url_param";
+$response = $sg->client->senders()->_($sender_id)->resend_verification()->post();
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+```
 <a name="stats"></a>
 # STATS
 
@@ -2643,7 +2915,7 @@ For more information about Subusers:
 
 
 ```php
-$query_params = json_decode('{"username": "test_string", "limit": 0, "offset": 0}');
+$query_params = json_decode('{"username": "test_string", "limit": 1, "offset": 1}');
 $response = $sg->client->subusers()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
@@ -2867,7 +3139,7 @@ For more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/
 
 
 ```php
-$query_params = json_decode('{"date": "test_string", "sort_by_direction": "asc", "limit": 0, "sort_by_metric": "test_string", "offset": 1}');
+$query_params = json_decode('{"date": "test_string", "sort_by_direction": "asc", "limit": 1, "sort_by_metric": "test_string", "offset": 1}');
 $subuser_name = "test_url_param";
 $response = $sg->client->subusers()->_($subuser_name)->stats()->monthly()->get(null, $query_params);
 echo $response->statusCode();
@@ -2975,7 +3247,7 @@ For more information see:
 
 
 ```php
-$query_params = json_decode('{"start_time": 0, "end_time": 0}');
+$query_params = json_decode('{"start_time": 1, "end_time": 1}');
 $response = $sg->client->suppression()->bounces()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
@@ -4062,17 +4334,91 @@ echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
 ```
-## Retrieve Parse Webhook settings
+## Create a parse setting
 
-**This endpoint allows you to retrieve your current inbound parse webhook settings.**
+**This endpoint allows you to create a new inbound parse setting.**
 
-SendGrid can parse the attachments and contents of incoming emails. The Parse API will POST the parsed email to a URL that you specify. For more information, see our Inbound [Parse Webhook documentation](https://sendgrid.com/docs/API_Reference/Webhooks/parse.html).
+The inbound parse webhook allows you to have incoming emails parsed, extracting some or all of the content, and then have that content POSTed by SendGrid to a URL of your choosing. For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Webhooks/parse.html).
+
+### POST /user/webhooks/parse/settings
+
+
+```php
+$request_body = json_decode('{
+  "hostname": "myhostname.com",
+  "send_raw": false,
+  "spam_check": true,
+  "url": "http://email.myhosthame.com"
+}');
+$response = $sg->client->user()->webhooks()->parse()->settings()->post($request_body);
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+```
+## Retrieve all parse settings
+
+**This endpoint allows you to retrieve all of your current inbound parse settings.**
+
+The inbound parse webhook allows you to have incoming emails parsed, extracting some or all of the contnet, and then have that content POSTed by SendGrid to a URL of your choosing. For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Webhooks/parse.html).
 
 ### GET /user/webhooks/parse/settings
 
 
 ```php
 $response = $sg->client->user()->webhooks()->parse()->settings()->get();
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+```
+## Update a parse setting
+
+**This endpoint allows you to update a specific inbound parse setting.**
+
+The inbound parse webhook allows you to have incoming emails parsed, extracting some or all of the contnet, and then have that content POSTed by SendGrid to a URL of your choosing. For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Webhooks/parse.html).
+
+### PATCH /user/webhooks/parse/settings/{hostname}
+
+
+```php
+$request_body = json_decode('{
+  "send_raw": true,
+  "spam_check": false,
+  "url": "http://newdomain.com/parse"
+}');
+$hostname = "test_url_param";
+$response = $sg->client->user()->webhooks()->parse()->settings()->_($hostname)->patch($request_body);
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+```
+## Retrieve a specific parse setting
+
+**This endpoint allows you to retrieve a specific inbound parse setting.**
+
+The inbound parse webhook allows you to have incoming emails parsed, extracting some or all of the contnet, and then have that content POSTed by SendGrid to a URL of your choosing. For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Webhooks/parse.html).
+
+### GET /user/webhooks/parse/settings/{hostname}
+
+
+```php
+$hostname = "test_url_param";
+$response = $sg->client->user()->webhooks()->parse()->settings()->_($hostname)->get();
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+```
+## Delete a parse setting
+
+**This endpoint allows you to delete a specific inbound parse setting.**
+
+The inbound parse webhook allows you to have incoming emails parsed, extracting some or all of the contnet, and then have that content POSTed by SendGrid to a URL of your choosing. For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Webhooks/parse.html).
+
+### DELETE /user/webhooks/parse/settings/{hostname}
+
+
+```php
+$hostname = "test_url_param";
+$response = $sg->client->user()->webhooks()->parse()->settings()->_($hostname)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();

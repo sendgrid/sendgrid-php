@@ -252,7 +252,7 @@ echo $response->headers();
 // Retrieve recipients matching search criteria #
 // GET /contactdb/recipients/search #
 
-$query_params = json_decode('{"%7Bfield_name%7D": "test_string", "{field_name}": "test_string"}');
+$query_params = json_decode('{"{field_name}": "test_string"}');
 $response = $sg->client->contactdb()->recipients()->search()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();

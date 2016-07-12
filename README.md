@@ -44,7 +44,7 @@ Add SendGrid to your `composer.json` file. If you are not using [Composer](http:
 ```json
 {
   "require": {
-    "sendgrid/sendgrid": "~5.0.4"
+    "sendgrid/sendgrid": "~5.0.5"
   }
 }
 ```

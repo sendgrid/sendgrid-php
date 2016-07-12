@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0.5] - 2016-07-12 ##
+### Added
+- Update docs, unit tests and examples to include Sender ID
+
 ## [5.0.4] - 2016-07-07 ##
 ### Added
 - Tests now mocked automatically against [prism](https://stoplight.io/prism/)
