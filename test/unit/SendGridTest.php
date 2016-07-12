@@ -59,7 +59,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
 
     public function testVersion()
     {
-        $this->assertEquals(SendGrid::VERSION, '5.0.4');
+        $this->assertEquals(SendGrid::VERSION, '5.0.5');
         $this->assertEquals(json_decode(file_get_contents(__DIR__ . '/../../composer.json'))->version, SendGrid::VERSION);
     }
 
@@ -775,7 +775,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
 
     public function test_contactdb_recipients_search_get()
     {
-        $query_params = json_decode('{"%7Bfield_name%7D": "test_string", "{field_name}": "test_string"}');
+        $query_params = json_decode('{"{field_name}": "test_string"}');
         $request_headers = array("X-Mock: 200");
         $response = self::$sg->client->contactdb()->recipients()->search()->get(null, $query_params, $request_headers);
         $this->assertEquals($response->statusCode(), 200);
@@ -1409,6 +1409,86 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
         $request_headers = array("X-Mock: 200");
         $response = self::$sg->client->scopes()->get(null, null, $request_headers);
         $this->assertEquals($response->statusCode(), 200);
+    }
+
+    public function test_senders_post()
+    {
+        $request_body = json_decode('{
+  "address": "123 Elm St.",
+  "address_2": "Apt. 456",
+  "city": "Denver",
+  "country": "United States",
+  "from": {
+    "email": "from@example.com",
+    "name": "Example INC"
+  },
+  "nickname": "My Sender ID",
+  "reply_to": {
+    "email": "replyto@example.com",
+    "name": "Example INC"
+  },
+  "state": "Colorado",
+  "zip": "80202"
+}');
+        $request_headers = array("X-Mock: 201");
+        $response = self::$sg->client->senders()->post($request_body, null, $request_headers);
+        $this->assertEquals($response->statusCode(), 201);
+    }
+
+    public function test_senders_get()
+    {
+        $request_headers = array("X-Mock: 200");
+        $response = self::$sg->client->senders()->get(null, null, $request_headers);
+        $this->assertEquals($response->statusCode(), 200);
+    }
+
+    public function test_senders__sender_id__patch()
+    {
+        $request_body = json_decode('{
+  "address": "123 Elm St.",
+  "address_2": "Apt. 456",
+  "city": "Denver",
+  "country": "United States",
+  "from": {
+    "email": "from@example.com",
+    "name": "Example INC"
+  },
+  "nickname": "My Sender ID",
+  "reply_to": {
+    "email": "replyto@example.com",
+    "name": "Example INC"
+  },
+  "state": "Colorado",
+  "zip": "80202"
+}');
+        $sender_id = "test_url_param";
+        $request_headers = array("X-Mock: 200");
+        $response = self::$sg->client->senders()->_($sender_id)->patch($request_body, null, $request_headers);
+        $this->assertEquals($response->statusCode(), 200);
+    }
+
+    public function test_senders__sender_id__get()
+    {
+        $sender_id = "test_url_param";
+        $request_headers = array("X-Mock: 200");
+        $response = self::$sg->client->senders()->_($sender_id)->get(null, null, $request_headers);
+        $this->assertEquals($response->statusCode(), 200);
+    }
+
+    public function test_senders__sender_id__delete()
+    {
+        $sender_id = "test_url_param";
+        $request_headers = array("X-Mock: 204");
+        $response = self::$sg->client->senders()->_($sender_id)->delete(null, null, $request_headers);
+        $this->assertEquals($response->statusCode(), 204);
+    }
+
+    public function test_senders__sender_id__resend_verification_post()
+    {
+        $sender_id = "test_url_param";
+        $request_headers = array("X-Mock: 204");
+        $response = self::$sg->client->senders()->_($sender_id)->resend_verification()->post(null, null, $request_headers);
+        $this->assertEquals($response->statusCode(), 204);
     }
 
     public function test_stats_get()
