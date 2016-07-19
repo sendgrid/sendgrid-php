@@ -25,11 +25,14 @@ All updates to this library is documented in our [CHANGELOG](https://github.com/
 
 # Installation
 
+## Prerequisites
+
+- PHP version 5.6 or 7.0
+- The SendGrid service, starting at the [free level](https://sendgrid.com/free?source=sendgrid-php)
+
 ## Setup Environment Variables
 
-First, get your free SendGrid account [here](https://sendgrid.com/free?source=sendgrid-php).
-
-Next, update your environment with your [SENDGRID_API_KEY](https://app.sendgrid.com/settings/api_keys).
+Update your environment with your [SENDGRID_API_KEY](https://app.sendgrid.com/settings/api_keys).
 
 ```bash
 echo "export SENDGRID_API_KEY='YOUR_API_KEY'" > sendgrid.env

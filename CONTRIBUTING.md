@@ -64,8 +64,7 @@ We welcome direct contributions to the sendgrid-php code base. Thank you!
 
 ##### Prerequisites #####
 
-- PHP 5.6 or greater
-- [php-http-client](https://github.com/sendgrid/php-http-client)
+- PHP 5.6 or 7.0
 
 ##### Initial setup: #####
 
