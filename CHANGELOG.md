@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0.6] - 2016-07-20 ##
+### Added
+- README updates
+- Update introduction blurb to include information regarding our forward path
+- Update the v3 /mail/send example to include non-helper usage
+- Update the generic v3 example to include non-fluent interface usage
+
 ## [5.0.5] - 2016-07-12 ##
 ### Added
 - Update docs, unit tests and examples to include Sender ID
