@@ -134,7 +134,7 @@ print $response->body();
 
 ## Roadmap
 
-If you are intersted in the future direction of this project, please take a look at our [milestones](https://github.com/sendgrid/sendgrid-php/milestones). We would love to hear your feedback.
+If you are interested in the future direction of this project, please take a look at our [milestones](https://github.com/sendgrid/sendgrid-php/milestones). We would love to hear your feedback.
 
 ## How to Contribute
 
