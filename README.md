@@ -1,27 +1,14 @@
 [![BuildStatus](https://travis-ci.org/sendgrid/sendgrid-php.svg?branch=master)](https://travis-ci.org/sendgrid/sendgrid-php)
 
-**This library allows you to quickly and easily use the SendGrid Web API via PHP.**
+**This library allows you to quickly and easily use the SendGrid Web API v3 via PHP.**
 
-# Announcements
+Version 3.X.X of this library provides full support for all SendGrid [Web API v3](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html) endpoints, including the new [v3 /mail/send](https://sendgrid.com/blog/introducing-v3mailsend-sendgrids-new-mail-endpoint).
 
-**BREAKING CHANGE as of 2016.06.14**
+This library represents the beginning of a new path for SendGrid. We want this library to be community driven and SendGrid led. We need your help to realize this goal. To help make sure we are building the right things in the right order, we ask that you create [issues](https://github.com/sendgrid/sendgrid-php/issues) and [pull requests](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md) or simply upvote or comment on existing issues or pull requests.
 
-Version `5.X.X` is a breaking change for the entire library.
+Please browse the rest of this README for further detail.
 
-Version 5.X.X brings you full support for all Web API v3 endpoints. We
-have the following resources to get you started quickly:
-
--   [SendGrid
-    Documentation](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html)
--   [Usage
-    Documentation](https://github.com/sendgrid/sendgrid-php/tree/master/USAGE.md)
--   [Example
-    Code](https://github.com/sendgrid/sendgrid-php/tree/master/examples)
--   [Migration from v2 to v3](https://sendgrid.com/docs/Classroom/Send/v3_Mail_Send/how_to_migrate_from_v2_to_v3_mail_send.html)
-
-Thank you for your continued support!
-
-All updates to this library is documented in our [CHANGELOG](https://github.com/sendgrid/sendgrid-php/blob/master/CHANGELOG.md).
+We appreciate your continued support, thank you!
 
 # Installation
 
@@ -32,7 +19,7 @@ All updates to this library is documented in our [CHANGELOG](https://github.com/
 
 ## Setup Environment Variables
 
-Update your environment with your [SENDGRID_API_KEY](https://app.sendgrid.com/settings/api_keys).
+Update the development environment with your [SENDGRID_API_KEY](https://app.sendgrid.com/settings/api_keys), for example:
 
 ```bash
 echo "export SENDGRID_API_KEY='YOUR_API_KEY'" > sendgrid.env
@@ -81,6 +68,8 @@ Previous versions of the library can be found in the [version index](https://sen
 
 ## Hello Email
 
+The following is the minimum needed code to send an email with the [/mail/send Helper](https://github.com/sendgrid/sendgrid-php/tree/master/lib/helpers/mail) ([here](https://github.com/sendgrid/sendgrid-php/blob/master/examples/helpers/mail/example.php#L22) is a full example):
+
 ```php
 <?php
 // If you are using Composer
@@ -90,9 +79,9 @@ require 'vendor/autoload.php';
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
 $from = new SendGrid\Email(null, "test@example.com");
-$subject = "Hello World from the SendGrid PHP Library";
+$subject = "Hello World from the SendGrid PHP Library!";
 $to = new SendGrid\Email(null, "test@example.com");
-$content = new SendGrid\Content("text/plain", "some text here");
+$content = new SendGrid\Content("text/plain", "Hello, Email!");
 $mail = new SendGrid\Mail($from, $subject, $to, $content);
 
 $apiKey = getenv('SENDGRID_API_KEY');
@@ -104,7 +93,41 @@ echo $response->headers();
 echo $response->body();
 ```
 
-## General v3 Web API Usage
+The `SendGrid\Mail` constructor creates a [personalization object](https://sendgrid.com/docs/Classroom/Send/v3_Mail_Send/personalizations.html) for you. [Here](https://github.com/sendgrid/sendgrid-php/blob/master/examples/helpers/mail/example.php#L16) is an example of how to add to it.
+
+### Without Mail Helper Class
+
+The following is the minimum needed code to send an email without the /mail/send Helper ([here](https://github.com/sendgrid/sendgrid-php/blob/master/examples/mail/mail.php#L28) is a full example):
+
+```php
+$request_body = json_decode('{
+  "personalizations": [
+    {
+      "to": [
+        {
+          "email": "test@example.com"
+        }
+      ],
+      "subject": "Hello World from the SendGrid PHP Library!"
+    }
+  ],
+  "from": {
+    "email": "test@example.com"
+  },
+  "content": [
+    {
+      "type": "text/plain",
+      "value": "Hello, Email!"
+    }
+  ]
+}');
+$response = $sg->client->mail()->send()->post($request_body);
+echo $response->statusCode();
+echo $response->body();
+echo $response->headers();
+```
+
+## General v3 Web API Usage (With Fluent Interface)
 
 ```php
 <?php
@@ -117,7 +140,27 @@ require 'vendor/autoload.php';
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
 
-$response = $sg->client->api_keys()->get();
+$response = $sg->client->suppressions()->bounces()->get();
+
+print $response->statusCode();
+print $response->headers();
+print $response->body();
+```
+
+## General v3 Web API Usage (Without Fluent Interface)
+
+```php
+<?php
+// If you are using Composer (recommended)
+require 'vendor/autoload.php';
+
+// If you are not using Composer
+// require("path/to/sendgrid-php/sendgrid-php.php");
+
+$apiKey = getenv('SENDGRID_API_KEY');
+$sg = new \SendGrid($apiKey);
+
+$response = $sg->client->_("suppression/bounces")->get();
 
 print $response->statusCode();
 print $response->headers();
@@ -127,18 +170,23 @@ print $response->body();
 # Usage
 
 - [SendGrid Docs](https://sendgrid.com/docs/API_Reference/index.html)
-- [Usage
+- [Library Usage
     Documentation](https://github.com/sendgrid/sendgrid-php/tree/master/USAGE.md)
 - [Example Code](https://github.com/sendgrid/sendgrid-php/tree/master/examples)
+- [How-to: Migration from v2 to v3](https://sendgrid.com/docs/Classroom/Send/v3_Mail_Send/how_to_migrate_from_v2_to_v3_mail_send.html)
 - [v3 Web API Mail Send Helper](https://github.com/sendgrid/sendgrid-php/tree/master/lib/helpers/mail/README.md) - build a request object payload for a v3 /mail/send API call.
 
-## Roadmap
+# Announcements
 
-If you are intersted in the future direction of this project, please take a look at our [milestones](https://github.com/sendgrid/sendgrid-php/milestones). We would love to hear your feedback.
+All updates to this library is documented in our [CHANGELOG](https://github.com/sendgrid/sendgrid-php/blob/master/CHANGELOG.md) and [releases](https://github.com/sendgrid/sendgrid-php/releases)
 
-## How to Contribute
+# Roadmap
 
-We encourage contribution to our libraries, please see our [CONTRIBUTING](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md) guide for details.
+If you are interested in the future direction of this project, please take a look at our open [issues](https://github.com/sendgrid/sendgrid-php/issues) and [pull requests](https://github.com/sendgrid/sendgrid-php/pulls). We would love to hear your feedback.
+
+# How to Contribute
+
+We encourage contribution to our libraries (you might even score some nifty swag), please see our [CONTRIBUTING](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md) guide for details.
 
 Quick links:
 
