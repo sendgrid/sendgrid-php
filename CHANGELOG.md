@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0.7] - 2016-07-25 ##
+### Added
+- [Troubleshooting](https://github.com/sendgrid/sendgrid-php/blob/master/TROUBLESHOOTING.md) section
+
 ## [5.0.6] - 2016-07-20 ##
 ### Added
 - README updates
