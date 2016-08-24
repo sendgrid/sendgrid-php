@@ -10,6 +10,19 @@ Please browse the rest of this README for further detail.
 
 We appreciate your continued support, thank you!
 
+# Table of Contents
+
+* [Installation](#installation)
+* [Quick Start](#quick_start)
+* [Usage](#usage)
+* [Use Cases](#use_cases)
+* [Announcements](#announcements)
+* [Roadmap](#roadmap)
+* [How to Contribute](#contribute)
+* [Troubleshooting](#troubleshooting)
+* [About](#about)
+
+<a name="installation"></a>
 # Installation
 
 ## Prerequisites
@@ -64,6 +77,7 @@ Previous versions of the library can be found in the [version index](https://sen
 - The SendGrid Service, starting at the [free level](https://sendgrid.com/free?source=sendgrid-php)
 - [php-HTTP-Client](https://github.com/sendgrid/php-http-client)
 
+<a name="quick_start"></a>
 # Quick Start
 
 ## Hello Email
@@ -100,6 +114,13 @@ The `SendGrid\Mail` constructor creates a [personalization object](https://sendg
 The following is the minimum needed code to send an email without the /mail/send Helper ([here](https://github.com/sendgrid/sendgrid-php/blob/master/examples/mail/mail.php#L28) is a full example):
 
 ```php
+<?php
+// If you are using Composer
+require 'vendor/autoload.php';
+
+// If you are not using Composer (recommended)
+// require("path/to/sendgrid-php/sendgrid-php.php");
+
 $request_body = json_decode('{
   "personalizations": [
     {
@@ -121,6 +142,10 @@ $request_body = json_decode('{
     }
   ]
 }');
+
+$apiKey = getenv('SENDGRID_API_KEY');
+$sg = new \SendGrid($apiKey);
+
 $response = $sg->client->mail()->send()->post($request_body);
 echo $response->statusCode();
 echo $response->body();
@@ -167,6 +192,7 @@ print $response->headers();
 print $response->body();
 ```
 
+<a name="usage"></a>
 # Usage
 
 - [SendGrid Docs](https://sendgrid.com/docs/API_Reference/index.html)
@@ -176,14 +202,22 @@ print $response->body();
 - [How-to: Migration from v2 to v3](https://sendgrid.com/docs/Classroom/Send/v3_Mail_Send/how_to_migrate_from_v2_to_v3_mail_send.html)
 - [v3 Web API Mail Send Helper](https://github.com/sendgrid/sendgrid-php/tree/master/lib/helpers/mail/README.md) - build a request object payload for a v3 /mail/send API call.
 
+<a name="use_cases">
+# Use Cases
+
+[Examples of common API use cases](https://github.com/sendgrid/sendgrid-php/blob/master/USE_CASES.md), such as how to send an email with a transactional template.
+
+<a name="announcements"></a>
 # Announcements
 
 All updates to this library is documented in our [CHANGELOG](https://github.com/sendgrid/sendgrid-php/blob/master/CHANGELOG.md) and [releases](https://github.com/sendgrid/sendgrid-php/releases)
 
+<a name="roadmap"></a>
 # Roadmap
 
 If you are interested in the future direction of this project, please take a look at our open [issues](https://github.com/sendgrid/sendgrid-php/issues) and [pull requests](https://github.com/sendgrid/sendgrid-php/pulls). We would love to hear your feedback.
 
+<a name="contribute"></a>
 # How to Contribute
 
 We encourage contribution to our libraries (you might even score some nifty swag), please see our [CONTRIBUTING](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md) guide for details.
@@ -195,10 +229,12 @@ Quick links:
 - [Sign the CLA to Create a Pull Request](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#cla)
 - [Improvements to the Codebase](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#improvements_to_the_codebase)
 
+<a name="troubleshooting"></a>
 # Troubleshooting
 
 Please see our [troubleshooting guide](https://github.com/sendgrid/sendgrid-php/blob/master/TROUBLESHOOTING.md) for common library issues.
 
+<a name="about"></a>
 # About
 
 sendgrid-php is guided and supported by the SendGrid [Developer Experience Team](mailto:dx@sendgrid.com).
