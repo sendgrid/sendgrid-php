@@ -25,6 +25,7 @@ class ReplyTo implements \jsonSerializable
     public function setEmail($email)
     {
         $this->email = $email;
+        return $this;
     }
 
     public function getEmail()
@@ -51,6 +52,7 @@ class ClickTracking implements \jsonSerializable
     public function setEnable($enable)
     {
         $this->enable = $enable;
+        return $this;
     }
 
     public function getEnable()
@@ -61,6 +63,7 @@ class ClickTracking implements \jsonSerializable
     public function setEnableText($enable_text)
     {
         $this->enable_text = $enable_text;
+        return $this;
     }
 
     public function getEnableText()
@@ -88,6 +91,7 @@ class OpenTracking implements \jsonSerializable
     public function setEnable($enable)
     {
         $this->enable = $enable;
+        return $this;
     }
 
     public function getEnable()
@@ -98,6 +102,7 @@ class OpenTracking implements \jsonSerializable
     public function setSubstitutionTag($substitution_tag)
     {
         $this->substitution_tag = $substitution_tag;
+        return $this;
     }
 
     public function getSubstitutionTag()
@@ -127,6 +132,7 @@ class SubscriptionTracking implements \jsonSerializable
     public function setEnable($enable)
     {
         $this->enable = $enable;
+        return $this;
     }
 
     public function getEnable()
@@ -137,6 +143,7 @@ class SubscriptionTracking implements \jsonSerializable
     public function setText($text)
     {
         $this->text = $text;
+        return $this;
     }
 
     public function getText()
@@ -147,6 +154,7 @@ class SubscriptionTracking implements \jsonSerializable
     public function setHtml($html)
     {
         $this->html = $html;
+        return $this;
     }
 
     public function getHtml()
@@ -157,6 +165,7 @@ class SubscriptionTracking implements \jsonSerializable
     public function setSubstitutionTag($substitution_tag)
     {
         $this->substitution_tag = $substitution_tag;
+        return $this;
     }
 
     public function getSubstitutionTag()
@@ -190,6 +199,7 @@ class Ganalytics implements \jsonSerializable
     public function setEnable($enable)
     {
         $this->enable = $enable;
+        return $this;
     }
 
     public function getEnable()
@@ -200,6 +210,7 @@ class Ganalytics implements \jsonSerializable
     public function setCampaignSource($utm_source)
     {
         $this->utm_source = $utm_source;
+        return $this;
     }
 
     public function getCampaignSource()
@@ -210,6 +221,7 @@ class Ganalytics implements \jsonSerializable
     public function setCampaignMedium($utm_medium)
     {
         $this->utm_medium = $utm_medium;
+        return $this;
     }
 
     public function getCampaignMedium()
@@ -220,6 +232,7 @@ class Ganalytics implements \jsonSerializable
     public function setCampaignTerm($utm_term)
     {
         $this->utm_term = $utm_term;
+        return $this;
     }
 
     public function getCampaignTerm()
@@ -230,6 +243,7 @@ class Ganalytics implements \jsonSerializable
     public function setCampaignContent($utm_content)
     {
         $this->utm_content = $utm_content;
+        return $this;
     }
 
     public function getCampaignContent()
@@ -240,6 +254,7 @@ class Ganalytics implements \jsonSerializable
     public function setCampaignName($utm_campaign)
     {
         $this->utm_campaign = $utm_campaign;
+        return $this;
     }
 
     public function getCampaignName()
@@ -273,6 +288,7 @@ class TrackingSettings implements \jsonSerializable
     public function setClickTracking($click_tracking)
     {
         $this->click_tracking = $click_tracking;
+        return $this;
     }
 
     public function getClickTracking()
@@ -283,6 +299,7 @@ class TrackingSettings implements \jsonSerializable
     public function setOpenTracking($open_tracking)
     {
         $this->open_tracking = $open_tracking;
+        return $this;
     }
 
     public function getOpenTracking()
@@ -293,6 +310,7 @@ class TrackingSettings implements \jsonSerializable
     public function setSubscriptionTracking($subscription_tracking)
     {
         $this->subscription_tracking = $subscription_tracking;
+        return $this;
     }
 
     public function getSubscriptionTracking()
@@ -303,6 +321,7 @@ class TrackingSettings implements \jsonSerializable
     public function setGanalytics($ganalytics)
     {
         $this->ganalytics = $ganalytics;
+        return $this;
     }
 
     public function getGanalytics()
@@ -332,6 +351,7 @@ class BccSettings implements \jsonSerializable
     public function setEnable($enable)
     {
         $this->enable = $enable;
+        return $this;
     }
 
     public function getEnable()
@@ -342,6 +362,7 @@ class BccSettings implements \jsonSerializable
     public function setEmail($email)
     {
         $this->email = $email;
+        return $this;
     }
 
     public function getEmail()
@@ -368,6 +389,7 @@ class BypassListManagement implements \jsonSerializable
     public function setEnable($enable)
     {
         $this->enable = $enable;
+        return $this;
     }
 
     public function getEnable()
@@ -395,6 +417,7 @@ class Footer implements \jsonSerializable
     public function setEnable($enable)
     {
         $this->enable = $enable;
+        return $this;
     }
 
     public function getEnable()
@@ -405,6 +428,7 @@ class Footer implements \jsonSerializable
     public function setText($text)
     {
         $this->text = $text;
+        return $this;
     }
 
     public function getText()
@@ -415,6 +439,7 @@ class Footer implements \jsonSerializable
     public function setHtml($html)
     {
         $this->html = $html;
+        return $this;
     }
 
     public function getHtml()
@@ -442,6 +467,7 @@ class SandBoxMode implements \jsonSerializable
     public function setEnable($enable)
     {
         $this->enable = $enable;
+        return $this;
     }
 
     public function getEnable()
@@ -468,6 +494,7 @@ class SpamCheck implements \jsonSerializable
     public function setEnable($enable)
     {
         $this->enable = $enable;
+        return $this;
     }
 
     public function getEnable()
@@ -478,6 +505,7 @@ class SpamCheck implements \jsonSerializable
     public function setThreshold($threshold)
     {
         $this->threshold = $threshold;
+        return $this;
     }
 
     public function getThreshold()
@@ -488,6 +516,7 @@ class SpamCheck implements \jsonSerializable
     public function setPostToUrl($post_to_url)
     {
         $this->post_to_url = $post_to_url;
+        return $this;
     }
 
     public function getPostToUrl()
@@ -519,6 +548,7 @@ class MailSettings implements \jsonSerializable
     public function setBccSettings($bcc)
     {
         $this->bcc = $bcc;
+        return $this;
     }
 
     public function getBccSettings()
@@ -529,6 +559,7 @@ class MailSettings implements \jsonSerializable
     public function setBypassListManagement($bypass_list_management)
     {
         $this->bypass_list_management = $bypass_list_management;
+        return $this;
     }
 
     public function getBypassListManagement()
@@ -539,6 +570,7 @@ class MailSettings implements \jsonSerializable
     public function setFooter($footer)
     {
         $this->footer = $footer;
+        return $this;
     }
 
     public function getFooter()
@@ -549,6 +581,7 @@ class MailSettings implements \jsonSerializable
     public function setSandboxMode($sandbox_mode)
     {
         $this->sandbox_mode = $sandbox_mode;
+        return $this;
     }
 
     public function getSandboxMode()
@@ -559,6 +592,7 @@ class MailSettings implements \jsonSerializable
     public function setSpamCheck($spam_check)
     {
         $this->spam_check = $spam_check;
+        return $this;
     }
 
     public function getSpamCheck()
@@ -589,6 +623,7 @@ class ASM implements \jsonSerializable
     public function setGroupId($group_id)
     {
         $this->group_id = $group_id;
+        return $this;
     }
 
     public function getGroupId()
@@ -599,6 +634,7 @@ class ASM implements \jsonSerializable
     public function setGroupsToDisplay($group_ids)
     {
         $this->groups_to_display = $group_ids;
+        return $this;
     }
 
     public function getGroupsToDisplay()
@@ -629,6 +665,7 @@ class Attachment implements \jsonSerializable
     public function setContent($content)
     {
         $this->content = $content;
+        return $this;
     }
 
     public function getContent()
@@ -639,6 +676,7 @@ class Attachment implements \jsonSerializable
     public function setType($type)
     {
         $this->type = $type;
+        return $this;
     }
 
     public function getType()
@@ -649,6 +687,7 @@ class Attachment implements \jsonSerializable
     public function setFilename($filename)
     {
         $this->filename = $filename;
+        return $this;
     }
 
     public function getFilename()
@@ -659,6 +698,7 @@ class Attachment implements \jsonSerializable
     public function setDisposition($disposition)
     {
         $this->disposition = $disposition;
+        return $this;
     }
 
     public function getDisposition()
@@ -669,6 +709,7 @@ class Attachment implements \jsonSerializable
     public function setContentID($content_id)
     {
         $this->content_id = $content_id;
+        return $this;
     }
 
     public function getContentID()
@@ -705,6 +746,7 @@ class Content implements \jsonSerializable
     public function setType($type)
     {
         $this->type = $type;
+        return $this;
     }
 
     public function getType()
@@ -715,6 +757,7 @@ class Content implements \jsonSerializable
     public function setValue($value)
     {
         $this->value = $value;
+        return $this;
     }
 
     public function getValue()
@@ -748,6 +791,7 @@ class Personalization implements \jsonSerializable
     public function addTo($email)
     {
         $this->tos[] = $email;
+        return $this;
     }
 
     public function getTos()
@@ -758,6 +802,7 @@ class Personalization implements \jsonSerializable
     public function addCc($email)
     {
         $this->ccs[] = $email;
+        return $this;
     }
 
     public function getCcs()
@@ -768,6 +813,7 @@ class Personalization implements \jsonSerializable
     public function addBcc($email)
     {
         $this->bccs[] = $email;
+        return $this;
     }
 
     public function getBccs()
@@ -778,6 +824,7 @@ class Personalization implements \jsonSerializable
     public function setSubject($subject)
     {
         $this->subject = $subject;
+        return $this;
     }
 
     public function getSubject()
@@ -788,6 +835,7 @@ class Personalization implements \jsonSerializable
     public function addHeader($key, $value)
     {
         $this->headers[$key] = $value;
+        return $this;
     }
 
     public function getHeaders()
@@ -798,6 +846,7 @@ class Personalization implements \jsonSerializable
     public function addSubstitution($key, $value)
     {
         $this->substitutions[$key] = $value;
+        return $this;
     }
 
     public function getSubstitutions()
@@ -808,6 +857,7 @@ class Personalization implements \jsonSerializable
     public function addCustomArg($key, $value)
     {
         $this->custom_args[$key] = $value;
+        return $this;
     }
 
     public function getCustomArgs()
@@ -818,6 +868,7 @@ class Personalization implements \jsonSerializable
     public function setSendAt($send_at)
     {
         $this->send_at = $send_at;
+        return $this;
     }
 
     public function getSendAt()
@@ -857,6 +908,7 @@ class Email implements \jsonSerializable
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
     }
 
     public function getName()
@@ -867,6 +919,7 @@ class Email implements \jsonSerializable
     public function setEmail($email)
     {
         $this->email = $email;
+        return $this;
     }
 
     public function getEmail()
@@ -931,6 +984,7 @@ class Mail implements \jsonSerializable
     public function setFrom($email)
     {
         $this->from = $email;
+        return $this;
     }
 
     public function getFrom()
@@ -951,6 +1005,7 @@ class Mail implements \jsonSerializable
     public function setSubject($subject)
     {
         $this->subject = $subject;
+        return $this;
     }
 
     public function getSubject()
@@ -981,6 +1036,7 @@ class Mail implements \jsonSerializable
     public function setTemplateId($template_id)
     {
         $this->template_id = $template_id;
+        return $this;
     }
 
     public function getTemplateId()
@@ -1028,9 +1084,10 @@ class Mail implements \jsonSerializable
         return $this->custom_args;
     }
 
-     public function setSendAt($send_at)
-     {
+    public function setSendAt($send_at)
+    {
         $this->send_at = $send_at;
+        return $this;
     }
 
     public function getSendAt()
@@ -1041,6 +1098,7 @@ class Mail implements \jsonSerializable
     public function setBatchId($batch_id)
     {
         $this->batch_id = $batch_id;
+        return $this;
     }
 
     public function getBatchId()
@@ -1051,6 +1109,7 @@ class Mail implements \jsonSerializable
     public function setASM($asm)
     {
         $this->asm = $asm;
+        return $this;
     }
 
     public function getASM()
@@ -1061,6 +1120,7 @@ class Mail implements \jsonSerializable
     public function setIpPoolName($ip_pool_name)
     {
         $this->ip_pool_name = $ip_pool_name;
+        return $this;
     }
 
     public function getIpPoolName()
@@ -1071,6 +1131,7 @@ class Mail implements \jsonSerializable
     public function setMailSettings($mail_settings)
     {
         $this->mail_settings = $mail_settings;
+        return $this;
     }
 
     public function getMailSettings()
@@ -1081,6 +1142,7 @@ class Mail implements \jsonSerializable
     public function setTrackingSettings($tracking_settings)
     {
         $this->tracking_settings = $tracking_settings;
+        return $this;
     }
 
     public function getTrackingSettings()
@@ -1091,6 +1153,7 @@ class Mail implements \jsonSerializable
     public function setReplyTo($reply_to)
     {
         $this->reply_to = $reply_to;
+        return $this;
     }
 
     public function getReplyTo()

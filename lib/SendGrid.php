@@ -21,9 +21,9 @@ class SendGrid
     protected
         $namespace = 'SendGrid';
 
-    public
-        $client,
-        $version = self::VERSION;
+    /** @var \SendGrid\Client  */
+    public $client;
+    public $version = self::VERSION;
 
     /**
       * Setup the HTTP Client
@@ -37,7 +37,7 @@ class SendGrid
             'Authorization: Bearer '.$apiKey,
             'User-Agent: sendgrid/' . $this->version . ';php',
             'Accept: application/json'
-            );
+        );
         $host = isset($options['host']) ? $options['host'] : 'https://api.sendgrid.com';
         $this->client = new \SendGrid\Client($host, $headers, '/v3', null);
     }

@@ -146,7 +146,7 @@ Please run your code through:
    # Clone your fork of the repo into the current directory
    git clone https://github.com/sendgrid/sendgrid-php
    # Navigate to the newly cloned directory
-   cd sendgrid-python
+   cd sendgrid-php
    # Assign the original repo to a remote called "upstream"
    git remote add upstream https://github.com/sendgrid/sendgrid-php
    ```
