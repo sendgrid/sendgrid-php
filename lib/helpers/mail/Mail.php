@@ -12,7 +12,7 @@
   */
 namespace SendGrid;
 
-class ReplyTo implements \jsonSerializable
+class ReplyTo implements \JsonSerializable
 {
     private
         $email;
@@ -42,7 +42,7 @@ class ReplyTo implements \jsonSerializable
     }
 }
 
-class ClickTracking implements \jsonSerializable
+class ClickTracking implements \JsonSerializable
 {
     private
         $enable,
@@ -79,7 +79,7 @@ class ClickTracking implements \jsonSerializable
     }
 }
 
-class OpenTracking implements \jsonSerializable
+class OpenTracking implements \JsonSerializable
 {
     private
         $enable,
@@ -116,7 +116,7 @@ class OpenTracking implements \jsonSerializable
     }
 }
 
-class SubscriptionTracking implements \jsonSerializable
+class SubscriptionTracking implements \JsonSerializable
 {
     private
         $enable,
@@ -177,7 +177,7 @@ class SubscriptionTracking implements \jsonSerializable
     }
 }
 
-class Ganalytics implements \jsonSerializable
+class Ganalytics implements \JsonSerializable
 {
     private
         $enable,
@@ -262,7 +262,7 @@ class Ganalytics implements \jsonSerializable
     }
 }
 
-class TrackingSettings implements \jsonSerializable
+class TrackingSettings implements \JsonSerializable
 {
     private
         $click_tracking,
@@ -323,7 +323,7 @@ class TrackingSettings implements \jsonSerializable
     }
 }
 
-class BccSettings implements \jsonSerializable
+class BccSettings implements \JsonSerializable
 {
     private
         $enable,
@@ -360,7 +360,7 @@ class BccSettings implements \jsonSerializable
     }
 }
 
-class BypassListManagement implements \jsonSerializable
+class BypassListManagement implements \JsonSerializable
 {
     private
         $enable;
@@ -385,7 +385,7 @@ class BypassListManagement implements \jsonSerializable
     }
 }
 
-class Footer implements \jsonSerializable
+class Footer implements \JsonSerializable
 {
     private
         $enable,
@@ -434,7 +434,7 @@ class Footer implements \jsonSerializable
     }
 }
 
-class SandBoxMode implements \jsonSerializable
+class SandBoxMode implements \JsonSerializable
 {
     private
         $enable;
@@ -458,7 +458,7 @@ class SandBoxMode implements \jsonSerializable
     }
 }
 
-class SpamCheck implements \jsonSerializable
+class SpamCheck implements \JsonSerializable
 {
     private
         $enable,
@@ -507,7 +507,7 @@ class SpamCheck implements \jsonSerializable
     }
 }
 
-class MailSettings implements \jsonSerializable
+class MailSettings implements \JsonSerializable
 {
     private
         $bcc,
@@ -580,7 +580,7 @@ class MailSettings implements \jsonSerializable
     }
 }
 
-class ASM implements \jsonSerializable
+class ASM implements \JsonSerializable
 {
     private
         $group_id,
@@ -617,7 +617,7 @@ class ASM implements \jsonSerializable
     }
 }
 
-class Attachment implements \jsonSerializable
+class Attachment implements \JsonSerializable
 {
     private
         $content,
@@ -690,7 +690,7 @@ class Attachment implements \jsonSerializable
     }
 }
 
-class Content implements \jsonSerializable
+class Content implements \JsonSerializable
 {
     private
         $type,
@@ -733,7 +733,7 @@ class Content implements \jsonSerializable
     }
 }
 
-class Personalization implements \jsonSerializable
+class Personalization implements \JsonSerializable
 {
     private
         $tos,
@@ -842,7 +842,7 @@ class Personalization implements \jsonSerializable
     }
 }
 
-class Email implements \jsonSerializable
+class Email implements \JsonSerializable
 {
     private
         $name,
@@ -888,7 +888,7 @@ class Email implements \jsonSerializable
 /**
   * The final request body object
   */
-class Mail implements \jsonSerializable
+class Mail implements \JsonSerializable
 {
     const VERSION = '1.0.0';
 
