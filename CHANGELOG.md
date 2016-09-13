@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0.9] - 2016-09-13 ##
+### Fixed
+- Pull request #289: [Replace "\jsonSerializable" with "\JsonSerializable" ](https://github.com/sendgrid/sendgrid-php/pull/289)
+- Thanks to [Issei.M](https://github.com/issei-m) for the pull request!
+
 ## [5.0.8] - 2016-08-24 ##
 ### Added
 - Table of Contents in the README
