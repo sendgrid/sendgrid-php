@@ -4,6 +4,25 @@ namespace SendGrid;
 // If you are using Composer
 require __DIR__ . '<PATH_TO>/vendor/autoload.php';
 
+use SendGrid\SendGrid;
+use SendGrid\Helper\ASM;
+use SendGrid\Helper\Attachment;
+use SendGrid\Helper\BccSettings;
+use SendGrid\Helper\BypassListManagement;
+use SendGrid\Helper\ClickTracking;
+use SendGrid\Helper\Content;
+use SendGrid\Helper\Email;
+use SendGrid\Helper\Footer;
+use SendGrid\Helper\Mail;
+use SendGrid\Helper\MailSettings;
+use SendGrid\Helper\OpenTracking;
+use SendGrid\Helper\Personalization;
+use SendGrid\Helper\ReplyTo;
+use SendGrid\Helper\SandBoxMode;
+use SendGrid\Helper\SpamCheck;
+use SendGrid\Helper\SubscriptionTracking;
+use SendGrid\Helper\TrackingSettings;
+use SendGrid\Helper\Ganalytics;
 
 function helloEmail()
 {
@@ -178,7 +197,7 @@ function kitchenSink()
 function sendHelloEmail()
 {
     $apiKey = getenv('SENDGRID_API_KEY');
-    $sg = new \SendGrid($apiKey);
+    $sg = new SendGrid($apiKey);
 
     $request_body = helloEmail();
     $response = $sg->client->mail()->send()->post($request_body);
@@ -190,7 +209,7 @@ function sendHelloEmail()
 function sendKitchenSink()
 {
     $apiKey = getenv('SENDGRID_API_KEY');
-    $sg = new \SendGrid($apiKey);
+    $sg = new SendGrid($apiKey);
 
     $request_body = kitchenSink();
     $response = $sg->client->mail()->send()->post($request_body);

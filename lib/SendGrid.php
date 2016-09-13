@@ -11,15 +11,14 @@
   * @link      http://packagist.org/packages/sendgrid/sendgrid
   */
 
+namespace SendGrid;
+
 /**
   * Interface to the SendGrid Web API
   */
 class SendGrid
 {
     const VERSION = '5.0.8';
-
-    protected
-        $namespace = 'SendGrid';
 
     /** @var \SendGrid\Client  */
     public $client;

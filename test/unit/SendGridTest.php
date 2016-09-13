@@ -1,4 +1,26 @@
 <?php
+namespace SendGrid\Test;
+
+use SendGrid\SendGrid;
+use SendGrid\Helper\ASM;
+use SendGrid\Helper\Attachment;
+use SendGrid\Helper\BccSettings;
+use SendGrid\Helper\BypassListManagement;
+use SendGrid\Helper\ClickTracking;
+use SendGrid\Helper\Content;
+use SendGrid\Helper\Email;
+use SendGrid\Helper\Footer;
+use SendGrid\Helper\Mail;
+use SendGrid\Helper\MailSettings;
+use SendGrid\Helper\OpenTracking;
+use SendGrid\Helper\Personalization;
+use SendGrid\Helper\ReplyTo;
+use SendGrid\Helper\SandBoxMode;
+use SendGrid\Helper\SpamCheck;
+use SendGrid\Helper\SubscriptionTracking;
+use SendGrid\Helper\TrackingSettings;
+use SendGrid\Helper\Ganalytics;
+
 class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
 {
     protected static $apiKey;
@@ -40,7 +62,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
                     fclose($pipes[1]);
                     fclose($pipes[2]);
                     proc_close($proc_grep);
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     print("Error downloading the prism binary, you can try downloading directly here (https://github.com/stoplightio/prism/releases) and place in your /user/local/bin directory: " .  $e->getMessage() . "\n");
                     exit();
                 }

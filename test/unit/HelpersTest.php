@@ -1,7 +1,30 @@
 <?php
-namespace SendGrid;
+namespace SendGrid\Test;
 
-class MailTest_Mail extends \PHPUnit_Framework_TestCase
+use SendGrid\Helper\Ganalytics;
+use SendGrid\Helper\ASM;
+use SendGrid\Helper\Attachment;
+use SendGrid\Helper\BccSettings;
+use SendGrid\Helper\BypassListManagement;
+use SendGrid\Helper\ClickTracking;
+use SendGrid\Helper\Content;
+use SendGrid\Helper\Email;
+use SendGrid\Helper\Footer;
+use SendGrid\Helper\Mail;
+use SendGrid\Helper\MailSettings;
+use SendGrid\Helper\OpenTracking;
+use SendGrid\Helper\Personalization;
+use SendGrid\Helper\ReplyTo;
+use SendGrid\Helper\SandBoxMode;
+use SendGrid\Helper\SpamCheck;
+use SendGrid\Helper\SubscriptionTracking;
+use SendGrid\Helper\TrackingSettings;
+
+/**
+ * Class HelpersTest
+ * @package SendGrid\Test
+ */
+class HelpersTest extends \PHPUnit_Framework_TestCase
 {
     public function testBaseLineExample()
     {
