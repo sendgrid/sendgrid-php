@@ -6,7 +6,7 @@ namespace SendGrid\Helper;
  * Class ReplyTo
  * @package SendGrid
  */
-class ReplyTo implements \jsonSerializable
+class ReplyTo implements \JsonSerializable
 {
     private
         $email;

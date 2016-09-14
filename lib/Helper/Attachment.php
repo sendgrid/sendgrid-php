@@ -6,7 +6,7 @@ namespace SendGrid\Helper;
  * Class Attachment
  * @package SendGrid\Helper
  */
-class Attachment implements \jsonSerializable
+class Attachment implements \JsonSerializable
 {
     private $content;
     private $type;

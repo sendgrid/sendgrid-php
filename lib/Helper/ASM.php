@@ -6,7 +6,7 @@ namespace SendGrid\Helper;
  * Class ASM
  * @package SendGrid\Helper
  */
-class ASM implements \jsonSerializable
+class ASM implements \JsonSerializable
 {
     private $group_id;
     private $groups_to_display;

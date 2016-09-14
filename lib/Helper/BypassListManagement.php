@@ -6,7 +6,7 @@ namespace SendGrid\Helper;
  * Class BypassListManagement
  * @package SendGrid\Helper
  */
-class BypassListManagement implements \jsonSerializable
+class BypassListManagement implements \JsonSerializable
 {
     private $enable;
 

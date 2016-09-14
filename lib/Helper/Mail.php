@@ -7,7 +7,7 @@ namespace SendGrid\Helper;
  * Class Mail
  * @package SendGrid\Helper
  */
-class Mail implements \jsonSerializable
+class Mail implements \JsonSerializable
 {
     const VERSION = '1.0.0';
 

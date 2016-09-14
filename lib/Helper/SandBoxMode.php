@@ -6,7 +6,7 @@ namespace SendGrid\Helper;
  * Class SandBoxMode
  * @package SendGrid\Helper
  */
-class SandBoxMode implements \jsonSerializable
+class SandBoxMode implements \JsonSerializable
 {
     private $enable;
 

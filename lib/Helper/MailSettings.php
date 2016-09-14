@@ -6,7 +6,7 @@ namespace SendGrid\Helper;
  * Class MailSettings
  * @package SendGrid\Helper
  */
-class MailSettings implements \jsonSerializable
+class MailSettings implements \JsonSerializable
 {
     private $bcc;
     private $bypass_list_management;

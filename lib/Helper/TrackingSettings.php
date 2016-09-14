@@ -6,7 +6,7 @@ namespace SendGrid\Helper;
  * Class TrackingSettings
  * @package SendGrid\Helper
  */
-class TrackingSettings implements \jsonSerializable
+class TrackingSettings implements \JsonSerializable
 {
     private $click_tracking;
     private $open_tracking;

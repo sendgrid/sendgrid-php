@@ -16,7 +16,7 @@ namespace SendGrid\Helper;
  * Class Ganalytics
  * @package SendGrid\Helper
  */
-class Ganalytics implements \jsonSerializable
+class Ganalytics implements \JsonSerializable
 {
     private $enable;
     private $utm_source;

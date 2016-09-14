@@ -6,7 +6,7 @@ namespace SendGrid\Helper;
  * Class Email
  * @package SendGrid\Helper
  */
-class Email implements \jsonSerializable
+class Email implements \JsonSerializable
 {
     private
         $name,

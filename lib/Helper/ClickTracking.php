@@ -6,7 +6,7 @@ namespace SendGrid\Helper;
  * Class ClickTracking
  * @package SendGrid
  */
-class ClickTracking implements \jsonSerializable
+class ClickTracking implements \JsonSerializable
 {
     private $enable;
     private $enable_text;

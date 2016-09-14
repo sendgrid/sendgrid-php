@@ -6,7 +6,7 @@ namespace SendGrid\Helper;
  * Class Content
  * @package SendGrid\Helper
  */
-class Content implements \jsonSerializable
+class Content implements \JsonSerializable
 {
     private $type;
     private $value;

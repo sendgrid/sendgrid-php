@@ -6,7 +6,7 @@ namespace SendGrid\Helper;
  * Class OpenTracking
  * @package SendGrid\Helper
  */
-class OpenTracking implements \jsonSerializable
+class OpenTracking implements \JsonSerializable
 {
     private $enable;
     private $substitution_tag;

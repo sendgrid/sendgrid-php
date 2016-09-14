@@ -6,7 +6,7 @@ namespace SendGrid\Helper;
  * Class Footer
  * @package SendGrid\Helper
  */
-class Footer implements \jsonSerializable
+class Footer implements \JsonSerializable
 {
     private $enable;
     private $text;

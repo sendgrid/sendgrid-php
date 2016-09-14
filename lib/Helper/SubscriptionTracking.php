@@ -6,7 +6,7 @@ namespace SendGrid\Helper;
  * Class SubscriptionTracking
  * @package SendGrid\Helper
  */
-class SubscriptionTracking implements \jsonSerializable
+class SubscriptionTracking implements \JsonSerializable
 {
     private
         $enable,

@@ -6,7 +6,7 @@ namespace SendGrid\Helper;
  * Class SpamCheck
  * @package SendGrid\Helper
  */
-class SpamCheck implements \jsonSerializable
+class SpamCheck implements \JsonSerializable
 {
     private $enable;
     private $threshold;

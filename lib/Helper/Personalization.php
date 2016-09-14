@@ -5,7 +5,7 @@ namespace SendGrid\Helper;
  * Class Personalization
  * @package SendGrid\Helper
  */
-class Personalization implements \jsonSerializable
+class Personalization implements \JsonSerializable
 {
     private $tos;
     private $ccs;

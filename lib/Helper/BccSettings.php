@@ -6,7 +6,7 @@ namespace SendGrid\Helper;
  * Class BccSettings
  * @package SendGrid\Helper
  */
-class BccSettings implements \jsonSerializable
+class BccSettings implements \JsonSerializable
 {
     private $enable;
     private $email;
