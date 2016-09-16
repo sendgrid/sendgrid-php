@@ -1,55 +1,50 @@
 <?php
 
-namespace SendGrid\Helper;
+namespace SendGrid\Helper\Mail;
 
 /**
- * Class Email
- * @package SendGrid\Helper
+ * Class ReplyTo
+ * @package SendGrid
  */
-class Email implements \JsonSerializable
+class ReplyTo implements \JsonSerializable
 {
     private
-        $name,
         $email;
 
     /**
-     * Email constructor.
-     * @param $name
+     * ReplyTo constructor.
      * @param $email
      */
-    public function __construct($name, $email)
+    public function __construct($email)
     {
-        $this->name = $name;
         $this->email = $email;
     }
 
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
+    /**
+     * @param $email
+     * @return $this
+     */
     public function setEmail($email)
     {
         $this->email = $email;
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getEmail()
     {
         return $this->email;
     }
 
+    /**
+     * @return array
+     */
     public function jsonSerialize()
     {
         return array_filter(
             [
-                'name' => $this->getName(),
                 'email' => $this->getEmail()
             ]
         );

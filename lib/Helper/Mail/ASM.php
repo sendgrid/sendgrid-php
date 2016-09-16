@@ -1,6 +1,6 @@
 <?php
 
-namespace SendGrid\Helper;
+namespace SendGrid\Helper\Mail;
 
 /**
  * Class ASM

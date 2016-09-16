@@ -1,6 +1,6 @@
 <?php
 
-namespace SendGrid\Helper;
+namespace SendGrid\Helper\Mail;
 
 /**
  * The final request body object

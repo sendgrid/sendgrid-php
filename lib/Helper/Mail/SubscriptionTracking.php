@@ -1,15 +1,18 @@
 <?php
 
-namespace SendGrid\Helper;
+namespace SendGrid\Helper\Mail;
 
 /**
- * Class OpenTracking
+ * Class SubscriptionTracking
  * @package SendGrid\Helper
  */
-class OpenTracking implements \JsonSerializable
+class SubscriptionTracking implements \JsonSerializable
 {
-    private $enable;
-    private $substitution_tag;
+    private
+        $enable,
+        $text,
+        $html,
+        $substitution_tag;
 
     public function setEnable($enable)
     {
@@ -20,6 +23,28 @@ class OpenTracking implements \JsonSerializable
     public function getEnable()
     {
         return $this->enable;
+    }
+
+    public function setText($text)
+    {
+        $this->text = $text;
+        return $this;
+    }
+
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    public function setHtml($html)
+    {
+        $this->html = $html;
+        return $this;
+    }
+
+    public function getHtml()
+    {
+        return $this->html;
     }
 
     public function setSubstitutionTag($substitution_tag)
@@ -38,6 +63,8 @@ class OpenTracking implements \JsonSerializable
         return array_filter(
             [
                 'enable' => $this->getEnable(),
+                'text' => $this->getText(),
+                'html' => $this->getHtml(),
                 'substitution_tag' => $this->getSubstitutionTag()
             ]
         );

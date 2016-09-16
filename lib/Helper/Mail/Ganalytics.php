@@ -10,7 +10,7 @@
   * @version   GIT: <git_id>
   * @link      http://packagist.org/packages/sendgrid/sendgrid
   */
-namespace SendGrid\Helper;
+namespace SendGrid\Helper\Mail;
 
 /**
  * Class Ganalytics

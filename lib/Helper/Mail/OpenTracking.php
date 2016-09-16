@@ -1,15 +1,15 @@
 <?php
 
-namespace SendGrid\Helper;
+namespace SendGrid\Helper\Mail;
 
 /**
- * Class BccSettings
+ * Class OpenTracking
  * @package SendGrid\Helper
  */
-class BccSettings implements \JsonSerializable
+class OpenTracking implements \JsonSerializable
 {
     private $enable;
-    private $email;
+    private $substitution_tag;
 
     public function setEnable($enable)
     {
@@ -22,15 +22,15 @@ class BccSettings implements \JsonSerializable
         return $this->enable;
     }
 
-    public function setEmail($email)
+    public function setSubstitutionTag($substitution_tag)
     {
-        $this->email = $email;
+        $this->substitution_tag = $substitution_tag;
         return $this;
     }
 
-    public function getEmail()
+    public function getSubstitutionTag()
     {
-        return $this->email;
+        return $this->substitution_tag;
     }
 
     public function jsonSerialize()
@@ -38,7 +38,7 @@ class BccSettings implements \JsonSerializable
         return array_filter(
             [
                 'enable' => $this->getEnable(),
-                'email' => $this->getEmail()
+                'substitution_tag' => $this->getSubstitutionTag()
             ]
         );
     }

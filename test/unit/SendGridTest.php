@@ -2,24 +2,24 @@
 namespace SendGrid\Test;
 
 use SendGrid\SendGrid;
-use SendGrid\Helper\ASM;
-use SendGrid\Helper\Attachment;
-use SendGrid\Helper\BccSettings;
-use SendGrid\Helper\BypassListManagement;
-use SendGrid\Helper\ClickTracking;
-use SendGrid\Helper\Content;
-use SendGrid\Helper\Email;
-use SendGrid\Helper\Footer;
-use SendGrid\Helper\Mail;
-use SendGrid\Helper\MailSettings;
-use SendGrid\Helper\OpenTracking;
-use SendGrid\Helper\Personalization;
-use SendGrid\Helper\ReplyTo;
-use SendGrid\Helper\SandBoxMode;
-use SendGrid\Helper\SpamCheck;
-use SendGrid\Helper\SubscriptionTracking;
-use SendGrid\Helper\TrackingSettings;
-use SendGrid\Helper\Ganalytics;
+use SendGrid\Helper\Mail\ASM;
+use SendGrid\Helper\Mail\Attachment;
+use SendGrid\Helper\Mail\BccSettings;
+use SendGrid\Helper\Mail\BypassListManagement;
+use SendGrid\Helper\Mail\ClickTracking;
+use SendGrid\Helper\Mail\Content;
+use SendGrid\Helper\Mail\Email;
+use SendGrid\Helper\Mail\Footer;
+use SendGrid\Helper\Mail\Mail;
+use SendGrid\Helper\Mail\MailSettings;
+use SendGrid\Helper\Mail\OpenTracking;
+use SendGrid\Helper\Mail\Personalization;
+use SendGrid\Helper\Mail\ReplyTo;
+use SendGrid\Helper\Mail\SandBoxMode;
+use SendGrid\Helper\Mail\SpamCheck;
+use SendGrid\Helper\Mail\SubscriptionTracking;
+use SendGrid\Helper\Mail\TrackingSettings;
+use SendGrid\Helper\Mail\Ganalytics;
 
 class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
 {
