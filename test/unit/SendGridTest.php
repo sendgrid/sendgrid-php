@@ -81,7 +81,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals($this->getProtectedPropertyValueFromObject($sg->client, 'host'), 'https://api.sendgrid.com');
-        $this->assertEquals($this->getProtectedPropertyValueFromObject($sg->client, 'request_headers'), $headers);
+        $this->assertEquals($this->getProtectedPropertyValueFromObject($sg->client, 'headers'), $headers);
         $this->assertEquals($this->getProtectedPropertyValueFromObject($sg->client, 'version'), '/v3');
 
         $apiKey = 'SENDGRID_API_KEY';
