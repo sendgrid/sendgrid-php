@@ -63,13 +63,6 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
         $this->assertEquals(json_decode(file_get_contents(__DIR__ . '/../../composer.json'))->version, SendGrid::VERSION);
     }
 
-    private function getProtectedPropertyValueFromObject($object, $propertyName)
-    {
-        $property = new \ReflectionProperty($object, $propertyName);
-        $property->setAccessible(true);
-        return $property->getValue($object);
-    }
-
     public function testSendGrid()
     {
         $apiKey = 'SENDGRID_API_KEY';
@@ -80,13 +73,13 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
             'Accept: application/json'
         );
 
-        $this->assertEquals($this->getProtectedPropertyValueFromObject($sg->client, 'host'), 'https://api.sendgrid.com');
-        $this->assertEquals($this->getProtectedPropertyValueFromObject($sg->client, 'headers'), $headers);
-        $this->assertEquals($this->getProtectedPropertyValueFromObject($sg->client, 'version'), '/v3');
+        $this->assertEquals($sg->client->getHost(), 'https://api.sendgrid.com');
+        $this->assertEquals($sg->client->getHeaders(), $headers);
+        $this->assertEquals($sg->client->getVersion(), '/v3');
 
         $apiKey = 'SENDGRID_API_KEY';
         $sg2 = new SendGrid($apiKey, array('host' => 'https://api.test.com'));
-        $this->assertEquals($this->getProtectedPropertyValueFromObject($sg2->client, 'host'), 'https://api.test.com');
+        $this->assertEquals($sg2->client->getHost(), 'https://api.test.com');
     }
 
     public function test_access_settings_activity_get()
