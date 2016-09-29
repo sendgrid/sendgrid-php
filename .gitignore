@@ -7,3 +7,4 @@ sendgrid-php.php
 composer.phar
 .editorconfig
 test.php
+.idea/
