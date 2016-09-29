@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.1.0] - 2016-09-29 ##
+### Fixed
+- Pull #295: [Upgrade sendgrid/php-http-client](https://github.com/sendgrid/sendgrid-php/pull/295/files)
+- This adds getters for certain properties, please see [this pull request](https://github.com/sendgrid/php-http-client/pull/9) for details
+- Thakns to [Arjan Keeman](https://github.com/akeeman) for the pull request!
+
 ## [5.0.9] - 2016-09-13 ##
 ### Fixed
 - Pull request #289: [Replace "\jsonSerializable" with "\JsonSerializable" ](https://github.com/sendgrid/sendgrid-php/pull/289)
