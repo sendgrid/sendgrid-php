@@ -81,26 +81,27 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
 
     public function testVersion()
     {
-        $this->assertEquals(SendGrid::VERSION, '5.0.9');
+        $this->assertEquals(SendGrid::VERSION, '5.1.0');
         $this->assertEquals(json_decode(file_get_contents(__DIR__ . '/../../composer.json'))->version, SendGrid::VERSION);
     }
 
     public function testSendGrid()
     {
-        $apiKey = "SENDGRID_API_KEY";
+        $apiKey = 'SENDGRID_API_KEY';
         $sg = new SendGrid($apiKey);
         $headers = array(
             'Authorization: Bearer '.$apiKey,
             'User-Agent: sendgrid/' . $sg->version . ';php',
             'Accept: application/json'
-            );
-        $this->assertEquals($sg->client->getHost(), "https://api.sendgrid.com");
-        $this->assertEquals($sg->client->getHeaders(), $headers);
-        $this->assertEquals($sg->client->getVersion(), "/v3");
+        );
 
-        $apiKey = "SENDGRID_API_KEY";
+        $this->assertEquals($sg->client->getHost(), 'https://api.sendgrid.com');
+        $this->assertEquals($sg->client->getHeaders(), $headers);
+        $this->assertEquals($sg->client->getVersion(), '/v3');
+
+        $apiKey = 'SENDGRID_API_KEY';
         $sg2 = new SendGrid($apiKey, array('host' => 'https://api.test.com'));
-        $this->assertEquals($sg2->client->getHost(), "https://api.test.com");
+        $this->assertEquals($sg2->client->getHost(), 'https://api.test.com');
     }
 
     public function test_access_settings_activity_get()
