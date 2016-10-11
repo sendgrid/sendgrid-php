@@ -47,7 +47,23 @@ class SendGrid
             'User-Agent: sendgrid/' . $this->version . ';php',
             'Accept: application/json'
             );
-        $host = isset($options['host']) ? $options['host'] : 'https://api.sendgrid.com';
-        $this->client = new \SendGrid\Client($host, $headers, '/v3', null);
+
+        $settings = $this->getSettings($options);
+        $this->client = new \SendGrid\Client($settings['host'], $headers, '/v3', null, $settings['curlOptions']);
+    }
+
+    /**
+     * Merge default and given options to ensure existance
+     * of all settings.
+     *
+     * @param array $options
+     * @return array
+     */
+    protected function getSettings(array $options)
+    {
+        return array_merge([
+            'host' => 'https://api.sendgrid.com',
+            'curlOptions' => [],
+        ], $options);
     }
 }
