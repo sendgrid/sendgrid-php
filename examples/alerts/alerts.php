@@ -2,9 +2,10 @@
 // If you are using Composer
 require 'vendor/autoload.php';
 
+use SendGrid\SendGrid;
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new SendGrid($apiKey);
 
 ////////////////////////////////////////////////////
 // Create a new Alert #
@@ -17,8 +18,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->alerts()->post($request_body);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Retrieve all alerts #
@@ -26,8 +27,8 @@ echo $response->headers();
 
 $response = $sg->client->alerts()->get();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Update an alert #
@@ -39,8 +40,8 @@ $request_body = json_decode('{
 $alert_id = "test_url_param";
 $response = $sg->client->alerts()->_($alert_id)->patch($request_body);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Retrieve a specific alert #
@@ -49,8 +50,8 @@ echo $response->headers();
 $alert_id = "test_url_param";
 $response = $sg->client->alerts()->_($alert_id)->get();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Delete an alert #
@@ -59,6 +60,6 @@ echo $response->headers();
 $alert_id = "test_url_param";
 $response = $sg->client->alerts()->_($alert_id)->delete();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 

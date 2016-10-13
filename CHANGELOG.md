@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [6.0.0] - 2016-10-13 ##
+### BREAKING CHANGE
+- Pull #287: Adding method chaining into the Mail helpers' setters
+- Updated to the [PSR-4 autoloader](http://www.php-fig.org/psr/psr-4/)
+- To use the various classes, you will need to update your function calls (e.g. /SendGrid becomes SendGrid with the appropriate `use` statement), please see the [README](https://github.com/sendgrid/sendgrid-php/blob/master/README.md) or [USAGE](https://github.com/sendgrid/sendgrid-php/blob/master/USAGE.md) or [examples](https://github.com/sendgrid/sendgrid-php/tree/master/examples) for details
+- The [Mail Helper](https://github.com/sendgrid/sendgrid-php/tree/master/lib/helpers/mail) is broken up in separate files and it's namespace is updated to be `SendGrid\Helper\Mail`
+- Method chaining is added to the Mail Helper
+- Thanks to [vitya1](https://github.com/vitya1) for the PR!
+
 ## [5.1.1] - 2016-10-11 ##
 ### Added
 - Pull #307, Fixes #276

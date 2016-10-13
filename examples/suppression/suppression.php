@@ -2,9 +2,10 @@
 // If you are using Composer
 require 'vendor/autoload.php';
 
+use SendGrid\SendGrid;
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new SendGrid($apiKey);
 
 ////////////////////////////////////////////////////
 // Retrieve all blocks #
@@ -13,8 +14,8 @@ $sg = new \SendGrid($apiKey);
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
 $response = $sg->client->suppression()->blocks()->get(null, $query_params);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Delete blocks #
@@ -29,8 +30,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->suppression()->blocks()->delete($request_body);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Retrieve a specific block #
@@ -39,8 +40,8 @@ echo $response->headers();
 $email = "test_url_param";
 $response = $sg->client->suppression()->blocks()->_($email)->get();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Delete a specific block #
@@ -49,8 +50,8 @@ echo $response->headers();
 $email = "test_url_param";
 $response = $sg->client->suppression()->blocks()->_($email)->delete();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Retrieve all bounces #
@@ -59,8 +60,8 @@ echo $response->headers();
 $query_params = json_decode('{"start_time": 1, "end_time": 1}');
 $response = $sg->client->suppression()->bounces()->get(null, $query_params);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Delete bounces #
@@ -75,8 +76,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->suppression()->bounces()->delete($request_body);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Retrieve a Bounce #
@@ -85,8 +86,8 @@ echo $response->headers();
 $email = "test_url_param";
 $response = $sg->client->suppression()->bounces()->_($email)->get();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Delete a bounce #
@@ -96,8 +97,8 @@ $query_params = json_decode('{"email_address": "example@example.com"}');
 $email = "test_url_param";
 $response = $sg->client->suppression()->bounces()->_($email)->delete(null, $query_params);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Retrieve all invalid emails #
@@ -106,8 +107,8 @@ echo $response->headers();
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
 $response = $sg->client->suppression()->invalid_emails()->get(null, $query_params);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Delete invalid emails #
@@ -122,8 +123,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->suppression()->invalid_emails()->delete($request_body);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Retrieve a specific invalid email #
@@ -132,8 +133,8 @@ echo $response->headers();
 $email = "test_url_param";
 $response = $sg->client->suppression()->invalid_emails()->_($email)->get();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Delete a specific invalid email #
@@ -142,8 +143,8 @@ echo $response->headers();
 $email = "test_url_param";
 $response = $sg->client->suppression()->invalid_emails()->_($email)->delete();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Retrieve a specific spam report #
@@ -152,8 +153,8 @@ echo $response->headers();
 $email = "test_url_param";
 $response = $sg->client->suppression()->spam_report()->_($email)->get();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Delete a specific spam report #
@@ -162,8 +163,8 @@ echo $response->headers();
 $email = "test_url_param";
 $response = $sg->client->suppression()->spam_report()->_($email)->delete();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Retrieve all spam reports #
@@ -172,8 +173,8 @@ echo $response->headers();
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
 $response = $sg->client->suppression()->spam_reports()->get(null, $query_params);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Delete spam reports #
@@ -188,8 +189,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->suppression()->spam_reports()->delete($request_body);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Retrieve all global suppressions #
@@ -198,6 +199,6 @@ echo $response->headers();
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
 $response = $sg->client->suppression()->unsubscribes()->get(null, $query_params);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 

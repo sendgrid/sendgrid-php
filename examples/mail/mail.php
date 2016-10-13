@@ -2,9 +2,10 @@
 // If you are using Composer
 require 'vendor/autoload.php';
 
+use SendGrid\SendGrid;
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new SendGrid($apiKey);
 
 ////////////////////////////////////////////////////
 // Create a batch ID #
@@ -12,8 +13,8 @@ $sg = new \SendGrid($apiKey);
 
 $response = $sg->client->mail()->batch()->post();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Validate batch ID #
@@ -22,8 +23,8 @@ echo $response->headers();
 $batch_id = "test_url_param";
 $response = $sg->client->mail()->batch()->_($batch_id)->get();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // v3 Mail Send #
@@ -170,6 +171,6 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->mail()->send()->post($request_body);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 

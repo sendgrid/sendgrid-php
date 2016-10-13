@@ -2,9 +2,10 @@
 // If you are using Composer
 require 'vendor/autoload.php';
 
+use SendGrid\SendGrid;
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new SendGrid($apiKey);
 
 ////////////////////////////////////////////////////
 // Create a Campaign #
@@ -32,8 +33,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->campaigns()->post($request_body);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Retrieve all Campaigns #
@@ -42,8 +43,8 @@ echo $response->headers();
 $query_params = json_decode('{"limit": 1, "offset": 1}');
 $response = $sg->client->campaigns()->get(null, $query_params);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Update a Campaign #
@@ -61,8 +62,8 @@ $request_body = json_decode('{
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->patch($request_body);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Retrieve a single campaign #
@@ -71,8 +72,8 @@ echo $response->headers();
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->get();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Delete a Campaign #
@@ -81,8 +82,8 @@ echo $response->headers();
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->delete();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Update a Scheduled Campaign #
@@ -94,8 +95,8 @@ $request_body = json_decode('{
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->patch($request_body);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Schedule a Campaign #
@@ -107,8 +108,8 @@ $request_body = json_decode('{
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->post($request_body);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // View Scheduled Time of a Campaign #
@@ -117,8 +118,8 @@ echo $response->headers();
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->get();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Unschedule a Scheduled Campaign #
@@ -127,8 +128,8 @@ echo $response->headers();
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->delete();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Send a Campaign #
@@ -137,8 +138,8 @@ echo $response->headers();
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->now()->post();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Send a Test Campaign #
@@ -150,6 +151,6 @@ $request_body = json_decode('{
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->test()->post($request_body);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 

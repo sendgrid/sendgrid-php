@@ -4,7 +4,7 @@ Please see our announcement regarding [breaking changes](https://github.com/send
 
 **This library allows you to quickly and easily use the SendGrid Web API v3 via PHP.**
 
-Version 5.X.X of this library provides full support for all SendGrid [Web API v3](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html) endpoints, including the new [v3 /mail/send](https://sendgrid.com/blog/introducing-v3mailsend-sendgrids-new-mail-endpoint).
+Version 6.X.X of this library provides full support for all SendGrid [Web API v3](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html) endpoints, including the new [v3 /mail/send](https://sendgrid.com/blog/introducing-v3mailsend-sendgrids-new-mail-endpoint).
 
 This library represents the beginning of a new path for SendGrid. We want this library to be community driven and SendGrid led. We need your help to realize this goal. To help make sure we are building the right things in the right order, we ask that you create [issues](https://github.com/sendgrid/sendgrid-php/issues) and [pull requests](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md) or simply upvote or comment on existing issues or pull requests.
 
@@ -49,7 +49,7 @@ Add SendGrid to your `composer.json` file. If you are not using [Composer](http:
 ```json
 {
   "require": {
-    "sendgrid/sendgrid": "~5.1"
+    "sendgrid/sendgrid": "~6.0"
   }
 }
 ```
@@ -91,21 +91,26 @@ The following is the minimum needed code to send an email with the [/mail/send H
 // If you are using Composer
 require 'vendor/autoload.php';
 
+use SendGrid\SendGrid;
+use SendGrid\Helper\Mail\Email;
+use SendGrid\Helper\Mail\Content;
+use SendGrid\Helper\Mail\Mail;
+
 // If you are not using Composer (recommended)
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
-$from = new SendGrid\Email(null, "test@example.com");
+$from = new Email(null, "dx@sendgrid.com");
 $subject = "Hello World from the SendGrid PHP Library!";
-$to = new SendGrid\Email(null, "test@example.com");
-$content = new SendGrid\Content("text/plain", "Hello, Email!");
-$mail = new SendGrid\Mail($from, $subject, $to, $content);
+$to = new Email(null, "elmer@sendgrid.com");
+$content = new Content("text/plain", "Hello, Email!");
+$mail = new Mail($from, $subject, $to, $content);
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new SendGrid($apiKey);
 
 $response = $sg->client->mail()->send()->post($mail);
 echo $response->statusCode();
-echo $response->headers();
+echo print_r($response->headers());
 echo $response->body();
 ```
 
@@ -119,6 +124,8 @@ The following is the minimum needed code to send an email without the /mail/send
 <?php
 // If you are using Composer
 require 'vendor/autoload.php';
+
+use SendGrid\SendGrid;
 
 // If you are not using Composer (recommended)
 // require("path/to/sendgrid-php/sendgrid-php.php");
@@ -146,12 +153,12 @@ $request_body = json_decode('{
 }');
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new SendGrid($apiKey);
 
 $response = $sg->client->mail()->send()->post($request_body);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 ```
 
 ## General v3 Web API Usage (With Fluent Interface)
@@ -161,16 +168,18 @@ echo $response->headers();
 // If you are using Composer (recommended)
 require 'vendor/autoload.php';
 
+use SendGrid\SendGrid;
+
 // If you are not using Composer
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new SendGrid($apiKey);
 
-$response = $sg->client->suppressions()->bounces()->get();
+$response = $sg->client->_("suppression/bounces")->get();
 
 print $response->statusCode();
-print $response->headers();
+echo print_r($response->headers());
 print $response->body();
 ```
 
@@ -181,16 +190,18 @@ print $response->body();
 // If you are using Composer (recommended)
 require 'vendor/autoload.php';
 
+use SendGrid\SendGrid;
+
 // If you are not using Composer
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new SendGrid($apiKey);
 
 $response = $sg->client->_("suppression/bounces")->get();
 
 print $response->statusCode();
-print $response->headers();
+echo print_r($response->headers());
 print $response->body();
 ```
 

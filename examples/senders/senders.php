@@ -2,9 +2,10 @@
 // If you are using Composer
 require 'vendor/autoload.php';
 
+use SendGrid\SendGrid;
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new SendGrid($apiKey);
 
 ////////////////////////////////////////////////////
 // Create a Sender Identity #
@@ -29,8 +30,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->senders()->post($request_body);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Get all Sender Identities #
@@ -38,8 +39,8 @@ echo $response->headers();
 
 $response = $sg->client->senders()->get();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Update a Sender Identity #
@@ -65,8 +66,8 @@ $request_body = json_decode('{
 $sender_id = "test_url_param";
 $response = $sg->client->senders()->_($sender_id)->patch($request_body);
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // View a Sender Identity #
@@ -75,8 +76,8 @@ echo $response->headers();
 $sender_id = "test_url_param";
 $response = $sg->client->senders()->_($sender_id)->get();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Delete a Sender Identity #
@@ -85,8 +86,8 @@ echo $response->headers();
 $sender_id = "test_url_param";
 $response = $sg->client->senders()->_($sender_id)->delete();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
 ////////////////////////////////////////////////////
 // Resend Sender Identity Verification #
@@ -95,6 +96,6 @@ echo $response->headers();
 $sender_id = "test_url_param";
 $response = $sg->client->senders()->_($sender_id)->resend_verification()->post();
 echo $response->statusCode();
+echo print_r($response->headers());
 echo $response->body();
-echo $response->headers();
 
