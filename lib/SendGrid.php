@@ -18,17 +18,23 @@ namespace SendGrid;
   */
 class SendGrid
 {
-    const VERSION = '5.1.0';
+    const VERSION = '5.1.1';
 
-    /** @var \SendGrid\Client  */
+    /**
+     * @var \SendGrid\Client
+     */
     public $client;
+
+    /**
+     * @var string
+     */
     public $version = self::VERSION;
 
     /**
       * Setup the HTTP Client
       *
       * @param string $apiKey  your SendGrid API Key.
-      * @param array  $options an array of options, currenlty only "host" is implemented.
+      * @param array  $options an array of options, currently only "host" is implemented.
       */
     public function __construct($apiKey, $options = array())
     {
