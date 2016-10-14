@@ -99,9 +99,9 @@ use SendGrid\Helper\Mail\Mail;
 // If you are not using Composer (recommended)
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
-$from = new Email(null, "dx@sendgrid.com");
+$from = new Email(null, "test@example.com");
 $subject = "Hello World from the SendGrid PHP Library!";
-$to = new Email(null, "elmer@sendgrid.com");
+$to = new Email(null, "test@example.com");
 $content = new Content("text/plain", "Hello, Email!");
 $mail = new Mail($from, $subject, $to, $content);
 
