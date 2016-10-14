@@ -18,7 +18,7 @@ namespace SendGrid;
   */
 class SendGrid
 {
-    const VERSION = '5.1.1';
+    const VERSION = '6.0.0';
 
     /**
      * @var \SendGrid\Client
