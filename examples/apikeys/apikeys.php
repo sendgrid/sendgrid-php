@@ -22,7 +22,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->api_keys()->post($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -32,7 +32,7 @@ echo $response->body();
 $query_params = json_decode('{"limit": 1}');
 $response = $sg->client->api_keys()->get(null, $query_params);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -49,7 +49,7 @@ $request_body = json_decode('{
 $api_key_id = "test_url_param";
 $response = $sg->client->api_keys()->_($api_key_id)->put($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -62,7 +62,7 @@ $request_body = json_decode('{
 $api_key_id = "test_url_param";
 $response = $sg->client->api_keys()->_($api_key_id)->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -72,7 +72,7 @@ echo $response->body();
 $api_key_id = "test_url_param";
 $response = $sg->client->api_keys()->_($api_key_id)->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -82,6 +82,6 @@ echo $response->body();
 $api_key_id = "test_url_param";
 $response = $sg->client->api_keys()->_($api_key_id)->delete();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 

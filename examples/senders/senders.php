@@ -30,7 +30,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->senders()->post($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -39,7 +39,7 @@ echo $response->body();
 
 $response = $sg->client->senders()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -66,7 +66,7 @@ $request_body = json_decode('{
 $sender_id = "test_url_param";
 $response = $sg->client->senders()->_($sender_id)->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -76,7 +76,7 @@ echo $response->body();
 $sender_id = "test_url_param";
 $response = $sg->client->senders()->_($sender_id)->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -86,7 +86,7 @@ echo $response->body();
 $sender_id = "test_url_param";
 $response = $sg->client->senders()->_($sender_id)->delete();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -96,6 +96,6 @@ echo $response->body();
 $sender_id = "test_url_param";
 $response = $sg->client->senders()->_($sender_id)->resend_verification()->post();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 

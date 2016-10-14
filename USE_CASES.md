@@ -128,6 +128,6 @@ try {
 }
 
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 ```

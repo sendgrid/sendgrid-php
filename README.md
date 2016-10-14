@@ -110,7 +110,7 @@ $sg = new SendGrid($apiKey);
 
 $response = $sg->client->mail()->send()->post($mail);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 ```
 
@@ -157,7 +157,7 @@ $sg = new SendGrid($apiKey);
 
 $response = $sg->client->mail()->send()->post($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 ```
 
@@ -178,9 +178,9 @@ $sg = new SendGrid($apiKey);
 
 $response = $sg->client->_("suppression/bounces")->get();
 
-print $response->statusCode();
-echo print_r($response->headers());
-print $response->body();
+echo $response->statusCode();
+print_r($response->headers());
+echo $response->body();
 ```
 
 ## General v3 Web API Usage (Without Fluent Interface)
@@ -200,9 +200,9 @@ $sg = new SendGrid($apiKey);
 
 $response = $sg->client->_("suppression/bounces")->get();
 
-print $response->statusCode();
-echo print_r($response->headers());
-print $response->body();
+echo $response->statusCode();
+print_r($response->headers());
+echo $response->body();
 ```
 
 <a name="usage"></a>

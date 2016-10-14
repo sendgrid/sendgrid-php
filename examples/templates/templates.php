@@ -16,7 +16,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->templates()->post($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -25,7 +25,7 @@ echo $response->body();
 
 $response = $sg->client->templates()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -38,7 +38,7 @@ $request_body = json_decode('{
 $template_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -48,7 +48,7 @@ echo $response->body();
 $template_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -58,7 +58,7 @@ echo $response->body();
 $template_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->delete();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -76,7 +76,7 @@ $request_body = json_decode('{
 $template_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->versions()->post($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -94,7 +94,7 @@ $template_id = "test_url_param";
 $version_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -105,7 +105,7 @@ $template_id = "test_url_param";
 $version_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -116,7 +116,7 @@ $template_id = "test_url_param";
 $version_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->delete();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -127,6 +127,6 @@ $template_id = "test_url_param";
 $version_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->activate()->post();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 

@@ -13,7 +13,7 @@ $sg = new SendGrid($apiKey);
 
 $response = $sg->client->user()->account()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -22,7 +22,7 @@ echo $response->body();
 
 $response = $sg->client->user()->credits()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->email()->put($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -43,7 +43,7 @@ echo $response->body();
 
 $response = $sg->client->user()->email()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -56,7 +56,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->password()->put($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -70,7 +70,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->profile()->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -79,7 +79,7 @@ echo $response->body();
 
 $response = $sg->client->user()->profile()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -92,7 +92,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->scheduled_sends()->post($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -101,7 +101,7 @@ echo $response->body();
 
 $response = $sg->client->user()->scheduled_sends()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -114,7 +114,7 @@ $request_body = json_decode('{
 $batch_id = "test_url_param";
 $response = $sg->client->user()->scheduled_sends()->_($batch_id)->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -124,7 +124,7 @@ echo $response->body();
 $batch_id = "test_url_param";
 $response = $sg->client->user()->scheduled_sends()->_($batch_id)->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -134,7 +134,7 @@ echo $response->body();
 $batch_id = "test_url_param";
 $response = $sg->client->user()->scheduled_sends()->_($batch_id)->delete();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -147,7 +147,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->settings()->enforced_tls()->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -156,7 +156,7 @@ echo $response->body();
 
 $response = $sg->client->user()->settings()->enforced_tls()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -168,7 +168,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->username()->put($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -177,7 +177,7 @@ echo $response->body();
 
 $response = $sg->client->user()->username()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -201,7 +201,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->webhooks()->event()->settings()->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -210,7 +210,7 @@ echo $response->body();
 
 $response = $sg->client->user()->webhooks()->event()->settings()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -222,7 +222,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->webhooks()->event()->test()->post($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -237,7 +237,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->webhooks()->parse()->settings()->post($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -246,7 +246,7 @@ echo $response->body();
 
 $response = $sg->client->user()->webhooks()->parse()->settings()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -261,7 +261,7 @@ $request_body = json_decode('{
 $hostname = "test_url_param";
 $response = $sg->client->user()->webhooks()->parse()->settings()->_($hostname)->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -271,7 +271,7 @@ echo $response->body();
 $hostname = "test_url_param";
 $response = $sg->client->user()->webhooks()->parse()->settings()->_($hostname)->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -281,7 +281,7 @@ echo $response->body();
 $hostname = "test_url_param";
 $response = $sg->client->user()->webhooks()->parse()->settings()->_($hostname)->delete();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -291,6 +291,6 @@ echo $response->body();
 $query_params = json_decode('{"aggregated_by": "day", "limit": "test_string", "start_date": "2016-01-01", "end_date": "2016-04-01", "offset": "test_string"}');
 $response = $sg->client->user()->webhooks()->parse()->stats()->get(null, $query_params);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 

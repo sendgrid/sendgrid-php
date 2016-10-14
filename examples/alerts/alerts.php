@@ -18,7 +18,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->alerts()->post($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -27,7 +27,7 @@ echo $response->body();
 
 $response = $sg->client->alerts()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -40,7 +40,7 @@ $request_body = json_decode('{
 $alert_id = "test_url_param";
 $response = $sg->client->alerts()->_($alert_id)->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -50,7 +50,7 @@ echo $response->body();
 $alert_id = "test_url_param";
 $response = $sg->client->alerts()->_($alert_id)->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -60,6 +60,6 @@ echo $response->body();
 $alert_id = "test_url_param";
 $response = $sg->client->alerts()->_($alert_id)->delete();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 

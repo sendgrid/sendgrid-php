@@ -14,7 +14,7 @@ $sg = new SendGrid($apiKey);
 $query_params = json_decode('{"limit": 1, "offset": 1}');
 $response = $sg->client->tracking_settings()->get(null, $query_params);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -26,7 +26,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->tracking_settings()->click()->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -35,7 +35,7 @@ echo $response->body();
 
 $response = $sg->client->tracking_settings()->click()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -52,7 +52,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->tracking_settings()->google_analytics()->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -61,7 +61,7 @@ echo $response->body();
 
 $response = $sg->client->tracking_settings()->google_analytics()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -73,7 +73,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->tracking_settings()->open()->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -82,7 +82,7 @@ echo $response->body();
 
 $response = $sg->client->tracking_settings()->open()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -99,7 +99,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->tracking_settings()->subscription()->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -108,6 +108,6 @@ echo $response->body();
 
 $response = $sg->client->tracking_settings()->subscription()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 

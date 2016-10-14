@@ -13,7 +13,7 @@ $sg = new SendGrid($apiKey);
 
 $response = $sg->client->mail()->batch()->post();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -23,7 +23,7 @@ echo $response->body();
 $batch_id = "test_url_param";
 $response = $sg->client->mail()->batch()->_($batch_id)->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -171,6 +171,6 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->mail()->send()->post($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 

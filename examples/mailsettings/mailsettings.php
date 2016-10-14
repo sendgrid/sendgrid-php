@@ -14,7 +14,7 @@ $sg = new SendGrid($apiKey);
 $query_params = json_decode('{"limit": 1, "offset": 1}');
 $response = $sg->client->mail_settings()->get(null, $query_params);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -30,7 +30,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->mail_settings()->address_whitelist()->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -39,7 +39,7 @@ echo $response->body();
 
 $response = $sg->client->mail_settings()->address_whitelist()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -52,7 +52,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->mail_settings()->bcc()->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -61,7 +61,7 @@ echo $response->body();
 
 $response = $sg->client->mail_settings()->bcc()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -75,7 +75,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->mail_settings()->bounce_purge()->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -84,7 +84,7 @@ echo $response->body();
 
 $response = $sg->client->mail_settings()->bounce_purge()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -98,7 +98,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->mail_settings()->footer()->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -107,7 +107,7 @@ echo $response->body();
 
 $response = $sg->client->mail_settings()->footer()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -120,7 +120,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->mail_settings()->forward_bounce()->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -129,7 +129,7 @@ echo $response->body();
 
 $response = $sg->client->mail_settings()->forward_bounce()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -142,7 +142,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->mail_settings()->forward_spam()->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -151,7 +151,7 @@ echo $response->body();
 
 $response = $sg->client->mail_settings()->forward_spam()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -163,7 +163,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->mail_settings()->plain_content()->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -172,7 +172,7 @@ echo $response->body();
 
 $response = $sg->client->mail_settings()->plain_content()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -186,7 +186,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->mail_settings()->spam_check()->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -195,7 +195,7 @@ echo $response->body();
 
 $response = $sg->client->mail_settings()->spam_check()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -208,7 +208,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->mail_settings()->template()->patch($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -217,6 +217,6 @@ echo $response->body();
 
 $response = $sg->client->mail_settings()->template()->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 

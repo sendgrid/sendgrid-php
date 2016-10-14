@@ -14,7 +14,7 @@ $sg = new SendGrid($apiKey);
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
 $response = $sg->client->suppression()->blocks()->get(null, $query_params);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -30,7 +30,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->suppression()->blocks()->delete($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -40,7 +40,7 @@ echo $response->body();
 $email = "test_url_param";
 $response = $sg->client->suppression()->blocks()->_($email)->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -50,7 +50,7 @@ echo $response->body();
 $email = "test_url_param";
 $response = $sg->client->suppression()->blocks()->_($email)->delete();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -60,7 +60,7 @@ echo $response->body();
 $query_params = json_decode('{"start_time": 1, "end_time": 1}');
 $response = $sg->client->suppression()->bounces()->get(null, $query_params);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -76,7 +76,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->suppression()->bounces()->delete($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -86,7 +86,7 @@ echo $response->body();
 $email = "test_url_param";
 $response = $sg->client->suppression()->bounces()->_($email)->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -97,7 +97,7 @@ $query_params = json_decode('{"email_address": "example@example.com"}');
 $email = "test_url_param";
 $response = $sg->client->suppression()->bounces()->_($email)->delete(null, $query_params);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -107,7 +107,7 @@ echo $response->body();
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
 $response = $sg->client->suppression()->invalid_emails()->get(null, $query_params);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -123,7 +123,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->suppression()->invalid_emails()->delete($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -133,7 +133,7 @@ echo $response->body();
 $email = "test_url_param";
 $response = $sg->client->suppression()->invalid_emails()->_($email)->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -143,7 +143,7 @@ echo $response->body();
 $email = "test_url_param";
 $response = $sg->client->suppression()->invalid_emails()->_($email)->delete();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -153,7 +153,7 @@ echo $response->body();
 $email = "test_url_param";
 $response = $sg->client->suppression()->spam_report()->_($email)->get();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -163,7 +163,7 @@ echo $response->body();
 $email = "test_url_param";
 $response = $sg->client->suppression()->spam_report()->_($email)->delete();
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -173,7 +173,7 @@ echo $response->body();
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
 $response = $sg->client->suppression()->spam_reports()->get(null, $query_params);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -189,7 +189,7 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->suppression()->spam_reports()->delete($request_body);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
 ////////////////////////////////////////////////////
@@ -199,6 +199,6 @@ echo $response->body();
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
 $response = $sg->client->suppression()->unsubscribes()->get(null, $query_params);
 echo $response->statusCode();
-echo print_r($response->headers());
+print_r($response->headers());
 echo $response->body();
 
