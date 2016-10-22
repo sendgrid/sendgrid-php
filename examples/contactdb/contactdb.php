@@ -394,4 +394,3 @@ $response = $sg->client->contactdb()->segments()->_($segment_id)->recipients()->
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
-
