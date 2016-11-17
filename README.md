@@ -88,10 +88,10 @@ The following is the minimum needed code to send an email with the [/mail/send H
 
 ```php
 <?php
-// If you are using Composer
+// If you are using Composer (recommended)
 require 'vendor/autoload.php';
 
-// If you are not using Composer (recommended)
+// If you are not using Composer
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
 $from = new SendGrid\Email(null, "test@example.com");
@@ -117,10 +117,10 @@ The following is the minimum needed code to send an email without the /mail/send
 
 ```php
 <?php
-// If you are using Composer
+// If you are using Composer (recommended)
 require 'vendor/autoload.php';
 
-// If you are not using Composer (recommended)
+// If you are not using Composer
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
 $request_body = json_decode('{
