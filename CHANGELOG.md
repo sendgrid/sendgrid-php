@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.1.2] - 2016-10-11 ##
+### Added
+- Pull #330, Fixes #320
+- Delete subaccounts returns 200 issue resolved
+- The fix happened at the [php-http-client](https://github.com/sendgrid/php-http-client/releases/tag/v3.5.1) dependency.
+- Thanks to [emil](https://github.com/emilva) for the PR!
+
 ## [5.1.1] - 2016-10-11 ##
 ### Added
 - Pull #307, Fixes #276
