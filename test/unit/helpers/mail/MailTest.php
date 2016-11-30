@@ -121,7 +121,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
 
         $asm = new ASM();
         $asm->setGroupId(99);
-        $asm->setGroupsToDisplay(array(4, 5, 6, 7, 8));
+        $asm->setGroupsToDisplay([4, 5, 6, 7, 8]);
         $mail->setASM($asm);
 
         $mail->setIpPoolName("23");
