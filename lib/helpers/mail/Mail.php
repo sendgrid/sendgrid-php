@@ -807,7 +807,7 @@ class Personalization implements \JsonSerializable
 
     public function addCustomArg($key, $value)
     {
-        $this->custom_args[$key] = $value;
+        $this->custom_args[$key] = (string)$value;
     }
 
     public function getCustomArgs()
@@ -1020,7 +1020,7 @@ class Mail implements \JsonSerializable
 
     public function addCustomArg($key, $value)
     {
-        $this->custom_args[$key] = $value;
+        $this->custom_args[$key] = (string)$value;
     }
 
     public function getCustomArgs()
