@@ -80,6 +80,10 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
         $apiKey = 'SENDGRID_API_KEY';
         $sg2 = new SendGrid($apiKey, array('host' => 'https://api.test.com'));
         $this->assertEquals($sg2->client->getHost(), 'https://api.test.com');
+
+        $apiKey = 'SENDGRID_API_KEY';
+        $sg3 = new SendGrid($apiKey, array('curl' => array('foo' => 'bar')));
+        $this->assertEquals(array('foo' => 'bar'), $sg3->client->getCurlOptions());
     }
 
     public function test_access_settings_activity_get()
