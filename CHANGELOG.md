@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.2.0] - 2017-02-23 ##
+### Added
+- Pull #346
+- Allow passing curlOptions to the client
+- Thanks to [Taluu](https://github.com/sendgrid/sendgrid-php/pull/346) for the PR!
+
 ## [5.1.2] - 2016-10-11 ##
 ### Added
 - Pull #330, Fixes #320
