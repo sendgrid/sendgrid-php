@@ -35,9 +35,9 @@ class ReplyTo implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'email' => $this->getEmail()
-            ]
+			)
         );
     }
 }
@@ -71,10 +71,10 @@ class ClickTracking implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'enable' => $this->getEnable(),
                 'enable_text' => $this->getEnableText()
-            ]
+            )
         );
     }
 }
@@ -108,10 +108,10 @@ class OpenTracking implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'enable' => $this->getEnable(),
                 'substitution_tag' => $this->getSubstitutionTag()
-            ]
+            )
         );
     }
 }
@@ -167,12 +167,12 @@ class SubscriptionTracking implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'enable' => $this->getEnable(),
                 'text' => $this->getText(),
                 'html' => $this->getHtml(),
                 'substitution_tag' => $this->getSubstitutionTag()
-            ]
+            )
         );
     }
 }
@@ -250,14 +250,14 @@ class Ganalytics implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'enable' => $this->getEnable(),
                 'utm_source' => $this->getCampaignSource(),
                 'utm_medium' => $this->getCampaignMedium(),
                 'utm_term' => $this->getCampaignTerm(),
                 'utm_content' => $this->getCampaignContent(),
                 'utm_campaign' => $this->getCampaignName()
-            ]
+            )
         );
     }
 }
@@ -313,12 +313,12 @@ class TrackingSettings implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'click_tracking' => $this->getClickTracking(),
                 'open_tracking' => $this->getOpenTracking(),
                 'subscription_tracking' => $this->getSubscriptionTracking(),
                 'ganalytics' => $this->getGanalytics()
-            ]
+            )
         );
     }
 }
@@ -352,10 +352,10 @@ class BccSettings implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'enable' => $this->getEnable(),
                 'email' => $this->getEmail()
-            ]
+            )
         );
     }
 }
@@ -378,9 +378,9 @@ class BypassListManagement implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'enable' => $this->getEnable()
-            ]
+            )
         );
     }
 }
@@ -425,11 +425,11 @@ class Footer implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'enable' => $this->getEnable(),
                 'text' => $this->getText(),
                 'html' => $this->getHtml()
-            ]
+            )
         );
     }
 }
@@ -451,9 +451,9 @@ class SandBoxMode implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'enable' => $this->getEnable()
-            ]
+            )
         );
     }
 }
@@ -498,11 +498,11 @@ class SpamCheck implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'enable' => $this->getEnable(),
                 'threshold' => $this->getThreshold(),
                 'post_to_url' => $this->getPostToUrl()
-            ]
+            )
         );
     }
 }
@@ -569,13 +569,13 @@ class MailSettings implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'bcc' => $this->getBccSettings(),
                 'bypass_list_management' => $this->getBypassListManagement(),
                 'footer' => $this->getFooter(),
                 'sandbox_mode' => $this->getSandboxMode(),
                 'spam_check' => $this->getSpamCheck()
-            ]
+            )
         );
     }
 }
@@ -609,10 +609,10 @@ class ASM implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'group_id' => $this->getGroupId(),
                 'groups_to_display' => $this->getGroupsToDisplay()
-            ]
+            )
         );
     }
 }
@@ -679,13 +679,13 @@ class Attachment implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'content' => $this->getContent(),
                 'type' => $this->getType(),
                 'filename' => $this->getFilename(),
                 'disposition' => $this->getDisposition(),
                 'content_id' => $this->getContentID()
-            ]
+            )
         );
     }
 }
@@ -725,10 +725,10 @@ class Content implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'type' => $this->getType(),
                 'value' => $this->getValue()
-            ]
+            )
         );
     }
 }
@@ -828,7 +828,7 @@ class Personalization implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'to' => $this->getTos(),
                 'cc' => $this->getCcs(),
                 'bcc' => $this->getBccs(),
@@ -837,7 +837,7 @@ class Personalization implements \JsonSerializable
                 'substitutions' => $this->getSubstitutions(),
                 'custom_args' => $this->getCustomArgs(),
                 'send_at' => $this->getSendAt()
-            ]
+            )
         );
     }
 }
@@ -877,10 +877,10 @@ class Email implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'name' => $this->getName(),
                 'email' => $this->getEmail()
-            ]
+            )
         );
     }
 }
@@ -1101,7 +1101,7 @@ class Mail implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'from' => $this->getFrom(),
                 'personalizations' => $this->getPersonalizations(),
                 'subject' => $this->getSubject(),
@@ -1119,7 +1119,7 @@ class Mail implements \JsonSerializable
                 'mail_settings' => $this->getMailSettings(),
                 'tracking_settings' => $this->getTrackingSettings(),
                 'reply_to' => $this->getReplyTo()
-            ]
+            )
         );
     }
 }
