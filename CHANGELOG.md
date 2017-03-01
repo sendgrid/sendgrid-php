@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.2.1] - 2017-03-01 ##
+### Fixed
+- Pull #353
+- Fixed Issue #352
+- Relative path fix for background jobs
+- Thanks to [Tarcísio Zotelli Ferraz](https://github.com/tarcisiozf) for the PR!
+
 ## [5.2.0] - 2017-02-23 ##
 ### Added
 - Pull #346
