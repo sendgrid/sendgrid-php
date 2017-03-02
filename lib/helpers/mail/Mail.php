@@ -14,8 +14,7 @@ namespace SendGrid;
 
 class ReplyTo implements \JsonSerializable
 {
-    private
-        $email;
+    private $email;
 
     public function __construct($email)
     {
@@ -35,17 +34,16 @@ class ReplyTo implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'email' => $this->getEmail()
-            ]
+            )
         );
     }
 }
 
 class ClickTracking implements \JsonSerializable
 {
-    private
-        $enable,
+    private $enable,
         $enable_text;
 
     public function setEnable($enable)
@@ -71,18 +69,17 @@ class ClickTracking implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
-                'enable' => $this->getEnable(),
+            array(
+                'enable'      => $this->getEnable(),
                 'enable_text' => $this->getEnableText()
-            ]
+            )
         );
     }
 }
 
 class OpenTracking implements \JsonSerializable
 {
-    private
-        $enable,
+    private $enable,
         $substitution_tag;
 
     public function setEnable($enable)
@@ -108,18 +105,17 @@ class OpenTracking implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
-                'enable' => $this->getEnable(),
+            array(
+                'enable'           => $this->getEnable(),
                 'substitution_tag' => $this->getSubstitutionTag()
-            ]
+            )
         );
     }
 }
 
 class SubscriptionTracking implements \JsonSerializable
 {
-    private
-        $enable,
+    private $enable,
         $text,
         $html,
         $substitution_tag;
@@ -167,20 +163,19 @@ class SubscriptionTracking implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
-                'enable' => $this->getEnable(),
-                'text' => $this->getText(),
-                'html' => $this->getHtml(),
+            array(
+                'enable'           => $this->getEnable(),
+                'text'             => $this->getText(),
+                'html'             => $this->getHtml(),
                 'substitution_tag' => $this->getSubstitutionTag()
-            ]
+            )
         );
     }
 }
 
 class Ganalytics implements \JsonSerializable
 {
-    private
-        $enable,
+    private $enable,
         $utm_source,
         $utm_medium,
         $utm_term,
@@ -250,22 +245,21 @@ class Ganalytics implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
-                'enable' => $this->getEnable(),
-                'utm_source' => $this->getCampaignSource(),
-                'utm_medium' => $this->getCampaignMedium(),
-                'utm_term' => $this->getCampaignTerm(),
-                'utm_content' => $this->getCampaignContent(),
+            array(
+                'enable'       => $this->getEnable(),
+                'utm_source'   => $this->getCampaignSource(),
+                'utm_medium'   => $this->getCampaignMedium(),
+                'utm_term'     => $this->getCampaignTerm(),
+                'utm_content'  => $this->getCampaignContent(),
                 'utm_campaign' => $this->getCampaignName()
-            ]
+            )
         );
     }
 }
 
 class TrackingSettings implements \JsonSerializable
 {
-    private
-        $click_tracking,
+    private $click_tracking,
         $open_tracking,
         $subscription_tracking,
         $ganalytics;
@@ -313,20 +307,19 @@ class TrackingSettings implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
-                'click_tracking' => $this->getClickTracking(),
-                'open_tracking' => $this->getOpenTracking(),
+            array(
+                'click_tracking'        => $this->getClickTracking(),
+                'open_tracking'         => $this->getOpenTracking(),
                 'subscription_tracking' => $this->getSubscriptionTracking(),
-                'ganalytics' => $this->getGanalytics()
-            ]
+                'ganalytics'            => $this->getGanalytics()
+            )
         );
     }
 }
 
 class BccSettings implements \JsonSerializable
 {
-    private
-        $enable,
+    private $enable,
         $email;
 
     public function setEnable($enable)
@@ -352,18 +345,17 @@ class BccSettings implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'enable' => $this->getEnable(),
-                'email' => $this->getEmail()
-            ]
+                'email'  => $this->getEmail()
+            )
         );
     }
 }
 
 class BypassListManagement implements \JsonSerializable
 {
-    private
-        $enable;
+    private $enable;
 
     public function setEnable($enable)
     {
@@ -378,17 +370,16 @@ class BypassListManagement implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'enable' => $this->getEnable()
-            ]
+            )
         );
     }
 }
 
 class Footer implements \JsonSerializable
 {
-    private
-        $enable,
+    private $enable,
         $text,
         $html;
 
@@ -425,19 +416,18 @@ class Footer implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'enable' => $this->getEnable(),
-                'text' => $this->getText(),
-                'html' => $this->getHtml()
-            ]
+                'text'   => $this->getText(),
+                'html'   => $this->getHtml()
+            )
         );
     }
 }
 
 class SandBoxMode implements \JsonSerializable
 {
-    private
-        $enable;
+    private $enable;
 
     public function setEnable($enable)
     {
@@ -451,17 +441,16 @@ class SandBoxMode implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
+            array(
                 'enable' => $this->getEnable()
-            ]
+            )
         );
     }
 }
 
 class SpamCheck implements \JsonSerializable
 {
-    private
-        $enable,
+    private $enable,
         $threshold,
         $post_to_url;
 
@@ -498,19 +487,18 @@ class SpamCheck implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
-                'enable' => $this->getEnable(),
-                'threshold' => $this->getThreshold(),
+            array(
+                'enable'      => $this->getEnable(),
+                'threshold'   => $this->getThreshold(),
                 'post_to_url' => $this->getPostToUrl()
-            ]
+            )
         );
     }
 }
 
 class MailSettings implements \JsonSerializable
 {
-    private
-        $bcc,
+    private $bcc,
         $bypass_list_management,
         $footer,
         $sandbox_mode,
@@ -569,21 +557,20 @@ class MailSettings implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
-                'bcc' => $this->getBccSettings(),
+            array(
+                'bcc'                    => $this->getBccSettings(),
                 'bypass_list_management' => $this->getBypassListManagement(),
-                'footer' => $this->getFooter(),
-                'sandbox_mode' => $this->getSandboxMode(),
-                'spam_check' => $this->getSpamCheck()
-            ]
+                'footer'                 => $this->getFooter(),
+                'sandbox_mode'           => $this->getSandboxMode(),
+                'spam_check'             => $this->getSpamCheck()
+            )
         );
     }
 }
 
 class ASM implements \JsonSerializable
 {
-    private
-        $group_id,
+    private $group_id,
         $groups_to_display;
 
     public function setGroupId($group_id)
@@ -609,18 +596,17 @@ class ASM implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
-                'group_id' => $this->getGroupId(),
+            array(
+                'group_id'          => $this->getGroupId(),
                 'groups_to_display' => $this->getGroupsToDisplay()
-            ]
+            )
         );
     }
 }
 
 class Attachment implements \JsonSerializable
 {
-    private
-        $content,
+    private $content,
         $type,
         $filename,
         $disposition,
@@ -679,21 +665,20 @@ class Attachment implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
-                'content' => $this->getContent(),
-                'type' => $this->getType(),
-                'filename' => $this->getFilename(),
+            array(
+                'content'     => $this->getContent(),
+                'type'        => $this->getType(),
+                'filename'    => $this->getFilename(),
                 'disposition' => $this->getDisposition(),
-                'content_id' => $this->getContentID()
-            ]
+                'content_id'  => $this->getContentID()
+            )
         );
     }
 }
 
 class Content implements \JsonSerializable
 {
-    private
-        $type,
+    private $type,
         $value;
 
     public function __construct($type, $value)
@@ -725,18 +710,17 @@ class Content implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
-                'type' => $this->getType(),
+            array(
+                'type'  => $this->getType(),
                 'value' => $this->getValue()
-            ]
+            )
         );
     }
 }
 
 class Personalization implements \JsonSerializable
 {
-    private
-        $tos,
+    private $tos,
         $ccs,
         $bccs,
         $subject,
@@ -828,24 +812,23 @@ class Personalization implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
-                'to' => $this->getTos(),
-                'cc' => $this->getCcs(),
-                'bcc' => $this->getBccs(),
-                'subject' => $this->subject,
-                'headers' => $this->getHeaders(),
+            array(
+                'to'            => $this->getTos(),
+                'cc'            => $this->getCcs(),
+                'bcc'           => $this->getBccs(),
+                'subject'       => $this->subject,
+                'headers'       => $this->getHeaders(),
                 'substitutions' => $this->getSubstitutions(),
-                'custom_args' => $this->getCustomArgs(),
-                'send_at' => $this->getSendAt()
-            ]
+                'custom_args'   => $this->getCustomArgs(),
+                'send_at'       => $this->getSendAt()
+            )
         );
     }
 }
 
 class Email implements \JsonSerializable
 {
-    private
-        $name,
+    private $name,
         $email;
 
     public function __construct($name, $email)
@@ -877,10 +860,10 @@ class Email implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
-                'name' => $this->getName(),
+            array(
+                'name'  => $this->getName(),
                 'email' => $this->getEmail()
-            ]
+            )
         );
     }
 }
@@ -892,11 +875,9 @@ class Mail implements \JsonSerializable
 {
     const VERSION = '1.0.0';
 
-    protected
-        $namespace = 'SendGrid';
+    protected $namespace = 'SendGrid';
 
-    public
-        $from,
+    public $from,
         $personalization,
         $subject,
         $contents,
@@ -916,8 +897,7 @@ class Mail implements \JsonSerializable
 
     public function __construct($from = null, $subject = null, $to = null, $content = null)
     {
-        if (!empty($from) &&  !empty($subject) && !empty($to) && !empty($content))
-        {
+        if (!empty($from) &&  !empty($subject) && !empty($to) && !empty($content)) {
             $this->setFrom($from);
             $personalization = new Personalization();
             $personalization->addTo($to);
@@ -925,7 +905,6 @@ class Mail implements \JsonSerializable
             $this->setSubject($subject);
             $this->addContent($content);
         }
-
     }
 
     public function setFrom($email)
@@ -1028,8 +1007,8 @@ class Mail implements \JsonSerializable
         return $this->custom_args;
     }
 
-     public function setSendAt($send_at)
-     {
+    public function setSendAt($send_at)
+    {
         $this->send_at = $send_at;
     }
 
@@ -1101,25 +1080,25 @@ class Mail implements \JsonSerializable
     public function jsonSerialize()
     {
         return array_filter(
-            [
-                'from' => $this->getFrom(),
-                'personalizations' => $this->getPersonalizations(),
-                'subject' => $this->getSubject(),
-                'content' => $this->getContents(),
-                'attachments' => $this->getAttachments(),
-                'template_id' => $this->getTemplateId(),
-                'sections' => $this->getSections(),
-                'headers' => $this->getHeaders(),
-                'categories' => $this->getCategories(),
-                'custom_args' => $this->getCustomArgs(),
-                'send_at' => $this->getSendAt(),
-                'batch_id' => $this->getBatchId(),
-                'asm' => $this->getASM(),
-                'ip_pool_name' => $this->getIpPoolName(),
-                'mail_settings' => $this->getMailSettings(),
+            array(
+                'from'              => $this->getFrom(),
+                'personalizations'  => $this->getPersonalizations(),
+                'subject'           => $this->getSubject(),
+                'content'           => $this->getContents(),
+                'attachments'       => $this->getAttachments(),
+                'template_id'       => $this->getTemplateId(),
+                'sections'          => $this->getSections(),
+                'headers'           => $this->getHeaders(),
+                'categories'        => $this->getCategories(),
+                'custom_args'       => $this->getCustomArgs(),
+                'send_at'           => $this->getSendAt(),
+                'batch_id'          => $this->getBatchId(),
+                'asm'               => $this->getASM(),
+                'ip_pool_name'      => $this->getIpPoolName(),
+                'mail_settings'     => $this->getMailSettings(),
                 'tracking_settings' => $this->getTrackingSettings(),
-                'reply_to' => $this->getReplyTo()
-            ]
+                'reply_to'          => $this->getReplyTo()
+            )
         );
     }
 }

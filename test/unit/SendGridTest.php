@@ -8,17 +8,17 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
     public static function setUpBeforeClass()
     {
         self::$apiKey = "SENDGRID_API_KEY";
-        $host = array('host' => 'http://localhost:4010');
+        $host = ['host' => 'http://localhost:4010'];
         self::$sg = new SendGrid(self::$apiKey, $host);
-        if( file_exists( '/usr/local/bin/prism' ) == false ) {
-            if(strtoupper(substr(php_uname('s'), 0, 3)) != 'WIN'){
+        if (file_exists('/usr/local/bin/prism') == false) {
+            if (strtoupper(substr(php_uname('s'), 0, 3)) != 'WIN') {
                 try {
                     $proc_ls = proc_open("curl https://raw.githubusercontent.com/stoplightio/prism/master/install.sh",
-                                        array(
-                                            array("pipe","r"), //stdin
-                                            array("pipe","w"), //stdout
-                                            array("pipe","w")  //stderr
-                                        ),
+                                        [
+                                            ["pipe", "r"], //stdin
+                                            ["pipe", "w"], //stdout
+                                            ["pipe", "w"]  //stderr
+                                        ],
                                         $pipes);
                     $output_ls = stream_get_contents($pipes[1]);
                     fclose($pipes[0]);
@@ -26,11 +26,11 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
                     fclose($pipes[2]);
                     $return_value_ls = proc_close($proc_ls);
                     $proc_grep = proc_open("sh",
-                                            array(
-                                                array("pipe","r"), //stdin
-                                                array("pipe","w"), //stdout
-                                                array("pipe","w")  //stderr
-                                            ),
+                                            [
+                                                ["pipe", "r"], //stdin
+                                                ["pipe", "w"], //stdout
+                                                ["pipe", "w"]  //stderr
+                                            ],
                                             $pipes);
 
                     fwrite($pipes[0], $output_ls);
