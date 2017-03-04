@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.2.3] - 2017-03-03 ##
+### Fixed
+- Pull #334
+- Fixed serialization of empty JSON objects, fixes #332 & #314
+- Thanks to [Matthew Dreyer](https://github.com/Dreyer) for the PR!
+
 ## [5.2.2] - 2017-03-03 ##
 ### Fixed
 - Pull #323
