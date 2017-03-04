@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.2.2] - 2017-03-03 ##
+### Fixed
+- Pull #323
+- Typo 'user' for 'usr'
+- Thanks to [Mike Ralphson](https://github.com/MikeRalphson) for the PR!
+
 ## [5.2.1] - 2017-03-01 ##
 ### Fixed
 - Pull #353

@@ -16,7 +16,7 @@
   */
 class SendGrid
 {
-    const VERSION = '5.2.1';
+    const VERSION = '5.2.2';
 
     /**
      *
