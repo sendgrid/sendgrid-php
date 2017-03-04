@@ -3,6 +3,7 @@ dist/
 composer.lock
 vendor
 .env*
+sendgrid.env
 sendgrid-php.php
 composer.phar
 .editorconfig
