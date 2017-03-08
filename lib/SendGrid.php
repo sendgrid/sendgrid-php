@@ -47,6 +47,7 @@ class SendGrid
             'User-Agent: sendgrid/' . $this->version . ';php',
             'Accept: application/json'
             );
+
         $host = isset($options['host']) ? $options['host'] : 'https://api.sendgrid.com';
 
         $curlOptions = isset($options['curl']) ? $options['curl'] : null;
