@@ -3,6 +3,31 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.2.3] - 2017-03-03 ##
+### Fixed
+- Pull #334
+- Fixed serialization of empty JSON objects, fixes #332 & #314
+- Thanks to [Matthew Dreyer](https://github.com/Dreyer) for the PR!
+
+## [5.2.2] - 2017-03-03 ##
+### Fixed
+- Pull #323
+- Typo 'user' for 'usr'
+- Thanks to [Mike Ralphson](https://github.com/MikeRalphson) for the PR!
+
+## [5.2.1] - 2017-03-01 ##
+### Fixed
+- Pull #353
+- Fixed Issue #352
+- Relative path fix for background jobs
+- Thanks to [Tarcísio Zotelli Ferraz](https://github.com/tarcisiozf) for the PR!
+
+## [5.2.0] - 2017-02-23 ##
+### Added
+- Pull #346
+- Allow passing curlOptions to the client
+- Thanks to [Taluu](https://github.com/sendgrid/sendgrid-php/pull/346) for the PR!
+
 ## [5.1.2] - 2016-10-11 ##
 ### Added
 - Pull #330, Fixes #320

@@ -37,8 +37,11 @@ class ReplyTo implements \JsonSerializable
         return array_filter(
             [
                 'email' => $this->getEmail()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
@@ -74,8 +77,11 @@ class ClickTracking implements \JsonSerializable
             [
                 'enable' => $this->getEnable(),
                 'enable_text' => $this->getEnableText()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
@@ -111,8 +117,11 @@ class OpenTracking implements \JsonSerializable
             [
                 'enable' => $this->getEnable(),
                 'substitution_tag' => $this->getSubstitutionTag()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
@@ -172,8 +181,11 @@ class SubscriptionTracking implements \JsonSerializable
                 'text' => $this->getText(),
                 'html' => $this->getHtml(),
                 'substitution_tag' => $this->getSubstitutionTag()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
@@ -257,8 +269,11 @@ class Ganalytics implements \JsonSerializable
                 'utm_term' => $this->getCampaignTerm(),
                 'utm_content' => $this->getCampaignContent(),
                 'utm_campaign' => $this->getCampaignName()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
@@ -318,8 +333,11 @@ class TrackingSettings implements \JsonSerializable
                 'open_tracking' => $this->getOpenTracking(),
                 'subscription_tracking' => $this->getSubscriptionTracking(),
                 'ganalytics' => $this->getGanalytics()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
@@ -355,8 +373,11 @@ class BccSettings implements \JsonSerializable
             [
                 'enable' => $this->getEnable(),
                 'email' => $this->getEmail()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
@@ -380,8 +401,11 @@ class BypassListManagement implements \JsonSerializable
         return array_filter(
             [
                 'enable' => $this->getEnable()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
@@ -429,8 +453,11 @@ class Footer implements \JsonSerializable
                 'enable' => $this->getEnable(),
                 'text' => $this->getText(),
                 'html' => $this->getHtml()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
@@ -453,8 +480,11 @@ class SandBoxMode implements \JsonSerializable
         return array_filter(
             [
                 'enable' => $this->getEnable()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
@@ -502,8 +532,11 @@ class SpamCheck implements \JsonSerializable
                 'enable' => $this->getEnable(),
                 'threshold' => $this->getThreshold(),
                 'post_to_url' => $this->getPostToUrl()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
@@ -575,8 +608,11 @@ class MailSettings implements \JsonSerializable
                 'footer' => $this->getFooter(),
                 'sandbox_mode' => $this->getSandboxMode(),
                 'spam_check' => $this->getSpamCheck()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
@@ -612,8 +648,11 @@ class ASM implements \JsonSerializable
             [
                 'group_id' => $this->getGroupId(),
                 'groups_to_display' => $this->getGroupsToDisplay()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
@@ -685,8 +724,11 @@ class Attachment implements \JsonSerializable
                 'filename' => $this->getFilename(),
                 'disposition' => $this->getDisposition(),
                 'content_id' => $this->getContentID()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
@@ -728,8 +770,11 @@ class Content implements \JsonSerializable
             [
                 'type' => $this->getType(),
                 'value' => $this->getValue()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
@@ -837,8 +882,11 @@ class Personalization implements \JsonSerializable
                 'substitutions' => $this->getSubstitutions(),
                 'custom_args' => $this->getCustomArgs(),
                 'send_at' => $this->getSendAt()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
@@ -880,8 +928,11 @@ class Email implements \JsonSerializable
             [
                 'name' => $this->getName(),
                 'email' => $this->getEmail()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
@@ -1119,7 +1170,10 @@ class Mail implements \JsonSerializable
                 'mail_settings' => $this->getMailSettings(),
                 'tracking_settings' => $this->getTrackingSettings(),
                 'reply_to' => $this->getReplyTo()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }

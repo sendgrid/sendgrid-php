@@ -16,7 +16,7 @@
   */
 class SendGrid
 {
-    const VERSION = '5.1.2';
+    const VERSION = '5.2.3';
 
     /**
      *
@@ -38,7 +38,7 @@ class SendGrid
       * Setup the HTTP Client
       *
       * @param string $apiKey  your SendGrid API Key.
-      * @param array  $options an array of options, currently only "host" is implemented.
+      * @param array  $options an array of options, currently only "host" and "curl" are implemented.
       */
     public function __construct($apiKey, $options = array())
     {
@@ -48,22 +48,10 @@ class SendGrid
             'Accept: application/json'
             );
 
-        $settings = $this->getSettings($options);
-        $this->client = new \SendGrid\Client($settings['host'], $headers, '/v3', null, $settings['curlOptions']);
-    }
+        $host = isset($options['host']) ? $options['host'] : 'https://api.sendgrid.com';
 
-    /**
-     * Merge default and given options to ensure existance
-     * of all settings.
-     *
-     * @param array $options
-     * @return array
-     */
-    protected function getSettings(array $options)
-    {
-        return array_merge([
-            'host' => 'https://api.sendgrid.com',
-            'curlOptions' => [],
-        ], $options);
+        $curlOptions = isset($options['curl']) ? $options['curl'] : null;
+
+        $this->client = new \SendGrid\Client($host, $headers, '/v3', null, $curlOptions);
     }
 }

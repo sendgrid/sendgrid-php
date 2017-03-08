@@ -41,7 +41,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
                     fclose($pipes[2]);
                     proc_close($proc_grep);
                 } catch (Exception $e) {
-                    print("Error downloading the prism binary, you can try downloading directly here (https://github.com/stoplightio/prism/releases) and place in your /user/local/bin directory: " .  $e->getMessage() . "\n");
+                    print("Error downloading the prism binary, you can try downloading directly here (https://github.com/stoplightio/prism/releases) and place in your /usr/local/bin directory: " .  $e->getMessage() . "\n");
                     exit();
                 }
             } else {
@@ -59,7 +59,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
 
     public function testVersion()
     {
-        $this->assertEquals(SendGrid::VERSION, '5.1.2');
+        $this->assertEquals(SendGrid::VERSION, '5.2.3');
         $this->assertEquals(json_decode(file_get_contents(__DIR__ . '/../../composer.json'))->version, SendGrid::VERSION);
     }
 
@@ -81,8 +81,11 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
         $sg2 = new SendGrid($apiKey, array('host' => 'https://api.test.com'));
         $this->assertEquals($sg2->client->getHost(), 'https://api.test.com');
 
-        $sg3 = new SendGrid($apiKey, ['curlOptions' => [CURLOPT_PROXY => '127.0.0.1:8000']]);
-        $this->assertEquals($sg3->client->getCurlOptions(), [CURLOPT_PROXY => '127.0.0.1:8000']);
+        $sg3 = new SendGrid($apiKey, array('curl' => array('foo' => 'bar')));
+        $this->assertEquals(array('foo' => 'bar'), $sg3->client->getCurlOptions());
+      
+        $sg4 = new SendGrid($apiKey, ['curlOptions' => [CURLOPT_PROXY => '127.0.0.1:8000']]);
+        $this->assertEquals($sg4->client->getCurlOptions(), [CURLOPT_PROXY => '127.0.0.1:8000']);
     }
 
     public function test_access_settings_activity_get()
