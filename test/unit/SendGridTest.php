@@ -84,7 +84,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
         $sg3 = new SendGrid($apiKey, array('curl' => array('foo' => 'bar')));
         $this->assertEquals(array('foo' => 'bar'), $sg3->client->getCurlOptions());
       
-        $sg4 = new SendGrid($apiKey, ['curlOptions' => [CURLOPT_PROXY => '127.0.0.1:8000']]);
+        $sg4 = new SendGrid($apiKey, ['curl' => [CURLOPT_PROXY => '127.0.0.1:8000']]);
         $this->assertEquals($sg4->client->getCurlOptions(), [10004 => '127.0.0.1:8000']);
     }
 
