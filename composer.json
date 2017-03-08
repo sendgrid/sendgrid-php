@@ -19,11 +19,5 @@
   "type": "library",
   "autoload": {
     "files": ["lib/SendGrid.php", "lib/helpers/mail/Mail.php"]
-  },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/ninsuo/php-http-client.git"
-        }
-    ]
+  }
 }
