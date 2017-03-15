@@ -741,7 +741,7 @@ class Content implements \JsonSerializable
     public function __construct($type, $value)
     {
         $this->type = $type;
-        $this->value = $value;
+        $this->value = mb_convert_encoding($value, 'UTF-8', 'UTF-8');
     }
 
     public function setType($type)
@@ -756,7 +756,7 @@ class Content implements \JsonSerializable
 
     public function setValue($value)
     {
-        $this->value = $value;
+        $this->value = mb_convert_encoding($value, 'UTF-8', 'UTF-8');
     }
 
     public function getValue()
@@ -822,7 +822,7 @@ class Personalization implements \JsonSerializable
 
     public function setSubject($subject)
     {
-        $this->subject = $subject;
+        $this->subject = mb_convert_encoding($subject, 'UTF-8', 'UTF-8');
     }
 
     public function getSubject()
