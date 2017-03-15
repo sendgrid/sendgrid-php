@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [5.3.0] - 2017-03-15 ##
-### Fixed
+### Added
 - Pull #367
 - UTF8 encoding forced for content value and message subject
 - Thanks to [Chris Schuld](https://github.com/cbschuld) for the PR!
