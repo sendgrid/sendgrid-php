@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.4.0] - 2017-03-16 ##
+### Added
+- Pull #337
+- API level addressing of the string-only custom arg rule
+- Thanks to [Chris Schuld](https://github.com/cbschuld) for the PR!
+
 ## [5.3.0] - 2017-03-15 ##
 ### Added
 - Pull #367
