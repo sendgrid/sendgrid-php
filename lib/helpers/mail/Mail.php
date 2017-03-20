@@ -906,19 +906,28 @@ class Email implements \JsonSerializable
     {
         // 2017-03-20 - cbschuld
         // The v3 API requires names wrapped with double quotes.  It will accept slashed single quotes,
-        // however, it will not accept slashed double quotes.  Process: decode, strip/add slashes, remove double quotes
-        $this->name = str_replace(
-            '\"',
-            '',
-            addslashes(
-                stripslashes(
-                    html_entity_decode(
-                        $name,
-                        ENT_QUOTES
+        // however, it will not accept slashed double quotes.  Process: decode, strip/add slashes,
+        // remove double quotes, trim caller quotes and add quotes.  Finally, the SDK does expect an empty string
+        // and not an empty string wrapped in quotes.
+        $this->name = '"'.
+            trim(
+                str_replace(
+                '\"',
+                '',
+                addslashes(
+                    stripslashes(
+                        html_entity_decode(
+                            $name,
+                            ENT_QUOTES
+                        )
                     )
                 )
-            )
-        );
+            ),
+            '"'
+        ).'"';
+        if('""' === $this->name) {
+            $this->name = '';
+        }
     }
 
     public function getName()
@@ -958,7 +967,7 @@ class Mail implements \JsonSerializable
     const VERSION = '1.0.0';
 
     protected
-        $namespace = 'SendGrid';
+        $namespace = \SendGrid::class;
 
     public
         $from,
