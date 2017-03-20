@@ -898,13 +898,27 @@ class Email implements \JsonSerializable
 
     public function __construct($name, $email)
     {
-        $this->name = $name;
-        $this->email = $email;
+        $this->setName($name);
+        $this->setEmail($email);
     }
 
     public function setName($name)
     {
-        $this->name = $name;
+        // 2017-03-20 - cbschuld
+        // The v3 API requires names wrapped with double quotes.  It will accept slashed single quotes,
+        // however, it will not accept slashed double quotes.  Process: decode, strip/add slashes, remove double quotes
+        $this->name = str_replace(
+            '\"',
+            '',
+            addslashes(
+                stripslashes(
+                    html_entity_decode(
+                        $name,
+                        ENT_QUOTES
+                    )
+                )
+            )
+        );
     }
 
     public function getName()
