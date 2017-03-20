@@ -908,7 +908,7 @@ class Email implements \JsonSerializable
         // The v3 API requires names wrapped with double quotes.  It will accept slashed single quotes,
         // however, it will not accept slashed double quotes.  Process: decode, strip/add slashes,
         // remove double quotes, trim caller quotes and add quotes.  Finally, the SDK does expect an empty string
-        // and not an empty string wrapped in quotes.
+        // and not an empty string wrapped in quotes - to arrive at that result set name to null.
         $this->name = '"'.
             trim(
                 str_replace(
