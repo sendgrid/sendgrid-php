@@ -926,7 +926,7 @@ class Email implements \JsonSerializable
             '"'
         ).'"';
         if('""' === $this->name) {
-            $this->name = '';
+            $this->name = null;
         }
     }
 
