@@ -11,19 +11,19 @@
  */
 function hmacsha1($key, $data)
 {
-    $blocksize=64;
-    $hashfunc='sha1';
-    if (strlen($key)>$blocksize) {
-        $key=pack('H*', $hashfunc($key));
+    $blocksize = 64;
+    $hashfunc = 'sha1';
+    if (strlen($key) > $blocksize) {
+        $key = pack('H*', $hashfunc($key));
     }
-    $key=str_pad($key, $blocksize, chr(0x00));
-    $ipad=str_repeat(chr(0x36), $blocksize);
-    $opad=str_repeat(chr(0x5c), $blocksize);
+    $key = str_pad($key, $blocksize, chr(0x00));
+    $ipad = str_repeat(chr(0x36), $blocksize);
+    $opad = str_repeat(chr(0x5c), $blocksize);
     $hmac = pack(
                 'H*', $hashfunc(
-                    ($key^$opad).pack(
+                    ($key ^ $opad).pack(
                         'H*', $hashfunc(
-                            ($key^$ipad).$data
+                            ($key ^ $ipad).$data
                         )
                     )
                 )
@@ -38,7 +38,7 @@ function hmacsha1($key, $data)
 function hex2b64($str)
 {
     $raw = '';
-    for ($i=0; $i < strlen($str); $i+=2) {
+    for ($i = 0; $i < strlen($str); $i += 2) {
         $raw .= chr(hexdec(substr($str, $i, 2)));
     }
     return base64_encode($raw);
