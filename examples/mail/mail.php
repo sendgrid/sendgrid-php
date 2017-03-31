@@ -172,4 +172,3 @@ $response = $sg->client->mail()->send()->post($request_body);
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
-

@@ -172,4 +172,3 @@ $response = $sg->client->asm()->suppressions()->_($email)->get();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
-

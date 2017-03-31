@@ -14,8 +14,7 @@ namespace SendGrid;
 
 class ReplyTo implements \JsonSerializable
 {
-    private
-        $email;
+    private $email;
 
     public function __construct($email)
     {
@@ -47,9 +46,8 @@ class ReplyTo implements \JsonSerializable
 
 class ClickTracking implements \JsonSerializable
 {
-    private
-        $enable,
-        $enable_text;
+    private $enable;
+    private $enable_text;
 
     public function setEnable($enable)
     {
@@ -87,9 +85,8 @@ class ClickTracking implements \JsonSerializable
 
 class OpenTracking implements \JsonSerializable
 {
-    private
-        $enable,
-        $substitution_tag;
+    private $enable;
+    private $substitution_tag;
 
     public function setEnable($enable)
     {
@@ -127,11 +124,10 @@ class OpenTracking implements \JsonSerializable
 
 class SubscriptionTracking implements \JsonSerializable
 {
-    private
-        $enable,
-        $text,
-        $html,
-        $substitution_tag;
+    private $enable;
+    private $text;
+    private $html;
+    private $substitution_tag;
 
     public function setEnable($enable)
     {
@@ -191,13 +187,12 @@ class SubscriptionTracking implements \JsonSerializable
 
 class Ganalytics implements \JsonSerializable
 {
-    private
-        $enable,
-        $utm_source,
-        $utm_medium,
-        $utm_term,
-        $utm_content,
-        $utm_campaign;
+    private $enable;
+    private $utm_source;
+    private $utm_medium;
+    private $utm_term;
+    private $utm_content;
+    private $utm_campaign;
 
     public function setEnable($enable)
     {
@@ -279,11 +274,10 @@ class Ganalytics implements \JsonSerializable
 
 class TrackingSettings implements \JsonSerializable
 {
-    private
-        $click_tracking,
-        $open_tracking,
-        $subscription_tracking,
-        $ganalytics;
+    private $click_tracking;
+    private $open_tracking;
+    private $subscription_tracking;
+    private $ganalytics;
 
     public function setClickTracking($click_tracking)
     {
@@ -343,9 +337,8 @@ class TrackingSettings implements \JsonSerializable
 
 class BccSettings implements \JsonSerializable
 {
-    private
-        $enable,
-        $email;
+    private $enable;
+    private $email;
 
     public function setEnable($enable)
     {
@@ -383,8 +376,7 @@ class BccSettings implements \JsonSerializable
 
 class BypassListManagement implements \JsonSerializable
 {
-    private
-        $enable;
+    private $enable;
 
     public function setEnable($enable)
     {
@@ -411,10 +403,9 @@ class BypassListManagement implements \JsonSerializable
 
 class Footer implements \JsonSerializable
 {
-    private
-        $enable,
-        $text,
-        $html;
+    private $enable;
+    private $text;
+    private $html;
 
     public function setEnable($enable)
     {
@@ -463,8 +454,7 @@ class Footer implements \JsonSerializable
 
 class SandBoxMode implements \JsonSerializable
 {
-    private
-        $enable;
+    private $enable;
 
     public function setEnable($enable)
     {
@@ -490,10 +480,9 @@ class SandBoxMode implements \JsonSerializable
 
 class SpamCheck implements \JsonSerializable
 {
-    private
-        $enable,
-        $threshold,
-        $post_to_url;
+    private $enable;
+    private $threshold;
+    private $post_to_url;
 
     public function setEnable($enable)
     {
@@ -542,12 +531,11 @@ class SpamCheck implements \JsonSerializable
 
 class MailSettings implements \JsonSerializable
 {
-    private
-        $bcc,
-        $bypass_list_management,
-        $footer,
-        $sandbox_mode,
-        $spam_check;
+    private $bcc;
+    private $bypass_list_management;
+    private $footer;
+    private $sandbox_mode;
+    private $spam_check;
 
     public function setBccSettings($bcc)
     {
@@ -618,9 +606,8 @@ class MailSettings implements \JsonSerializable
 
 class ASM implements \JsonSerializable
 {
-    private
-        $group_id,
-        $groups_to_display;
+    private $group_id;
+    private $groups_to_display;
 
     public function setGroupId($group_id)
     {
@@ -658,12 +645,11 @@ class ASM implements \JsonSerializable
 
 class Attachment implements \JsonSerializable
 {
-    private
-        $content,
-        $type,
-        $filename,
-        $disposition,
-        $content_id;
+    private $content;
+    private $type;
+    private $filename;
+    private $disposition;
+    private $content_id;
 
     public function setContent($content)
     {
@@ -734,9 +720,8 @@ class Attachment implements \JsonSerializable
 
 class Content implements \JsonSerializable
 {
-    private
-        $type,
-        $value;
+    private $type;
+    private $value;
 
     public function __construct($type, $value)
     {
@@ -780,15 +765,14 @@ class Content implements \JsonSerializable
 
 class Personalization implements \JsonSerializable
 {
-    private
-        $tos,
-        $ccs,
-        $bccs,
-        $subject,
-        $headers,
-        $substitutions,
-        $custom_args,
-        $send_at;
+    private $tos;
+    private $ccs;
+    private $bccs;
+    private $subject;
+    private $headers;
+    private $substitutions;
+    private $custom_args;
+    private $send_at;
 
     public function addTo($email)
     {
@@ -892,9 +876,8 @@ class Personalization implements \JsonSerializable
 
 class Email implements \JsonSerializable
 {
-    private
-        $name,
-        $email;
+    private $name;
+    private $email;
 
     public function __construct($name, $email)
     {
@@ -943,32 +926,29 @@ class Mail implements \JsonSerializable
 {
     const VERSION = '1.0.0';
 
-    protected
-        $namespace = 'SendGrid';
+    protected $namespace = 'SendGrid';
 
-    public
-        $from,
-        $personalization,
-        $subject,
-        $contents,
-        $attachments,
-        $template_id,
-        $sections,
-        $headers,
-        $categories,
-        $custom_args,
-        $send_at,
-        $batch_id,
-        $asm,
-        $ip_pool_name,
-        $mail_settings,
-        $tracking_settings,
-        $reply_to;
+    public $from;
+    public $personalization;
+    public $subject;
+    public $contents;
+    public $attachments;
+    public $template_id;
+    public $sections;
+    public $headers;
+    public $categories;
+    public $custom_args;
+    public $send_at;
+    public $batch_id;
+    public $asm;
+    public $ip_pool_name;
+    public $mail_settings;
+    public $tracking_settings;
+    public $reply_to;
 
     public function __construct($from = null, $subject = null, $to = null, $content = null)
     {
-        if (!empty($from) &&  !empty($subject) && !empty($to) && !empty($content))
-        {
+        if (!empty($from) &&  !empty($subject) && !empty($to) && !empty($content)) {
             $this->setFrom($from);
             $personalization = new Personalization();
             $personalization->addTo($to);
@@ -976,7 +956,6 @@ class Mail implements \JsonSerializable
             $this->setSubject($subject);
             $this->addContent($content);
         }
-
     }
 
     public function setFrom($email)
@@ -1079,8 +1058,8 @@ class Mail implements \JsonSerializable
         return $this->custom_args;
     }
 
-     public function setSendAt($send_at)
-     {
+    public function setSendAt($send_at)
+    {
         $this->send_at = $send_at;
     }
 

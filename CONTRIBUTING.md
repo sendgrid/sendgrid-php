@@ -131,7 +131,7 @@ cd test/unit
 
 Generally, we follow the style guidelines as suggested by the official language. However, we ask that you conform to the styles that already exist in the library. If you wish to deviate, please explain your reasoning.
 
-- [pear coding standards](https://pear.php.net/manual/en/standards.php)
+- [PSR2 Coding Standards](http://www.php-fig.org/psr/psr-2/)
 
 Please run your code through:
 
@@ -188,6 +188,6 @@ Please run your code through:
    ```
 
 7. [Open a Pull Request](https://help.github.com/articles/using-pull-requests/)
-    with a clear title and description against the `master` branch. All tests must be passing before we will review the PR.
+	with a clear title and description against the `master` branch. All tests must be passing before we will review the PR.
 
 If you have any additional questions, please feel free to [email](mailto:dx@sendgrid.com) us or create an issue in this repo.
