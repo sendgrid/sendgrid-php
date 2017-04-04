@@ -967,16 +967,28 @@ class Mail implements \JsonSerializable
 
     public function __construct($from = null, $subject = null, $to = null, $content = null)
     {
-        if (!empty($from) &&  !empty($subject) && !empty($to) && !empty($content))
-        {
+        $from = $from ?: null;
+        if ($from !== null) {
             $this->setFrom($from);
-            $personalization = new Personalization();
-            $personalization->addTo($to);
-            $this->addPersonalization($personalization);
+        }
+
+        $subject = $subject ?: null;
+        if ($subject !== null) {
             $this->setSubject($subject);
+        }
+
+        $content = $content ?: null;
+        if ($content !== null) {
             $this->addContent($content);
         }
 
+        $to = $to ?: null;
+        if ($to !== null) {
+            $personalization = new Personalization();
+            $personalization->addTo($to);
+
+            $this->addPersonalization($personalization);
+        }
     }
 
     public function setFrom($email)
