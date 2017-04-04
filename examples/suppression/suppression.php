@@ -200,4 +200,3 @@ $response = $sg->client->suppression()->unsubscribes()->get(null, $query_params)
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
-

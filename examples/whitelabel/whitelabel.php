@@ -309,4 +309,3 @@ $response = $sg->client->whitelabel()->links()->_($link_id)->subuser()->post($re
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
-
