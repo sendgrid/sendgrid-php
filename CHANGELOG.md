@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.4.1] - 2017-04-04 ##
+### Added
+- Pull #373
+- PSR1 & PSR2 Conversion
+- Thanks to [Braunson Yager](https://github.com/Braunson) for the PR!
+
 ## [5.4.0] - 2017-03-16 ##
 ### Added
 - Pull #337
