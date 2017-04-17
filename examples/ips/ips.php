@@ -153,4 +153,3 @@ $response = $sg->client->ips()->_($ip_address)->get();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
-

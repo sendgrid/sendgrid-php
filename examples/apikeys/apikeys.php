@@ -83,4 +83,3 @@ $response = $sg->client->api_keys()->_($api_key_id)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
-

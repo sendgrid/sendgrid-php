@@ -61,4 +61,3 @@ $response = $sg->client->alerts()->_($alert_id)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
-

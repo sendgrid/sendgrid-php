@@ -138,7 +138,7 @@ class MailTest_Mail extends \PHPUnit_Framework_TestCase
         $bypass_list_management->setEnable(True);
         $mail_settings->setBypassListManagement($bypass_list_management);
         $footer = new Footer();
-        $footer->setEnable(true);
+        $footer->setEnable(True);
         $footer->setText('Footer Text');
         $footer->setHtml('<html><body>Footer Text</body></html>');
         $mail_settings->setFooter($footer);
@@ -151,7 +151,7 @@ class MailTest_Mail extends \PHPUnit_Framework_TestCase
 
         $tracking_settings = new TrackingSettings();
         $click_tracking = new ClickTracking();
-        $click_tracking->setEnable(true);
+        $click_tracking->setEnable(True);
         $click_tracking->setEnableText(True);
         $tracking_settings->setClickTracking($click_tracking);
         $open_tracking = new OpenTracking();

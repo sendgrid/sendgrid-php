@@ -38,4 +38,3 @@ $response = $sg->client->partner_settings()->new_relic()->get();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
-

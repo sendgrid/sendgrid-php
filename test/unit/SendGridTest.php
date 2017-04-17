@@ -10,8 +10,8 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
         self::$apiKey = "SENDGRID_API_KEY";
         $host = array('host' => 'http://localhost:4010');
         self::$sg = new SendGrid(self::$apiKey, $host);
-        if( file_exists( '/usr/local/bin/prism' ) == false ) {
-            if(strtoupper(substr(php_uname('s'), 0, 3)) != 'WIN'){
+        if (file_exists('/usr/local/bin/prism') == false) {
+            if (strtoupper(substr(php_uname('s'), 0, 3)) != 'WIN') {
                 try {
                     $proc_ls = proc_open("curl https://raw.githubusercontent.com/stoplightio/prism/master/install.sh",
                                         array(
@@ -59,7 +59,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
 
     public function testVersion()
     {
-        $this->assertEquals(SendGrid::VERSION, '5.4.0');
+        $this->assertEquals(SendGrid::VERSION, '5.4.1');
         $this->assertEquals(json_decode(file_get_contents(__DIR__ . '/../../composer.json'))->version, SendGrid::VERSION);
     }
 
