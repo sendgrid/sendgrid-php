@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [5.4.2] - 2017-04-18 ##
-### Added
+### Fixes
 - Fixes #292
 - Removes Prism file in sendgrid-php.zip
 
