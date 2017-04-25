@@ -2,10 +2,10 @@
 /**
   * This helper builds the request body for a /mail/send API call.
   *
-  * PHP version 5.3
+  * PHP version 5.6, 7
   *
   * @author    Elmer Thomas <dx@sendgrid.com>
-  * @copyright 2016 SendGrid
+  * @copyright 2017 SendGrid
   * @license   https://opensource.org/licenses/MIT The MIT License
   * @version   GIT: <git_id>
   * @link      http://packagist.org/packages/sendgrid/sendgrid
