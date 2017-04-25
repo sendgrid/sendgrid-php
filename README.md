@@ -167,7 +167,7 @@ require 'vendor/autoload.php';
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
 
-$response = $sg->client->suppressions()->bounces()->get();
+$response = $sg->client->suppression()->bounces()->get();
 
 print $response->statusCode();
 print $response->headers();
