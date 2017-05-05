@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.5.0] - 2017-05-04 ##
+### Added
+- Pull #393: Update [php-http-client](https://github.com/sendgrid/php-http-client) dependency
+- [v3.6](https://github.com/sendgrid/php-http-client/releases/tag/v3.6.0): Pass the curlOptions to the client in buildClient
+- [v3.7](https://github.com/sendgrid/php-http-client/releases/tag/v3.7.0): Added ability to get headers as associative array
+
 ## [5.4.2] - 2017-04-18 ##
 ### Fixes
 - Fixes #292
