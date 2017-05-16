@@ -13,7 +13,7 @@ $sg = new \SendGrid($apiKey);
 $response = $sg->client->mail()->batch()->post();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Validate batch ID #
@@ -23,7 +23,7 @@ $batch_id = "test_url_param";
 $response = $sg->client->mail()->batch()->_($batch_id)->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // v3 Mail Send #
@@ -171,4 +171,4 @@ $request_body = json_decode('{
 $response = $sg->client->mail()->send()->post($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
