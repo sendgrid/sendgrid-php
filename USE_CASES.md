@@ -40,7 +40,7 @@ $sg = new \SendGrid($apiKey);
 
 $response = $sg->client->mail()->send()->post($mail);
 echo $response->statusCode();
-echo $response->headers();
+print_r($response->headers());
 echo $response->body();
 
 ?>
@@ -112,7 +112,7 @@ try {
 }
 
 echo $response->statusCode();
-echo $response->headers();
+print_r($response->headers());
 echo $response->body();
 ```
 
@@ -164,5 +164,5 @@ try {
 
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 ```

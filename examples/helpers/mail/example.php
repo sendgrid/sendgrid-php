@@ -185,7 +185,7 @@ function sendHelloEmail()
     $response = $sg->client->mail()->send()->post($request_body);
     echo $response->statusCode();
     echo $response->body();
-    echo $response->headers();
+    print_r($response->headers());
 }
 
 function sendKitchenSink()
@@ -197,7 +197,7 @@ function sendKitchenSink()
     $response = $sg->client->mail()->send()->post($request_body);
     echo $response->statusCode();
     echo $response->body();
-    echo $response->headers();
+    print_r($response->headers());
 }
 
 sendHelloEmail();  // this will actually send an email
