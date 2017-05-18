@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.5.1] - 2017-05-18 ##
+### Fixed
+- Pull #396: Use `print_r` instead of `echo` on Arrays
+- Thanks to [Ryan P.C. McQuen](https://github.com/ryanpcmcquen) for the PR!
+
 ## [5.5.0] - 2017-05-04 ##
 ### Added
 - Pull #393: Update [php-http-client](https://github.com/sendgrid/php-http-client) dependency
