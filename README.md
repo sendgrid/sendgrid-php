@@ -54,23 +54,11 @@ Add SendGrid to your `composer.json` file. If you are not using [Composer](http:
 }
 ```
 
-Then at the top of your PHP script require the autoloader:
-
-```bash
-require 'vendor/autoload.php';
-```
-
 #### Alternative: Install package from zip
 
 If you are not using Composer, simply download and install the **[latest packaged release of the library as a zip](https://sendgrid-open-source.s3.amazonaws.com/sendgrid-php/sendgrid-php.zip)**.
 
 [**⬇︎ Download Packaged Library ⬇︎**](https://sendgrid-open-source.s3.amazonaws.com/sendgrid-php/sendgrid-php.zip)
-
-Then require the library from package:
-
-```php
-require("path/to/sendgrid-php/sendgrid-php.php");
-```
 
 Previous versions of the library can be found in the [version index](https://sendgrid-open-source.s3.amazonaws.com/index.html).
 
