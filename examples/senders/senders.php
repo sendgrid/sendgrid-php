@@ -30,8 +30,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->senders()->post($request_body);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Get all Sender Identities #
@@ -39,8 +39,8 @@ echo $response->body();
 
 $response = $sg->client->senders()->get();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Update a Sender Identity #
@@ -66,8 +66,8 @@ $request_body = json_decode('{
 $sender_id = "test_url_param";
 $response = $sg->client->senders()->_($sender_id)->patch($request_body);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // View a Sender Identity #
@@ -76,8 +76,8 @@ echo $response->body();
 $sender_id = "test_url_param";
 $response = $sg->client->senders()->_($sender_id)->get();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Delete a Sender Identity #
@@ -86,8 +86,8 @@ echo $response->body();
 $sender_id = "test_url_param";
 $response = $sg->client->senders()->_($sender_id)->delete();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Resend Sender Identity Verification #
@@ -96,6 +96,5 @@ echo $response->body();
 $sender_id = "test_url_param";
 $response = $sg->client->senders()->_($sender_id)->resend_verification()->post();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
-
+print_r($response->headers());

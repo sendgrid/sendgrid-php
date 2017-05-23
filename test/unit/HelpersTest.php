@@ -151,14 +151,14 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
 
         $mail_settings = new MailSettings();
         $bcc_settings = new BccSettings();
-        $bcc_settings->setEnable(True)
+        $bcc_settings->setEnable(true)
             ->setEmail("test@example.com");
         $mail_settings->setBccSettings($bcc_settings);
         $sandbox_mode = new SandBoxMode();
-        $sandbox_mode->setEnable(True);
+        $sandbox_mode->setEnable(true);
         $mail_settings->setSandboxMode($sandbox_mode);
         $bypass_list_management = new BypassListManagement();
-        $bypass_list_management->setEnable(True);
+        $bypass_list_management->setEnable(true);
         $mail_settings->setBypassListManagement($bypass_list_management);
         $footer = new Footer();
         $footer->setEnable(true);
@@ -166,7 +166,7 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
         $footer->setHtml("<html><body>Footer Text</body></html>");
         $mail_settings->setFooter($footer);
         $spam_check = new SpamCheck();
-        $spam_check->setEnable(True);
+        $spam_check->setEnable(true);
         $spam_check->setThreshold(1);
         $spam_check->setPostToUrl("https://spamcatcher.sendgrid.com");
         $mail_settings->setSpamCheck($spam_check);
@@ -175,20 +175,20 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
         $tracking_settings = new TrackingSettings();
         $click_tracking = new ClickTracking();
         $click_tracking->setEnable(true);
-        $click_tracking->setEnableText(True);
+        $click_tracking->setEnableText(true);
         $tracking_settings->setClickTracking($click_tracking);
         $open_tracking = new OpenTracking();
-        $open_tracking->setEnable(True);
+        $open_tracking->setEnable(true);
         $open_tracking->setSubstitutionTag("Optional tag to replace with the open image in the body of the message");
         $tracking_settings->setOpenTracking($open_tracking);
         $subscription_tracking = new SubscriptionTracking();
-        $subscription_tracking->setEnable(True)
+        $subscription_tracking->setEnable(true)
             ->setText("text to insert into the text/plain portion of the message")
             ->setHtml("<html><body>html to insert into the text/html portion of the message</body></html>")
             ->setSubstitutionTag("Optional tag to replace with the open image in the body of the message");
         $tracking_settings->setSubscriptionTracking($subscription_tracking);
         $ganalytics = new Ganalytics();
-        $ganalytics->setEnable(True)
+        $ganalytics->setEnable(true)
             ->setCampaignSource("some source")
             ->setCampaignTerm("some term")
             ->setCampaignContent("some content")

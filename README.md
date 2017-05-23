@@ -54,23 +54,11 @@ Add SendGrid to your `composer.json` file. If you are not using [Composer](http:
 }
 ```
 
-Then at the top of your PHP script require the autoloader:
-
-```bash
-require 'vendor/autoload.php';
-```
-
 #### Alternative: Install package from zip
 
 If you are not using Composer, simply download and install the **[latest packaged release of the library as a zip](https://sendgrid-open-source.s3.amazonaws.com/sendgrid-php/sendgrid-php.zip)**.
 
 [**⬇︎ Download Packaged Library ⬇︎**](https://sendgrid-open-source.s3.amazonaws.com/sendgrid-php/sendgrid-php.zip)
-
-Then require the library from package:
-
-```php
-require("path/to/sendgrid-php/sendgrid-php.php");
-```
 
 Previous versions of the library can be found in the [version index](https://sendgrid-open-source.s3.amazonaws.com/index.html).
 
@@ -88,21 +76,21 @@ The following is the minimum needed code to send an email with the [/mail/send H
 
 ```php
 <?php
-// If you are using Composer
+// If you are using Composer (recommended)
 require 'vendor/autoload.php';
+
+// If you are not using Composer (recommended)
+// require("path/to/sendgrid-php/sendgrid-php.php");
 
 use SendGrid\SendGrid;
 use SendGrid\Helper\Mail\Email;
 use SendGrid\Helper\Mail\Content;
 use SendGrid\Helper\Mail\Mail;
 
-// If you are not using Composer (recommended)
-// require("path/to/sendgrid-php/sendgrid-php.php");
-
-$from = new Email(null, "test@example.com");
-$subject = "Hello World from the SendGrid PHP Library!";
-$to = new Email(null, "test@example.com");
-$content = new Content("text/plain", "Hello, Email!");
+$from = new Email("Example User", "test@example.com");
+$subject = "Sending with SendGrid is Fun";
+$to = new Email("Example User", "test@example.com");
+$content = new Content("text/plain", "and easy to do anywhere, even with PHP");
 $mail = new Mail($from, $subject, $to, $content);
 
 $apiKey = getenv('SENDGRID_API_KEY');
@@ -122,13 +110,13 @@ The following is the minimum needed code to send an email without the /mail/send
 
 ```php
 <?php
-// If you are using Composer
+// If you are using Composer (recommended)
 require 'vendor/autoload.php';
-
-use SendGrid\SendGrid;
 
 // If you are not using Composer (recommended)
 // require("path/to/sendgrid-php/sendgrid-php.php");
+
+use SendGrid\SendGrid;
 
 $request_body = json_decode('{
   "personalizations": [
@@ -138,7 +126,7 @@ $request_body = json_decode('{
           "email": "test@example.com"
         }
       ],
-      "subject": "Hello World from the SendGrid PHP Library!"
+      "subject": "Sending with SendGrid is Fun"
     }
   ],
   "from": {
@@ -147,7 +135,7 @@ $request_body = json_decode('{
   "content": [
     {
       "type": "text/plain",
-      "value": "Hello, Email!"
+      "value": "and easy to do anywhere, even with PHP"
     }
   ]
 }');
@@ -157,8 +145,8 @@ $sg = new SendGrid($apiKey);
 
 $response = $sg->client->mail()->send()->post($request_body);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 ```
 
 ## General v3 Web API Usage (With Fluent Interface)
@@ -176,7 +164,7 @@ use SendGrid\SendGrid;
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new SendGrid($apiKey);
 
-$response = $sg->client->_("suppression/bounces")->get();
+$response = $sg->client->suppression()->bounces()->get();
 
 echo $response->statusCode();
 print_r($response->headers());
@@ -256,6 +244,5 @@ sendgrid-php is guided and supported by the SendGrid [Developer Experience Team]
 
 sendgrid-php is maintained and funded by SendGrid, Inc. The names and logos for sendgrid-php are trademarks of SendGrid, Inc.
 
-![SendGrid Logo]
-(https://uiux.s3.amazonaws.com/2016-logos/email-logo%402x.png)
+![SendGrid Logo](https://uiux.s3.amazonaws.com/2016-logos/email-logo%402x.png)
 

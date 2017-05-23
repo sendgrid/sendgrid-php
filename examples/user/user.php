@@ -201,8 +201,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->webhooks()->event()->settings()->patch($request_body);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve Event Webhook settings #
@@ -210,8 +210,8 @@ echo $response->body();
 
 $response = $sg->client->user()->webhooks()->event()->settings()->get();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Test Event Notification Settings  #
@@ -222,8 +222,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->webhooks()->event()->test()->post($request_body);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Create a parse setting #
@@ -237,8 +237,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->webhooks()->parse()->settings()->post($request_body);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve all parse settings #
@@ -246,8 +246,8 @@ echo $response->body();
 
 $response = $sg->client->user()->webhooks()->parse()->settings()->get();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Update a parse setting #
@@ -261,8 +261,8 @@ $request_body = json_decode('{
 $hostname = "test_url_param";
 $response = $sg->client->user()->webhooks()->parse()->settings()->_($hostname)->patch($request_body);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve a specific parse setting #
@@ -271,8 +271,8 @@ echo $response->body();
 $hostname = "test_url_param";
 $response = $sg->client->user()->webhooks()->parse()->settings()->_($hostname)->get();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Delete a parse setting #
@@ -281,8 +281,8 @@ echo $response->body();
 $hostname = "test_url_param";
 $response = $sg->client->user()->webhooks()->parse()->settings()->_($hostname)->delete();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieves Inbound Parse Webhook statistics. #
@@ -291,6 +291,5 @@ echo $response->body();
 $query_params = json_decode('{"aggregated_by": "day", "limit": "test_string", "start_date": "2016-01-01", "end_date": "2016-04-01", "offset": "test_string"}');
 $response = $sg->client->user()->webhooks()->parse()->stats()->get(null, $query_params);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
-
+print_r($response->headers());

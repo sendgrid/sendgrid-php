@@ -18,8 +18,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->alerts()->post($request_body);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve all alerts #
@@ -27,8 +27,8 @@ echo $response->body();
 
 $response = $sg->client->alerts()->get();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Update an alert #
@@ -40,8 +40,8 @@ $request_body = json_decode('{
 $alert_id = "test_url_param";
 $response = $sg->client->alerts()->_($alert_id)->patch($request_body);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve a specific alert #
@@ -50,8 +50,8 @@ echo $response->body();
 $alert_id = "test_url_param";
 $response = $sg->client->alerts()->_($alert_id)->get();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Delete an alert #
@@ -60,6 +60,5 @@ echo $response->body();
 $alert_id = "test_url_param";
 $response = $sg->client->alerts()->_($alert_id)->delete();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
-
+print_r($response->headers());

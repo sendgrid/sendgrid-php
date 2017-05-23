@@ -22,8 +22,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->api_keys()->post($request_body);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve all API Keys belonging to the authenticated user #
@@ -32,8 +32,8 @@ echo $response->body();
 $query_params = json_decode('{"limit": 1}');
 $response = $sg->client->api_keys()->get(null, $query_params);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Update the name & scopes of an API Key #
@@ -49,8 +49,8 @@ $request_body = json_decode('{
 $api_key_id = "test_url_param";
 $response = $sg->client->api_keys()->_($api_key_id)->put($request_body);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Update API keys #
@@ -62,8 +62,8 @@ $request_body = json_decode('{
 $api_key_id = "test_url_param";
 $response = $sg->client->api_keys()->_($api_key_id)->patch($request_body);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve an existing API Key #
@@ -72,8 +72,8 @@ echo $response->body();
 $api_key_id = "test_url_param";
 $response = $sg->client->api_keys()->_($api_key_id)->get();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Delete API keys #
@@ -82,6 +82,5 @@ echo $response->body();
 $api_key_id = "test_url_param";
 $response = $sg->client->api_keys()->_($api_key_id)->delete();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
-
+print_r($response->headers());

@@ -18,8 +18,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->asm()->groups()->post($request_body);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve information about multiple suppression groups #
@@ -28,8 +28,8 @@ echo $response->body();
 $query_params = json_decode('{"id": 1}');
 $response = $sg->client->asm()->groups()->get(null, $query_params);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Update a suppression group. #
@@ -43,8 +43,8 @@ $request_body = json_decode('{
 $group_id = "test_url_param";
 $response = $sg->client->asm()->groups()->_($group_id)->patch($request_body);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Get information on a single suppression group. #
@@ -53,8 +53,8 @@ echo $response->body();
 $group_id = "test_url_param";
 $response = $sg->client->asm()->groups()->_($group_id)->get();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Delete a suppression group. #
@@ -63,8 +63,8 @@ echo $response->body();
 $group_id = "test_url_param";
 $response = $sg->client->asm()->groups()->_($group_id)->delete();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Add suppressions to a suppression group #
@@ -79,8 +79,8 @@ $request_body = json_decode('{
 $group_id = "test_url_param";
 $response = $sg->client->asm()->groups()->_($group_id)->suppressions()->post($request_body);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve all suppressions for a suppression group #
@@ -89,8 +89,8 @@ echo $response->body();
 $group_id = "test_url_param";
 $response = $sg->client->asm()->groups()->_($group_id)->suppressions()->get();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Search for suppressions within a group #
@@ -106,8 +106,8 @@ $request_body = json_decode('{
 $group_id = "test_url_param";
 $response = $sg->client->asm()->groups()->_($group_id)->suppressions()->search()->post($request_body);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Delete a suppression from a suppression group #
@@ -117,8 +117,8 @@ $group_id = "test_url_param";
 $email = "test_url_param";
 $response = $sg->client->asm()->groups()->_($group_id)->suppressions()->_($email)->delete();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve all suppressions #
@@ -126,8 +126,8 @@ echo $response->body();
 
 $response = $sg->client->asm()->suppressions()->get();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Add recipient addresses to the global suppression group. #
@@ -141,8 +141,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->asm()->suppressions()->global()->post($request_body);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve a Global Suppression #
@@ -151,8 +151,8 @@ echo $response->body();
 $email = "test_url_param";
 $response = $sg->client->asm()->suppressions()->global()->_($email)->get();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Delete a Global Suppression #
@@ -161,8 +161,8 @@ echo $response->body();
 $email = "test_url_param";
 $response = $sg->client->asm()->suppressions()->global()->_($email)->delete();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve all suppression groups for an email address #
@@ -171,6 +171,5 @@ echo $response->body();
 $email = "test_url_param";
 $response = $sg->client->asm()->suppressions()->_($email)->get();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
-
+print_r($response->headers());

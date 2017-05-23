@@ -14,8 +14,8 @@ $sg = new SendGrid($apiKey);
 $query_params = json_decode('{"limit": 1}');
 $response = $sg->client->access_settings()->activity()->get(null, $query_params);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Add one or more IPs to the whitelist #
@@ -36,8 +36,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->access_settings()->whitelist()->post($request_body);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve a list of currently whitelisted IPs #
@@ -45,8 +45,8 @@ echo $response->body();
 
 $response = $sg->client->access_settings()->whitelist()->get();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Remove one or more IPs from the whitelist #
@@ -61,8 +61,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->access_settings()->whitelist()->delete($request_body);
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve a specific whitelisted IP #
@@ -71,8 +71,8 @@ echo $response->body();
 $rule_id = "test_url_param";
 $response = $sg->client->access_settings()->whitelist()->_($rule_id)->get();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Remove a specific IP from the whitelist #
@@ -81,6 +81,5 @@ echo $response->body();
 $rule_id = "test_url_param";
 $response = $sg->client->access_settings()->whitelist()->_($rule_id)->delete();
 echo $response->statusCode();
-print_r($response->headers());
 echo $response->body();
-
+print_r($response->headers());
