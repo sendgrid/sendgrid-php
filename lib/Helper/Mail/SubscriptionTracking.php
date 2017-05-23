@@ -8,11 +8,10 @@ namespace SendGrid\Helper\Mail;
  */
 class SubscriptionTracking implements \JsonSerializable
 {
-    private
-        $enable,
-        $text,
-        $html,
-        $substitution_tag;
+    private $enable;
+    private $text;
+    private $html;
+    private $substitution_tag;
 
     public function setEnable($enable)
     {
@@ -62,11 +61,14 @@ class SubscriptionTracking implements \JsonSerializable
     {
         return array_filter(
             [
-                'enable' => $this->getEnable(),
-                'text' => $this->getText(),
-                'html' => $this->getHtml(),
+                'enable'           => $this->getEnable(),
+                'text'             => $this->getText(),
+                'html'             => $this->getHtml(),
                 'substitution_tag' => $this->getSubstitutionTag()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }

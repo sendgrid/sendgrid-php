@@ -1,5 +1,15 @@
 <?php
-
+/**
+  * This helper builds the request body for a /mail/send API call.
+  *
+  * PHP version 5.6, 7
+  *
+  * @author    Elmer Thomas <dx@sendgrid.com>
+  * @copyright 2017 SendGrid
+  * @license   https://opensource.org/licenses/MIT The MIT License
+  * @version   GIT: <git_id>
+  * @link      http://packagist.org/packages/sendgrid/sendgrid
+  */
 namespace SendGrid\Helper\Mail;
 
 /**
@@ -145,7 +155,7 @@ class Mail implements \JsonSerializable
 
     public function addCustomArg($key, $value)
     {
-        $this->custom_args[$key] = $value;
+        $this->custom_args[$key] = (string)$value;
     }
 
     public function getCustomArgs()
@@ -234,24 +244,27 @@ class Mail implements \JsonSerializable
     {
         return array_filter(
             [
-                'from' => $this->getFrom(),
-                'personalizations' => $this->getPersonalizations(),
-                'subject' => $this->getSubject(),
-                'content' => $this->getContents(),
-                'attachments' => $this->getAttachments(),
-                'template_id' => $this->getTemplateId(),
-                'sections' => $this->getSections(),
-                'headers' => $this->getHeaders(),
-                'categories' => $this->getCategories(),
-                'custom_args' => $this->getCustomArgs(),
-                'send_at' => $this->getSendAt(),
-                'batch_id' => $this->getBatchId(),
-                'asm' => $this->getASM(),
-                'ip_pool_name' => $this->getIpPoolName(),
-                'mail_settings' => $this->getMailSettings(),
+                'from'              => $this->getFrom(),
+                'personalizations'  => $this->getPersonalizations(),
+                'subject'           => $this->getSubject(),
+                'content'           => $this->getContents(),
+                'attachments'       => $this->getAttachments(),
+                'template_id'       => $this->getTemplateId(),
+                'sections'          => $this->getSections(),
+                'headers'           => $this->getHeaders(),
+                'categories'        => $this->getCategories(),
+                'custom_args'       => $this->getCustomArgs(),
+                'send_at'           => $this->getSendAt(),
+                'batch_id'          => $this->getBatchId(),
+                'asm'               => $this->getASM(),
+                'ip_pool_name'      => $this->getIpPoolName(),
+                'mail_settings'     => $this->getMailSettings(),
                 'tracking_settings' => $this->getTrackingSettings(),
-                'reply_to' => $this->getReplyTo()
-            ]
-        );
+                'reply_to'          => $this->getReplyTo()
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }

@@ -73,12 +73,15 @@ class MailSettings implements \JsonSerializable
     {
         return array_filter(
             [
-                'bcc' => $this->getBccSettings(),
+                'bcc'                    => $this->getBccSettings(),
                 'bypass_list_management' => $this->getBypassListManagement(),
-                'footer' => $this->getFooter(),
-                'sandbox_mode' => $this->getSandboxMode(),
-                'spam_check' => $this->getSpamCheck()
-            ]
-        );
+                'footer'                 => $this->getFooter(),
+                'sandbox_mode'           => $this->getSandboxMode(),
+                'spam_check'             => $this->getSpamCheck()
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }

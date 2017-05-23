@@ -19,7 +19,7 @@ class Content implements \JsonSerializable
     public function __construct($type, $value)
     {
         $this->type = $type;
-        $this->value = $value;
+        $this->value = mb_convert_encoding($value, 'UTF-8', 'UTF-8');
     }
 
     public function setType($type)
@@ -35,7 +35,7 @@ class Content implements \JsonSerializable
 
     public function setValue($value)
     {
-        $this->value = $value;
+        $this->value = mb_convert_encoding($value, 'UTF-8', 'UTF-8');
         return $this;
     }
 
@@ -48,9 +48,12 @@ class Content implements \JsonSerializable
     {
         return array_filter(
             [
-                'type' => $this->getType(),
+                'type'  => $this->getType(),
                 'value' => $this->getValue()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }

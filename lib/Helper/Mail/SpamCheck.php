@@ -49,10 +49,13 @@ class SpamCheck implements \JsonSerializable
     {
         return array_filter(
             [
-                'enable' => $this->getEnable(),
-                'threshold' => $this->getThreshold(),
+                'enable'      => $this->getEnable(),
+                'threshold'   => $this->getThreshold(),
                 'post_to_url' => $this->getPostToUrl()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }

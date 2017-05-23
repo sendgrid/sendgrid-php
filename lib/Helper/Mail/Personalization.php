@@ -51,7 +51,7 @@ class Personalization implements \JsonSerializable
 
     public function setSubject($subject)
     {
-        $this->subject = $subject;
+        $this->subject = mb_convert_encoding($subject, 'UTF-8', 'UTF-8');
         return $this;
     }
 
@@ -84,7 +84,7 @@ class Personalization implements \JsonSerializable
 
     public function addCustomArg($key, $value)
     {
-        $this->custom_args[$key] = $value;
+        $this->custom_args[$key] = (string) $value;
         return $this;
     }
 
@@ -108,15 +108,18 @@ class Personalization implements \JsonSerializable
     {
         return array_filter(
             [
-                'to' => $this->getTos(),
-                'cc' => $this->getCcs(),
-                'bcc' => $this->getBccs(),
-                'subject' => $this->subject,
-                'headers' => $this->getHeaders(),
+                'to'            => $this->getTos(),
+                'cc'            => $this->getCcs(),
+                'bcc'           => $this->getBccs(),
+                'subject'       => $this->subject,
+                'headers'       => $this->getHeaders(),
                 'substitutions' => $this->getSubstitutions(),
-                'custom_args' => $this->getCustomArgs(),
-                'send_at' => $this->getSendAt()
-            ]
-        );
+                'custom_args'   => $this->getCustomArgs(),
+                'send_at'       => $this->getSendAt()
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }

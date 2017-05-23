@@ -8,8 +8,7 @@ namespace SendGrid\Helper\Mail;
  */
 class ReplyTo implements \JsonSerializable
 {
-    private
-        $email;
+    private $email;
 
     /**
      * ReplyTo constructor.
@@ -46,7 +45,10 @@ class ReplyTo implements \JsonSerializable
         return array_filter(
             [
                 'email' => $this->getEmail()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }

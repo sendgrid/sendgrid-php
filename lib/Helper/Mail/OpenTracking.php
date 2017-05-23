@@ -37,9 +37,12 @@ class OpenTracking implements \JsonSerializable
     {
         return array_filter(
             [
-                'enable' => $this->getEnable(),
+                'enable'           => $this->getEnable(),
                 'substitution_tag' => $this->getSubstitutionTag()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }

@@ -26,7 +26,10 @@ class BypassListManagement implements \JsonSerializable
         return array_filter(
             [
                 'enable' => $this->getEnable()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }

@@ -119,13 +119,16 @@ class Ganalytics implements \JsonSerializable
     {
         return array_filter(
             [
-                'enable' => $this->getEnable(),
-                'utm_source' => $this->getCampaignSource(),
-                'utm_medium' => $this->getCampaignMedium(),
-                'utm_term' => $this->getCampaignTerm(),
-                'utm_content' => $this->getCampaignContent(),
+                'enable'       => $this->getEnable(),
+                'utm_source'   => $this->getCampaignSource(),
+                'utm_medium'   => $this->getCampaignMedium(),
+                'utm_term'     => $this->getCampaignTerm(),
+                'utm_content'  => $this->getCampaignContent(),
                 'utm_campaign' => $this->getCampaignName()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }

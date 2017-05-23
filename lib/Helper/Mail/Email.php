@@ -8,9 +8,10 @@ namespace SendGrid\Helper\Mail;
  */
 class Email implements \JsonSerializable
 {
-    private
-        $name,
-        $email;
+    /** @var string **/
+    private $name;
+    /** @var string **/
+    private $email;
 
     /**
      * Email constructor.
@@ -49,9 +50,12 @@ class Email implements \JsonSerializable
     {
         return array_filter(
             [
-                'name' => $this->getName(),
+                'name'  => $this->getName(),
                 'email' => $this->getEmail()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }

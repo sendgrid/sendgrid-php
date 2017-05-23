@@ -61,11 +61,14 @@ class TrackingSettings implements \JsonSerializable
     {
         return array_filter(
             [
-                'click_tracking' => $this->getClickTracking(),
-                'open_tracking' => $this->getOpenTracking(),
+                'click_tracking'        => $this->getClickTracking(),
+                'open_tracking'         => $this->getOpenTracking(),
                 'subscription_tracking' => $this->getSubscriptionTracking(),
-                'ganalytics' => $this->getGanalytics()
-            ]
-        );
+                'ganalytics'            => $this->getGanalytics()
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }

@@ -73,12 +73,15 @@ class Attachment implements \JsonSerializable
     {
         return array_filter(
             [
-                'content' => $this->getContent(),
-                'type' => $this->getType(),
-                'filename' => $this->getFilename(),
+                'content'     => $this->getContent(),
+                'type'        => $this->getType(),
+                'filename'    => $this->getFilename(),
                 'disposition' => $this->getDisposition(),
-                'content_id' => $this->getContentID()
-            ]
-        );
+                'content_id'  => $this->getContentID()
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }

@@ -50,9 +50,12 @@ class Footer implements \JsonSerializable
         return array_filter(
             [
                 'enable' => $this->getEnable(),
-                'text' => $this->getText(),
-                'html' => $this->getHtml()
-            ]
-        );
+                'text'   => $this->getText(),
+                'html'   => $this->getHtml()
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }

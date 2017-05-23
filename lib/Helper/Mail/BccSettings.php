@@ -38,8 +38,11 @@ class BccSettings implements \JsonSerializable
         return array_filter(
             [
                 'enable' => $this->getEnable(),
-                'email' => $this->getEmail()
-            ]
-        );
+                'email'  => $this->getEmail()
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }

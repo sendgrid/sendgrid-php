@@ -37,9 +37,12 @@ class ASM implements \JsonSerializable
     {
         return array_filter(
             [
-                'group_id' => $this->getGroupId(),
+                'group_id'          => $this->getGroupId(),
                 'groups_to_display' => $this->getGroupsToDisplay()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }

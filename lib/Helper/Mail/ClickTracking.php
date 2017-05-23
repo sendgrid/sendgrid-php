@@ -54,9 +54,12 @@ class ClickTracking implements \JsonSerializable
     {
         return array_filter(
             [
-                'enable' => $this->getEnable(),
+                'enable'      => $this->getEnable(),
                 'enable_text' => $this->getEnableText()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
