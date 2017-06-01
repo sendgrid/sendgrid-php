@@ -214,6 +214,8 @@ If you are interested in the future direction of this project, please take a loo
 
 We encourage contribution to our libraries (you might even score some nifty swag), please see our [CONTRIBUTING](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md) guide for details.
 
+Things and stuff here
+
 Quick links:
 
 - [Feature Request](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#feature_request)
