@@ -74,6 +74,9 @@ Previous versions of the library can be found in the [version index](https://sen
 
 The following is the minimum needed code to send an email with the [/mail/send Helper](https://github.com/sendgrid/sendgrid-php/tree/master/lib/helpers/mail) ([here](https://github.com/sendgrid/sendgrid-php/blob/master/examples/helpers/mail/example.php#L22) is a full example):
 
+
+sldkfjwlkejrlwkejrlerjgoierg
+
 ```php
 <?php
 // If you are using Composer (recommended)
