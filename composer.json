@@ -1,7 +1,7 @@
 {
   "name": "sendgrid/sendgrid",
   "description": "This library allows you to quickly and easily send emails through SendGrid using PHP.",
-  "version": "5.5.1",
+  "version": "6.0.0",
   "homepage": "http://github.com/sendgrid/sendgrid-php",
   "license": "MIT",
   "keywords": ["SendGrid", "sendgrid", "email", "send", "grid"],
@@ -18,6 +18,13 @@
   },
   "type": "library",
   "autoload": {
-    "files": ["lib/SendGrid.php", "lib/helpers/mail/Mail.php"]
+    "psr-4": {
+      "SendGrid\\": "lib/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SendGrid\\Test\\": "test/unit/"
+    }
   }
 }

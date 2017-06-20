@@ -2,9 +2,10 @@
 // If you are using Composer
 require 'vendor/autoload.php';
 
+use SendGrid\SendGrid;
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new SendGrid($apiKey);
 
 ////////////////////////////////////////////////////
 // Retrieve Tracking Settings #
@@ -13,8 +14,8 @@ $sg = new \SendGrid($apiKey);
 $query_params = json_decode('{"limit": 1, "offset": 1}');
 $response = $sg->client->tracking_settings()->get(null, $query_params);
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Update Click Tracking Settings #
@@ -25,8 +26,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->tracking_settings()->click()->patch($request_body);
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Retrieve Click Track Settings #
@@ -34,8 +35,8 @@ print_r($response->headers());
 
 $response = $sg->client->tracking_settings()->click()->get();
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Update Google Analytics Settings #
@@ -51,8 +52,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->tracking_settings()->google_analytics()->patch($request_body);
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Retrieve Google Analytics Settings #
@@ -60,8 +61,8 @@ print_r($response->headers());
 
 $response = $sg->client->tracking_settings()->google_analytics()->get();
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Update Open Tracking Settings #
@@ -72,8 +73,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->tracking_settings()->open()->patch($request_body);
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Get Open Tracking Settings #
@@ -81,8 +82,8 @@ print_r($response->headers());
 
 $response = $sg->client->tracking_settings()->open()->get();
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Update Subscription Tracking Settings #
@@ -98,8 +99,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->tracking_settings()->subscription()->patch($request_body);
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Retrieve Subscription Tracking Settings #
@@ -107,5 +108,6 @@ print_r($response->headers());
 
 $response = $sg->client->tracking_settings()->subscription()->get();
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
+

@@ -2,9 +2,10 @@
 // If you are using Composer
 require 'vendor/autoload.php';
 
+use SendGrid\SendGrid;
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new SendGrid($apiKey);
 
 ////////////////////////////////////////////////////
 // Get a user's account information. #
@@ -12,8 +13,8 @@ $sg = new \SendGrid($apiKey);
 
 $response = $sg->client->user()->account()->get();
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Retrieve your credit balance #
@@ -21,8 +22,8 @@ print_r($response->headers());
 
 $response = $sg->client->user()->credits()->get();
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Update your account email address #
@@ -33,8 +34,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->email()->put($request_body);
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Retrieve your account email address #
@@ -42,8 +43,8 @@ print_r($response->headers());
 
 $response = $sg->client->user()->email()->get();
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Update your password #
@@ -55,8 +56,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->password()->put($request_body);
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Update a user's profile #
@@ -69,8 +70,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->profile()->patch($request_body);
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Get a user's profile #
@@ -78,8 +79,8 @@ print_r($response->headers());
 
 $response = $sg->client->user()->profile()->get();
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Cancel or pause a scheduled send #
@@ -91,8 +92,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->scheduled_sends()->post($request_body);
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Retrieve all scheduled sends #
@@ -100,8 +101,8 @@ print_r($response->headers());
 
 $response = $sg->client->user()->scheduled_sends()->get();
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Update user scheduled send information #
@@ -113,8 +114,8 @@ $request_body = json_decode('{
 $batch_id = "test_url_param";
 $response = $sg->client->user()->scheduled_sends()->_($batch_id)->patch($request_body);
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Retrieve scheduled send #
@@ -123,8 +124,8 @@ print_r($response->headers());
 $batch_id = "test_url_param";
 $response = $sg->client->user()->scheduled_sends()->_($batch_id)->get();
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Delete a cancellation or pause of a scheduled send #
@@ -133,8 +134,8 @@ print_r($response->headers());
 $batch_id = "test_url_param";
 $response = $sg->client->user()->scheduled_sends()->_($batch_id)->delete();
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Update Enforced TLS settings #
@@ -146,8 +147,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->settings()->enforced_tls()->patch($request_body);
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Retrieve current Enforced TLS settings. #
@@ -155,8 +156,8 @@ print_r($response->headers());
 
 $response = $sg->client->user()->settings()->enforced_tls()->get();
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Update your username #
@@ -167,8 +168,8 @@ $request_body = json_decode('{
 }');
 $response = $sg->client->user()->username()->put($request_body);
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Retrieve your username #
@@ -176,8 +177,8 @@ print_r($response->headers());
 
 $response = $sg->client->user()->username()->get();
 echo $response->statusCode();
-echo $response->body();
 print_r($response->headers());
+echo $response->body();
 
 ////////////////////////////////////////////////////
 // Update Event Notification Settings #

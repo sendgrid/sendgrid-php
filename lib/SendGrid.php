@@ -9,21 +9,17 @@
   * @link      http://packagist.org/packages/sendgrid/sendgrid
   */
 
+namespace SendGrid;
+
 /**
   * Interface to the SendGrid Web API
   */
 class SendGrid
 {
-    const VERSION = '5.5.1';
+    const VERSION = '6.0.0';
 
     /**
-     *
-     * @var string
-     */
-    protected $namespace = 'SendGrid';
-
-    /**
-     * @var \SendGrid\Client
+     * @var Client
      */
     public $client;
 
@@ -44,12 +40,10 @@ class SendGrid
             'Authorization: Bearer '.$apiKey,
             'User-Agent: sendgrid/' . $this->version . ';php',
             'Accept: application/json'
-            );
+        );
 
         $host = isset($options['host']) ? $options['host'] : 'https://api.sendgrid.com';
-
         $curlOptions = isset($options['curl']) ? $options['curl'] : null;
-
-        $this->client = new \SendGrid\Client($host, $headers, '/v3', null, $curlOptions);
+        $this->client = new Client($host, $headers, '/v3', null, $curlOptions);
     }
 }

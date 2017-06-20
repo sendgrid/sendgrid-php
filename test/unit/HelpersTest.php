@@ -1,7 +1,30 @@
 <?php
-namespace SendGrid;
+namespace SendGrid\Test;
 
-class MailTest_Mail extends \PHPUnit_Framework_TestCase
+use SendGrid\Helper\Mail\Ganalytics;
+use SendGrid\Helper\Mail\ASM;
+use SendGrid\Helper\Mail\Attachment;
+use SendGrid\Helper\Mail\BccSettings;
+use SendGrid\Helper\Mail\BypassListManagement;
+use SendGrid\Helper\Mail\ClickTracking;
+use SendGrid\Helper\Mail\Content;
+use SendGrid\Helper\Mail\Email;
+use SendGrid\Helper\Mail\Footer;
+use SendGrid\Helper\Mail\Mail;
+use SendGrid\Helper\Mail\MailSettings;
+use SendGrid\Helper\Mail\OpenTracking;
+use SendGrid\Helper\Mail\Personalization;
+use SendGrid\Helper\Mail\ReplyTo;
+use SendGrid\Helper\Mail\SandBoxMode;
+use SendGrid\Helper\Mail\SpamCheck;
+use SendGrid\Helper\Mail\SubscriptionTracking;
+use SendGrid\Helper\Mail\TrackingSettings;
+
+/**
+ * Class HelpersTest
+ * @package SendGrid\Test
+ */
+class HelpersTest extends \PHPUnit_Framework_TestCase
 {
     public function testBaseLineExample()
     {
@@ -48,14 +71,14 @@ class MailTest_Mail extends \PHPUnit_Framework_TestCase
         $email = new Email("Example User", "test@example.com");
         $personalization->addBcc($email);
         $email = new Email("Example User", "test@example.com");
-        $personalization->addBcc($email);
-        $personalization->setSubject("Hello World from the SendGrid PHP Library");
-        $personalization->addHeader("X-Test", "test");
-        $personalization->addHeader("X-Mock", "true");
-        $personalization->addSubstitution("%name%", "Example User");
-        $personalization->addSubstitution("%city%", "Denver");
-        $personalization->addCustomArg("user_id", "343");
-        $personalization->addCustomArg("type", "marketing");
+        $personalization->addBcc($email)
+            ->setSubject("Hello World from the SendGrid PHP Library")
+            ->addHeader("X-Test", "test")
+            ->addHeader("X-Mock", "true")
+            ->addSubstitution("%name%", "Example User")
+            ->addSubstitution("%city%", "Denver")
+            ->addCustomArg("user_id", "343")
+            ->addCustomArg("type", "marketing");
         $personalization->setSendAt(1443636843);
         $mail->addPersonalization($personalization);
 
@@ -71,14 +94,14 @@ class MailTest_Mail extends \PHPUnit_Framework_TestCase
         $email = new Email("Example User", "test@example.com");
         $personalization2->addBcc($email);
         $email = new Email("Example User", "test@example.com");
-        $personalization2->addBcc($email);
-        $personalization2->setSubject("Hello World from the SendGrid PHP Library");
-        $personalization2->addHeader("X-Test", "test");
-        $personalization2->addHeader("X-Mock", "true");
-        $personalization2->addSubstitution("%name%", "Example User");
-        $personalization2->addSubstitution("%city%", "Denver");
-        $personalization2->addCustomArg("user_id", "343");
-        $personalization2->addCustomArg("type", "marketing");
+        $personalization2->addBcc($email)
+            ->setSubject("Hello World from the SendGrid PHP Library")
+            ->addHeader("X-Test", "test")
+            ->addHeader("X-Mock", "true")
+            ->addSubstitution("%name%", "Example User")
+            ->addSubstitution("%city%", "Denver")
+            ->addCustomArg("user_id", "343")
+            ->addCustomArg("type", "marketing");
         $personalization2->setSendAt(1443636843);
         $mail->addPersonalization($personalization2);
 
@@ -88,19 +111,19 @@ class MailTest_Mail extends \PHPUnit_Framework_TestCase
         $mail->addContent($content);
 
         $attachment = new Attachment();
-        $attachment->setContent("TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2NpbmcgZWxpdC4gQ3JhcyBwdW12");
-        $attachment->setType("application/pdf");
-        $attachment->setFilename("balance_001.pdf");
-        $attachment->setDisposition("attachment");
+        $attachment->setContent("TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2NpbmcgZWxpdC4gQ3JhcyBwdW12")
+            ->setType("application/pdf")
+            ->setFilename("balance_001.pdf")
+            ->setDisposition("attachment");
         $attachment->setContentId("Balance Sheet");
         $mail->addAttachment($attachment);
 
         $attachment2 = new Attachment();
-        $attachment2->setContent("BwdW");
-        $attachment2->setType("image/png");
-        $attachment2->setFilename("banner.png");
-        $attachment2->setDisposition("inline");
-        $attachment2->setContentId("Banner");
+        $attachment2->setContent("BwdW")
+            ->setType("image/png")
+            ->setFilename("banner.png")
+            ->setDisposition("inline")
+            ->setContentId("Banner");
         $mail->addAttachment($attachment2);
 
         $mail->setTemplateId("439b6d66-4408-4ead-83de-5c83c2ee313a");
@@ -128,8 +151,8 @@ class MailTest_Mail extends \PHPUnit_Framework_TestCase
 
         $mail_settings = new MailSettings();
         $bcc_settings = new BccSettings();
-        $bcc_settings->setEnable(true);
-        $bcc_settings->setEmail("test@example.com");
+        $bcc_settings->setEnable(true)
+            ->setEmail("test@example.com");
         $mail_settings->setBccSettings($bcc_settings);
         $sandbox_mode = new SandBoxMode();
         $sandbox_mode->setEnable(true);
@@ -159,18 +182,18 @@ class MailTest_Mail extends \PHPUnit_Framework_TestCase
         $open_tracking->setSubstitutionTag("Optional tag to replace with the open image in the body of the message");
         $tracking_settings->setOpenTracking($open_tracking);
         $subscription_tracking = new SubscriptionTracking();
-        $subscription_tracking->setEnable(true);
-        $subscription_tracking->setText("text to insert into the text/plain portion of the message");
-        $subscription_tracking->setHtml("<html><body>html to insert into the text/html portion of the message</body></html>");
-        $subscription_tracking->setSubstitutionTag("Optional tag to replace with the open image in the body of the message");
+        $subscription_tracking->setEnable(true)
+            ->setText("text to insert into the text/plain portion of the message")
+            ->setHtml("<html><body>html to insert into the text/html portion of the message</body></html>")
+            ->setSubstitutionTag("Optional tag to replace with the open image in the body of the message");
         $tracking_settings->setSubscriptionTracking($subscription_tracking);
         $ganalytics = new Ganalytics();
-        $ganalytics->setEnable(true);
-        $ganalytics->setCampaignSource("some source");
-        $ganalytics->setCampaignTerm("some term");
-        $ganalytics->setCampaignContent("some content");
-        $ganalytics->setCampaignName("some name");
-        $ganalytics->setCampaignMedium("some medium");
+        $ganalytics->setEnable(true)
+            ->setCampaignSource("some source")
+            ->setCampaignTerm("some term")
+            ->setCampaignContent("some content")
+            ->setCampaignName("some name")
+            ->setCampaignMedium("some medium");
         $tracking_settings->setGanalytics($ganalytics);
         $mail->setTrackingSettings($tracking_settings);
 

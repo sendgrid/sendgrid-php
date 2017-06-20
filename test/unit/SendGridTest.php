@@ -1,4 +1,26 @@
 <?php
+namespace SendGrid\Test;
+
+use SendGrid\SendGrid;
+use SendGrid\Helper\Mail\ASM;
+use SendGrid\Helper\Mail\Attachment;
+use SendGrid\Helper\Mail\BccSettings;
+use SendGrid\Helper\Mail\BypassListManagement;
+use SendGrid\Helper\Mail\ClickTracking;
+use SendGrid\Helper\Mail\Content;
+use SendGrid\Helper\Mail\Email;
+use SendGrid\Helper\Mail\Footer;
+use SendGrid\Helper\Mail\Mail;
+use SendGrid\Helper\Mail\MailSettings;
+use SendGrid\Helper\Mail\OpenTracking;
+use SendGrid\Helper\Mail\Personalization;
+use SendGrid\Helper\Mail\ReplyTo;
+use SendGrid\Helper\Mail\SandBoxMode;
+use SendGrid\Helper\Mail\SpamCheck;
+use SendGrid\Helper\Mail\SubscriptionTracking;
+use SendGrid\Helper\Mail\TrackingSettings;
+use SendGrid\Helper\Mail\Ganalytics;
+
 class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
 {
     protected static $apiKey;
@@ -40,7 +62,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
                     fclose($pipes[1]);
                     fclose($pipes[2]);
                     proc_close($proc_grep);
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     print("Error downloading the prism binary, you can try downloading directly here (https://github.com/stoplightio/prism/releases) and place in your /usr/local/bin directory: " .  $e->getMessage() . "\n");
                     exit();
                 }
@@ -70,7 +92,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
 
     public function testVersion()
     {
-        $this->assertEquals(SendGrid::VERSION, '5.5.1');
+        $this->assertEquals(SendGrid::VERSION, '6.0.0');
         $this->assertEquals(json_decode(file_get_contents(__DIR__ . '/../../composer.json'))->version, SendGrid::VERSION);
     }
 
