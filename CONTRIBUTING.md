@@ -90,7 +90,7 @@ source ./sendgrid.env
 
 See the [examples folder](https://github.com/sendgrid/sendgrid-php/tree/master/examples) to get started quickly.
 
-If you are using composer, replace <PATH_TO> with the path to your `vendor/autoload.php`. Otherwise, include lib/SendGrid.php and lib/helpers/mail/Mail.php.
+If you are using composer, replace <PATH_TO> with the path to your `vendor/autoload.php`. Otherwise, include lib/loader.php.
 
 <a name="understanding_the_codebase"></a>
 ## Understanding the Code Base
