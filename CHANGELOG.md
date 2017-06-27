@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.6.0] - 2017-06-26 ##
+### Added
+- Pull #405: Updating docs and non-composer includes
+- Thanks to [Casey Wilson](https://github.com/caseyw) for the PR!
+
 ## [5.5.1] - 2017-05-18 ##
 ### Fixed
 - Pull #396: Use `print_r` instead of `echo` on Arrays
