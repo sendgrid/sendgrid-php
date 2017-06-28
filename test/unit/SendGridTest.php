@@ -54,7 +54,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
         exec($command, $op);
         self::$pid = (int)$op[0];
         sleep(15);
-        print("\nPrism Started");
+        print("\nPrism Started\n\n");
     }
 
     public function testHelloWorld()
