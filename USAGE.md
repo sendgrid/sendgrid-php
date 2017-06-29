@@ -1299,7 +1299,7 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 
 
 ```php
-$query_params = json_decode('{"page": 1, "page_size": 1, "list_id": 1}');
+$query_params = json_decode('{"page": 1, "page_size": 1}');
 $list_id = "test_url_param";
 $response = $sg->client->contactdb()->lists()->_($list_id)->recipients()->get(null, $query_params);
 echo $response->statusCode();
