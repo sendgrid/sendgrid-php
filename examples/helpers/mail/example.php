@@ -169,7 +169,7 @@ function kitchenSink()
     $tracking_settings->setGanalytics($ganalytics);
     $mail->setTrackingSettings($tracking_settings);
 
-    $reply_to = new ReplyTo("test@example.com");
+    $reply_to = new ReplyTo("test@example.com", "Optional Name");
     $mail->setReplyTo($reply_to);
 
     //echo json_encode($mail, JSON_PRETTY_PRINT), "\n";
