@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.6.2] - 2017-06-29 ##
+### Fix
+- PR #410: Adding name for ReplyTo for issue #390
+- Thanks to [Casey Wilson](https://github.com/caseyw) for the PR!
+
 ## [5.6.1] - 2017-06-26 ##
 ### Fix
 - Versioning mistake (forgot the .0 at the end)
