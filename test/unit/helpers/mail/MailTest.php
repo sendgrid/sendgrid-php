@@ -22,7 +22,7 @@ class MailTest_Mail extends \PHPUnit_Framework_TestCase
     public function testKitchenSinkExample()
     {
         $from = new Email("DX", "test@example.com");
-        $subject = Hello World from the SendGrid PHP Library");
+        $subject = "Hello World from the SendGrid PHP Library";
         $to = new Email("Example User", "test@example.com");
         $content = new Content("text/plain", "some text here");
         $mail = new Mail($from, $subject, $to, $content);
