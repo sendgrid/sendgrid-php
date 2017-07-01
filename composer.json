@@ -18,6 +18,9 @@
   },
   "type": "library",
   "autoload": {
-    "files": ["lib/SendGrid.php", "lib/helpers/mail/Mail.php"]
+    "psr-4": {"Helpers\\": "lib/Helpers/"},
+    "files": [
+      "lib/SendGrid.php"
+    ]
   }
 }

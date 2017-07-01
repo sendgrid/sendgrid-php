@@ -1,8 +1,11 @@
 <?php
-namespace SendGrid;
+
+namespace Helpers;
 
 // If you are using Composer
-require __DIR__ . '<PATH_TO>/vendor/autoload.php';
+require 'vendor/autoload.php';
+// If you're using the loader
+//require '<PROJECT-ROOT>/lib/loader.php';
 
 
 function helloEmail()

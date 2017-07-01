@@ -9,6 +9,8 @@
   * @link      http://packagist.org/packages/sendgrid/sendgrid
   */
 
+namespace SendGrid;
+
 /**
   * Interface to the SendGrid Web API
   */

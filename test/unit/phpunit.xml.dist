@@ -2,8 +2,7 @@
 <phpunit bootstrap="bootstrap.php">
   <testsuites>
     <testsuite name="General">
-      <file>./SendGrid.php</file>
-      <file>./helpers/mail/Mail.php</file>
+      <directory>*.php</directory>
     </testsuite>
   </testsuites>
 </phpunit>

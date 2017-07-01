@@ -1,5 +1,6 @@
 <?php
-namespace SendGrid;
+
+namespace Helpers;
 
 class MailTest_Mail extends \PHPUnit_Framework_TestCase
 {
