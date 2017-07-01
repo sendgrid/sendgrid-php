@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [6.0.0] - 2017-06-30 ##
+### BREAKING CHANGE
+- PR #408: Update Mail constructor to signify which parameters are required for sending all email
+- The `Mail()` constructor now requires `$from`, `$subject`, `$to` and `$content` parameters like so: `Mail($from, $subject, $to, $content)`. Those are the minimaly required paramaters to send an email.
+- Thanks to [Casey Wilson](https://github.com/caseyw) for the PR!
+
 ## [5.6.2] - 2017-06-29 ##
 ### Fix
 - PR #410: Adding name for ReplyTo for issue #390

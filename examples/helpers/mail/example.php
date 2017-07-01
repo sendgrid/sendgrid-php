@@ -21,61 +21,55 @@ function helloEmail()
 
 function kitchenSink()
 {
-    $mail = new Mail();
-
-    $email = new Email("DX", "test@example.com");
-    $mail->setFrom($email);
-
-    $mail->setSubject("Hello World from the SendGrid PHP Library");
-
-    $personalization = new Personalization();
-    $email1 = new Email("Example User", "test1@example.com");
-    $personalization->addTo($email1);
-    $email2 = new Email("Example User", "test2@example.com");
-    $personalization->addTo($email2);
-    $email3 = new Email("Example User", "test3@example.com");
-    $personalization->addCc($email3);
-    $email4 = new Email("Example User", "test4@example.com");
-    $personalization->addCc($email4);
-    $email5 = new Email("Example User", "test5@example.com");
-    $personalization->addBcc($email5);
-    $email6 = new Email("Example User", "test6@example.com");
-    $personalization->addBcc($email6);
-    $personalization->setSubject("Hello World from the SendGrid PHP Library");
-    $personalization->addHeader("X-Test", "test");
-    $personalization->addHeader("X-Mock", "true");
-    $personalization->addSubstitution("%name%", "Example User");
-    $personalization->addSubstitution("%city%", "Denver");
-    $personalization->addCustomArg("user_id", "343");
-    $personalization->addCustomArg("type", "marketing");
-    $personalization->setSendAt(1443636843);
-    $mail->addPersonalization($personalization);
-
-    $personalization2 = new Personalization();
-    $email7 = new Email("Example User", "test7@example.com");
-    $personalization2->addTo($email7);
-    $email8 = new Email("Example User", "test8@example.com");
-    $personalization2->addTo($email8);
-    $email9 = new Email("Example User", "test9@example.com");
-    $personalization2->addCc($email9);
-    $email10 = new Email("Example User", "test10@example.com");
-    $personalization2->addCc($email10);
-    $email11 = new Email("Example User", "test11@example.com");
-    $personalization2->addBcc($email11);
-    $email12 = new Email("Example User", "test12@example.com");
-    $personalization2->addBcc($email12);
-    $personalization2->setSubject("Hello World from the SendGrid PHP Library");
-    $personalization2->addHeader("X-Test", "test");
-    $personalization2->addHeader("X-Mock", "true");
-    $personalization2->addSubstitution("%name%", "Example User");
-    $personalization2->addSubstitution("%city%", "Denver");
-    $personalization2->addCustomArg("user_id", "343");
-    $personalization2->addCustomArg("type", "marketing");
-    $personalization2->setSendAt(1443636843);
-    $mail->addPersonalization($personalization2);
-
+    $from = new Email("DX", "test@example.com");
+    $subject = "Hello World from the SendGrid PHP Library";
+    $to = new Email("Example User", "test1@example.com");
     $content = new Content("text/plain", "some text here");
-    $mail->addContent($content);
+
+    $mail = new Mail($from, $subject, $to, $content);
+
+    $email2 = new Email("Example User", "test2@example.com");
+    $mail->personalization[0]->addTo($email2);
+    $email3 = new Email("Example User", "test3@example.com");
+    $mail->personalization[0]->addCc($email3);
+    $email4 = new Email("Example User", "test4@example.com");
+    $mail->personalization[0]->addCc($email4);
+    $email5 = new Email("Example User", "test5@example.com");
+    $mail->personalization[0]->addBcc($email5);
+    $email6 = new Email("Example User", "test6@example.com");
+    $mail->personalization[0]->addBcc($email6);
+    $mail->personalization[0]->setSubject("Hello World from the SendGrid PHP Library");
+    $mail->personalization[0]->addHeader("X-Test", "test");
+    $mail->personalization[0]->addHeader("X-Mock", "true");
+    $mail->personalization[0]->addSubstitution("%name%", "Example User");
+    $mail->personalization[0]->addSubstitution("%city%", "Denver");
+    $mail->personalization[0]->addCustomArg("user_id", "343");
+    $mail->personalization[0]->addCustomArg("type", "marketing");
+    $mail->personalization[0]->setSendAt(1443636843);
+
+    $personalization1 = new Personalization();
+    $email7 = new Email("Example User", "test7@example.com");
+    $personalization1->addTo($email7);
+    $email8 = new Email("Example User", "test8@example.com");
+    $personalization1->addTo($email8);
+    $email9 = new Email("Example User", "test9@example.com");
+    $personalization1->addCc($email9);
+    $email10 = new Email("Example User", "test10@example.com");
+    $personalization1->addCc($email10);
+    $email11 = new Email("Example User", "test11@example.com");
+    $personalization1->addBcc($email11);
+    $email12 = new Email("Example User", "test12@example.com");
+    $personalization1->addBcc($email12);
+    $personalization1->setSubject("Hello World from the SendGrid PHP Library");
+    $personalization1->addHeader("X-Test", "test");
+    $personalization1->addHeader("X-Mock", "true");
+    $personalization1->addSubstitution("%name%", "Example User");
+    $personalization1->addSubstitution("%city%", "Denver");
+    $personalization1->addCustomArg("user_id", "343");
+    $personalization1->addCustomArg("type", "marketing");
+    $personalization1->setSendAt(1443636843);
+    $mail->addPersonalization($personalization1);
+
     $content = new Content("text/html", "<html><body>some text here</body></html>");
     $mail->addContent($content);
 
