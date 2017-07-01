@@ -962,16 +962,14 @@ class Mail implements \JsonSerializable
     public $tracking_settings;
     public $reply_to;
 
-    public function __construct($from = null, $subject = null, $to = null, $content = null)
+    public function __construct($from, $subject, $to, $content)
     {
-        if (!empty($from) && !empty($subject) && !empty($to) && !empty($content)) {
-            $this->setFrom($from);
-            $personalization = new Personalization();
-            $personalization->addTo($to);
-            $this->addPersonalization($personalization);
-            $this->setSubject($subject);
-            $this->addContent($content);
-        }
+        $this->setFrom($from);
+	    $this->setSubject($subject);
+	    $personalization = new Personalization();
+        $personalization->addTo($to);
+        $this->addPersonalization($personalization);
+        $this->addContent($content);
     }
 
     public function setFrom($email)
