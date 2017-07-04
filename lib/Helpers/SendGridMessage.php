@@ -16,7 +16,7 @@ namespace Helpers;
 /**
   * The final request body object
   */
-class Mail implements \JsonSerializable
+class SendGridMessage implements \JsonSerializable
 {
     const VERSION = '1.0.0';
 

@@ -10,7 +10,7 @@ class MailTest_Mail extends \PHPUnit_Framework_TestCase
         $to = new Email(null, "test@example.com");
         $subject = "Hello World from the SendGrid PHP Library";
         $content = new Content("text/plain", "some text here");
-        $mail = new Mail($from, $subject, $to, $content);
+        $mail = new SendGridMessage($from, $subject, $to, $content);
        
         $content = new Content("text/html", "<html><body>some text here</body></html>");
         $mail->addContent($content);
@@ -26,7 +26,7 @@ class MailTest_Mail extends \PHPUnit_Framework_TestCase
         $subject = "Hello World from the SendGrid PHP Library";
         $to = new Email("Example User", "test@example.com");
         $content = new Content("text/plain", "some text here");
-        $mail = new Mail($from, $subject, $to, $content);
+        $mail = new SendGridMessage($from, $subject, $to, $content);
   
         $email = new Email("Example User", "test@example.com");
         $mail->personalization[0]->addTo($email);

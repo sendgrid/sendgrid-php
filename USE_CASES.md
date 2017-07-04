@@ -32,7 +32,7 @@ $attachment->setType("application/text");
 $attachment->setDisposition("attachment");
 $attachment->setFilename("my_file.txt");
 
-$mail = new \Helpers\Mail($from, $subject, $to, $content);
+$mail = new \Helpers\SendGridMessage($from, $subject, $to, $content);
 $mail->addAttachment($attachment);
 
 $apiKey = getenv('SENDGRID_API_KEY');
@@ -97,7 +97,7 @@ $from = new \Helpers\Email(null, "test@example.com");
 $subject = "I'm replacing the subject tag";
 $to = new \Helpers\Email(null, "test@example.com");
 $content = new \Helpers\Content("text/html", "I'm replacing the <strong>body tag</strong>");
-$mail = new \Helpers\Mail($from, $subject, $to, $content);
+$mail = new \Helpers\SendGridMessage($from, $subject, $to, $content);
 $mail->personalization[0]->addSubstitution("-name-", "Example User");
 $mail->personalization[0]->addSubstitution("-city-", "Denver");
 $mail->setTemplateId("13b8f94f-bcae-4ec6-b752-70d6cb59f932");

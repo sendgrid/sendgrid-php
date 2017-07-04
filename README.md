@@ -86,7 +86,7 @@ $from = new \Helpers\Email("Example User", "test@example.com");
 $subject = "Sending with SendGrid is Fun";
 $to = new \Helpers\Email("Example User", "test@example.com");
 $content = new \Helpers\Content("text/plain", "and easy to do anywhere, even with PHP");
-$mail = new \Helpers\Mail($from, $subject, $to, $content);
+$mail = new \Helpers\SendGridMessage($from, $subject, $to, $content);
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
