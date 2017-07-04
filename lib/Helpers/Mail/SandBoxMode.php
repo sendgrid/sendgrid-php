@@ -11,9 +11,9 @@
  * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
-namespace Helpers;
+namespace SendGrid\Mail;
 
-class BypassListManagement implements \JsonSerializable
+class SandBoxMode implements \JsonSerializable
 {
     private $enable;
 
@@ -26,7 +26,6 @@ class BypassListManagement implements \JsonSerializable
     {
         return $this->enable;
     }
-
     public function jsonSerialize()
     {
         return array_filter(

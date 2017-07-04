@@ -111,14 +111,14 @@ function kitchenSink()
 
     $mail->setSendAt(1443636842);
 
-    $asm = new ASM();
+    $asm = new Mail\ASM();
     $asm->setGroupId(99);
     $asm->setGroupsToDisplay([4,5,6,7,8]);
     $mail->setASM($asm);
 
     $mail->setIpPoolName("23");
 
-    $mail_settings = new MailSettings();
+    $mail_settings = new Mail\MailSettings();
     $bcc_settings = new BccSettings();
     $bcc_settings->setEnable(true);
     $bcc_settings->setEmail("test@example.com");

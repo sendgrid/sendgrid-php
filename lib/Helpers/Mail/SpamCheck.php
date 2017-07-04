@@ -11,12 +11,13 @@
  * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
-namespace Helpers;
+namespace SendGrid\Mail;
 
-class ClickTracking implements \JsonSerializable
+class SpamCheck implements \JsonSerializable
 {
     private $enable;
-    private $enable_text;
+    private $threshold;
+    private $post_to_url;
 
     public function setEnable($enable)
     {
@@ -28,14 +29,24 @@ class ClickTracking implements \JsonSerializable
         return $this->enable;
     }
 
-    public function setEnableText($enable_text)
+    public function setThreshold($threshold)
     {
-        $this->enable_text = $enable_text;
+        $this->threshold = $threshold;
     }
 
-    public function getEnableText()
+    public function getThreshold()
     {
-        return $this->enable_text;
+        return $this->threshold;
+    }
+
+    public function setPostToUrl($post_to_url)
+    {
+        $this->post_to_url = $post_to_url;
+    }
+
+    public function getPostToUrl()
+    {
+        return $this->post_to_url;
     }
 
     public function jsonSerialize()
@@ -43,7 +54,8 @@ class ClickTracking implements \JsonSerializable
         return array_filter(
             [
                 'enable'      => $this->getEnable(),
-                'enable_text' => $this->getEnableText()
+                'threshold'   => $this->getThreshold(),
+                'post_to_url' => $this->getPostToUrl()
             ],
             function ($value) {
                 return $value !== null;

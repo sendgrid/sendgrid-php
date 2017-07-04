@@ -11,13 +11,12 @@
  * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
-namespace Helpers;
+namespace SendGrid\Mail;
 
-class Footer implements \JsonSerializable
+class OpenTracking implements \JsonSerializable
 {
     private $enable;
-    private $text;
-    private $html;
+    private $substitution_tag;
 
     public function setEnable($enable)
     {
@@ -29,33 +28,22 @@ class Footer implements \JsonSerializable
         return $this->enable;
     }
 
-    public function setText($text)
+    public function setSubstitutionTag($substitution_tag)
     {
-        $this->text = $text;
+        $this->substitution_tag = $substitution_tag;
     }
 
-    public function getText()
+    public function getSubstitutionTag()
     {
-        return $this->text;
-    }
-
-    public function setHtml($html)
-    {
-        $this->html = $html;
-    }
-
-    public function getHtml()
-    {
-        return $this->html;
+        return $this->substitution_tag;
     }
 
     public function jsonSerialize()
     {
         return array_filter(
             [
-                'enable' => $this->getEnable(),
-                'text'   => $this->getText(),
-                'html'   => $this->getHtml()
+                'enable'           => $this->getEnable(),
+                'substitution_tag' => $this->getSubstitutionTag()
             ],
             function ($value) {
                 return $value !== null;

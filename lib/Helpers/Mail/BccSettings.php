@@ -11,27 +11,21 @@
  * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
-namespace Helpers;
+namespace SendGrid\Mail;
 
-class Email implements \JsonSerializable
+class BccSettings implements \JsonSerializable
 {
-    private $name;
+    private $enable;
     private $email;
 
-    public function __construct($name, $email)
+    public function setEnable($enable)
     {
-        $this->name = $name;
-        $this->email = $email;
+        $this->enable = $enable;
     }
 
-    public function setName($name)
+    public function getEnable()
     {
-        $this->name = $name;
-    }
-
-    public function getName()
-    {
-        return $this->name;
+        return $this->enable;
     }
 
     public function setEmail($email)
@@ -48,8 +42,8 @@ class Email implements \JsonSerializable
     {
         return array_filter(
             [
-                'name'  => $this->getName(),
-                'email' => $this->getEmail()
+                'enable' => $this->getEnable(),
+                'email'  => $this->getEmail()
             ],
             function ($value) {
                 return $value !== null;

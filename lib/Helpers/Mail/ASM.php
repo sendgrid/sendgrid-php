@@ -11,39 +11,39 @@
  * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
-namespace Helpers;
+namespace SendGrid\Mail;
 
-class OpenTracking implements \JsonSerializable
+class ASM implements \JsonSerializable
 {
-    private $enable;
-    private $substitution_tag;
+    private $group_id;
+    private $groups_to_display;
 
-    public function setEnable($enable)
+    public function setGroupId($group_id)
     {
-        $this->enable = $enable;
+        $this->group_id = $group_id;
     }
 
-    public function getEnable()
+    public function getGroupId()
     {
-        return $this->enable;
+        return $this->group_id;
     }
 
-    public function setSubstitutionTag($substitution_tag)
+    public function setGroupsToDisplay($group_ids)
     {
-        $this->substitution_tag = $substitution_tag;
+        $this->groups_to_display = $group_ids;
     }
 
-    public function getSubstitutionTag()
+    public function getGroupsToDisplay()
     {
-        return $this->substitution_tag;
+        return $this->groups_to_display;
     }
 
     public function jsonSerialize()
     {
         return array_filter(
             [
-                'enable'           => $this->getEnable(),
-                'substitution_tag' => $this->getSubstitutionTag()
+                'group_id'          => $this->getGroupId(),
+                'groups_to_display' => $this->getGroupsToDisplay()
             ],
             function ($value) {
                 return $value !== null;

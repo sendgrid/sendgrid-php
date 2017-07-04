@@ -82,11 +82,11 @@ require 'vendor/autoload.php';
 // If you are not using Composer
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
-$from = new \Helpers\Email("Example User", "test@example.com");
+$from = new \SendGrid\Mail\Email("Example User", "test@example.com");
 $subject = "Sending with SendGrid is Fun";
-$to = new \Helpers\Email("Example User", "test@example.com");
-$content = new \Helpers\Content("text/plain", "and easy to do anywhere, even with PHP");
-$mail = new \Helpers\SendGridMessage($from, $subject, $to, $content);
+$to = new \SendGrid\Mail\Email("Example User", "test@example.com");
+$content = new \SendGrid\Mail\Content("text/plain", "and easy to do anywhere, even with PHP");
+$mail = new \SendGrid\Mail\SendGridMessage($from, $subject, $to, $content);
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);

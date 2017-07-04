@@ -11,13 +11,11 @@
  * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
-namespace Helpers;
+namespace SendGrid\Mail;
 
-class SpamCheck implements \JsonSerializable
+class BypassListManagement implements \JsonSerializable
 {
     private $enable;
-    private $threshold;
-    private $post_to_url;
 
     public function setEnable($enable)
     {
@@ -29,33 +27,11 @@ class SpamCheck implements \JsonSerializable
         return $this->enable;
     }
 
-    public function setThreshold($threshold)
-    {
-        $this->threshold = $threshold;
-    }
-
-    public function getThreshold()
-    {
-        return $this->threshold;
-    }
-
-    public function setPostToUrl($post_to_url)
-    {
-        $this->post_to_url = $post_to_url;
-    }
-
-    public function getPostToUrl()
-    {
-        return $this->post_to_url;
-    }
-
     public function jsonSerialize()
     {
         return array_filter(
             [
-                'enable'      => $this->getEnable(),
-                'threshold'   => $this->getThreshold(),
-                'post_to_url' => $this->getPostToUrl()
+                'enable' => $this->getEnable()
             ],
             function ($value) {
                 return $value !== null;

@@ -11,7 +11,7 @@
  * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
-namespace Helpers;
+namespace SendGrid\Mail;
 
 class MailSettings implements \JsonSerializable
 {

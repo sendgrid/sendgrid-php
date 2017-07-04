@@ -62,11 +62,11 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
 
     public function testHelloWorld()
     {
-        $from = new \Helpers\Email("Example User", "test@example.com");
+        $from = new \SendGrid\Mail\Email("Example User", "test@example.com");
         $subject = "Sending with SendGrid is Fun";
-        $to = new \Helpers\Email("Example User", "test@example.com");
-        $content = new \Helpers\Content("text/plain", "and easy to do anywhere, even with PHP");
-        $mail = new \Helpers\SendGridMessage($from, $subject, $to, $content);
+        $to = new \SendGrid\Mail\Email("Example User", "test@example.com");
+        $content = new \SendGrid\Mail\Content("text/plain", "and easy to do anywhere, even with PHP");
+        $mail = new \SendGrid\Mail\SendGridMessage($from, $subject, $to, $content);
         $json = json_encode($mail->jsonSerialize());
         $this->assertEquals($json, '{"from":{"name":"Example User","email":"test@example.com"},"personalizations":[{"to":[{"name":"Example User","email":"test@example.com"}]}],"subject":"Sending with SendGrid is Fun","content":[{"type":"text\/plain","value":"and easy to do anywhere, even with PHP"}]}');
     }

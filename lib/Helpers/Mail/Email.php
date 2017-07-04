@@ -11,39 +11,45 @@
  * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
-namespace Helpers;
+namespace SendGrid\Mail;
 
-class ASM implements \JsonSerializable
+class Email implements \JsonSerializable
 {
-    private $group_id;
-    private $groups_to_display;
+    private $name;
+    private $email;
 
-    public function setGroupId($group_id)
+    public function __construct($name, $email)
     {
-        $this->group_id = $group_id;
+        $this->name = $name;
+        $this->email = $email;
     }
 
-    public function getGroupId()
+    public function setName($name)
     {
-        return $this->group_id;
+        $this->name = $name;
     }
 
-    public function setGroupsToDisplay($group_ids)
+    public function getName()
     {
-        $this->groups_to_display = $group_ids;
+        return $this->name;
     }
 
-    public function getGroupsToDisplay()
+    public function setEmail($email)
     {
-        return $this->groups_to_display;
+        $this->email = $email;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
     }
 
     public function jsonSerialize()
     {
         return array_filter(
             [
-                'group_id'          => $this->getGroupId(),
-                'groups_to_display' => $this->getGroupsToDisplay()
+                'name'  => $this->getName(),
+                'email' => $this->getEmail()
             ],
             function ($value) {
                 return $value !== null;
