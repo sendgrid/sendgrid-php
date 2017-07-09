@@ -36,7 +36,7 @@ $mail = new \SendGrid\Mail\SendGridMessage($from, $subject, $to, $content);
 $mail->addAttachment($attachment);
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new \SendGrid\SendGrid($apiKey);
 
 $response = $sg->client->mail()->send()->post($mail);
 echo $response->statusCode();
@@ -103,7 +103,7 @@ $mail->personalization[0]->addSubstitution("-city-", "Denver");
 $mail->setTemplateId("13b8f94f-bcae-4ec6-b752-70d6cb59f932");
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new \SendGrid\SendGrid($apiKey);
 
 try {
     $response = $sg->client->mail()->send()->post($mail);
@@ -154,7 +154,7 @@ $request_body = json_decode('{
 }');
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new \SendGrid\SendGrid($apiKey);
 
 try {
     $response = $sg->client->mail()->send()->post($request_body);

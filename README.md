@@ -89,7 +89,7 @@ $content = new \SendGrid\Mail\Content("text/plain", "and easy to do anywhere, ev
 $msg = new \SendGrid\Mail\SendGridMessage($from, $subject, $to, $content);
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new \SendGrid\SendGrid($apiKey);
 
 $response = $sg->client->mail()->send()->post($msg);
 echo $response->statusCode();
@@ -134,7 +134,7 @@ $request_body = json_decode('{
 }');
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new \SendGrid\SendGrid($apiKey);
 
 $response = $sg->client->mail()->send()->post($request_body);
 echo $response->statusCode();
@@ -153,7 +153,7 @@ require 'vendor/autoload.php';
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new \SendGrid\SendGrid($apiKey);
 
 $response = $sg->client->suppression()->bounces()->get();
 
@@ -173,7 +173,7 @@ require 'vendor/autoload.php';
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new \SendGrid\SendGrid($apiKey);
 
 $response = $sg->client->_("suppression/bounces")->get();
 
