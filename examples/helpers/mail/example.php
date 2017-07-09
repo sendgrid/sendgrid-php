@@ -1,6 +1,6 @@
 <?php
 
-namespace Helpers;
+namespace SendGrid\Mail;
 
 // If you are using Composer
 require 'vendor/autoload.php';
@@ -111,14 +111,14 @@ function kitchenSink()
 
     $mail->setSendAt(1443636842);
 
-    $asm = new Mail\ASM();
+    $asm = new ASM();
     $asm->setGroupId(99);
     $asm->setGroupsToDisplay([4,5,6,7,8]);
     $mail->setASM($asm);
 
     $mail->setIpPoolName("23");
 
-    $mail_settings = new Mail\MailSettings();
+    $mail_settings = new MailSettings();
     $bcc_settings = new BccSettings();
     $bcc_settings->setEnable(true);
     $bcc_settings->setEmail("test@example.com");
