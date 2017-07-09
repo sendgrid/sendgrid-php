@@ -86,12 +86,12 @@ $from = new \SendGrid\Mail\Email("Example User", "test@example.com");
 $subject = "Sending with SendGrid is Fun";
 $to = new \SendGrid\Mail\Email("Example User", "test@example.com");
 $content = new \SendGrid\Mail\Content("text/plain", "and easy to do anywhere, even with PHP");
-$mail = new \SendGrid\Mail\SendGridMessage($from, $subject, $to, $content);
+$msg = new \SendGrid\Mail\SendGridMessage($from, $subject, $to, $content);
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
 
-$response = $sg->client->mail()->send()->post($mail);
+$response = $sg->client->mail()->send()->post($msg);
 echo $response->statusCode();
 print_r($response->headers());
 echo $response->body();
