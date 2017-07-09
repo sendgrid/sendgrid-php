@@ -13,7 +13,7 @@
 
 namespace SendGrid\Mail;
 
-class Mail implements \JsonSerializable
+class Email implements \JsonSerializable
 {
     private $name;
     private $email;
