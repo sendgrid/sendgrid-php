@@ -1,6 +1,6 @@
 <?php
 
-use SendGrid\SendGrid;
+use SendGrid\Factory;
 
 class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
 {
@@ -12,7 +12,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
     {
         self::$apiKey = "SENDGRID_API_KEY";
         $host = array('host' => 'http://localhost:4010');
-        self::$sg = new SendGrid(self::$apiKey, $host);
+        self::$sg = new Factory(self::$apiKey, $host);
         if (file_exists('/usr/local/bin/prism') == false) {
             if (strtoupper(substr(php_uname('s'), 0, 3)) != 'WIN') {
                 try {
@@ -73,14 +73,14 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
 
     public function testVersion()
     {
-        $this->assertEquals(SendGrid::VERSION, '6.0.0');
-        $this->assertEquals(json_decode(file_get_contents(__DIR__ . '/../../composer.json'))->version, SendGrid::VERSION);
+        $this->assertEquals(Factory::VERSION, '6.0.0');
+        $this->assertEquals(json_decode(file_get_contents(__DIR__ . '/../../composer.json'))->version, Factory::VERSION);
     }
 
     public function testSendGrid()
     {
         $apiKey = 'SENDGRID_API_KEY';
-        $sg = new SendGrid($apiKey);
+        $sg = new Factory($apiKey);
         $headers = array(
             'Authorization: Bearer '.$apiKey,
             'User-Agent: sendgrid/' . $sg->version . ';php',
@@ -92,13 +92,13 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
         $this->assertEquals($sg->client->getVersion(), '/v3');
 
         $apiKey = 'SENDGRID_API_KEY';
-        $sg2 = new SendGrid($apiKey, array('host' => 'https://api.test.com'));
+        $sg2 = new Factory($apiKey, array('host' => 'https://api.test.com'));
         $this->assertEquals($sg2->client->getHost(), 'https://api.test.com');
 
-        $sg3 = new SendGrid($apiKey, array('curl' => array('foo' => 'bar')));
+        $sg3 = new Factory($apiKey, array('curl' => array('foo' => 'bar')));
         $this->assertEquals(array('foo' => 'bar'), $sg3->client->getCurlOptions());
 
-        $sg4 = new SendGrid($apiKey, ['curl' => [CURLOPT_PROXY => '127.0.0.1:8000']]);
+        $sg4 = new Factory($apiKey, ['curl' => [CURLOPT_PROXY => '127.0.0.1:8000']]);
         $this->assertEquals($sg4->client->getCurlOptions(), [10004 => '127.0.0.1:8000']);
     }
 

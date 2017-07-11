@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid\SendGrid($apiKey);
+$sg = new \SendGrid\Factory($apiKey);
 
 ////////////////////////////////////////////////////
 // Retrieve global email statistics #

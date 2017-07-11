@@ -176,7 +176,7 @@ function kitchenSink()
 function sendHelloEmail()
 {
     $apiKey = getenv('SENDGRID_API_KEY');
-    $sg = new \SendGrid\SendGrid($apiKey);
+    $sg = new \SendGrid\Factory($apiKey);
 
     $request_body = helloEmail();
     $response = $sg->client->mail()->send()->post($request_body);
@@ -188,7 +188,7 @@ function sendHelloEmail()
 function sendKitchenSink()
 {
     $apiKey = getenv('SENDGRID_API_KEY');
-    $sg = new \SendGrid\SendGrid($apiKey);
+    $sg = new \SendGrid\Factory($apiKey);
 
     $request_body = kitchenSink();
     $response = $sg->client->mail()->send()->post($request_body);
