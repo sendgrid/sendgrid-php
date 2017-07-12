@@ -8,7 +8,7 @@ require 'vendor/autoload.php';
 
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid\Factory($apiKey);
+$sg = new \SendGrid\ClientFactory($apiKey);
 ```
 
 # Table of Contents

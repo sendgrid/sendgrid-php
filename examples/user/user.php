@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid\Factory($apiKey);
+$sg = new \SendGrid\ClientFactory($apiKey);
 
 ////////////////////////////////////////////////////
 // Get a user's account information. #

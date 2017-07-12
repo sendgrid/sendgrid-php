@@ -20,7 +20,7 @@
   "autoload": {
     "psr-4": {"SendGrid\\": "lib/Helpers/"},
     "files": [
-      "lib/Factory.php"
+      "lib/ClientFactory.php"
     ]
   }
 }

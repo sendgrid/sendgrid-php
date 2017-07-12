@@ -14,7 +14,7 @@ namespace SendGrid;
 /**
   * Interface to the SendGrid Web API
   */
-class Factory
+class ClientFactory
 {
     const VERSION = '6.0.0';
 
