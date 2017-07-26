@@ -43,6 +43,7 @@ function kitchenSink()
     $mail->personalization[0]->addHeader("X-Mock", "true");
     $mail->personalization[0]->addSubstitution("%name%", "Example User");
     $mail->personalization[0]->addSubstitution("%city%", "Denver");
+    $mail->personalization[0]->addSubstitution("%sec1%", "%section1%");
     $mail->personalization[0]->addCustomArg("user_id", "343");
     $mail->personalization[0]->addCustomArg("type", "marketing");
     $mail->personalization[0]->setSendAt(1443636843);
@@ -65,6 +66,7 @@ function kitchenSink()
     $personalization1->addHeader("X-Mock", "true");
     $personalization1->addSubstitution("%name%", "Example User");
     $personalization1->addSubstitution("%city%", "Denver");
+    $personalization1->addSubstitution("%sec2%", "%section2%");
     $personalization1->addCustomArg("user_id", "343");
     $personalization1->addCustomArg("type", "marketing");
     $personalization1->setSendAt(1443636843);
