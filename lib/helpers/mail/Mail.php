@@ -1132,11 +1132,17 @@ class Mail implements \JsonSerializable
         return $this->tracking_settings;
     }
 
+    /**
+     * @param ReplyTo $reply_to
+     */
     public function setReplyTo($reply_to)
     {
-        $this->reply_to = $reply_to;
+        $this->reply_to[] = $reply_to;
     }
 
+    /**
+     * @return array
+     */
     public function getReplyTo()
     {
         return $this->reply_to;
