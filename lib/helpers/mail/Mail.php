@@ -1141,7 +1141,7 @@ class Mail implements \JsonSerializable
     }
 
     /**
-     * @return array
+     * @return array|null
      */
     public function getReplyTo()
     {
