@@ -447,7 +447,6 @@ require 'vendor/autoload.php';
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sendgrid = new \SendGrid($apiKey);
-$email = new \SendGrid\Mail\Message();
 
 $from = new \SendGrid\Mail\From("test@example.com", "Example User");
 $to = new \SendGrid\Mail\To("test@example.com", "Example User");
