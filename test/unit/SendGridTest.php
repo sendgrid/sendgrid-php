@@ -1,4 +1,7 @@
 <?php
+
+use SendGrid\ClientFactory;
+
 class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
 {
     protected static $apiKey;
@@ -9,7 +12,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
     {
         self::$apiKey = "SENDGRID_API_KEY";
         $host = array('host' => 'http://localhost:4010');
-        self::$sg = new SendGrid(self::$apiKey, $host);
+        self::$sg = new ClientFactory(self::$apiKey, $host);
         if (file_exists('/usr/local/bin/prism') == false) {
             if (strtoupper(substr(php_uname('s'), 0, 3)) != 'WIN') {
                 try {
@@ -59,25 +62,25 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
 
     public function testHelloWorld()
     {
-        $from = new SendGrid\Email("Example User", "test@example.com");
         $subject = "Sending with SendGrid is Fun";
-        $to = new SendGrid\Email("Example User", "test@example.com");
-        $content = new SendGrid\Content("text/plain", "and easy to do anywhere, even with PHP");
-        $mail = new SendGrid\Mail($from, $subject, $to, $content);
+        $fromEmail = new \SendGrid\Mail\Email("From Name", "from@example.com");
+        $toEmail = new \SendGrid\Mail\Email("To Name", "to@example.com");
+        $content = new \SendGrid\Mail\Content("text/plain", "and easy to do anywhere, even with PHP");
+        $mail = new \SendGrid\Mail\SendGridMessage($fromEmail, $subject, $toEmail, $content);
         $json = json_encode($mail->jsonSerialize());
-        $this->assertEquals($json, '{"from":{"name":"Example User","email":"test@example.com"},"personalizations":[{"to":[{"name":"Example User","email":"test@example.com"}]}],"subject":"Sending with SendGrid is Fun","content":[{"type":"text\/plain","value":"and easy to do anywhere, even with PHP"}]}');
+        $this->assertEquals($json, '{"from":{"name":"From Name","email":"from@example.com"},"personalizations":[{"to":[{"name":"To Name","email":"to@example.com"}]}],"subject":"Sending with SendGrid is Fun","content":[{"type":"text\/plain","value":"and easy to do anywhere, even with PHP"}]}');
     }
 
     public function testVersion()
     {
-        $this->assertEquals(SendGrid::VERSION, '6.0.0');
-        $this->assertEquals(json_decode(file_get_contents(__DIR__ . '/../../composer.json'))->version, SendGrid::VERSION);
+        $this->assertEquals(ClientFactory::VERSION, '6.0.0');
+        $this->assertEquals(json_decode(file_get_contents(__DIR__ . '/../../composer.json'))->version, ClientFactory::VERSION);
     }
 
     public function testSendGrid()
     {
         $apiKey = 'SENDGRID_API_KEY';
-        $sg = new SendGrid($apiKey);
+        $sg = new ClientFactory($apiKey);
         $headers = array(
             'Authorization: Bearer '.$apiKey,
             'User-Agent: sendgrid/' . $sg->version . ';php',
@@ -89,13 +92,13 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
         $this->assertEquals($sg->client->getVersion(), '/v3');
 
         $apiKey = 'SENDGRID_API_KEY';
-        $sg2 = new SendGrid($apiKey, array('host' => 'https://api.test.com'));
+        $sg2 = new ClientFactory($apiKey, array('host' => 'https://api.test.com'));
         $this->assertEquals($sg2->client->getHost(), 'https://api.test.com');
 
-        $sg3 = new SendGrid($apiKey, array('curl' => array('foo' => 'bar')));
+        $sg3 = new ClientFactory($apiKey, array('curl' => array('foo' => 'bar')));
         $this->assertEquals(array('foo' => 'bar'), $sg3->client->getCurlOptions());
 
-        $sg4 = new SendGrid($apiKey, ['curl' => [CURLOPT_PROXY => '127.0.0.1:8000']]);
+        $sg4 = new ClientFactory($apiKey, ['curl' => [CURLOPT_PROXY => '127.0.0.1:8000']]);
         $this->assertEquals($sg4->client->getCurlOptions(), [10004 => '127.0.0.1:8000']);
     }
 

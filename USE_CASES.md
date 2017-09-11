@@ -20,23 +20,23 @@ require 'vendor/autoload.php';
 // If you are not using Composer
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
-$from = new SendGrid\Email("Example User", "test@example.com");
+$from = new \SendGrid\Mail\Email("Example User", "test@example.com");
 $subject = "Sending with SendGrid is Fun";
-$to = new SendGrid\Email("Example User", "test@example.com");
-$content = new SendGrid\Content("text/plain", "and easy to do anywhere, even with PHP");
+$to = new \SendGrid\Mail\Email("Example User", "test@example.com");
+$content = new \SendGrid\Mail\Content("text/plain", "and easy to do anywhere, even with PHP");
 $file = 'my_file.txt';
 $file_encoded = base64_encode(file_get_contents($file));
-$attachment = new SendGrid\Attachment();
+$attachment = new \SendGrid\Mail\Attachment();
 $attachment->setContent($file_encoded);
 $attachment->setType("application/text");
 $attachment->setDisposition("attachment");
 $attachment->setFilename("my_file.txt");
 
-$mail = new SendGrid\Mail($from, $subject, $to, $content);
+$mail = new \SendGrid\Mail\SendGridMessage($from, $subject, $to, $content);
 $mail->addAttachment($attachment);
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new \SendGrid\ClientFactory($apiKey);
 
 $response = $sg->client->mail()->send()->post($mail);
 echo $response->statusCode();
@@ -93,17 +93,17 @@ require 'vendor/autoload.php';
 // If you are not using Composer (recommended)
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
-$from = new SendGrid\Email(null, "test@example.com");
+$from = new \SendGrid\Mail\Email(null, "test@example.com");
 $subject = "I'm replacing the subject tag";
-$to = new SendGrid\Email(null, "test@example.com");
-$content = new SendGrid\Content("text/html", "I'm replacing the <strong>body tag</strong>");
-$mail = new SendGrid\Mail($from, $subject, $to, $content);
+$to = new \SendGrid\Mail\Email(null, "test@example.com");
+$content = new \SendGrid\Mail\Content("text/html", "I'm replacing the <strong>body tag</strong>");
+$mail = new \SendGrid\Mail\SendGridMessage($from, $subject, $to, $content);
 $mail->personalization[0]->addSubstitution("-name-", "Example User");
 $mail->personalization[0]->addSubstitution("-city-", "Denver");
 $mail->setTemplateId("13b8f94f-bcae-4ec6-b752-70d6cb59f932");
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new \SendGrid\ClientFactory($apiKey);
 
 try {
     $response = $sg->client->mail()->send()->post($mail);
@@ -154,7 +154,7 @@ $request_body = json_decode('{
 }');
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new \SendGrid\ClientFactory($apiKey);
 
 try {
     $response = $sg->client->mail()->send()->post($request_body);

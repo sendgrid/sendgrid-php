@@ -83,16 +83,16 @@ require 'vendor/autoload.php';
 // If you are not using Composer
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
-$from = new SendGrid\Email("Example User", "test@example.com");
+$from = new \SendGrid\Mail\Email("Example User", "test@example.com");
 $subject = "Sending with SendGrid is Fun";
-$to = new SendGrid\Email("Example User", "test@example.com");
-$content = new SendGrid\Content("text/plain", "and easy to do anywhere, even with PHP");
-$mail = new SendGrid\Mail($from, $subject, $to, $content);
+$to = new \SendGrid\Mail\Email("Example User", "test@example.com");
+$content = new \SendGrid\Mail\Content("text/plain", "and easy to do anywhere, even with PHP");
+$msg = new \SendGrid\Mail\SendGridMessage($from, $subject, $to, $content);
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new \SendGrid\ClientFactory($apiKey);
 
-$response = $sg->client->mail()->send()->post($mail);
+$response = $sg->client->mail()->send()->post($msg);
 echo $response->statusCode();
 print_r($response->headers());
 echo $response->body();
@@ -135,7 +135,7 @@ $request_body = json_decode('{
 }');
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new \SendGrid\ClientFactory($apiKey);
 
 $response = $sg->client->mail()->send()->post($request_body);
 echo $response->statusCode();
@@ -154,7 +154,7 @@ require 'vendor/autoload.php';
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new \SendGrid\ClientFactory($apiKey);
 
 $response = $sg->client->suppression()->bounces()->get();
 
@@ -174,7 +174,7 @@ require 'vendor/autoload.php';
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new \SendGrid\ClientFactory($apiKey);
 
 $response = $sg->client->_("suppression/bounces")->get();
 

@@ -9,10 +9,12 @@
   * @link      http://packagist.org/packages/sendgrid/sendgrid
   */
 
+namespace SendGrid;
+
 /**
   * Interface to the SendGrid Web API
   */
-class SendGrid
+class ClientFactory
 {
     const VERSION = '6.0.0';
 

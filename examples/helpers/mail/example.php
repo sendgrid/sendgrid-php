@@ -1,8 +1,11 @@
 <?php
-namespace SendGrid;
+
+namespace SendGrid\Mail;
 
 // If you are using Composer
-require __DIR__ . '<PATH_TO>/vendor/autoload.php';
+require 'vendor/autoload.php';
+// If you're using the loader
+//require '<PROJECT-ROOT>/lib/loader.php';
 
 
 function helloEmail()
@@ -11,7 +14,7 @@ function helloEmail()
     $subject = "Hello World from the SendGrid PHP Library";
     $to = new Email(null, "test@example.com");
     $content = new Content("text/plain", "some text here");
-    $mail = new Mail($from, $subject, $to, $content);
+    $mail = new SendGridMessage($from, $subject, $to, $content);
     $to = new Email(null, "test2@example.com");
     $mail->personalization[0]->addTo($to);
 
@@ -26,7 +29,7 @@ function kitchenSink()
     $to = new Email("Example User", "test1@example.com");
     $content = new Content("text/plain", "some text here");
 
-    $mail = new Mail($from, $subject, $to, $content);
+    $mail = new SendGridMessage($from, $subject, $to, $content);
 
     $email2 = new Email("Example User", "test2@example.com");
     $mail->personalization[0]->addTo($email2);
@@ -175,7 +178,7 @@ function kitchenSink()
 function sendHelloEmail()
 {
     $apiKey = getenv('SENDGRID_API_KEY');
-    $sg = new \SendGrid($apiKey);
+    $sg = new \SendGrid\ClientFactory($apiKey);
 
     $request_body = helloEmail();
     $response = $sg->client->mail()->send()->post($request_body);
@@ -187,7 +190,7 @@ function sendHelloEmail()
 function sendKitchenSink()
 {
     $apiKey = getenv('SENDGRID_API_KEY');
-    $sg = new \SendGrid($apiKey);
+    $sg = new \SendGrid\ClientFactory($apiKey);
 
     $request_body = kitchenSink();
     $response = $sg->client->mail()->send()->post($request_body);

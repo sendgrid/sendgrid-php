@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new \SendGrid\ClientFactory($apiKey);
 
 ////////////////////////////////////////////////////
 // Retrieve a list of scopes for which this user has access. #
