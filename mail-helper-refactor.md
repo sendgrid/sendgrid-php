@@ -449,14 +449,21 @@ $apiKey = getenv('SENDGRID_API_KEY');
 $sendgrid = new \SendGrid($apiKey);
 $email = new \SendGrid\Mail\Message();
 
-$email->setFrom("test@example.com", "Example User");
-$email->setSubject("Sending with SendGrid is Fun");
-$email->addTo(new \SendGrid\Mail\Mail("test@example.com", "Example User"))
-$email->addContent(MimeType::Html, "<strong>and easy to do anywhere, even with PHP</strong>")
-$substitutions = [
+$from = new \SendGrid\Mail\From("test@example.com", "Example User");
+$to = new \SendGrid\Mail\To("test@example.com", "Example User");
+$subject = new \SendGrid\Mail\Subject("Sending with SendGrid is Fun");
+$plainTextContent = new \SendGrid\Mail\PlainTextContent("and easy to do anywhere, even with PHP");
+$htmlContent = new \SendGrid\Mail\HtmlContent("<strong>and easy to do anywhere, even with PHP</strong>");
+$email = new \SendGrid\Mail($from,
+                             $to,
+                             $subject,
+                             $plainTextContent,
+                             $htmlContent);
+// See `Send Multiple Emails to Multiple Recipients` for additional methods for adding substitutions
+$substitutions = new \SendGrid\Mail\SubstitutionCollection([
     "-name-" => "Example User",
     "-city-" => "Denver"
-];
+]);
 $email->addSubstitutions($substitutions);
 $email->setTemplateId("13b8f94f-bcae-4ec6-b752-70d6cb59f932");
 
