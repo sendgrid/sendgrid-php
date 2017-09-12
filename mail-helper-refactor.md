@@ -30,10 +30,7 @@ $email = new Mail($from,
                   $plainTextContent,
                   $htmlContent);
 
-$apiKey = getenv('SENDGRID_API_KEY');
-$sendgrid = new \SendGrid($apiKey);
-// Get a SendGrid Client object like so:
-// $client = $sendgrid->getClient();
+$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 try {
     $response = $sendgrid->send($email);
 } catch (Exception $e) {
@@ -72,8 +69,7 @@ $email = new Mail($from,
                   $plainTextContent,
                   $htmlContent);
 
-$apiKey = getenv('SENDGRID_API_KEY');
-$sendgrid = new \SendGrid($apiKey);
+$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 try {
     $response = $sendgrid->send($email);
 } catch (Exception $e) {
@@ -131,8 +127,7 @@ $email = new Mail($from,
                   $plainTextContent,
                   $htmlContent);
 
-$apiKey = getenv('SENDGRID_API_KEY');
-$sendgrid = new \SendGrid($apiKey);
+$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 try {
     $response = $sendgrid->send($email);
 } catch (Exception $e) {
@@ -336,8 +331,7 @@ $sections = new SectionCollection([
 ]);
 $email->addSections($sections);
 
-$apiKey = getenv('SENDGRID_API_KEY');
-$sendgrid = new \SendGrid($apiKey);
+$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 try {
     $response = $sendgrid->send($email);
 } catch (Exception $e) {
@@ -377,8 +371,7 @@ $email->addAttachment("balance_001.pdf",
                       "attachment",
                       "Balance Sheet");
 
-$apiKey = getenv('SENDGRID_API_KEY');
-$sendgrid = new \SendGrid($apiKey);
+$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 try {
     $response = $sendgrid->send($email);
 } catch (Exception $e) {
@@ -453,8 +446,7 @@ $substitutions = new SubstitutionCollection([
 $email->addSubstitutions($substitutions);
 $email->setTemplateId("13b8f94f-bcae-4ec6-b752-70d6cb59f932");
 
-$apiKey = getenv('SENDGRID_API_KEY');
-$sendgrid = new \SendGrid($apiKey);
+$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 try {
     $response = $sendgrid->send($email);
 } catch (Exception $e) {
