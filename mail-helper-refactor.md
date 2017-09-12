@@ -16,7 +16,6 @@ use \SendGrid;
 use \SendGrid\Mail;
 // If you are using Composer (recommended)
 require 'vendor/autoload.php';
-
 // If you are not using Composer
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
@@ -35,13 +34,11 @@ $apiKey = getenv('SENDGRID_API_KEY');
 $sendgrid = new \SendGrid($apiKey);
 // Get a SendGrid Client object like so:
 // $client = $sendgrid->getClient();
-
 try {
     $response = $sendgrid->send($email);
 } catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
 }
-
 echo $response->statusCode();
 print_r($response->headers());
 echo $response->body();
@@ -57,7 +54,6 @@ use \SendGrid;
 use \SendGrid\Mail;
 // If you are using Composer (recommended)
 require 'vendor/autoload.php';
-
 // If you are not using Composer
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
@@ -78,13 +74,11 @@ $email = new Mail($from,
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sendgrid = new \SendGrid($apiKey);
-
 try {
     $response = $sendgrid->send($email);
 } catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
 }
-
 echo $response->statusCode();
 print_r($response->headers());
 echo $response->body();
@@ -100,7 +94,6 @@ use \SendGrid;
 use \SendGrid\Mail;
 // If you are using Composer (recommended)
 require 'vendor/autoload.php';
-
 // If you are not using Composer
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
@@ -140,13 +133,11 @@ $email = new Mail($from,
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sendgrid = new \SendGrid($apiKey);
-
 try {
     $response = $sendgrid->send($email);
 } catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
 }
-
 echo $response->statusCode();
 print_r($response->headers());
 echo $response->body();
@@ -162,12 +153,8 @@ use \SendGrid;
 use \SendGrid\Mail;
 // If you are using Composer (recommended)
 require 'vendor/autoload.php';
-
 // If you are not using Composer
 // require("path/to/sendgrid-php/sendgrid-php.php");
-
-$apiKey = getenv('SENDGRID_API_KEY');
-$sendgrid = new \SendGrid($apiKey);
 
 $from = new From("test@example.com", "Example User");
 $to = new To("test@example.com", "Example User");
@@ -349,12 +336,13 @@ $sections = new SectionCollection([
 ]);
 $email->addSections($sections);
 
+$apiKey = getenv('SENDGRID_API_KEY');
+$sendgrid = new \SendGrid($apiKey);
 try {
     $response = $sendgrid->send($email);
 } catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
 }
-
 echo $response->statusCode();
 print_r($response->headers());
 echo $response->body();
@@ -368,15 +356,10 @@ The following code assumes you are storing the API key in an [environment variab
 <?php
 use \SendGrid;
 use \SendGrid\Mail;
-
 // If you are using Composer (recommended)
 require 'vendor/autoload.php';
-
 // If you are not using Composer
 // require("path/to/sendgrid-php/sendgrid-php.php");
-
-$apiKey = getenv('SENDGRID_API_KEY');
-$sendgrid = new \SendGrid($apiKey);
 
 $from = new From("test@example.com", "Example User");
 $to = new To("test@example.com", "Example User");
@@ -394,12 +377,13 @@ $email->addAttachment("balance_001.pdf",
                       "attachment",
                       "Balance Sheet");
 
+$apiKey = getenv('SENDGRID_API_KEY');
+$sendgrid = new \SendGrid($apiKey);
 try {
     $response = $sendgrid->send($email);
 } catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
 }
-
 echo $response->statusCode();
 print_r($response->headers());
 echo $response->body();
@@ -446,15 +430,10 @@ I hope you are having a great day in -city- :)
 ```php
 use \SendGrid;
 use \SendGrid\Mail;
-
 // If you are using Composer (recommended)
 require 'vendor/autoload.php';
-
 // If you are not using Composer
 // require("path/to/sendgrid-php/sendgrid-php.php");
-
-$apiKey = getenv('SENDGRID_API_KEY');
-$sendgrid = new \SendGrid($apiKey);
 
 $from = new From("test@example.com", "Example User");
 $to = new To("test@example.com", "Example User");
@@ -474,12 +453,13 @@ $substitutions = new SubstitutionCollection([
 $email->addSubstitutions($substitutions);
 $email->setTemplateId("13b8f94f-bcae-4ec6-b752-70d6cb59f932");
 
+$apiKey = getenv('SENDGRID_API_KEY');
+$sendgrid = new \SendGrid($apiKey);
 try {
     $response = $sendgrid->send($email);
 } catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
 }
-
 echo $response->statusCode();
 print_r($response->headers());
 echo $response->body();
