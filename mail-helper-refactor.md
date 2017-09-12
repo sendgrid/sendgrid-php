@@ -14,10 +14,8 @@ The following code assumes you are storing the API key in an [environment variab
 <?php
 use \SendGrid;
 use \SendGrid\Mail;
-// If you are using Composer (recommended)
-require 'vendor/autoload.php';
-// If you are not using Composer
-// require("path/to/sendgrid-php/sendgrid-php.php");
+require 'vendor/autoload.php'; // If you're using Composer (recommended)
+// require("path/to/sendgrid-php/sendgrid-php.php"); // If not using Composer, uncomment and comment out the above line
 
 $from = new From("test@example.com", "Example User");
 $to = new To("test@example.com", "Example User");
@@ -49,10 +47,8 @@ The following code assumes you are storing the API key in an [environment variab
 <?php
 use \SendGrid;
 use \SendGrid\Mail;
-// If you are using Composer (recommended)
-require 'vendor/autoload.php';
-// If you are not using Composer
-// require("path/to/sendgrid-php/sendgrid-php.php");
+require 'vendor/autoload.php'; // If you're using Composer (recommended)
+// require("path/to/sendgrid-php/sendgrid-php.php"); // If not using Composer, uncomment and comment out the above line
 
 $from = new From("test@example.com", "Example User");
 $tos = new ToCollection([ 
@@ -88,10 +84,8 @@ The following code assumes you are storing the API key in an [environment variab
 <?php
 use \SendGrid;
 use \SendGrid\Mail;
-// If you are using Composer (recommended)
-require 'vendor/autoload.php';
-// If you are not using Composer
-// require("path/to/sendgrid-php/sendgrid-php.php");
+require 'vendor/autoload.php'; // If you're using Composer (recommended)
+// require("path/to/sendgrid-php/sendgrid-php.php"); // If not using Composer, uncomment and comment out the above line
 
 $from = new From("test@example.com", "Example User");
 $tos = new ToCollection([
@@ -146,10 +140,8 @@ The following code assumes you are storing the API key in an [environment variab
 <?php
 use \SendGrid;
 use \SendGrid\Mail;
-// If you are using Composer (recommended)
-require 'vendor/autoload.php';
-// If you are not using Composer
-// require("path/to/sendgrid-php/sendgrid-php.php");
+require 'vendor/autoload.php'; // If you're using Composer (recommended)
+// require("path/to/sendgrid-php/sendgrid-php.php"); // If not using Composer, uncomment and comment out the above line
 
 $from = new From("test@example.com", "Example User");
 $to = new To("test@example.com", "Example User");
@@ -350,10 +342,8 @@ The following code assumes you are storing the API key in an [environment variab
 <?php
 use \SendGrid;
 use \SendGrid\Mail;
-// If you are using Composer (recommended)
-require 'vendor/autoload.php';
-// If you are not using Composer
-// require("path/to/sendgrid-php/sendgrid-php.php");
+require 'vendor/autoload.php'; // If you're using Composer (recommended)
+// require("path/to/sendgrid-php/sendgrid-php.php"); // If not using Composer, uncomment and comment out the above line
 
 $from = new From("test@example.com", "Example User");
 $to = new To("test@example.com", "Example User");
@@ -423,10 +413,8 @@ I hope you are having a great day in -city- :)
 ```php
 use \SendGrid;
 use \SendGrid\Mail;
-// If you are using Composer (recommended)
-require 'vendor/autoload.php';
-// If you are not using Composer
-// require("path/to/sendgrid-php/sendgrid-php.php");
+require 'vendor/autoload.php'; // If you're using Composer (recommended)
+// require("path/to/sendgrid-php/sendgrid-php.php"); // If not using Composer, uncomment and comment out the above line
 
 $from = new From("test@example.com", "Example User");
 $to = new To("test@example.com", "Example User");
