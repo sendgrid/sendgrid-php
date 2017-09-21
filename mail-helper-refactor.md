@@ -60,7 +60,7 @@ $subject = new Subject("Sending with SendGrid is Fun");
 $plainTextContent = new PlainTextContent("and easy to do anywhere, even with PHP");
 $htmlContent = new HtmlContent("<strong>and easy to do anywhere, even with PHP</strong>");
 $email = new Mail($from,
-                  $to,
+                  $tos,
                   $subject,
                   $plainTextContent,
                   $htmlContent);
