@@ -150,7 +150,7 @@ print_r($response->headers());
 // GET /suppression/spam_report/{email} #
 
 $email = "test_url_param";
-$response = $sg->client->suppression()->spam_report()->_($email)->get();
+$response = $sg->client->suppression()->spam_reports()->_($email)->get();
 echo $response->statusCode();
 echo $response->body();
 print_r($response->headers());
@@ -160,7 +160,7 @@ print_r($response->headers());
 // DELETE /suppression/spam_report/{email} #
 
 $email = "test_url_param";
-$response = $sg->client->suppression()->spam_report()->_($email)->delete();
+$response = $sg->client->suppression()->spam_reports()->_($email)->delete();
 echo $response->statusCode();
 echo $response->body();
 print_r($response->headers());
