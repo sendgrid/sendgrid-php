@@ -160,7 +160,7 @@ $email = new Mail($from,
 $email->addTo("test1@example.com", "Example User1")
 
 $toEmails = [ 
-    ["test1@sendgrid.com", Test Name1"],
+    ["test1@sendgrid.com", "Test Name1"],
     ["test2@sendgrid.com", "Test Name2"],
     ["test3@sendgrid.com", "Test Name3"]
 ];
