@@ -420,9 +420,9 @@ use \SendGrid\Mail;
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // require("path/to/sendgrid-php/sendgrid-php.php"); // If not using Composer, uncomment and comment out the above line
 
-$from = new From("test@example.com", "Example User");
-$to = new To("test@example.com", "Example User");
-$subject = new Subject("Sending with SendGrid is Fun");
+$from = ["test@example.com", "Example User"];
+$to = ["test@example.com", "Example User"];
+$subject = ["Sending with SendGrid is Fun"];
 $plainTextContent = new PlainTextContent("and easy to do anywhere, even with PHP");
 $htmlContent = new HtmlContent("<strong>and easy to do anywhere, even with PHP</strong>");
 $email = new Mail($from,
@@ -431,10 +431,10 @@ $email = new Mail($from,
                   $plainTextContent,
                   $htmlContent);
 // See `Send Multiple Emails to Multiple Recipients` for additional methods for adding substitutions
-$substitutions = new SubstitutionCollection([
+$substitutions = [
     "-name-" => "Example User",
     "-city-" => "Denver"
-]);
+];
 $email->addSubstitutions($substitutions);
 $email->setTemplateId("13b8f94f-bcae-4ec6-b752-70d6cb59f932");
 
