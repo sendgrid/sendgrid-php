@@ -166,7 +166,7 @@ $toEmails = [
 ];
 $email->addTos($toEmails);
 
-$email->addCc(["test4@example.com", "Example User4"])
+$email->addCc(["test4@example.com", "Example User4"]);
 
 $ccEmails = [ 
     ["test5@sendgrid.com", "Test Name5"],
@@ -191,13 +191,13 @@ $headers = new HeaderCollection([
 ]);
 $email->addHeaders($headers);
 
-$email->addSubstitution("%name1%", "Example Name 1");
-$email->addSubstitution("%city1%", "Denver");
+$email->addSubstitution(["%name1%" => "Example Name 1"]);
+$email->addSubstitution(["%city1%" => "Denver"]);
 
-$substitutions = new SubstitutionCollection([
-    "%name2%" => "Example Name 2",
-    "%city2%" => "Orange"
-]);
+$substitutions = [
+    ["%name2%" => "Test Name 2"],
+    ["%city2%" => "Orange"]
+];
 $email->addSubstitutions($substitutions);
 
 $email->addCustomArg("marketing1", "false");
@@ -228,16 +228,16 @@ $email->addTos($toEmails, 1);
 $email->addCc(["test13@example.com", "Example User13", 1])
 
 $ccEmails = [ 
-    ["test14@sendgrid.com", "Example User14", 1],
-    ["test15@sendgrid.com", "Example User15", 1]
+    ["test14@sendgrid.com", "Test Name14", 1],
+    ["test15@sendgrid.com", "Test Name15", 1]
 ];
 $email->addCcs($ccEmails, 1);
 
 $email->addBcc(["test16@example.com", "Example User16", 1]);
 
 $bccEmails = [ 
-    ["test17@example.com", "Example User17", 1],
-    ["test18@example.com", "Example User18", 1]
+    ["test17@sendgrid.com", "Test Name17", 1],
+    ["test18@sendgrid.com", "Test Name18", 1]
 ];
 $email->addBccs($bccEmails);
 
