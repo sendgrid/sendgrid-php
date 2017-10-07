@@ -962,14 +962,15 @@ class Mail implements \JsonSerializable
     public $tracking_settings;
     public $reply_to;
 
-    public function __construct($from, $subject, $to, $content)
+    public function __construct($from, $subject, $to, $htmlContent, $plainTextContent)
     {
         $this->setFrom($from);
 	    $this->setSubject($subject);
 	    $personalization = new Personalization();
         $personalization->addTo($to);
         $this->addPersonalization($personalization);
-        $this->addContent($content);
+        $this->addContent($htmlContent);
+        $this->addContent($plainTextContent);
     }
 
     public function setFrom($email)
@@ -1148,7 +1149,7 @@ class Mail implements \JsonSerializable
             [
                 'from'              => $this->getFrom(),
                 'personalizations'  => $this->getPersonalizations(),
-                'subject'           => $this->getSubject(),
+                'subject'           => $this->getSubject()->getSubject(),
                 'content'           => $this->getContents(),
                 'attachments'       => $this->getAttachments(),
                 'template_id'       => $this->getTemplateId(),
