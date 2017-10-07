@@ -1,14 +1,19 @@
 <?php namespace SendGrid\Helpers\Mail\Model;
 
-class EmailAddress
+class EmailAddress implements \JsonSerializable
 {
-    public $email;
     public $name;
+    public $email;
 
-    public function __construct($emailAddress, $name = null)
+    public function __construct($name = null, $emailAddress)
     {
-        $this->email = $emailAddress;
         $this->name  = $name;
+        $this->email = $emailAddress;
+    }
+
+    public function getEmail()
+    {
+        return $this->getEmailAddress();
     }
 
     public function getEmailAddress()
@@ -29,5 +34,18 @@ class EmailAddress
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    public function jsonSerialize()
+    {
+        return array_filter(
+            [
+                'name'  => $this->getName(),
+                'email' => $this->getEmail()
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }

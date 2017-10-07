@@ -1,6 +1,6 @@
 <?php namespace SendGrid\Helpers\Mail\Model;
 
-class Content
+class Content implements \JsonSerializable
 {
     const TYPE_TEXT = 'text/plain';
     const TYPE_HTML = 'text/html';
@@ -11,7 +11,7 @@ class Content
     public function __construct($type, $value)
     {
         $this->type  = $type;
-        $this->value = $value;
+        $this->value = mb_convert_encoding($value, 'UTF-8', 'UTF-8');
     }
 
     public function getType()
@@ -31,6 +31,19 @@ class Content
 
     public function setValue($value)
     {
-        $this->value = $value;
+        $this->value = mb_convert_encoding($value, 'UTF-8', 'UTF-8');
+    }
+
+    public function jsonSerialize()
+    {
+        return array_filter(
+            [
+                'type'  => $this->getType(),
+                'value' => $this->getValue()
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }

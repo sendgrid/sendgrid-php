@@ -1,6 +1,6 @@
 <?php namespace SendGrid\Helpers\Mail\Model;
 
-class Subject
+class Subject implements \JsonSerializable
 {
     public $subject;
 
@@ -17,5 +17,10 @@ class Subject
     public function setSubject($subject)
     {
         $this->subject = $subject;
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->getSubject();
     }
 }
