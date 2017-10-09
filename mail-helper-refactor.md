@@ -326,6 +326,16 @@ $sections = [
 ];
 $email->addSections($sections);
 
+// Reliability settings measured in seconds.
+$reliabilitySettings = [
+"retryCount" => 2,
+"minBackOff" => 1,
+"maxBackOff" => 10,
+"deltaBackOff" => 3
+];
+$email->reliabilitySettings($reliabilitySettings);
+
+
 $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 try {
     $response = $sendgrid->send($email);
