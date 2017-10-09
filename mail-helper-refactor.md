@@ -157,7 +157,7 @@ $email = new Mail($from,
 
 // For a detailed description of each of these settings, please see the [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
 
-$email->addTo("test1@example.com", "Example User1")
+$email->addTo("test1@example.com", "Example User1");
 
 $toEmails = new ToCollection([ 
     new To("test2@example.com", "Example User2"),
@@ -165,7 +165,7 @@ $toEmails = new ToCollection([
 ]);
 $email->addTos($toEmails);
 
-$email->addCc(new Cc("test4@example.com", "Example User4"))
+$email->addCc(new Cc("test4@example.com", "Example User4"));
 
 $ccEmails = new CcCollection([ 
     new Cc("test5@example.com", "Example User5"),
@@ -173,7 +173,7 @@ $ccEmails = new CcCollection([
 ]);
 $email->addCcs($ccEmails);
 
-$email->addBcc(new Mail("test7@example.com", "Example User7"))
+$email->addBcc(new Mail("test7@example.com", "Example User7"));
 
 $bccEmails = new BccCollection([ 
     new Bcc("test8@example.com", "Example User8"),
@@ -214,7 +214,7 @@ $email->setSubject("this subject overrides the Global Subject on the default Per
 
 // If you need to add more [Personalizations](https://sendgrid.com/docs/Classroom/Send/v3_Mail_Send/personalizations.html), here is an example of adding another Personalization by passing in a personalization index.
 
-$email->addTo(new To("test10@example.com", "Example User10"), 1)
+$email->addTo(new To("test10@example.com", "Example User10"), 1);
 
 $toEmails = new ToCollection([ 
     new To("test11@example.com", "Example User11"),
@@ -222,7 +222,7 @@ $toEmails = new ToCollection([
 ]);
 $email->addTos($toEmails, 1);
 
-$email->addCc(new Cc("test13@example.com", "Example User13"), 1)
+$email->addCc(new Cc("test13@example.com", "Example User13"), 1);
 
 $ccEmails = new CcCollection([ 
     new Cc("test14@example.com", "Example User14"),
@@ -230,7 +230,7 @@ $ccEmails = new CcCollection([
 ]);
 $email->addCcs($ccEmails, 1);
 
-$email->addBcc(new Bcc("test16@example.com", "Example User16"), 1)
+$email->addBcc(new Bcc("test16@example.com", "Example User16"), 1);
 
 $bccEmails = new BccCollection([ 
     new Bcc("test17@example.com", "Example User17"),
@@ -323,6 +323,15 @@ $sections = new SectionCollection([
     "%section3%" => "Substitution for Section 3 Tag"
 ]);
 $email->addSections($sections);
+
+// Reliability settings measured in seconds.
+$reliabilitySettings = [
+"retryCount" => 2,
+"minBackOff" => 1,
+"maxBackOff" => 10,
+"deltaBackOff" => 3
+];
+$email->reliabilitySettings($reliabilitySettings);
 
 $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 try {
