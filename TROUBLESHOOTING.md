@@ -12,6 +12,7 @@ If you can't find a solution below, please open an [issue](https://github.com/se
 * [Versions](#versions)
 * [Environment Variables and Your SendGrid API Key](#environment)
 * [Using the Package Manager](#package-manager)
+* [Fixing Error 415](#error-415)
 
 <a name="migrating"></a>
 ## Migrating from v2 to v3
@@ -87,3 +88,14 @@ In most cases we recommend you download the latest version of the library, but i
   }
 }
 ```
+
+<a name="error-415"></a>
+## Fixing Error 415
+
+If you're getting the following error while using this library:
+
+`Content-Type should be application/json.`
+
+It is most likely due to a linebreak in your API key. Passing your key through `trim` should fix this:
+
+`$apiKey = trim($apiKey)`
