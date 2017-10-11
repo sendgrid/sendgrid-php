@@ -468,6 +468,445 @@ class Footer implements \JsonSerializable
     }
 }
 
+class Permissions
+{
+	private $scopes = [];
+	private	$methods = ['c' => 'create', 'r' => 'read', 'u' => 'update', 'd' => 'delete', 's' => 'send'];
+	private $groups = [
+		'alerts' => [
+			'create',
+			'delete',
+			'read',
+			'update'
+		],
+		'api_keys' => [
+			'create',
+			'delete',
+			'read',
+			'update'
+		],
+		'asm' => [
+			'groups' => [
+				'create',
+				'delete',
+				'read',
+				'update'
+			]
+		],
+		'billing' => [
+			'create',
+			'delete',
+			'read',
+			'update'
+		],
+		'categories' => [
+			'create',
+			'delete',
+			'read',
+			'update',
+			'stats' => [
+				'read',
+				'sums' => [
+					'read'
+				],
+			]
+		],
+		'credentials' => [
+			'create',
+			'delete',
+			'read',
+			'update'
+		],
+		'email_activity' => [
+			'read'
+		],
+		'stats' => [
+			'read',
+			'global' => [
+				'read'
+			]
+		],
+		'browsers' => [
+			'stats' => [
+				'read'
+			]
+		],
+		'devices' => [
+			'stats' => [
+				'read'
+			]
+		],
+		'geo' => [
+			'stats' => [
+				'read'
+			]
+		],
+		'mailbox_providers' => [
+			'stats' => [
+				'read'
+			]
+		],
+		'clients' => [
+			'desktop' => [
+				'stats' => [
+					'read'
+				]
+			],
+			'phone' => [
+				'stats' => [
+					'read'
+				]
+			],
+			'stats' => [
+				'read'
+			],
+			'tablet' => [
+				'stats' => [
+					'read'
+				]
+			],
+			'webmail' => [
+				'stats' => [
+					'read'
+				]
+			]
+		],
+		'ips' => [
+			'assigned' => [
+				'read'
+			],
+			'read',
+			'pools' => [
+				'create',
+				'delete',
+				'read',
+				'update',
+				'ips' => [
+					'create',
+					'delete',
+					'read',
+					'update'
+				]
+			],
+			'warmup' => [
+				'create',
+				'delete',
+				'read',
+				'update'
+			]
+		],
+		'mail_settings' => [
+			'address_whitelist' => [
+				'read',
+				'update'
+			],
+			'bcc' => [
+				'read',
+				'update'
+			],
+			'bounce_purge' => [
+				'read',
+				'update'
+			],
+			'footer' => [
+				'read',
+				'update'
+			],
+			'forward_bounce' => [
+				'read',
+				'update'
+			],
+			'forward_spam' => [
+				'read',
+				'update'
+			],
+			'plain_content' => [
+				'read',
+				'update'
+			],
+			'read',
+			'spam_check' => [
+				'read',
+				'update'
+			],
+			'template' => [
+				'read',
+				'update'
+			],
+		],
+		'mail' => [
+			'batch' => [
+				'create',
+				'delete',
+				'read',
+				'update'
+			],
+			'send'
+		],
+		'marketing_campaigns' => [
+			'create',
+			'delete',
+			'read',
+			'update'
+		],
+		'partner_settings' => [
+			'new_relic' => [
+				'read',
+				'update'
+			],
+			'read',
+			'sendwithus' => [
+				'read',
+				'update'
+			],
+		],
+		'user' => [
+			'scheduled_sends' => [
+				'create',
+				'delete',
+				'read',
+				'update'
+			],
+			'account' => [
+				'read'
+			],
+			'credits' => [
+				'read'
+			],
+			'email' => [
+				'create',
+				'delete',
+				'read',
+				'update'
+			],
+			'multifactor_authentication' => [
+				'create',
+				'delete',
+				'read',
+				'update'
+			],
+			'password' => [
+				'read',
+				'update'
+			],
+			'profile' => [
+				'read',
+				'update'
+			],
+			'settings' => [
+				'enforced_tls' => [
+					'read',
+					'update'
+				]
+			],
+			'timezone' => [
+				'read',
+				'update'
+			],
+			'username' => [
+				'read',
+				'update'
+			],
+			'webooks' => [
+				'event' => [
+					'settings' => [
+						'read',
+						'update'
+					],
+					'test' => [
+						'create',
+						'read',
+						'update'
+					],
+				],
+				'parse' => [
+					'settings' => [
+						'create',
+						'delete',
+						'read',
+						'update'
+					],
+					'stats' => [
+						'read'
+					]
+				]
+			]
+		],
+		'subusers' => [
+			'create',
+			'delete',
+			'read',
+			'update',
+			'credits' => [
+				'create',
+				'delete',
+				'read',
+				'update',
+				'remaining' => [
+					'create',
+					'delete',
+					'read',
+					'update'
+				]
+			],
+			'monitor' => [
+				'create',
+				'delete',
+				'read',
+				'update'
+			],
+			'reputations' => [
+				'read'
+			],
+			'stats' => [
+				'read',
+				'monthly' => [
+					'read'
+				],
+				'sums' => [
+					'read'
+				]
+			],
+			'summary' => [
+				'read'
+			]
+		],
+		'suppression' => [
+			'create',
+			'delete',
+			'read',
+			'update',
+			'bounces' => [
+				'create',
+				'delete',
+				'read',
+				'update'
+			],
+			'blocks' => [
+				'create',
+				'delete',
+				'read',
+				'update'
+			],
+			'invalid_emails' => [
+				'create',
+				'delete',
+				'read',
+				'update'
+			],
+			'spam_reports' => [
+				'create',
+				'delete',
+				'read',
+				'update'
+			],
+			'unsubscribes' => [
+				'create',
+				'delete',
+				'read',
+				'update'
+			]
+		],
+		'teammates' => [
+			'create',
+			'delete',
+			'read',
+			'update'
+		],
+		'templates' => [
+			'create',
+			'delete',
+			'read',
+			'update',
+			'versions' => [
+				'activate' => [
+					'create',
+					'delete',
+					'read',
+					'update'
+				],
+				'create',
+				'delete',
+				'read',
+				'update'
+			]
+		],
+		'tracking_settings' => [
+			'click' => [
+				'read',
+				'update'
+			],
+			'google_analytics' => [
+				'read',
+				'update'
+			],
+			'open' => [
+				'read',
+				'update'
+			],
+			'read',
+			'subscription' => [
+				'read',
+				'update'
+			]
+		],
+		'whitelabel' => [
+			'create',
+			'delete',
+			'read',
+			'update'
+		],
+		'access_settings' => [
+			'activity' => [
+				'read'
+			],
+			'whitelist' => [
+				'create',
+				'delete',
+				'read',
+				'update'
+			]
+		]
+	];
+
+	public function scopeGet() {
+		return json_encode($this -> scope);
+	}
+
+	public function scopeStart()
+	{
+		$this -> scope = [];
+
+		return $this;
+	}
+
+	public function __call($name, $args) {
+		$array	=	$this -> groups;
+
+		if (!array_key_exists($name, get_class_methods($this))) {
+			$name = strtolower($name);
+
+			if (in_array($name, $this -> methods)) {
+				if (isset($args[0])) {
+					$groups = explode('.', $args[0]);
+
+					foreach($groups as $group) {
+						if (isset($array[$group])) {
+							$array	=	$array[$group];
+						}
+					}
+
+					if (in_array($name, $array)) {
+						$this -> scope[]	=	"{$args[0]}.$name";
+					}
+
+					return $this;
+				}
+			}
+		}
+	}
+}
+
 class SandBoxMode implements \JsonSerializable
 {
     private $enable;
