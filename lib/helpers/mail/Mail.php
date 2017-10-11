@@ -748,8 +748,9 @@ class Content implements \JsonSerializable
         $this->value = mb_convert_encoding($value, 'UTF-8', 'UTF-8');
     }
     
-    public function convertPlainText($type) {
-	$type = preg_replace(
+    public function convertPlainText($type) 
+    {
+	    $type = preg_replace(
         array(
             '@<head[^>]*?>.*?</head>@siu',
             '@<style[^>]*?>.*?</style>@siu',
