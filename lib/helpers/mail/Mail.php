@@ -471,7 +471,7 @@ class Footer implements \JsonSerializable
 class Permissions
 {
     private $scopes = [];
-    private    $methods = ['c' => 'create', 'r' => 'read', 'u' => 'update', 'd' => 'delete', 's' => 'send'];
+    private $methods = ['create', 'read', 'update', 'delete', 'send'];
     private $groups = [
         'alerts' => [
             'create',
