@@ -8,3 +8,4 @@ composer.phar
 .editorconfig
 test.php
 .idea/
+.project

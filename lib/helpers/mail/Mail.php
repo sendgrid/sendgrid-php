@@ -468,6 +468,715 @@ class Footer implements \JsonSerializable
     }
 }
 
+class Permissions
+{
+    private $scopes = [];
+    private $methods = ['create', 'read', 'update', 'delete', 'send'];
+    private $groups = [
+        'alerts' => [
+            'create',
+            'delete',
+            'read',
+            'update'
+        ],
+        'api_keys' => [
+            'create',
+            'delete',
+            'read',
+            'update'
+        ],
+        'asm' => [
+            'groups' => [
+                'create',
+                'delete',
+                'read',
+                'update'
+            ]
+        ],
+        'billing' => [
+            'create',
+            'delete',
+            'read',
+            'update'
+        ],
+        'categories' => [
+            'create',
+            'delete',
+            'read',
+            'update',
+            'stats' => [
+                'read',
+                'sums' => [
+                    'read'
+                ],
+            ]
+        ],
+        'credentials' => [
+            'create',
+            'delete',
+            'read',
+            'update'
+        ],
+        'email_activity' => [
+            'read'
+        ],
+        'stats' => [
+            'read',
+            'global' => [
+                'read'
+            ]
+        ],
+        'browsers' => [
+            'stats' => [
+                'read'
+            ]
+        ],
+        'devices' => [
+            'stats' => [
+                'read'
+            ]
+        ],
+        'geo' => [
+            'stats' => [
+                'read'
+            ]
+        ],
+        'mailbox_providers' => [
+            'stats' => [
+                'read'
+            ]
+        ],
+        'clients' => [
+            'desktop' => [
+                'stats' => [
+                    'read'
+                ]
+            ],
+            'phone' => [
+                'stats' => [
+                    'read'
+                ]
+            ],
+            'stats' => [
+                'read'
+            ],
+            'tablet' => [
+                'stats' => [
+                    'read'
+                ]
+            ],
+            'webmail' => [
+                'stats' => [
+                    'read'
+                ]
+            ]
+        ],
+        'ips' => [
+            'assigned' => [
+                'read'
+            ],
+            'read',
+            'pools' => [
+                'create',
+                'delete',
+                'read',
+                'update',
+                'ips' => [
+                    'create',
+                    'delete',
+                    'read',
+                    'update'
+                ]
+            ],
+            'warmup' => [
+                'create',
+                'delete',
+                'read',
+                'update'
+            ]
+        ],
+        'mail_settings' => [
+            'address_whitelist' => [
+                'read',
+                'update'
+            ],
+            'bcc' => [
+                'read',
+                'update'
+            ],
+            'bounce_purge' => [
+                'read',
+                'update'
+            ],
+            'footer' => [
+                'read',
+                'update'
+            ],
+            'forward_bounce' => [
+                'read',
+                'update'
+            ],
+            'forward_spam' => [
+                'read',
+                'update'
+            ],
+            'plain_content' => [
+                'read',
+                'update'
+            ],
+            'read',
+            'spam_check' => [
+                'read',
+                'update'
+            ],
+            'template' => [
+                'read',
+                'update'
+            ],
+        ],
+        'mail' => [
+            'batch' => [
+                'create',
+                'delete',
+                'read',
+                'update'
+            ],
+            'send'
+        ],
+        'marketing_campaigns' => [
+            'create',
+            'delete',
+            'read',
+            'update'
+        ],
+        'partner_settings' => [
+            'new_relic' => [
+                'read',
+                'update'
+            ],
+            'read',
+            'sendwithus' => [
+                'read',
+                'update'
+            ],
+        ],
+        'user' => [
+            'scheduled_sends' => [
+                'create',
+                'delete',
+                'read',
+                'update'
+            ],
+            'account' => [
+                'read'
+            ],
+            'credits' => [
+                'read'
+            ],
+            'email' => [
+                'create',
+                'delete',
+                'read',
+                'update'
+            ],
+            'multifactor_authentication' => [
+                'create',
+                'delete',
+                'read',
+                'update'
+            ],
+            'password' => [
+                'read',
+                'update'
+            ],
+            'profile' => [
+                'read',
+                'update'
+            ],
+            'settings' => [
+                'enforced_tls' => [
+                    'read',
+                    'update'
+                ]
+            ],
+            'timezone' => [
+                'read',
+                'update'
+            ],
+            'username' => [
+                'read',
+                'update'
+            ],
+            'webooks' => [
+                'event' => [
+                    'settings' => [
+                        'read',
+                        'update'
+                    ],
+                    'test' => [
+                        'create',
+                        'read',
+                        'update'
+                    ],
+                ],
+                'parse' => [
+                    'settings' => [
+                        'create',
+                        'delete',
+                        'read',
+                        'update'
+                    ],
+                    'stats' => [
+                        'read'
+                    ]
+                ]
+            ]
+        ],
+        'subusers' => [
+            'create',
+            'delete',
+            'read',
+            'update',
+            'credits' => [
+                'create',
+                'delete',
+                'read',
+                'update',
+                'remaining' => [
+                    'create',
+                    'delete',
+                    'read',
+                    'update'
+                ]
+            ],
+            'monitor' => [
+                'create',
+                'delete',
+                'read',
+                'update'
+            ],
+            'reputations' => [
+                'read'
+            ],
+            'stats' => [
+                'read',
+                'monthly' => [
+                    'read'
+                ],
+                'sums' => [
+                    'read'
+                ]
+            ],
+            'summary' => [
+                'read'
+            ]
+        ],
+        'suppression' => [
+            'create',
+            'delete',
+            'read',
+            'update',
+            'bounces' => [
+                'create',
+                'delete',
+                'read',
+                'update'
+            ],
+            'blocks' => [
+                'create',
+                'delete',
+                'read',
+                'update'
+            ],
+            'invalid_emails' => [
+                'create',
+                'delete',
+                'read',
+                'update'
+            ],
+            'spam_reports' => [
+                'create',
+                'delete',
+                'read',
+                'update'
+            ],
+            'unsubscribes' => [
+                'create',
+                'delete',
+                'read',
+                'update'
+            ]
+        ],
+        'teammates' => [
+            'create',
+            'delete',
+            'read',
+            'update'
+        ],
+        'templates' => [
+            'create',
+            'delete',
+            'read',
+            'update',
+            'versions' => [
+                'activate' => [
+                    'create',
+                    'delete',
+                    'read',
+                    'update'
+                ],
+                'create',
+                'delete',
+                'read',
+                'update'
+            ]
+        ],
+        'tracking_settings' => [
+            'click' => [
+                'read',
+                'update'
+            ],
+            'google_analytics' => [
+                'read',
+                'update'
+            ],
+            'open' => [
+                'read',
+                'update'
+            ],
+            'read',
+            'subscription' => [
+                'read',
+                'update'
+            ]
+        ],
+        'whitelabel' => [
+            'create',
+            'delete',
+            'read',
+            'update'
+        ],
+        'access_settings' => [
+            'activity' => [
+                'read'
+            ],
+            'whitelist' => [
+                'create',
+                'delete',
+                'read',
+                'update'
+            ]
+        ]
+    ];
+
+    public function scopeGet() {
+        $scope = array_filter($this -> scope);
+
+        return json_encode($scope);
+    }
+
+    public function scopeStart()
+    {
+        $this -> scope = [];
+
+        return $this;
+    }
+
+    public function __call($name, $args) {
+        $array    =    $this -> groups;
+
+        if (!array_key_exists($name, get_class_methods($this))) {
+            $name = strtolower($name);
+
+            if (in_array($name, $this -> methods)) {
+                if (isset($args[0])) {
+                    $groups = explode('.', $args[0]);
+
+                    foreach($groups as $group) {
+                        if (isset($array[$group])) {
+                            $array    =    $array[$group];
+                        }
+                    }
+
+                    if (in_array($name, $array)) {
+                        $this -> scope[]    =    "{$args[0]}.$name";
+                    }
+
+                    return $this;
+                }
+            }
+        }
+    }
+
+    public function crud($group) {
+        return $this
+            -> create($group)
+            -> read($group)
+            -> update($group)
+            -> delete($group);
+    }
+
+    public function mailSendReadOnly() {
+        return $this
+            -> scopeStart()
+            -> read('mail.batch')
+            -> scopeGet();
+    }
+
+    public function mailSendFullAccess() {
+        return $this
+            -> scopeStart()
+            -> crud('mail.batch')
+            -> send('mail')
+            -> scopeGet();
+    }
+
+    public function alertsReadOnly() {
+        return $this
+            -> scopeStart()
+            -> read('alerts')
+            -> scopeGet();
+    }
+
+    public function alertsFullAccess() {
+        return $this
+            -> scopeStart()
+            -> crud('alerts')
+            -> scopeGet();
+    }
+
+    public function statsReadOnly() {
+        return $this
+            -> scopeStart()
+            -> read('email_activity')
+            -> read('stats')
+            -> read('stats.global')
+            -> read('browser.stats')
+            -> read('devices.stats')
+            -> read('geo.stats')
+            -> read('mailbox_providers.stats')
+            -> scopeGet();
+    }
+
+    public function suppressionsReadOnly() {
+        return $this
+            -> scopeStart()
+            -> read('suppression')
+            -> scopeGet();
+    }
+
+    public function suppressionsFullAccess() {
+        return $this
+            -> scopeStart()
+            -> crud('suppression')
+            -> scopeGet();
+    }
+
+    public function whitelabelsReadOnly() {
+        return $this
+            -> scopeStart()
+            -> read('whitelabel')
+            -> scopeGet();
+    }
+
+    public function whitelabelsFullAccess() {
+        return $this
+            -> scopeStart()
+            -> crud('whitelabel')
+            -> scopeGet();
+    }
+
+    public function ipManagementReadOnly() {
+        return $this
+            -> scopeStart()
+            -> read('ips.assigned')
+            -> read('ips')
+            -> read('ips.pools')
+            -> read('ips.warmup')
+            -> scopeGet();
+    }
+
+    public function ipManagementFullAccess() {
+        return $this
+            -> scopeStart()
+            -> crud('ips.assigned')
+            -> crud('ips')
+            -> crud('ips.pools')
+            -> crud('ips.pools.ips')
+            -> crud('ips.warmup')
+            -> scopeGet();
+    }
+
+    public function templatesReadOnly() {
+        return $this
+            -> scopeStart()
+            -> read('templates')
+            -> read('templates.versions.activate')
+            -> read('templates.versions')
+            -> scopeGet();
+    }
+
+    public function templatesFullAccess() {
+        return $this
+            -> scopeStart()
+            -> crud('templates')
+            -> crud('templates.versions.activate')
+            -> crud('templates.versions')
+            -> scopeGet();
+    }
+
+    public function inboundParseReadOnly() {
+        return $this
+            -> scopeStart()
+            -> read('user.webhooks.parse.settings')
+            -> read('user.webhooks.parse.stats')
+            -> scopeGet();
+    }
+
+    public function inboundParseFullAccess() {
+        return $this
+            -> scopeStart()
+            -> crud('user.webhooks.parse.settings')
+            -> crud('user.webhooks.parse.settings')
+            -> scopeGet();
+    }
+
+    public function mailSettingsReadOnly() {
+        return $this
+            -> scopeStart()
+            -> read('mail_settings.address_whitelist')
+            -> read('mail_settings.bbc')
+            -> read('mail_settings.bounce_purge')
+            -> read('mail_settings.footer')
+            -> read('mail_settings.forward_bounce')
+            -> read('mail_settings.forward_spam')
+            -> read('mail_settings.plain_content')
+            -> read('mail_settings')
+            -> read('mail_settings.spam_check')
+            -> read('mail_settings.template')
+            -> scopeGet();
+    }
+
+    public function mailSettingsFullAccess() {
+        return $this
+            -> scopeStart()
+            -> crud('mail_settings.address_whitelist')
+            -> crud('mail_settings.bbc')
+            -> crud('mail_settings.bounce_purge')
+            -> crud('mail_settings.footer')
+            -> crud('mail_settings.forward_bounce')
+            -> crud('mail_settings.forward_spam')
+            -> crud('mail_settings.plain_content')
+            -> crud('mail_settings')
+            -> crud('mail_settings.spam_check')
+            -> crud('mail_settings.template')
+            -> scopeGet();
+    }
+
+    public function marketingCampaignsReadOnly() {
+        return $this
+            -> scopeStart()
+            -> read('marketing_campaigns')
+            -> scopeGet();
+    }
+
+    public function marketingCampaignsFullAccess() {
+        return $this
+            -> scopeStart()
+            -> crud('marketing_campaigns')
+            -> crud('partner_settings.new_relic')
+            -> scopeGet();
+    }
+
+    public function adminAccess() {
+        return $this
+            -> scopeStart()
+            -> crud('access_settings.activity')
+            -> crud('access_settings.whitelist')
+            -> crud('alerts')
+            -> crud('api_keys')
+            -> crud('asm.groups')
+            -> crud('billing')
+            -> crud('browsers.stats')
+            -> crud('categories')
+            -> crud('categories.stats')
+            -> crud('clients.desktop.stats')
+            -> crud('clients.phone.stats')
+            -> crud('clients.stats')
+            -> crud('clients.tablet.stats')
+            -> crud('clients.webmail.stats')
+            -> crud('credentials')
+            -> crud('devices.stats')
+            -> crud('email_activity')
+            -> crud('geo.stats')
+            -> crud('ips.assigned')
+            -> crud('ips.pools')
+            -> crud('ips.pools.ips')
+            -> crud('ips')
+            -> crud('ips.warmup')
+            -> crud('mail_settings.address_whitelist')
+            -> crud('mail_settings.bcc')
+            -> crud('mail_settings.bounce_purge')
+            -> crud('mail_settings.footer')
+            -> crud('mail_settings.forward_bounce')
+            -> crud('mail_settings.forward_spam')
+            -> crud('mail_settings.plain_content')
+            -> crud('mail_settings')
+            -> crud('mail_settings.spam_check')
+            -> crud('mail_settings.template')
+            -> crud('mail.batch')
+            -> send('mail')
+            -> crud('mailbox_providers')
+            -> crud('marketing_campaigns')
+            -> crud('newsletter')
+            -> crud('partner_settings.new_relic')
+            -> crud('partner_settings')
+            -> crud('partner_settings.sendwithus')
+            -> crud('stats.global')
+            -> crud('stats')
+            -> crud('subusers')
+            -> crud('subusers.credits')
+            -> crud('subusers.credits.remaining')
+            -> crud('subusers.monitor')
+            -> crud('subusers.reputations')
+            -> crud('subusers.stats.monthly')
+            -> crud('subusers.stats')
+            -> crud('subusers.stats.sums')
+            -> crud('subusers.summary')
+            -> crud('suppression.blocks')
+            -> crud('suppression.bounces')
+            -> crud('suppression')
+            -> crud('suppression.invalid_emails')
+            -> crud('suppression.spam_reports')
+            -> crud('suppression.unsubscribes')
+            -> crud('suppression')
+            -> crud('templates')
+            -> crud('templates.versions.activate')
+            -> crud('templates.versions')
+            -> crud('tracking_settings.click')
+            -> crud('tracking_settings.google_analytics')
+            -> crud('tracking_settings.open')
+            -> crud('tracking_settings')
+            -> crud('tracking_settings.subscription')
+            -> crud('user.account')
+            -> crud('user.credits')
+            -> crud('user.email')
+            -> crud('user.multifactor_authentication')
+            -> crud('user.password')
+            -> crud('user.profile')
+            -> crud('user.scheduled_sends')
+            -> crud('user.settings.enforced_tls')
+            -> crud('user.timezone')
+            -> crud('user.username')
+            -> crud('user.webhooks.event.settings')
+            -> crud('user.webhooks.event.test')
+            -> crud('user.webhooks.parse.settings')
+            -> crud('user.webhooks.parse.stats')
+            -> crud('whitelabel')
+            -> scopeGet();
+    }
+}
+
 class SandBoxMode implements \JsonSerializable
 {
     private $enable;
@@ -965,8 +1674,8 @@ class Mail implements \JsonSerializable
     public function __construct($from, $subject, $to, $content)
     {
         $this->setFrom($from);
-	    $this->setSubject($subject);
-	    $personalization = new Personalization();
+        $this->setSubject($subject);
+        $personalization = new Personalization();
         $personalization->addTo($to);
         $this->addPersonalization($personalization);
         $this->addContent($content);
