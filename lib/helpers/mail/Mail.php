@@ -742,7 +742,7 @@ class Content implements \JsonSerializable
     public function __construct($type, $value)
     {
         if ($type == 'text/plain') {
-        $this->type = $this->convertPlainText($type);
+        $type = $this->convertPlainText($type);
         }
         $this->type = $type;
         $this->value = mb_convert_encoding($value, 'UTF-8', 'UTF-8');
