@@ -748,7 +748,7 @@ class Content implements \JsonSerializable
         $this->value = mb_convert_encoding($value, 'UTF-8', 'UTF-8');
     }
     
-    public function convertHTMLPlainText($value) 
+    private function convertHTMLPlainText($value) 
     {
 		$value = preg_replace(
         array(
