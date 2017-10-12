@@ -3,6 +3,7 @@ This documentation provides examples for specific use cases. Please [open an iss
 # Table of Contents
 * [Attachments](#attachments)
 * [Transactional Templates](#transactional_templates)
+* [Sample Application on Cloud](#sample)
 
 <a name="attachments"></a>
 # Attachments
@@ -166,3 +167,13 @@ echo $response->statusCode();
 echo $response->body();
 print_r($response->headers());
 ```
+
+<a name="sample"></a>
+# Sample Application on Cloud
+
+## Heroku
+Use the button below to instantly setup your own Simple instance for sending email using sendgrid on Heroku.
+
+<a href="https://heroku.com/deploy?template=https://github.com/pangaunn/sendgrid-php-heroku">
+  <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
+</a>
