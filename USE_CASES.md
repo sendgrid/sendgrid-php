@@ -11,13 +11,11 @@ Here is an example of attaching a text file to your email, assuming that text fi
 
 ```php
 <?php
-// using SendGrid's PHP Library
-// https://github.com/sendgrid/sendgrid-php
-
 // If you are using Composer (recommended)
 require 'vendor/autoload.php';
 
-// If you are not using Composer
+// If you are not using Composer and downloaded SendGrid's PHP Library
+// http://dx.sendgrid.com/downloads/sendgrid-php/sendgrid-php-latest.zip
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
 $from = new SendGrid\Email("Example User", "test@example.com");
@@ -87,10 +85,11 @@ I hope you are having a great day in -city- :)
 
 ```php
 <?php
-// If you are using Composer
+// If you are using Composer (recommended)
 require 'vendor/autoload.php';
 
-// If you are not using Composer (recommended)
+// If you are not using Composer and downloaded SendGrid's PHP Library
+// http://dx.sendgrid.com/downloads/sendgrid-php/sendgrid-php-latest.zip
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
 $from = new SendGrid\Email(null, "test@example.com");
@@ -120,10 +119,11 @@ echo $response->body();
 
 ```php
 <?php
-// If you are using Composer
+// If you are using Composer (recommended)
 require 'vendor/autoload.php';
 
-// If you are not using Composer (recommended)
+// If you are not using Composer and downloaded SendGrid's PHP Library
+// http://dx.sendgrid.com/downloads/sendgrid-php/sendgrid-php-latest.zip
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
 $request_body = json_decode('{
