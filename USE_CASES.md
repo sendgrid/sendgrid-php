@@ -3,6 +3,7 @@ This documentation provides examples for specific use cases. Please [open an iss
 # Table of Contents
 * [Attachments](#attachments)
 * [Transactional Templates](#transactional_templates)
+* [How to Setup a Domain Whitelabel](#domain_whitelabel)
 
 <a name="attachments"></a>
 # Attachments
@@ -166,3 +167,10 @@ echo $response->statusCode();
 echo $response->body();
 print_r($response->headers());
 ```
+
+<a name="domain_whitelabel"></a>
+# How to Setup a Domain Whitelabel
+
+You can find documentation for how to setup a domain whitelabel via the UI [here](https://sendgrid.com/docs/Classroom/Basics/Whitelabel/setup_domain_whitelabel.html) and via API [here](https://github.com/sendgrid/sendgrid-csharp/blob/master/USAGE.md#whitelabel).
+
+Find more information about all of SendGrid's whitelabeling related documentation [here](https://sendgrid.com/docs/Classroom/Basics/Whitelabel/index.html).
