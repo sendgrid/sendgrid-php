@@ -1,5 +1,6 @@
 [![BuildStatus](https://travis-ci.org/sendgrid/sendgrid-php.svg?branch=master)](https://travis-ci.org/sendgrid/sendgrid-php)
 [![Email Notifications Badge](https://dx.sendgrid.com/badge/php)](https://dx.sendgrid.com/newsletter/php)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.txt)
 
 **NEW:** Subscribe to email [notifications](https://dx.sendgrid.com/newsletter/php) for releases and breaking changes.
 
@@ -24,6 +25,7 @@ We appreciate your continued support, thank you!
 * [How to Contribute](#contribute)
 * [Troubleshooting](#troubleshooting)
 * [About](#about)
+* [License](#license)
 
 <a name="installation"></a>
 # Installation
@@ -235,3 +237,7 @@ sendgrid-php is guided and supported by the SendGrid [Developer Experience Team]
 sendgrid-php is maintained and funded by SendGrid, Inc. The names and logos for sendgrid-php are trademarks of SendGrid, Inc.
 
 ![SendGrid Logo](https://uiux.s3.amazonaws.com/2016-logos/email-logo%402x.png)
+
+
+# License
+[The MIT License (MIT)](LICENSE.txt)
