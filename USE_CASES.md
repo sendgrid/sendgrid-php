@@ -3,6 +3,8 @@ This documentation provides examples for specific use cases. Please [open an iss
 # Table of Contents
 * [Attachments](#attachments)
 * [Transactional Templates](#transactional_templates)
+* [How to Setup a Domain Whitelabel](#domain_whitelabel)
+* [How to View Email Statistics](#email_stats)
 * [Sample Application on Cloud](#sample)
 
 <a name="attachments"></a>
@@ -12,13 +14,11 @@ Here is an example of attaching a text file to your email, assuming that text fi
 
 ```php
 <?php
-// using SendGrid's PHP Library
-// https://github.com/sendgrid/sendgrid-php
-
 // If you are using Composer (recommended)
 require 'vendor/autoload.php';
 
-// If you are not using Composer
+// If you are not using Composer and downloaded SendGrid's PHP Library
+// http://dx.sendgrid.com/downloads/sendgrid-php/sendgrid-php-latest.zip
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
 $from = new SendGrid\Email("Example User", "test@example.com");
@@ -88,10 +88,11 @@ I hope you are having a great day in -city- :)
 
 ```php
 <?php
-// If you are using Composer
+// If you are using Composer (recommended)
 require 'vendor/autoload.php';
 
-// If you are not using Composer (recommended)
+// If you are not using Composer and downloaded SendGrid's PHP Library
+// http://dx.sendgrid.com/downloads/sendgrid-php/sendgrid-php-latest.zip
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
 $from = new SendGrid\Email(null, "test@example.com");
@@ -121,10 +122,11 @@ echo $response->body();
 
 ```php
 <?php
-// If you are using Composer
+// If you are using Composer (recommended)
 require 'vendor/autoload.php';
 
-// If you are not using Composer (recommended)
+// If you are not using Composer and downloaded SendGrid's PHP Library
+// http://dx.sendgrid.com/downloads/sendgrid-php/sendgrid-php-latest.zip
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
 $request_body = json_decode('{
@@ -168,12 +170,26 @@ echo $response->body();
 print_r($response->headers());
 ```
 
+<a name="domain_whitelabel"></a>
+# How to Setup a Domain Whitelabel
+
+You can find documentation for how to setup a domain whitelabel via the UI [here](https://sendgrid.com/docs/Classroom/Basics/Whitelabel/setup_domain_whitelabel.html) and via API [here](https://github.com/sendgrid/sendgrid-php/blob/master/USAGE.md#whitelabel).
+
+Find more information about all of SendGrid's whitelabeling related documentation [here](https://sendgrid.com/docs/Classroom/Basics/Whitelabel/index.html).
+
+<a name="email_stats"></a>
+# How to View Email Statistics
+
+You can find documentation for how to view your email statistics via the UI [here](https://app.sendgrid.com/statistics) and via API [here](https://github.com/sendgrid/sendgrid-php/blob/master/USAGE.md#stats).
+
+Alternatively, we can post events to a URL of your choice via our [Event Webhook](https://sendgrid.com/docs/API_Reference/Webhooks/event.html) about events that occur as SendGrid processes your email.
+
 <a name="sample"></a>
 # Sample Application on Cloud
 
 ## Heroku
 Use the button below to instantly setup your own Simple instance for sending email using sendgrid on Heroku.
 
-<a href="https://heroku.com/deploy?template=https://github.com/pangaunn/sendgrid-php-heroku">
+<a href="https://heroku.com/deploy?template=https://github.com/pangaunn/tree/example-heroku-hello-email">
   <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
 </a>
