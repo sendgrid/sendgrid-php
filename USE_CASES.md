@@ -190,6 +190,6 @@ Alternatively, we can post events to a URL of your choice via our [Event Webhook
 ## Heroku
 Use the button below to instantly setup your own Simple instance for sending email using sendgrid on Heroku.
 
-<a href="https://heroku.com/deploy?template=https://github.com/pangaunn/tree/example-heroku-hello-email">
+<a href="https://heroku.com/deploy?template=https://github.com/pangaunn/sendgrid-php/tree/example-heroku-hello-email">
   <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
 </a>
