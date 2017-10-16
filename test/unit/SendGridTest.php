@@ -1771,7 +1771,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
     {
         $email = "test_url_param";
         $request_headers = array("X-Mock: 200");
-        $response = self::$sg->client->suppression()->spam_report()->_($email)->get(null, null, $request_headers);
+        $response = self::$sg->client->suppression()->spam_reports()->_($email)->get(null, null, $request_headers);
         $this->assertEquals($response->statusCode(), 200);
     }
 
@@ -1779,7 +1779,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
     {
         $email = "test_url_param";
         $request_headers = array("X-Mock: 204");
-        $response = self::$sg->client->suppression()->spam_report()->_($email)->delete(null, null, $request_headers);
+        $response = self::$sg->client->suppression()->spam_reports()->_($email)->delete(null, null, $request_headers);
         $this->assertEquals($response->statusCode(), 204);
     }
 
