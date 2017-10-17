@@ -26,6 +26,8 @@ $from = new SendGrid\Email("Example User", "test@example.com");
 $subject = "Sending with SendGrid is Fun";
 $to = new SendGrid\Email("Example User", "test@example.com");
 $content = new SendGrid\Content("text/plain", "and easy to do anywhere, even with PHP");
+
+
 $file = 'my_file.txt';
 $file_encoded = base64_encode(file_get_contents($file));
 $attachment = new SendGrid\Attachment();
@@ -33,6 +35,13 @@ $attachment->setContent($file_encoded);
 $attachment->setType("application/text");
 $attachment->setDisposition("attachment");
 $attachment->setFilename("my_file.txt");
+
+// OR
+
+$attachment = new SendGrid\Attachment();
+$attachment->setContentPath("my_file.txt");
+$attachment->setType("application/text");
+$attachment->setDisposition("attachment");
 
 $mail = new SendGrid\Mail($from, $subject, $to, $content);
 $mail->addAttachment($attachment);
