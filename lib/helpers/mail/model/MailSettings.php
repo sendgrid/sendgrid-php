@@ -48,6 +48,16 @@ class MailSettings implements \JsonSerializable
         return $this->sandbox_mode;
     }
 
+    public function enableSandboxMode()
+    {
+        $this->setSandboxMode(true);
+    }
+
+    public function disableSandboxMode()
+    {
+        $this->setSandboxMode(false);
+    }
+
     public function setSpamCheck($spam_check)
     {
         $this->spam_check = $spam_check;
@@ -60,12 +70,14 @@ class MailSettings implements \JsonSerializable
 
     public function jsonSerialize()
     {
+        $sandbox = new \stdClass();
+        $sandbox->enabled = $this->getSandboxMode();
         return array_filter(
             [
                 'bcc'                    => $this->getBccSettings(),
                 'bypass_list_management' => $this->getBypassListManagement(),
                 'footer'                 => $this->getFooter(),
-                'sandbox_mode'           => $this->getSandboxMode(),
+                'sandbox_mode'           => $sandbox,
                 'spam_check'             => $this->getSpamCheck()
             ],
             function ($value) {

@@ -25,8 +25,8 @@ class MailTest_Mail extends \PHPUnit_Framework_TestCase
 {
     public function testBaseLineExample()
     {
-        $from = new EmailAddress(null, "test@example.com");
-        $to = new EmailAddress(null, "test@example.com");
+        $from = new EmailAddress("test@example.com");
+        $to = new EmailAddress("test@example.com");
         $subject = "Hello World from the SendGrid PHP Library";
         $content = new PlainTextContent("some text here");
         $mail = new Mail($from, $subject, $to, $content);
@@ -41,21 +41,21 @@ class MailTest_Mail extends \PHPUnit_Framework_TestCase
 
     public function testKitchenSinkExample()
     {
-        $from = new EmailAddress("DX", "test@example.com");
+        $from = new EmailAddress("test@example.com", "DX");
         $subject = "Hello World from the SendGrid PHP Library";
-        $to = new EmailAddress("Example User", "test@example.com");
+        $to = new EmailAddress("test@example.com", "Example User");
         $content = new PlainTextContent("some text here");
         $mail = new Mail($from, $subject, $to, $content);
-  
-        $email = new EmailAddress("Example User", "test@example.com");
+
+        $email = new EmailAddress("test@example.com", "Example User");
         $mail->personalization[0]->addTo($email);
-        $email = new EmailAddress("Example User", "test@example.com");
+        $email = new EmailAddress("test@example.com", "Example User");
         $mail->personalization[0]->addCc($email);
-        $email = new EmailAddress("Example User", "test@example.com");
+        $email = new EmailAddress("test@example.com", "Example User");
         $mail->personalization[0]->addCc($email);
-        $email = new EmailAddress("Example User", "test@example.com");
+        $email = new EmailAddress("test@example.com", "Example User");
         $mail->personalization[0]->addBcc($email);
-        $email = new EmailAddress("Example User", "test@example.com");
+        $email = new EmailAddress("test@example.com", "Example User");
         $mail->personalization[0]->addBcc($email);
         $mail->personalization[0]->setSubject("Hello World from the SendGrid PHP Library");
         $mail->personalization[0]->addHeader("X-Test", "test");
@@ -67,17 +67,17 @@ class MailTest_Mail extends \PHPUnit_Framework_TestCase
         $mail->personalization[0]->setSendAt(1443636843);
   
         $personalization1 = new Personalization();
-        $email = new EmailAddress("Example User", "test@example.com");
+        $email = new EmailAddress("test@example.com", "Example User");
         $personalization1->addTo($email);
-        $email = new EmailAddress("Example User", "test@example.com");
+        $email = new EmailAddress("test@example.com", "Example User");
         $personalization1->addTo($email);
-        $email = new EmailAddress("Example User", "test@example.com");
+        $email = new EmailAddress("test@example.com", "Example User");
         $personalization1->addCc($email);
-        $email = new EmailAddress("Example User", "test@example.com");
+        $email = new EmailAddress("test@example.com", "Example User");
         $personalization1->addCc($email);
-        $email = new EmailAddress("Example User", "test@example.com");
+        $email = new EmailAddress("test@example.com", "Example User");
         $personalization1->addBcc($email);
-        $email = new EmailAddress("Example User", "test@example.com");
+        $email = new EmailAddress("test@example.com", "Example User");
         $personalization1->addBcc($email);
         $personalization1->setSubject("Hello World from the SendGrid PHP Library");
         $personalization1->addHeader("X-Test", "test");

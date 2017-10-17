@@ -64,9 +64,9 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
 
     public function testHelloWorld()
     {
-        $from = new EmailAddress("Example User", "test@example.com");
+        $from = new EmailAddress("test@example.com", "Example User");
         $subject = new Subject("Sending with SendGrid is Fun");
-        $to = new EmailAddress("Example User", "test@example.com");
+        $to = new EmailAddress("test@example.com", "Example User");
         $content = new PlainTextContent("and easy to do anywhere, even with PHP");
         $mail = new Mail($from, $subject, $to, $content);
         $json = json_encode($mail->jsonSerialize());

@@ -2,13 +2,13 @@
 
 class EmailAddress implements \JsonSerializable
 {
-    public $name;
-    public $email;
+    private $name;
+    private $email;
 
-    public function __construct($name = null, $emailAddress)
+    public function __construct($emailAddress, $name = null)
     {
-        $this->name  = $name;
         $this->email = $emailAddress;
+        $this->name  = $name;
     }
 
     public function getEmail()
