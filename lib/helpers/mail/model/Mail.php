@@ -19,23 +19,24 @@ class Mail implements \JsonSerializable
 
     protected $namespace = 'SendGrid';
 
-    public $from;
+    private $from;
+    private $subject;
+    private $contents;
+    private $attachments;
+    private $template_id;
+    private $sections;
+    private $headers;
+    private $categories;
+    private $custom_args;
+    private $send_at;
+    private $batch_id;
+    private $asm;
+    private $ip_pool_name;
+    private $mail_settings;
+    private $tracking_settings;
+    private $reply_to;
+
     public $personalization;
-    public $subject;
-    public $contents;
-    public $attachments;
-    public $template_id;
-    public $sections;
-    public $headers;
-    public $categories;
-    public $custom_args;
-    public $send_at;
-    public $batch_id;
-    public $asm;
-    public $ip_pool_name;
-    public $mail_settings;
-    public $tracking_settings;
-    public $reply_to;
 
     public function __construct($from, $subject, $to, $content)
     {
