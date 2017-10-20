@@ -18,6 +18,6 @@
   },
   "type": "library",
   "autoload": {
-    "files": ["lib/SendGrid.php", "lib/helpers/mail/Mail.php"]
+    "files": ["lib/SendGrid.php", "lib/helpers/mail/Mail.php", "lib/helpers/contacts/Recipients.php"]
   }
 }

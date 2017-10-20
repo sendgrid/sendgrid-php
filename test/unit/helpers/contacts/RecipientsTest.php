@@ -1,0 +1,27 @@
+<?php
+namespace SendGrid;
+
+class RecipientsTest_Recipient extends \PHPUnit_Framework_TestCase
+{
+    public function testRecipientsForm()
+    {
+        $form = new RecipientForm('http://www.examle.com/recipientFormSubmit');
+        $this->assertEquals(
+            $form->html, '<form action="http://www.examle.com/recipientFormSubmit" method="post">
+        First Name: <input type="text" name="first-name"><br>
+        Last Name: <input type="text" name="last-name"><br>
+        E-mail: <input type="text" name="email"><br>
+        <input type="submit">
+        </form>'
+        );
+    }
+    public function testRecipientsFormSubmit()
+    {
+        $firstName = 'Test';
+        $lastName = 'Tester';
+        $email = 'test@test.com';
+        $recipient = new Recipient($firstName, $lastName, $email);
+        $json = json_encode($recipient);
+        $this->assertEquals($json, '{"email":"test@test.com","first_name":"Test","last_name":"Tester"}');
+    }
+}
