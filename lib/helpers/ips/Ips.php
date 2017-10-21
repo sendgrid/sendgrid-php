@@ -3,29 +3,29 @@
 namespace SendGrid;
 class Ips
 {
-	private $sg;
+	private $sendGrid;
 	
-	public function __construct($sg)
+	public function __construct(SendGrid $sendGrid)
 	{
-		$this->sg = $sg;
+		$this->sendGrid = $sendGrid;
 	}
 	
 	public function getAll()
 	{
-		$response = $sg->client->ips()->get();
+		$response = $this->sendGrid->client->ips()->get();
 		return $response->body();
 	}
 	
 	public function getAssigned()
 	{
-		$response = $sg->client->ips()->assigned()->get();
+		$response = $this->sendGrid->client->ips()->assigned()->get();
 		return $response->body();
 	}
 	
 	public function getUnassigned()
 	{
-		$all_ips = $this->getAll();
-		$ips = json_decode($all_ips,true);
+		$allIps = $this->getAll();
+		$ips = json_decode($allIps,true);
 		$unassigned_ips=array();
 		foreach($ips as $ip){
 			if (empty($ip['subusers'])) {
