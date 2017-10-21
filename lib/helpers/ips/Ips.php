@@ -35,5 +35,3 @@ class Ips
 		return $unassigned_ips;
 	}
 }
-
-?>
