@@ -1,6 +1,9 @@
 [![BuildStatus](https://travis-ci.org/sendgrid/sendgrid-php.svg?branch=master)](https://travis-ci.org/sendgrid/sendgrid-php)
-[![Email Notifications Badge](https://dx.sendgrid.com/badge/php)](https://dx.sendgrid.com/newsletter/php)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/sendgrid/sendgrid.svg?style=flat-square)](https://packagist.org/packages/sendgrid/sendgrid)
+[![Monthly Downloads](https://img.shields.io/packagist/dm/sendgrid/sendgrid.svg?style=flat-square)](https://packagist.org/packages/sendgrid/sendgrid)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.txt)
+[![GitHub contributors](https://img.shields.io/github/contributors/sendgrid/sendgrid-php.svg)](https://github.com/sendgrid/sendgrid-php/graphs/contributors)
+[![Email Notifications Badge](https://dx.sendgrid.com/badge/php)](https://dx.sendgrid.com/newsletter/php)
 
 **NEW:** Subscribe to email [notifications](https://dx.sendgrid.com/newsletter/php) for releases and breaking changes.
 
