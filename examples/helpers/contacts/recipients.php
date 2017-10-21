@@ -7,8 +7,8 @@ require __DIR__ . '<PATH_TO>/vendor/autoload.php';
 // This will build an HTML form to be embedded in your page. This form allows users to subscribe using their name and email.
 function buildRecipientForm($url = 'http://www.examle.com/recipientFormSubmit')
 {
-    $form = new RecipientForm($url);
-    echo $form->html;
+    $form = (string) new RecipientForm($url);
+    echo $form . PHP_EOL;
 }
 
 // This will accept a form submission from the above form. Will create a new Recipient, adding them to "contactdb". Note, it does not add the recipient to any list.

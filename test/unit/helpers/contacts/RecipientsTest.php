@@ -5,14 +5,14 @@ class RecipientsTest_Recipient extends \PHPUnit_Framework_TestCase
 {
     public function testRecipientsForm()
     {
-        $form = new RecipientForm('http://www.examle.com/recipientFormSubmit');
+        $form = (string) new RecipientForm('http://www.examle.com/recipientFormSubmit');
         $this->assertEquals(
-            $form->html, '<form action="http://www.examle.com/recipientFormSubmit" method="post">
-        First Name: <input type="text" name="first-name"><br>
-        Last Name: <input type="text" name="last-name"><br>
-        E-mail: <input type="text" name="email"><br>
-        <input type="submit">
-        </form>'
+            $form, '<form action="http://www.examle.com/recipientFormSubmit" method="post">
+    First Name: <input type="text" name="first-name"><br>
+    Last Name: <input type="text" name="last-name"><br>
+    E-mail: <input type="text" name="email"><br>
+    <input type="submit">
+</form>'
         );
     }
     public function testRecipientsFormSubmit()

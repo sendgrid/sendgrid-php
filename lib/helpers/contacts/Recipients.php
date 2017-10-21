@@ -14,25 +14,25 @@ namespace SendGrid;
 
 class RecipientForm
 {
-    public $html;
+    private $html;
 
+    /**
+     * Form constructor
+     *
+     * @param string $url The url the form should submit to
+     */
     public function __construct($url)
     {
         $html = '<form action="' . $url . '" method="post">
-        First Name: <input type="text" name="first-name"><br>
-        Last Name: <input type="text" name="last-name"><br>
-        E-mail: <input type="text" name="email"><br>
-        <input type="submit">
-        </form>';
-        $this->setHtml($html);
-    }
-
-    public function setHtml($html)
-    {
+    First Name: <input type="text" name="first-name"><br>
+    Last Name: <input type="text" name="last-name"><br>
+    E-mail: <input type="text" name="email"><br>
+    <input type="submit">
+</form>';
         $this->html = $html;
     }
 
-    public function getHtml()
+    public function __toString() 
     {
         return $this->html;
     }
@@ -44,21 +44,15 @@ class RecipientForm
  */
 class Recipient implements \JsonSerializable
 {
-    public $firstName;
-    public $lastName;
-    public $email;
-    public $id;
+    private $firstName;
+    private $lastName;
+    private $email;
 
     public function __construct($firstName, $lastName, $email)
     {
-        $this->setFirstName($firstName);
-        $this->setLastName($lastName);
-        $this->setEmail($email);
-    }
-
-    public function setFirstName($firstName)
-    {
         $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->email = $email;
     }
 
     public function getFirstName()
@@ -66,19 +60,9 @@ class Recipient implements \JsonSerializable
         return $this->firstName;
     }
 
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
-    }
-
     public function getLastName()
     {
         return $this->lastName;
-    }
-
-    public function setEmail($email)
-    {
-        $this->email = $email;
     }
 
     public function getEmail()
