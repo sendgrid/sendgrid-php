@@ -2,9 +2,9 @@ This documentation provides examples for specific use cases. Please [open an iss
 
 # Table of Contents
 * [Attachments](#attachments)
-* [Transactional Templates](#transactional_templates)
-* [How to Setup a Domain Whitelabel](#domain_whitelabel)
-* [How to View Email Statistics](#email_stats)
+* [Transactional Templates](#transactional-templates)
+* [How to Setup a Domain Whitelabel](#domain-whitelabel)
+* [How to View Email Statistics](#email-stats)
 
 <a name="attachments"></a>
 # Attachments
@@ -46,7 +46,7 @@ echo $response->body();
 ?>
 ```
 
-<a name="transactional_templates"></a>
+<a name="transactional-templates"></a>
 # Transactional Templates
 
 For this example, we assume you have created a [transactional template](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html). Following is the template content we used for testing.
@@ -169,14 +169,14 @@ echo $response->body();
 print_r($response->headers());
 ```
 
-<a name="domain_whitelabel"></a>
+<a name="domain-whitelabel"></a>
 # How to Setup a Domain Whitelabel
 
 You can find documentation for how to setup a domain whitelabel via the UI [here](https://sendgrid.com/docs/Classroom/Basics/Whitelabel/setup_domain_whitelabel.html) and via API [here](https://github.com/sendgrid/sendgrid-php/blob/master/USAGE.md#whitelabel).
 
 Find more information about all of SendGrid's whitelabeling related documentation [here](https://sendgrid.com/docs/Classroom/Basics/Whitelabel/index.html).
 
-<a name="email_stats"></a>
+<a name="email-stats"></a>
 # How to View Email Statistics
 
 You can find documentation for how to view your email statistics via the UI [here](https://app.sendgrid.com/statistics) and via API [here](https://github.com/sendgrid/sendgrid-php/blob/master/USAGE.md#stats).

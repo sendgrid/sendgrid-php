@@ -22,9 +22,9 @@ We appreciate your continued support, thank you!
 # Table of Contents
 
 * [Installation](#installation)
-* [Quick Start](#quick_start)
+* [Quick Start](#quick-start)
 * [Usage](#usage)
-* [Use Cases](#use_cases)
+* [Use Cases](#use-cases)
 * [Announcements](#announcements)
 * [Roadmap](#roadmap)
 * [How to Contribute](#contribute)
@@ -75,7 +75,7 @@ Previous versions of the library can be found in the [version index](https://sen
 - The SendGrid Service, starting at the [free level](https://sendgrid.com/free?source=sendgrid-php)
 - [php-HTTP-Client](https://github.com/sendgrid/php-http-client)
 
-<a name="quick_start"></a>
+<a name="quick-start"></a>
 # Quick Start
 
 ## Hello Email
@@ -200,7 +200,7 @@ print $response->body();
 - [How-to: Migration from v2 to v3](https://sendgrid.com/docs/Classroom/Send/v3_Mail_Send/how_to_migrate_from_v2_to_v3_mail_send.html)
 - [v3 Web API Mail Send Helper](https://github.com/sendgrid/sendgrid-php/tree/master/lib/helpers/mail/README.md) - build a request object payload for a v3 /mail/send API call.
 
-<a name="use_cases"></a>
+<a name="use-cases"></a>
 # Use Cases
 
 [Examples of common API use cases](https://github.com/sendgrid/sendgrid-php/blob/master/USE_CASES.md), such as how to send an email with a transactional template.
