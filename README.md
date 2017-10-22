@@ -9,6 +9,8 @@
 
 **NEW:** Subscribe to email [notifications](https://dx.sendgrid.com/newsletter/php) for releases and breaking changes.
 
+**Chance to get a Sendgrid Tshirt if you contribute to this repo.**
+
 **This library allows you to quickly and easily use the SendGrid Web API v3 via PHP.**
 
 Version 5.X.X of this library provides full support for all SendGrid [Web API v3](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html) endpoints, including the new [v3 /mail/send](https://sendgrid.com/blog/introducing-v3mailsend-sendgrids-new-mail-endpoint).
