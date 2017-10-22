@@ -1169,4 +1169,26 @@ class Mail implements \JsonSerializable
             }
         ) ?: null;
     }
+
+    /**
+     * @param string | array $patterns string or array of string of regex pattern to check against
+     * @throws \Exception
+     */
+    public function checkAgainst($patterns)
+    {
+        foreach ($this->contents as $content) {
+            /* @var Content $content */
+            if(is_array($patterns)){
+                foreach ($patterns as $pattern) {
+                    if(preg_match("/".$pattern."/", $content->getValue())){
+                        throw new \Exception("Mail content contains secret");
+                    }
+                }
+            }else{
+                if(preg_match("/".$patterns."/", $content->getValue())){
+                    throw new \Exception("Mail content contains secret");
+                }
+            }
+        }
+    }
 }
