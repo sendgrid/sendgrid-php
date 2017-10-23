@@ -1096,7 +1096,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
   "content": [
     {
       "type": "text/html",
-      "value": "<html><p>Hello, world!</p><img src=[CID GOES HERE]></img></html>"
+      "value": "<html><p>Hello, world!</p><img src=[CID GOES HERE] /></html>"
     }
   ],
   "custom_args": {
