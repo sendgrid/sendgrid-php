@@ -2,8 +2,8 @@
 
 namespace SendGrid;
 
-class Stats {
-
+class Stats
+{
     const DATE_FORMAT = 'Y-m-d';
 
     const OPTIONS_SORT_DIRECTION = ['asc', 'desc'];
@@ -31,12 +31,13 @@ class Stats {
      * @param string $endDate YYYYMMDD
      * @param string $aggregatedBy day|week|month
      */
-    public function __construct($startDate, $endDate = null, $aggregatedBy = null) {
+    public function __construct($startDate, $endDate = null, $aggregatedBy = null)
+    {
         $this->validateDateFormat($startDate);
-        if(null !== $endDate) {
+        if (null !== $endDate) {
             $this->validateDateFormat($endDate);
         }
-        if(null !== $aggregatedBy) {
+        if (null !== $aggregatedBy) {
             $this->validateOptions('aggregatedBy', $aggregatedBy, self::OPTIONS_AGGREGATED_BY);
         }
         $this->startDate = $startDate;
@@ -47,7 +48,8 @@ class Stats {
     /**
      * @return array
      */
-    public function getGlobal() {
+    public function getGlobal()
+    {
         return [
             'start_date' => $this->startDate,
             'end_date' => $this->endDate,
@@ -60,7 +62,8 @@ class Stats {
      * @return array
      * @throws \Exception
      */
-    public function getCategory($categories) {
+    public function getCategory($categories)
+    {
         $this->validateNumericArray('categories', $categories);
         $stats = $this->getGlobal();
         $stats['categories'] = $categories;
@@ -72,7 +75,8 @@ class Stats {
      * @return array
      * @throws \Exception
      */
-    public function getSubuser($subusers) {
+    public function getSubuser($subusers)
+    {
         $this->validateNumericArray('subusers', $subusers);
         $stats = $this->getGlobal();
         $stats['subusers'] = $subusers;
@@ -87,7 +91,8 @@ class Stats {
      * @return array
      * @throws \Exception
      */
-    public function getSum($sortByMetric = 'delivered', $sortByDirection = 'desc', $limit = 5, $offset = 0) {
+    public function getSum($sortByMetric = 'delivered', $sortByDirection = 'desc', $limit = 5, $offset = 0)
+    {
         $this->validateOptions('sortByDirection', $sortByDirection, self::OPTIONS_SORT_DIRECTION);
         $this->validateInteger('limit', $limit);
         $this->validateInteger('offset', $offset);
@@ -108,7 +113,8 @@ class Stats {
      * @return array
      * @throws \Exception
      */
-    public function getSubuserMonthly($subuser = null, $sortByMetric = 'delivered', $sortByDirection = 'desc', $limit = 5, $offset = 0) {
+    public function getSubuserMonthly($subuser = null, $sortByMetric = 'delivered', $sortByDirection = 'desc', $limit = 5, $offset = 0)
+    {
         $this->validateOptions('sortByDirection', $sortByDirection, self::OPTIONS_SORT_DIRECTION);
         $this->validateInteger('limit', $limit);
         $this->validateInteger('offset', $offset);
@@ -126,8 +132,9 @@ class Stats {
      * @param string $date
      * @throws \Exception
      */
-    protected function validateDateFormat($date) {
-        if(false === \DateTime::createFromFormat(self::DATE_FORMAT, $date)) {
+    protected function validateDateFormat($date)
+    {
+        if (false === \DateTime::createFromFormat(self::DATE_FORMAT, $date)) {
             throw new \Exception('Date must be in the YYYY-MM-DD format.');
         }
     }
@@ -138,8 +145,9 @@ class Stats {
      * @param array $options
      * @throws \Exception
      */
-    protected function validateOptions($name, $value, $options) {
-        if(!in_array($value, $options)) {
+    protected function validateOptions($name, $value, $options)
+    {
+        if (!in_array($value, $options)) {
             throw new \Exception($name . ' must be one of: ' . implode(', ', $options));
         }
     }
@@ -149,8 +157,9 @@ class Stats {
      * @param integer $value
      * @throws \Exception
      */
-    protected function validateInteger($name, $value) {
-        if(!is_integer($value)) {
+    protected function validateInteger($name, $value)
+    {
+        if (!is_integer($value)) {
             throw new \Exception($name . ' must be an integer.');
         }
     }
@@ -160,8 +169,9 @@ class Stats {
      * @param array $value
      * @throws \Exception
      */
-    protected function validateNumericArray($name, $value) {
-        if(!is_array($value) || empty($value) || !$this->isNumeric($value)) {
+    protected function validateNumericArray($name, $value)
+    {
+        if (!is_array($value) || empty($value) || !$this->isNumeric($value)) {
             throw new \Exception($name . ' must be a non-empty numeric array.');
         }
     }
@@ -170,8 +180,8 @@ class Stats {
      * @param array $array
      * @return bool
      */
-    protected function isNumeric(array $array) {
+    protected function isNumeric(array $array)
+    {
         return array_keys($array) == range(0, count($array) - 1);
     }
-
 }

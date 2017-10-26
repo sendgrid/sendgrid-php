@@ -61,7 +61,8 @@ class StatsTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function validValues() {
+    public function validValues()
+    {
         return [
             [
                 $this->getExpectedGlobal('1980-01-01', null, null),
@@ -87,7 +88,8 @@ class StatsTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    public function invalidValues() {
+    public function invalidValues()
+    {
         return [
             [
                 $this->getExpectedGlobal(null, null, null),
@@ -176,7 +178,8 @@ class StatsTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    public function getExpectedGlobal($startDate, $endDate, $aggregatedBy) {
+    public function getExpectedGlobal($startDate, $endDate, $aggregatedBy)
+    {
         return [
             'start_date' => $startDate,
             'end_date' => $endDate,
@@ -184,7 +187,8 @@ class StatsTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    public function getExpectedCategory($startDate, $endDate, $aggregatedBy, $categories) {
+    public function getExpectedCategory($startDate, $endDate, $aggregatedBy, $categories)
+    {
         return [
             'start_date' => $startDate,
             'end_date' => $endDate,
@@ -193,7 +197,8 @@ class StatsTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    public function getExpectedSubuser($startDate, $endDate, $aggregatedBy, $subusers) {
+    public function getExpectedSubuser($startDate, $endDate, $aggregatedBy, $subusers)
+    {
         return [
             'start_date' => $startDate,
             'end_date' => $endDate,
@@ -202,7 +207,8 @@ class StatsTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    public function getExpectedSum($startDate, $endDate, $aggregatedBy, $sortByMetric, $sortByDirection, $limit, $offset) {
+    public function getExpectedSum($startDate, $endDate, $aggregatedBy, $sortByMetric, $sortByDirection, $limit, $offset)
+    {
         return [
             'start_date' => $startDate,
             'end_date' => $endDate,
@@ -214,7 +220,8 @@ class StatsTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    public function getExpectedSubuserMonthly($date, $subuser, $sortByMetric, $sortByDirection, $limit, $offset) {
+    public function getExpectedSubuserMonthly($date, $subuser, $sortByMetric, $sortByDirection, $limit, $offset)
+    {
         return [
             'date' => $date,
             'subuser' => $subuser,
@@ -225,4 +232,3 @@ class StatsTest extends \PHPUnit_Framework_TestCase
         ];
     }
 }
-
