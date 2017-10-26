@@ -40,7 +40,11 @@ class MailSettings implements \JsonSerializable
 
     public function setSandboxMode($sandbox_mode)
     {
-        $this->sandbox_mode = $sandbox_mode;
+        if ($sandbox_mode instanceof SandBoxMode) {
+            $this->sandbox_mode = $sandbox_mode->getEnable();
+        } else {
+            $this->sandbox_mode = $sandbox_mode;
+        }
     }
 
     public function getSandboxMode()
@@ -70,8 +74,9 @@ class MailSettings implements \JsonSerializable
 
     public function jsonSerialize()
     {
-        $sandbox = new \stdClass();
-        $sandbox->enabled = $this->getSandboxMode();
+        $sandbox = new SandBoxMode();
+        $sandbox->setEnable($this->getSandboxMode());
+
         return array_filter(
             [
                 'bcc'                    => $this->getBccSettings(),
