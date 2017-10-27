@@ -277,8 +277,8 @@ $email->setFrom(new Mail("test0@example.com", "Example User0"));
 
 $email->setGlobalSubject("Sending with SendGrid is Fun");
 
-$email->addContent(MimeType::Text, "and easy to do anywhere, even with PHP")
-$email->addContent(MimeType::Html, "<strong>and easy to do anywhere, even with PHP</strong>")
+$email->addContent(MimeType::Text, "and easy to do anywhere, even with PHP");
+$email->addContent(MimeType::Html, "<strong>and easy to do anywhere, even with PHP</strong>");
 
 $contents = [
     new Content("text/calendar", "Party Time!!"),
