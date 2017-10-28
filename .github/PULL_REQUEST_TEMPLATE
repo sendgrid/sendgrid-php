@@ -1,0 +1,29 @@
+<!-- 
+Please explain WHAT you changed and WHY.
+
+The title should be descriptive, for example:
+
+* *Fixed a typo in the readme.md page*
+* *Update mail helper v3 with feedback*
+* *Helpers for email statistics - global, category, subuser*
+
+Fill out this form in the body:
+-->
+
+**Description of the change**:
+**Reason for the change**:
+**Link to original source**:
+<!-- 
+If this pull request closes an issue, add in the issue number here 
+-->
+Closes #
+
+### Checklist
+
+Make sure all of these items are complete, or else the PR will be ineligible for a code review.
+
+- [ ] Code passes all existing [tests](https://github.com/sendgrid/sendgrid-php/tree/master/test/unit)
+- [ ] Any new functionality added includes new unit tests
+- [ ] Create or update example code to show the new functionality in action.
+- [ ] All code, branch, and git naming and style conventions are followed (see [`CONTRIBUTING.md`](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#style-guidelines--naming-conventions))
+- [ ] Feature branch has been rebased off of the latest `master` branch. ( see [`CONTRIBUTING.md`](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#creating-a-pull-request)).
