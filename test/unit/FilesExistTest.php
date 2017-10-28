@@ -2,7 +2,6 @@
 
 namespace SendGrid;
 
-
 class FilesExistTest extends \PHPUnit_Framework_TestCase
 {
     private $requiredFiles;
