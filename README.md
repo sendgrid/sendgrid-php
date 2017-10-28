@@ -46,7 +46,7 @@ Update the development environment with your [SENDGRID_API_KEY](https://app.send
 
 1. Copy the sample env file to a new file named `.env`
 ```bash
-cp .env_sample .env
+cp .env.sample .env
 ```
 2. Edit the `.env` file to include your `SENDGRID_API_KEY`
 3. Source the `.env` file
