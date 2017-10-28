@@ -169,6 +169,6 @@ $request_body = json_decode('{
   }
 }');
 $response = $sg->client->mail()->send()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print_r $response->statusCode();
+print_r $response->body();
 print_r($response->headers());
