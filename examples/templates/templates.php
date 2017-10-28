@@ -14,8 +14,8 @@ $request_body = json_decode('{
   "name": "example_name"
 }');
 $response = $sg->client->templates()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print_r($response->statusCode();
+print_r($response->body();
 print_r($response->headers());
 
 ////////////////////////////////////////////////////
@@ -23,8 +23,8 @@ print_r($response->headers());
 // GET /templates #
 
 $response = $sg->client->templates()->get();
-echo $response->statusCode();
-echo $response->body();
+print_r($response->statusCode();
+print_r($response->body();
 print_r($response->headers());
 
 ////////////////////////////////////////////////////
@@ -36,8 +36,8 @@ $request_body = json_decode('{
 }');
 $template_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print_r($response->statusCode();
+print_r($response->body();
 print_r($response->headers());
 
 ////////////////////////////////////////////////////
@@ -46,8 +46,8 @@ print_r($response->headers());
 
 $template_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->get();
-echo $response->statusCode();
-echo $response->body();
+print_r($response->statusCode();
+print_r($response->body();
 print_r($response->headers());
 
 ////////////////////////////////////////////////////
@@ -56,8 +56,8 @@ print_r($response->headers());
 
 $template_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->delete();
-echo $response->statusCode();
-echo $response->body();
+print_r($response->statusCode();
+print_r($response->body();
 print_r($response->headers());
 
 ////////////////////////////////////////////////////
@@ -74,8 +74,8 @@ $request_body = json_decode('{
 }');
 $template_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->versions()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print_r($response->statusCode();
+print_r($response->body();
 print_r($response->headers());
 
 ////////////////////////////////////////////////////
@@ -92,8 +92,8 @@ $request_body = json_decode('{
 $template_id = "test_url_param";
 $version_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print_r($response->statusCode();
+print_r($response->body();
 print_r($response->headers());
 
 ////////////////////////////////////////////////////
@@ -103,8 +103,8 @@ print_r($response->headers());
 $template_id = "test_url_param";
 $version_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->get();
-echo $response->statusCode();
-echo $response->body();
+print_r($response->statusCode();
+print_r($response->body();
 print_r($response->headers());
 
 ////////////////////////////////////////////////////
@@ -114,8 +114,8 @@ print_r($response->headers());
 $template_id = "test_url_param";
 $version_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->delete();
-echo $response->statusCode();
-echo $response->body();
+print_r($response->statusCode();
+print_r($response->body();
 print_r($response->headers());
 
 ////////////////////////////////////////////////////
@@ -125,6 +125,6 @@ print_r($response->headers());
 $template_id = "test_url_param";
 $version_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->activate()->post();
-echo $response->statusCode();
-echo $response->body();
+print_r($response->statusCode();
+print_r($response->body();
 print_r($response->headers());
