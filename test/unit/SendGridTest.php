@@ -1055,7 +1055,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
     public function test_license_date_range()
     {
     	$license_file = file_get_contents("../../LICENSE.txt");
-    	$this-> assertInternalType("int", strpos($license_file, date("Y")));
+    	$this->assertInternalType("int", strpos($license_file, date("Y")));
     }
 
     public function test_mail_batch_post()
