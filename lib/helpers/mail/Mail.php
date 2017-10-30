@@ -895,10 +895,28 @@ class Email implements \JsonSerializable
     private $name;
     private $email;
 
-    public function __construct($name, $email)
+    public function __construct($name, $email = NULL)
     {
-        $this->name = $name;
-        $this->email = $email;
+        if ($email === NULL) {
+            $check_spaces = strpos($name, ' ');
+            $check_character_begin = strpos($name, '<');
+            $check_character_end = strpos($name, '>');
+            if ($check_spaces !== false && $check_character_begin !== false && $check_character_end !== false) {
+                $exploded_string = explode('<', $name, 2);
+                $name_trimmed = trim($exploded_string[0]);
+                $mail_explode = explode('>', $exploded_string[1]);
+                $this->name = $name_trimmed;
+                $this->email = $mail_explode[0];
+            }
+            else {
+                $this->name = $name;
+                $this->email = $name;                    
+            }
+        } 
+        else {
+            $this->name = $name;
+            $this->email = $email;
+        }
     }
 
     public function setName($name)
