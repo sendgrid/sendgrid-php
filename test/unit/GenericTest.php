@@ -4,7 +4,7 @@ namespace SendGridPhp\Tests;
 
 use SendGrid;
 
-class GenericConnectionTest extends BaseTestClass
+class GenericTest extends BaseTestClass
 {
     public function testVersionIsCorrect()
     {
