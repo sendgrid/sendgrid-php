@@ -7,7 +7,7 @@ before_script:
 - composer install
 - cd test/unit
 script:
-- "../../vendor/bin/phpunit . --bootstrap bootstrap.php --filter test*"
+- "../../vendor/bin/phpunit ."
 after_script:
 - cd ../..
 - ./scripts/dxupload.sh
