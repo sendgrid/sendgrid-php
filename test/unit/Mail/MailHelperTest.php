@@ -22,7 +22,7 @@ use SendGrid\SpamCheck;
 use SendGrid\SubscriptionTracking;
 use SendGrid\TrackingSettings;
 
-class MailTest extends TestCase
+class MailHelperTest extends TestCase
 {
     public function testBaseLineExample()
     {
