@@ -1,6 +1,8 @@
 <?php
 
-namespace SendGridPhp\Tests;
+namespace SendGridPhp\Tests\Mail;
+
+use SendGridPhp\Tests\BaseTestClass;
 
 class MailBatchTest extends BaseTestClass
 {
