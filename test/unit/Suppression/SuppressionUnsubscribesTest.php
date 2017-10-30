@@ -1,6 +1,8 @@
 <?php
 
-namespace SendGridPhp\Tests;
+namespace SendGridPhp\Tests\Suppression;
+
+use SendGridPhp\Tests\BaseTestClass;
 
 class SuppressionUnsubscribesTest extends BaseTestClass
 {
