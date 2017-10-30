@@ -1,6 +1,8 @@
 <?php
 
-namespace SendGridPhp\Tests;
+namespace SendGridPhp\Tests\Categories;
+
+use SendGridPhp\Tests\BaseTestClass;
 
 class CategoriesTest extends BaseTestClass
 {
