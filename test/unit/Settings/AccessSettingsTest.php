@@ -1,8 +1,10 @@
 <?php
 
-namespace SendGridPhp\Tests;
+namespace SendGridPhp\Tests\Settings;
 
-class SettingsTest extends BaseTestClass
+use SendGridPhp\Tests\BaseTestClass;
+
+class AccessSettingsTest extends BaseTestClass
 {
     public function testAccessSettingsActivityGetMethod()
     {

@@ -1,8 +1,10 @@
 <?php
 
-namespace SendGridPhp\Tests;
+namespace SendGridPhp\Tests\Settings;
 
-class TrackingTest extends BaseTestClass
+use SendGridPhp\Tests\BaseTestClass;
+
+class TrackingSettingsTest extends BaseTestClass
 {
     public function testTrackingSettingsGetMethod()
     {
