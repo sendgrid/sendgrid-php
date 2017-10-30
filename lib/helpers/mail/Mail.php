@@ -897,11 +897,20 @@ class Email implements \JsonSerializable
 
     public function __construct($name, $email = NULL)
     {
+        /*
+        check if the second parameter has been defined
+        */
         if ($email === NULL) {
+            /*
+            check if there is a second parameter that can be extracted 
+            */
             $check_spaces = strpos($name, ' ');
             $check_character_begin = strpos($name, '<');
             $check_character_end = strpos($name, '>');
             if ($check_spaces !== false && $check_character_begin !== false && $check_character_end !== false) {
+                /*
+                email address has to be extracted from the string
+                */
                 $exploded_string = explode('<', $name, 2);
                 $name_trimmed = trim($exploded_string[0]);
                 $mail_explode = explode('>', $exploded_string[1]);
@@ -909,11 +918,17 @@ class Email implements \JsonSerializable
                 $this->email = $mail_explode[0];
             }
             else {
+                /*
+                only the email address has been provided
+                */
                 $this->name = $name;
                 $this->email = $name;                    
             }
         } 
         else {
+            /*
+            the name and the email address have been defined separately
+            */
             $this->name = $name;
             $this->email = $email;
         }
