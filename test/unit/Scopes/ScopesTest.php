@@ -1,6 +1,8 @@
 <?php
 
-namespace SendGridPhp\Tests;
+namespace SendGridPhp\Tests\Scopes;
+
+use SendGridPhp\Tests\BaseTestClass;
 
 class ScopesTest extends BaseTestClass
 {
