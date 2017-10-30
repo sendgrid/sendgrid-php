@@ -1,6 +1,8 @@
 <?php
 
-namespace SendGridPhp\Tests;
+namespace SendGridPhp\Tests\ApiKeys;
+
+use SendGridPhp\Tests\BaseTestClass;
 
 class ApiKeysTest extends BaseTestClass
 {
