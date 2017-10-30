@@ -1,6 +1,8 @@
 <?php
 
-namespace SendGridPhp\Tests;
+namespace SendGridPhp\Tests\Ip;
+
+use SendGridPhp\Tests\BaseTestClass;
 
 class IpsWarmupTest extends BaseTestClass
 {
