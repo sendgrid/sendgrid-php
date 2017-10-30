@@ -74,7 +74,7 @@ class BaseTestClass extends TestCase
                 }
             }
             print("Activating Prism (~20 seconds)\n");
-            $command = 'nohup prism run -s https://raw.githubusercontent.com/sendgrid/sendgrid-oai/master/oai_stoplight.json > /dev/null 2>&1 & echo $!';
+            $command = 'nohup prism serve --config https://raw.githubusercontent.com/sendgrid/sendgrid-oai/master/oai_stoplight.json > /dev/null 2>&1 & echo $!';
             exec($command, $op);
             self::$pid = (int)$op[0];
             print("\nPrism Started\n\n");
