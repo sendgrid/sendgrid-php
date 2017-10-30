@@ -31,8 +31,9 @@ class BaseTestClass extends TestCase
         self::$apiKey = "SENDGRID_API_KEY";
         $host = ['host' => 'http://localhost:4010'];
         self::$sg = new SendGrid(self::$apiKey, $host);
-        if (!self::$pid) {
-            if (!file_exists(__DIR__ . '/../../prism/bin/prism') && !file_exists('/usr/local/bin/prism')) {
+
+        if (!is_int(self::$pid)) {
+            if (file_exists('/usr/local/bin/prism') == false) {
                 if (strtoupper(substr(php_uname('s'), 0, 3)) != 'WIN') {
                     try {
                         $proc_ls = proc_open("curl https://raw.githubusercontent.com/stoplightio/prism/master/install.sh",
@@ -54,18 +55,14 @@ class BaseTestClass extends TestCase
                                 ["pipe", "w"]  //stderr
                             ],
                             $pipes);
-
                         fwrite($pipes[0], $output_ls);
                         fclose($pipes[0]);
                         $output_grep = stream_get_contents($pipes[1]);
-
                         fclose($pipes[1]);
                         fclose($pipes[2]);
                         proc_close($proc_grep);
                     } catch (\Exception $e) {
-                        print("Error downloading the prism binary, you can try downloading directly here (https://github.com/stoplightio/prism/releases) and place in your /usr/local/bin directory: "
-                              . $e->getMessage()
-                              . "\n");
+                        print("Error downloading the prism binary, you can try downloading directly here (https://github.com/stoplightio/prism/releases) and place in your /usr/local/bin directory: " . $e->getMessage() . "\n");
                         exit();
                     }
                 } else {
@@ -73,22 +70,13 @@ class BaseTestClass extends TestCase
                     exit();
                 }
             }
+
             print("Activating Prism (~20 seconds)\n");
-            $command = 'nohup prism serve --config https://raw.githubusercontent.com/sendgrid/sendgrid-oai/master/oai_stoplight.json > /dev/null 2>&1 & echo $!';
+            $command = 'nohup prism run -s https://raw.githubusercontent.com/sendgrid/sendgrid-oai/master/oai_stoplight.json > /dev/null 2>&1 & echo $!';
             exec($command, $op);
             self::$pid = (int)$op[0];
+            sleep(15);
             print("\nPrism Started\n\n");
         }
-    }
-
-    /**
-     * This method is run after all tests are run for the class
-     */
-    public static function tearDownAfterClass()
-    {
-        $command = 'kill ' . self::$pid;
-        exec($command);
-        self::$pid = null;
-        print("\nPrism shut down");
     }
 }
