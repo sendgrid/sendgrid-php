@@ -80,4 +80,15 @@ class BaseTestClass extends TestCase
             print("\nPrism Started\n\n");
         }
     }
+
+    /**
+     * This method is run after all tests are run for the class
+     */
+    public static function tearDownAfterClass()
+    {
+        $command = 'kill ' . self::$pid;
+        exec($command);
+        self::$pid = null;
+        print("\nPrism shut down");
+    }
 }
