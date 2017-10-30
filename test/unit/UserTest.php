@@ -17,14 +17,14 @@ class UserTest extends BaseTestClass
     {
         $request_headers = ["X-Mock: 200"];
         $response = self::$sg->client->user()->account()->get(null, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 200);
+        $this->assertEquals(200, $response->statusCode());
     }
 
     public function testUserCreditsGetMethod()
     {
         $request_headers = ["X-Mock: 200"];
         $response = self::$sg->client->user()->credits()->get(null, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 200);
+        $this->assertEquals(200, $response->statusCode());
     }
 
     public function testUserEmailPutMethod()
@@ -34,14 +34,14 @@ class UserTest extends BaseTestClass
 }');
         $request_headers = ["X-Mock: 200"];
         $response = self::$sg->client->user()->email()->put($request_body, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 200);
+        $this->assertEquals(200, $response->statusCode());
     }
 
     public function testUserEmailGetMethod()
     {
         $request_headers = ["X-Mock: 200"];
         $response = self::$sg->client->user()->email()->get(null, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 200);
+        $this->assertEquals(200, $response->statusCode());
     }
 
     public function testUserPasswordPutMethod()
@@ -52,7 +52,7 @@ class UserTest extends BaseTestClass
 }');
         $request_headers = ["X-Mock: 200"];
         $response = self::$sg->client->user()->password()->put($request_body, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 200);
+        $this->assertEquals(200, $response->statusCode());
     }
 
     public function testUserProfilePatchMethod()
@@ -64,7 +64,7 @@ class UserTest extends BaseTestClass
 }');
         $request_headers = ["X-Mock: 200"];
         $response = self::$sg->client->user()->profile()->patch($request_body, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 200);
+        $this->assertEquals(200, $response->statusCode());
     }
 
     public function testUserProfileGetMethod()
@@ -82,14 +82,14 @@ class UserTest extends BaseTestClass
 }');
         $request_headers = ["X-Mock: 201"];
         $response = self::$sg->client->user()->scheduled_sends()->post($request_body, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 201);
+        $this->assertEquals(201, $response->statusCode());
     }
 
     public function testUserScheduledSendsGetMethod()
     {
         $request_headers = ["X-Mock: 200"];
         $response = self::$sg->client->user()->scheduled_sends()->get(null, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 200);
+        $this->assertEquals(200, $response->statusCode());
     }
 
     public function testUserScheduledSendsBatchIdPatchMethod()
@@ -100,7 +100,7 @@ class UserTest extends BaseTestClass
         $batch_id = "test_url_param";
         $request_headers = ["X-Mock: 204"];
         $response = self::$sg->client->user()->scheduled_sends()->_($batch_id)->patch($request_body, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 204);
+        $this->assertEquals(204, $response->statusCode());
     }
 
     public function testUserScheduledSendsBatchIdGetMethod()
@@ -108,7 +108,7 @@ class UserTest extends BaseTestClass
         $batch_id = "test_url_param";
         $request_headers = ["X-Mock: 200"];
         $response = self::$sg->client->user()->scheduled_sends()->_($batch_id)->get(null, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 200);
+        $this->assertEquals(200, $response->statusCode());
     }
 
     public function testUserScheduledSendsBatchIdDeleteMethod()
@@ -116,7 +116,7 @@ class UserTest extends BaseTestClass
         $batch_id = "test_url_param";
         $request_headers = ["X-Mock: 204"];
         $response = self::$sg->client->user()->scheduled_sends()->_($batch_id)->delete(null, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 204);
+        $this->assertEquals(204, $response->statusCode());
     }
 
     public function testUserSettingsEnforcedTlsPatchMethod()
@@ -127,14 +127,14 @@ class UserTest extends BaseTestClass
 }');
         $request_headers = ["X-Mock: 200"];
         $response = self::$sg->client->user()->settings()->enforced_tls()->patch($request_body, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 200);
+        $this->assertEquals(200, $response->statusCode());
     }
 
     public function testUserSettingsEnforcedTlsGetMethod()
     {
         $request_headers = ["X-Mock: 200"];
         $response = self::$sg->client->user()->settings()->enforced_tls()->get(null, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 200);
+        $this->assertEquals(200, $response->statusCode());
     }
 
     public function testUserUsernamePutMethod()
@@ -144,14 +144,14 @@ class UserTest extends BaseTestClass
 }');
         $request_headers = ["X-Mock: 200"];
         $response = self::$sg->client->user()->username()->put($request_body, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 200);
+        $this->assertEquals(200, $response->statusCode());
     }
 
     public function testUserUsernameGetMethod()
     {
         $request_headers = ["X-Mock: 200"];
         $response = self::$sg->client->user()->username()->get(null, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 200);
+        $this->assertEquals(200, $response->statusCode());
     }
 
     public function testUserWebhooksEventSettingsPatchMethod()
@@ -173,14 +173,14 @@ class UserTest extends BaseTestClass
 }');
         $request_headers = ["X-Mock: 200"];
         $response = self::$sg->client->user()->webhooks()->event()->settings()->patch($request_body, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 200);
+        $this->assertEquals(200, $response->statusCode());
     }
 
     public function testUserWebhooksEventSettingsGetMethod()
     {
         $request_headers = ["X-Mock: 200"];
         $response = self::$sg->client->user()->webhooks()->event()->settings()->get(null, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 200);
+        $this->assertEquals(200, $response->statusCode());
     }
 
     public function testUserWebhooksEventTestPostMethod()
@@ -190,7 +190,7 @@ class UserTest extends BaseTestClass
 }');
         $request_headers = ["X-Mock: 204"];
         $response = self::$sg->client->user()->webhooks()->event()->test()->post($request_body, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 204);
+        $this->assertEquals(204, $response->statusCode());
     }
 
     public function testUserWebhooksParseSettingsPostMethod()
@@ -203,14 +203,14 @@ class UserTest extends BaseTestClass
 }');
         $request_headers = ["X-Mock: 201"];
         $response = self::$sg->client->user()->webhooks()->parse()->settings()->post($request_body, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 201);
+        $this->assertEquals(201, $response->statusCode());
     }
 
     public function testUserWebhooksParseSettingsGetMethod()
     {
         $request_headers = ["X-Mock: 200"];
         $response = self::$sg->client->user()->webhooks()->parse()->settings()->get(null, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 200);
+        $this->assertEquals(200, $response->statusCode());
     }
 
     public function testUserWebhooksParseHostnamePatchMethod()
@@ -224,7 +224,7 @@ class UserTest extends BaseTestClass
         $request_headers = ["X-Mock: 200"];
         $response = self::$sg->client->user()->webhooks()->parse()->settings()->_($hostname)
                                      ->patch($request_body, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 200);
+        $this->assertEquals(200, $response->statusCode());
     }
 
     public function testUserWebhooksParseHostnameGetMethod()
@@ -232,7 +232,7 @@ class UserTest extends BaseTestClass
         $hostname = "test_url_param";
         $request_headers = ["X-Mock: 200"];
         $response = self::$sg->client->user()->webhooks()->parse()->settings()->_($hostname)->get(null, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 200);
+        $this->assertEquals(200, $response->statusCode());
     }
 
     public function testUserWebhooksParseHostnameDeleteMethod()
@@ -240,7 +240,7 @@ class UserTest extends BaseTestClass
         $hostname = "test_url_param";
         $request_headers = ["X-Mock: 204"];
         $response = self::$sg->client->user()->webhooks()->parse()->settings()->_($hostname)->delete(null, null, $request_headers);
-        $this->assertEquals($response->statusCode(), 204);
+        $this->assertEquals(204, $response->statusCode());
     }
 
     public function testUserWebhooksParseStatsGetMethod()
@@ -248,6 +248,6 @@ class UserTest extends BaseTestClass
         $query_params = json_decode('{"aggregated_by": "day", "limit": "test_string", "start_date": "2016-01-01", "end_date": "2016-04-01", "offset": "test_string"}');
         $request_headers = ["X-Mock: 200"];
         $response = self::$sg->client->user()->webhooks()->parse()->stats()->get(null, $query_params, $request_headers);
-        $this->assertEquals($response->statusCode(), 200);
+        $this->assertEquals(200, $response->statusCode());
     }
 }
