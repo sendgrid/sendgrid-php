@@ -1,6 +1,8 @@
 <?php
 
-namespace SendGridPhp\Tests;
+namespace SendGridPhp\Tests\Senders;
+
+use SendGridPhp\Tests\BaseTestClass;
 
 class SendersTest extends BaseTestClass
 {
