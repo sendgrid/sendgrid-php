@@ -19,5 +19,10 @@
   "type": "library",
   "autoload": {
     "files": ["lib/SendGrid.php", "lib/helpers/mail/Mail.php"]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SendGridPhp\\Tests\\": "test/unit/"
+    }
   }
 }
