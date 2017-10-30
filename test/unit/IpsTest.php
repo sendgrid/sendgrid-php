@@ -18,4 +18,12 @@ class IpsTest extends BaseTestClass
         $response = self::$sg->client->ips()->assigned()->get(null, null, $request_headers);
         $this->assertEquals(200, $response->statusCode());
     }
+
+    public function testIpsIpAddressGetMethod()
+    {
+        $ip_address = "test_url_param";
+        $request_headers = ["X-Mock: 200"];
+        $response = self::$sg->client->ips()->_($ip_address)->get(null, null, $request_headers);
+        $this->assertEquals(200, $response->statusCode());
+    }
 }
