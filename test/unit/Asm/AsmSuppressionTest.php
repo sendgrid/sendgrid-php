@@ -1,6 +1,8 @@
 <?php
 
-namespace SendGridPhp\Tests;
+namespace SendGridPhp\Tests\Asm;
+
+use SendGridPhp\Tests\BaseTestClass;
 
 class AsmSuppressionTest extends BaseTestClass
 {
