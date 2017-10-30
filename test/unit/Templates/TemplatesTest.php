@@ -111,5 +111,4 @@ class TemplatesTest extends BaseTestClass
                                      ->post(null, null, $request_headers);
         $this->assertEquals(200, $response->statusCode());
     }
-
 }

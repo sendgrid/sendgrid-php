@@ -100,8 +100,11 @@ class UserTest extends BaseTestClass
 }');
         $batch_id = "test_url_param";
         $request_headers = ["X-Mock: 204"];
-        $response = self::$sg->client->user()->scheduled_sends()->_($batch_id)->patch($request_body, null,
-            $request_headers);
+        $response = self::$sg->client->user()->scheduled_sends()->_($batch_id)->patch(
+            $request_body,
+            null,
+            $request_headers
+        );
         $this->assertEquals(204, $response->statusCode());
     }
 
@@ -174,8 +177,11 @@ class UserTest extends BaseTestClass
   "url": "url"
 }');
         $request_headers = ["X-Mock: 200"];
-        $response = self::$sg->client->user()->webhooks()->event()->settings()->patch($request_body, null,
-            $request_headers);
+        $response = self::$sg->client->user()->webhooks()->event()->settings()->patch(
+            $request_body,
+            null,
+            $request_headers
+        );
         $this->assertEquals(200, $response->statusCode());
     }
 
@@ -205,8 +211,11 @@ class UserTest extends BaseTestClass
   "url": "http://email.myhosthame.com"
 }');
         $request_headers = ["X-Mock: 201"];
-        $response = self::$sg->client->user()->webhooks()->parse()->settings()->post($request_body, null,
-            $request_headers);
+        $response = self::$sg->client->user()->webhooks()->parse()->settings()->post(
+            $request_body,
+            null,
+            $request_headers
+        );
         $this->assertEquals(201, $response->statusCode());
     }
 
@@ -235,8 +244,11 @@ class UserTest extends BaseTestClass
     {
         $hostname = "test_url_param";
         $request_headers = ["X-Mock: 200"];
-        $response = self::$sg->client->user()->webhooks()->parse()->settings()->_($hostname)->get(null, null,
-            $request_headers);
+        $response = self::$sg->client->user()->webhooks()->parse()->settings()->_($hostname)->get(
+            null,
+            null,
+            $request_headers
+        );
         $this->assertEquals(200, $response->statusCode());
     }
 
@@ -244,8 +256,11 @@ class UserTest extends BaseTestClass
     {
         $hostname = "test_url_param";
         $request_headers = ["X-Mock: 204"];
-        $response = self::$sg->client->user()->webhooks()->parse()->settings()->_($hostname)->delete(null, null,
-            $request_headers);
+        $response = self::$sg->client->user()->webhooks()->parse()->settings()->_($hostname)->delete(
+            null,
+            null,
+            $request_headers
+        );
         $this->assertEquals(204, $response->statusCode());
     }
 

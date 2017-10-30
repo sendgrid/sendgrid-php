@@ -100,8 +100,11 @@ class SubUsersTest extends BaseTestClass
 }');
         $subuser_name = "test_url_param";
         $request_headers = ["X-Mock: 200"];
-        $response = self::$sg->client->subusers()->_($subuser_name)->monitor()->put($request_body, null,
-            $request_headers);
+        $response = self::$sg->client->subusers()->_($subuser_name)->monitor()->put(
+            $request_body,
+            null,
+            $request_headers
+        );
         $this->assertEquals(200, $response->statusCode());
     }
 
@@ -113,8 +116,11 @@ class SubUsersTest extends BaseTestClass
 }');
         $subuser_name = "test_url_param";
         $request_headers = ["X-Mock: 200"];
-        $response = self::$sg->client->subusers()->_($subuser_name)->monitor()->post($request_body, null,
-            $request_headers);
+        $response = self::$sg->client->subusers()->_($subuser_name)->monitor()->post(
+            $request_body,
+            null,
+            $request_headers
+        );
         $this->assertEquals(200, $response->statusCode());
     }
 
@@ -139,8 +145,11 @@ class SubUsersTest extends BaseTestClass
         $query_params = json_decode('{"date": "test_string", "sort_by_direction": "asc", "limit": 1, "sort_by_metric": "test_string", "offset": 1}');
         $subuser_name = "test_url_param";
         $request_headers = ["X-Mock: 200"];
-        $response = self::$sg->client->subusers()->_($subuser_name)->stats()->monthly()->get(null, $query_params,
-            $request_headers);
+        $response = self::$sg->client->subusers()->_($subuser_name)->stats()->monthly()->get(
+            null,
+            $query_params,
+            $request_headers
+        );
         $this->assertEquals(200, $response->statusCode());
     }
 }
