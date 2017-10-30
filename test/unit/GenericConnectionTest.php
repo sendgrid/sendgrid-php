@@ -1,0 +1,54 @@
+<?php
+
+namespace SendGridPhp\Tests;
+
+use SendGrid;
+
+class GenericConnectionTest extends BaseTestClass
+{
+    public function testVersionIsCorrect()
+    {
+        $this->assertEquals(SendGrid::VERSION, '6.0.0');
+        $this->assertEquals(json_decode(file_get_contents(__DIR__ . '/../../composer.json'))->version, SendGrid::VERSION);
+    }
+
+    public function testCanConnectToSendGridApi()
+    {
+        $apiKey = 'SENDGRID_API_KEY';
+        $sg = new SendGrid($apiKey);
+        $headers = [
+            'Authorization: Bearer ' . $apiKey,
+            'User-Agent: sendgrid/' . $sg->version . ';php',
+            'Accept: application/json'
+        ];
+
+        $this->assertEquals($sg->client->getHost(), 'https://api.sendgrid.com');
+        $this->assertEquals($sg->client->getHeaders(), $headers);
+        $this->assertEquals($sg->client->getVersion(), '/v3');
+
+        $apiKey = 'SENDGRID_API_KEY';
+        $sg2 = new SendGrid($apiKey, ['host' => 'https://api.test.com']);
+        $this->assertEquals($sg2->client->getHost(), 'https://api.test.com');
+
+        $sg3 = new SendGrid($apiKey, ['curl' => ['foo' => 'bar']]);
+        $this->assertEquals(['foo' => 'bar'], $sg3->client->getCurlOptions());
+
+        $sg4 = new SendGrid($apiKey, ['curl' => [CURLOPT_PROXY => '127.0.0.1:8000']]);
+        $this->assertEquals($sg4->client->getCurlOptions(), [10004 => '127.0.0.1:8000']);
+    }
+
+    public function testHelloWorld()
+    {
+        $from = new SendGrid\Email("Example User", "test@example.com");
+        $subject = "Sending with SendGrid is Fun";
+        $to = new SendGrid\Email("Example User", "test@example.com");
+        $content = new SendGrid\Content("text/plain", "and easy to do anywhere, even with PHP");
+        $mail = new SendGrid\Mail($from, $subject, $to, $content);
+        $json = json_encode($mail->jsonSerialize());
+
+        $this->assertEquals(
+            $json,
+            '{"from":{"name":"Example User","email":"test@example.com"},"personalizations":[{"to":[{"name":"Example User","email":"test@example.com"}]}],"subject":"Sending with SendGrid is Fun","content":[{"type":"text\/plain","value":"and easy to do anywhere, even with PHP"}]}'
+        );
+    }
+}
