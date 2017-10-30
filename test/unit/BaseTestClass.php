@@ -32,7 +32,7 @@ class BaseTestClass extends TestCase
         $host = ['host' => 'http://localhost:4010'];
         self::$sg = new SendGrid(self::$apiKey, $host);
         if (!self::$pid) {
-            if (file_exists('/usr/local/bin/prism') == false) {
+            if (!file_exists(__DIR__ . '/../../prism/bin/prism') && !file_exists('/usr/local/bin/prism')) {
                 if (strtoupper(substr(php_uname('s'), 0, 3)) != 'WIN') {
                     try {
                         $proc_ls = proc_open("curl https://raw.githubusercontent.com/stoplightio/prism/master/install.sh",
