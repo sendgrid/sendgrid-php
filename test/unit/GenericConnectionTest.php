@@ -14,10 +14,9 @@ class GenericConnectionTest extends BaseTestClass
 
     public function testCanConnectToSendGridApi()
     {
-        $apiKey = 'SENDGRID_API_KEY';
-        $sg = new SendGrid($apiKey);
+        $sg = new SendGrid(self::$apiKey);
         $headers = [
-            'Authorization: Bearer ' . $apiKey,
+            'Authorization: Bearer ' . self::$apiKey,
             'User-Agent: sendgrid/' . $sg->version . ';php',
             'Accept: application/json'
         ];
@@ -26,14 +25,13 @@ class GenericConnectionTest extends BaseTestClass
         $this->assertEquals($sg->client->getHeaders(), $headers);
         $this->assertEquals($sg->client->getVersion(), '/v3');
 
-        $apiKey = 'SENDGRID_API_KEY';
-        $sg2 = new SendGrid($apiKey, ['host' => 'https://api.test.com']);
+        $sg2 = new SendGrid(self::$apiKey, ['host' => 'https://api.test.com']);
         $this->assertEquals($sg2->client->getHost(), 'https://api.test.com');
 
-        $sg3 = new SendGrid($apiKey, ['curl' => ['foo' => 'bar']]);
+        $sg3 = new SendGrid(self::$apiKey, ['curl' => ['foo' => 'bar']]);
         $this->assertEquals(['foo' => 'bar'], $sg3->client->getCurlOptions());
 
-        $sg4 = new SendGrid($apiKey, ['curl' => [CURLOPT_PROXY => '127.0.0.1:8000']]);
+        $sg4 = new SendGrid(self::$apiKey, ['curl' => [CURLOPT_PROXY => '127.0.0.1:8000']]);
         $this->assertEquals($sg4->client->getCurlOptions(), [10004 => '127.0.0.1:8000']);
     }
 
