@@ -1,8 +1,10 @@
 <?php
 
-namespace SendGridPhp\Tests;
+namespace SendGridPhp\Tests\Stats;
 
-class GeoTest extends BaseTestClass
+use SendGridPhp\Tests\BaseTestClass;
+
+class GeoStatsTest extends BaseTestClass
 {
     public function testGeoStatsGetMethod()
     {
