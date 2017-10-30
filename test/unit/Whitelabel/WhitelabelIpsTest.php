@@ -1,6 +1,8 @@
 <?php
 
-namespace SendGridPhp\Tests;
+namespace SendGridPhp\Tests\Whitelabel;
+
+use SendGridPhp\Tests\BaseTestClass;
 
 class WhitelabelIpsTest extends BaseTestClass
 {
