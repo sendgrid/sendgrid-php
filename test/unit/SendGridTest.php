@@ -1052,6 +1052,13 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
         $this->assertEquals($response->statusCode(), 200);
     }
 
+    public function test_license_date_range()
+    {
+    	$license_file = file_get_contents("../../LICENSE.txt");
+        $current_year = date("Y");
+    	$this->assertInternalType("int", strpos($license_file, "Copyright (c) 2012-" . $current_year . " SendGrid, Inc."));
+    }
+
     public function test_mail_batch_post()
     {
         $request_headers = array("X-Mock: 201");
