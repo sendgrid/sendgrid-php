@@ -74,7 +74,7 @@ cd sendgrid-php
 composer install
 ```
 
-## Environment Variables
+### Environment Variables
 
 First, get your free SendGrid account [here](https://sendgrid.com/free?source=sendgrid-php).
 
