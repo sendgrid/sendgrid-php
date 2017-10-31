@@ -9,7 +9,7 @@ class FilesExistTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->requiredFiles = [
-            ['./Docker', './docker/Docker'],
+            ['./Dockerfile', './docker/Dockerfile'],
             ['./docker-compose.yml', './docker/docker-compose.yml'],
             './.codeclimate.yml',
             './.env_sample',
