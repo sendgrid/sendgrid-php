@@ -15,7 +15,7 @@
   },
   "require": {
     "sendgrid/sendgrid": "~6.0"
-  }
+  },
   "replace": {
     "sendgrid/sendgrid-php": "*"
   },
