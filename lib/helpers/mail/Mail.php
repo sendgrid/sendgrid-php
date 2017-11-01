@@ -12,6 +12,9 @@
   */
 namespace SendGrid;
 
+use DOMDocument;
+use DOMXPath;
+
 class ReplyTo implements \JsonSerializable
 {
     private $email;
@@ -738,13 +741,23 @@ class PlainTextConverter
 {
     private $value;
 
+    /**
+     *
+     * @param string $value
+     */
     public function __construct($value)
     {
         $this->value = $value;
     }
 
-    public function toText()
+    /**
+     * Convert HTML to plain text
+     *
+     * @return string
+     */
+    public static function toText($value)
     {
+        $doc = new DOMDocument((string) new self($value));
         $xpath = new DOMXPath($doc);
         $textNodes = $xpath->query('//text()');
 
@@ -757,6 +770,14 @@ class PlainTextConverter
         }
 
         return join("\n", $text);
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->value;
     }
 }
 
@@ -785,8 +806,7 @@ class Content implements \JsonSerializable
     {
         $this->value = mb_convert_encoding($value, 'UTF-8', 'UTF-8');
         if ($this->type === 'text/plain') {
-            $converter = new PlainTextConverter($this->value);
-            $this->value = $converter->toText();
+            $this->value = PlainTextConverter::toText($this->value);
         }
     }
 
