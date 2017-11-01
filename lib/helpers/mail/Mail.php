@@ -734,6 +734,32 @@ class Attachment implements \JsonSerializable
     }
 }
 
+class PlainTextConverter
+{
+    private $value;
+
+    public function __construct($value)
+    {
+        $this->value = $value;
+    }
+
+    public function toText()
+    {
+        $xpath = new DOMXPath($doc);
+        $textNodes = $xpath->query('//text()');
+
+        $text = array();
+        foreach($textNodes as $node) {
+            $content = trim((string)$node->textContent);
+            if (strlen($content) > 0) {
+                $text[] = $content;
+            }
+        }
+
+        return join("\n", $text);
+    }
+}
+
 class Content implements \JsonSerializable
 {
     private $type;
@@ -758,6 +784,10 @@ class Content implements \JsonSerializable
     public function setValue($value)
     {
         $this->value = mb_convert_encoding($value, 'UTF-8', 'UTF-8');
+        if ($this->type === 'text/plain') {
+            $converter = new PlainTextConverter($this->value);
+            $this->value = $converter->toText();
+        }
     }
 
     public function getValue()
