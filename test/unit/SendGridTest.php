@@ -1052,6 +1052,13 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
         $this->assertEquals($response->statusCode(), 200);
     }
 
+    public function test_license_date_range()
+    {
+    	$license_file = file_get_contents("../../LICENSE.txt");
+        $current_year = date("Y");
+    	$this->assertInternalType("int", strpos($license_file, "Copyright (c) 2012-" . $current_year . " SendGrid, Inc."));
+    }
+
     public function test_mail_batch_post()
     {
         $request_headers = array("X-Mock: 201");
@@ -1096,7 +1103,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
   "content": [
     {
       "type": "text/html",
-      "value": "<html><p>Hello, world!</p><img src=[CID GOES HERE]></img></html>"
+      "value": "<html><p>Hello, world!</p><img src=[CID GOES HERE] /></html>"
     }
   ],
   "custom_args": {
@@ -1203,7 +1210,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
       "enable": true,
       "html": "If you would like to unsubscribe and stop receiving these emails <% clickhere %>.",
       "substitution_tag": "<%click here%>",
-      "text": "If you would like to unsubscribe and stop receiveing these emails <% click here %>."
+      "text": "If you would like to unsubscribe and stop receiving these emails <% click here %>."
     }
   }
 }');
@@ -1771,7 +1778,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
     {
         $email = "test_url_param";
         $request_headers = array("X-Mock: 200");
-        $response = self::$sg->client->suppression()->spam_report()->_($email)->get(null, null, $request_headers);
+        $response = self::$sg->client->suppression()->spam_reports()->_($email)->get(null, null, $request_headers);
         $this->assertEquals($response->statusCode(), 200);
     }
 
@@ -1779,7 +1786,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
     {
         $email = "test_url_param";
         $request_headers = array("X-Mock: 204");
-        $response = self::$sg->client->suppression()->spam_report()->_($email)->delete(null, null, $request_headers);
+        $response = self::$sg->client->suppression()->spam_reports()->_($email)->delete(null, null, $request_headers);
         $this->assertEquals($response->statusCode(), 204);
     }
 

@@ -13,9 +13,9 @@ $sg = new \SendGrid($apiKey);
 
 # Table of Contents
 
-* [ACCESS SETTINGS](#access_settings)
+* [ACCESS SETTINGS](#access-settings)
 * [ALERTS](#alerts)
-* [API KEYS](#api_keys)
+* [API KEYS](#api-keys)
 * [ASM](#asm)
 * [BROWSERS](#browsers)
 * [CAMPAIGNS](#campaigns)
@@ -26,21 +26,21 @@ $sg = new \SendGrid($apiKey);
 * [GEO](#geo)
 * [IPS](#ips)
 * [MAIL](#mail)
-* [MAIL SETTINGS](#mail_settings)
-* [MAILBOX PROVIDERS](#mailbox_providers)
-* [PARTNER SETTINGS](#partner_settings)
+* [MAIL SETTINGS](#mail-settings)
+* [MAILBOX PROVIDERS](#mailbox-providers)
+* [PARTNER SETTINGS](#partner-settings)
 * [SCOPES](#scopes)
 * [SENDERS](#senders)
 * [STATS](#stats)
 * [SUBUSERS](#subusers)
 * [SUPPRESSION](#suppression)
 * [TEMPLATES](#templates)
-* [TRACKING SETTINGS](#tracking_settings)
+* [TRACKING SETTINGS](#tracking-settings)
 * [USER](#user)
 * [WHITELABEL](#whitelabel)
 
 
-<a name="access_settings"></a>
+<a name="access-settings"></a>
 # ACCESS SETTINGS
 
 ## Retrieve all recent access attempts
@@ -138,7 +138,7 @@ print_r($response->headers());
 ```
 ## Retrieve a specific whitelisted IP
 
-**This endpoint allows you to retreive a specific IP address that has been whitelisted.**
+**This endpoint allows you to retrieve a specific IP address that has been whitelisted.**
 
 You must include the ID for the specific IP address you want to retrieve in your call.
 
@@ -285,7 +285,7 @@ echo $response->statusCode();
 echo $response->body();
 print_r($response->headers());
 ```
-<a name="api_keys"></a>
+<a name="api-keys"></a>
 # API KEYS
 
 ## Create API keys
@@ -408,7 +408,7 @@ print_r($response->headers());
 
 **This endpoint allows you to revoke an existing API Key**
 
-Authentications using this API Key will fail after this request is made, with some small propogation delay.If the API Key ID does not exist an HTTP 404 will be returned.
+Authentications using this API Key will fail after this request is made, with some small propagation delay.If the API Key ID does not exist an HTTP 404 will be returned.
 
 The API Keys feature allows customers to be able to generate an API Key credential which can be used for authentication with the SendGrid v3 Web API or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).
 
@@ -463,7 +463,7 @@ This endpoint will return information for each group ID that you include in your
 
 Suppressions are a list of email addresses that will not receive content sent under a given [group](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html).
 
-Suppression groups, or [unsubscribe groups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html), allow you to label a category of content that you regularly send. This gives your recipients the ability to opt out of a specific set of your email. For example, you might define a group for your transactional email, and one for your marketing email so that your users can continue recieving your transactional email witout having to receive your marketing content.
+Suppression groups, or [unsubscribe groups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html), allow you to label a category of content that you regularly send. This gives your recipients the ability to opt out of a specific set of your email. For example, you might define a group for your transactional email, and one for your marketing email so that your users can continue receiving your transactional email without having to receive your marketing content.
 
 ### GET /asm/groups
 
@@ -662,9 +662,9 @@ print_r($response->headers());
 ```
 ## Retrieve a Global Suppression
 
-**This endpoint allows you to retrieve a global suppression. You can also use this endpoint to confirm if an email address is already globally suppresed.**
+**This endpoint allows you to retrieve a global suppression. You can also use this endpoint to confirm if an email address is already globally suppressed.**
 
-If the email address you include in the URL path parameter `{email}` is alreayd globally suppressed, the response will include that email address. If the address you enter for `{email}` is not globally suppressed, an empty JSON object `{}` will be returned.
+If the email address you include in the URL path parameter `{email}` is already globally suppressed, the response will include that email address. If the address you enter for `{email}` is not globally suppressed, an empty JSON object `{}` will be returned.
 
 A global suppression (or global unsubscribe) is an email address of a recipient who does not want to receive any of your messages. A globally suppressed recipient will be removed from any email you send. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/global_unsubscribes.html).
 
@@ -1580,7 +1580,7 @@ Valid operators for create and update depend on the type of the field you are se
 
 Segment conditions using "eq" or "ne" for email clicks and opens should provide a "field" of either *clicks.campaign_identifier* or *opens.campaign_identifier*. The condition value should be a string containing the id of a completed campaign.
 
-Segments may contain multiple condtions, joined by an "and" or "or" in the "and_or" field. The first condition in the conditions list must have an empty "and_or", and subsequent conditions must all specify an "and_or".
+Segments may contain multiple conditions, joined by an "and" or "or" in the "and_or" field. The first condition in the conditions list must have an empty "and_or", and subsequent conditions must all specify an "and_or".
 
 The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
 
@@ -2242,7 +2242,7 @@ $request_body = json_decode('{
       "enable": true,
       "html": "If you would like to unsubscribe and stop receiving these emails <% clickhere %>.",
       "substitution_tag": "<%click here%>",
-      "text": "If you would like to unsubscribe and stop receiveing these emails <% click here %>."
+      "text": "If you would like to unsubscribe and stop receiving these emails <% click here %>."
     }
   }
 }');
@@ -2251,7 +2251,7 @@ echo $response->statusCode();
 echo $response->body();
 print_r($response->headers());
 ```
-<a name="mail_settings"></a>
+<a name="mail-settings"></a>
 # MAIL SETTINGS
 
 ## Retrieve all mail settings
@@ -2621,7 +2621,7 @@ echo $response->statusCode();
 echo $response->body();
 print_r($response->headers());
 ```
-<a name="mailbox_providers"></a>
+<a name="mailbox-providers"></a>
 # MAILBOX PROVIDERS
 
 ## Retrieve email statistics by mailbox provider.
@@ -2642,7 +2642,7 @@ echo $response->statusCode();
 echo $response->body();
 print_r($response->headers());
 ```
-<a name="partner_settings"></a>
+<a name="partner-settings"></a>
 # PARTNER SETTINGS
 
 ## Returns a list of all partner settings.
@@ -2707,7 +2707,7 @@ print_r($response->headers());
 
 **This endpoint returns a list of all scopes that this user has access to.**
 
-API Keys can be used to authenticate the use of [SendGrids v3 Web API](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html), or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html). API Keys may be assigned certain permissions, or scopes, that limit which API endpoints they are able to access. For a more detailed explanation of how you can use API Key permissios, please visit our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/api_keys.html#-API-Key-Permissions) or [Classroom](https://sendgrid.com/docs/Classroom/Basics/API/api_key_permissions.html).
+API Keys can be used to authenticate the use of [SendGrids v3 Web API](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html), or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html). API Keys may be assigned certain permissions, or scopes, that limit which API endpoints they are able to access. For a more detailed explanation of how you can use API Key permissions, please visit our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/api_keys.html#-API-Key-Permissions) or [Classroom](https://sendgrid.com/docs/Classroom/Basics/API/api_key_permissions.html).
 
 ### GET /scopes
 
@@ -3753,7 +3753,7 @@ echo $response->statusCode();
 echo $response->body();
 print_r($response->headers());
 ```
-<a name="tracking_settings"></a>
+<a name="tracking-settings"></a>
 # TRACKING SETTINGS
 
 ## Retrieve Tracking Settings
@@ -4524,7 +4524,7 @@ print_r($response->headers());
 
 A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
 
-Domain whitelabels can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's whitelabels. To associate a whitelabel with a subuser, the parent account must first create the whitelabel and validate it. The the parent may then associate the whitelabel via the subuser management tools.
+Domain whitelabels can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's whitelabels. To associate a whitelabel with a subuser, the parent account must first create the whitelabel and validate it. The parent may then associate the whitelabel via the subuser management tools.
 
 For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
 
@@ -4548,7 +4548,7 @@ print_r($response->headers());
 
 A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
 
-Domain whitelabels can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's whitelabels. To associate a whitelabel with a subuser, the parent account must first create the whitelabel and validate it. The the parent may then associate the whitelabel via the subuser management tools.
+Domain whitelabels can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's whitelabels. To associate a whitelabel with a subuser, the parent account must first create the whitelabel and validate it. The parent may then associate the whitelabel via the subuser management tools.
 
 For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
 
@@ -4631,7 +4631,7 @@ print_r($response->headers());
 
 A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
 
-Domain whitelabels can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's whitelabels. To associate a whitelabel with a subuser, the parent account must first create the whitelabel and validate it. The the parent may then associate the whitelabel via the subuser management tools.
+Domain whitelabels can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's whitelabels. To associate a whitelabel with a subuser, the parent account must first create the whitelabel and validate it. The parent may then associate the whitelabel via the subuser management tools.
 
 For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
 

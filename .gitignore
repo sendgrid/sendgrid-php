@@ -2,7 +2,7 @@ test/coverage/*
 dist/
 composer.lock
 vendor
-.env*
+.env
 sendgrid.env
 composer.phar
 .editorconfig
