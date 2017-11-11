@@ -44,10 +44,14 @@ We appreciate your continued support, thank you!
 
 Update the development environment with your [SENDGRID_API_KEY](https://app.sendgrid.com/settings/api_keys), for example:
 
+1. Copy the sample env file to a new file named `.env`
 ```bash
-echo "export SENDGRID_API_KEY='YOUR_API_KEY'" > sendgrid.env
-echo "sendgrid.env" >> .gitignore
-source ./sendgrid.env
+cp .env.sample .env
+```
+2. Edit the `.env` file to include your `SENDGRID_API_KEY`
+3. Source the `.env` file
+```bash
+source ./.env
 ```
 
 ## Install Package
