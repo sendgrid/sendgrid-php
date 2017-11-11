@@ -8,3 +8,6 @@ composer.phar
 .editorconfig
 test.php
 .idea/
+test/prism_linux_amd64
+test/prism/*
+!test/prim
