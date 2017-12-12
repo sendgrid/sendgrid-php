@@ -9,7 +9,7 @@ before_script:
 - cd test/unit
 
 script:
-- "../../vendor/bin/phpunit . --bootstrap bootstrap.php --filter test* --coverage-clover=coverage.xml"
+- "../../vendor/bin/phpunit . --filter test* --coverage-clover=coverage.xml"
 
 after_script:
 - cd ../..
