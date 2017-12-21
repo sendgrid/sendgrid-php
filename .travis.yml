@@ -7,10 +7,12 @@ before_script:
 - composer install
 - cd test/unit
 script:
-- "../../vendor/bin/phpunit . --bootstrap bootstrap.php --filter test*"
+- "../../vendor/bin/phpunit . --bootstrap bootstrap.php --filter test* --coverage-clover=coverage.xml"
 after_script:
 - cd ../..
 - ./scripts/dxupload.sh
+after_success:
+- bash <(curl -s https://codecov.io/bash)
 php:
 - 5.6
 - 7.0
