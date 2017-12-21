@@ -1,17 +1,37 @@
 <?php
 namespace SendGrid;
 
+use SendGrid\Helpers\Mail\Model\ASM;
+use SendGrid\Helpers\Mail\Model\Attachment;
+use SendGrid\Helpers\Mail\Model\BccSettings;
+use SendGrid\Helpers\Mail\Model\BypassListManagement;
+use SendGrid\Helpers\Mail\Model\ClickTracking;
+use SendGrid\Helpers\Mail\Model\EmailAddress;
+use SendGrid\Helpers\Mail\Model\Footer;
+use SendGrid\Helpers\Mail\Model\Ganalytics;
+use SendGrid\Helpers\Mail\Model\HtmlContent;
+use SendGrid\Helpers\Mail\Model\Mail;
+use SendGrid\Helpers\Mail\Model\MailSettings;
+use SendGrid\Helpers\Mail\Model\OpenTracking;
+use SendGrid\Helpers\Mail\Model\Personalization;
+use SendGrid\Helpers\Mail\Model\PlainTextContent;
+use SendGrid\Helpers\Mail\Model\ReplyTo;
+use SendGrid\Helpers\Mail\Model\SandBoxMode;
+use SendGrid\Helpers\Mail\Model\SpamCheck;
+use SendGrid\Helpers\Mail\Model\SubscriptionTracking;
+use SendGrid\Helpers\Mail\Model\TrackingSettings;
+
 class MailTest_Mail extends \PHPUnit_Framework_TestCase
 {
     public function testBaseLineExample()
     {
-        $from = new Email(null, "test@example.com");
-        $to = new Email(null, "test@example.com");
+        $from = new EmailAddress("test@example.com");
+        $to = new EmailAddress("test@example.com");
         $subject = "Hello World from the SendGrid PHP Library";
-        $content = new Content("text/plain", "some text here");
+        $content = new PlainTextContent("some text here");
         $mail = new Mail($from, $subject, $to, $content);
        
-        $content = new Content("text/html", "<html><body>some text here</body></html>");
+        $content = new HtmlContent("<html><body>some text here</body></html>");
         $mail->addContent($content);
 
         $json = json_encode($mail);
@@ -21,21 +41,21 @@ class MailTest_Mail extends \PHPUnit_Framework_TestCase
 
     public function testKitchenSinkExample()
     {
-        $from = new Email("DX", "test@example.com");
+        $from = new EmailAddress("test@example.com", "DX");
         $subject = "Hello World from the SendGrid PHP Library";
-        $to = new Email("Example User", "test@example.com");
-        $content = new Content("text/plain", "some text here");
+        $to = new EmailAddress("test@example.com", "Example User");
+        $content = new PlainTextContent("some text here");
         $mail = new Mail($from, $subject, $to, $content);
-  
-        $email = new Email("Example User", "test@example.com");
+
+        $email = new EmailAddress("test@example.com", "Example User");
         $mail->personalization[0]->addTo($email);
-        $email = new Email("Example User", "test@example.com");
+        $email = new EmailAddress("test@example.com", "Example User");
         $mail->personalization[0]->addCc($email);
-        $email = new Email("Example User", "test@example.com");
+        $email = new EmailAddress("test@example.com", "Example User");
         $mail->personalization[0]->addCc($email);
-        $email = new Email("Example User", "test@example.com");
+        $email = new EmailAddress("test@example.com", "Example User");
         $mail->personalization[0]->addBcc($email);
-        $email = new Email("Example User", "test@example.com");
+        $email = new EmailAddress("test@example.com", "Example User");
         $mail->personalization[0]->addBcc($email);
         $mail->personalization[0]->setSubject("Hello World from the SendGrid PHP Library");
         $mail->personalization[0]->addHeader("X-Test", "test");
@@ -47,17 +67,17 @@ class MailTest_Mail extends \PHPUnit_Framework_TestCase
         $mail->personalization[0]->setSendAt(1443636843);
   
         $personalization1 = new Personalization();
-        $email = new Email("Example User", "test@example.com");
+        $email = new EmailAddress("test@example.com", "Example User");
         $personalization1->addTo($email);
-        $email = new Email("Example User", "test@example.com");
+        $email = new EmailAddress("test@example.com", "Example User");
         $personalization1->addTo($email);
-        $email = new Email("Example User", "test@example.com");
+        $email = new EmailAddress("test@example.com", "Example User");
         $personalization1->addCc($email);
-        $email = new Email("Example User", "test@example.com");
+        $email = new EmailAddress("test@example.com", "Example User");
         $personalization1->addCc($email);
-        $email = new Email("Example User", "test@example.com");
+        $email = new EmailAddress("test@example.com", "Example User");
         $personalization1->addBcc($email);
-        $email = new Email("Example User", "test@example.com");
+        $email = new EmailAddress("test@example.com", "Example User");
         $personalization1->addBcc($email);
         $personalization1->setSubject("Hello World from the SendGrid PHP Library");
         $personalization1->addHeader("X-Test", "test");
@@ -69,7 +89,7 @@ class MailTest_Mail extends \PHPUnit_Framework_TestCase
         $personalization1->setSendAt(1443636843);
         $mail->addPersonalization($personalization1);
 
-        $content = new Content("text/html", "<html><body>some text here</body></html>");
+        $content = new HtmlContent("<html><body>some text here</body></html>");
         $mail->addContent($content);
 
         $attachment = new Attachment();

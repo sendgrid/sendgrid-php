@@ -52,4 +52,9 @@ class SendGrid
 
         $this->client = new \SendGrid\Client($host, $headers, '/v3', null, $curlOptions);
     }
+
+    public function send(\SendGrid\Mail $email)
+    {
+        return $this->client->mail()->send()->post($email);
+    }
 }

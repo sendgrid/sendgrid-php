@@ -1,4 +1,9 @@
 <?php
+use SendGrid\Helpers\Mail\Model\EmailAddress;
+use SendGrid\Helpers\Mail\Model\Subject;
+use SendGrid\Helpers\Mail\Model\PlainTextContent;
+use SendGrid\Helpers\Mail\Model\Mail;
+
 class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
 {
     protected static $apiKey;
@@ -59,11 +64,11 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
 
     public function testHelloWorld()
     {
-        $from = new SendGrid\Email("Example User", "test@example.com");
-        $subject = "Sending with SendGrid is Fun";
-        $to = new SendGrid\Email("Example User", "test@example.com");
-        $content = new SendGrid\Content("text/plain", "and easy to do anywhere, even with PHP");
-        $mail = new SendGrid\Mail($from, $subject, $to, $content);
+        $from = new EmailAddress("test@example.com", "Example User");
+        $subject = new Subject("Sending with SendGrid is Fun");
+        $to = new EmailAddress("test@example.com", "Example User");
+        $content = new PlainTextContent("and easy to do anywhere, even with PHP");
+        $mail = new Mail($from, $subject, $to, $content);
         $json = json_encode($mail->jsonSerialize());
         $this->assertEquals($json, '{"from":{"name":"Example User","email":"test@example.com"},"personalizations":[{"to":[{"name":"Example User","email":"test@example.com"}]}],"subject":"Sending with SendGrid is Fun","content":[{"type":"text\/plain","value":"and easy to do anywhere, even with PHP"}]}');
     }
