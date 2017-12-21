@@ -1,0 +1,11 @@
+{
+    "name": "Simple sendgrid on heroku",
+    "description": "A minimal hello world email",
+    "repository": "https://github.com/senndgrid/sendgrid-php",
+    "addons": [],
+    "env": {
+        "SENDGRID_API_KEY": "",
+        "FROM_EMAIL": "",
+        "TO_EMAIL": ""
+    }
+  }
