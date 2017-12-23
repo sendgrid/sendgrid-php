@@ -7,6 +7,7 @@ This documentation provides examples for specific use cases. Please [open an iss
 * [How to View Email Statistics](#email-stats)
 * [Deploying to Heroku](#heroku)
 * [Google App Engine Installation](#GAE-instructions)
+* [Sending a personalized email to multiple recipients](#personalization)
 
 <a name="attachments"></a>
 # Attachments
@@ -204,4 +205,6 @@ The file `php.ini` should contain:
 ```ini
 google_app_engine.enable_curl_lite = 1
 ```
+<a name="personalization"></a>
+# Personalization
 
