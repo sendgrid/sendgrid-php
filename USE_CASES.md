@@ -7,7 +7,7 @@ This documentation provides examples for specific use cases. Please [open an iss
 * [How to View Email Statistics](#email-stats)
 * [Deploying to Heroku](#heroku)
 * [Google App Engine Installation](#GAE-instructions)
-* [Sending a personalized email to multiple recipients](#personalization)
+* [Personalized Emails](#personalization)
 
 <a name="attachments"></a>
 # Attachments
@@ -205,6 +205,107 @@ The file `php.ini` should contain:
 ```ini
 google_app_engine.enable_curl_lite = 1
 ```
-<a name="personalization"></a>
-# Personalization
 
+<a name="personalization"></a>
+# Personalized Emails
+
+```php
+<?php
+/*
+This program demostrates how to send a personalized email
+to multiple recipients using the V3 SDK
+*/
+
+require "../SendGridV3B/sendgrid-php.php";
+
+/*
+define  SG_APIKEY and SG_FROM
+or you can create your own instead as follows
+*/
+
+define('SG_APIKEY',"Your api key");
+define('SG_FROM',"Your From Email");
+
+
+/*
+The body contains two substition tags |name| and |pwd|
+They will be replaced by the corresponding recipient data.
+
+Note: the choice of | to encapsulate a tag is arbitrary. 
+You can use whatever you perfer. 
+*/
+$body=<<<EOD
+<p>Dear |name|,</p>
+The information you requested is below<ul>
+<li>password: |pwd|</li>
+</ul>
+EOD;
+
+$apiKey = SG_APIKEY;
+$sg = new \SendGrid( $apiKey );
+
+/*
+Recipient Data
+This could come from a database but this example it is implemented using an array of recipient objects.
+*/
+class Recipient {
+  var $email;
+  var $name;
+  var $password;
+  function Recipient( $e, $n, $p ) {
+    $this->email=$e;
+    $this->name=$n;
+    $this->password=$p;
+  }
+}
+/*
+Load recipient array
+*/
+$recipients=array();
+$recipients[]=new Recipient( "email1@somedomain.com", "Guy", "1234" );
+$recipients[]=new Recipient( "email2@somedomain.com", "Pauline", "4321" );
+
+
+/*
+Create Mail Object and set common elements
+*/
+$from = new SendGrid\Email( null, SG_FROM );
+$subject = "Testing Sending ".count( $recipients )." personalized emails";
+$content = new SendGrid\Content( "text/html", $body );
+
+$mail = new SendGrid\mail();
+$mail->setFrom( $from );
+$mail->addContent( $content );
+$mail->setSubject( $subject );
+
+/*
+set email and its substitutions for each recipient
+*/
+$cnt=0;
+echo "Sending emails to<ol>";
+foreach ( $recipients as $recip ) {
+  echo "<li>$recip->email $recip->name $recip->password</li>";
+  /*
+add personalizion elements
+*/
+  $personalization = new SendGrid\Personalization();
+  $email = new SendGrid\Email( null, $recip->email );
+  $personalization->addTo( $email );
+  $personalization->addSubstitution( "|name|", $recip->name );
+  $personalization->addSubstitution( "|pwd|", $recip->password );
+  $mail->addPersonalization( $personalization );
+}
+/*
+ Send it
+ */
+$response = $sg->client->mail()->send()->post( $mail );
+
+/*
+Message success or display error
+*/
+if ( $response->statusCode()==202 )
+  echo "<p>Emails have been sucessfully sent!</p>";
+else
+  echo "<p><font color=red>Error: ".$response->statusCode()." - ".$response->body()."</font></p>";
+?>
+```
