@@ -5,6 +5,8 @@ This documentation provides examples for specific use cases. Please [open an iss
 * [Transactional Templates](#transactional-templates)
 * [How to Setup a Domain Whitelabel](#domain-whitelabel)
 * [How to View Email Statistics](#email-stats)
+* [Deploying to Heroku](#heroku)
+* [Google App Engine Installation](#GAE-instructions)
 
 <a name="attachments"></a>
 # Attachments
@@ -182,3 +184,24 @@ Find more information about all of SendGrid's whitelabeling related documentatio
 You can find documentation for how to view your email statistics via the UI [here](https://app.sendgrid.com/statistics) and via API [here](https://github.com/sendgrid/sendgrid-php/blob/master/USAGE.md#stats).
 
 Alternatively, we can post events to a URL of your choice via our [Event Webhook](https://sendgrid.com/docs/API_Reference/Webhooks/event.html) about events that occur as SendGrid processes your email.
+
+<a name="heroku"></a>
+# Deploying to Heroku
+
+Use the button below to instantly setup your own Simple instance for sending email using sendgrid on Heroku.
+
+<a href="https://heroku.com/deploy?template=https://github.com/sendgrid/sendgrid-php/tree/example-heroku-hello-email">
+  <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
+</a>
+
+<a name="GAE-instructions"></a>
+# Google App Engine Installation
+
+Google App Engine installations with composer require creation of file `php.ini` in the base folder(the same directory as the `app.yaml` file). You can read more about this file [here](https://cloud.google.com/appengine/docs/standard/php/config/php_ini).
+
+The file `php.ini` should contain:
+
+```ini
+google_app_engine.enable_curl_lite = 1
+```
+

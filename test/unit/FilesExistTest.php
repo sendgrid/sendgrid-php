@@ -2,7 +2,9 @@
 
 namespace SendGrid;
 
-class FilesExistTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class FilesExistTest extends TestCase
 {
     private $requiredFiles;
 
@@ -46,4 +48,3 @@ class FilesExistTest extends \PHPUnit_Framework_TestCase
         }
     }
 }
-
