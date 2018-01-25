@@ -98,6 +98,10 @@ $from = new SendGrid\Email("Example User", "test@example.com");
 $subject = "Sending with SendGrid is Fun";
 $to = new SendGrid\Email("Example User", "test@example.com");
 $content = new SendGrid\Content("text/plain", "and easy to do anywhere, even with PHP");
+
+// Send message as html
+// $content = new SendGrid\Content("text/html", "<h1>Sending with SendGrid is Fun and easy to do anywhere, even with PHP</h1>");
+
 $mail = new SendGrid\Mail($from, $subject, $to, $content);
 
 $apiKey = getenv('SENDGRID_API_KEY');
