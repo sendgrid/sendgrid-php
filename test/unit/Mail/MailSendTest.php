@@ -148,6 +148,7 @@ class MailSendTest extends BaseTestClass
 }');
         $request_headers = ["X-Mock: 202"];
         $response = self::$sg->client->mail()->send()->post($request_body, null, $request_headers);
-        $this->assertEquals(202, $response->statusCode());
+        $this->assertSame(202, $response->statusCode());
+        $this->assertInstanceOf('SendGrid\\Response', $response);
     }
 }
