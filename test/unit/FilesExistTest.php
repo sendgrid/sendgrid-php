@@ -6,45 +6,23 @@ use PHPUnit\Framework\TestCase;
 
 class FilesExistTest extends TestCase
 {
-    private $requiredFiles;
-
-    protected function setUp()
-    {
-        $this->requiredFiles = [
-            ['./Dockerfile', './docker/Dockerfile'],
-            ['./docker-compose.yml', './docker/docker-compose.yml'],
-            './.codeclimate.yml',
-            './.env_sample',
-            './.github/ISSUE_TEMPLATE',
-            './.github/PULL_REQUEST_TEMPLATE',
-            './.gitignore',
-            './.travis.yml',
-            './CHANGELOG.md',
-            './CODE_OF_CONDUCT.md',
-            './CONTRIBUTING.md',
-            './LICENSE.md',
-            './README.md',
-            './TROUBLESHOOTING.md',
-            './USAGE.md',
-            './USE_CASES.md',
-        ];
-    }
-
     public function testFilesArePresentInRepo()
     {
-        foreach ($this->requiredFiles as $filePath) {
-            if (is_array($filePath)) {
-                $exists = array_filter(
-                    $filePath,
-                    function ($file) {
-                        return file_exists($file);
-                    }
-                );
-                $files = join('" and "', $filePath);
-                $this->assertNotEmpty($exists, "File \"{$files}\" does not exist in repo!");
-            } else {
-                $this->assertFileExists($filePath, "File \"{$filePath}\" does not exist in repo!");
-            }
-        }
+        $rootDir = __DIR__ . '/../..';
+        $this->assertFileExists("$rootDir/docker/Dockerfile");
+        //$this->assertFileExists("$rootDir/docker/docker-compose.yml");
+        $this->assertFileExists("$rootDir/.codeclimate.yml");
+        $this->assertFileExists("$rootDir/.env.sample");
+        $this->assertFileExists("$rootDir/.github/ISSUE_TEMPLATE");
+        $this->assertFileExists("$rootDir/.github/PULL_REQUEST_TEMPLATE");
+        $this->assertFileExists("$rootDir/.gitignore");
+        $this->assertFileExists("$rootDir/.travis.yml");
+        $this->assertFileExists("$rootDir/CHANGELOG.md");
+        $this->assertFileExists("$rootDir/CODE_OF_CONDUCT.md");
+        $this->assertFileExists("$rootDir/LICENSE.md");
+        $this->assertFileExists("$rootDir/README.md");
+        $this->assertFileExists("$rootDir/TROUBLESHOOTING.md");
+        $this->assertFileExists("$rootDir/USAGE.md");
+        $this->assertFileExists("$rootDir/USE_CASES.md");
     }
 }

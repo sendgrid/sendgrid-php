@@ -21,7 +21,7 @@ class GenericTest extends BaseTestClass
             'Accept: application/json'
         ];
 
-        $this->assertEquals($sg->client->getHost(), 'https://api.sendgrid.com');
+        $this->assertEquals($sg->client->getHost(), 'https://api.sendgrid.com', '/v3');
         $this->assertEquals($sg->client->getHeaders(), $headers);
         $this->assertEquals($sg->client->getVersion(), '/v3');
 
