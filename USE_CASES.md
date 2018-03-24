@@ -44,8 +44,6 @@ $response = $sg->client->mail()->send()->post($mail);
 echo $response->statusCode();
 print_r($response->headers());
 echo $response->body();
-
-?>
 ```
 
 <a name="transactional-templates"></a>
