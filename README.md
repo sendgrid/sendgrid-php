@@ -44,10 +44,14 @@ We appreciate your continued support, thank you!
 
 Update the development environment with your [SENDGRID_API_KEY](https://app.sendgrid.com/settings/api_keys), for example:
 
+1. Copy the sample env file to a new file named `.env`
 ```bash
-echo "export SENDGRID_API_KEY='YOUR_API_KEY'" > sendgrid.env
-echo "sendgrid.env" >> .gitignore
-source ./sendgrid.env
+cp .env.sample .env
+```
+2. Edit the `.env` file to include your `SENDGRID_API_KEY`
+3. Source the `.env` file
+```bash
+source ./.env
 ```
 
 ## Install Package
@@ -94,6 +98,10 @@ $from = new SendGrid\Email("Example User", "test@example.com");
 $subject = "Sending with SendGrid is Fun";
 $to = new SendGrid\Email("Example User", "test@example.com");
 $content = new SendGrid\Content("text/plain", "and easy to do anywhere, even with PHP");
+
+// Send message as html
+// $content = new SendGrid\Content("text/html", "<h1>Sending with SendGrid is Fun and easy to do anywhere, even with PHP</h1>");
+
 $mail = new SendGrid\Mail($from, $subject, $to, $content);
 
 $apiKey = getenv('SENDGRID_API_KEY');
@@ -228,6 +236,7 @@ Quick links:
 - [Bug Reports](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#submit_a_bug_report)
 - [Sign the CLA to Create a Pull Request](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#cla)
 - [Improvements to the Codebase](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#improvements_to_the_codebase)
+- [Review Pull Requests](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#code-reviews)
 
 <a name="troubleshooting"></a>
 # Troubleshooting
