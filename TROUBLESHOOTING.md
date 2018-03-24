@@ -14,6 +14,7 @@ If you can't find a solution below, please open an [issue](https://github.com/se
 * [Using the Package Manager](#package-manager)
 * [Fixing Error 415](#error-415)
 * [Viewing the Request Body](#request-body)
+* [Google App Engine installation](#GAE-instructions)
 
 <a name="migrating"></a>
 ## Migrating from v2 to v3
@@ -111,3 +112,8 @@ You can do this right before you call `$response = $sg->client->mail()->send()->
 ```php
 echo json_encode($mail, JSON_PRETTY_PRINT);
 ```
+
+<a name="GAE-instructions"></a>
+## Google App Engine installation
+
+Please refer to [`USE_CASES.md`](https://github.com/sendgrid/sendgrid-php/blob/master/USE_CASES.md#GAE-instructions) for additional instructions.
