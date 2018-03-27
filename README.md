@@ -68,9 +68,9 @@ Add SendGrid to your `composer.json` file. If you are not using [Composer](http:
 
 #### Alternative: Install package from zip
 
-If you are not using Composer, simply download and install the **[latest packaged release of the library as a zip](http://dx.sendgrid.com/downloads/sendgrid-php/sendgrid-php-latest.zip)**.
+If you are not using Composer, simply download and install the **[latest packaged release of the library as a zip](https://github.com/sendgrid/sendgrid-php/releases/download/v6.1.0/sendgrid-php.zip)**.
 
-[**⬇︎ Download Packaged Library ⬇︎**](http://dx.sendgrid.com/downloads/sendgrid-php/sendgrid-php-latest.zip)
+[**⬇︎ Download Packaged Library ⬇︎**](https://github.com/sendgrid/sendgrid-php/releases/download/v6.1.0/sendgrid-php.zip)
 
 Previous versions of the library can be found in the [version index](https://sendgrid-open-source.s3.amazonaws.com/index.html) or downloaded directly from GitHub.
 
