@@ -3,6 +3,98 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [6.1.0] - 2018-03-27 ##
+### Added
+- PR [#512](https://github.com/sendgrid/sendgrid-php/pull/512): Omit PHP closing tag in use case sample, thanks to [Sébastien Santoro](https://github.com/dereckson) for the PR!
+
+- PR [#575](https://github.com/sendgrid/sendgrid-php/pull/575): Add an example to the README.md describing how to send emails as html as the content type, thanks to [Benjamin Manford](https://github.com/manfordbenjamin) for the PR!
+
+- Closes [#547](https://github.com/sendgrid/sendgrid-php/issues/547), PR [#549](https://github.com/sendgrid/sendgrid-php/pull/549): 
+Added Code Review to Contributing.md, thanks to [tomhorvat](https://github.com/tomhorvat) for the PR!
+
+- PR [#565](https://github.com/sendgrid/sendgrid-php/pull/565): Add PHP 7.1 and 7.2 to Travis build matrix, thanks to [Emir Beganović](https://github.com/emirb) for the PR!
+
+- PR [#577](https://github.com/sendgrid/sendgrid-php/pull/577): Update PHP Version terms, thanks to [Siddhant Sharma](https://github.com/ssiddhantsharma) for the PR!
+
+- Closes [#540](https://github.com/sendgrid/sendgrid-php/issues/540), PR [#543](https://github.com/sendgrid/sendgrid-php/pull/543): 
+Feature/split unit tests, thanks to [Owen Voke](https://github.com/pxgamer) for the PR!
+
+- Closes [#441](https://github.com/sendgrid/sendgrid-php/issues/441), PR [#467](https://github.com/sendgrid/sendgrid-php/pull/467): 
+Add deploy to heroku button, thanks to [pangaunn](https://github.com/pangaunn) for the PR!
+
+- Closes [#423](https://github.com/sendgrid/sendgrid-php/issues/423), PR [#510](https://github.com/sendgrid/sendgrid-php/pull/510): 
+Adding Google App engine installation with composer instructions, thanks to [Nalin Bhardwaj](https://github.com/nalinbhardwaj) for the PR!
+
+- Closes [#541](https://github.com/sendgrid/sendgrid-php/issues/541), PR [#542](https://github.com/sendgrid/sendgrid-php/pull/542): 
+Added CodeCov support, thanks to [Owen Voke](https://github.com/pxgamer) for the PR!
+
+- PR [#539](https://github.com/sendgrid/sendgrid-php/pull/539): Rename LICENSE.txt to md, thanks to [Ankit Jain](https://github.com/ankitjain28may) for the PR!
+
+- Closes [#436](https://github.com/sendgrid/sendgrid-php/issues/436), PR [#535](https://github.com/sendgrid/sendgrid-php/pull/535): Add docker development setup, thanks to [Samundra Shrestha](https://github.com/samundra) for the PR!
+
+- Closes [#532](https://github.com/sendgrid/sendgrid-php/issues/532), PR [#537](https://github.com/sendgrid/sendgrid-php/pull/537): Add license date range unit test, thanks to [uppe-r](https://github.com/uppe-r) for the PR!
+
+- Closes [#533](https://github.com/sendgrid/sendgrid-php/issues/533), PR [#536](https://github.com/sendgrid/sendgrid-php/pull/536): Add unittest to check that specific files exist in repo, thanks to [Bertus Steenberg](https://github.com/bertuss) for the PR!
+
+- Closes [#524](https://github.com/sendgrid/sendgrid-php/issues/524), PR [#527](https://github.com/sendgrid/sendgrid-php/pull/527): Created code climate YML file, thanks to [Prashu Chaudhary](https://github.com/prashuchaudhary) for the PR!
+
+- Closes [#520](https://github.com/sendgrid/sendgrid-php/issues/520), PR [#523](https://github.com/sendgrid/sendgrid-php/pull/523): Added sample env file, thanks to [Joey Lee](https://github.com/yeoji) for the PR!
+
+- PR [#519](https://github.com/sendgrid/sendgrid-php/pull/519): Add github PR template, thanks to [Alex](https://github.com/pushkyn) for the PR!
+
+- PR [#513](https://github.com/sendgrid/sendgrid-php/pull/513): Update to PHP 7.0.0 refactor - Fix syntax error in refactor documentation, thanks to [Sébastien Santoro](https://github.com/dereckson) for the PR!
+
+- PR [#505](https://github.com/sendgrid/sendgrid-php/pull/505): Update README.md with additional badges, thanks to [Lalit Vijay](https://github.com/lalitvj) for the PR!
+
+- Closes [#500](https://github.com/sendgrid/sendgrid-php/issues/500), PR [#504](https://github.com/sendgrid/sendgrid-php/pull/504): SEO Friendly Section links, thanks to [Dharma Saputra](https://github.com/ladhadha) for the PR!
+
+- PR [#503](https://github.com/sendgrid/sendgrid-php/pull/503): Added new badges to README.md, thanks to [Alex](https://github.com/myzeprog) for the PR!
+
+- Closes [#492](https://github.com/sendgrid/sendgrid-php/issues/492), PR [#494](https://github.com/sendgrid/sendgrid-php/pull/494): Demonstrate how to review the request body for troubleshooting, thanks to [Alex](https://github.com/myzeprog) for the PR!
+
+- PR [#476](https://github.com/sendgrid/sendgrid-php/pull/476): Update README.md with license information, thanks to [Tarmo Leppänen](https://github.com/tarlepp) for the PR!
+
+- PR [#475](https://github.com/sendgrid/sendgrid-php/pull/475): Add documentation for setting up domain whitelabel, thanks to [Sourav Sarkar](https://github.com/amsourav) for the PR!
+
+- PR [#468](https://github.com/sendgrid/sendgrid-php/pull/463): Changes the recommendation to use composer as recommended source, thanks to [Gabriela D'Ávila Ferrara](https://github.com/gabidavila) for the PR!
+
+- PR [#463](https://github.com/sendgrid/sendgrid-php/pull/463): Add TROUBLESHOOTING.md section about fixing error 415, thanks to [AlbinoDrought](https://github.com/AlbinoDrought) for the PR!
+
+- PR [#456](https://github.com/sendgrid/sendgrid-php/pull/456): Added Code of Conduct, thanks to [Rubemlrm](https://github.com/Rubemlrm) for the PR!
+
+- PR [#439](https://github.com/sendgrid/sendgrid-php/pull/439): Update to PHP 7.0.0 refactor - Removal of Collections, thanks to [Joseph Opanel](https://github.com/jopanel) for the PR!
+
+- PR [#416](https://github.com/sendgrid/sendgrid-php/pull/416): Add release notifications, thanks to [Gabriel Krell](https://github.com/gabrielkrell) for the PR!
+
+- PR [#415](https://github.com/sendgrid/sendgrid-php/pull/415): Updated example.php to fix that there was no way for the sections to get substituted without their being a substition that calls them, thanks to [Kyle Roberts](https://github.com/kylearoberts) for the PR!
+
+### Fixed
+- PR [#545](https://github.com/sendgrid/sendgrid-php/pull/545): Fix typo CONTRIBUTING.md, thanks to [thepriefy](https://github.com/thepriefy) for the PR!
+
+- PR [#588](https://github.com/sendgrid/sendgrid-php/pull/588): Fix broken unit tests
+
+- PR [#576](https://github.com/sendgrid/sendgrid-php/pull/576): API level addressing of the string-only in addSubstitution arg rule. Every long integer triggers a bad request, thanks to [Ezequiel Villarreal](https://github.com/saruman) for the PR!
+
+- PR [#517](https://github.com/sendgrid/sendgrid-php/pull/517): Fix typos in USAGE.md, thanks to [Anatoly](https://github.com/anatolyyyyyy) for the PR!
+
+- PR [#530](https://github.com/sendgrid/sendgrid-php/pull/530): Changed the license period., thanks to [Siddhant Sharma](https://github.com/ssiddhantsharma) for the PR!
+
+- PR [#514](https://github.com/sendgrid/sendgrid-php/pull/514): Don't close img tag in HTML, thanks to [Sébastien Santoro](https://github.com/dereckson) for the PR!
+
+- PR [#507](https://github.com/sendgrid/sendgrid-php/pull/507): Fix typos in various files, thanks to [Brandon Smith](https://github.com/brandon93s) for the PR!
+
+- Fixes [#336](https://github.com/sendgrid/sendgrid-php/issues/336), PR [#479](https://github.com/sendgrid/sendgrid-php/pull/479): Incorrect documentation path fixed, thanks to [Valerian Pereira](https://github.com/valerianpereira) for the PR! 
+
+- PR [#465](https://github.com/sendgrid/sendgrid-php/pull/465): Fix typo in README.md, thanks to [shra1cumar](https://github.com/shra1cumar) for the PR!
+
+- PR [#449](https://github.com/sendgrid/sendgrid-php/pull/449): Fix typos in USAGE.md, thanks to [Cícero Pablo](https://github.com/ciceropablo) for the PR!
+
+- PR [#448](https://github.com/sendgrid/sendgrid-php/pull/448): Fix typos in TROUBLESHOOTING.md, thanks to [Cícero Pablo](https://github.com/ciceropablo) for the PR!
+
+- PR [#435](https://github.com/sendgrid/sendgrid-php/pull/435): Change spam_report() to spam_reports() in documentation and examples, thanks to [mrmxs](https://github.com/mrmxs) for the PR!
+
+- PR [#431](https://github.com/sendgrid/sendgrid-php/pull/431): Fixed minor typo during Mail creation, thanks to [joeldixon66](https://github.com/joeldixon66) for the PR!
+
 ## [6.0.0] - 2017-06-30 ##
 ### BREAKING CHANGE
 - PR #408: Update Mail constructor to signify which parameters are required for sending all email
