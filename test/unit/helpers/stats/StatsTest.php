@@ -1,6 +1,10 @@
 <?php
 
-class StatsTest extends \PHPUnit_Framework_TestCase
+namespace SendGrid;
+
+use SendGridPhp\Tests\BaseTestClass;
+
+class StatsTest extends  extends BaseTestClass
 {
     /**
      * @param array $expectedGlobal
