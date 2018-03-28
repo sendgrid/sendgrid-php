@@ -94,7 +94,7 @@ function kitchenSink()
     $mail->setTemplateId("439b6d66-4408-4ead-83de-5c83c2ee313a");
 
     # This must be a valid [batch ID](https://sendgrid.com/docs/API_Reference/SMTP_API/scheduling_parameters.html) to work
-    # $mail->setBatchID("sengrid_batch_id");
+    # $mail->setBatchID("sendgrid_batch_id");
 
     $mail->addSection("%section1%", "Substitution Text for Section 1");
     $mail->addSection("%section2%", "Substitution Text for Section 2");
