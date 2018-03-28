@@ -7,9 +7,9 @@ class RecipientsTest_Recipient extends BaseTestClass
 {
     public function testRecipientsForm()
     {
-        $form = (string) new RecipientForm('http://www.examle.com/recipientFormSubmit');
+        $form = (string) new RecipientForm('http://www.example.com/recipientFormSubmit');
         $this->assertEquals(
-            $form, '<form action="http://www.examle.com/recipientFormSubmit" method="post">
+            $form, '<form action="http://www.example.com/recipientFormSubmit" method="post">
     First Name: <input type="text" name="first-name"><br>
     Last Name: <input type="text" name="last-name"><br>
     E-mail: <input type="text" name="email"><br>
