@@ -5,7 +5,7 @@ namespace SendGrid;
 require __DIR__ . '<PATH_TO>/vendor/autoload.php';
 
 // This will build an HTML form to be embedded in your page. This form allows users to subscribe using their name and email.
-function buildRecipientForm($url = 'http://www.examle.com/recipientFormSubmit')
+function buildRecipientForm($url = 'http://www.example.com/recipientFormSubmit')
 {
     $form = (string) new RecipientForm($url);
     echo $form . PHP_EOL;
@@ -17,7 +17,7 @@ function recipientFormSubmit()
     $apiKey = getenv('SENDGRID_API_KEY');
     $sg = new \SendGrid($apiKey);
 
-    // These should be retreived from $_POST
+    // These should be retrieved from $_POST
     $post_body = array(
         'first-name' => 'Test',
         'last-name' => 'Tester',
