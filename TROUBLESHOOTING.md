@@ -13,6 +13,8 @@ If you can't find a solution below, please open an [issue](https://github.com/se
 * [Environment Variables and Your SendGrid API Key](#environment)
 * [Using the Package Manager](#package-manager)
 * [Fixing Error 415](#error-415)
+* [Viewing the Request Body](#request-body)
+* [Google App Engine installation](#GAE-instructions)
 
 <a name="migrating"></a>
 ## Migrating from v2 to v3
@@ -99,3 +101,19 @@ If you're getting the following error while using this library:
 It is most likely due to a linebreak in your API key. Passing your key through `trim` should fix this:
 
 `$apiKey = trim($apiKey)`
+
+<a name="request-body"></a>
+## Viewing the Request Body
+
+When debugging or testing, it may be useful to examine the raw request body to compare against the [documented format](https://sendgrid.com/docs/API_Reference/api_v3.html).
+
+You can do this right before you call `$response = $sg->client->mail()->send()->post($mail);` like so:
+
+```php
+echo json_encode($mail, JSON_PRETTY_PRINT);
+```
+
+<a name="GAE-instructions"></a>
+## Google App Engine installation
+
+Please refer to [`USE_CASES.md`](https://github.com/sendgrid/sendgrid-php/blob/master/USE_CASES.md#GAE-instructions) for additional instructions.

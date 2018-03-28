@@ -842,7 +842,7 @@ class Personalization implements \JsonSerializable
 
     public function addSubstitution($key, $value)
     {
-        $this->substitutions[$key] = $value;
+        $this->substitutions[$key] = (string)$value;
     }
 
     public function getSubstitutions()

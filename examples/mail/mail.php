@@ -57,7 +57,7 @@ $request_body = json_decode('{
   "content": [
     {
       "type": "text/html", 
-      "value": "<html><p>Hello, world!</p><img src=[CID GOES HERE]></img></html>"
+      "value": "<html><p>Hello, world!</p><img src=[CID GOES HERE] /></html>"
     }
   ], 
   "custom_args": {
@@ -164,7 +164,7 @@ $request_body = json_decode('{
       "enable": true, 
       "html": "If you would like to unsubscribe and stop receiving these emails <% clickhere %>.", 
       "substitution_tag": "<%click here%>", 
-      "text": "If you would like to unsubscribe and stop receiveing these emails <% click here %>."
+      "text": "If you would like to unsubscribe and stop receiving these emails <% click here %>."
     }
   }
 }');
