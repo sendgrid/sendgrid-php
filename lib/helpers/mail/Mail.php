@@ -760,6 +760,18 @@ class Attachment implements \JsonSerializable
             }
         ) ?: null;
     }
+
+    public function setContentPath($string)
+    {
+        $rawContent = file_get_contents($string);
+
+        if ($rawContent === false) {
+            throw new \RuntimeException("Could not open file $string");
+        }
+
+        $this->content  = base64_encode($rawContent);
+        $this->filename = $this->filename ?: basename($string);
+    }
 }
 
 class Content implements \JsonSerializable
