@@ -2,7 +2,7 @@
 namespace SendGrid;
 
 // If you are using Composer
-require __DIR__ . '<PATH_TO>/vendor/autoload.php';
+require __DIR__ . '/../../../vendor/autoload.php';
 
 
 function helloEmail()
