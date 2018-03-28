@@ -4,7 +4,7 @@ namespace SendGrid;
 
 use SendGridPhp\Tests\BaseTestClass;
 
-class StatsTest extends  extends BaseTestClass
+class StatsTest extends BaseTestClass
 {
     /**
      * @param array $expectedGlobal
