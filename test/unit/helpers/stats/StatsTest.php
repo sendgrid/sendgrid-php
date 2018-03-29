@@ -1,5 +1,4 @@
 <?php
-
 namespace SendGrid;
 
 use SendGridPhp\Tests\BaseTestClass;
@@ -21,7 +20,7 @@ class StatsTest extends BaseTestClass
         $expectedSum,
         $expectedSubuserMonthly
     ) {
-        $userStats = new \SendGrid\Stats($expectedGlobal['start_date'], $expectedGlobal['end_date'], $expectedGlobal['aggregated_by']);
+        $userStats = new Stats($expectedGlobal['start_date'], $expectedGlobal['end_date'], $expectedGlobal['aggregated_by']);
         $this->assertEquals($expectedGlobal, $userStats->getGlobal());
         $this->assertEquals($expectedCategory, $userStats->getCategory($expectedCategory['categories']));
         $this->assertEquals($expectedSubuser, $userStats->getSubuser($expectedSubuser['subusers']));
