@@ -3,6 +3,20 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [6.2.0] - 2018-03-28 ##
+### Added
+- Closes [#454](https://github.com/sendgrid/sendgrid-php/issues/454), PR [#502](https://github.com/sendgrid/sendgrid-php/pull/502): 
+Add helper for adding new recipients to your contactdb via a webform, thanks to [Kraig Hufstedler](https://github.com/kraigh) for the PR!
+
+- Closes [#487](https://github.com/sendgrid/sendgrid-php/issues/487), PR [#506](https://github.com/sendgrid/sendgrid-php/pull/506): 
+Add helper to get all stats from a specified data range, thanks to [Milos Pejanovic](https://github.com/runz0rd) for the PR!
+
+- Closes [#368](https://github.com/sendgrid/sendgrid-php/issues/368), PR [#511](https://github.com/sendgrid/sendgrid-php/pull/511): 
+Add support for commas and semicolns in email name, thanks to [Quentin Ligier](https://github.com/qligier) for the PR!
+
+- Closes [#491](https://github.com/sendgrid/sendgrid-php/issues/491), PR [#493](https://github.com/sendgrid/sendgrid-php/pull/493: 
+Allow for setting attachment content from path, thanks to [rparpa](https://github.com/rparpa) for the PR!
+
 ## [6.1.0] - 2018-03-27 ##
 ### Added
 - PR [#512](https://github.com/sendgrid/sendgrid-php/pull/512): Omit PHP closing tag in use case sample, thanks to [Sébastien Santoro](https://github.com/dereckson) for the PR!

@@ -5,3 +5,4 @@
 require_once __DIR__ . '/SendGrid.php';
 require_once __DIR__ . '/helpers/mail/Mail.php';
 require_once __DIR__ . '/helpers/contacts/Recipients.php';
+require_once __DIR__ . '/helpers/stats/Stats.php';
