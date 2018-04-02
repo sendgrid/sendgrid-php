@@ -16,7 +16,7 @@ $request_body = json_decode('{
 $response = $sg->client->templates()->post($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve all transactional templates. #
@@ -25,7 +25,7 @@ echo $response->headers();
 $response = $sg->client->templates()->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Edit a transactional template. #
@@ -38,7 +38,7 @@ $template_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->patch($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve a single transactional template. #
@@ -48,7 +48,7 @@ $template_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Delete a template. #
@@ -58,7 +58,7 @@ $template_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->delete();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Create a new transactional template version. #
@@ -76,7 +76,7 @@ $template_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->versions()->post($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Edit a transactional template version. #
@@ -94,7 +94,7 @@ $version_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->patch($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve a specific transactional template version. #
@@ -105,7 +105,7 @@ $version_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Delete a transactional template version. #
@@ -116,7 +116,7 @@ $version_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->delete();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Activate a transactional template version. #
@@ -127,5 +127,4 @@ $version_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->activate()->post();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
-
+print_r($response->headers());

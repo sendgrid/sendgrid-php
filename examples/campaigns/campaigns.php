@@ -33,7 +33,7 @@ $request_body = json_decode('{
 $response = $sg->client->campaigns()->post($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve all Campaigns #
@@ -43,7 +43,7 @@ $query_params = json_decode('{"limit": 1, "offset": 1}');
 $response = $sg->client->campaigns()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Update a Campaign #
@@ -62,7 +62,7 @@ $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->patch($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve a single campaign #
@@ -72,7 +72,7 @@ $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Delete a Campaign #
@@ -82,7 +82,7 @@ $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->delete();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Update a Scheduled Campaign #
@@ -95,7 +95,7 @@ $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->patch($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Schedule a Campaign #
@@ -108,7 +108,7 @@ $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->post($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // View Scheduled Time of a Campaign #
@@ -118,7 +118,7 @@ $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Unschedule a Scheduled Campaign #
@@ -128,7 +128,7 @@ $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->delete();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Send a Campaign #
@@ -138,7 +138,7 @@ $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->now()->post();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Send a Test Campaign #
@@ -151,5 +151,4 @@ $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->test()->post($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
-
+print_r($response->headers());

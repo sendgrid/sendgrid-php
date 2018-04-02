@@ -14,7 +14,7 @@ $query_params = json_decode('{"limit": 1, "offset": 1}');
 $response = $sg->client->tracking_settings()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Update Click Tracking Settings #
@@ -26,7 +26,7 @@ $request_body = json_decode('{
 $response = $sg->client->tracking_settings()->click()->patch($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve Click Track Settings #
@@ -35,7 +35,7 @@ echo $response->headers();
 $response = $sg->client->tracking_settings()->click()->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Update Google Analytics Settings #
@@ -52,7 +52,7 @@ $request_body = json_decode('{
 $response = $sg->client->tracking_settings()->google_analytics()->patch($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve Google Analytics Settings #
@@ -61,7 +61,7 @@ echo $response->headers();
 $response = $sg->client->tracking_settings()->google_analytics()->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Update Open Tracking Settings #
@@ -73,7 +73,7 @@ $request_body = json_decode('{
 $response = $sg->client->tracking_settings()->open()->patch($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Get Open Tracking Settings #
@@ -82,7 +82,7 @@ echo $response->headers();
 $response = $sg->client->tracking_settings()->open()->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Update Subscription Tracking Settings #
@@ -99,7 +99,7 @@ $request_body = json_decode('{
 $response = $sg->client->tracking_settings()->subscription()->patch($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve Subscription Tracking Settings #
@@ -108,5 +108,4 @@ echo $response->headers();
 $response = $sg->client->tracking_settings()->subscription()->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
-
+print_r($response->headers());

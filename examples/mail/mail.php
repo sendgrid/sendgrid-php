@@ -13,7 +13,7 @@ $sg = new \SendGrid($apiKey);
 $response = $sg->client->mail()->batch()->post();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Validate batch ID #
@@ -23,7 +23,7 @@ $batch_id = "test_url_param";
 $response = $sg->client->mail()->batch()->_($batch_id)->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // v3 Mail Send #
@@ -57,7 +57,7 @@ $request_body = json_decode('{
   "content": [
     {
       "type": "text/html", 
-      "value": "<html><p>Hello, world!</p><img src=[CID GOES HERE]></img></html>"
+      "value": "<html><p>Hello, world!</p><img src=[CID GOES HERE] /></html>"
     }
   ], 
   "custom_args": {
@@ -164,12 +164,11 @@ $request_body = json_decode('{
       "enable": true, 
       "html": "If you would like to unsubscribe and stop receiving these emails <% clickhere %>.", 
       "substitution_tag": "<%click here%>", 
-      "text": "If you would like to unsubscribe and stop receiveing these emails <% click here %>."
+      "text": "If you would like to unsubscribe and stop receiving these emails <% click here %>."
     }
   }
 }');
 $response = $sg->client->mail()->send()->post($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
-
+print_r($response->headers());

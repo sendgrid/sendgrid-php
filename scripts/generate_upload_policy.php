@@ -9,19 +9,21 @@
  * Calculate HMAC-SHA1 according to RFC2104
  * See http://www.faqs.org/rfcs/rfc2104.html
  */
-function hmacsha1($key,$data) {
-    $blocksize=64;
-    $hashfunc='sha1';
-    if (strlen($key)>$blocksize)
-        $key=pack('H*', $hashfunc($key));
-    $key=str_pad($key,$blocksize,chr(0x00));
-    $ipad=str_repeat(chr(0x36),$blocksize);
-    $opad=str_repeat(chr(0x5c),$blocksize);
+function hmacsha1($key, $data)
+{
+    $blocksize = 64;
+    $hashfunc = 'sha1';
+    if (strlen($key) > $blocksize) {
+        $key = pack('H*', $hashfunc($key));
+    }
+    $key = str_pad($key, $blocksize, chr(0x00));
+    $ipad = str_repeat(chr(0x36), $blocksize);
+    $opad = str_repeat(chr(0x5c), $blocksize);
     $hmac = pack(
-                'H*',$hashfunc(
-                    ($key^$opad).pack(
-                        'H*',$hashfunc(
-                            ($key^$ipad).$data
+                'H*', $hashfunc(
+                    ($key ^ $opad).pack(
+                        'H*', $hashfunc(
+                            ($key ^ $ipad).$data
                         )
                     )
                 )
@@ -36,16 +38,15 @@ function hmacsha1($key,$data) {
 function hex2b64($str)
 {
     $raw = '';
-    for ($i=0; $i < strlen($str); $i+=2)
-    {
+    for ($i = 0; $i < strlen($str); $i += 2) {
         $raw .= chr(hexdec(substr($str, $i, 2)));
     }
     return base64_encode($raw);
 }
 
 if (count($argv) != 3) {
-  echo "Usage: " . $argv[0] . " <S3 Policy File> <S3 secret key>\n";
-  exit(1);
+    echo "Usage: " . $argv[0] . " <S3 Policy File> <S3 secret key>\n";
+    exit(1);
 }
 
 $policy = file_get_contents($argv[1]);

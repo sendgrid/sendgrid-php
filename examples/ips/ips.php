@@ -14,7 +14,7 @@ $query_params = json_decode('{"subuser": "test_string", "ip": "test_string", "li
 $response = $sg->client->ips()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve all assigned IPs #
@@ -23,7 +23,7 @@ echo $response->headers();
 $response = $sg->client->ips()->assigned()->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Create an IP pool. #
@@ -35,7 +35,7 @@ $request_body = json_decode('{
 $response = $sg->client->ips()->pools()->post($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve all IP pools. #
@@ -44,7 +44,7 @@ echo $response->headers();
 $response = $sg->client->ips()->pools()->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Update an IP pools name. #
@@ -57,7 +57,7 @@ $pool_name = "test_url_param";
 $response = $sg->client->ips()->pools()->_($pool_name)->put($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve all IPs in a specified pool. #
@@ -67,7 +67,7 @@ $pool_name = "test_url_param";
 $response = $sg->client->ips()->pools()->_($pool_name)->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Delete an IP pool. #
@@ -77,7 +77,7 @@ $pool_name = "test_url_param";
 $response = $sg->client->ips()->pools()->_($pool_name)->delete();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Add an IP address to a pool #
@@ -90,7 +90,7 @@ $pool_name = "test_url_param";
 $response = $sg->client->ips()->pools()->_($pool_name)->ips()->post($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Remove an IP address from a pool. #
@@ -101,7 +101,7 @@ $ip = "test_url_param";
 $response = $sg->client->ips()->pools()->_($pool_name)->ips()->_($ip)->delete();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Add an IP to warmup #
@@ -113,7 +113,7 @@ $request_body = json_decode('{
 $response = $sg->client->ips()->warmup()->post($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve all IPs currently in warmup #
@@ -122,7 +122,7 @@ echo $response->headers();
 $response = $sg->client->ips()->warmup()->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve warmup status for a specific IP address #
@@ -132,7 +132,7 @@ $ip_address = "test_url_param";
 $response = $sg->client->ips()->warmup()->_($ip_address)->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Remove an IP from warmup #
@@ -142,7 +142,7 @@ $ip_address = "test_url_param";
 $response = $sg->client->ips()->warmup()->_($ip_address)->delete();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve all IP pools an IP address belongs to #
@@ -152,5 +152,4 @@ $ip_address = "test_url_param";
 $response = $sg->client->ips()->_($ip_address)->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
-
+print_r($response->headers());

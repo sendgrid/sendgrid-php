@@ -14,5 +14,4 @@ $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", 
 $response = $sg->client->browsers()->stats()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
-
+print_r($response->headers());

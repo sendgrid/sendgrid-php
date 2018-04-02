@@ -25,7 +25,7 @@ $request_body = json_decode('{
 $response = $sg->client->whitelabel()->domains()->post($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // List all domain whitelabels. #
@@ -35,7 +35,7 @@ $query_params = json_decode('{"username": "test_string", "domain": "test_string"
 $response = $sg->client->whitelabel()->domains()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Get the default domain whitelabel. #
@@ -44,7 +44,7 @@ echo $response->headers();
 $response = $sg->client->whitelabel()->domains()->default()->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // List the domain whitelabel associated with the given user. #
@@ -53,7 +53,7 @@ echo $response->headers();
 $response = $sg->client->whitelabel()->domains()->subuser()->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Disassociate a domain whitelabel from a given user. #
@@ -62,7 +62,7 @@ echo $response->headers();
 $response = $sg->client->whitelabel()->domains()->subuser()->delete();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Update a domain whitelabel. #
@@ -76,7 +76,7 @@ $domain_id = "test_url_param";
 $response = $sg->client->whitelabel()->domains()->_($domain_id)->patch($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve a domain whitelabel. #
@@ -86,7 +86,7 @@ $domain_id = "test_url_param";
 $response = $sg->client->whitelabel()->domains()->_($domain_id)->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Delete a domain whitelabel. #
@@ -96,7 +96,7 @@ $domain_id = "test_url_param";
 $response = $sg->client->whitelabel()->domains()->_($domain_id)->delete();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Associate a domain whitelabel with a given user. #
@@ -109,7 +109,7 @@ $domain_id = "test_url_param";
 $response = $sg->client->whitelabel()->domains()->_($domain_id)->subuser()->post($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Add an IP to a domain whitelabel. #
@@ -122,7 +122,7 @@ $id = "test_url_param";
 $response = $sg->client->whitelabel()->domains()->_($id)->ips()->post($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Remove an IP from a domain whitelabel. #
@@ -133,7 +133,7 @@ $ip = "test_url_param";
 $response = $sg->client->whitelabel()->domains()->_($id)->ips()->_($ip)->delete();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Validate a domain whitelabel. #
@@ -143,7 +143,7 @@ $id = "test_url_param";
 $response = $sg->client->whitelabel()->domains()->_($id)->validate()->post();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Create an IP whitelabel #
@@ -157,7 +157,7 @@ $request_body = json_decode('{
 $response = $sg->client->whitelabel()->ips()->post($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve all IP whitelabels #
@@ -167,7 +167,7 @@ $query_params = json_decode('{"ip": "test_string", "limit": 1, "offset": 1}');
 $response = $sg->client->whitelabel()->ips()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve an IP whitelabel #
@@ -177,7 +177,7 @@ $id = "test_url_param";
 $response = $sg->client->whitelabel()->ips()->_($id)->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Delete an IP whitelabel #
@@ -187,7 +187,7 @@ $id = "test_url_param";
 $response = $sg->client->whitelabel()->ips()->_($id)->delete();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Validate an IP whitelabel #
@@ -197,7 +197,7 @@ $id = "test_url_param";
 $response = $sg->client->whitelabel()->ips()->_($id)->validate()->post();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Create a Link Whitelabel #
@@ -212,7 +212,7 @@ $query_params = json_decode('{"limit": 1, "offset": 1}');
 $response = $sg->client->whitelabel()->links()->post($request_body, $query_params);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve all link whitelabels #
@@ -222,7 +222,7 @@ $query_params = json_decode('{"limit": 1}');
 $response = $sg->client->whitelabel()->links()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve a Default Link Whitelabel #
@@ -232,7 +232,7 @@ $query_params = json_decode('{"domain": "test_string"}');
 $response = $sg->client->whitelabel()->links()->default()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve Associated Link Whitelabel #
@@ -242,7 +242,7 @@ $query_params = json_decode('{"username": "test_string"}');
 $response = $sg->client->whitelabel()->links()->subuser()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Disassociate a Link Whitelabel #
@@ -252,7 +252,7 @@ $query_params = json_decode('{"username": "test_string"}');
 $response = $sg->client->whitelabel()->links()->subuser()->delete(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Update a Link Whitelabel #
@@ -265,7 +265,7 @@ $id = "test_url_param";
 $response = $sg->client->whitelabel()->links()->_($id)->patch($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Retrieve a Link Whitelabel #
@@ -275,7 +275,7 @@ $id = "test_url_param";
 $response = $sg->client->whitelabel()->links()->_($id)->get();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Delete a Link Whitelabel #
@@ -285,7 +285,7 @@ $id = "test_url_param";
 $response = $sg->client->whitelabel()->links()->_($id)->delete();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Validate a Link Whitelabel #
@@ -295,7 +295,7 @@ $id = "test_url_param";
 $response = $sg->client->whitelabel()->links()->_($id)->validate()->post();
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
+print_r($response->headers());
 
 ////////////////////////////////////////////////////
 // Associate a Link Whitelabel #
@@ -308,5 +308,4 @@ $link_id = "test_url_param";
 $response = $sg->client->whitelabel()->links()->_($link_id)->subuser()->post($request_body);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
-
+print_r($response->headers());

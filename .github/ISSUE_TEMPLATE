@@ -2,7 +2,6 @@
 
 A summary of the issue and the environment in which it occurs. If suitable, include the steps required to reproduce the bug. Please feel free to include screenshots, screencasts, code examples.
 
-
 #### Steps to Reproduce
 
 1. This is the first step
@@ -14,4 +13,4 @@ Any other information you want to share that is relevant to the issue being repo
 #### Technical details:
 
 * sendgrid-php Version: master (latest commit: [commit number])
-* PHP Version: 5.x
+* PHP Version: 5.4 to 7.2 (as of February 1, 2018)

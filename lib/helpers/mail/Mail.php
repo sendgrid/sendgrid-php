@@ -2,10 +2,10 @@
 /**
   * This helper builds the request body for a /mail/send API call.
   *
-  * PHP version 5.3
+  * PHP version 5.6, 7
   *
   * @author    Elmer Thomas <dx@sendgrid.com>
-  * @copyright 2016 SendGrid
+  * @copyright 2017 SendGrid
   * @license   https://opensource.org/licenses/MIT The MIT License
   * @version   GIT: <git_id>
   * @link      http://packagist.org/packages/sendgrid/sendgrid
@@ -14,12 +14,16 @@ namespace SendGrid;
 
 class ReplyTo implements \JsonSerializable
 {
-    private
-        $email;
+    private $email;
+    private $name;
 
-    public function __construct($email)
+    public function __construct($email, $name = null)
     {
-        $this->email = $email;
+        $this->setEmail($email);
+
+        if (!is_null($name)) {
+            $this->setName($name);
+        }
     }
 
     public function setEmail($email)
@@ -32,21 +36,62 @@ class ReplyTo implements \JsonSerializable
         return $this->email;
     }
 
+    public function setName($name)
+    {
+        /*
+            Issue #368
+            ==========
+
+            If the name is not wrapped in double quotes and contains a comma or
+            semicolon, the API fails to parse it correctly.
+
+            When wrapped in double quotes, commas, semicolons and unescaped single
+            quotes are supported.
+            Escaped double quotes are supported as well but will appear unescaped in
+            the mail (e.g. "O\'Keefe").
+
+            Double quotes will be shown in some email clients, so the name should
+            only be wrapped when necessary.
+        */
+
+        // Only wrapp in double quote if comma or semicolon are found
+        if (false !== strpos($name, ',') || false !== strpos($name, ';')) {
+            // Unescape quotes
+            $name = stripslashes(html_entity_decode($name, ENT_QUOTES));
+
+            // Escape only double quotes
+            $name = str_replace('"', '\\"', $name);
+
+            // Wrapp in double quotes
+            $name = '"' . $name . '"';
+        }
+
+        $this->name = (!empty($name)) ? $name : null;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
     public function jsonSerialize()
     {
         return array_filter(
             [
-                'email' => $this->getEmail()
-            ]
-        );
+                'email' => $this->getEmail(),
+                'name' => $this->getName(),
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
 class ClickTracking implements \JsonSerializable
 {
-    private
-        $enable,
-        $enable_text;
+    private $enable;
+    private $enable_text;
 
     public function setEnable($enable)
     {
@@ -72,18 +117,20 @@ class ClickTracking implements \JsonSerializable
     {
         return array_filter(
             [
-                'enable' => $this->getEnable(),
+                'enable'      => $this->getEnable(),
                 'enable_text' => $this->getEnableText()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
 class OpenTracking implements \JsonSerializable
 {
-    private
-        $enable,
-        $substitution_tag;
+    private $enable;
+    private $substitution_tag;
 
     public function setEnable($enable)
     {
@@ -109,20 +156,22 @@ class OpenTracking implements \JsonSerializable
     {
         return array_filter(
             [
-                'enable' => $this->getEnable(),
+                'enable'           => $this->getEnable(),
                 'substitution_tag' => $this->getSubstitutionTag()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
 class SubscriptionTracking implements \JsonSerializable
 {
-    private
-        $enable,
-        $text,
-        $html,
-        $substitution_tag;
+    private $enable;
+    private $text;
+    private $html;
+    private $substitution_tag;
 
     public function setEnable($enable)
     {
@@ -168,24 +217,26 @@ class SubscriptionTracking implements \JsonSerializable
     {
         return array_filter(
             [
-                'enable' => $this->getEnable(),
-                'text' => $this->getText(),
-                'html' => $this->getHtml(),
+                'enable'           => $this->getEnable(),
+                'text'             => $this->getText(),
+                'html'             => $this->getHtml(),
                 'substitution_tag' => $this->getSubstitutionTag()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
 class Ganalytics implements \JsonSerializable
 {
-    private
-        $enable,
-        $utm_source,
-        $utm_medium,
-        $utm_term,
-        $utm_content,
-        $utm_campaign;
+    private $enable;
+    private $utm_source;
+    private $utm_medium;
+    private $utm_term;
+    private $utm_content;
+    private $utm_campaign;
 
     public function setEnable($enable)
     {
@@ -251,24 +302,26 @@ class Ganalytics implements \JsonSerializable
     {
         return array_filter(
             [
-                'enable' => $this->getEnable(),
-                'utm_source' => $this->getCampaignSource(),
-                'utm_medium' => $this->getCampaignMedium(),
-                'utm_term' => $this->getCampaignTerm(),
-                'utm_content' => $this->getCampaignContent(),
+                'enable'       => $this->getEnable(),
+                'utm_source'   => $this->getCampaignSource(),
+                'utm_medium'   => $this->getCampaignMedium(),
+                'utm_term'     => $this->getCampaignTerm(),
+                'utm_content'  => $this->getCampaignContent(),
                 'utm_campaign' => $this->getCampaignName()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
 class TrackingSettings implements \JsonSerializable
 {
-    private
-        $click_tracking,
-        $open_tracking,
-        $subscription_tracking,
-        $ganalytics;
+    private $click_tracking;
+    private $open_tracking;
+    private $subscription_tracking;
+    private $ganalytics;
 
     public function setClickTracking($click_tracking)
     {
@@ -314,20 +367,22 @@ class TrackingSettings implements \JsonSerializable
     {
         return array_filter(
             [
-                'click_tracking' => $this->getClickTracking(),
-                'open_tracking' => $this->getOpenTracking(),
+                'click_tracking'        => $this->getClickTracking(),
+                'open_tracking'         => $this->getOpenTracking(),
                 'subscription_tracking' => $this->getSubscriptionTracking(),
-                'ganalytics' => $this->getGanalytics()
-            ]
-        );
+                'ganalytics'            => $this->getGanalytics()
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
 class BccSettings implements \JsonSerializable
 {
-    private
-        $enable,
-        $email;
+    private $enable;
+    private $email;
 
     public function setEnable($enable)
     {
@@ -354,16 +409,18 @@ class BccSettings implements \JsonSerializable
         return array_filter(
             [
                 'enable' => $this->getEnable(),
-                'email' => $this->getEmail()
-            ]
-        );
+                'email'  => $this->getEmail()
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
 class BypassListManagement implements \JsonSerializable
 {
-    private
-        $enable;
+    private $enable;
 
     public function setEnable($enable)
     {
@@ -380,17 +437,19 @@ class BypassListManagement implements \JsonSerializable
         return array_filter(
             [
                 'enable' => $this->getEnable()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
 class Footer implements \JsonSerializable
 {
-    private
-        $enable,
-        $text,
-        $html;
+    private $enable;
+    private $text;
+    private $html;
 
     public function setEnable($enable)
     {
@@ -427,17 +486,19 @@ class Footer implements \JsonSerializable
         return array_filter(
             [
                 'enable' => $this->getEnable(),
-                'text' => $this->getText(),
-                'html' => $this->getHtml()
-            ]
-        );
+                'text'   => $this->getText(),
+                'html'   => $this->getHtml()
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
 class SandBoxMode implements \JsonSerializable
 {
-    private
-        $enable;
+    private $enable;
 
     public function setEnable($enable)
     {
@@ -453,17 +514,19 @@ class SandBoxMode implements \JsonSerializable
         return array_filter(
             [
                 'enable' => $this->getEnable()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
 class SpamCheck implements \JsonSerializable
 {
-    private
-        $enable,
-        $threshold,
-        $post_to_url;
+    private $enable;
+    private $threshold;
+    private $post_to_url;
 
     public function setEnable($enable)
     {
@@ -499,22 +562,24 @@ class SpamCheck implements \JsonSerializable
     {
         return array_filter(
             [
-                'enable' => $this->getEnable(),
-                'threshold' => $this->getThreshold(),
+                'enable'      => $this->getEnable(),
+                'threshold'   => $this->getThreshold(),
                 'post_to_url' => $this->getPostToUrl()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
 class MailSettings implements \JsonSerializable
 {
-    private
-        $bcc,
-        $bypass_list_management,
-        $footer,
-        $sandbox_mode,
-        $spam_check;
+    private $bcc;
+    private $bypass_list_management;
+    private $footer;
+    private $sandbox_mode;
+    private $spam_check;
 
     public function setBccSettings($bcc)
     {
@@ -570,21 +635,23 @@ class MailSettings implements \JsonSerializable
     {
         return array_filter(
             [
-                'bcc' => $this->getBccSettings(),
+                'bcc'                    => $this->getBccSettings(),
                 'bypass_list_management' => $this->getBypassListManagement(),
-                'footer' => $this->getFooter(),
-                'sandbox_mode' => $this->getSandboxMode(),
-                'spam_check' => $this->getSpamCheck()
-            ]
-        );
+                'footer'                 => $this->getFooter(),
+                'sandbox_mode'           => $this->getSandboxMode(),
+                'spam_check'             => $this->getSpamCheck()
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
 class ASM implements \JsonSerializable
 {
-    private
-        $group_id,
-        $groups_to_display;
+    private $group_id;
+    private $groups_to_display;
 
     public function setGroupId($group_id)
     {
@@ -610,21 +677,23 @@ class ASM implements \JsonSerializable
     {
         return array_filter(
             [
-                'group_id' => $this->getGroupId(),
+                'group_id'          => $this->getGroupId(),
                 'groups_to_display' => $this->getGroupsToDisplay()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
 class Attachment implements \JsonSerializable
 {
-    private
-        $content,
-        $type,
-        $filename,
-        $disposition,
-        $content_id;
+    private $content;
+    private $type;
+    private $filename;
+    private $disposition;
+    private $content_id;
 
     public function setContent($content)
     {
@@ -680,26 +749,40 @@ class Attachment implements \JsonSerializable
     {
         return array_filter(
             [
-                'content' => $this->getContent(),
-                'type' => $this->getType(),
-                'filename' => $this->getFilename(),
+                'content'     => $this->getContent(),
+                'type'        => $this->getType(),
+                'filename'    => $this->getFilename(),
                 'disposition' => $this->getDisposition(),
-                'content_id' => $this->getContentID()
-            ]
-        );
+                'content_id'  => $this->getContentID()
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
+    }
+
+    public function setContentPath($string)
+    {
+        $rawContent = file_get_contents($string);
+
+        if ($rawContent === false) {
+            throw new \RuntimeException("Could not open file $string");
+        }
+
+        $this->content  = base64_encode($rawContent);
+        $this->filename = $this->filename ?: basename($string);
     }
 }
 
 class Content implements \JsonSerializable
 {
-    private
-        $type,
-        $value;
+    private $type;
+    private $value;
 
     public function __construct($type, $value)
     {
         $this->type = $type;
-        $this->value = $value;
+        $this->value = mb_convert_encoding($value, 'UTF-8', 'UTF-8');
     }
 
     public function setType($type)
@@ -714,7 +797,7 @@ class Content implements \JsonSerializable
 
     public function setValue($value)
     {
-        $this->value = $value;
+        $this->value = mb_convert_encoding($value, 'UTF-8', 'UTF-8');
     }
 
     public function getValue()
@@ -726,24 +809,26 @@ class Content implements \JsonSerializable
     {
         return array_filter(
             [
-                'type' => $this->getType(),
+                'type'  => $this->getType(),
                 'value' => $this->getValue()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
 class Personalization implements \JsonSerializable
 {
-    private
-        $tos,
-        $ccs,
-        $bccs,
-        $subject,
-        $headers,
-        $substitutions,
-        $custom_args,
-        $send_at;
+    private $tos;
+    private $ccs;
+    private $bccs;
+    private $subject;
+    private $headers;
+    private $substitutions;
+    private $custom_args;
+    private $send_at;
 
     public function addTo($email)
     {
@@ -777,7 +862,7 @@ class Personalization implements \JsonSerializable
 
     public function setSubject($subject)
     {
-        $this->subject = $subject;
+        $this->subject = mb_convert_encoding($subject, 'UTF-8', 'UTF-8');
     }
 
     public function getSubject()
@@ -797,7 +882,7 @@ class Personalization implements \JsonSerializable
 
     public function addSubstitution($key, $value)
     {
-        $this->substitutions[$key] = $value;
+        $this->substitutions[$key] = (string)$value;
     }
 
     public function getSubstitutions()
@@ -807,7 +892,7 @@ class Personalization implements \JsonSerializable
 
     public function addCustomArg($key, $value)
     {
-        $this->custom_args[$key] = $value;
+        $this->custom_args[$key] = (string)$value;
     }
 
     public function getCustomArgs()
@@ -829,34 +914,64 @@ class Personalization implements \JsonSerializable
     {
         return array_filter(
             [
-                'to' => $this->getTos(),
-                'cc' => $this->getCcs(),
-                'bcc' => $this->getBccs(),
-                'subject' => $this->subject,
-                'headers' => $this->getHeaders(),
+                'to'            => $this->getTos(),
+                'cc'            => $this->getCcs(),
+                'bcc'           => $this->getBccs(),
+                'subject'       => $this->subject,
+                'headers'       => $this->getHeaders(),
                 'substitutions' => $this->getSubstitutions(),
-                'custom_args' => $this->getCustomArgs(),
-                'send_at' => $this->getSendAt()
-            ]
-        );
+                'custom_args'   => $this->getCustomArgs(),
+                'send_at'       => $this->getSendAt()
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
 class Email implements \JsonSerializable
 {
-    private
-        $name,
-        $email;
+    private $name;
+    private $email;
 
     public function __construct($name, $email)
     {
-        $this->name = $name;
-        $this->email = $email;
+        $this->setName($name);
+        $this->setEmail($email);
     }
 
     public function setName($name)
     {
-        $this->name = $name;
+        /*
+            Issue #368
+            ==========
+
+            If the name is not wrapped in double quotes and contains a comma or
+            semicolon, the API fails to parse it correctly.
+
+            When wrapped in double quotes, commas, semicolons and unescaped single
+            quotes are supported.
+            Escaped double quotes are supported as well but will appear unescaped in
+            the mail (e.g. "O\'Keefe").
+
+            Double quotes will be shown in some email clients, so the name should
+            only be wrapped when necessary.
+        */
+
+        // Only wrapp in double quote if comma or semicolon are found
+        if (false !== strpos($name, ',') || false !== strpos($name, ';')) {
+            // Unescape quotes
+            $name = stripslashes(html_entity_decode($name, ENT_QUOTES));
+
+            // Escape only double quotes
+            $name = str_replace('"', '\\"', $name);
+
+            // Wrapp in double quotes
+            $name = '"' . $name . '"';
+        }
+
+        $this->name = (!empty($name)) ? $name : null;
     }
 
     public function getName()
@@ -878,10 +993,13 @@ class Email implements \JsonSerializable
     {
         return array_filter(
             [
-                'name' => $this->getName(),
+                'name'  => $this->getName(),
                 'email' => $this->getEmail()
-            ]
-        );
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }
 
@@ -892,40 +1010,34 @@ class Mail implements \JsonSerializable
 {
     const VERSION = '1.0.0';
 
-    protected
-        $namespace = 'SendGrid';
+    protected $namespace = 'SendGrid';
 
-    public
-        $from,
-        $personalization,
-        $subject,
-        $contents,
-        $attachments,
-        $template_id,
-        $sections,
-        $headers,
-        $categories,
-        $custom_args,
-        $send_at,
-        $batch_id,
-        $asm,
-        $ip_pool_name,
-        $mail_settings,
-        $tracking_settings,
-        $reply_to;
+    public $from;
+    public $personalization;
+    public $subject;
+    public $contents;
+    public $attachments;
+    public $template_id;
+    public $sections;
+    public $headers;
+    public $categories;
+    public $custom_args;
+    public $send_at;
+    public $batch_id;
+    public $asm;
+    public $ip_pool_name;
+    public $mail_settings;
+    public $tracking_settings;
+    public $reply_to;
 
-    public function __construct($from = null, $subject = null, $to = null, $content = null)
+    public function __construct($from, $subject, $to, $content)
     {
-        if (!empty($from) &&  !empty($subject) && !empty($to) && !empty($content))
-        {
-            $this->setFrom($from);
-            $personalization = new Personalization();
-            $personalization->addTo($to);
-            $this->addPersonalization($personalization);
-            $this->setSubject($subject);
-            $this->addContent($content);
-        }
-
+        $this->setFrom($from);
+	    $this->setSubject($subject);
+	    $personalization = new Personalization();
+        $personalization->addTo($to);
+        $this->addPersonalization($personalization);
+        $this->addContent($content);
     }
 
     public function setFrom($email)
@@ -1020,7 +1132,7 @@ class Mail implements \JsonSerializable
 
     public function addCustomArg($key, $value)
     {
-        $this->custom_args[$key] = $value;
+        $this->custom_args[$key] = (string)$value;
     }
 
     public function getCustomArgs()
@@ -1028,8 +1140,8 @@ class Mail implements \JsonSerializable
         return $this->custom_args;
     }
 
-     public function setSendAt($send_at)
-     {
+    public function setSendAt($send_at)
+    {
         $this->send_at = $send_at;
     }
 
@@ -1102,24 +1214,27 @@ class Mail implements \JsonSerializable
     {
         return array_filter(
             [
-                'from' => $this->getFrom(),
-                'personalizations' => $this->getPersonalizations(),
-                'subject' => $this->getSubject(),
-                'content' => $this->getContents(),
-                'attachments' => $this->getAttachments(),
-                'template_id' => $this->getTemplateId(),
-                'sections' => $this->getSections(),
-                'headers' => $this->getHeaders(),
-                'categories' => $this->getCategories(),
-                'custom_args' => $this->getCustomArgs(),
-                'send_at' => $this->getSendAt(),
-                'batch_id' => $this->getBatchId(),
-                'asm' => $this->getASM(),
-                'ip_pool_name' => $this->getIpPoolName(),
-                'mail_settings' => $this->getMailSettings(),
+                'from'              => $this->getFrom(),
+                'personalizations'  => $this->getPersonalizations(),
+                'subject'           => $this->getSubject(),
+                'content'           => $this->getContents(),
+                'attachments'       => $this->getAttachments(),
+                'template_id'       => $this->getTemplateId(),
+                'sections'          => $this->getSections(),
+                'headers'           => $this->getHeaders(),
+                'categories'        => $this->getCategories(),
+                'custom_args'       => $this->getCustomArgs(),
+                'send_at'           => $this->getSendAt(),
+                'batch_id'          => $this->getBatchId(),
+                'asm'               => $this->getASM(),
+                'ip_pool_name'      => $this->getIpPoolName(),
+                'mail_settings'     => $this->getMailSettings(),
                 'tracking_settings' => $this->getTrackingSettings(),
-                'reply_to' => $this->getReplyTo()
-            ]
-        );
+                'reply_to'          => $this->getReplyTo()
+            ],
+            function ($value) {
+                return $value !== null;
+            }
+        ) ?: null;
     }
 }

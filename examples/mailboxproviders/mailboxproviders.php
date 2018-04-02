@@ -14,5 +14,4 @@ $query_params = json_decode('{"end_date": "2016-04-01", "mailbox_providers": "te
 $response = $sg->client->mailbox_providers()->stats()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
-echo $response->headers();
-
+print_r($response->headers());

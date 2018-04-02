@@ -12,6 +12,9 @@ If you can't find a solution below, please open an [issue](https://github.com/se
 * [Versions](#versions)
 * [Environment Variables and Your SendGrid API Key](#environment)
 * [Using the Package Manager](#package-manager)
+* [Fixing Error 415](#error-415)
+* [Viewing the Request Body](#request-body)
+* [Google App Engine installation](#GAE-instructions)
 
 <a name="migrating"></a>
 ## Migrating from v2 to v3
@@ -56,7 +59,7 @@ try {
 <a name="versions"></a>
 ## Versions
 
-We follow the MAJOR.MINOR.PATCH versioning scheme as described by [SemVer.org](http://semver.org). Therefore, we recommend that you always pin (or vendor) the particular version you are working with to your code and never auto-update to the latest version. Especially when there is a MAJOR point release, since that is guarenteed to be a breaking change. Changes are documented in the [CHANGELOG](https://github.com/sendgrid/sendgrid-php/blob/master/CHANGELOG.md) and [releases](https://github.com/sendgrid/sendgrid-php/releases) section.
+We follow the MAJOR.MINOR.PATCH versioning scheme as described by [SemVer.org](http://semver.org). Therefore, we recommend that you always pin (or vendor) the particular version you are working with to your code and never auto-update to the latest version. Especially when there is a MAJOR point release, since that is guaranteed to be a breaking change. Changes are documented in the [CHANGELOG](https://github.com/sendgrid/sendgrid-php/blob/master/CHANGELOG.md) and [releases](https://github.com/sendgrid/sendgrid-php/releases) section.
 
 <a name="environment"></a>
 ## Environment Variables and Your SendGrid API Key
@@ -87,3 +90,30 @@ In most cases we recommend you download the latest version of the library, but i
   }
 }
 ```
+
+<a name="error-415"></a>
+## Fixing Error 415
+
+If you're getting the following error while using this library:
+
+`Content-Type should be application/json.`
+
+It is most likely due to a linebreak in your API key. Passing your key through `trim` should fix this:
+
+`$apiKey = trim($apiKey)`
+
+<a name="request-body"></a>
+## Viewing the Request Body
+
+When debugging or testing, it may be useful to examine the raw request body to compare against the [documented format](https://sendgrid.com/docs/API_Reference/api_v3.html).
+
+You can do this right before you call `$response = $sg->client->mail()->send()->post($mail);` like so:
+
+```php
+echo json_encode($mail, JSON_PRETTY_PRINT);
+```
+
+<a name="GAE-instructions"></a>
+## Google App Engine installation
+
+Please refer to [`USE_CASES.md`](https://github.com/sendgrid/sendgrid-php/blob/master/USE_CASES.md#GAE-instructions) for additional instructions.
