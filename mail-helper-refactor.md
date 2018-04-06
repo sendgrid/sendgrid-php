@@ -120,7 +120,7 @@ $email = new Mail($from,
                   $subject, // or $subjects
                   $plainTextContent,
                   $htmlContent,
-		  $globalSubstitutions);
+		          $globalSubstitutions);
 
 $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 try {

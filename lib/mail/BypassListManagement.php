@@ -1,6 +1,6 @@
-<?php namespace SendGrid\Helpers\Mail\Model;
+<?php namespace SendGrid\Mail;
 
-class SandBoxMode implements \JsonSerializable
+class BypassListManagement implements \JsonSerializable
 {
     private $enable;
 
@@ -13,6 +13,7 @@ class SandBoxMode implements \JsonSerializable
     {
         return $this->enable;
     }
+
     public function jsonSerialize()
     {
         return array_filter(

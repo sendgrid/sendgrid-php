@@ -1,8 +1,9 @@
-<?php namespace SendGrid\Helpers\Mail\Model;
+<?php namespace SendGrid\Mail;
 
-class BypassListManagement implements \JsonSerializable
+class BccSettings implements \JsonSerializable
 {
     private $enable;
+    private $email;
 
     public function setEnable($enable)
     {
@@ -14,11 +15,22 @@ class BypassListManagement implements \JsonSerializable
         return $this->enable;
     }
 
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
     public function jsonSerialize()
     {
         return array_filter(
             [
-                'enable' => $this->getEnable()
+                'enable' => $this->getEnable(),
+                'email'  => $this->getEmail()
             ],
             function ($value) {
                 return $value !== null;

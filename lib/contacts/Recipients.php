@@ -1,4 +1,4 @@
-<?php
+<?php namespace SendGrid\Contacts;
 /**
  * This helper builds a html form and provides a submission endpoint for the form that makes a /contactdb/recipients API call.
  *
@@ -10,7 +10,6 @@
  * @version   GIT: <git_id>
  * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
-namespace SendGrid;
 
 class RecipientForm
 {

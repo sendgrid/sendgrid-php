@@ -1,4 +1,4 @@
-<?php namespace SendGrid\Helpers\Mail\Model;
+<?php namespace SendGrid\Mail;
 
 class Content implements \JsonSerializable
 {

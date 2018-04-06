@@ -3,7 +3,7 @@
   * This library allows you to quickly and easily send emails through SendGrid using PHP.
   *
   * @author    Elmer Thomas <dx@sendgrid.com>
-  * @copyright 2017 SendGrid
+  * @copyright 2018 SendGrid
   * @license   https://opensource.org/licenses/MIT The MIT License
   * @version   GIT: <git_id>
   * @link      http://packagist.org/packages/sendgrid/sendgrid
@@ -53,7 +53,7 @@ class SendGrid
         $this->client = new \SendGrid\Client($host, $headers, '/v3', null, $curlOptions);
     }
 
-    public function send(\SendGrid\Mail $email)
+    public function send(\SendGrid\Mail\Mail $email)
     {
         return $this->client->mail()->send()->post($email);
     }

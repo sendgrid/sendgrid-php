@@ -1,9 +1,10 @@
-<?php namespace SendGrid\Helpers\Mail\Model;
+<?php namespace SendGrid\Mail;
 
-class BccSettings implements \JsonSerializable
+class Footer implements \JsonSerializable
 {
     private $enable;
-    private $email;
+    private $text;
+    private $html;
 
     public function setEnable($enable)
     {
@@ -15,14 +16,24 @@ class BccSettings implements \JsonSerializable
         return $this->enable;
     }
 
-    public function setEmail($email)
+    public function setText($text)
     {
-        $this->email = $email;
+        $this->text = $text;
     }
 
-    public function getEmail()
+    public function getText()
     {
-        return $this->email;
+        return $this->text;
+    }
+
+    public function setHtml($html)
+    {
+        $this->html = $html;
+    }
+
+    public function getHtml()
+    {
+        return $this->html;
     }
 
     public function jsonSerialize()
@@ -30,7 +41,8 @@ class BccSettings implements \JsonSerializable
         return array_filter(
             [
                 'enable' => $this->getEnable(),
-                'email'  => $this->getEmail()
+                'text'   => $this->getText(),
+                'html'   => $this->getHtml()
             ],
             function ($value) {
                 return $value !== null;

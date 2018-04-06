@@ -1,6 +1,4 @@
-<?php
-
-namespace SendGrid;
+<?php namespace SendGrid\Stats;
 
 class Stats
 {

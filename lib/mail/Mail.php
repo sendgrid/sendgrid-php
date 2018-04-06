@@ -1,4 +1,4 @@
-<?php namespace SendGrid\Helpers\Mail\Model;
+<?php namespace SendGrid\Mail;
 /**
   * This helper builds the request body for a /mail/send API call.
   *
@@ -38,14 +38,49 @@ class Mail implements \JsonSerializable
 
     public $personalization;
 
-    public function __construct($from, $subject, $to, $content)
-    {
+    public function __construct(
+        $from,
+        $to,
+        $subject,
+        $plainTextContent,
+        $htmlContent,
+        array $globalSubstitutions = null
+    ) {
         $this->setFrom($from);
-	    $this->setSubject($subject);
-	    $personalization = new Personalization();
-        $personalization->addTo($to);
-        $this->addPersonalization($personalization);
-        $this->addContent($content);
+        if (!is_array($subject)) {
+            $this->setSubject($subject);
+            $subjectCount = null;
+        } else {
+            $subjectCount = 1;
+        }
+        if (!is_array($to)) {
+            $to = [ $to ];
+        }
+        foreach ($to as $email) {
+            $personalization = new Personalization();
+            $personalization->addTo($email);
+            if ($subs = $email->getSubstitions()) {
+                foreach ($subs as $key => $value) {
+                    $personalization->addSubstitution($key, $value);
+                }
+            }
+            if (is_array($subject)) {
+                $personalization->setSubject($subject[$subjectCount - 1]);
+                $subjectCount++;
+            } else {
+                if ($subject = $email->getSubject()) {
+                    $personalization->setSubject($subject);
+                }
+            }
+            if (is_array($globalSubstitutions)) {
+                foreach ($globalSubstitutions as $key => $value) {
+                    $personalization->addSubstitution($key, $value);
+                }
+            }
+            $this->addPersonalization($personalization);
+        }
+        $this->addContent($plainTextContent);
+        $this->addContent($htmlContent);
     }
 
     public function setFrom($email)
