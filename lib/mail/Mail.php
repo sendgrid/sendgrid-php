@@ -39,13 +39,22 @@ class Mail implements \JsonSerializable
     public $personalization;
 
     public function __construct(
-        $from,
-        $to,
-        $subject,
-        $plainTextContent,
-        $htmlContent,
+        $from = null,
+        $to = null,
+        $subject = null,
+        $plainTextContent = null,
+        $htmlContent = null,
         array $globalSubstitutions = null
     ) {
+        if (!$from
+            && !$to
+            && !$subject
+            && !$plainTextContent
+            && !$htmlContent
+            && !$globalSubstitutions
+        ) {
+            return;
+        }
         $this->setFrom($from);
         if (!is_array($subject)) {
             $this->setSubject($subject);
