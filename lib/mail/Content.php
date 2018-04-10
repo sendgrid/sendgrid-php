@@ -1,10 +1,13 @@
 <?php namespace SendGrid\Mail;
 
+abstract class MimeType
+{
+    const Text = 'text/plain';
+    const Html = 'text/html';
+}
+
 class Content implements \JsonSerializable
 {
-    const TYPE_TEXT = 'text/plain';
-    const TYPE_HTML = 'text/html';
-
     public $type;
     public $value;
 

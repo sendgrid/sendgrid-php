@@ -4,6 +4,6 @@ class PlainTextContent extends Content
 {
     public function __construct($value)
     {
-        parent::__construct(self::TYPE_TEXT, $value);
+        parent::__construct(MimeType::Text, $value);
     }
 }

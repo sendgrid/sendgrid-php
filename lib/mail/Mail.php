@@ -36,7 +36,7 @@ class Mail implements \JsonSerializable
     private $tracking_settings;
     private $reply_to;
 
-    public $personalization;
+    public $personalization = null;
 
     public function __construct(
         $from = null,
@@ -92,14 +92,62 @@ class Mail implements \JsonSerializable
         $this->addContent($htmlContent);
     }
 
-    public function setFrom($email)
+    public function setFrom($email, $name=null)
     {
-        $this->from = $email;
+        if ($name != null ) {
+            $this->from = new From($email, $name);
+        } else {
+            $this->from = $email;
+        }
     }
 
     public function getFrom()
     {
         return $this->from;
+    }
+
+    public function addTo(
+        $to,
+        $name = null,
+        $personalizationIndex = null,
+        $personalization = null
+    ) {
+        if ($name != null) {
+            $to = new To($to, $name);
+        }
+        if ($personalization != null) {
+            $this->addPersonalization($personalization);
+            return;
+        } else {
+            if ($this->personalization[0] != null) {
+                $this->personalization[0]->addTo($to);
+            } else {
+                $personalization = new Personalization();
+                $personalization->addTo($to);
+                if (($personalizationIndex != 0)
+                && ($this->getPersonalizationCount() <= personalizationIndex)
+                ) {
+                    $this->personalization[personalizationIndex] = $personalization;
+                } else {
+                    $this->addPersonalization($personalization);
+                }
+            }
+            return;
+        }
+    }
+
+    public function addTos(
+        $toEmails,
+        $personalizationIndex = null,
+        $personalization = null) {
+        foreach ($toEmails as $email) {
+            $this->addTo(
+                $email,
+                null,
+                $personalizationIndex,
+                $personalization
+            );
+        }
     }
 
     public function addPersonalization($personalization)
@@ -114,7 +162,11 @@ class Mail implements \JsonSerializable
 
     public function setSubject($subject)
     {
-        $this->subject = $subject;
+        if ($subject instanceof Subject) {
+            $this->subject = $subject;
+        } else {
+            $this->subject = new Subject($subject);
+        }
     }
 
     public function getSubject()
@@ -122,13 +174,17 @@ class Mail implements \JsonSerializable
         return $this->subject;
     }
 
-    public function addContent($content)
+    public function addContent($content, $value = null)
     {
+        if ($value != null) {
+            $content = new Content($content, $value);
+        }
         $this->contents[] = $content;
     }
 
     public function getContents()
     {
+        // TODO: Ensure text/plain is always first
         return $this->contents;
     }
 
