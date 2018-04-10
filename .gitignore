@@ -12,3 +12,4 @@ test/prism_linux_amd64
 test/prism/*
 !test/prim
 *.code-workspace
+.vscode
