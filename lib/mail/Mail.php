@@ -139,6 +139,34 @@ class Mail implements \JsonSerializable
         }
     }
 
+    public function addRecipientEmails(
+        $emailType,
+        $emails,
+        $personalizationIndex = null,
+        $personalization = null
+    ) {
+        $emailFunctionCall = "add".$emailType;
+        if ($emails[0] instanceof EmailAddress) {
+            foreach ($emails as $email) {
+                $this->$emailFunctionCall(
+                    $email,
+                    $name = null,
+                    $personalizationIndex,
+                    $personalization
+                );
+            }
+        } else {
+            foreach ($emails as $email => $name) {
+                $this->$emailFunctionCall(
+                    $email,
+                    $name,
+                    $personalizationIndex,
+                    $personalization
+                );
+            }
+        }
+    }
+
     public function addTo(
         $to,
         $name = null,
@@ -157,15 +185,14 @@ class Mail implements \JsonSerializable
     public function addTos(
         $toEmails,
         $personalizationIndex = null,
-        $personalization = null) {
-        foreach ($toEmails as $email) {
-            $this->addTo(
-                $email,
-                null,
-                $personalizationIndex,
-                $personalization
-            );
-        }
+        $personalization = null
+    ) {
+        $this->addRecipientEmails(
+            "To",
+            $toEmails,
+            $personalizationIndex,
+            $personalization
+        );
     }
 
     public function addCc(
@@ -186,15 +213,14 @@ class Mail implements \JsonSerializable
     public function addCcs(
         $ccEmails,
         $personalizationIndex = null,
-        $personalization = null) {
-        foreach ($ccEmails as $email) {
-            $this->addCc(
-                $email,
-                null,
-                $personalizationIndex,
-                $personalization
-            );
-        }
+        $personalization = null
+    ) {
+        $this->addRecipientEmails(
+            "Cc",
+            $ccEmails,
+            $personalizationIndex,
+            $personalization
+        );
     }
 
     public function addBcc(
@@ -216,14 +242,12 @@ class Mail implements \JsonSerializable
         $bccEmails,
         $personalizationIndex = null,
         $personalization = null) {
-        foreach ($bccEmails as $email) {
-            $this->addBcc(
-                $email,
-                null,
+            $this->addRecipientEmails(
+                "Bcc",
+                $bccEmails,
                 $personalizationIndex,
                 $personalization
             );
-        }
     }
 
     public function addPersonalization($personalization)
