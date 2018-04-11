@@ -16,6 +16,7 @@ require_once __DIR__ . '/mail/EmailAddress.php';
 require_once __DIR__ . '/mail/Footer.php';
 require_once __DIR__ . '/mail/From.php';
 require_once __DIR__ . '/mail/Ganalytics.php';
+require_once __DIR__ . '/mail/Header.php';
 require_once __DIR__ . '/mail/HtmlContent.php';
 require_once __DIR__ . '/mail/Mail.php';
 require_once __DIR__ . '/mail/MailSettings.php';

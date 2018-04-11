@@ -318,9 +318,27 @@ class Mail implements \JsonSerializable
         return $this->sections;
     }
 
-    public function addHeader($key, $value)
+    public function addHeader($key, $value=null)
     {
+        if ($key instanceof Header) {
+            $header = $key;
+            $this->headers[$header->getKey()] = $header->getValue();
+            return;
+        }
         $this->headers[$key] = $value;
+    }
+
+    public function addHeaders($headers)
+    {
+        if ($headers[0] instanceof Header) {
+            foreach ($headers as $header) {
+                $this->addHeader($header);
+            }
+        } else {
+            foreach ($headers as $key => $value) {
+                $this->addHeader($key, $value);
+            }
+        }
     }
 
     public function getHeaders()

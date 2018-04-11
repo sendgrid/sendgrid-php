@@ -139,6 +139,7 @@ require 'vendor/autoload.php'; // If you're using Composer (recommended)
 
 use \SendGrid\Mail\Cc as Cc;
 use \SendGrid\Mail\Bcc as Bcc;
+use \SendGrid\Mail\Header as Header;
 
 $from = new From("dx@example.com", "DX Team");
 $to = new To("elmer.thomas@sendgrid.com", "Elmer Thomas");
@@ -180,29 +181,32 @@ $ccEmails = [
 $email->addCcs($ccEmails);
 $email->addBcc(new Bcc("elmer.thomas+8@sendgrid.com", "Elmer Thomas 8"));
 $email->addBcc("elmer.thomas+9@sendgrid.com", "Elmer Thomas 9");
-// $bccEmails = [ 
-//     new Bcc("elmer.thomas+10@sendgrid.com", "Elmer Thomas 10"),
-//     new Bcc("elmer.thomas+11@sendgrid.com", "Elmer Thomas 11")
-// ];
 $bccEmails = [ 
-    "elmer.thomas+10@sendgrid.com" => "Elmer Thomas 10",
-    "elmer.thomas+11@sendgrid.com" => "Elmer Thomas 11"
+    new Bcc("elmer.thomas+10@sendgrid.com", "Elmer Thomas 10"),
+    new Bcc("elmer.thomas+11@sendgrid.com", "Elmer Thomas 11")
 ];
-$email->addBccs($bccEmails);
-
-// $email->addHeader(new Header("X-Test1", "Test1"));
-// $email->addHeader(new Header("X-Test2", "Test2"));
-// //$email->addHeader("X-Test1", "Test1");
-// //$email->addHeader("X-Test2", "Test2");
-// $headers = [
-//     new Header("X-Test3", "Test3"),
-//     new Header("X-Test4", "Test4"),
+// $bccEmails = [ 
+//     "elmer.thomas+10@sendgrid.com" => "Elmer Thomas 10",
+//     "elmer.thomas+11@sendgrid.com" => "Elmer Thomas 11"
 // ];
-// $email->addHeaders($headers);
-// $email->addContent($plainTextContent);
-// $email->addContent($htmlContent);
-// $email->addContent(MimeType::Text, "and easy to do anywhere, even with PHP");
-// $email->addContent(MimeType::Html, "<strong>and easy to do anywhere, even with PHP</strong>");
+$email->addBccs($bccEmails);
+$email->addHeader(new Header("X-Test1", "Test1"));
+$email->addHeader(new Header("X-Test2", "Test2"));
+// $email->addHeader("X-Test1", "Test1");
+// $email->addHeader("X-Test2", "Test2");
+$headers = [
+    new Header("X-Test3", "Test3"),
+    new Header("X-Test4", "Test4"),
+];
+// $headers = [
+//     "X-Test3" => "Test3",
+//     "X-Test4" => "Test4",
+// ];
+$email->addHeaders($headers);
+$email->addContent($plainTextContent);
+$email->addContent($htmlContent);
+$email->addContent(MimeType::Text, "and easy to do anywhere, even with PHP");
+$email->addContent(MimeType::Html, "<strong>and easy to do anywhere, even with PHP</strong>");
 
 $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 echo json_encode($email, JSON_PRETTY_PRINT);
