@@ -137,6 +137,9 @@ require 'vendor/autoload.php'; // If you're using Composer (recommended)
 
 // Kitchen Sink - an example with all settings used
 
+use \SendGrid\Mail\Cc as Cc;
+use \SendGrid\Mail\Bcc as Bcc;
+
 $from = new From("dx@example.com", "DX Team");
 $to = new To("elmer.thomas@sendgrid.com", "Elmer Thomas");
 $subject = new Subject("Sending with SendGrid is Fun");
@@ -154,16 +157,30 @@ $email->setFrom($from);
 $email->setSubject($subject);
 // $email->setSubject("Sending with SendGrid is Fun 2");
 $email->addTo($to);
-$email->addTo('elmer.thomas+1@sendgrid.com', "Elmer Thomas 1");
+$email->addTo("elmer.thomas+1@sendgrid.com", "Elmer Thomas 1");
 $toEmails = [ 
     new To("elmer.thomas+2@sendgrid.com", "Elmer Thomas 2"),
     new To("elmer.thomas+3@sendgrid.com", "Elmer Thomas 3")
 ];
 $email->addTos($toEmails);
+$email->addCc(new Cc("elmer.thomas+4@sendgrid.com", "Elmer Thomas 4"));
+$email->addCc("elmer.thomas+5@sendgrid.com", "Elmer Thomas 5");
+$ccEmails = [ 
+    new Cc("elmer.thomas+6@sendgrid.com", "Elmer Thomas 6"),
+    new Cc("elmer.thomas+7@sendgrid.com", "Elmer Thomas 7")
+];
+$email->addCcs($ccEmails);
+$email->addBcc(new Bcc("elmer.thomas+8@sendgrid.com", "Elmer Thomas 8"));
+$email->addBcc("elmer.thomas+9@sendgrid.com", "Elmer Thomas 9");
+$bccEmails = [ 
+    new Bcc("elmer.thomas+10@sendgrid.com", "Elmer Thomas 10"),
+    new Bcc("elmer.thomas+11@sendgrid.com", "Elmer Thomas 11")
+];
+$email->addBccs($bccEmails);
 $email->addContent($plainTextContent);
 $email->addContent($htmlContent);
-$email->addContent(MimeType::Text, "and easy to do anywhere, even with PHP");
-$email->addContent(MimeType::Html, "<strong>and easy to do anywhere, even with PHP</strong>");
+// $email->addContent(MimeType::Text, "and easy to do anywhere, even with PHP");
+// $email->addContent(MimeType::Html, "<strong>and easy to do anywhere, even with PHP</strong>");
 
 $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 echo json_encode($email, JSON_PRETTY_PRINT);

@@ -106,26 +106,29 @@ class Mail implements \JsonSerializable
         return $this->from;
     }
 
-    public function addTo(
-        $to,
+    public function addRecipientEmail(
+        $emailType,
+        $email,
         $name = null,
         $personalizationIndex = null,
         $personalization = null
     ) {
+        $personalizationFunctionCall = "add".$emailType;
+        $emailType = "\SendGrid\Mail\\".$emailType;
         if ($name != null) {
-            $to = new To($to, $name);
+            $email = new $emailType($email, $name);
         }
         if ($personalization != null) {
             $this->addPersonalization($personalization);
             return;
         } else {
             if ($this->personalization[0] != null) {
-                $this->personalization[0]->addTo($to);
+                $this->personalization[0]->$personalizationFunctionCall($email);
             } else {
                 $personalization = new Personalization();
-                $personalization->addTo($to);
+                $personalization->$personalizationFunctionCall($email);
                 if (($personalizationIndex != 0)
-                && ($this->getPersonalizationCount() <= personalizationIndex)
+                    && ($this->getPersonalizationCount() <= personalizationIndex)
                 ) {
                     $this->personalization[personalizationIndex] = $personalization;
                 } else {
@@ -136,12 +139,85 @@ class Mail implements \JsonSerializable
         }
     }
 
+    public function addTo(
+        $to,
+        $name = null,
+        $personalizationIndex = null,
+        $personalization = null
+    ) {
+        $this->addRecipientEmail(
+            "To",
+            $to,
+            $name,
+            $personalizationIndex,
+            $personalization
+        );
+    }
+
     public function addTos(
         $toEmails,
         $personalizationIndex = null,
         $personalization = null) {
         foreach ($toEmails as $email) {
             $this->addTo(
+                $email,
+                null,
+                $personalizationIndex,
+                $personalization
+            );
+        }
+    }
+
+    public function addCc(
+        $cc,
+        $name = null,
+        $personalizationIndex = null,
+        $personalization = null
+    ) {
+        $this->addRecipientEmail(
+            "Cc",
+            $cc,
+            $name,
+            $personalizationIndex,
+            $personalization
+        );
+    }
+
+    public function addCcs(
+        $ccEmails,
+        $personalizationIndex = null,
+        $personalization = null) {
+        foreach ($ccEmails as $email) {
+            $this->addCc(
+                $email,
+                null,
+                $personalizationIndex,
+                $personalization
+            );
+        }
+    }
+
+    public function addBcc(
+        $bcc,
+        $name = null,
+        $personalizationIndex = null,
+        $personalization = null
+    ) {
+        $this->addRecipientEmail(
+            "Bcc",
+            $bcc,
+            $name,
+            $personalizationIndex,
+            $personalization
+        );
+    }
+
+    public function addBccs(
+        $bccEmails,
+        $personalizationIndex = null,
+        $personalization = null) {
+        foreach ($bccEmails as $email) {
+            $this->addBcc(
                 $email,
                 null,
                 $personalizationIndex,
