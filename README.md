@@ -2,6 +2,7 @@
 
 [![BuildStatus](https://travis-ci.org/sendgrid/sendgrid-php.svg?branch=master)](https://travis-ci.org/sendgrid/sendgrid-php)
 [![Packagist](https://img.shields.io/packagist/v/sendgrid/sendgrid.svg)](https://packagist.org/packages/sendgrid/sendgrid)
+[![Downloads](https://img.shields.io/packagist/dt/sendgrid/sendgrid.svg?maxAge=3600)](https://packagist.org/packages/sendgrid/sendgrid)
 [![Email Notifications Badge](https://dx.sendgrid.com/badge/php)](https://dx.sendgrid.com/newsletter/php)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.txt)
 [![Twitter Follow](https://img.shields.io/twitter/follow/sendgrid.svg?style=social&label=Follow)](https://twitter.com/sendgrid)
