@@ -140,6 +140,8 @@ require 'vendor/autoload.php'; // If you're using Composer (recommended)
 use \SendGrid\Mail\Cc as Cc;
 use \SendGrid\Mail\Bcc as Bcc;
 use \SendGrid\Mail\Header as Header;
+use \SendGrid\Mail\Substitution as Substitution;
+use \SendGrid\Mail\CustomArg as CustomArg;
 
 $from = new From("dx@example.com", "DX Team");
 $to = new To("elmer.thomas@sendgrid.com", "Elmer Thomas");
@@ -203,6 +205,39 @@ $headers = [
 //     "X-Test4" => "Test4",
 // ];
 $email->addHeaders($headers);
+$email->addSubstitution(new Substitution("%name1%", "Example Name 1"));
+$email->addSubstitution(new Substitution("%city1%", "Denver"));
+// $email->addSubstitution("%name1%", "Example Name 1");
+// $email->addSubstitution("%city1%", "Denver");
+$substitutions = [
+    new Substitution("%name2%", "Example Name 2"),
+    new Substitution("%city2%", "Orange")
+];
+// $substitutions = [
+//     "%name2%" => "Example Name 2",
+//     "%city2%" => "Orange"
+// ];
+$email->addSubstitutions($substitutions);
+
+$email->addCustomArg(new CustomArg("marketing1", "false"));
+$email->addCustomArg(new CustomArg("transactional1", "true"));
+$email->addCustomArg(new CustomArg("category", "name"));
+// $email->addCustomArg("marketing1", "false");
+// $email->addCustomArg("transactional1", "true");
+// $email->addCustomArg("category", "name");
+
+$customArgs = [
+    new CustomArg("marketing2", "true"),
+    new CustomArg("transactional2", "false"),
+    new CustomArg("category", "name")
+];
+// $customArgs = [
+//     "marketing2" => "true",
+//     "transactional2" => "false",
+//     "category" => "name"
+// ];
+$email->addCustomArgs($customArgs);
+
 $email->addContent($plainTextContent);
 $email->addContent($htmlContent);
 $email->addContent(MimeType::Text, "and easy to do anywhere, even with PHP");

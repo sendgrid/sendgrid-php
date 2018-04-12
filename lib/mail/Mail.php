@@ -28,6 +28,7 @@ class Mail implements \JsonSerializable
     private $headers;
     private $categories;
     private $custom_args;
+    private $substitutions;
     private $send_at;
     private $batch_id;
     private $asm;
@@ -346,6 +347,35 @@ class Mail implements \JsonSerializable
         return $this->headers;
     }
 
+    public function addSubstitution($key, $value=null)
+    {
+        if ($key instanceof Substitution) {
+            $substitution = $key;
+            $this->substitutions[$substitution->getKey()]
+                = $substitution->getValue();
+            return;
+        }
+        $this->substitutions[$key] = $value;
+    }
+
+    public function addSubstitutions($substitutions)
+    {
+        if ($substitutions[0] instanceof Substitution) {
+            foreach ($substitutions as $substitution) {
+                $this->addSubstitution($substitution);
+            }
+        } else {
+            foreach ($substitutions as $key => $value) {
+                $this->addSubstitution($key, $value);
+            }
+        }
+    }
+
+    public function getSubstitutions()
+    {
+        return $this->substitutions;
+    }
+
     public function addCategory($category)
     {
         $this->categories[] = $category;
@@ -356,9 +386,28 @@ class Mail implements \JsonSerializable
         return $this->categories;
     }
 
-    public function addCustomArg($key, $value)
+    public function addCustomArg($key, $value=null)
     {
+        if ($key instanceof CustomArg) {
+            $custom_arg = $key;
+            $this->custom_args[$custom_arg->getKey()]
+                = $custom_arg->getValue();
+            return;
+        }
         $this->custom_args[$key] = (string)$value;
+    }
+
+    public function addCustomArgs($custom_args)
+    {
+        if ($custom_args[0] instanceof CustomArg) {
+            foreach ($custom_args as $custom_arg) {
+                $this->addCustomArg($custom_arg);
+            }
+        } else {
+            foreach ($custom_args as $key => $value) {
+                $this->addCustomArg($key, $value);
+            }
+        }
     }
 
     public function getCustomArgs()
@@ -450,6 +499,7 @@ class Mail implements \JsonSerializable
                 'headers'           => $this->getHeaders(),
                 'categories'        => $this->getCategories(),
                 'custom_args'       => $this->getCustomArgs(),
+                'substitutions'     => $this->getSubstitutions(),
                 'send_at'           => $this->getSendAt(),
                 'batch_id'          => $this->getBatchId(),
                 'asm'               => $this->getASM(),
