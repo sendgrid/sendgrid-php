@@ -43,7 +43,7 @@ class Personalization implements \JsonSerializable
 
     public function setSubject($subject)
     {
-        $this->subject = mb_convert_encoding($subject, 'UTF-8', 'UTF-8');
+        $this->subject = $subject->getSubject();
     }
 
     public function getSubject()
@@ -51,9 +51,9 @@ class Personalization implements \JsonSerializable
         return $this->subject;
     }
 
-    public function addHeader($key, $value)
+    public function addHeader($header)
     {
-        $this->headers[$key] = $value;
+        $this->headers[$header->getKey()] = $header->getValue();
     }
 
     public function getHeaders()
@@ -61,9 +61,9 @@ class Personalization implements \JsonSerializable
         return $this->headers;
     }
 
-    public function addSubstitution($key, $value)
+    public function addSubstitution($substitution)
     {
-        $this->substitutions[$key] = $value;
+        $this->substitutions[$substitution->getKey()] = $substitution->getValue();
     }
 
     public function getSubstitutions()
@@ -71,9 +71,9 @@ class Personalization implements \JsonSerializable
         return $this->substitutions;
     }
 
-    public function addCustomArg($key, $value)
+    public function addCustomArg($custom_arg)
     {
-        $this->custom_args[$key] = (string)$value;
+        $this->custom_args[$custom_arg->getKey()] = (string)$custom_arg->getValue();
     }
 
     public function getCustomArgs()
@@ -98,7 +98,7 @@ class Personalization implements \JsonSerializable
                 'to'            => $this->getTos(),
                 'cc'            => $this->getCcs(),
                 'bcc'           => $this->getBccs(),
-                'subject'       => $this->subject,
+                'subject'       => $this->getSubject(),
                 'headers'       => $this->getHeaders(),
                 'substitutions' => $this->getSubstitutions(),
                 'custom_args'   => $this->getCustomArgs(),

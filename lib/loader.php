@@ -12,6 +12,7 @@ require_once __DIR__ . '/mail/BypassListManagement.php';
 require_once __DIR__ . '/mail/Cc.php';
 require_once __DIR__ . '/mail/ClickTracking.php';
 require_once __DIR__ . '/mail/Content.php';
+require_once __DIR__ . '/mail/CustomArg.php';
 require_once __DIR__ . '/mail/EmailAddress.php';
 require_once __DIR__ . '/mail/Footer.php';
 require_once __DIR__ . '/mail/From.php';

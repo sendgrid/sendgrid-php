@@ -11,7 +11,7 @@ class Subject implements \JsonSerializable
 
     public function getSubject()
     {
-        return $this->subject;
+        return mb_convert_encoding($this->subject, 'UTF-8', 'UTF-8');
     }
 
     public function setSubject($subject)
