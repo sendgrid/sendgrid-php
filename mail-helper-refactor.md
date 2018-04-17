@@ -275,6 +275,7 @@ $email->setSubject("this subject overrides the Global Subject on the second Pers
 
 $email->setFrom(new Mail("test0@example.com", "Example User0"));
 
+// TODO: Left off here
 $email->setGlobalSubject("Sending with SendGrid is Fun");
 
 $email->addContent(MimeType::Text, "and easy to do anywhere, even with PHP");

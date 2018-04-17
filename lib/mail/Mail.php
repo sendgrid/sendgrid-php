@@ -594,12 +594,58 @@ class Mail implements \JsonSerializable
         return $this->custom_args;
     }
 
-    public function setSendAt($send_at)
+    public function setSendAt(
+        $send_at,
+        $personalizationIndex = null,
+        $personalization = null
+    ) {
+        if ($send_at instanceof SendAt) {
+            $send_at = $send_at;
+        } else {
+            $send_at = new SendAt($send_at);
+        }
+        if ($personalization != null) {
+            $personalization->setSendAt($send_at);
+            $this->addPersonalization($personalization);
+            return;
+        } else {
+            if ($this->personalization[0] != null) {
+                $this->personalization[0]->setSendAt($send_at);
+                return;
+            } elseif ($this->personalization[$personalizationIndex] != null) {
+                $this->personalization[$personalizationIndex]->setSendAt($send_at);
+                return;
+            } else {
+                $personalization = new Personalization();
+                $personalization->setSendAt($send_at);
+                if (($personalizationIndex != 0)
+                    && ($this->getPersonalizationCount() <= $personalizationIndex)
+                ) {
+                    $this->personalization[$personalizationIndex] = $personalization;
+                } else {
+                    $this->addPersonalization($personalization);
+                }
+                return;
+            }
+        }
+    }
+
+    public function getSendAt($personalizationIndex = 0)
     {
+        return $this->personalization[$personalizationIndex]->getSendAt();
+    }    
+
+    public function setGlobalSendAt($send_at)
+    {
+        if ($send_at instanceof SendAt) {
+            $send_at = $send_at;
+        } else {
+            $send_at = new SendAt($send_at);
+        }
         $this->send_at = $send_at;
     }
 
-    public function getSendAt()
+    public function getGlobalSendAt()
     {
         return $this->send_at;
     }
@@ -679,7 +725,7 @@ class Mail implements \JsonSerializable
                 'categories'        => $this->getCategories(),
                 'custom_args'       => $this->getGlobalCustomArgs(),
                 'substitutions'     => $this->getGlobalSubstitutions(),
-                'send_at'           => $this->getSendAt(),
+                'send_at'           => $this->getGlobalSendAt(),
                 'batch_id'          => $this->getBatchId(),
                 'asm'               => $this->getASM(),
                 'ip_pool_name'      => $this->getIpPoolName(),

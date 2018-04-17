@@ -142,6 +142,7 @@ use \SendGrid\Mail\Bcc as Bcc;
 use \SendGrid\Mail\Header as Header;
 use \SendGrid\Mail\Substitution as Substitution;
 use \SendGrid\Mail\CustomArg as CustomArg;
+use \SendGrid\Mail\SendAt as SendAt;
 
 $from = new From("dx@example.com", "DX Team");
 $to = new To("elmer.thomas@sendgrid.com", "Elmer Thomas");
@@ -155,8 +156,6 @@ $htmlContent = new HtmlContent(
 $email = new Mail();
 
 // For a detailed description of each of these settings, please see the [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
-$email->setFrom($from);
-// $email->setFrom("dx+2@example.com", "DX Team 2");
 $email->setSubject($subject);
 // $email->setSubject("Sending with SendGrid is Fun 2");
 $email->addTo($to);
@@ -238,10 +237,18 @@ $customArgs = [
 // ];
 $email->addCustomArgs($customArgs);
 
+$email->setSendAt(1461775051);
+//$email->setSendAt(new SendAt(1461775052));
+
 $email->addContent($plainTextContent);
 $email->addContent($htmlContent);
 $email->addContent(MimeType::Text, "and easy to do anywhere, even with PHP");
 $email->addContent(MimeType::Html, "<strong>and easy to do anywhere, even with PHP</strong>");
+
+// The values below this comment are global to entire message
+
+$email->setFrom($from);
+// $email->setFrom("dx+2@example.com", "DX Team 2");
 
 $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 echo json_encode($email, JSON_PRETTY_PRINT);
