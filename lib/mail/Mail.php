@@ -386,6 +386,11 @@ class Mail implements \JsonSerializable
 
     public function setTemplateId($template_id)
     {
+        if ($template_id instanceof TemplateId) {
+            $template_id = $template_id;
+        } else {
+            $template_id = new TemplateId($template_id);
+        }
         $this->template_id = $template_id;
     }
 
@@ -459,7 +464,32 @@ class Mail implements \JsonSerializable
         return $this->personalization[$personalizationIndex]->getHeaders();
     }
 
-    public function getGlobalheaders()
+
+    public function addGlobalHeader($key, $value=null)
+    {
+        if ($key instanceof Header) {
+            $header = $key;
+            $this->headers[$header->getKey()]
+                = $header->getValue();
+            return;
+        }
+        $this->headers[$key] = (string)$value;
+    }
+
+    public function addGlobalHeaders($headers)
+    {
+        if ($headers[0] instanceof Header) {
+            foreach ($headers as $header) {
+                $this->addGlobalHeader($header);
+            }
+        } else {
+            foreach ($headers as $key => $value) {
+                $this->addGlobalHeader($key, $value);
+            }
+        }
+    }
+
+    public function getGlobalHeaders()
     {
         return $this->headers;
     }
@@ -787,3 +817,5 @@ class Mail implements \JsonSerializable
         ) ?: null;
     }
 }
+
+// TODO: Make sure all returns are using their getters

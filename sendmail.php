@@ -145,6 +145,7 @@ use \SendGrid\Mail\CustomArg as CustomArg;
 use \SendGrid\Mail\SendAt as SendAt;
 use \SendGrid\Mail\Content as Content;
 use \SendGrid\Mail\Attachment as Attachment;
+use \SendGrid\Mail\TemplateId as TemplateId;
 
 $from = new From("dx@example.com", "DX Team");
 $to = new To("elmer.thomas@sendgrid.com", "Elmer Thomas");
@@ -199,7 +200,7 @@ $email->addHeader(new Header("X-Test2", "Test2"));
 // $email->addHeader("X-Test2", "Test2");
 $headers = [
     new Header("X-Test3", "Test3"),
-    new Header("X-Test4", "Test4"),
+    new Header("X-Test4", "Test4")
 ];
 // $headers = [
 //     "X-Test3" => "Test3",
@@ -295,6 +296,22 @@ $attachments = [
     )
 ];
 $email->addAttachments($attachments);
+
+$email->setTemplateId("13b8f94f-bcae-4ec6-b752-70d6cb59f932");
+// $email->setTemplateId(new TemplateId("13b8f94f-bcae-4ec6-b752-70d6cb59f933"));
+
+$email->addGlobalHeader("X-Day", "Monday");
+// $email->addGlobalHeader(new Header("X-Day2", "Monday2"));
+
+$globalHeaders = [
+    new Header("X-Test5", "Test5"),
+    new Header("X-Test6", "Test6")
+];
+// $globalHeaders = [
+//     "X-Month" => "January",
+//     "X-Year" => "2017"
+// ];
+$email->addGlobalHeaders($globalHeaders);
 
 $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 echo json_encode($email, JSON_PRETTY_PRINT);
