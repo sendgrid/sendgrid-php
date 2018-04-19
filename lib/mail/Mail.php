@@ -307,6 +307,16 @@ class Mail implements \JsonSerializable
         return $this->personalization[$personalizationIndex]->getSubject();
     }
 
+    public function setGlobalSubject($subject)
+    {
+        if ($subject instanceof Subject) {
+            $subject = $subject;
+        } else {
+            $subject = new Subject($subject);
+        }
+        $this->subject = $subject;
+    }
+
     public function getGlobalSubject()
     {
         return $this->subject;
@@ -314,11 +324,26 @@ class Mail implements \JsonSerializable
 
     public function addContent($content, $value = null)
     {
-        if ($value != null) {
-            $content = new Content($content, $value);
+        if ($content instanceof Content) {
+            $content = $content;
+        } else {
+            $content = new Content($content);
         }
         $this->contents[] = $content;
     }
+
+    public function addContents($contents)
+    {
+        if ($contents[0] instanceof Content) {
+            foreach ($contents as $content) {
+                $this->addContent($content);
+            }
+        } else {
+            foreach ($contents as $key => $value) {
+                $this->addContent($key, $value);
+            }
+        }
+    }    
 
     public function getContents()
     {
@@ -326,10 +351,33 @@ class Mail implements \JsonSerializable
         return $this->contents;
     }
 
-    public function addAttachment($attachment)
-    {
+    public function addAttachment(
+        $attachment,
+        $type = null,
+        $filename = null,
+        $disposition = null,
+        $content_id = null
+    ) {
+        if ($attachment instanceof Attachment) {
+            $attachment = $attachment;
+        } else {
+            $attachment = new Attachment(
+                $attachment,
+                $type,
+                $filename,
+                $disposition,
+                $content_id
+            );
+        }
         $this->attachments[] = $attachment;
     }
+
+    public function addAttachments($attachments)
+    {
+        foreach ($attachments as $attachment) {
+            $this->addAttachment($attachment);
+        }
+    } 
 
     public function getAttachments()
     {

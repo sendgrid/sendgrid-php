@@ -8,6 +8,20 @@ class Attachment implements \JsonSerializable
     private $disposition;
     private $content_id;
 
+    public function __construct(
+        $content,
+        $type,
+        $filename,
+        $disposition,
+        $content_id
+    ) {
+        $this->content = $content;
+        $this->type  = $type;
+        $this->filename = $filename;
+        $this->disposition  = $disposition;
+        $this->content_id  = $content_id;
+    }
+
     public function setContent($content)
     {
         $this->content = $content;
