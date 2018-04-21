@@ -25,6 +25,7 @@ require_once __DIR__ . '/mail/OpenTracking.php';
 require_once __DIR__ . '/mail/Personalization.php';
 require_once __DIR__ . '/mail/PlainTextContent.php';
 require_once __DIR__ . '/mail/ReplyTo.php';
+require_once __DIR__ . '/mail/Section.php';
 require_once __DIR__ . '/mail/SandBoxMode.php';
 require_once __DIR__ . '/mail/SendAt.php';
 require_once __DIR__ . '/mail/SpamCheck.php';

@@ -146,6 +146,7 @@ use \SendGrid\Mail\SendAt as SendAt;
 use \SendGrid\Mail\Content as Content;
 use \SendGrid\Mail\Attachment as Attachment;
 use \SendGrid\Mail\TemplateId as TemplateId;
+use \SendGrid\Mail\Section as Section;
 
 $from = new From("dx@example.com", "DX Team");
 $to = new To("elmer.thomas@sendgrid.com", "Elmer Thomas");
@@ -312,6 +313,19 @@ $globalHeaders = [
 //     "X-Year" => "2017"
 // ];
 $email->addGlobalHeaders($globalHeaders);
+
+$email->addSection("%section1%", "Substitution for Section 1 Tag");
+// $email->addSection(new Section("%section2%", "Substitution for Section 2 Tag"));
+
+$sections = [
+    "%section3%" => "Substitution for Section 3 Tag",
+    "%section4%" => "Substitution for Section 4 Tag"
+];
+// $sections = [
+//     new Section("%section5%", "Substitution for Section 5 Tag"),
+//     new Section("%section6%", "Substitution for Section 6 Tag")
+// ];
+$email->addSections($sections);
 
 $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 echo json_encode($email, JSON_PRETTY_PRINT);

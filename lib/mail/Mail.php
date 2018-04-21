@@ -399,9 +399,28 @@ class Mail implements \JsonSerializable
         return $this->template_id;
     }
 
-    public function addSection($key, $value)
+    public function addSection($key, $value=null)
     {
-        $this->sections[$key] = $value;
+        if ($key instanceof Section) {
+            $section = $key;
+            $this->sections[$section->getKey()]
+                = $section->getValue();
+            return;
+        }
+        $this->sections[$key] = (string)$value;
+    }
+
+    public function addSections($sections)
+    {
+        if ($sections[0] instanceof Section) {
+            foreach ($sections as $section) {
+                $this->addSection($section);
+            }
+        } else {
+            foreach ($sections as $key => $value) {
+                $this->addSection($key, $value);
+            }
+        }
     }
 
     public function getSections()
