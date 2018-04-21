@@ -147,6 +147,9 @@ use \SendGrid\Mail\Content as Content;
 use \SendGrid\Mail\Attachment as Attachment;
 use \SendGrid\Mail\TemplateId as TemplateId;
 use \SendGrid\Mail\Section as Section;
+use \SendGrid\Mail\ReplyTo as ReplyTo;
+use \SendGrid\Mail\Category as Category;
+use \SendGrid\Mail\BatchId as BatchId;
 
 $from = new From("dx@example.com", "DX Team");
 $to = new To("elmer.thomas@sendgrid.com", "Elmer Thomas");
@@ -326,6 +329,24 @@ $sections = [
 //     new Section("%section6%", "Substitution for Section 6 Tag")
 // ];
 $email->addSections($sections);
+
+// $email->addCategory("Category 1");
+$email->addCategory(new Category("Category 2"));
+// $categories = [
+//     "Category 3",
+//     "Category 4"
+// ];
+$categories = [
+    new Category("Category 5"),
+    new Category("Category 6")
+];
+$email->addCategories($categories);
+
+$email->setBatchId("MWQxZmIyODYtNjE1Ni0xMWU1LWI3ZTUtMDgwMDI3OGJkMmY2LWEzMmViMjYxMw");
+// $email->setBatchId(new BatchId("MWQxZmIyODYtNjE1Ni0xMWU1LWI3ZTUtMDgwMDI3OGJkMmY2LWEzMmViMjYxMw2"));
+
+$email->setReplyTo(new ReplyTo("dx+replyto@example.com", "DX Team Reply To"));
+// $email->setReplyTo("dx+replyto2@example.com", "DX Team Reply To 2");
 
 $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 echo json_encode($email, JSON_PRETTY_PRINT);

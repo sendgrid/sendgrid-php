@@ -93,21 +93,7 @@ class Mail implements \JsonSerializable
         $this->addContent($htmlContent);
     }
 
-    public function setFrom($email, $name=null)
-    {
-        if ($name != null ) {
-            $this->from = new From($email, $name);
-        } else {
-            $this->from = $email;
-        }
-    }
-
-    public function getFrom()
-    {
-        return $this->from;
-    }
-
-    public function addRecipientEmail(
+    private function addRecipientEmail(
         $emailType,
         $email,
         $name = null,
@@ -145,7 +131,7 @@ class Mail implements \JsonSerializable
         }
     }
 
-    public function addRecipientEmails(
+    private function addRecipientEmails(
         $emailType,
         $emails,
         $personalizationIndex = null,
@@ -171,6 +157,16 @@ class Mail implements \JsonSerializable
                 );
             }
         }
+    }    
+
+    public function addPersonalization($personalization)
+    {
+        $this->personalization[] = $personalization;
+    }
+
+    public function getPersonalizations()
+    {
+        return $this->personalization;
     }
 
     public function addTo(
@@ -200,7 +196,6 @@ class Mail implements \JsonSerializable
             $personalization
         );
     }
-
     public function addCc(
         $cc,
         $name = null,
@@ -256,16 +251,6 @@ class Mail implements \JsonSerializable
             );
     }
 
-    public function addPersonalization($personalization)
-    {
-        $this->personalization[] = $personalization;
-    }
-
-    public function getPersonalizations()
-    {
-        return $this->personalization;
-    }
-
     public function setSubject(
         $subject,
         $personalizationIndex = null,
@@ -305,6 +290,242 @@ class Mail implements \JsonSerializable
     public function getSubject($personalizationIndex = 0)
     {
         return $this->personalization[$personalizationIndex]->getSubject();
+    }
+
+    public function addHeader(
+        $key,
+        $value=null,
+        $personalizationIndex = null,
+        $personalization = null
+    ) {
+        $header = null;
+        if ($key instanceof Header) {
+            $h = $key;
+            $header = new Header($h->getKey(), $h->getValue());
+        } else {
+            $header = new Header($key, $value);
+        }
+        if ($personalization != null) {
+            $personalization->addHeader($header);
+            $this->addPersonalization($personalization);
+            return;
+        } else {
+            if ($this->personalization[0] != null) {
+                $this->personalization[0]->addHeader($header);
+            } elseif ($this->personalization[$personalizationIndex] != null) {
+                $this->personalization[$personalizationIndex]->addHeader($header);
+            } else {
+                $personalization = new Personalization();
+                $personalization->addHeader($header);
+                if (($personalizationIndex != 0)
+                    && ($this->getPersonalizationCount() <= $personalizationIndex)
+                ) {
+                    $this->personalization[$personalizationIndex] = $personalization;
+                } else {
+                    $this->addPersonalization($personalization);
+                }
+            }
+            return;
+        }
+    }
+
+    public function addHeaders($headers)
+    {
+        if ($headers[0] instanceof Header) {
+            foreach ($headers as $header) {
+                $this->addHeader($header);
+            }
+        } else {
+            foreach ($headers as $key => $value) {
+                $this->addHeader($key, $value);
+            }
+        }
+    }
+
+    public function getHeaders($personalizationIndex = 0)
+    {
+        return $this->personalization[$personalizationIndex]->getHeaders();
+    }
+
+    public function addSubstitution(
+        $key,
+        $value=null,
+        $personalizationIndex = null,
+        $personalization = null
+    ) {
+        $substitution = null;
+        if ($key instanceof Substitution) {
+            $s = $key;
+            $substitution = new Substitution($s->getKey(), $s->getValue());
+        } else {
+            $substitution = new Substitution($key, $value);
+        }
+        if ($personalization != null) {
+            $personalization->addSubstitution($substitution);
+            $this->addPersonalization($personalization);
+            return;
+        } else {
+            if ($this->personalization[0] != null) {
+                $this->personalization[0]->addSubstitution($substitution);
+            } elseif ($this->personalization[$personalizationIndex] != null) {
+                $this->personalization[$personalizationIndex]->addSubstitution($substitution);
+            } else {
+                $personalization = new Personalization();
+                $personalization->addSubstitution($substitution);
+                if (($personalizationIndex != 0)
+                    && ($this->getPersonalizationCount() <= $personalizationIndex)
+                ) {
+                    $this->personalization[$personalizationIndex] = $personalization;
+                } else {
+                    $this->addPersonalization($personalization);
+                }
+            }
+            return;
+        }
+    }
+
+    public function addSubstitutions($substitutions)
+    {
+        if ($substitutions[0] instanceof Substitution) {
+            foreach ($substitutions as $substitution) {
+                $this->addSubstitution($substitution);
+            }
+        } else {
+            foreach ($substitutions as $key => $value) {
+                $this->addSubstitution($key, $value);
+            }
+        }
+    }
+
+    public function getSubstitutions($personalizationIndex = 0)
+    {
+        return $this->personalization[$personalizationIndex]->getSubstitutions();
+    }
+
+    public function addCustomArg(
+        $key,
+        $value=null,
+        $personalizationIndex = null,
+        $personalization = null
+    ) {
+        $custom_arg = null;
+        if ($key instanceof CustomArg) {
+            $ca = $key;
+            $custom_arg = new CustomArg($ca->getKey(), $ca->getValue());
+        } else {
+            $custom_arg = new CustomArg($key, $value);
+        }
+        if ($personalization != null) {
+            $personalization->addCustomArg($custom_arg);
+            $this->addPersonalization($personalization);
+            return;
+        } else {
+            if ($this->personalization[0] != null) {
+                $this->personalization[0]->addCustomArg($custom_arg);
+            } elseif ($this->personalization[$personalizationIndex] != null) {
+                $this->personalization[$personalizationIndex]->addCustomArg($custom_arg);
+            } else {
+                $personalization = new Personalization();
+                $personalization->addCustomArg($custom_arg);
+                if (($personalizationIndex != 0)
+                    && ($this->getPersonalizationCount() <= $personalizationIndex)
+                ) {
+                    $this->personalization[$personalizationIndex] = $personalization;
+                } else {
+                    $this->addPersonalization($personalization);
+                }
+            }
+            return;
+        }
+    }
+
+    public function addCustomArgs($custom_args)
+    {
+        if ($custom_args[0] instanceof CustomArg) {
+            foreach ($custom_args as $custom_arg) {
+                $this->addCustomArg($custom_arg);
+            }
+        } else {
+            foreach ($custom_args as $key => $value) {
+                $this->addCustomArg($key, $value);
+            }
+        }
+    }    
+
+    public function getCustomArgs($personalizationIndex = 0)
+    {
+        return $this->personalization[$personalizationIndex]->getCustomArgs();
+    }
+
+    public function setSendAt(
+        $send_at,
+        $personalizationIndex = null,
+        $personalization = null
+    ) {
+        if ($send_at instanceof SendAt) {
+            $send_at = $send_at;
+        } else {
+            $send_at = new SendAt($send_at);
+        }
+        if ($personalization != null) {
+            $personalization->setSendAt($send_at);
+            $this->addPersonalization($personalization);
+            return;
+        } else {
+            if ($this->personalization[0] != null) {
+                $this->personalization[0]->setSendAt($send_at);
+                return;
+            } elseif ($this->personalization[$personalizationIndex] != null) {
+                $this->personalization[$personalizationIndex]->setSendAt($send_at);
+                return;
+            } else {
+                $personalization = new Personalization();
+                $personalization->setSendAt($send_at);
+                if (($personalizationIndex != 0)
+                    && ($this->getPersonalizationCount() <= $personalizationIndex)
+                ) {
+                    $this->personalization[$personalizationIndex] = $personalization;
+                } else {
+                    $this->addPersonalization($personalization);
+                }
+                return;
+            }
+        }
+    }
+
+    public function getSendAt($personalizationIndex = 0)
+    {
+        return $this->personalization[$personalizationIndex]->getSendAt();
+    }  
+
+    public function setFrom($email, $name=null)
+    {
+        if ($email instanceof From) {
+            $this->from = $email;
+        } else {
+            $this->from = new From($email, $name);
+        }
+        return;
+    }
+
+    public function getFrom()
+    {
+        return $this->from;
+    }
+
+    public function setReplyTo($email, $name=null)
+    {
+        if ($email instanceof ReplyTo) {
+            $this->reply_to = $email;
+        } else {
+            $this->reply_to = new ReplyTo($email, $name);
+        }
+        return;
+    }
+
+    public function getReplyTo()
+    {
+        return $this->reply_to;
     }
 
     public function setGlobalSubject($subject)
@@ -428,62 +649,6 @@ class Mail implements \JsonSerializable
         return $this->sections;
     }
 
-    public function addHeader(
-        $key,
-        $value=null,
-        $personalizationIndex = null,
-        $personalization = null
-    ) {
-        $header = null;
-        if ($key instanceof Header) {
-            $h = $key;
-            $header = new Header($h->getKey(), $h->getValue());
-        } else {
-            $header = new Header($key, $value);
-        }
-        if ($personalization != null) {
-            $personalization->addHeader($header);
-            $this->addPersonalization($personalization);
-            return;
-        } else {
-            if ($this->personalization[0] != null) {
-                $this->personalization[0]->addHeader($header);
-            } elseif ($this->personalization[$personalizationIndex] != null) {
-                $this->personalization[$personalizationIndex]->addHeader($header);
-            } else {
-                $personalization = new Personalization();
-                $personalization->addHeader($header);
-                if (($personalizationIndex != 0)
-                    && ($this->getPersonalizationCount() <= $personalizationIndex)
-                ) {
-                    $this->personalization[$personalizationIndex] = $personalization;
-                } else {
-                    $this->addPersonalization($personalization);
-                }
-            }
-            return;
-        }
-    }
-
-    public function addHeaders($headers)
-    {
-        if ($headers[0] instanceof Header) {
-            foreach ($headers as $header) {
-                $this->addHeader($header);
-            }
-        } else {
-            foreach ($headers as $key => $value) {
-                $this->addHeader($key, $value);
-            }
-        }
-    }
-
-    public function getHeaders($personalizationIndex = 0)
-    {
-        return $this->personalization[$personalizationIndex]->getHeaders();
-    }
-
-
     public function addGlobalHeader($key, $value=null)
     {
         if ($key instanceof Header) {
@@ -511,61 +676,6 @@ class Mail implements \JsonSerializable
     public function getGlobalHeaders()
     {
         return $this->headers;
-    }
-
-    public function addSubstitution(
-        $key,
-        $value=null,
-        $personalizationIndex = null,
-        $personalization = null
-    ) {
-        $substitution = null;
-        if ($key instanceof Substitution) {
-            $s = $key;
-            $substitution = new Substitution($s->getKey(), $s->getValue());
-        } else {
-            $substitution = new Substitution($key, $value);
-        }
-        if ($personalization != null) {
-            $personalization->addSubstitution($substitution);
-            $this->addPersonalization($personalization);
-            return;
-        } else {
-            if ($this->personalization[0] != null) {
-                $this->personalization[0]->addSubstitution($substitution);
-            } elseif ($this->personalization[$personalizationIndex] != null) {
-                $this->personalization[$personalizationIndex]->addSubstitution($substitution);
-            } else {
-                $personalization = new Personalization();
-                $personalization->addSubstitution($substitution);
-                if (($personalizationIndex != 0)
-                    && ($this->getPersonalizationCount() <= $personalizationIndex)
-                ) {
-                    $this->personalization[$personalizationIndex] = $personalization;
-                } else {
-                    $this->addPersonalization($personalization);
-                }
-            }
-            return;
-        }
-    }
-
-    public function addSubstitutions($substitutions)
-    {
-        if ($substitutions[0] instanceof Substitution) {
-            foreach ($substitutions as $substitution) {
-                $this->addSubstitution($substitution);
-            }
-        } else {
-            foreach ($substitutions as $key => $value) {
-                $this->addSubstitution($key, $value);
-            }
-        }
-    }
-
-    public function getSubstitutions($personalizationIndex = 0)
-    {
-        return $this->personalization[$personalizationIndex]->getSubstitutions();
     }
 
     public function addGlobalSubstitution($key, $value=null)
@@ -599,67 +709,25 @@ class Mail implements \JsonSerializable
 
     public function addCategory($category)
     {
+        if ($category instanceof Category) {
+            $category = $category->getCategory();
+        } else {
+            $category = new Category($category);
+        }
         $this->categories[] = $category;
+    }
+
+    public function addCategories($categories)
+    {
+        foreach ($categories as $category) {
+            $this->addCategory($category);
+        }
+        return;
     }
 
     public function getCategories()
     {
         return $this->categories;
-    }
-
-    public function addCustomArg(
-        $key,
-        $value=null,
-        $personalizationIndex = null,
-        $personalization = null
-    ) {
-        $custom_arg = null;
-        if ($key instanceof CustomArg) {
-            $ca = $key;
-            $custom_arg = new CustomArg($ca->getKey(), $ca->getValue());
-        } else {
-            $custom_arg = new CustomArg($key, $value);
-        }
-        if ($personalization != null) {
-            $personalization->addCustomArg($custom_arg);
-            $this->addPersonalization($personalization);
-            return;
-        } else {
-            if ($this->personalization[0] != null) {
-                $this->personalization[0]->addCustomArg($custom_arg);
-            } elseif ($this->personalization[$personalizationIndex] != null) {
-                $this->personalization[$personalizationIndex]->addCustomArg($custom_arg);
-            } else {
-                $personalization = new Personalization();
-                $personalization->addCustomArg($custom_arg);
-                if (($personalizationIndex != 0)
-                    && ($this->getPersonalizationCount() <= $personalizationIndex)
-                ) {
-                    $this->personalization[$personalizationIndex] = $personalization;
-                } else {
-                    $this->addPersonalization($personalization);
-                }
-            }
-            return;
-        }
-    }
-
-    public function addCustomArgs($custom_args)
-    {
-        if ($custom_args[0] instanceof CustomArg) {
-            foreach ($custom_args as $custom_arg) {
-                $this->addCustomArg($custom_arg);
-            }
-        } else {
-            foreach ($custom_args as $key => $value) {
-                $this->addCustomArg($key, $value);
-            }
-        }
-    }    
-
-    public function getCustomArgs($personalizationIndex = 0)
-    {
-        return $this->personalization[$personalizationIndex]->getCustomArgs();
     }
 
     public function addGlobalCustomArg($key, $value=null)
@@ -689,48 +757,7 @@ class Mail implements \JsonSerializable
     public function getGlobalCustomArgs()
     {
         return $this->custom_args;
-    }
-
-    public function setSendAt(
-        $send_at,
-        $personalizationIndex = null,
-        $personalization = null
-    ) {
-        if ($send_at instanceof SendAt) {
-            $send_at = $send_at;
-        } else {
-            $send_at = new SendAt($send_at);
-        }
-        if ($personalization != null) {
-            $personalization->setSendAt($send_at);
-            $this->addPersonalization($personalization);
-            return;
-        } else {
-            if ($this->personalization[0] != null) {
-                $this->personalization[0]->setSendAt($send_at);
-                return;
-            } elseif ($this->personalization[$personalizationIndex] != null) {
-                $this->personalization[$personalizationIndex]->setSendAt($send_at);
-                return;
-            } else {
-                $personalization = new Personalization();
-                $personalization->setSendAt($send_at);
-                if (($personalizationIndex != 0)
-                    && ($this->getPersonalizationCount() <= $personalizationIndex)
-                ) {
-                    $this->personalization[$personalizationIndex] = $personalization;
-                } else {
-                    $this->addPersonalization($personalization);
-                }
-                return;
-            }
-        }
-    }
-
-    public function getSendAt($personalizationIndex = 0)
-    {
-        return $this->personalization[$personalizationIndex]->getSendAt();
-    }    
+    }  
 
     public function setGlobalSendAt($send_at)
     {
@@ -749,6 +776,11 @@ class Mail implements \JsonSerializable
 
     public function setBatchId($batch_id)
     {
+        if ($batch_id instanceof BatchId) {
+            $batch_id = $batch_id;
+        } else {
+            $batch_id = new BatchId($batch_id);
+        }
         $this->batch_id = $batch_id;
     }
 
@@ -797,22 +829,13 @@ class Mail implements \JsonSerializable
         return $this->tracking_settings;
     }
 
-    public function setReplyTo($reply_to)
-    {
-        $this->reply_to = $reply_to;
-    }
-
-    public function getReplyTo()
-    {
-        return $this->reply_to;
-    }
-
     public function jsonSerialize()
     {
         return array_filter(
             [
-                'from'              => $this->getFrom(),
                 'personalizations'  => $this->getPersonalizations(),
+                'from'              => $this->getFrom(),
+                'reply_to'          => $this->getReplyTo(),
                 'subject'           => $this->getGlobalSubject(),
                 'content'           => $this->getContents(),
                 'attachments'       => $this->getAttachments(),
@@ -821,14 +844,13 @@ class Mail implements \JsonSerializable
                 'headers'           => $this->getGlobalHeaders(),
                 'categories'        => $this->getCategories(),
                 'custom_args'       => $this->getGlobalCustomArgs(),
-                'substitutions'     => $this->getGlobalSubstitutions(),
                 'send_at'           => $this->getGlobalSendAt(),
                 'batch_id'          => $this->getBatchId(),
                 'asm'               => $this->getASM(),
                 'ip_pool_name'      => $this->getIpPoolName(),
+                'substitutions'     => $this->getGlobalSubstitutions(),
                 'mail_settings'     => $this->getMailSettings(),
-                'tracking_settings' => $this->getTrackingSettings(),
-                'reply_to'          => $this->getReplyTo()
+                'tracking_settings' => $this->getTrackingSettings()
             ],
             function ($value) {
                 return $value !== null;
