@@ -1,13 +1,30 @@
 <?php namespace SendGrid\Mail;
 
-class ASM implements \JsonSerializable
+class Asm implements \JsonSerializable
 {
     private $group_id;
     private $groups_to_display;
 
+    public function __construct(
+        $group_id=null,
+        $groups_to_display=null
+    ) {
+        if ($group_id) {
+            $this->setGroupId($group_id);
+        }
+        if ($groups_to_display) {
+            $this->setGroupsToDisplay($groups_to_display);
+        }
+    }
+
     public function setGroupId($group_id)
     {
-        $this->group_id = $group_id;
+        if ($group_id instanceof GroupId) {
+            $this->group_id = $group_id->getGroupId();
+        } else {
+            $this->group_id = new GroupId($group_id);
+        }
+        return;
     }
 
     public function getGroupId()
@@ -15,9 +32,14 @@ class ASM implements \JsonSerializable
         return $this->group_id;
     }
 
-    public function setGroupsToDisplay($group_ids)
+    public function setGroupsToDisplay($groups_to_display)
     {
-        $this->groups_to_display = $group_ids;
+        if ($groups_to_display instanceof GroupsToDisplay) {
+            $this->groups_to_display = $groups_to_display->getGroupsToDisplay();
+        } else {
+            $this->groups_to_display = new GroupsToDisplay($groups_to_display);
+        }
+        return;
     }
 
     public function getGroupsToDisplay()

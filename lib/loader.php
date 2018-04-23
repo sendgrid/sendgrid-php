@@ -4,7 +4,7 @@
  */
 require_once __DIR__ . '/SendGrid.php';
 require_once __DIR__ . '/contacts/Recipients.php';
-require_once __DIR__ . '/mail/ASM.php';
+require_once __DIR__ . '/mail/Asm.php';
 require_once __DIR__ . '/mail/Attachment.php';
 require_once __DIR__ . '/mail/BatchId';
 require_once __DIR__ . '/mail/Bcc.php';
@@ -19,6 +19,8 @@ require_once __DIR__ . '/mail/EmailAddress.php';
 require_once __DIR__ . '/mail/Footer.php';
 require_once __DIR__ . '/mail/From.php';
 require_once __DIR__ . '/mail/Ganalytics.php';
+require_once __DIR__ . '/mail/GroupId.php';
+require_once __DIR__ . '/mail/GroupsToDisplay.php';
 require_once __DIR__ . '/mail/Header.php';
 require_once __DIR__ . '/mail/HtmlContent.php';
 require_once __DIR__ . '/mail/Mail.php';

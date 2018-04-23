@@ -789,12 +789,18 @@ class Mail implements \JsonSerializable
         return $this->batch_id;
     }
 
-    public function setASM($asm)
+    public function setAsm($group_id, $groups_to_display=null)
     {
-        $this->asm = $asm;
+        if ($group_id instanceof Asm) {
+            $asm = $group_id;
+            $this->asm = $asm;
+        } else {
+            $this->asm = new Asm($group_id, $groups_to_display);
+        }
+        return;
     }
 
-    public function getASM()
+    public function getAsm()
     {
         return $this->asm;
     }

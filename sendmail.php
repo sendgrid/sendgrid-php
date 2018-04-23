@@ -150,6 +150,9 @@ use \SendGrid\Mail\Section as Section;
 use \SendGrid\Mail\ReplyTo as ReplyTo;
 use \SendGrid\Mail\Category as Category;
 use \SendGrid\Mail\BatchId as BatchId;
+use \SendGrid\Mail\Asm as Asm;
+use \SendGrid\Mail\GroupId as GroupId;
+use \SendGrid\Mail\GroupsToDisplay as GroupsToDisplay;
 
 $from = new From("dx@example.com", "DX Team");
 $to = new To("elmer.thomas@sendgrid.com", "Elmer Thomas");
@@ -347,6 +350,18 @@ $email->setBatchId("MWQxZmIyODYtNjE1Ni0xMWU1LWI3ZTUtMDgwMDI3OGJkMmY2LWEzMmViMjYx
 
 $email->setReplyTo(new ReplyTo("dx+replyto@example.com", "DX Team Reply To"));
 // $email->setReplyTo("dx+replyto2@example.com", "DX Team Reply To 2");
+
+// $email->setAsm(1, [1, 2, 3, 4]);
+$asm = new Asm();
+$asm->setGroupId(2);
+$asm->setGroupsToDisplay([5,6,7,8]);
+// $asm->setGroupId(new GroupId(3));
+// $asm->setGroupsToDisplay(new GroupsToDisplay([9,10,11,12]));
+// $asm = new Asm(
+//     new GroupId(4),
+//     new GroupsToDisplay([13,14,15,16])
+// );
+$email->setAsm($asm);
 
 $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 echo json_encode($email, JSON_PRETTY_PRINT);
