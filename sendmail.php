@@ -160,6 +160,11 @@ use \SendGrid\Mail\BypassListManagement as BypassListManagement;
 use \SendGrid\Mail\Footer as Footer;
 use \SendGrid\Mail\SandBoxMode as SandBoxMode;
 use \SendGrid\Mail\SpamCheck as SpamCheck;
+use \SendGrid\Mail\TrackingSettings as TrackingSettings;
+use \SendGrid\Mail\ClickTracking as ClickTracking;
+use \SendGrid\Mail\OpenTracking as OpenTracking;
+use \SendGrid\Mail\SubscriptionTracking as SubscriptionTracking;
+use \SendGrid\Mail\Ganalytics as Ganalytics;
 
 $from = new From("dx@example.com", "DX Team");
 $to = new To("elmer.thomas@sendgrid.com", "Elmer Thomas");
@@ -385,6 +390,17 @@ $mail_settings->setSandBoxMode(new SandBoxMode(false));
 // $mail_settings->setSpamCheck(true, 1, "http://mydomain.com");
 $mail_settings->setSpamCheck(false);
 $email->setMailSettings($mail_settings);
+
+$tracking_settings = new TrackingSettings();
+// $tracking_settings->setClickTracking(true, true);
+$tracking_settings->setClickTracking(new ClickTracking(false, false));
+// $tracking_settings->setOpenTracking(true, "--sub--");
+$tracking_settings->setOpenTracking(new OpenTracking(false));
+// $tracking_settings->setSubscriptionTracking(true, "subscribe", "<bold>subscribe</bold>", "%%sub%%");
+$tracking_settings->setSubscriptionTracking(new SubscriptionTracking(false));
+// $tracking_settings->setGanalytics(true, "utm_source", "utm_medium", "utm_term", "utm_content", "utm_campaign");
+$tracking_settings->setGanalytics(new Ganalytics(false));
+$email->setTrackingSettings($tracking_settings);
 
 $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 echo json_encode($email, JSON_PRETTY_PRINT);

@@ -5,6 +5,12 @@ class ClickTracking implements \JsonSerializable
     private $enable;
     private $enable_text;
 
+    public function __construct($enable, $enable_text = null)
+    {
+        $this->setEnable($enable);
+        $this->setEnableText($enable_text);
+    }
+
     public function setEnable($enable)
     {
         $this->enable = $enable;
