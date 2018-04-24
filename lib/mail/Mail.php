@@ -807,7 +807,12 @@ class Mail implements \JsonSerializable
 
     public function setIpPoolName($ip_pool_name)
     {
-        $this->ip_pool_name = $ip_pool_name;
+        if ($ip_pool_name instanceof IpPoolName) {
+            $this->ip_pool_name = $ip_pool_name->getIpPoolName();
+        } else {
+            $this->ip_pool_name = new IpPoolName($ip_pool_name);
+        }
+        
     }
 
     public function getIpPoolName()

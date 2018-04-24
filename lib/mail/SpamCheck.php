@@ -6,6 +6,13 @@ class SpamCheck implements \JsonSerializable
     private $threshold;
     private $post_to_url;
 
+    public function __construct($enable, $threshold=null, $post_to_url=null)
+    {
+        $this->setEnable($enable);
+        $this->setThreshold($threshold);
+        $this->setPostToUrl($post_to_url);
+    }
+
     public function setEnable($enable)
     {
         $this->enable = $enable;

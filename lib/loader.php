@@ -23,6 +23,7 @@ require_once __DIR__ . '/mail/GroupId.php';
 require_once __DIR__ . '/mail/GroupsToDisplay.php';
 require_once __DIR__ . '/mail/Header.php';
 require_once __DIR__ . '/mail/HtmlContent.php';
+require_once __DIR__ . '/mail/IpPoolName.php';
 require_once __DIR__ . '/mail/Mail.php';
 require_once __DIR__ . '/mail/MailSettings.php';
 require_once __DIR__ . '/mail/OpenTracking.php';

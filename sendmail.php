@@ -153,6 +153,13 @@ use \SendGrid\Mail\BatchId as BatchId;
 use \SendGrid\Mail\Asm as Asm;
 use \SendGrid\Mail\GroupId as GroupId;
 use \SendGrid\Mail\GroupsToDisplay as GroupsToDisplay;
+use \SendGrid\Mail\IpPoolName as IpPoolName;
+use \SendGrid\Mail\MailSettings as MailSettings;
+use \SendGrid\Mail\BccSettings as BccSettings;
+use \SendGrid\Mail\BypassListManagement as BypassListManagement;
+use \SendGrid\Mail\Footer as Footer;
+use \SendGrid\Mail\SandBoxMode as SandBoxMode;
+use \SendGrid\Mail\SpamCheck as SpamCheck;
 
 $from = new From("dx@example.com", "DX Team");
 $to = new To("elmer.thomas@sendgrid.com", "Elmer Thomas");
@@ -362,6 +369,22 @@ $asm->setGroupsToDisplay([5,6,7,8]);
 //     new GroupsToDisplay([13,14,15,16])
 // );
 $email->setAsm($asm);
+
+// $email->setIpPoolName("23");
+$email->setIpPoolName(new IpPoolName("24"));
+
+$mail_settings = new MailSettings();
+// $mail_settings->setBccSettings(true, "bcc@sendgrid.com");
+$mail_settings->setBccSettings(new BccSettings(false));
+$mail_settings->setBypassListManagement(true);
+// $mail_settings->setBypassListManagement(new BypassListManagement(false));
+// $mail_settings->setFooter(true, "Footer", "<strong>Footer</strong>");
+$mail_settings->setFooter(new Footer(false));
+// $mail_settings->setSandBoxMode(true);
+$mail_settings->setSandBoxMode(new SandBoxMode(false));
+// $mail_settings->setSpamCheck(true, 1, "http://mydomain.com");
+$mail_settings->setSpamCheck(false);
+$email->setMailSettings($mail_settings);
 
 $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 echo json_encode($email, JSON_PRETTY_PRINT);

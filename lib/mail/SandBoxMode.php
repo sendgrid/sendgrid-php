@@ -4,6 +4,11 @@ class SandBoxMode implements \JsonSerializable
 {
     private $enable;
 
+    public function __construct($enable)
+    {
+        $this->setEnable($enable);
+    }
+
     public function setEnable($enable)
     {
         $this->enable = $enable;

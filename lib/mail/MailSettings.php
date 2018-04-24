@@ -8,9 +8,15 @@ class MailSettings implements \JsonSerializable
     private $sandbox_mode;
     private $spam_check;
 
-    public function setBccSettings($bcc)
+    public function setBccSettings($enable, $email=null)
     {
-        $this->bcc = $bcc;
+        if ($enable instanceof BccSettings) {
+            $bcc = $enable;
+            $this->bcc = $bcc;
+            return;
+        }
+        $this->bcc = new BccSettings($enable, $email);
+        return;
     }
 
     public function getBccSettings()
@@ -20,7 +26,11 @@ class MailSettings implements \JsonSerializable
 
     public function setBypassListManagement($bypass_list_management)
     {
-        $this->bypass_list_management = $bypass_list_management;
+        if ($bypass_list_management instanceof BypassListManagement) {
+            $this->bypass_list_management = $bypass_list_management;
+            return;
+        }
+        $this->bypass_list_management = new BypassListManagement($bypass_list_management);
     }
 
     public function getBypassListManagement()
@@ -28,9 +38,15 @@ class MailSettings implements \JsonSerializable
         return $this->bypass_list_management;
     }
 
-    public function setFooter($footer)
+    public function setFooter($enable, $text=null, $html=null)
     {
-        $this->footer = $footer;
+        if ($enable instanceof Footer) {
+            $footer = $enable;
+            $this->footer = $footer;
+            return;
+        }
+        $this->footer = new Footer($enable, $text, $html);
+        return;
     }
 
     public function getFooter()
@@ -41,9 +57,9 @@ class MailSettings implements \JsonSerializable
     public function setSandboxMode($sandbox_mode)
     {
         if ($sandbox_mode instanceof SandBoxMode) {
-            $this->sandbox_mode = $sandbox_mode->getEnable();
-        } else {
             $this->sandbox_mode = $sandbox_mode;
+        } else {
+            $this->sandbox_mode = new SandBoxMode($sandbox_mode);
         }
     }
 
@@ -62,9 +78,13 @@ class MailSettings implements \JsonSerializable
         $this->setSandboxMode(false);
     }
 
-    public function setSpamCheck($spam_check)
+    public function setSpamCheck($enable, $threshold=null, $post_to_url=null)
     {
-        $this->spam_check = $spam_check;
+        if ($enable instanceof SpamCheck) {
+            $spam_check = $enable;
+            $this->spam_check = $spam_check;
+        }
+        $this->spam_check = new SpamCheck($enable, $threshold, $post_to_url);
     }
 
     public function getSpamCheck()
@@ -74,15 +94,12 @@ class MailSettings implements \JsonSerializable
 
     public function jsonSerialize()
     {
-        $sandbox = new SandBoxMode();
-        $sandbox->setEnable($this->getSandboxMode());
-
         return array_filter(
             [
                 'bcc'                    => $this->getBccSettings(),
                 'bypass_list_management' => $this->getBypassListManagement(),
                 'footer'                 => $this->getFooter(),
-                'sandbox_mode'           => $sandbox,
+                'sandbox_mode'           => $this->getSandboxMode(),
                 'spam_check'             => $this->getSpamCheck()
             ],
             function ($value) {

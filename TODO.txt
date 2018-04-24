@@ -1,0 +1,2 @@
+Make sure all constructors are using setters
+Make sure all internal class variables are private
