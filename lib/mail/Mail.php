@@ -36,8 +36,7 @@ class Mail implements \JsonSerializable
     private $mail_settings;
     private $tracking_settings;
     private $reply_to;
-
-    public $personalization = null;
+    private $personalization;
 
     public function __construct(
         $from = null,
@@ -47,50 +46,54 @@ class Mail implements \JsonSerializable
         $htmlContent = null,
         array $globalSubstitutions = null
     ) {
-        if (!$from
-            && !$to
-            && !$subject
-            && !$plainTextContent
-            && !$htmlContent
-            && !$globalSubstitutions
+        if (!isset($from)
+            && !isset($to)
+            && !isset($subject)
+            && !isset($plainTextContent)
+            && !isset($htmlContent)
+            && !isset($globalSubstitutions)
         ) {
             return;
         }
-        $this->setFrom($from);
-        if (!is_array($subject)) {
-            $this->setSubject($subject);
-            $subjectCount = null;
-        } else {
-            $subjectCount = 1;
-        }
-        if (!is_array($to)) {
-            $to = [ $to ];
-        }
-        foreach ($to as $email) {
-            $personalization = new Personalization();
-            $personalization->addTo($email);
-            if ($subs = $email->getSubstitions()) {
-                foreach ($subs as $key => $value) {
-                    $personalization->addSubstitution($key, $value);
-                }
-            }
-            if (is_array($subject)) {
-                $personalization->setSubject($subject[$subjectCount - 1]);
-                $subjectCount++;
+        if(isset($from)) $this->setFrom($from);
+        if(isset($subject)) {
+            if (!is_array($subject)) {
+                $this->setSubject($subject);
+                $subjectCount = null;
             } else {
-                if ($subject = $email->getSubject()) {
-                    $personalization->setSubject($subject);
-                }
+                $subjectCount = 1;
             }
-            if (is_array($globalSubstitutions)) {
-                foreach ($globalSubstitutions as $key => $value) {
-                    $personalization->addSubstitution($key, $value);
-                }
-            }
-            $this->addPersonalization($personalization);
         }
-        $this->addContent($plainTextContent);
-        $this->addContent($htmlContent);
+        if(isset($to)) {
+            if (!is_array($to)) {
+                $to = [ $to ];
+            }
+            foreach ($to as $email) {
+                $personalization = new Personalization();
+                $personalization->addTo($email);
+                if ($subs = $email->getSubstitions()) {
+                    foreach ($subs as $key => $value) {
+                        $personalization->addSubstitution($key, $value);
+                    }
+                }
+                if (is_array($subject)) {
+                    $personalization->setSubject($subject[$subjectCount - 1]);
+                    $subjectCount++;
+                } else {
+                    if ($subject = $email->getSubject()) {
+                        $personalization->setSubject($subject);
+                    }
+                }
+                if (is_array($globalSubstitutions)) {
+                    foreach ($globalSubstitutions as $key => $value) {
+                        $personalization->addSubstitution($key, $value);
+                    }
+                }
+                $this->addPersonalization($personalization);
+            }           
+        }
+        if(isset($plainTextContent)) $this->addContent($plainTextContent);
+        if(isset($htmlContent)) $this->addContent($htmlContent);
     }
 
     private function addRecipientEmail(

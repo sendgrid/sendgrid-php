@@ -9,12 +9,8 @@ class Asm implements \JsonSerializable
         $group_id=null,
         $groups_to_display=null
     ) {
-        if ($group_id) {
-            $this->setGroupId($group_id);
-        }
-        if ($groups_to_display) {
-            $this->setGroupsToDisplay($groups_to_display);
-        }
+        if(isset($group_id)) $this->setGroupId($group_id);
+        if(isset($groups_to_display)) $this->setGroupsToDisplay($groups_to_display);
     }
 
     public function setGroupId($group_id)

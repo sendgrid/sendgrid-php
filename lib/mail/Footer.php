@@ -6,11 +6,11 @@ class Footer implements \JsonSerializable
     private $text;
     private $html;
 
-    public function __construct($enable, $text=null, $html=null)
+    public function __construct($enable=null, $text=null, $html=null)
     {
-        $this->setEnable($enable);
-        $this->setText($text);
-        $this->setHtml($html);
+        if(isset($enable)) $this->setEnable($enable);
+        if(isset($text)) $this->setText($text);
+        if(isset($html)) $this->setHtml($html);
     }
 
     public function setEnable($enable)

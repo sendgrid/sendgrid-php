@@ -5,10 +5,10 @@ class OpenTracking implements \JsonSerializable
     private $enable;
     private $substitution_tag;
 
-    public function __construct($enable, $substitution_tag=null)
+    public function __construct($enable=null, $substitution_tag=null)
     {
-        $this->setEnable($enable);
-        $this->setSubstitutionTag($substitution_tag);
+        if(isset($enable)) $this->setEnable($enable);
+        if(isset($substitution_tag)) $this->setSubstitutionTag($substitution_tag);
     }
 
     public function setEnable($enable)

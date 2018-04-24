@@ -9,14 +9,20 @@ class Ganalytics implements \JsonSerializable
     private $utm_content;
     private $utm_campaign;
 
-    public function __construct($enable, $utm_source=null, $utm_medium=null, $utm_term=null, $utm_content=null, $utm_campaign=null)
-    {
-        $this->setEnable($enable);
-        $this->setCampaignSource($utm_source);
-        $this->setCampaignMedium($utm_medium);
-        $this->setCampaignTerm($utm_term);
-        $this->setCampaignContent($utm_content);
-        $this->setCampaignName($utm_campaign);
+    public function __construct(
+        $enable=null,
+        $utm_source=null,
+        $utm_medium=null,
+        $utm_term=null,
+        $utm_content=null,
+        $utm_campaign=null
+    ) {
+        if(isset($enable)) $this->setEnable($enable);
+        if(isset($utm_source)) $this->setCampaignSource($utm_source);
+        if(isset($utm_medium)) $this->setCampaignMedium($utm_medium);
+        if(isset($utm_term)) $this->setCampaignTerm($utm_term);
+        if(isset($utm_content)) $this->setCampaignContent($utm_content);
+        if(isset($utm_campaign)) $this->setCampaignName($utm_campaign);
     }
 
     public function setEnable($enable)

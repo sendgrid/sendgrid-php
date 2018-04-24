@@ -2,11 +2,11 @@
 
 class SendAt implements \JsonSerializable
 {
-    public $send_at;
+    private $send_at;
 
-    public function __construct($send_at)
+    public function __construct($send_at=null)
     {
-        $this->send_at = $send_at;
+        if(isset($send_at)) $this->setSendAt($send_at);
     }
 
     public function getSendAt()

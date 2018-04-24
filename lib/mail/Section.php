@@ -5,12 +5,10 @@ class Section implements \JsonSerializable
     private $key;
     private $value;
 
-    public function __construct(
-        $key,
-        $value
-    ) {
-        $this->key = $key;
-        $this->value  = $value;
+    public function __construct($key=null, $value=null)
+    {
+        if(isset($key)) $this->setKey($key);
+        if(isset($value)) $this->setValue($value);
     }
 
     public function setKey($key)

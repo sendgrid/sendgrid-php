@@ -2,11 +2,11 @@
 
 class Subject implements \JsonSerializable
 {
-    public $subject;
+    private $subject;
 
-    public function __construct($subject)
+    public function __construct($subject=null)
     {
-        $this->subject = $subject;
+        if(isset($subject)) $this->setSubject($subject);
     }
 
     public function getSubject()

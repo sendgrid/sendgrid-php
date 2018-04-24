@@ -2,11 +2,11 @@
 
 class BatchId implements \JsonSerializable
 {
-    public $batch_id;
+    private $batch_id;
 
-    public function __construct($batch_id)
+    public function __construct($batch_id=null)
     {
-        $this->batch_id = $batch_id;
+        if(isset($batch_id)) $this->setBatchId($batch_id);
     }
 
     public function getBatchId()

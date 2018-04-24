@@ -2,14 +2,11 @@
 
 class GroupId implements \JsonSerializable
 {
-    public $group_id;
+    private $group_id;
 
     public function __construct(int $group_id=null)
     {
-        if ($group_id) {
-            $this->group_id = $group_id;
-        }
-        return;
+        if (isset($group_id)) $this->setGroupId($group_id);
     }
 
     public function getGroupId()

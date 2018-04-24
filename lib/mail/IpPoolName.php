@@ -2,11 +2,11 @@
 
 class IpPoolName implements \JsonSerializable
 {
-    public $ip_pool_name;
+    private $ip_pool_name;
 
-    public function __construct(string $ip_pool_name)
+    public function __construct(string $ip_pool_name=null)
     {
-        $this->ip_pool_name = $ip_pool_name;
+        if(isset($ip_pool_name)) $this->setIpPoolName($ip_pool_name);
     }
 
     public function getIpPoolName()

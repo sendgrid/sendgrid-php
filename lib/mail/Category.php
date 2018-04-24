@@ -2,11 +2,11 @@
 
 class Category implements \JsonSerializable
 {
-    public $category;
+    private $category;
 
-    public function __construct(string $category)
+    public function __construct(string $category=null)
     {
-        $this->category = $category;
+        if(isset($category)) $this->setCategory($category);
     }
 
     public function getCategory()

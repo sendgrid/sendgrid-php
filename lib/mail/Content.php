@@ -8,13 +8,13 @@ abstract class MimeType
 
 class Content implements \JsonSerializable
 {
-    public $type;
-    public $value;
+    private $type;
+    private $value;
 
-    public function __construct($type, $value)
+    public function __construct($type=null, $value=null)
     {
-        $this->type  = $type;
-        $this->value = mb_convert_encoding($value, 'UTF-8', 'UTF-8');
+        if(isset($type)) $this->setType($type);
+        if(isset($value)) $this->setValue($value);
     }
 
     public function getType()

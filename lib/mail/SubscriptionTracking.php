@@ -7,12 +7,12 @@ class SubscriptionTracking implements \JsonSerializable
     private $html;
     private $substitution_tag;
 
-    public function __construct($enable, $text=null, $html=null, $substitution_tag=null)
+    public function __construct($enable=null, $text=null, $html=null, $substitution_tag=null)
     {
-        $this->setEnable($enable);
-        $this->setText($text);
-        $this->setHtml($html);
-        $this->setSubstitutionTag($substitution_tag);
+        if(isset($enable)) $this->setEnable($enable);
+        if(isset($text)) $this->setText($text);
+        if(isset($html)) $this->setHtml($html);
+        if(isset($substitution_tag)) $this->setSubstitutionTag($substitution_tag);
     }
 
     public function setEnable($enable)

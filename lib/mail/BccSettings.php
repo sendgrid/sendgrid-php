@@ -5,10 +5,10 @@ class BccSettings implements \JsonSerializable
     private $enable;
     private $email;
 
-    public function __construct($enable, $email=null)
+    public function __construct($enable=null, $email=null)
     {
-        $this->setEnable($enable);
-        $this->setEmail($email);
+        if(isset($enable)) $this->setEnable($enable);
+        if(isset($email)) $this->setEmail($email);
     }
 
     public function setEnable($enable)

@@ -7,6 +7,18 @@ class TrackingSettings implements \JsonSerializable
     private $subscription_tracking;
     private $ganalytics;
 
+    public function __construct(
+        $click_tracking=null,
+        $open_tracking=null,
+        $subscription_tracking=null,
+        $ganalytics=null
+    ) {
+        if(isset($click_tracking)) $this->setClickTracking($click_trackingc);
+        if(isset($open_tracking)) $this->setOpenTracking($open_tracking);
+        if(isset($subscription_tracking)) $this->setSubscriptionTracking($subscription_tracking);
+        if(isset($ganalytics)) $this->setGanalytics($ganalytics);
+    }
+
     public function setClickTracking($enable, $enable_text=null)
     {
         if ($enable instanceof ClickTracking) {

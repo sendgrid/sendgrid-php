@@ -4,9 +4,9 @@ class BypassListManagement implements \JsonSerializable
 {
     private $enable;
 
-    public function __construct($enable)
+    public function __construct($enable=null)
     {
-        $this->setEnable($enable);
+        if(isset($enable)) $this->setEnable($enable);
     }
 
     public function setEnable($enable)

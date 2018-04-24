@@ -8,6 +8,20 @@ class MailSettings implements \JsonSerializable
     private $sandbox_mode;
     private $spam_check;
 
+    public function __construct(
+        $bcc=null,
+        $bypass_list_management=null,
+        $footer=null,
+        $sandbox_mode=null,
+        $spam_check=null
+    ) {
+        if(isset($bcc)) $this->setBccSettings($bcc);
+        if(isset($bypass_list_management)) $this->setBypassListManagement($bypass_list_management);
+        if(isset($footer)) $this->setFooter($footer);
+        if(isset($sandbox_mode)) $this->setSandboxMode($sandbox_mode);
+        if(isset($spam_check)) $this->setSpamCheck($spam_check);
+    }
+    
     public function setBccSettings($enable, $email=null)
     {
         if ($enable instanceof BccSettings) {

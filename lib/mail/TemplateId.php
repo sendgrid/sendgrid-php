@@ -2,11 +2,11 @@
 
 class TemplateId implements \JsonSerializable
 {
-    public $template_id;
+    private $template_id;
 
-    public function __construct($template_id)
+    public function __construct($template_id=null)
     {
-        $this->template_id = $template_id;
+        if(isset($template_id)) $this->setTemplateId($template_id);
     }
 
     public function getTemplateId()

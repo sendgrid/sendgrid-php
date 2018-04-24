@@ -6,15 +6,15 @@ class EmailAddress implements \JsonSerializable
     private $email;
 
     public function __construct(
-        $emailAddress,
-        $name = null,
-        $substitutions = null,
-        $subject = null
+        $emailAddress=null,
+        $name=null,
+        $substitutions=null,
+        $subject=null
     ) {
-        $this->email = $emailAddress;
-        $this->name  = $name;
-        $this->substitutions = $substitutions;
-        $this->subject = $subject;
+        if(isset($emailAddress)) $this->setEmailAddress($emailAddress);
+        if(isset($name)) $this->setName($name);
+        if(isset($substitutions)) $this->setSubstitutions($substitutions);
+        if(isset($subject)) $this->setSubject($subject);
     }
 
     public function getEmail()
