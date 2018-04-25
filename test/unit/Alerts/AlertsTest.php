@@ -1,6 +1,6 @@
 <?php
 
-namespace SendGrid\Tests\Alerts;
+namespace SendGrid\Tests;
 
 use SendGrid\Tests\BaseTestClass;
 
