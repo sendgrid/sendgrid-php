@@ -4,7 +4,7 @@ class Category implements \JsonSerializable
 {
     private $category;
 
-    public function __construct(string $category=null)
+    public function __construct($category=null)
     {
         if(isset($category)) $this->setCategory($category);
     }
@@ -14,7 +14,7 @@ class Category implements \JsonSerializable
         return $this->category;
     }
 
-    public function setCategory(string $category)
+    public function setCategory($category)
     {
         $this->category = $category;
     }
