@@ -1,6 +1,6 @@
 <?php
 
-namespace SendGridPhp\Tests;
+namespace SendGrid\Tests;
 
 use PHPUnit\Framework\TestCase;
 use SendGrid;
@@ -82,5 +82,12 @@ class BaseTestClass extends TestCase
             sleep(15);
             print("\nPrism Started\n\n");
         }
+    }
+
+    public static function tearDownAfterClass()
+    {
+        $command = 'kill '.self::$pid;
+        exec($command);
+        print("\nPrism shut down");
     }
 }

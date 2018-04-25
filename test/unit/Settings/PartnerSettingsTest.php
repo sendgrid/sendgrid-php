@@ -1,8 +1,8 @@
 <?php
 
-namespace SendGridPhp\Tests\Settings;
+namespace SendGrid\Tests\Settings;
 
-use SendGridPhp\Tests\BaseTestClass;
+use SendGrid\Tests\BaseTestClass;
 
 class PartnerSettingsTest extends BaseTestClass
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace SendGrid;
+namespace SendGrid\Tests;
 
 use PHPUnit\Framework\TestCase;
 

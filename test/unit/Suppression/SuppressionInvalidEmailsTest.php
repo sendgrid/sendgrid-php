@@ -1,8 +1,8 @@
 <?php
 
-namespace SendGridPhp\Tests\Suppression;
+namespace SendGrid\Tests\Suppression;
 
-use SendGridPhp\Tests\BaseTestClass;
+use SendGrid\Tests\BaseTestClass;
 
 class SuppressionInvalidEmailsTest extends BaseTestClass
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace SendGridPhp\Tests\Ip;
+namespace SendGrid\Tests\Ip;
 
-use SendGridPhp\Tests\BaseTestClass;
+use SendGrid\Tests\BaseTestClass;
 
 class IpsTest extends BaseTestClass
 {

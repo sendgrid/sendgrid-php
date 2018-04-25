@@ -1,8 +1,8 @@
 <?php
 
-namespace SendGridPhp\Tests\Contacts;
+namespace SendGrid\Tests\Contacts;
 
-use SendGridPhp\Tests\BaseTestClass;
+use SendGrid\Tests\BaseTestClass;
 
 class ContactDbTest extends BaseTestClass
 {

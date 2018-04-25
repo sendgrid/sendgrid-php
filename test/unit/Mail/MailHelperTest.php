@@ -1,214 +1,354 @@
 <?php
 
-use SendGrid\Helpers\Mail\Model\ASM;
-use SendGrid\Helpers\Mail\Model\Attachment;
-use SendGrid\Helpers\Mail\Model\BccSettings;
-use SendGrid\Helpers\Mail\Model\BypassListManagement;
-use SendGrid\Helpers\Mail\Model\ClickTracking;
-use SendGrid\Helpers\Mail\Model\EmailAddress;
-use SendGrid\Helpers\Mail\Model\Footer;
-use SendGrid\Helpers\Mail\Model\Ganalytics;
-use SendGrid\Helpers\Mail\Model\HtmlContent;
-use SendGrid\Helpers\Mail\Model\Mail;
-use SendGrid\Helpers\Mail\Model\MailSettings;
-use SendGrid\Helpers\Mail\Model\OpenTracking;
-use SendGrid\Helpers\Mail\Model\Personalization;
-use SendGrid\Helpers\Mail\Model\PlainTextContent;
-use SendGrid\Helpers\Mail\Model\ReplyTo;
-use SendGrid\Helpers\Mail\Model\SandBoxMode;
-use SendGrid\Helpers\Mail\Model\SpamCheck;
-use SendGrid\Helpers\Mail\Model\SubscriptionTracking;
-use SendGrid\Helpers\Mail\Model\TrackingSettings;
+use \SendGrid\Mail\EmailAddress as EmailAddress;
+use \SendGrid\Mail\From as From;
+use \SendGrid\Mail\To as To;
+use \SendGrid\Mail\Subject as Subject;
+use \SendGrid\Mail\MimeType as MimeType;
+use \SendGrid\Mail\PlainTextContent as PlainTextContent;
+use \SendGrid\Mail\HtmlContent as HtmlContent;
+use \SendGrid\Mail\Mail as Mail;
+use \SendGrid\Mail\Cc as Cc;
+use \SendGrid\Mail\Bcc as Bcc;
+use \SendGrid\Mail\Header as Header;
+use \SendGrid\Mail\Substitution as Substitution;
+use \SendGrid\Mail\CustomArg as CustomArg;
+use \SendGrid\Mail\SendAt as SendAt;
+use \SendGrid\Mail\Content as Content;
+use \SendGrid\Mail\Attachment as Attachment;
+use \SendGrid\Mail\TemplateId as TemplateId;
+use \SendGrid\Mail\Section as Section;
+use \SendGrid\Mail\ReplyTo as ReplyTo;
+use \SendGrid\Mail\Category as Category;
+use \SendGrid\Mail\BatchId as BatchId;
+use \SendGrid\Mail\Asm as Asm;
+use \SendGrid\Mail\GroupId as GroupId;
+use \SendGrid\Mail\GroupsToDisplay as GroupsToDisplay;
+use \SendGrid\Mail\IpPoolName as IpPoolName;
+use \SendGrid\Mail\MailSettings as MailSettings;
+use \SendGrid\Mail\BccSettings as BccSettings;
+use \SendGrid\Mail\BypassListManagement as BypassListManagement;
+use \SendGrid\Mail\Footer as Footer;
+use \SendGrid\Mail\SandBoxMode as SandBoxMode;
+use \SendGrid\Mail\SpamCheck as SpamCheck;
+use \SendGrid\Mail\TrackingSettings as TrackingSettings;
+use \SendGrid\Mail\ClickTracking as ClickTracking;
+use \SendGrid\Mail\OpenTracking as OpenTracking;
+use \SendGrid\Mail\SubscriptionTracking as SubscriptionTracking;
+use \SendGrid\Mail\Ganalytics as Ganalytics;
 
-class MailTest_Mail extends \PHPUnit_Framework_TestCase
+class MailTest_Mail extends \PHPUnit\Framework\TestCase
 {
-    public function testBaseLineExample()
-    {
-        $from = new EmailAddress("test@example.com");
-        $to = new EmailAddress("test@example.com");
-        $subject = "Hello World from the SendGrid PHP Library";
-        $content = new PlainTextContent("some text here");
-        $mail = new Mail($from, $subject, $to, $content);
-       
-        $content = new HtmlContent("<html><body>some text here</body></html>");
-        $mail->addContent($content);
-
-        $json = json_encode($mail);
-
-        $this->assertEquals($json, '{"from":{"email":"test@example.com"},"personalizations":[{"to":[{"email":"test@example.com"}]}],"subject":"Hello World from the SendGrid PHP Library","content":[{"type":"text\/plain","value":"some text here"},{"type":"text\/html","value":"<html><body>some text here<\/body><\/html>"}]}');
-    }
-
     public function testKitchenSinkExample()
     {
-        $from = new EmailAddress("test@example.com", "DX");
-        $subject = "Hello World from the SendGrid PHP Library";
-        $to = new EmailAddress("test@example.com", "Example User");
-        $content = new PlainTextContent("some text here");
-        $mail = new Mail($from, $subject, $to, $content);
+        $email = new Mail();
 
-        $email = new EmailAddress("test@example.com", "Example User");
-        $mail->personalization[0]->addTo($email);
-        $email = new EmailAddress("test@example.com", "Example User");
-        $mail->personalization[0]->addCc($email);
-        $email = new EmailAddress("test@example.com", "Example User");
-        $mail->personalization[0]->addCc($email);
-        $email = new EmailAddress("test@example.com", "Example User");
-        $mail->personalization[0]->addBcc($email);
-        $email = new EmailAddress("test@example.com", "Example User");
-        $mail->personalization[0]->addBcc($email);
-        $mail->personalization[0]->setSubject("Hello World from the SendGrid PHP Library");
-        $mail->personalization[0]->addHeader("X-Test", "test");
-        $mail->personalization[0]->addHeader("X-Mock", "true");
-        $mail->personalization[0]->addSubstitution("%name%", "Example User");
-        $mail->personalization[0]->addSubstitution("%city%", "Denver");
-        $mail->personalization[0]->addCustomArg("user_id", "343");
-        $mail->personalization[0]->addCustomArg("type", "marketing");
-        $mail->personalization[0]->setSendAt(1443636843);
+        // For a detailed description of each of these settings, please see the [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
+        $email->setSubject("Sending with SendGrid is Fun 2");
+    
+        $email->addTo("test@example.com", "Example User");
+        $email->addTo("test+1@example.com", "Example User1");
+        $toEmails = [ 
+            "test+2@example.com" => "Example User2",
+            "test+3@example.com" => "Example User3"
+        ];
+        $email->addTos($toEmails);
+    
+        $email->addCc("test+4@example.com", "Example User4");
+        $ccEmails = [ 
+            "test+5@example.com" => "Example User5",
+            "test+6@example.com" => "Example User6"
+        ];
+        $email->addCcs($ccEmails);
+    
+        $email->addBcc("test+7@example.com", "Example User7");
+        $bccEmails = [ 
+            "test+8@example.com" => "Example User8",
+            "test+9@example.com" => "Example User9"
+        ];
+        $email->addBccs($bccEmails);
+   
+        $email->addHeader("X-Test1", "Test1");
+        $email->addHeader("X-Test2", "Test2");
+        $headers = [
+            "X-Test3" => "Test3",
+            "X-Test4" => "Test4",
+        ];
+        $email->addHeaders($headers);
+     
+        $email->addSubstitution("%name1%", "Example Name 1");
+        $email->addSubstitution("%city1%", "Denver");
+        $substitutions = [
+            "%name2%" => "Example Name 2",
+            "%city2%" => "Orange"
+        ];
+        $email->addSubstitutions($substitutions);
 
-        $personalization1 = new Personalization();
-        $email = new EmailAddress("test@example.com", "Example User");
-        $personalization1->addTo($email);
-        $email = new EmailAddress("test@example.com", "Example User");
-        $personalization1->addTo($email);
-        $email = new EmailAddress("test@example.com", "Example User");
-        $personalization1->addCc($email);
-        $email = new EmailAddress("test@example.com", "Example User");
-        $personalization1->addCc($email);
-        $email = new EmailAddress("test@example.com", "Example User");
-        $personalization1->addBcc($email);
-        $email = new EmailAddress("test@example.com", "Example User");
-        $personalization1->addBcc($email);
-        $personalization1->setSubject("Hello World from the SendGrid PHP Library");
-        $personalization1->addHeader("X-Test", "test");
-        $personalization1->addHeader("X-Mock", "true");
-        $personalization1->addSubstitution("%name%", "Example User");
-        $personalization1->addSubstitution("%city%", "Denver");
-        $personalization1->addCustomArg("user_id", "343");
-        $personalization1->addCustomArg("type", "marketing");
-        $personalization1->setSendAt(1443636843);
-        $mail->addPersonalization($personalization1);
+        $email->addCustomArg("marketing1", "false");
+        $email->addCustomArg("transactional1", "true");
+        $email->addCustomArg("category", "name");
+        $customArgs = [
+            "marketing2" => "true",
+            "transactional2" => "false",
+            "category" => "name"
+        ];
+        $email->addCustomArgs($customArgs);
 
-        $content = new HtmlContent("<html><body>some text here</body></html>");
-        $mail->addContent($content);
+        $email->setSendAt(1461775051);
 
-        $attachment = new Attachment();
-        $attachment->setContent("TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2NpbmcgZWxpdC4gQ3JhcyBwdW12");
-        $attachment->setType("application/pdf");
-        $attachment->setFilename("balance_001.pdf");
-        $attachment->setDisposition("attachment");
-        $attachment->setContentId("Balance Sheet");
-        $mail->addAttachment($attachment);
+        // The values below this comment are global to entire message
 
-        $attachment2 = new Attachment();
-        $attachment2->setContent("BwdW");
-        $attachment2->setType("image/png");
-        $attachment2->setFilename("banner.png");
-        $attachment2->setDisposition("inline");
-        $attachment2->setContentId("Banner");
-        $mail->addAttachment($attachment2);
+        $email->setFrom("test@example.com", "DX");
 
-        $attachment3 = new Attachment();
-        $attachment3->setContentPath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'test.txt');
-        $attachment3->setType('text/plain');
-        $attachment3->setDisposition('attachment');
-        $attachment3->setContentID('My text');
-        $mail->addAttachment($attachment3);
+        $email->setGlobalSubject("Sending with SendGrid is Fun and Global 2");
 
-        $mail->setTemplateId("439b6d66-4408-4ead-83de-5c83c2ee313a");
+        $email->addContent(MimeType::Text, "and easy to do anywhere, even with PHP");
+        $email->addContent(MimeType::Html, "<strong>and easy to do anywhere, even with PHP</strong>");
+        $contents = [
+            "text/calendar" => "Party Time!!",
+            "text/calendar2" => "Party Time 2!!"
+        ];
+        $email->addContents($contents);
 
-        $mail->addSection("%section1%", "Substitution Text for Section 1");
-        $mail->addSection("%section2%", "Substitution Text for Section 2");
+        $email->addAttachment(
+            "base64 encoded content1",
+            "image/png",
+            "banner.png",
+            "inline",
+            "Banner"
+        );
+        $attachments = [
+            [   
+                "base64 encoded content2",
+                "banner2.jpeg",
+                "image/jpeg",
+                "attachment",
+                "Banner 3"
+            ],
+            [
+                "base64 encoded content3",
+                "banner3.gif",
+                "image/gif",
+                "inline",
+                "Banner 3"
+            ]
+        ];
+        $email->addAttachments($attachments);
 
-        $mail->addHeader("X-Test1", "1");
-        $mail->addHeader("X-Test2", "2");
+        $email->setTemplateId("13b8f94f-bcae-4ec6-b752-70d6cb59f932");
 
-        $mail->addCategory("May");
-        $mail->addCategory("2016");
+        $email->addGlobalHeader("X-Day", "Monday");
+        $globalHeaders = [
+            "X-Month" => "January",
+            "X-Year" => "2017"
+        ];
+        $email->addGlobalHeaders($globalHeaders);
 
-        $mail->addCustomArg("campaign", "welcome");
-        $mail->addCustomArg("weekday", "morning");
+        $email->addSection("%section1%", "Substitution for Section 1 Tag");
+        $sections = [
+            "%section3%" => "Substitution for Section 3 Tag",
+            "%section4%" => "Substitution for Section 4 Tag"
+        ];
+        $email->addSections($sections);
 
-        $mail->setSendAt(1443636842);
+        $email->addCategory("Category 1");
+        $categories = [
+            "Category 2",
+            "Category 3"
+        ];
+        $email->addCategories($categories);
 
-        $asm = new ASM();
-        $asm->setGroupId(99);
-        $asm->setGroupsToDisplay([4,5,6,7,8]);
-        $mail->setASM($asm);
+        $email->setBatchId("MWQxZmIyODYtNjE1Ni0xMWU1LWI3ZTUtMDgwMDI3OGJkMmY2LWEzMmViMjYxMw");
 
-        $mail->setIpPoolName("23");
+        $email->setReplyTo("dx+replyto2@example.com", "DX Team Reply To 2");
+
+        $email->setAsm(1, [1, 2, 3, 4]);
+
+        $email->setIpPoolName("23");
 
         $mail_settings = new MailSettings();
-        $bcc_settings = new BccSettings();
-        $bcc_settings->setEnable(true);
-        $bcc_settings->setEmail("test@example.com");
-        $mail_settings->setBccSettings($bcc_settings);
-        $sandbox_mode = new SandBoxMode();
-        $sandbox_mode->setEnable(true);
-        $mail_settings->setSandboxMode($sandbox_mode);
-        $bypass_list_management = new BypassListManagement();
-        $bypass_list_management->setEnable(true);
-        $mail_settings->setBypassListManagement($bypass_list_management);
-        $footer = new Footer();
-        $footer->setEnable(true);
-        $footer->setText("Footer Text");
-        $footer->setHtml("<html><body>Footer Text</body></html>");
-        $mail_settings->setFooter($footer);
-        $spam_check = new SpamCheck();
-        $spam_check->setEnable(true);
-        $spam_check->setThreshold(1);
-        $spam_check->setPostToUrl("https://spamcatcher.sendgrid.com");
-        $mail_settings->setSpamCheck($spam_check);
-        $mail->setMailSettings($mail_settings);
+        $mail_settings->setBccSettings(true, "bcc@example.com");
+        $mail_settings->setBypassListManagement(true);
+        $mail_settings->setFooter(true, "Footer", "<strong>Footer</strong>");
+        $mail_settings->setSandBoxMode(true);
+        $mail_settings->setSpamCheck(true, 1, "http://mydomain.com");
+        $email->setMailSettings($mail_settings);
 
         $tracking_settings = new TrackingSettings();
-        $click_tracking = new ClickTracking();
-        $click_tracking->setEnable(true);
-        $click_tracking->setEnableText(true);
-        $tracking_settings->setClickTracking($click_tracking);
-        $open_tracking = new OpenTracking();
-        $open_tracking->setEnable(true);
-        $open_tracking->setSubstitutionTag("Optional tag to replace with the open image in the body of the message");
-        $tracking_settings->setOpenTracking($open_tracking);
-        $subscription_tracking = new SubscriptionTracking();
-        $subscription_tracking->setEnable(true);
-        $subscription_tracking->setText("text to insert into the text/plain portion of the message");
-        $subscription_tracking->setHtml("<html><body>html to insert into the text/html portion of the message</body></html>");
-        $subscription_tracking->setSubstitutionTag("Optional tag to replace with the open image in the body of the message");
-        $tracking_settings->setSubscriptionTracking($subscription_tracking);
-        $ganalytics = new Ganalytics();
-        $ganalytics->setEnable(true);
-        $ganalytics->setCampaignSource("some source");
-        $ganalytics->setCampaignTerm("some term");
-        $ganalytics->setCampaignContent("some content");
-        $ganalytics->setCampaignName("some name");
-        $ganalytics->setCampaignMedium("some medium");
-        $tracking_settings->setGanalytics($ganalytics);
-        $mail->setTrackingSettings($tracking_settings);
+        $tracking_settings->setClickTracking(true, true);
+        $tracking_settings->setOpenTracking(true, "--sub--");
+        $tracking_settings->setSubscriptionTracking(true, "subscribe", "<bold>subscribe</bold>", "%%sub%%");
+        $tracking_settings->setGanalytics(true, "utm_source", "utm_medium", "utm_term", "utm_content", "utm_campaign");
+        $email->setTrackingSettings($tracking_settings);
 
-        $reply_to = new ReplyTo("test@example.com", "Optional Name");
-        $mail->setReplyTo($reply_to);
+        $json = json_encode($email->jsonSerialize());
 
-        $json = json_encode($mail);
+        $this->assertEquals($json, '{"personalizations":[{"to":[{"name":"Example User","email":"test@example.com"},{"name":"Example User1","email":"test+1@example.com"},{"name":"Example User2","email":"test+2@example.com"},{"name":"Example User3","email":"test+3@example.com"}],"cc":[{"name":"Example User4","email":"test+4@example.com"},{"name":"Example User5","email":"test+5@example.com"},{"name":"Example User6","email":"test+6@example.com"}],"bcc":[{"name":"Example User7","email":"test+7@example.com"},{"name":"Example User8","email":"test+8@example.com"},{"name":"Example User9","email":"test+9@example.com"}],"subject":"Sending with SendGrid is Fun 2","headers":{"X-Test1":"Test1","X-Test2":"Test2","X-Test3":"Test3","X-Test4":"Test4"},"substitutions":{"%name1%":"Example Name 1","%city1%":"Denver","%name2%":"Example Name 2","%city2%":"Orange"},"custom_args":{"marketing1":"false","transactional1":"true","category":"name","marketing2":"true","transactional2":"false"},"send_at":1461775051}],"from":{"name":"DX","email":"test@example.com"},"reply_to":{"name":"DX Team Reply To 2","email":"dx+replyto2@example.com"},"subject":"Sending with SendGrid is Fun and Global 2","content":[{"type":"text\/plain","value":"and easy to do anywhere, even with PHP"},{"type":"text\/html","value":"<strong>and easy to do anywhere, even with PHP<\/strong>"},{"type":"text\/calendar","value":"Party Time!!"},{"type":"text\/calendar2","value":"Party Time 2!!"}],"attachments":[{"content":"base64 encoded content1","type":"image\/png","filename":"banner.png","disposition":"inline","content_id":"Banner"},{"content":"base64 encoded content2","type":"banner2.jpeg","filename":"image\/jpeg","disposition":"attachment","content_id":"Banner 3"},{"content":"base64 encoded content3","type":"banner3.gif","filename":"image\/gif","disposition":"inline","content_id":"Banner 3"}],"template_id":"13b8f94f-bcae-4ec6-b752-70d6cb59f932","sections":{"%section1%":"Substitution for Section 1 Tag","%section3%":"Substitution for Section 3 Tag","%section4%":"Substitution for Section 4 Tag"},"headers":{"X-Day":"Monday","X-Month":"January","X-Year":"2017"},"categories":["Category 1","Category 2","Category 3"],"batch_id":"MWQxZmIyODYtNjE1Ni0xMWU1LWI3ZTUtMDgwMDI3OGJkMmY2LWEzMmViMjYxMw","asm":{"group_id":1,"groups_to_display":[[1,2,3,4]]},"ip_pool_name":"23","mail_settings":{"bcc":{"enable":true,"email":"bcc@example.com"},"bypass_list_management":{"enable":true},"footer":{"enable":true,"text":"Footer","html":"<strong>Footer<\/strong>"},"sandbox_mode":{"enable":true},"spam_check":{"enable":true,"threshold":1,"post_to_url":"http:\/\/mydomain.com"}},"tracking_settings":{"click_tracking":{"enable":true,"enable_text":true},"open_tracking":{"enable":true,"substitution_tag":"--sub--"},"subscription_tracking":{"enable":true,"text":"subscribe","html":"<bold>subscribe<\/bold>","substitution_tag":"%%sub%%"},"ganalytics":{"enable":true,"utm_source":"utm_source","utm_medium":"utm_medium","utm_term":"utm_term","utm_content":"utm_content","utm_campaign":"utm_campaign"}}}');
+    }
 
-        $this->assertEquals($json, '{"from":{"name":"DX","email":"test@example.com"},"personalizations":[{"to":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"cc":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"bcc":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"subject":"Hello World from the SendGrid PHP Library","headers":{"X-Test":"test","X-Mock":"true"},"substitutions":{"%name%":"Example User","%city%":"Denver"},"custom_args":{"user_id":"343","type":"marketing"},"send_at":1443636843},{"to":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"cc":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"bcc":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"subject":"Hello World from the SendGrid PHP Library","headers":{"X-Test":"test","X-Mock":"true"},"substitutions":{"%name%":"Example User","%city%":"Denver"},"custom_args":{"user_id":"343","type":"marketing"},"send_at":1443636843}],"subject":"Hello World from the SendGrid PHP Library","content":[{"type":"text\/plain","value":"some text here"},{"type":"text\/html","value":"<html><body>some text here<\/body><\/html>"}],"attachments":[{"content":"TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2NpbmcgZWxpdC4gQ3JhcyBwdW12","type":"application\/pdf","filename":"balance_001.pdf","disposition":"attachment","content_id":"Balance Sheet"},{"content":"BwdW","type":"image\/png","filename":"banner.png","disposition":"inline","content_id":"Banner"},{"content":"aGVsbG8K","type":"text\/plain","filename":"test.txt","disposition":"attachment","content_id":"My text"}],"template_id":"439b6d66-4408-4ead-83de-5c83c2ee313a","sections":{"%section1%":"Substitution Text for Section 1","%section2%":"Substitution Text for Section 2"},"headers":{"X-Test1":"1","X-Test2":"2"},"categories":["May","2016"],"custom_args":{"campaign":"welcome","weekday":"morning"},"send_at":1443636842,"asm":{"group_id":99,"groups_to_display":[4,5,6,7,8]},"ip_pool_name":"23","mail_settings":{"bcc":{"enable":true,"email":"test@example.com"},"bypass_list_management":{"enable":true},"footer":{"enable":true,"text":"Footer Text","html":"<html><body>Footer Text<\/body><\/html>"},"sandbox_mode":{"enable":true},"spam_check":{"enable":true,"threshold":1,"post_to_url":"https:\/\/spamcatcher.sendgrid.com"}},"tracking_settings":{"click_tracking":{"enable":true,"enable_text":true},"open_tracking":{"enable":true,"substitution_tag":"Optional tag to replace with the open image in the body of the message"},"subscription_tracking":{"enable":true,"text":"text to insert into the text\/plain portion of the message","html":"<html><body>html to insert into the text\/html portion of the message<\/body><\/html>","substitution_tag":"Optional tag to replace with the open image in the body of the message"},"ganalytics":{"enable":true,"utm_source":"some source","utm_medium":"some medium","utm_term":"some term","utm_content":"some content","utm_campaign":"some name"}},"reply_to":{"email":"test@example.com","name":"Optional Name"}}');
-        $reply_to = new ReplyTo("test@example.com");
-        $mail->setReplyTo($reply_to);
+    public function testKitchenSinkExampleAllObjects()
+    {
+        $email = new Mail();
 
-        $json = json_encode($mail);
+        // For a detailed description of each of these settings, please see the [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
+        $email->setSubject(new Subject("Sending with SendGrid is Fun 2"));
 
-        $this->assertEquals($json, '{"from":{"name":"DX","email":"test@example.com"},"personalizations":[{"to":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"cc":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"bcc":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"subject":"Hello World from the SendGrid PHP Library","headers":{"X-Test":"test","X-Mock":"true"},"substitutions":{"%name%":"Example User","%city%":"Denver"},"custom_args":{"user_id":"343","type":"marketing"},"send_at":1443636843},{"to":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"cc":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"bcc":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"subject":"Hello World from the SendGrid PHP Library","headers":{"X-Test":"test","X-Mock":"true"},"substitutions":{"%name%":"Example User","%city%":"Denver"},"custom_args":{"user_id":"343","type":"marketing"},"send_at":1443636843}],"subject":"Hello World from the SendGrid PHP Library","content":[{"type":"text\/plain","value":"some text here"},{"type":"text\/html","value":"<html><body>some text here<\/body><\/html>"}],"attachments":[{"content":"TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2NpbmcgZWxpdC4gQ3JhcyBwdW12","type":"application\/pdf","filename":"balance_001.pdf","disposition":"attachment","content_id":"Balance Sheet"},{"content":"BwdW","type":"image\/png","filename":"banner.png","disposition":"inline","content_id":"Banner"},{"content":"aGVsbG8K","type":"text\/plain","filename":"test.txt","disposition":"attachment","content_id":"My text"}],"template_id":"439b6d66-4408-4ead-83de-5c83c2ee313a","sections":{"%section1%":"Substitution Text for Section 1","%section2%":"Substitution Text for Section 2"},"headers":{"X-Test1":"1","X-Test2":"2"},"categories":["May","2016"],"custom_args":{"campaign":"welcome","weekday":"morning"},"send_at":1443636842,"asm":{"group_id":99,"groups_to_display":[4,5,6,7,8]},"ip_pool_name":"23","mail_settings":{"bcc":{"enable":true,"email":"test@example.com"},"bypass_list_management":{"enable":true},"footer":{"enable":true,"text":"Footer Text","html":"<html><body>Footer Text<\/body><\/html>"},"sandbox_mode":{"enable":true},"spam_check":{"enable":true,"threshold":1,"post_to_url":"https:\/\/spamcatcher.sendgrid.com"}},"tracking_settings":{"click_tracking":{"enable":true,"enable_text":true},"open_tracking":{"enable":true,"substitution_tag":"Optional tag to replace with the open image in the body of the message"},"subscription_tracking":{"enable":true,"text":"text to insert into the text\/plain portion of the message","html":"<html><body>html to insert into the text\/html portion of the message<\/body><\/html>","substitution_tag":"Optional tag to replace with the open image in the body of the message"},"ganalytics":{"enable":true,"utm_source":"some source","utm_medium":"some medium","utm_term":"some term","utm_content":"some content","utm_campaign":"some name"}},"reply_to":{"email":"test@example.com"}}');
+        $email->addTo(new To("test@example.com", "Example User"));
+        $email->addTo(new To("test+1@example.com", "Example User1"));
+        $toEmails = [ 
+            new To("test+2@example.com", "Example User2"),
+            new To("test+3@example.com", "Example User3")
+        ];
+        $email->addTos($toEmails);
 
-        $reply_to = new ReplyTo("test@example.com", null);
-        $mail->setReplyTo($reply_to);
+        $email->addCc(new Cc("test+4@example.com", "Example User4"));
+        $ccEmails = [ 
+            new Cc("test+5@example.com", "Example User5"),
+            new Cc("test+6@example.com", "Example User6")
+        ];
+        $email->addCcs($ccEmails);
+ 
+        $email->addBcc(new Bcc("test+7@example.com", "Example User7"));
+        $bccEmails = [ 
+            new Bcc("test+8@example.com", "Example User8"),
+            new Bcc("test+9@example.com", "Example User9")
+        ];
+        $email->addBccs($bccEmails);
 
-        $json = json_encode($mail);
+        $email->addHeader(new Header("X-Test1", "Test1"));
+        $email->addHeader(new Header("X-Test2", "Test2"));
+        $headers = [
+            new Header("X-Test3", "Test3"),
+            new Header("X-Test4", "Test4")
+        ];
+        $email->addHeaders($headers);
 
-        $this->assertEquals($json, '{"from":{"name":"DX","email":"test@example.com"},"personalizations":[{"to":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"cc":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"bcc":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"subject":"Hello World from the SendGrid PHP Library","headers":{"X-Test":"test","X-Mock":"true"},"substitutions":{"%name%":"Example User","%city%":"Denver"},"custom_args":{"user_id":"343","type":"marketing"},"send_at":1443636843},{"to":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"cc":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"bcc":[{"name":"Example User","email":"test@example.com"},{"name":"Example User","email":"test@example.com"}],"subject":"Hello World from the SendGrid PHP Library","headers":{"X-Test":"test","X-Mock":"true"},"substitutions":{"%name%":"Example User","%city%":"Denver"},"custom_args":{"user_id":"343","type":"marketing"},"send_at":1443636843}],"subject":"Hello World from the SendGrid PHP Library","content":[{"type":"text\/plain","value":"some text here"},{"type":"text\/html","value":"<html><body>some text here<\/body><\/html>"}],"attachments":[{"content":"TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2NpbmcgZWxpdC4gQ3JhcyBwdW12","type":"application\/pdf","filename":"balance_001.pdf","disposition":"attachment","content_id":"Balance Sheet"},{"content":"BwdW","type":"image\/png","filename":"banner.png","disposition":"inline","content_id":"Banner"},{"content":"aGVsbG8K","type":"text\/plain","filename":"test.txt","disposition":"attachment","content_id":"My text"}],"template_id":"439b6d66-4408-4ead-83de-5c83c2ee313a","sections":{"%section1%":"Substitution Text for Section 1","%section2%":"Substitution Text for Section 2"},"headers":{"X-Test1":"1","X-Test2":"2"},"categories":["May","2016"],"custom_args":{"campaign":"welcome","weekday":"morning"},"send_at":1443636842,"asm":{"group_id":99,"groups_to_display":[4,5,6,7,8]},"ip_pool_name":"23","mail_settings":{"bcc":{"enable":true,"email":"test@example.com"},"bypass_list_management":{"enable":true},"footer":{"enable":true,"text":"Footer Text","html":"<html><body>Footer Text<\/body><\/html>"},"sandbox_mode":{"enable":true},"spam_check":{"enable":true,"threshold":1,"post_to_url":"https:\/\/spamcatcher.sendgrid.com"}},"tracking_settings":{"click_tracking":{"enable":true,"enable_text":true},"open_tracking":{"enable":true,"substitution_tag":"Optional tag to replace with the open image in the body of the message"},"subscription_tracking":{"enable":true,"text":"text to insert into the text\/plain portion of the message","html":"<html><body>html to insert into the text\/html portion of the message<\/body><\/html>","substitution_tag":"Optional tag to replace with the open image in the body of the message"},"ganalytics":{"enable":true,"utm_source":"some source","utm_medium":"some medium","utm_term":"some term","utm_content":"some content","utm_campaign":"some name"}},"reply_to":{"email":"test@example.com"}}');
+        $email->addSubstitution(new Substitution("%name1%", "Example Name 1"));
+        $email->addSubstitution(new Substitution("%city1%", "Denver"));
+        $substitutions = [
+            new Substitution("%name2%", "Example Name 2"),
+            new Substitution("%city2%", "Orange")
+        ];
+        $email->addSubstitutions($substitutions);
+
+        $email->addCustomArg(new CustomArg("marketing1", "false"));
+        $email->addCustomArg(new CustomArg("transactional1", "true"));
+        $email->addCustomArg(new CustomArg("category", "name"));
+        $customArgs = [
+            new CustomArg("marketing2", "true"),
+            new CustomArg("transactional2", "false"),
+            new CustomArg("category", "name")
+        ];
+        $email->addCustomArgs($customArgs);
+
+        $email->setSendAt(new SendAt(1461775051));
+
+        // The values below this comment are global to entire message
+
+        $email->setFrom(new From("test@example.com", "DX"));
+
+        $email->setGlobalSubject(new Subject("Sending with SendGrid is Fun and Global 2"));
+
+        $plainTextContent = new PlainTextContent(
+            "and easy to do anywhere, even with PHP"
+        );
+        $htmlContent = new HtmlContent(
+            "<strong>and easy to do anywhere, even with PHP</strong>"
+        );
+        $email->addContent($plainTextContent);
+        $email->addContent($htmlContent);
+        $contents = [
+            new Content("text/calendar", "Party Time!!"),
+            new Content("text/calendar2", "Party Time 2!!")
+        ];
+        $email->addContents($contents);
+
+        $email->addAttachment(
+            new Attachment(
+                "base64 encoded content1",
+                "image/png",
+                "banner.png",
+                "inline",
+                "Banner"
+            )
+        );
+        $attachments = [
+            new Attachment(
+                "base64 encoded content2",
+                "banner2.jpeg",
+                "image/jpeg",
+                "attachment",
+                "Banner 3"
+            ),
+            new Attachment(
+                "base64 encoded content3",
+                "banner3.gif",
+                "image/gif",
+                "inline",
+                "Banner 3"
+            )
+        ];
+        $email->addAttachments($attachments);
+
+        $email->setTemplateId(new TemplateId("13b8f94f-bcae-4ec6-b752-70d6cb59f932"));
+
+        $email->addGlobalHeader(new Header("X-Day", "Monday"));
+        $globalHeaders = [
+            new Header("X-Month", "January"),
+            new Header("X-Year", "2017")
+        ];
+        $email->addGlobalHeaders($globalHeaders);
+
+        $email->addSection(new Section("%section1%", "Substitution for Section 1 Tag"));
+
+        $sections = [
+            new Section("%section3%", "Substitution for Section 3 Tag"),
+            new Section("%section4%", "Substitution for Section 4 Tag")
+        ];
+        $email->addSections($sections);
+
+        $email->addCategory(new Category("Category 1"));
+        $categories = [
+            new Category("Category 2"),
+            new Category("Category 3")
+        ];
+        $email->addCategories($categories);
+
+        $email->setBatchId(new BatchId("MWQxZmIyODYtNjE1Ni0xMWU1LWI3ZTUtMDgwMDI3OGJkMmY2LWEzMmViMjYxMw"));
+
+        $email->setReplyTo(new ReplyTo("dx+replyto2@example.com", "DX Team Reply To 2"));
+
+        $asm = new Asm(
+            new GroupId(1),
+            new GroupsToDisplay([1,2,3,4])
+        );
+        $email->setAsm($asm);
+
+        $email->setIpPoolName(new IpPoolName("23"));
+
+        $mail_settings = new MailSettings();
+        $mail_settings->setBccSettings(new BccSettings(true, "bcc@example.com"));
+        $mail_settings->setBypassListManagement(new BypassListManagement(true));
+        $mail_settings->setFooter(new Footer(true, "Footer", "<strong>Footer</strong>"));
+        $mail_settings->setSandBoxMode(new SandBoxMode(true));
+        $mail_settings->setSpamCheck(new SpamCheck(true, 1, "http://mydomain.com"));
+        $email->setMailSettings($mail_settings);
+
+        $tracking_settings = new TrackingSettings();
+        $tracking_settings->setClickTracking(new ClickTracking(true, true));
+        $tracking_settings->setOpenTracking(new OpenTracking(true, "--sub--"));
+        $tracking_settings->setSubscriptionTracking(new SubscriptionTracking(true, "subscribe", "<bold>subscribe</bold>", "%%sub%%"));
+        $tracking_settings->setGanalytics(new Ganalytics(true, "utm_source", "utm_medium", "utm_term", "utm_content", "utm_campaign"));
+        $email->setTrackingSettings($tracking_settings);
+
+        $json = json_encode($email->jsonSerialize());
+
+        $this->assertEquals($json, '{"personalizations":[{"to":[{"name":"Example User","email":"test@example.com"},{"name":"Example User1","email":"test+1@example.com"},{"name":"Example User2","email":"test+2@example.com"},{"name":"Example User3","email":"test+3@example.com"}],"cc":[{"name":"Example User4","email":"test+4@example.com"},{"name":"Example User5","email":"test+5@example.com"},{"name":"Example User6","email":"test+6@example.com"}],"bcc":[{"name":"Example User7","email":"test+7@example.com"},{"name":"Example User8","email":"test+8@example.com"},{"name":"Example User9","email":"test+9@example.com"}],"subject":"Sending with SendGrid is Fun 2","headers":{"X-Test1":"Test1","X-Test2":"Test2","X-Test3":"Test3","X-Test4":"Test4"},"substitutions":{"%name1%":"Example Name 1","%city1%":"Denver","%name2%":"Example Name 2","%city2%":"Orange"},"custom_args":{"marketing1":"false","transactional1":"true","category":"name","marketing2":"true","transactional2":"false"},"send_at":1461775051}],"from":{"name":"DX","email":"test@example.com"},"reply_to":{"name":"DX Team Reply To 2","email":"dx+replyto2@example.com"},"subject":"Sending with SendGrid is Fun and Global 2","content":[{"type":"text\/plain","value":"and easy to do anywhere, even with PHP"},{"type":"text\/html","value":"<strong>and easy to do anywhere, even with PHP<\/strong>"},{"type":"text\/calendar","value":"Party Time!!"},{"type":"text\/calendar2","value":"Party Time 2!!"}],"attachments":[{"content":"base64 encoded content1","type":"image\/png","filename":"banner.png","disposition":"inline","content_id":"Banner"},{"content":"base64 encoded content2","type":"banner2.jpeg","filename":"image\/jpeg","disposition":"attachment","content_id":"Banner 3"},{"content":"base64 encoded content3","type":"banner3.gif","filename":"image\/gif","disposition":"inline","content_id":"Banner 3"}],"template_id":"13b8f94f-bcae-4ec6-b752-70d6cb59f932","sections":{"%section1%":"Substitution for Section 1 Tag","%section3%":"Substitution for Section 3 Tag","%section4%":"Substitution for Section 4 Tag"},"headers":{"X-Day":"Monday","X-Month":"January","X-Year":"2017"},"categories":["Category 1","Category 2","Category 3"],"batch_id":"MWQxZmIyODYtNjE1Ni0xMWU1LWI3ZTUtMDgwMDI3OGJkMmY2LWEzMmViMjYxMw","asm":{"group_id":1,"groups_to_display":[[1,2,3,4]]},"ip_pool_name":"23","mail_settings":{"bcc":{"enable":true,"email":"bcc@example.com"},"bypass_list_management":{"enable":true},"footer":{"enable":true,"text":"Footer","html":"<strong>Footer<\/strong>"},"sandbox_mode":{"enable":true},"spam_check":{"enable":true,"threshold":1,"post_to_url":"http:\/\/mydomain.com"}},"tracking_settings":{"click_tracking":{"enable":true,"enable_text":true},"open_tracking":{"enable":true,"substitution_tag":"--sub--"},"subscription_tracking":{"enable":true,"text":"subscribe","html":"<bold>subscribe<\/bold>","substitution_tag":"%%sub%%"},"ganalytics":{"enable":true,"utm_source":"utm_source","utm_medium":"utm_medium","utm_term":"utm_term","utm_content":"utm_content","utm_campaign":"utm_campaign"}}}');
     }
 
     public function testEmailName()
     {
-        $email = new Email('John Doe', 'test@example.com');
+        $email = new EmailAddress('test@example.com', 'John Doe');
         $json = json_encode($email->jsonSerialize());
         $this->assertEquals($json, '{"name":"John Doe","email":"test@example.com"}');
 
