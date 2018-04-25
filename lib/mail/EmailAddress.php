@@ -4,6 +4,8 @@ class EmailAddress implements \JsonSerializable
 {
     private $name;
     private $email;
+    private $substitutions;
+    private $subject;
 
     public function __construct(
         $emailAddress=null,
@@ -63,9 +65,19 @@ class EmailAddress implements \JsonSerializable
         $this->name = (!empty($name)) ? $name : null;
     }
 
+    public function setSubstitutions($substitutions)
+    {
+        $this->substitutions = $substitutions
+    }
+
     public function getSubstitions()
     {
         return $this->substitutions;
+    }
+
+    public function setSubject($subject)
+    {
+        $this->subject = $subject;
     }
 
     public function getSubject()

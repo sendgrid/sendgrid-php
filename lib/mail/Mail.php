@@ -734,7 +734,7 @@ class Mail implements \JsonSerializable
     public function addCategory($category)
     {
         if ($category instanceof Category) {
-            $category = $category->getCategory();
+            $category = $category;
         } else {
             $category = new Category($category);
         }
