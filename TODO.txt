@@ -1,3 +1,4 @@
+Get tests working on Travis
 Fix Integration Tests
 - Easer to deal with PRISM in docker?
 Implement Unit Tests for the use cases in sendmail.php

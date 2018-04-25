@@ -67,7 +67,7 @@ class EmailAddress implements \JsonSerializable
 
     public function setSubstitutions($substitutions)
     {
-        $this->substitutions = $substitutions
+        $this->substitutions = $substitutions;
     }
 
     public function getSubstitions()
