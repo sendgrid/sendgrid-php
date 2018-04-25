@@ -97,8 +97,10 @@ class MailSettings implements \JsonSerializable
         if ($enable instanceof SpamCheck) {
             $spam_check = $enable;
             $this->spam_check = $spam_check;
+            return;
         }
         $this->spam_check = new SpamCheck($enable, $threshold, $post_to_url);
+        return;
     }
 
     public function getSpamCheck()

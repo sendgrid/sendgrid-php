@@ -14,28 +14,28 @@ require 'vendor/autoload.php'; // If you're using Composer (recommended)
 
 // Send a Single Email to a Single Recipient
 
-// $from = new From("dx@sendgrid.com", "DX Team");
-// $to = new To("elmer.thomas@sendgrid.com", "Elmer Thomas");
-// $subject = new Subject("Sending with SendGrid is Fun");
-// $plainTextContent = new PlainTextContent(
-//     "and easy to do anywhere, even with PHP"
-// );
-// $htmlContent = new HtmlContent(
-//     "<strong>and easy to do anywhere, even with PHP</strong>"
-// );
-// $email = new Mail(
-//     $from,
-//     $to,
-//     $subject,
-//     $plainTextContent,
-//     $htmlContent
-// );
-// $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
-// try {
-//     $response = $sendgrid->send($email);
-// } catch (Exception $e) {
-//     echo 'Caught exception: ',  $e->getMessage(), "\n";
-// }
+$from = new From("dx@example.com", "DX Team");
+$to = new To("test@example.com", "Elmer Thomas");
+$subject = new Subject("Sending with SendGrid is Fun");
+$plainTextContent = new PlainTextContent(
+    "and easy to do anywhere, even with PHP"
+);
+$htmlContent = new HtmlContent(
+    "<strong>and easy to do anywhere, even with PHP</strong>"
+);
+$email = new Mail(
+    $from,
+    $to,
+    $subject,
+    $plainTextContent,
+    $htmlContent
+);
+$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+try {
+    $response = $sendgrid->send($email);
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 // echo $response->statusCode();
 // print_r($response->headers());
@@ -45,9 +45,9 @@ require 'vendor/autoload.php'; // If you're using Composer (recommended)
 
 // $from = new From("dx@example.com", "DX Team");
 // $tos = [ 
-//     new To("elmer.thomas+test1@sendgrid.com", "Elmer Thomas1"),
-//     new To("elmer.thomas+test2@sendgrid.com", "Elmer Thomas2"),
-//     new To("elmer.thomas+test3@sendgrid.com", "Elmer Thomas3")
+//     new To("test+test1@example.com", "Elmer Thomas1"),
+//     new To("test+test2@example.com", "Elmer Thomas2"),
+//     new To("test+test3@example.com", "Elmer Thomas3")
 // ];
 // $subject = new Subject("Sending with SendGrid is Fun");
 // $plainTextContent = new PlainTextContent(
@@ -78,7 +78,7 @@ require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // $from = new From("dx@example.com", "DX Team");
 // $tos = [ 
 //     new To(
-//         "elmer.thomas+test1@sendgrid.com",
+//         "test+test1@example.com",
 //         "Elmer Thomas1",
 //         [
 //             '-name-' => 'Elmer 1',
@@ -87,7 +87,7 @@ require 'vendor/autoload.php'; // If you're using Composer (recommended)
 //         "Subject 1 -name-"
 //     ),
 //     new To(
-//         "elmer.thomas+test2@sendgrid.com",
+//         "test+test2@example.com",
 //         "Elmer Thomas2",
 //         [
 //             '-name-' => 'Elmer 2',
@@ -96,7 +96,7 @@ require 'vendor/autoload.php'; // If you're using Composer (recommended)
 //         "Subject 2 -name-"
 //     ),
 //     new To(
-//         "elmer.thomas+test3@sendgrid.com",
+//         "test+test3@example.com",
 //         "Elmer Thomas3",
 //         [
 //             '-name-' => 'Elmer 3',
@@ -167,7 +167,7 @@ use \SendGrid\Mail\SubscriptionTracking as SubscriptionTracking;
 use \SendGrid\Mail\Ganalytics as Ganalytics;
 
 $from = new From("dx@example.com", "DX Team");
-$to = new To("elmer.thomas@sendgrid.com", "Elmer Thomas");
+$to = new To("test@example.com", "Elmer Thomas");
 $subject = new Subject("Sending with SendGrid is Fun");
 $plainTextContent = new PlainTextContent(
     "and easy to do anywhere, even with PHP"
@@ -181,36 +181,36 @@ $email = new Mail();
 $email->setSubject($subject);
 // $email->setSubject("Sending with SendGrid is Fun 2");
 $email->addTo($to);
-$email->addTo("elmer.thomas+1@sendgrid.com", "Elmer Thomas 1");
+$email->addTo("test+1@example.com", "Elmer Thomas 1");
 $toEmails = [ 
-    new To("elmer.thomas+2@sendgrid.com", "Elmer Thomas 2"),
-    new To("elmer.thomas+3@sendgrid.com", "Elmer Thomas 3")
+    new To("test+2@example.com", "Elmer Thomas 2"),
+    new To("test+3@example.com", "Elmer Thomas 3")
 ];
 // $toEmails = [ 
-//     "elmer.thomas+2@sendgrid.com" => "Elmer Thomas 2",
-//     "elmer.thomas+3@sendgrid.com" => "Elmer Thomas 3"
+//     "test+2@example.com" => "Elmer Thomas 2",
+//     "test+3@example.com" => "Elmer Thomas 3"
 // ];
 $email->addTos($toEmails);
-$email->addCc(new Cc("elmer.thomas+4@sendgrid.com", "Elmer Thomas 4"));
-$email->addCc("elmer.thomas+5@sendgrid.com", "Elmer Thomas 5");
+$email->addCc(new Cc("test+4@example.com", "Elmer Thomas 4"));
+$email->addCc("test+5@example.com", "Elmer Thomas 5");
 $ccEmails = [ 
-    new Cc("elmer.thomas+6@sendgrid.com", "Elmer Thomas 6"),
-    new Cc("elmer.thomas+7@sendgrid.com", "Elmer Thomas 7")
+    new Cc("test+6@example.com", "Elmer Thomas 6"),
+    new Cc("test+7@example.com", "Elmer Thomas 7")
 ];
 // $ccEmails = [ 
-//     "elmer.thomas+6@sendgrid.com" => "Elmer Thomas 6",
-//     "elmer.thomas+7@sendgrid.com" => "Elmer Thomas 7"
+//     "test+6@example.com" => "Elmer Thomas 6",
+//     "test+7@example.com" => "Elmer Thomas 7"
 // ];
 $email->addCcs($ccEmails);
-$email->addBcc(new Bcc("elmer.thomas+8@sendgrid.com", "Elmer Thomas 8"));
-$email->addBcc("elmer.thomas+9@sendgrid.com", "Elmer Thomas 9");
+$email->addBcc(new Bcc("test+8@example.com", "Elmer Thomas 8"));
+$email->addBcc("test+9@example.com", "Elmer Thomas 9");
 $bccEmails = [ 
-    new Bcc("elmer.thomas+10@sendgrid.com", "Elmer Thomas 10"),
-    new Bcc("elmer.thomas+11@sendgrid.com", "Elmer Thomas 11")
+    new Bcc("test+10@example.com", "Elmer Thomas 10"),
+    new Bcc("test+11@example.com", "Elmer Thomas 11")
 ];
 // $bccEmails = [ 
-//     "elmer.thomas+10@sendgrid.com" => "Elmer Thomas 10",
-//     "elmer.thomas+11@sendgrid.com" => "Elmer Thomas 11"
+//     "test+10@example.com" => "Elmer Thomas 10",
+//     "test+11@example.com" => "Elmer Thomas 11"
 // ];
 $email->addBccs($bccEmails);
 $email->addHeader(new Header("X-Test1", "Test1"));
@@ -379,7 +379,7 @@ $email->setAsm($asm);
 $email->setIpPoolName(new IpPoolName("24"));
 
 $mail_settings = new MailSettings();
-// $mail_settings->setBccSettings(true, "bcc@sendgrid.com");
+// $mail_settings->setBccSettings(true, "bcc@example.com");
 $mail_settings->setBccSettings(new BccSettings(false));
 $mail_settings->setBypassListManagement(true);
 // $mail_settings->setBypassListManagement(new BypassListManagement(false));

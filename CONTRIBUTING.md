@@ -124,7 +124,7 @@ For the purposes of contributing to this repo, please update the [`SendGridTest.
 ```bash
 composer install
 cd test/unit
-../../vendor/bin/phpunit . --bootstrap bootstrap.php --filter test*
+../../vendor/bin/phpunit . --filter test*
 ```
 
 <a name="style-guidelines-and-naming-conventions"></a>

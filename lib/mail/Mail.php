@@ -53,6 +53,7 @@ class Mail implements \JsonSerializable
             && !isset($htmlContent)
             && !isset($globalSubstitutions)
         ) {
+            $this->personalization[] = new Personalization();
             return;
         }
         if(isset($from)) $this->setFrom($from);
@@ -178,6 +179,10 @@ class Mail implements \JsonSerializable
         $personalizationIndex = null,
         $personalization = null
     ) {
+        if ($to instanceof To) {
+            $name = $to->getName();
+            $to = $to->getEmailAddress();
+        }
         $this->addRecipientEmail(
             "To",
             $to,
@@ -205,6 +210,10 @@ class Mail implements \JsonSerializable
         $personalizationIndex = null,
         $personalization = null
     ) {
+        if ($cc instanceof Cc) {
+            $name = $cc->getName();
+            $cc = $cc->getEmailAddress();
+        }
         $this->addRecipientEmail(
             "Cc",
             $cc,
@@ -233,6 +242,10 @@ class Mail implements \JsonSerializable
         $personalizationIndex = null,
         $personalization = null
     ) {
+        if ($bcc instanceof Bcc) {
+            $name = $bcc->getName();
+            $bcc = $bcc->getEmailAddress();  
+        }
         $this->addRecipientEmail(
             "Bcc",
             $bcc,
@@ -546,12 +559,12 @@ class Mail implements \JsonSerializable
         return $this->subject;
     }
 
-    public function addContent($content, $value = null)
+    public function addContent($type, $value = null)
     {
-        if ($content instanceof Content) {
-            $content = $content;
+        if ($type instanceof Content) {
+            $content = $type;
         } else {
-            $content = new Content($content);
+            $content = new Content($type, $value);
         }
         $this->contents[] = $content;
     }
@@ -584,6 +597,14 @@ class Mail implements \JsonSerializable
     ) {
         if ($attachment instanceof Attachment) {
             $attachment = $attachment;
+        } elseif (is_array($attachment)) {
+            $attachment = new Attachment(
+                $attachment[0],
+                $attachment[1],
+                $attachment[2],
+                $attachment[3],
+                $attachment[4]
+            );
         } else {
             $attachment = new Attachment(
                 $attachment,
