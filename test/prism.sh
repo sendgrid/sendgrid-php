@@ -41,4 +41,17 @@ else
 fi
 }
 
-install
+run () {
+  echo "Running prism..."
+  cd ../prism/bin
+  ./prism run --mock --spec https://raw.githubusercontent.com/sendgrid/sendgrid-oai/master/oai_stoplight.json
+}
+
+if [ -f ../prism/bin/prism ]; then
+   echo "Prism is already installed."
+   run
+else
+   echo "Prism is not installed."
+   install
+   run
+fi
