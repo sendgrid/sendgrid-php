@@ -48,21 +48,21 @@ class MailTest_Mail extends \PHPUnit\Framework\TestCase
     
         $email->addTo("test@example.com", "Example User");
         $email->addTo("test+1@example.com", "Example User1");
-        $toEmails = [ 
+        $toEmails = [
             "test+2@example.com" => "Example User2",
             "test+3@example.com" => "Example User3"
         ];
         $email->addTos($toEmails);
     
         $email->addCc("test+4@example.com", "Example User4");
-        $ccEmails = [ 
+        $ccEmails = [
             "test+5@example.com" => "Example User5",
             "test+6@example.com" => "Example User6"
         ];
         $email->addCcs($ccEmails);
     
         $email->addBcc("test+7@example.com", "Example User7");
-        $bccEmails = [ 
+        $bccEmails = [
             "test+8@example.com" => "Example User8",
             "test+9@example.com" => "Example User9"
         ];
