@@ -4,7 +4,7 @@ class GroupsToDisplay implements \JsonSerializable
 {
     private $groups_to_display;
 
-    public function __construct(array $groups_to_display=null)
+    public function __construct($groups_to_display=null)
     {
         if(isset($groups_to_display)) $this->setGroupsToDisplay($groups_to_display);
     }
@@ -14,7 +14,7 @@ class GroupsToDisplay implements \JsonSerializable
         return $this->groups_to_display;
     }
 
-    public function setGroupsToDisplay(array $groups_to_display)
+    public function setGroupsToDisplay($groups_to_display)
     {
         $this->groups_to_display[] = $groups_to_display;
     }

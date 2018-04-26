@@ -1,4 +1,4 @@
-You can use Docker to easily try out or test sendgrid-python.
+You can use Docker to easily try out or test sendgrid-php.
 
 <a name="Quickstart"></a>
 # Quickstart
