@@ -142,7 +142,8 @@ class Mail implements \JsonSerializable
         $personalization = null
     ) {
         $emailFunctionCall = "add".$emailType;
-        if ($emails[0] instanceof EmailAddress) {
+
+        if (current($emails) instanceof EmailAddress) {
             foreach ($emails as $email) {
                 $this->$emailFunctionCall(
                     $email,
