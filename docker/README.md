@@ -4,7 +4,14 @@ You can use Docker to easily try out or test sendgrid-php.
 # Quickstart
 
 1. Install Docker on your machine
-2. Run `docker run -it sendgrid/sendgrid-php`.
+2. Setup local environment variable SENDGRID_API_KEY
+2. `cd docker`
+3. `docker image build --tag="sendgrid/php7" .`
+6. Run `docker run -itd --name="sendgrid_php7" -v /Users/ethomas/Workspace/sendgrid/sendgrid-php:/root/sendgrid/sendgrid-php sendgrid/php7`
+6. Run `sudo docker exec -it sendgrid_php7 /bin/bash`
+`composer install`
+`cd test/unit`
+`../../vendor/bin/phpunit . --filter test*`
 
 <a name="Info"></a>
 # Info
@@ -29,16 +36,15 @@ For instance, to install sendgrid-php v5.6.1 with an older version of php-http-c
     $ git clone https://github.com/sendgrid/php-http-client.git --branch v3.5.1
     $ realpath php-http-client
       /path/to/php-http-client
-    $ docker run -it -v /path/to/sendgrid-php:/mnt/sendgrid-php \
-                     -v /path/to/php-http-client:/mnt/php-http-client \
-                     sendgrid/sendgrid-php
+    $ docker run --name=sendgrid-php -it -d -v /path/to/sendgrid-php:/mnt/sendgrid-php \
+                     -v /path/to/php-http-client:/mnt/php-http-client
 
 ## To install your own version:
 
     $ git clone https://github.com/you/cool-sendgrid-php.git
     $ realpath sendgrid-php
       /path/to/cool-sendgrid-php
-    $ docker run -it -v /path/to/cool-sendgrid-php:/mnt/sendgrid-php sendgrid/sendgrid-php
+    $ docker run -it -d -v /path/to/cool-sendgrid-php:/mnt/sendgrid-php
 
 Note that the paths you specify in `-v` must be absolute.
 

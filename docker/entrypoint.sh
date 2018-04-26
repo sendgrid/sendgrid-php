@@ -39,3 +39,5 @@ echo "Starting PHP. You can 'use Namespace\Package' to import them into context.
 echo
 
 php -a
+
+exec $SHELL
