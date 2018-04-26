@@ -348,7 +348,7 @@ class Mail implements \JsonSerializable
 
     public function addHeaders($headers)
     {
-        if ($headers[0] instanceof Header) {
+        if (current($headers) instanceof Header) {
             foreach ($headers as $header) {
                 $this->addHeader($header);
             }
@@ -458,7 +458,7 @@ class Mail implements \JsonSerializable
 
     public function addCustomArgs($custom_args)
     {
-        if ($custom_args[0] instanceof CustomArg) {
+        if (current($custom_args) instanceof CustomArg) {
             foreach ($custom_args as $custom_arg) {
                 $this->addCustomArg($custom_arg);
             }
@@ -572,7 +572,7 @@ class Mail implements \JsonSerializable
 
     public function addContents($contents)
     {
-        if ($contents[0] instanceof Content) {
+        if (current($contents) instanceof Content) {
             foreach ($contents as $content) {
                 $this->addContent($content);
             }
@@ -658,7 +658,7 @@ class Mail implements \JsonSerializable
 
     public function addSections($sections)
     {
-        if ($sections[0] instanceof Section) {
+        if (current($sections) instanceof Section) {
             foreach ($sections as $section) {
                 $this->addSection($section);
             }
@@ -687,7 +687,7 @@ class Mail implements \JsonSerializable
 
     public function addGlobalHeaders($headers)
     {
-        if ($headers[0] instanceof Header) {
+        if (current($headers) instanceof Header) {
             foreach ($headers as $header) {
                 $this->addGlobalHeader($header);
             }
@@ -716,7 +716,7 @@ class Mail implements \JsonSerializable
 
     public function addGlobalSubstitutions($substitutions)
     {
-        if ($substitutions[0] instanceof Substitution) {
+        if (current($substitutions) instanceof Substitution) {
             foreach ($substitutions as $substitution) {
                 $this->addGlobalSubstitution($substitution);
             }
@@ -768,7 +768,7 @@ class Mail implements \JsonSerializable
 
     public function addGlobalCustomArgs($custom_args)
     {
-        if ($custom_args[0] instanceof CustomArg) {
+        if (current($custom_args) instanceof CustomArg) {
             foreach ($custom_args as $custom_arg) {
                 $this->addGlobalCustomArg($custom_arg);
             }
