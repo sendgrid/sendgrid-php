@@ -403,7 +403,7 @@ class Mail implements \JsonSerializable
 
     public function addSubstitutions($substitutions)
     {
-        if ($substitutions[0] instanceof Substitution) {
+        if (current($substitutions) instanceof Substitution) {
             foreach ($substitutions as $substitution) {
                 $this->addSubstitution($substitution);
             }

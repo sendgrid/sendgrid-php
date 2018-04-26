@@ -1,0 +1,1174 @@
+PHPUnit 6.5.8 by Sebastian Bergmann and contributors.
+
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF  63 / 256 ( 24%)
+FFFFFFF....FFFFFFFFFFFFFFFF...FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF 126 / 256 ( 49%)
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF 189 / 256 ( 73%)
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF............. 252 / 256 ( 98%)
+....                                                            256 / 256 (100%)
+
+Time: 2.2 seconds, Memory: 14.00MB
+
+There were 232 failures:
+
+1) SendGrid\Tests\AlertsTest::testAlertsPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Alerts/AlertsTest.php:18
+
+2) SendGrid\Tests\AlertsTest::testAlertsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Alerts/AlertsTest.php:25
+
+3) SendGrid\Tests\AlertsTest::testAlertsIdPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Alerts/AlertsTest.php:36
+
+4) SendGrid\Tests\AlertsTest::testAlertsIdGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Alerts/AlertsTest.php:44
+
+5) SendGrid\Tests\AlertsTest::testAlertsIdDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Alerts/AlertsTest.php:52
+
+6) SendGrid\Tests\ApiKeys\ApiKeysTest::testApiKeysPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/ApiKeys/ApiKeysTest.php:22
+
+7) SendGrid\Tests\ApiKeys\ApiKeysTest::testApiKeysGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/ApiKeys/ApiKeysTest.php:30
+
+8) SendGrid\Tests\ApiKeys\ApiKeysTest::testApiKeysIdPutMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/ApiKeys/ApiKeysTest.php:45
+
+9) SendGrid\Tests\ApiKeys\ApiKeysTest::testApiKeysIdPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/ApiKeys/ApiKeysTest.php:56
+
+10) SendGrid\Tests\ApiKeys\ApiKeysTest::testApiKeysIdGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/ApiKeys/ApiKeysTest.php:64
+
+11) SendGrid\Tests\ApiKeys\ApiKeysTest::testApiKeysIdDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/ApiKeys/ApiKeysTest.php:72
+
+12) SendGrid\Tests\Asm\AsmGroupsTest::testAsmGroupsPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Asm/AsmGroupsTest.php:18
+
+13) SendGrid\Tests\Asm\AsmGroupsTest::testAsmGroupsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Asm/AsmGroupsTest.php:26
+
+14) SendGrid\Tests\Asm\AsmGroupsTest::testAsmGroupsIdPatchMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Asm/AsmGroupsTest.php:39
+
+15) SendGrid\Tests\Asm\AsmGroupsTest::testAsmGroupsIdGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Asm/AsmGroupsTest.php:47
+
+16) SendGrid\Tests\Asm\AsmGroupsTest::testAsmGroupsIdDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Asm/AsmGroupsTest.php:55
+
+17) SendGrid\Tests\Asm\AsmGroupsTest::testAsmGroupsIdSuppressionPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Asm/AsmGroupsTest.php:69
+
+18) SendGrid\Tests\Asm\AsmGroupsTest::testAsmGroupsIdSuppressionGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Asm/AsmGroupsTest.php:77
+
+19) SendGrid\Tests\Asm\AsmGroupsTest::testAsmGroupsIdSuppressionSearchPostMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Asm/AsmGroupsTest.php:93
+
+20) SendGrid\Tests\Asm\AsmGroupsTest::testAsmGroupsIdSuppressionEmailDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Asm/AsmGroupsTest.php:103
+
+21) SendGrid\Tests\Asm\AsmSuppressionTest::testAsmSuppressionGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Asm/AsmSuppressionTest.php:13
+
+22) SendGrid\Tests\Asm\AsmSuppressionTest::testAsmSuppressionGlobalPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Asm/AsmSuppressionTest.php:26
+
+23) SendGrid\Tests\Asm\AsmSuppressionTest::testAsmSuppressionGlobalEmailGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Asm/AsmSuppressionTest.php:34
+
+24) SendGrid\Tests\Asm\AsmSuppressionTest::testAsmSuppressionGlobalEmailDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Asm/AsmSuppressionTest.php:42
+
+25) SendGrid\Tests\Asm\AsmSuppressionTest::testAsmSuppressionEmailGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Asm/AsmSuppressionTest.php:50
+
+26) SendGrid\Tests\Campaigns\CampaignsTest::testCampaignsPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Campaigns/CampaignsTest.php:33
+
+27) SendGrid\Tests\Campaigns\CampaignsTest::testCampaignsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Campaigns/CampaignsTest.php:41
+
+28) SendGrid\Tests\Campaigns\CampaignsTest::testCampaignsIdPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Campaigns/CampaignsTest.php:58
+
+29) SendGrid\Tests\Campaigns\CampaignsTest::testCampaignsIdGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Campaigns/CampaignsTest.php:66
+
+30) SendGrid\Tests\Campaigns\CampaignsTest::testCampaignsIdDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Campaigns/CampaignsTest.php:74
+
+31) SendGrid\Tests\Campaigns\CampaignsTest::testCampaignsIdSchedulesPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Campaigns/CampaignsTest.php:85
+
+32) SendGrid\Tests\Campaigns\CampaignsTest::testCampaignsIdSchedulesPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Campaigns/CampaignsTest.php:96
+
+33) SendGrid\Tests\Campaigns\CampaignsTest::testCampaignsIdSchedulesGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Campaigns/CampaignsTest.php:104
+
+34) SendGrid\Tests\Campaigns\CampaignsTest::testCampaignsIdSchedulesDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Campaigns/CampaignsTest.php:112
+
+35) SendGrid\Tests\Campaigns\CampaignsTest::testCampaignsIdSchedulesNowPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Campaigns/CampaignsTest.php:120
+
+36) SendGrid\Tests\Campaigns\CampaignsTest::testCampaignsIdSchedulesTestPostMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Campaigns/CampaignsTest.php:132
+
+37) SendGrid\Tests\Categories\CategoriesTest::testCategoriesGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Categories/CategoriesTest.php:14
+
+38) SendGrid\Tests\Categories\CategoriesTest::testCategoriesStatsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Categories/CategoriesTest.php:22
+
+39) SendGrid\Tests\Categories\CategoriesTest::testCategoriesStatsSumsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Categories/CategoriesTest.php:30
+
+40) SendGrid\Tests\Contacts\ContactDbTest::testContactDbCustomFieldsPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:19
+
+41) SendGrid\Tests\Contacts\ContactDbTest::testContactDbCustomFieldsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:28
+
+42) SendGrid\Tests\Contacts\ContactDbTest::testContactDbCustomFieldsIdGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:39
+
+43) SendGrid\Tests\Contacts\ContactDbTest::testContactDbCustomFieldsIdDeleteMethod
+Failed asserting that 0 matches expected 202.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:50
+
+44) SendGrid\Tests\Contacts\ContactDbTest::testContactDbListsPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:62
+
+45) SendGrid\Tests\Contacts\ContactDbTest::testContactDbListsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:71
+
+46) SendGrid\Tests\Contacts\ContactDbTest::testContactDbListsDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:86
+
+47) SendGrid\Tests\Contacts\ContactDbTest::testContactDbListsIdPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:101
+
+48) SendGrid\Tests\Contacts\ContactDbTest::testContactDbListsIdGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:113
+
+49) SendGrid\Tests\Contacts\ContactDbTest::testContactDbListsIdDeleteMethod
+Failed asserting that 0 matches expected 202.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:125
+
+50) SendGrid\Tests\Contacts\ContactDbTest::testContactDbListsIdRecipientsPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:141
+
+51) SendGrid\Tests\Contacts\ContactDbTest::testContactDbListsIdRecipientsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:154
+
+52) SendGrid\Tests\Contacts\ContactDbTest::testContactDbListsIdRecipientsIdPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:168
+
+53) SendGrid\Tests\Contacts\ContactDbTest::testContactDbListsIdRecipientsIdDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:183
+
+54) SendGrid\Tests\Contacts\ContactDbTest::testContactDbRecipientsPatchMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:199
+
+55) SendGrid\Tests\Contacts\ContactDbTest::testContactDbRecipientsPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:222
+
+56) SendGrid\Tests\Contacts\ContactDbTest::testContactDbRecipientsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:232
+
+57) SendGrid\Tests\Contacts\ContactDbTest::testContactDbRecipientsDeleteMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:245
+
+58) SendGrid\Tests\Contacts\ContactDbTest::testContactDbRecipientsBillableCountGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:255
+
+59) SendGrid\Tests\Contacts\ContactDbTest::testContactDbRecipientsCountMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:265
+
+60) SendGrid\Tests\Contacts\ContactDbTest::testContactDbRecipientsSearchGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:276
+
+61) SendGrid\Tests\Contacts\ContactDbTest::testContactDbRecipientsIdGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:287
+
+62) SendGrid\Tests\Contacts\ContactDbTest::testContactDbRecipientsIdDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:298
+
+63) SendGrid\Tests\Contacts\ContactDbTest::testContactDbRecipientsIdListsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:310
+
+64) SendGrid\Tests\Contacts\ContactDbTest::testContactDbReservedFieldsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:319
+
+65) SendGrid\Tests\Contacts\ContactDbTest::testContactDbSegmentsPostMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:352
+
+66) SendGrid\Tests\Contacts\ContactDbTest::testContactDbSegmentsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:361
+
+67) SendGrid\Tests\Contacts\ContactDbTest::testContactDbSegmentsIdPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:385
+
+68) SendGrid\Tests\Contacts\ContactDbTest::testContactDbSegmentsIdGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:397
+
+69) SendGrid\Tests\Contacts\ContactDbTest::testContactDbSegmentsIdDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:409
+
+70) SendGrid\Tests\Contacts\ContactDbTest::testContactDbSegmentsIdRecipientsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Contacts/ContactDbTest.php:422
+
+71) SendGrid\Tests\Ip\IpPoolsTest::testIpPoolsPostMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Ip/IpPoolsTest.php:16
+
+72) SendGrid\Tests\Ip\IpPoolsTest::testIpPoolsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Ip/IpPoolsTest.php:23
+
+73) SendGrid\Tests\Ip\IpPoolsTest::testIpPoolsPoolNamePutMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Ip/IpPoolsTest.php:34
+
+74) SendGrid\Tests\Ip\IpPoolsTest::testIpPoolsPoolNameGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Ip/IpPoolsTest.php:42
+
+75) SendGrid\Tests\Ip\IpPoolsTest::testIpPoolsPoolNameDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Ip/IpPoolsTest.php:50
+
+76) SendGrid\Tests\Ip\IpPoolsTest::testIpPoolsPoolNameIpsPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Ip/IpPoolsTest.php:61
+
+77) SendGrid\Tests\Ip\IpPoolsTest::testIpPoolsPoolNameIpsIdDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Ip/IpPoolsTest.php:70
+
+78) SendGrid\Tests\Ip\IpsTest::testIpsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Ip/IpsTest.php:14
+
+79) SendGrid\Tests\Ip\IpsTest::testIpsAssignedGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Ip/IpsTest.php:21
+
+80) SendGrid\Tests\Ip\IpsTest::testIpsIpAddressGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Ip/IpsTest.php:29
+
+81) SendGrid\Tests\Ip\IpsWarmupTest::testIpsWarmupGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Ip/IpsWarmupTest.php:13
+
+82) SendGrid\Tests\Ip\IpsWarmupTest::testIpsWarmupPostMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Ip/IpsWarmupTest.php:23
+
+83) SendGrid\Tests\Ip\IpsWarmupTest::testIpsWarmupIpAddressGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Ip/IpsWarmupTest.php:31
+
+84) SendGrid\Tests\Ip\IpsWarmupTest::testIpsWarmupIpAddressDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Ip/IpsWarmupTest.php:39
+
+85) SendGrid\Tests\Mail\MailBatchTest::testMailBatchPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailBatchTest.php:13
+
+86) SendGrid\Tests\Mail\MailBatchTest::testMailBatchIdGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailBatchTest.php:21
+
+87) SendGrid\Tests\Mail\MailSendTest::testMailSendPostMethod
+Failed asserting that 0 matches expected 202.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailSendTest.php:151
+
+88) SendGrid\Tests\Mail\MailSettingsTest::testMailSettingsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailSettingsTest.php:14
+
+89) SendGrid\Tests\Mail\MailSettingsTest::testMailSettingsAddressWhitelistPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailSettingsTest.php:28
+
+90) SendGrid\Tests\Mail\MailSettingsTest::testMailSettingsAddressWhitelistGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailSettingsTest.php:35
+
+91) SendGrid\Tests\Mail\MailSettingsTest::testMailSettingsBccPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailSettingsTest.php:46
+
+92) SendGrid\Tests\Mail\MailSettingsTest::testMailSettingsBccGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailSettingsTest.php:53
+
+93) SendGrid\Tests\Mail\MailSettingsTest::testMailSettingsBouncePurgePatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailSettingsTest.php:65
+
+94) SendGrid\Tests\Mail\MailSettingsTest::testMailSettingsBouncePurgeGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailSettingsTest.php:72
+
+95) SendGrid\Tests\Mail\MailSettingsTest::testMailSettingsFooterPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailSettingsTest.php:84
+
+96) SendGrid\Tests\Mail\MailSettingsTest::testMailSettingsFooterGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailSettingsTest.php:91
+
+97) SendGrid\Tests\Mail\MailSettingsTest::testMailSettingsForwardBouncePatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailSettingsTest.php:102
+
+98) SendGrid\Tests\Mail\MailSettingsTest::testMailSettingsForwardBounceGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailSettingsTest.php:109
+
+99) SendGrid\Tests\Mail\MailSettingsTest::testMailSettingsForwardSpamPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailSettingsTest.php:120
+
+100) SendGrid\Tests\Mail\MailSettingsTest::testMailSettingsForwardSpamGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailSettingsTest.php:127
+
+101) SendGrid\Tests\Mail\MailSettingsTest::testMailSettingsPlainContentPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailSettingsTest.php:137
+
+102) SendGrid\Tests\Mail\MailSettingsTest::testMailSettingsPlainContentGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailSettingsTest.php:144
+
+103) SendGrid\Tests\Mail\MailSettingsTest::testMailSettingsSpamCheckPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailSettingsTest.php:156
+
+104) SendGrid\Tests\Mail\MailSettingsTest::testMailSettingsSpamCheckGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailSettingsTest.php:163
+
+105) SendGrid\Tests\Mail\MailSettingsTest::testMailSettingsTemplatePatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailSettingsTest.php:174
+
+106) SendGrid\Tests\Mail\MailSettingsTest::testMailSettingsTemplateGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailSettingsTest.php:181
+
+107) SendGrid\Tests\Mail\MailboxProvidersTest::testMailboxProvidersStatsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Mail/MailboxProvidersTest.php:16
+
+108) SendGrid\Tests\Scopes\ScopesTest::testScopesGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Scopes/ScopesTest.php:13
+
+109) SendGrid\Tests\Senders\SendersTest::testSendersPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Senders/SendersTest.php:31
+
+110) SendGrid\Tests\Senders\SendersTest::testSendersGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Senders/SendersTest.php:39
+
+111) SendGrid\Tests\Senders\SendersTest::testSendersIdPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Senders/SendersTest.php:66
+
+112) SendGrid\Tests\Senders\SendersTest::testSendersIdGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Senders/SendersTest.php:76
+
+113) SendGrid\Tests\Senders\SendersTest::testSendersIdDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Senders/SendersTest.php:86
+
+114) SendGrid\Tests\Senders\SendersTest::testSendersIdResendVerificationPostMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Senders/SendersTest.php:97
+
+115) SendGrid\Tests\Settings\AccessSettingsTest::testAccessSettingsActivityGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Settings/AccessSettingsTest.php:17
+
+116) SendGrid\Tests\Settings\AccessSettingsTest::testAccessSettingsWhitelistPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Settings/AccessSettingsTest.php:37
+
+117) SendGrid\Tests\Settings\AccessSettingsTest::testAccessSettingsWhitelistGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Settings/AccessSettingsTest.php:44
+
+118) SendGrid\Tests\Settings\AccessSettingsTest::testAccessSettingsWhitelistDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Settings/AccessSettingsTest.php:58
+
+119) SendGrid\Tests\Settings\AccessSettingsTest::testAccessSettingsWhitelistRuleIdGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Settings/AccessSettingsTest.php:66
+
+120) SendGrid\Tests\Settings\AccessSettingsTest::testAccessSettingsWhitelistRuleIdDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Settings/AccessSettingsTest.php:74
+
+121) SendGrid\Tests\Settings\PartnerSettingsTest::testPartnerSettingsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Settings/PartnerSettingsTest.php:14
+
+122) SendGrid\Tests\Settings\PartnerSettingsTest::testPartnerSettingsNewRelicPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Settings/PartnerSettingsTest.php:26
+
+123) SendGrid\Tests\Settings\PartnerSettingsTest::testPartnerSettingsNewRelicGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Settings/PartnerSettingsTest.php:33
+
+124) SendGrid\Tests\Settings\TrackingSettingsTest::testTrackingSettingsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Settings/TrackingSettingsTest.php:14
+
+125) SendGrid\Tests\Settings\TrackingSettingsTest::testTrackingSettingsClickPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Settings/TrackingSettingsTest.php:24
+
+126) SendGrid\Tests\Settings\TrackingSettingsTest::testTrackingSettingsClickGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Settings/TrackingSettingsTest.php:31
+
+127) SendGrid\Tests\Settings\TrackingSettingsTest::testTrackingSettingsGoogleAnalyticsPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Settings/TrackingSettingsTest.php:46
+
+128) SendGrid\Tests\Settings\TrackingSettingsTest::testTrackingSettingsGoogleAnalyticsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Settings/TrackingSettingsTest.php:53
+
+129) SendGrid\Tests\Settings\TrackingSettingsTest::testTrackingSettingsOpenPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Settings/TrackingSettingsTest.php:63
+
+130) SendGrid\Tests\Settings\TrackingSettingsTest::testTrackingSettingsOpenGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Settings/TrackingSettingsTest.php:70
+
+131) SendGrid\Tests\Settings\TrackingSettingsTest::testTrackingSettingsSubscriptionPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Settings/TrackingSettingsTest.php:85
+
+132) SendGrid\Tests\Settings\TrackingSettingsTest::testTrackingSettingsSubscriptionGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Settings/TrackingSettingsTest.php:92
+
+133) SendGrid\Tests\Stats\BrowserStatsTest::testBrowserStatsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Stats/BrowserStatsTest.php:14
+
+134) SendGrid\Tests\Stats\ClientsStatsTest::testClientsStatsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Stats/ClientsStatsTest.php:14
+
+135) SendGrid\Tests\Stats\ClientsStatsTest::testClientsClientTypeStatsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Stats/ClientsStatsTest.php:23
+
+136) SendGrid\Tests\Stats\DevicesStatsTest::testDevicesStatsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Stats/DevicesStatsTest.php:14
+
+137) SendGrid\Tests\Stats\GeoStatsTest::testGeoStatsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Stats/GeoStatsTest.php:14
+
+138) SendGrid\Tests\Stats\StatsTest::testStatsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Stats/StatsTest.php:14
+
+139) SendGrid\Tests\Subusers\SubUsersTest::testSubUsersGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Subusers/SubUsersTest.php:14
+
+140) SendGrid\Tests\Subusers\SubUsersTest::testSubUsersPostMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Subusers/SubUsersTest.php:30
+
+141) SendGrid\Tests\Subusers\SubUsersTest::testSubUsersReputationGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Subusers/SubUsersTest.php:38
+
+142) SendGrid\Tests\Subusers\SubUsersTest::testSubUsersStatsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Subusers/SubUsersTest.php:46
+
+143) SendGrid\Tests\Subusers\SubUsersTest::testSubUsersStatsMonthlyGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Subusers/SubUsersTest.php:54
+
+144) SendGrid\Tests\Subusers\SubUsersTest::testSubUsersStatsSumsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Subusers/SubUsersTest.php:62
+
+145) SendGrid\Tests\Subusers\SubUsersTest::testSubUsersNamePatchMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Subusers/SubUsersTest.php:73
+
+146) SendGrid\Tests\Subusers\SubUsersTest::testSubUsersNameDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Subusers/SubUsersTest.php:81
+
+147) SendGrid\Tests\Subusers\SubUsersTest::testSubUsersNameIpsPutMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Subusers/SubUsersTest.php:92
+
+148) SendGrid\Tests\Subusers\SubUsersTest::testSubUsersNameMonitorPutMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Subusers/SubUsersTest.php:108
+
+149) SendGrid\Tests\Subusers\SubUsersTest::testSubUsersNameMonitorPostMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Subusers/SubUsersTest.php:124
+
+150) SendGrid\Tests\Subusers\SubUsersTest::testSubUsersNameMonitorGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Subusers/SubUsersTest.php:132
+
+151) SendGrid\Tests\Subusers\SubUsersTest::testSubUsersNameMonitorDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Subusers/SubUsersTest.php:140
+
+152) SendGrid\Tests\Subusers\SubUsersTest::testSubUsersNameStatsMonthlyGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Subusers/SubUsersTest.php:153
+
+153) SendGrid\Tests\Suppression\SuppressionBlocksTest::testSuppressionBlocksGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Suppression/SuppressionBlocksTest.php:14
+
+154) SendGrid\Tests\Suppression\SuppressionBlocksTest::testSuppressionBlocksDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Suppression/SuppressionBlocksTest.php:28
+
+155) SendGrid\Tests\Suppression\SuppressionBlocksTest::testSuppressionBlocksEmailGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Suppression/SuppressionBlocksTest.php:36
+
+156) SendGrid\Tests\Suppression\SuppressionBlocksTest::testSuppressionBlocksEmailDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Suppression/SuppressionBlocksTest.php:44
+
+157) SendGrid\Tests\Suppression\SuppressionBouncesTest::testSuppressionBouncesGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Suppression/SuppressionBouncesTest.php:14
+
+158) SendGrid\Tests\Suppression\SuppressionBouncesTest::testSuppressionBouncesDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Suppression/SuppressionBouncesTest.php:28
+
+159) SendGrid\Tests\Suppression\SuppressionBouncesTest::testSuppressionBouncesEmailGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Suppression/SuppressionBouncesTest.php:36
+
+160) SendGrid\Tests\Suppression\SuppressionBouncesTest::testSuppressionBouncesEmailDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Suppression/SuppressionBouncesTest.php:45
+
+161) SendGrid\Tests\Suppression\SuppressionInvalidEmailsTest::testSuppressionInvalidEmailsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Suppression/SuppressionInvalidEmailsTest.php:14
+
+162) SendGrid\Tests\Suppression\SuppressionInvalidEmailsTest::testSuppressionInvalidEmailsDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Suppression/SuppressionInvalidEmailsTest.php:28
+
+163) SendGrid\Tests\Suppression\SuppressionInvalidEmailsTest::testSuppressionInvalidEmailsEmailGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Suppression/SuppressionInvalidEmailsTest.php:36
+
+164) SendGrid\Tests\Suppression\SuppressionInvalidEmailsTest::testSuppressionBouncesEmailDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Suppression/SuppressionInvalidEmailsTest.php:44
+
+165) SendGrid\Tests\Suppression\SuppressionSpamReportsTest::testSuppressionSpamReportsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Suppression/SuppressionSpamReportsTest.php:14
+
+166) SendGrid\Tests\Suppression\SuppressionSpamReportsTest::testSuppressionSpamReportsDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Suppression/SuppressionSpamReportsTest.php:28
+
+167) SendGrid\Tests\Suppression\SuppressionSpamReportsTest::testSuppressionSpamReportsEmailGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Suppression/SuppressionSpamReportsTest.php:36
+
+168) SendGrid\Tests\Suppression\SuppressionSpamReportsTest::testSuppressionSpamReportsEmailDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Suppression/SuppressionSpamReportsTest.php:44
+
+169) SendGrid\Tests\Suppression\SuppressionUnsubscribesTest::testSuppressionUnsubscribesGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Suppression/SuppressionUnsubscribesTest.php:14
+
+170) SendGrid\Tests\Templates\TemplatesTest::testTemplatesPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Templates/TemplatesTest.php:16
+
+171) SendGrid\Tests\Templates\TemplatesTest::testTemplatesGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Templates/TemplatesTest.php:23
+
+172) SendGrid\Tests\Templates\TemplatesTest::testTemplatesIdPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Templates/TemplatesTest.php:34
+
+173) SendGrid\Tests\Templates\TemplatesTest::testTemplatesIdGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Templates/TemplatesTest.php:42
+
+174) SendGrid\Tests\Templates\TemplatesTest::testTemplatesIdDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Templates/TemplatesTest.php:50
+
+175) SendGrid\Tests\Templates\TemplatesTest::testTemplatesIdVersionsPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Templates/TemplatesTest.php:66
+
+176) SendGrid\Tests\Templates\TemplatesTest::testTemplatesIdVersionsIdPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Templates/TemplatesTest.php:83
+
+177) SendGrid\Tests\Templates\TemplatesTest::testTemplatesIdVersionsIdGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Templates/TemplatesTest.php:92
+
+178) SendGrid\Tests\Templates\TemplatesTest::testTemplatesIdVersionsIdDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Templates/TemplatesTest.php:102
+
+179) SendGrid\Tests\Templates\TemplatesTest::testTemplatesIdVersionsIdActivatePostMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Templates/TemplatesTest.php:112
+
+180) SendGrid\Tests\Users\UserTest::testUserMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:14
+
+181) SendGrid\Tests\Users\UserTest::testUserAccountGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:21
+
+182) SendGrid\Tests\Users\UserTest::testUserCreditsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:28
+
+183) SendGrid\Tests\Users\UserTest::testUserEmailPutMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:38
+
+184) SendGrid\Tests\Users\UserTest::testUserEmailGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:45
+
+185) SendGrid\Tests\Users\UserTest::testUserPasswordPutMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:56
+
+186) SendGrid\Tests\Users\UserTest::testUserProfilePatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:68
+
+187) SendGrid\Tests\Users\UserTest::testUserProfileGetMethod
+Failed asserting that 200 matches expected 0.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:75
+
+188) SendGrid\Tests\Users\UserTest::testUserScheduledSendsPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:86
+
+189) SendGrid\Tests\Users\UserTest::testUserScheduledSendsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:93
+
+190) SendGrid\Tests\Users\UserTest::testUserScheduledSendsBatchIdPatchMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:108
+
+191) SendGrid\Tests\Users\UserTest::testUserScheduledSendsBatchIdGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:116
+
+192) SendGrid\Tests\Users\UserTest::testUserScheduledSendsBatchIdDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:124
+
+193) SendGrid\Tests\Users\UserTest::testUserSettingsEnforcedTlsPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:135
+
+194) SendGrid\Tests\Users\UserTest::testUserSettingsEnforcedTlsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:142
+
+195) SendGrid\Tests\Users\UserTest::testUserUsernamePutMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:152
+
+196) SendGrid\Tests\Users\UserTest::testUserUsernameGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:159
+
+197) SendGrid\Tests\Users\UserTest::testUserWebhooksEventSettingsPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:185
+
+198) SendGrid\Tests\Users\UserTest::testUserWebhooksEventSettingsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:192
+
+199) SendGrid\Tests\Users\UserTest::testUserWebhooksEventTestPostMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:202
+
+200) SendGrid\Tests\Users\UserTest::testUserWebhooksParseSettingsPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:219
+
+201) SendGrid\Tests\Users\UserTest::testUserWebhooksParseSettingsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:226
+
+202) SendGrid\Tests\Users\UserTest::testUserWebhooksParseHostnamePatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:240
+
+203) SendGrid\Tests\Users\UserTest::testUserWebhooksParseHostnameGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:252
+
+204) SendGrid\Tests\Users\UserTest::testUserWebhooksParseHostnameDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:264
+
+205) SendGrid\Tests\Users\UserTest::testUserWebhooksParseStatsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Users/UserTest.php:272
+
+206) SendGrid\Tests\Whitelabel\WhitelabelDomainsTest::testWhitelabelDomainsPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelDomainsTest.php:25
+
+207) SendGrid\Tests\Whitelabel\WhitelabelDomainsTest::testWhitelabelDomainsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelDomainsTest.php:33
+
+208) SendGrid\Tests\Whitelabel\WhitelabelDomainsTest::testWhitelabelDomainsDefaultGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelDomainsTest.php:40
+
+209) SendGrid\Tests\Whitelabel\WhitelabelDomainsTest::testWhitelabelDomainsSubUserGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelDomainsTest.php:47
+
+210) SendGrid\Tests\Whitelabel\WhitelabelDomainsTest::testWhitelabelDomainsSubUserDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelDomainsTest.php:54
+
+211) SendGrid\Tests\Whitelabel\WhitelabelDomainsTest::testWhitelabelDomainsIdPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelDomainsTest.php:66
+
+212) SendGrid\Tests\Whitelabel\WhitelabelDomainsTest::testWhitelabelDomainsIdGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelDomainsTest.php:74
+
+213) SendGrid\Tests\Whitelabel\WhitelabelDomainsTest::testWhitelabelDomainsIdDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelDomainsTest.php:82
+
+214) SendGrid\Tests\Whitelabel\WhitelabelDomainsTest::testWhitelabelDomainsIdSubUserPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelDomainsTest.php:94
+
+215) SendGrid\Tests\Whitelabel\WhitelabelDomainsTest::testWhitelabelDomainsIdIpsPostMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelDomainsTest.php:105
+
+216) SendGrid\Tests\Whitelabel\WhitelabelDomainsTest::testWhitelabelDomainsIdIpsDeleteMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelDomainsTest.php:114
+
+217) SendGrid\Tests\Whitelabel\WhitelabelDomainsTest::testWhitelabelDomainsIdValidatePostMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelDomainsTest.php:122
+
+218) SendGrid\Tests\Whitelabel\WhitelabelIpsTest::testWhitelabelIpsPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelIpsTest.php:18
+
+219) SendGrid\Tests\Whitelabel\WhitelabelIpsTest::testWhitelabelIpsGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelIpsTest.php:26
+
+220) SendGrid\Tests\Whitelabel\WhitelabelIpsTest::testWhitelabelIpsIdGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelIpsTest.php:34
+
+221) SendGrid\Tests\Whitelabel\WhitelabelIpsTest::testWhitelabelIpsIdDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelIpsTest.php:42
+
+222) SendGrid\Tests\Whitelabel\WhitelabelIpsTest::testWhitelabelIpsIdValidatePostMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelIpsTest.php:50
+
+223) SendGrid\Tests\Whitelabel\WhitelabelLinksTest::testWhitelabelLinksPostMethod
+Failed asserting that 0 matches expected 201.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelLinksTest.php:19
+
+224) SendGrid\Tests\Whitelabel\WhitelabelLinksTest::testWhitelabelLinksGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelLinksTest.php:27
+
+225) SendGrid\Tests\Whitelabel\WhitelabelLinksTest::testWhitelabelLinksDefaultGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelLinksTest.php:35
+
+226) SendGrid\Tests\Whitelabel\WhitelabelLinksTest::testWhitelabelLinksSubUserGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelLinksTest.php:43
+
+227) SendGrid\Tests\Whitelabel\WhitelabelLinksTest::testWhitelabelLinksSubUserDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelLinksTest.php:51
+
+228) SendGrid\Tests\Whitelabel\WhitelabelLinksTest::testWhitelabelLinksIdPatchMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelLinksTest.php:62
+
+229) SendGrid\Tests\Whitelabel\WhitelabelLinksTest::testWhitelabelLinksIdGetMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelLinksTest.php:70
+
+230) SendGrid\Tests\Whitelabel\WhitelabelLinksTest::testWhitelabelLinksIdDeleteMethod
+Failed asserting that 0 matches expected 204.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelLinksTest.php:78
+
+231) SendGrid\Tests\Whitelabel\WhitelabelLinksTest::testWhitelabelLinksIdValidatePostMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelLinksTest.php:86
+
+232) SendGrid\Tests\Whitelabel\WhitelabelLinksTest::testWhitelabelLinksIdSubUserPostMethod
+Failed asserting that 0 matches expected 200.
+
+/Users/ethomas/Workspace/sendgrid/sendgrid-php/test/unit/Whitelabel/WhitelabelLinksTest.php:97
+
+FAILURES!
+Tests: 256, Assertions: 308, Failures: 232.
