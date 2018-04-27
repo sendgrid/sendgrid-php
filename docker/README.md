@@ -26,7 +26,7 @@ This Docker image contains:
 4. Build Docker image, run Docker container, login to the Docker container
   - `cd docker`
   - `docker image build --tag="sendgrid/php7" .`
-  - `docker run -itd --name="sendgrid_php7" -v /Users/ethomas/Workspace/sendgrid/sendgrid-php:/root/sendgrid-php sendgrid/php7 /bin/bash`
+  - `docker run -itd --name="sendgrid_php7" -v $(pwd):/root/sendgrid-php sendgrid/php7 /bin/bash`
 5. Run the tests within the Docker container
   - `sudo docker exec -it sendgrid_php7 /bin/bash -c 'cd sendgrid-php/test/unit; ../../vendor/bin/phpunit . --filter test*; exec "${SHELL:-sh}"'`
 
