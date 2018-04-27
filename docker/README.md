@@ -37,7 +37,9 @@ Happy Hacking!
 <a name="testing"></a>
 # For Testing the Library (Kick the Tires)
 
-- After step 4 in the QuickStart: `php sendmail.php` within the Docker container.
+- After step 5 in the QuickStart, within the Docker container: 
+  - `cd ../..`
+  - `php sendmail.php` 
 
 <a name="contributing"></a>
 # For Contributors
