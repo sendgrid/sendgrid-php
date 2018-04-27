@@ -1,6 +1,4 @@
-Get tests working on Travis
-Fix Integration Tests
-- Easer to deal with PRISM in docker?
+Determine why prism is not auto-starting
 Implement Unit Tests for the use cases in sendmail.php
 Run through linter
 Update documentation
