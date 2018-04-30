@@ -6,6 +6,8 @@ use SendGrid\Tests\BaseTestClass;
 
 class SingleEmailToASingleRecipientTest extends BaseTestClass
 {
+    private $REQUEST_OBJECT = '{"personalizations":[{"subject":"Sending with SendGrid is Fun"},{"to":[{"name":"test@example.com","email":"Example User"}]}],"from":{"name":"test@example.com","email":"Example User"},"content":[{"type":"text\/plain","value":"and easy to do anywhere, even with PHP"},{"type":"text\/html","value":"<strong>and easy to do anywhere, even with PHP<\/strong>"}]}';
+
     public function testWithObjects()
     {
         $from = new \SendGrid\Mail\From("Example User", "test@example.com");
@@ -20,11 +22,11 @@ class SingleEmailToASingleRecipientTest extends BaseTestClass
             $plainTextContent,
             $htmlContent
         );
-        $json = json_encode($email->jsonSerialize());
+        $json = json_encode($email->jsonSerialize($this->REQUEST_OBJECT));
 
         $this->assertEquals(
             $json,
-            '{"personalizations":[{"subject":"Sending with SendGrid is Fun"},{"to":[{"name":"test@example.com","email":"Example User"}]}],"from":{"name":"test@example.com","email":"Example User"},"content":[{"type":"text\/plain","value":"and easy to do anywhere, even with PHP"},{"type":"text\/html","value":"<strong>and easy to do anywhere, even with PHP<\/strong>"}]}'
+            $this->REQUEST_OBJECT
         );
     }
 
@@ -40,7 +42,7 @@ class SingleEmailToASingleRecipientTest extends BaseTestClass
         $json = json_encode($email->jsonSerialize());
 
         $json1 = json_decode($json, true);
-        $json2 = json_decode('{"personalizations":[{"subject":"Sending with SendGrid is Fun"},{"to":[{"name":"test@example.com","email":"Example User"}]}],"from":{"name":"test@example.com","email":"Example User"},"content":[{"type":"text\/plain","value":"and easy to do anywhere, even with PHP"},{"type":"text\/html","value":"<strong>and easy to do anywhere, even with PHP<\/strong>"}]}', true);
+        $json2 = json_decode($this->REQUEST_OBJECT, true);
         $result_array = array_diff($json1, $json2);
 
         $this->assertTrue(empty($result_array));
