@@ -4,7 +4,7 @@ namespace SendGrid\Tests;
 
 use SendGrid\Tests\BaseTestClass;
 
-class GenericTest extends BaseTestClass
+class SendGridTest extends BaseTestClass
 {
     public function testVersionIsCorrect()
     {
@@ -33,27 +33,5 @@ class GenericTest extends BaseTestClass
 
         $sg4 = new \SendGrid(self::$apiKey, ['curl' => [CURLOPT_PROXY => '127.0.0.1:8000']]);
         $this->assertEquals($sg4->client->getCurlOptions(), [10004 => '127.0.0.1:8000']);
-    }
-
-    public function testHelloWorld()
-    {
-        $from = new \SendGrid\Mail\From("Example User", "test@example.com");
-        $subject = new \SendGrid\Mail\Subject("Sending with SendGrid is Fun");
-        $to = new \SendGrid\Mail\To("Example User", "test@example.com");
-        $plainTextContent = new \SendGrid\Mail\PlainTextContent("and easy to do anywhere, even with PHP");
-        $htmlContent = new \SendGrid\Mail\HtmlContent("<strong>and easy to do anywhere, even with PHP</strong>");
-        $email = new \SendGrid\Mail\Mail(
-            $from,
-            $to,
-            $subject,
-            $plainTextContent,
-            $htmlContent
-        );
-        $json = json_encode($email->jsonSerialize());
-
-        $this->assertEquals(
-            $json,
-            '{"personalizations":[{"subject":"Sending with SendGrid is Fun"},{"to":[{"name":"test@example.com","email":"Example User"}]}],"from":{"name":"test@example.com","email":"Example User"},"content":[{"type":"text\/plain","value":"and easy to do anywhere, even with PHP"},{"type":"text\/html","value":"<strong>and easy to do anywhere, even with PHP<\/strong>"}]}'
-        );
     }
 }
