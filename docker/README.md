@@ -27,9 +27,9 @@ This Docker image contains:
   - `docker image build --tag="sendgrid/php7" ./docker`
   - `docker run -itd --name="sendgrid_php7" -v $(pwd):/root/sendgrid-php sendgrid/php7 /bin/bash`
 5. Run the tests within the Docker container
-  - `sudo docker exec -it sendgrid_php7 sh -c 'cd sendgrid-php/test/unit; ../../vendor/bin/phpunit . --filter test*; exec "${SHELL:-sh}"'`
+  - `sudo docker exec -it sendgrid_php7 sh -c 'cd sendgrid-php/test; ../vendor/bin/phpunit . --filter test*; exec "${SHELL:-sh}"'`
 
-Now you can continue development locally, and run `../../vendor/bin/phpunit . --filter test*` inside of the container to test.
+Now you can continue development locally, and run `../vendor/bin/phpunit . --filter test*` inside of the container to test.
 
 Happy Hacking! 
 
@@ -37,7 +37,7 @@ Happy Hacking!
 # For Testing the Library (Kick the Tires)
 
 - After step 5 in the QuickStart, within the Docker container: 
-  - `cd ../..`
+  - `cd ../`
   - `php sendmail.php` 
 
 <a name="contributing"></a>

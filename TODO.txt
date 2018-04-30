@@ -1,4 +1,4 @@
-Determine why prism is not auto-starting
+Refactor Test structure (integration, unit)
 Implement Unit Tests for the use cases in sendmail.php
 Run through linter
 Update documentation

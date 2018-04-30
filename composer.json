@@ -37,7 +37,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "SendGrid\\Tests\\": "test/unit/"
+      "SendGrid\\Tests\\": "test/"
     }
   }
 }

@@ -4,13 +4,13 @@ before_script:
 - composer install
 - "./test/prism.sh &"
 - sleep 20
-- cd test/unit
+- cd test
 
 script:
-- "../../vendor/bin/phpunit . --filter test*"
+- "../vendor/bin/phpunit . --filter test*"
 
 after_script:
-- cd ../..
+- cd ../
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 

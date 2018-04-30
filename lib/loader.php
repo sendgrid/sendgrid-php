@@ -26,6 +26,7 @@ require_once __DIR__ . '/mail/HtmlContent.php';
 require_once __DIR__ . '/mail/IpPoolName.php';
 require_once __DIR__ . '/mail/Mail.php';
 require_once __DIR__ . '/mail/MailSettings.php';
+require_once __DIR__ . '/mail/MimeType.php';
 require_once __DIR__ . '/mail/OpenTracking.php';
 require_once __DIR__ . '/mail/Personalization.php';
 require_once __DIR__ . '/mail/PlainTextContent.php';
