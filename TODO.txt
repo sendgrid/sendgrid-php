@@ -1,4 +1,5 @@
 Determine the best way to compare to objects in PHP (might need a custom function)
+- composer require swaggest/json-diff
 Implement Unit Tests for the use cases in sendmail.php
 Run through linter
 Update documentation

@@ -31,6 +31,8 @@ This Docker image contains:
 
 Now you can continue development locally, and run `../vendor/bin/phpunit . --filter test*` inside of the container to test.
 
+To clean up the container: `docker stop sendgrid_php7 && docker rm sendgrid_php7`
+
 Happy Hacking! 
 
 <a name="testing"></a>

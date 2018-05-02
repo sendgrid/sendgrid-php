@@ -20,7 +20,8 @@
   },
   "require-dev": {
     "phpunit/phpunit": "^5.7.9 || ^6.4.3",
-    "squizlabs/php_codesniffer": "2.*"
+    "squizlabs/php_codesniffer": "2.*",
+    "swaggest/json-diff": "^3.4"
   },
   "replace": {
     "sendgrid/sendgrid-php": "*"

@@ -43,7 +43,7 @@ class Personalization implements \JsonSerializable
 
     public function setSubject($subject)
     {
-        $this->subject = $subject->getSubject();
+        $this->subject = $subject;
     }
 
     public function getSubject()

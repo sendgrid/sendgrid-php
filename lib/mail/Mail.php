@@ -45,7 +45,7 @@ class Mail implements \JsonSerializable
         $plainTextContent = null,
         $htmlContent = null,
         array $globalSubstitutions = null
-    ) {
+    ) { 
         if (!isset($from)
             && !isset($to)
             && !isset($subject)
@@ -56,15 +56,8 @@ class Mail implements \JsonSerializable
             $this->personalization[] = new Personalization();
             return;
         }
+        
         if(isset($from)) $this->setFrom($from);
-        if(isset($subject)) {
-            if (!is_array($subject)) {
-                $this->setSubject($subject);
-                $subjectCount = null;
-            } else {
-                $subjectCount = 1;
-            }
-        }
         if(isset($to)) {
             if (!is_array($to)) {
                 $to = [ $to ];
@@ -81,7 +74,9 @@ class Mail implements \JsonSerializable
                     $personalization->setSubject($subject[$subjectCount - 1]);
                     $subjectCount++;
                 } else {
-                    if ($subject = $email->getSubject()) {
+                    if ($subject == $email->getSubject()) {
+                        $personalization->setSubject($email->getSubject());
+                    } else {
                         $personalization->setSubject($subject);
                     }
                 }
