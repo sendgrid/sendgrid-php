@@ -29,9 +29,9 @@ This Docker image contains:
 5. Run the tests within the Docker container
   - `sudo docker exec -it sendgrid_php7 sh -c 'cd sendgrid-php/test; ../vendor/bin/phpunit . --filter test*; exec "${SHELL:-sh}"'`
 
-Now you can continue development locally, and run `../vendor/bin/phpunit . --filter test*` inside of the container to test.
+Now you can continue development locally, and run `../vendor/bin/phpunit . --filter test*` inside of the container to test. Replace `test*` with the name of a particular test if you do not wish to run the entire suite of tests.
 
-To clean up the container: `docker stop sendgrid_php7 && docker rm sendgrid_php7`
+To clean up the container: `docker stop sendgrid_php7 && docker rm sendgrid_php7`.
 
 Happy Hacking! 
 
@@ -46,3 +46,5 @@ Happy Hacking!
 # For Contributors
 
 - Develop per usual locally, but before pushing up to GitHub, you can run the tests locally in the Docker container per step 5 of the quickstart.
+- To run all the tests: `../vendor/bin/phpunit . --filter test*`
+- To run an individual test: `../vendor/bin/phpunit . --filter [Name of Test]`
