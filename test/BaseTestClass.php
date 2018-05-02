@@ -3,6 +3,8 @@
 namespace SendGrid\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Swaggest\JsonDiff\JsonDiff;
+use Swaggest\JsonDiff\JsonPatch;
 
 /**
  * Class BaseTestClass
@@ -81,6 +83,15 @@ class BaseTestClass extends TestCase
     //         sleep(15);
     //         print("\nPrism Started\n\n");
     //     }
+    }
+
+    // Returns True if equal
+    public static function compareJSONObjects($json1, $json2)
+    {
+        $diff = new JsonDiff(json_decode($json1), json_decode($json2), JsonDiff::REARRANGE_ARRAYS);
+        $patch = $diff->getPatch();
+        $patch_array = JsonPatch::export($patch);
+        return empty($patch_array);
     }
 
     // public static function tearDownAfterClass()
