@@ -85,13 +85,19 @@ class BaseTestClass extends TestCase
     //     }
     }
 
-    // Returns True if equal
+    // Returns True if equal, else return array of differences
     public static function compareJSONObjects($json1, $json2)
     {
         $diff = new JsonDiff(json_decode($json1), json_decode($json2), JsonDiff::REARRANGE_ARRAYS);
         $patch = $diff->getPatch();
         $patch_array = JsonPatch::export($patch);
-        return empty($patch_array);
+        print(sizeof($patch_array));
+        print("HERE");
+        if (empty($patch_array)) {
+            return true;
+        } else {
+            return $patch_array;
+        }
     }
 
     // public static function tearDownAfterClass()

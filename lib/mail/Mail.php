@@ -70,15 +70,12 @@ class Mail implements \JsonSerializable
                         $personalization->addSubstitution($key, $value);
                     }
                 }
+                if ($email->getSubject()) {
+                    $personalization->setSubject($email->getSubject());
+                }
                 if (is_array($subject)) {
                     $personalization->setSubject($subject[$subjectCount - 1]);
                     $subjectCount++;
-                } else {
-                    if ($subject == $email->getSubject()) {
-                        $personalization->setSubject($email->getSubject());
-                    } else {
-                        $personalization->setSubject($subject);
-                    }
                 }
                 if (is_array($globalSubstitutions)) {
                     foreach ($globalSubstitutions as $key => $value) {
@@ -88,6 +85,7 @@ class Mail implements \JsonSerializable
                 $this->addPersonalization($personalization);
             }           
         }
+        if(isset($subject)) $this->setGlobalSubject($subject);
         if(isset($plainTextContent)) $this->addContent($plainTextContent);
         if(isset($htmlContent)) $this->addContent($htmlContent);
     }

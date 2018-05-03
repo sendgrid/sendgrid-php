@@ -61,9 +61,14 @@ class Personalization implements \JsonSerializable
         return $this->headers;
     }
 
-    public function addSubstitution($substitution)
+    public function addSubstitution($substitution, $value=null)
     {
+        if (!$substitution instanceof Substitution) {
+            $key = $substitution;
+            $substitution = new Substitution($key, $value);
+        }
         $this->substitutions[$substitution->getKey()] = $substitution->getValue();
+        
     }
 
     public function getSubstitutions()

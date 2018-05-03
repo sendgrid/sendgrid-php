@@ -11,6 +11,21 @@ class SingleEmailToASingleRecipientTest extends BaseTestClass
     
     private $REQUEST_OBJECT = <<<'JSON'
 {
+    "personalizations": [
+        {
+            "subject": "Sending with SendGrid is Fun",
+            "to": [
+                {
+                "email": "test@example.com",
+                "name": "Example User"
+                }
+            ]
+        }
+    ],
+    "from": {
+        "email": "test@example.com",
+        "name": "Example User"
+    },
     "content": [
         {
             "type": "text/plain",
@@ -20,30 +35,15 @@ class SingleEmailToASingleRecipientTest extends BaseTestClass
             "type": "text/html",
             "value": "<strong>and easy to do anywhere, even with PHP</strong>"
         }
-    ],
-    "from": {
-        "email": "Example User",
-        "name": "test@example.com"
-    },
-    "personalizations": [
-        {
-        "subject": "Sending with SendGrid is Fun",
-        "to": [
-            {
-            "email": "Example User",
-            "name": "test@example.com"
-            }
-        ]
-        }
     ]
 }
 JSON;
     
     public function testWithObjects()
     {
-        $from = new \SendGrid\Mail\From("Example User", "test@example.com");
+        $from = new \SendGrid\Mail\From("test@example.com", "Example User");
         $subject = new \SendGrid\Mail\Subject("Sending with SendGrid is Fun");
-        $to = new \SendGrid\Mail\To("Example User", "test@example.com");
+        $to = new \SendGrid\Mail\To("test@example.com", "Example User");
         $plainTextContent = new \SendGrid\Mail\PlainTextContent(
             "and easy to do anywhere, even with PHP"
         );
@@ -65,9 +65,9 @@ JSON;
     public function testWithoutObjects()
     {
         $email = new \SendGrid\Mail\Mail(); 
-        $email->setFrom("Example User", "test@example.com");
+        $email->setFrom("test@example.com", "Example User");
         $email->setSubject("Sending with SendGrid is Fun");
-        $email->addTo("Example User", "test@example.com");
+        $email->addTo("test@example.com", "Example User");
         $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
         $email->addContent(
             "text/html", "<strong>and easy to do anywhere, even with PHP</strong>"
