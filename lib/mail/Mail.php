@@ -62,6 +62,7 @@ class Mail implements \JsonSerializable
             if (!is_array($to)) {
                 $to = [ $to ];
             }
+            $subjectCount = 0;
             foreach ($to as $email) {
                 $personalization = new Personalization();
                 $personalization->addTo($email);
@@ -74,7 +75,7 @@ class Mail implements \JsonSerializable
                     $personalization->setSubject($email->getSubject());
                 }
                 if (is_array($subject)) {
-                    $personalization->setSubject($subject[$subjectCount - 1]);
+                    $personalization->setSubject($subject[$subjectCount]);
                     $subjectCount++;
                 }
                 if (is_array($globalSubstitutions)) {
@@ -85,7 +86,11 @@ class Mail implements \JsonSerializable
                 $this->addPersonalization($personalization);
             }           
         }
-        if(isset($subject)) $this->setGlobalSubject($subject);
+        if (isset($subject)) {
+            if (!is_array($subject)) {
+                $this->setGlobalSubject($subject);
+            }
+        }
         if(isset($plainTextContent)) $this->addContent($plainTextContent);
         if(isset($htmlContent)) $this->addContent($htmlContent);
     }
@@ -276,22 +281,11 @@ class Mail implements \JsonSerializable
             $this->addPersonalization($personalization);
             return;
         } else {
-            if ($this->personalization[0] != null) {
-                $this->personalization[0]->setSubject($subject);
-                return;
-            } elseif ($this->personalization[$personalizationIndex] != null) {
+            if ($this->personalization[$personalizationIndex] != null) {
                 $this->personalization[$personalizationIndex]->setSubject($subject);
                 return;
             } else {
-                $personalization = new Personalization();
-                $personalization->setSubject($subject);
-                if (($personalizationIndex != 0)
-                    && ($this->getPersonalizationCount() <= $personalizationIndex)
-                ) {
-                    $this->personalization[$personalizationIndex] = $personalization;
-                } else {
-                    $this->addPersonalization($personalization);
-                }
+                $this->setGlobalSubject($subject);
                 return;
             }
         }

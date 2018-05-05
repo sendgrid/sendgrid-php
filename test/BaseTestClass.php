@@ -91,8 +91,6 @@ class BaseTestClass extends TestCase
         $diff = new JsonDiff(json_decode($json1), json_decode($json2), JsonDiff::REARRANGE_ARRAYS);
         $patch = $diff->getPatch();
         $patch_array = JsonPatch::export($patch);
-        print(sizeof($patch_array));
-        print("HERE");
         if (empty($patch_array)) {
             return true;
         } else {

@@ -13,15 +13,15 @@ class SingleEmailToASingleRecipientTest extends BaseTestClass
 {
     "personalizations": [
         {
-            "subject": "Sending with SendGrid is Fun",
             "to": [
                 {
-                "email": "test@example.com",
-                "name": "Example User"
+                    "email": "test@example.com",
+                    "name": "Example User"
                 }
             ]
         }
     ],
+    "subject": "Sending with SendGrid is Fun",
     "from": {
         "email": "test@example.com",
         "name": "Example User"
@@ -72,7 +72,6 @@ JSON;
         $email->addContent(
             "text/html", "<strong>and easy to do anywhere, even with PHP</strong>"
         );
-
         $json = json_encode($email->jsonSerialize());
         $isEqual = BaseTestClass::compareJSONObjects($json, $this->REQUEST_OBJECT);
         $this->assertTrue($isEqual);
