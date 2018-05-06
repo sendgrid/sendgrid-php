@@ -1,3 +1,4 @@
+Check that we don't go out of bounds here: https://github.com/sendgrid/sendgrid-php/blob/v7/lib/mail/Mail.php#L80 (see latest test on Travis)
 Implement Unit Tests for the use cases in sendmail.php
 Run through linter
 Update documentation
