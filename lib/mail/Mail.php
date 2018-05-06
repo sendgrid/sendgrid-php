@@ -63,8 +63,11 @@ class Mail implements \JsonSerializable
                 $to = [ $to ];
             }
             $subjectCount = 0;
+            $personalization = new Personalization();
             foreach ($to as $email) {
-                $personalization = new Personalization();
+                if ($subs = $email->getSubstitions()) {
+                    $personalization = new Personalization();
+                }
                 $personalization->addTo($email);
                 if ($subs = $email->getSubstitions()) {
                     foreach ($subs as $key => $value) {
@@ -83,12 +86,17 @@ class Mail implements \JsonSerializable
                         $personalization->addSubstitution($key, $value);
                     }
                 }
-                $this->addPersonalization($personalization);
-            }           
+                if ($subs = $email->getSubstitions()) {
+                    $this->addPersonalization($personalization);  
+                }
+            }    
+            if (!$subs = $email->getSubstitions()) {
+                $this->addPersonalization($personalization);  
+            }      
         }
         if (isset($subject)) {
             if (!is_array($subject)) {
-                $this->setGlobalSubject($subject);
+                $this->setSubject($subject);
             }
         }
         if(isset($plainTextContent)) $this->addContent($plainTextContent);
@@ -276,19 +284,18 @@ class Mail implements \JsonSerializable
         } else {
             $subject = new Subject($subject);
         }
+
         if ($personalization != null) {
             $personalization->setSubject($subject);
             $this->addPersonalization($personalization);
             return;
-        } else {
-            if ($this->personalization[$personalizationIndex] != null) {
-                $this->personalization[$personalizationIndex]->setSubject($subject);
-                return;
-            } else {
-                $this->setGlobalSubject($subject);
-                return;
-            }
+        } 
+        if ($personalizationIndex != null) {
+            $this->personalization[$personalizationIndex]->setSubject($subject);
+            return;
         }
+        $this->setGlobalSubject($subject);
+        return;
     }
 
     public function getSubject($personalizationIndex = 0)
