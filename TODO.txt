@@ -3,3 +3,4 @@ Implement Unit Tests for the use cases in sendmail.php
 Run through linter
 Update documentation
 Check Getting Started deliverables
+You should be able to set tracking and mail settings without creating an object.
