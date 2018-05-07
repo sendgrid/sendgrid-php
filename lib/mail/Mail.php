@@ -78,7 +78,9 @@ class Mail implements \JsonSerializable
                     $personalization->setSubject($email->getSubject());
                 }
                 if (is_array($subject)) {
-                    $personalization->setSubject($subject[$subjectCount]);
+                    if ($subjectCount < sizeof($subject)) {
+                        $personalization->setSubject($subject[$subjectCount]);
+                    }
                     $subjectCount++;
                 }
                 if (is_array($globalSubstitutions)) {

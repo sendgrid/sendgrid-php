@@ -6,7 +6,7 @@ use SendGrid\Tests\BaseTestClass;
 
 class KitchenSinkTest extends BaseTestClass
 {
-    // public function testKitchenSinkExample()
+    // public function testKitchenSinkExampleWithoutObjects()
     // {
     //     $email = new Mail();
 
@@ -153,7 +153,7 @@ class KitchenSinkTest extends BaseTestClass
     //     $this->assertEquals($json, '{"personalizations":[{"to":[{"name":"Example User","email":"test@example.com"},{"name":"Example User1","email":"test+1@example.com"},{"name":"Example User2","email":"test+2@example.com"},{"name":"Example User3","email":"test+3@example.com"}],"cc":[{"name":"Example User4","email":"test+4@example.com"},{"name":"Example User5","email":"test+5@example.com"},{"name":"Example User6","email":"test+6@example.com"}],"bcc":[{"name":"Example User7","email":"test+7@example.com"},{"name":"Example User8","email":"test+8@example.com"},{"name":"Example User9","email":"test+9@example.com"}],"subject":"Sending with SendGrid is Fun 2","headers":{"X-Test1":"Test1","X-Test2":"Test2","X-Test3":"Test3","X-Test4":"Test4"},"substitutions":{"%name1%":"Example Name 1","%city1%":"Denver","%name2%":"Example Name 2","%city2%":"Orange"},"custom_args":{"marketing1":"false","transactional1":"true","category":"name","marketing2":"true","transactional2":"false"},"send_at":1461775051}],"from":{"name":"DX","email":"test@example.com"},"reply_to":{"name":"DX Team Reply To 2","email":"dx+replyto2@example.com"},"subject":"Sending with SendGrid is Fun and Global 2","content":[{"type":"text\/plain","value":"and easy to do anywhere, even with PHP"},{"type":"text\/html","value":"<strong>and easy to do anywhere, even with PHP<\/strong>"},{"type":"text\/calendar","value":"Party Time!!"},{"type":"text\/calendar2","value":"Party Time 2!!"}],"attachments":[{"content":"base64 encoded content1","type":"image\/png","filename":"banner.png","disposition":"inline","content_id":"Banner"},{"content":"base64 encoded content2","type":"banner2.jpeg","filename":"image\/jpeg","disposition":"attachment","content_id":"Banner 3"},{"content":"base64 encoded content3","type":"banner3.gif","filename":"image\/gif","disposition":"inline","content_id":"Banner 3"}],"template_id":"13b8f94f-bcae-4ec6-b752-70d6cb59f932","sections":{"%section1%":"Substitution for Section 1 Tag","%section3%":"Substitution for Section 3 Tag","%section4%":"Substitution for Section 4 Tag"},"headers":{"X-Day":"Monday","X-Month":"January","X-Year":"2017"},"categories":["Category 1","Category 2","Category 3"],"batch_id":"MWQxZmIyODYtNjE1Ni0xMWU1LWI3ZTUtMDgwMDI3OGJkMmY2LWEzMmViMjYxMw","asm":{"group_id":1,"groups_to_display":[[1,2,3,4]]},"ip_pool_name":"23","mail_settings":{"bcc":{"enable":true,"email":"bcc@example.com"},"bypass_list_management":{"enable":true},"footer":{"enable":true,"text":"Footer","html":"<strong>Footer<\/strong>"},"sandbox_mode":{"enable":true},"spam_check":{"enable":true,"threshold":1,"post_to_url":"http:\/\/mydomain.com"}},"tracking_settings":{"click_tracking":{"enable":true,"enable_text":true},"open_tracking":{"enable":true,"substitution_tag":"--sub--"},"subscription_tracking":{"enable":true,"text":"subscribe","html":"<bold>subscribe<\/bold>","substitution_tag":"%%sub%%"},"ganalytics":{"enable":true,"utm_source":"utm_source","utm_medium":"utm_medium","utm_term":"utm_term","utm_content":"utm_content","utm_campaign":"utm_campaign"}}}');
     // }
 
-    // public function testKitchenSinkExampleAllObjects()
+    // public function testKitchenSinkExampleWithObjects()
     // {
     //     $email = new Mail();
 
