@@ -1,6 +1,9 @@
-Check that we don't go out of bounds here: https://github.com/sendgrid/sendgrid-php/blob/v7/lib/mail/Mail.php#L80 (see latest test on Travis)
-Implement Unit Tests for the use cases in sendmail.php
-Run through linter
-Update documentation
-Check Getting Started deliverables
 You should be able to set tracking and mail settings without creating an object.
+Run through linter
+Update documentation files (.md)
+Check Getting Started deliverables
+Try some live calls for final sanity check
+
+For the community
+- Object level unit Tests (e.g. test each function in the lib directory)
+- Increase the number of tests for each existing unit test (e.g. failure cases, edge cases, etc.)
