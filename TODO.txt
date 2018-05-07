@@ -7,3 +7,4 @@ Try some live calls for final sanity check
 For the community
 - Object level unit Tests (e.g. test each function in the lib directory)
 - Increase the number of tests for each existing unit test (e.g. failure cases, edge cases, etc.)
+- Refeactor internals to adhere to DRY

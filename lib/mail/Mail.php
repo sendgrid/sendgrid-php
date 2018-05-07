@@ -851,6 +851,62 @@ class Mail implements \JsonSerializable
         return $this->mail_settings;
     }
 
+    public function setBccSettings($enable=null, $email=null)
+    {
+        if (!$this->mail_settings instanceof MailSettings) {
+            $this->mail_settings = new MailSettings();
+        }
+        $this->mail_settings->setBccSettings($enable, $email);
+    }
+
+    public function enableBypassListManagement()
+    {
+        if (!$this->mail_settings instanceof MailSettings) {
+            $this->mail_settings = new MailSettings();
+        }
+        $this->mail_settings->setBypassListManagement(true);
+    }
+
+    public function disableBypassListManagement()
+    {
+        if (!$this->mail_settings instanceof MailSettings) {
+            $this->mail_settings = new MailSettings();
+        }
+        $this->mail_settings->setBypassListManagement(false);
+    }
+
+    public function setFooter($enable=null, $text=null, $html=null)
+    {
+        if (!$this->mail_settings instanceof MailSettings) {
+            $this->mail_settings = new MailSettings();
+        }
+        $this->mail_settings->setFooter($enable, $text, $html);
+    }
+
+    public function enableSandBoxMode()
+    {
+        if (!$this->mail_settings instanceof MailSettings) {
+            $this->mail_settings = new MailSettings();
+        }
+        $this->mail_settings->setSandBoxMode(true);
+    }
+
+    public function disableSandBoxMode()
+    {
+        if (!$this->mail_settings instanceof MailSettings) {
+            $this->mail_settings = new MailSettings();
+        }
+        $this->mail_settings->setSandBoxMode(false);
+    }
+
+    public function setSpamCheck($enable=null, $threshold=null, $post_to_url=null)
+    {
+        if (!$this->mail_settings instanceof MailSettings) {
+            $this->mail_settings = new MailSettings();
+        }
+        $this->mail_settings->setSpamCheck($enable, $threshold, $post_to_url);
+    }
+
     public function setTrackingSettings($tracking_settings)
     {
         $this->tracking_settings = $tracking_settings;
@@ -859,6 +915,51 @@ class Mail implements \JsonSerializable
     public function getTrackingSettings()
     {
         return $this->tracking_settings;
+    }
+
+    public function setClickTracking($enable=null, $enable_text=null)
+    {
+        if (!$this->tracking_settings instanceof TrackingSettings) {
+            $this->tracking_settings = new TrackingSettings();
+        }
+        $this->tracking_settings->setClickTracking($enable, $enable_text);
+    }
+
+    public function setOpenTracking($enable=null, $substitution_tag=null)
+    {
+        if (!$this->tracking_settings instanceof TrackingSettings) {
+            $this->tracking_settings = new TrackingSettings();
+        }
+        $this->tracking_settings->setOpenTracking($enable, $substitution_tag);
+    }
+
+    public function setSubscriptionTracking($enable=null, $text=null, $html=null, $substitution_tag=null)
+    {
+        if (!$this->tracking_settings instanceof TrackingSettings) {
+            $this->tracking_settings = new TrackingSettings();
+        }
+        $this->tracking_settings->setSubscriptionTracking($enable, $text, $html, $substitution_tag);
+    }
+
+    public function setGanalytics(
+        $enable=null,
+        $utm_source=null,
+        $utm_medium=null,
+        $utm_term=null,
+        $utm_content=null,
+        $utm_campaign=null
+    ) {
+        if (!$this->tracking_settings instanceof TrackingSettings) {
+            $this->tracking_settings = new TrackingSettings();
+        }
+        $this->tracking_settings->setGanalytics(
+            $enable,
+            $utm_source,
+            $utm_medium,
+            $utm_term,
+            $utm_content,
+            $utm_campaign
+        );
     }
 
     public function jsonSerialize()

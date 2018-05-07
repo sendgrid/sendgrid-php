@@ -334,20 +334,20 @@ JSON;
 
         $email->setIpPoolName("23");
 
-        $mail_settings = new \SendGrid\Mail\MailSettings();
-        $mail_settings->setBccSettings(true, "bcc@example.com");
-        $mail_settings->setBypassListManagement(true);
-        $mail_settings->setFooter(true, "Footer", "<strong>Footer</strong>");
-        $mail_settings->setSandBoxMode(true);
-        $mail_settings->setSpamCheck(true, 1, "http://mydomain.com");
-        $email->setMailSettings($mail_settings);
-
-        $tracking_settings = new \SendGrid\Mail\TrackingSettings();
-        $tracking_settings->setClickTracking(true, true);
-        $tracking_settings->setOpenTracking(true, "--sub--");
-        $tracking_settings->setSubscriptionTracking(true, "subscribe", "<bold>subscribe</bold>", "%%sub%%");
-        $tracking_settings->setGanalytics(true, "utm_source", "utm_medium", "utm_term", "utm_content", "utm_campaign");
-        $email->setTrackingSettings($tracking_settings);
+        // Mail Settings
+        $email->setBccSettings(true, "bcc@example.com");
+        $email->enableBypassListManagement();
+        //$email->disableBypassListManagement();
+        $email->setFooter(true, "Footer", "<strong>Footer</strong>");
+        $email->enableSandBoxMode();
+        //$email->disableSandBoxMode();
+        $email->setSpamCheck(true, 1, "http://mydomain.com");
+        
+        // Tracking Settings
+        $email->setClickTracking(true, true);
+        $email->setOpenTracking(true, "--sub--");
+        $email->setSubscriptionTracking(true, "subscribe", "<bold>subscribe</bold>", "%%sub%%");
+        $email->setGanalytics(true, "utm_source", "utm_medium", "utm_term", "utm_content", "utm_campaign");
 
         $json = json_encode($email->jsonSerialize());
         $isEqual = BaseTestClass::compareJSONObjects($json, $this->REQUEST_OBJECT);
