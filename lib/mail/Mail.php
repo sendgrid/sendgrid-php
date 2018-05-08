@@ -1,43 +1,102 @@
-<?php namespace SendGrid\Mail;
+<?php
 /**
-  * This helper builds the request body for a /mail/send API call.
-  *
-  * PHP version 5.6, 7
-  *
-  * @author    Elmer Thomas <dx@sendgrid.com>
-  * @copyright 2017 SendGrid
-  * @license   https://opensource.org/licenses/MIT The MIT License
-  * @version   GIT: <git_id>
-  * @link      http://packagist.org/packages/sendgrid/sendgrid
-  */
+ * This helper builds the request body for a /mail/send API call
+ * 
+ * PHP Version - 5.6, 7.0, 7.1, 7.2
+ *
+ * @package   SendGrid\Mail
+ * @author    Elmer Thomas <dx@sendgrid.com>
+ * @copyright 2018 SendGrid
+ * @license   https://opensource.org/licenses/MIT The MIT License
+ * @version   GIT: <git_id>
+ * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ */
+namespace SendGrid\Mail;
+
 /**
-  * The final request body object
-  */
+ * This class is used to construct a request body for the /mail/send API call
+ * 
+ * @package SendGrid\Mail
+ */
 class Mail implements \JsonSerializable
 {
-    const VERSION = '1.0.0';
-
-    protected $namespace = 'SendGrid';
-
+    // @var From Email address of the sender
     private $from;
+
+    // @var Subject Subject of the email
     private $subject;
+
+    // @var Content[] Content(s) of the email
     private $contents;
+
+    // @var Attachment[] Email attachments
     private $attachments;
+
+    // @var TemplateId Id of a template that you would like to use
     private $template_id;
+
+    // @var Section[] Key/value pairs that define block sections of code 
+    // to be used as substitutions
     private $sections;
+
+    // @var Header[] Header names and the value to substitute for them
     private $headers;
+
+    // @var Category[] Category names for this message
     private $categories;
+
+    // @var CustomArg[] Values that are specific to the entire send that 
+    // will be carried along with the email and its activity data
     private $custom_args;
+
+    // @var Substitution[] Substitutions that will apply to the text and html 
+    // content of the body of your email, in addition to the subject and reply-to 
+    // parameters
     private $substitutions;
+
+    // @var SendAt A unix timestamp allowing you to specify when you want your 
+    // email to be delivered
     private $send_at;
+
+    // @var BatchId This ID represents a batch of emails to be sent at the same time
     private $batch_id;
+
+    // @var ASM Specifies how to handle unsubscribes
     private $asm;
+
+    // @var IpPoolName The IP Pool that you would like to send this email from
     private $ip_pool_name;
+
+    // @var MailSettings A collection of different mail settings that you can use 
+    // to specify how you would like this email to be handled
     private $mail_settings;
+
+    // @var TrackingSettings Settings to determine how you would like to track the 
+    // metrics of how your recipients interact with your email
     private $tracking_settings;
+
+    // @var ReplyTo Email to be use when replied to
     private $reply_to;
+
+    // @var Personalization Messages and their metadata
     private $personalization;
 
+    const   VERSION = "7.0.0";
+
+    /**
+     * If passing parameters into this constructor include:
+     * $from, $to, $subject, $plainTextContent and
+     * $htmlContent at a minimum. In that case, a Personalization
+     * object will be created for you.
+     *
+     * @param From|null              $from                Email address of the sender
+     * @param To|To[]|null           $to                  Recipient(s) email address(es)
+     * @param Subject|Subject[]|null $subject             Subject(s)
+     * @param PlainTextContent|null  $plainTextContent    Plain text version of content
+     * @param HtmlContent|null       $htmlContent         Html version of content
+     * @param Substitution[]|null    $globalSubstitutions Substitutions for entire email
+     * 
+     */
     public function __construct(
         $from = null,
         $to = null,

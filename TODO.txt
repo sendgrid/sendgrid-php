@@ -1,5 +1,5 @@
-You should be able to set tracking and mail settings without creating an object.
 Run through linter
+- shout out to https://github.com/martijnmelchers for helpling with this: https://github.com/martijnmelchers/sendgrid-php/blob/v7
 Update documentation files (.md)
 Check Getting Started deliverables
 Try some live calls for final sanity check
