@@ -412,3 +412,5 @@ echo json_encode($email, JSON_PRETTY_PRINT);
 // echo $response->statusCode();
 // print_r($response->headers());
 // echo $response->body(); // This will be empty on a 202
+
+$email = new Mail();

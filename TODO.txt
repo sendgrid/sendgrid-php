@@ -1,8 +1,10 @@
-Run through linter
-- shout out to https://github.com/martijnmelchers for helpling with this: https://github.com/martijnmelchers/sendgrid-php/blob/v7
+Review all related PRs and original requests to capture anything missed or that should be added to "For the community"
+Run through linter and update phpdocs
+- shout out to https://github.com/martijnmelchers for helping with this: https://github.com/martijnmelchers/sendgrid-php/blob/v7
 Update documentation files (.md)
-Check Getting Started deliverables
+Double check Getting Started deliverables (See Google Docs)
 Try some live calls for final sanity check
+Release
 
 For the community
 - Object level unit Tests (e.g. test each function in the lib directory)
