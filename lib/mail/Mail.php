@@ -726,6 +726,24 @@ class Mail implements \JsonSerializable
         return $this->personalization[$personalizationIndex]->getSubstitutions();
     }
 
+    /**
+     * Add a custom arg to a Personalization or Mail object
+     * 
+     * If you don't provide a Personalization object or index, the
+     * custom arg will be global to entire message. Note that 
+     * custom args added to Personalization objects override
+     * global custom args.
+     *
+     * @param string|CustomArg     $key                  Key or CustomArg object
+     * @param string|null          $value                Value
+     * @param int|null             $personalizationIndex Index into an array of 
+     *                                                   existing Personalization 
+     *                                                   objects
+     * @param Personalization|null $personalization      A pre-created 
+     *                                                   Personalization object
+     * 
+     * @return null
+     */     
     public function addCustomArg(
         $key,
         $value=null,
@@ -763,24 +781,76 @@ class Mail implements \JsonSerializable
         }
     }
 
-    public function addCustomArgs($custom_args)
-    {
+    /**
+     * Adds multiple custom args to a Personalization or Mail object
+     * 
+     * If you don't provide a Personalization object or index, the
+     * custom arg will be global to entire message. Note that 
+     * custom args added to Personalization objects override
+     * global custom args.
+     *
+     * @param CustomArg[]          $custom_args          Array of CustomArg objects
+     * @param int|null             $personalizationIndex Index into an array of 
+     *                                                   existing Personalization 
+     *                                                   objects
+     * @param Personalization|null $personalization      A pre-created 
+     *                                                   Personalization object
+     * 
+     * @return null
+     */ 
+    public function addCustomArgs(
+        $custom_args,
+        $personalizationIndex = null,
+        $personalization = null
+    ) {
         if (current($custom_args) instanceof CustomArg) {
             foreach ($custom_args as $custom_arg) {
                 $this->addCustomArg($custom_arg);
             }
         } else {
             foreach ($custom_args as $key => $value) {
-                $this->addCustomArg($key, $value);
+                $this->addCustomArg(
+                    $key,
+                    $value,
+                    $personalizationIndex,
+                    $personalization
+                );
             }
         }
     }    
 
+    /**
+     * Retrieve the custom args (key/values) attached to a Personalization object
+     *
+     * @param int|0 $personalizationIndex Index into an array of 
+     *                                    existing Personalization 
+     *                                    objects
+     * 
+     * @return array
+     */  
     public function getCustomArgs($personalizationIndex = 0)
     {
         return $this->personalization[$personalizationIndex]->getCustomArgs();
     }
 
+    /**
+     * Add a unix timestamp allowing you to specify when you want your 
+     * email to be delivered to a Personalization or Mail object
+     * 
+     * If you don't provide a Personalization object or index, the
+     * subject will be global to entire message. Note that 
+     * subjects added to Personalization objects override
+     * global subjects.
+     *
+     * @param int|SendAt           $send_at              A unix timestamp
+     * @param int|null             $personalizationIndex Index into an array of 
+     *                                                   existing Personalization 
+     *                                                   objects
+     * @param Personalization|null $personalization      A pre-created 
+     *                                                   Personalization object
+     * 
+     * @return null
+     */  
     public function setSendAt(
         $send_at,
         $personalizationIndex = null,
@@ -817,6 +887,15 @@ class Mail implements \JsonSerializable
         }
     }
 
+    /**
+     * Retrieve the unix timestamp attached to a Personalization object
+     *
+     * @param int|0 $personalizationIndex Index into an array of 
+     *                                    existing Personalization 
+     *                                    objects
+     * 
+     * @return array
+     */ 
     public function getSendAt($personalizationIndex = 0)
     {
         return $this->personalization[$personalizationIndex]->getSendAt();
