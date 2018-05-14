@@ -504,7 +504,7 @@ class Mail implements \JsonSerializable
      *                                    existing Personalization 
      *                                    objects
      * 
-     * @return string|Subject
+     * @return Subject
      */  
     public function getSubject($personalizationIndex = 0)
     {
@@ -574,7 +574,8 @@ class Mail implements \JsonSerializable
      * headers added to Personalization objects override
      * global headers.
      *
-     * @param Header[]             $headers              Array of Header objects
+     * @param array|Header[]       $headers              Array of Header objects 
+     *                                                   or key values
      * @param int|null             $personalizationIndex Index into an array of 
      *                                                   existing Personalization 
      *                                                   objects
@@ -605,13 +606,13 @@ class Mail implements \JsonSerializable
     }
 
     /**
-     * Retrieve the headers (key/values) attached to a Personalization object
+     * Retrieve the headers attached to a Personalization object
      *
      * @param int|0 $personalizationIndex Index into an array of 
      *                                    existing Personalization 
      *                                    objects
      * 
-     * @return array
+     * @return Header[]
      */  
     public function getHeaders($personalizationIndex = 0)
     {
@@ -682,7 +683,8 @@ class Mail implements \JsonSerializable
      * substitutions added to Personalization objects override
      * global headers.
      *
-     * @param Substitution[]       $substitutions        Array of Substitution objects
+     * @param array|Substitution[] $substitutions        Array of Substitution
+     *                                                   objects or key/values
      * @param int|null             $personalizationIndex Index into an array of 
      *                                                   existing Personalization 
      *                                                   objects
@@ -713,13 +715,13 @@ class Mail implements \JsonSerializable
     }
 
     /**
-     * Retrieve the substitutions (key/values) attached to a Personalization object
+     * Retrieve the substitutions attached to a Personalization object
      *
      * @param int|0 $personalizationIndex Index into an array of 
      *                                    existing Personalization 
      *                                    objects
      * 
-     * @return array
+     * @return Substitution[]
      */  
     public function getSubstitutions($personalizationIndex = 0)
     {
@@ -789,7 +791,8 @@ class Mail implements \JsonSerializable
      * custom args added to Personalization objects override
      * global custom args.
      *
-     * @param CustomArg[]          $custom_args          Array of CustomArg objects
+     * @param array|CustomArg[]    $custom_args          Array of CustomArg objects
+     *                                                   or key/values
      * @param int|null             $personalizationIndex Index into an array of 
      *                                                   existing Personalization 
      *                                                   objects
@@ -820,13 +823,13 @@ class Mail implements \JsonSerializable
     }    
 
     /**
-     * Retrieve the custom args (key/values) attached to a Personalization object
+     * Retrieve the custom args attached to a Personalization object
      *
      * @param int|0 $personalizationIndex Index into an array of 
      *                                    existing Personalization 
      *                                    objects
      * 
-     * @return array
+     * @return CustomArg[]
      */  
     public function getCustomArgs($personalizationIndex = 0)
     {
@@ -838,9 +841,9 @@ class Mail implements \JsonSerializable
      * email to be delivered to a Personalization or Mail object
      * 
      * If you don't provide a Personalization object or index, the
-     * subject will be global to entire message. Note that 
-     * subjects added to Personalization objects override
-     * global subjects.
+     * send at timestamp will be global to entire message. Note that 
+     * timestamps added to Personalization objects override
+     * global timestamps.
      *
      * @param int|SendAt           $send_at              A unix timestamp
      * @param int|null             $personalizationIndex Index into an array of 
@@ -894,13 +897,21 @@ class Mail implements \JsonSerializable
      *                                    existing Personalization 
      *                                    objects
      * 
-     * @return array
+     * @return SendAt
      */ 
     public function getSendAt($personalizationIndex = 0)
     {
         return $this->personalization[$personalizationIndex]->getSendAt();
     }  
 
+    /**
+     * Add the sender email address to a Mail object
+     *
+     * @param string|From $email Email address or From object
+     * @param string|null $name  Sender name
+     * 
+     * @return null
+     */      
     public function setFrom($email, $name=null)
     {
         if ($email instanceof From) {
@@ -911,11 +922,24 @@ class Mail implements \JsonSerializable
         return;
     }
 
+    /**
+     * Retrieve the sender attached to a Mail object
+     * 
+     * @return From
+     */  
     public function getFrom()
     {
         return $this->from;
     }
 
+    /**
+     * Add the reply to email address to a Mail object
+     *
+     * @param string|ReplyTo $email Email address or From object
+     * @param string|null    $name  Reply to name
+     * 
+     * @return null
+     */     
     public function setReplyTo($email, $name=null)
     {
         if ($email instanceof ReplyTo) {
@@ -926,11 +950,28 @@ class Mail implements \JsonSerializable
         return;
     }
 
+    /**
+     * Retrieve the reply to information attached to a Mail object
+     * 
+     * @return ReplyTo
+     */  
     public function getReplyTo()
     {
         return $this->reply_to;
     }
 
+
+    /**
+     * Add a subject to a Mail object
+     * 
+     * Note that 
+     * subjects added to Personalization objects override
+     * global subjects.
+     *
+     * @param string|Subject $subject Email subject
+     * 
+     * @return null
+     */      
     public function setGlobalSubject($subject)
     {
         if ($subject instanceof Subject) {
@@ -941,11 +982,27 @@ class Mail implements \JsonSerializable
         $this->subject = $subject;
     }
 
+    /**
+     * Retrieve a subject attached to a Mail object
+     * 
+     * @return Subject
+     */  
     public function getGlobalSubject()
     {
         return $this->subject;
     }
 
+    /**
+     * Add content to a Mail object
+     * 
+     * For a list of pre-configured mime types, please see
+     * MimeType.php
+     *
+     * @param string|Content $type  Mime type or Content object
+     * @param string|null    $value Contents (e.g. text or html)
+     * 
+     * @return null
+     */ 
     public function addContent($type, $value = null)
     {
         if ($type instanceof Content) {
@@ -956,6 +1013,14 @@ class Mail implements \JsonSerializable
         $this->contents[] = $content;
     }
 
+    /**
+     * Adds multiple Content objects to a Mail object
+     *
+     * @param array|Content[] $contents Array of Content objects
+     *                                  or key value pairs
+     * 
+     * @return null
+     */ 
     public function addContents($contents)
     {
         if (current($contents) instanceof Content) {
@@ -969,12 +1034,32 @@ class Mail implements \JsonSerializable
         }
     }    
 
+    /**
+     * Retrieve the contents attached to a Mail object
+     * 
+     * @return Content[]
+     */  
     public function getContents()
     {
-        // TODO: Ensure text/plain is always first
         return $this->contents;
     }
 
+    /**
+     * Add an attachment to a Mail object
+     *
+     * @param string|Attachment $attachment  Attachment object or 
+     *                                       Base64 encoded content
+     * @param string|null       $type        Mime type of the attachment
+     * @param string|null       $filename    File name of the attachment
+     * @param string|null       $disposition How the attachment should be
+     *                                       displayed: inline or attachment
+     *                                       default is attachment
+     * @param string|null       $content_id  Used when disposition is inline
+     *                                       to diplay the file within the
+     *                                       body of the email
+     * 
+     * @return null
+     */  
     public function addAttachment(
         $attachment,
         $type = null,
@@ -1004,6 +1089,14 @@ class Mail implements \JsonSerializable
         $this->attachments[] = $attachment;
     }
 
+    /**
+     * Adds multiple attachments to a Mail object
+     *
+     * @param array|Attachments[] $attachments Array of Attachment objects 
+     *                                         or arrays
+     * 
+     * @return null
+     */  
     public function addAttachments($attachments)
     {
         foreach ($attachments as $attachment) {
@@ -1011,11 +1104,24 @@ class Mail implements \JsonSerializable
         }
     } 
 
+    /**
+     * Retrieve the attachments attached to a Mail object
+     * 
+     * @return Attachment[]
+     */  
     public function getAttachments()
     {
         return $this->attachments;
     }
 
+    /**
+     * Add a template id to a Mail object
+     *
+     * @param string $template_id The id of the template to be
+     *                            appied to this email
+     * 
+     * @return null
+     */   
     public function setTemplateId($template_id)
     {
         if ($template_id instanceof TemplateId) {
@@ -1026,11 +1132,24 @@ class Mail implements \JsonSerializable
         $this->template_id = $template_id;
     }
 
+    /**
+     * Retrieve a template id attached to a Mail object
+     * 
+     * @return TemplateId
+     */  
     public function getTemplateId()
     {
         return $this->template_id;
     }
 
+    /**
+     * Add a section to a Mail object
+     *
+     * @param string|Section $key   Key or Section object
+     * @param string|null    $value Value
+     * 
+     * @return null
+     */ 
     public function addSection($key, $value=null)
     {
         if ($key instanceof Section) {
@@ -1042,6 +1161,14 @@ class Mail implements \JsonSerializable
         $this->sections[$key] = (string)$value;
     }
 
+    /**
+     * Adds multiple sections to a Mail object
+     *
+     * @param array|Section[] $sections Array of CustomArg objects
+     *                                  or key/values
+     * 
+     * @return null
+     */ 
     public function addSections($sections)
     {
         if (current($sections) instanceof Section) {
@@ -1055,11 +1182,27 @@ class Mail implements \JsonSerializable
         }
     }
 
+    /**
+     * Retrieve the section(s) attached to a Mail object
+     * 
+     * @return Section[]
+     */  
     public function getSections()
     {
         return $this->sections;
     }
 
+    /**
+     * Add a header to a Mail object
+     * 
+     * Note that headers added to Personalization objects override
+     * global headers.
+     *
+     * @param string|Header $key   Key or Header object
+     * @param string|null   $value Value
+     * 
+     * @return null
+     */      
     public function addGlobalHeader($key, $value=null)
     {
         if ($key instanceof Header) {
@@ -1071,6 +1214,17 @@ class Mail implements \JsonSerializable
         $this->headers[$key] = (string)$value;
     }
 
+    /**
+     * Adds multiple headers to a Mail object
+     * 
+     * Note that headers added to Personalization objects override
+     * global headers.
+     *
+     * @param array|Header[] $headers Array of Header objects 
+     *                                or key values
+     * 
+     * @return null
+     */    
     public function addGlobalHeaders($headers)
     {
         if (current($headers) instanceof Header) {
@@ -1084,11 +1238,27 @@ class Mail implements \JsonSerializable
         }
     }
 
+    /**
+     * Retrieve the headers attached to a Mail object
+     * 
+     * @return Header[]
+     */  
     public function getGlobalHeaders()
     {
         return $this->headers;
     }
 
+    /**
+     * Add a substitution to a Mail object
+     * 
+     * Note that substitutions added to Personalization objects override
+     * global substitutions.
+     *
+     * @param string|Substitution $key   Key or Substitution object
+     * @param string|null         $value Value
+     * 
+     * @return null
+     */ 
     public function addGlobalSubstitution($key, $value=null)
     {
         if ($key instanceof Substitution) {
@@ -1100,6 +1270,17 @@ class Mail implements \JsonSerializable
         $this->substitutions[$key] = $value;
     }
 
+    /**
+     * Adds multiple substitutions to a Mail object
+     * 
+     * Note that substitutions added to Personalization objects override
+     * global headers.
+     *
+     * @param array|Substitution[] $substitutions Array of Substitution
+     *                                            objects or key/values
+     * 
+     * @return null
+     */ 
     public function addGlobalSubstitutions($substitutions)
     {
         if (current($substitutions) instanceof Substitution) {
@@ -1113,11 +1294,23 @@ class Mail implements \JsonSerializable
         }
     }
 
+    /**
+     * Retrieve the substitutions attached to a Mail object
+     * 
+     * @return Substitution[]
+     */  
     public function getGlobalSubstitutions()
     {
         return $this->substitutions;
     }
 
+    /**
+     * Add a category to a Mail object
+     *
+     * @param string|Category $category Category object or category name
+     * 
+     * @return null
+     */  
     public function addCategory($category)
     {
         if ($category instanceof Category) {
@@ -1128,6 +1321,14 @@ class Mail implements \JsonSerializable
         $this->categories[] = $category;
     }
 
+    /**
+     * Adds multiple categories to a Mail object
+     *
+     * @param array|Category[] $categories Array of Category objects 
+     *                                     or arrays
+     * 
+     * @return null
+     */  
     public function addCategories($categories)
     {
         foreach ($categories as $category) {
@@ -1136,11 +1337,27 @@ class Mail implements \JsonSerializable
         return;
     }
 
+    /**
+     * Retrieve the categories attached to a Mail object
+     * 
+     * @return Category[]
+     */  
     public function getCategories()
     {
         return $this->categories;
     }
 
+    /**
+     * Add a custom arg to a Mail object
+     * 
+     * Note that custom args added to Personalization objects override
+     * global custom args.
+     *
+     * @param string|CustomArg $key   Key or CustomArg object
+     * @param string|null      $value Value
+     * 
+     * @return null
+     */  
     public function addGlobalCustomArg($key, $value=null)
     {
         if ($key instanceof CustomArg) {
@@ -1152,6 +1369,17 @@ class Mail implements \JsonSerializable
         $this->custom_args[$key] = (string)$value;
     }
 
+    /**
+     * Adds multiple custom args to a Mail object
+     * 
+     * Note that custom args added to Personalization objects override
+     * global custom args.
+     *
+     * @param array|CustomArg[] $custom_args Array of CustomArg objects
+     *                                       or key/values
+     * 
+     * @return null
+     */ 
     public function addGlobalCustomArgs($custom_args)
     {
         if (current($custom_args) instanceof CustomArg) {
@@ -1165,11 +1393,27 @@ class Mail implements \JsonSerializable
         }
     }
 
+    /**
+     * Retrieve the custom args attached to a Mail object
+     * 
+     * @return CustomArg[]
+     */  
     public function getGlobalCustomArgs()
     {
         return $this->custom_args;
     }  
 
+    /**
+     * Add a unix timestamp allowing you to specify when you want your 
+     * email to be delivered to a Mail object
+     * 
+     * Note that timestamps added to Personalization objects override
+     * global timestamps.
+     *
+     * @param int|SendAt $send_at A unix timestamp
+     * 
+     * @return null
+     */  
     public function setGlobalSendAt($send_at)
     {
         if ($send_at instanceof SendAt) {
@@ -1180,11 +1424,24 @@ class Mail implements \JsonSerializable
         $this->send_at = $send_at;
     }
 
+    /**
+     * Retrieve the unix timestamp attached to a Mail object
+     * 
+     * @return SendAt
+     */ 
     public function getGlobalSendAt()
     {
         return $this->send_at;
     }
 
+    /**
+     * Add a batch id to a Mail object
+     *
+     * @param string|BatchId $batch_id Id for a batch of emails
+     *                                 to be sent at the same time
+     * 
+     * @return null
+     */  
     public function setBatchId($batch_id)
     {
         if ($batch_id instanceof BatchId) {
@@ -1195,11 +1452,27 @@ class Mail implements \JsonSerializable
         $this->batch_id = $batch_id;
     }
 
+    /**
+     * Retrieve the batch id attached to a Mail object
+     * 
+     * @return BatchId
+     */ 
     public function getBatchId()
     {
         return $this->batch_id;
     }
 
+    /**
+     * Add a Asm describing how to handle unsubscribes to a Mail object
+     *
+     * @param int|Asm $group_id          Asm object or unsubscribe group id
+     *                                   to associate this email with
+     * @param array   $groups_to_display Array of integer ids of unsubscribe 
+     *                                   groups to be displayed on the
+     *                                   unsubscribe preferences page
+     * 
+     * @return null
+     */ 
     public function setAsm($group_id, $groups_to_display=null)
     {
         if ($group_id instanceof Asm) {
@@ -1211,6 +1484,12 @@ class Mail implements \JsonSerializable
         return;
     }
 
+    /**
+     * Retrieve the Asm object describing how to handle unsubscribes attached 
+     * to a Mail object
+     * 
+     * @return Asm
+     */ 
     public function getAsm()
     {
         return $this->asm;
@@ -1381,5 +1660,3 @@ class Mail implements \JsonSerializable
         ) ?: null;
     }
 }
-
-// TODO: Make sure all returns are using their getters
