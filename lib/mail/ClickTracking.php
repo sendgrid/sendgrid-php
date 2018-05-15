@@ -1,14 +1,47 @@
-<?php namespace SendGrid\Mail;
+<?php 
+/**
+ * This helper builds the ClickTracking object for a /mail/send API call
+ * 
+ * PHP Version - 5.6, 7.0, 7.1, 7.2
+ *
+ * @package   SendGrid\Mail
+ * @author    Elmer Thomas <dx@sendgrid.com>
+ * @copyright 2018 SendGrid
+ * @license   https://opensource.org/licenses/MIT The MIT License
+ * @version   GIT: <git_id>
+ * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ */
+namespace SendGrid\Mail;
 
+/**
+ * This class is used to construct a ClickTracking object for the /mail/send API call
+ * 
+ * @package SendGrid\Mail
+ */
 class ClickTracking implements \JsonSerializable
 {
+    // @var bool Indicates if this setting is enabled
     private $enable;
+    // @var bool Indicates if this setting should be included in the text/plain 
+    // portion of your email
     private $enable_text;
 
+    /**
+     * Optional constructor
+     *
+     * @param bool|null $enable      Indicates if this setting is enabled
+     * @param bool|null $enable_text Indicates if this setting should be 
+     *                               included in the text/plain portion of 
+     *                               your email
+     */ 
     public function __construct($enable=null, $enable_text=null)
     {
-        if(isset($enable)) $this->setEnable($enable);
-        if(isset($enable_text)) $this->setEnableText($enable_text);
+        if (isset($enable)) {
+            $this->setEnable($enable);
+        }
+        if (isset($enable_text)) {
+            $this->setEnableText($enable_text);
+        }
     }
 
     public function setEnable($enable)
@@ -31,6 +64,11 @@ class ClickTracking implements \JsonSerializable
         return $this->enable_text;
     }
 
+    /**
+     * Return an array representing a ClickTracking object for the SendGrid API
+     * 
+     * @return null|array
+     */  
     public function jsonSerialize()
     {
         return array_filter(

@@ -1,12 +1,39 @@
-<?php namespace SendGrid\Mail;
+<?php 
+/**
+ * This helper builds the BatchId object for a /mail/send API call
+ * 
+ * PHP Version - 5.6, 7.0, 7.1, 7.2
+ *
+ * @package   SendGrid\Mail
+ * @author    Elmer Thomas <dx@sendgrid.com>
+ * @copyright 2018 SendGrid
+ * @license   https://opensource.org/licenses/MIT The MIT License
+ * @version   GIT: <git_id>
+ * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ */
+namespace SendGrid\Mail;
 
+/**
+ * This class is used to construct a BatchId object for the /mail/send API call
+ * 
+ * @package SendGrid\Mail
+ */
 class BatchId implements \JsonSerializable
 {
+    // @var string This ID represents a batch of emails to be sent at the same time
     private $batch_id;
 
+    /**
+     * Optional constructor
+     *
+     * @param string|BatchId|null $batch_id This ID represents a batch of emails to 
+     *                                      be sent at the same time
+     */
     public function __construct($batch_id=null)
     {
-        if(isset($batch_id)) $this->setBatchId($batch_id);
+        if (isset($batch_id)) {
+            $this->setBatchId($batch_id);
+        }
     }
 
     public function getBatchId()
@@ -19,6 +46,11 @@ class BatchId implements \JsonSerializable
         $this->batch_id = $batch_id;
     }
 
+    /**
+     * Return an array representing a BatchId object for the SendGrid API
+     * 
+     * @return null|array
+     */  
     public function jsonSerialize()
     {
         return $this->getBatchId();

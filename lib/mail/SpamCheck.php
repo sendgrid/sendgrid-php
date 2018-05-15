@@ -1,16 +1,58 @@
-<?php namespace SendGrid\Mail;
+<?php 
+/**
+ * This helper builds the SpamCheck object for a /mail/send API call
+ * 
+ * PHP Version - 5.6, 7.0, 7.1, 7.2
+ *
+ * @package   SendGrid\Mail
+ * @author    Elmer Thomas <dx@sendgrid.com>
+ * @copyright 2018 SendGrid
+ * @license   https://opensource.org/licenses/MIT The MIT License
+ * @version   GIT: <git_id>
+ * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ */
+namespace SendGrid\Mail;
 
+/**
+ * This class is used to construct a SpamCheck object for the /mail/send API call
+ * 
+ * @package SendGrid\Mail
+ */
 class SpamCheck implements \JsonSerializable
 {
+    // @var bool Indicates if this setting is enabled
     private $enable;
+    // @var int The threshold used to determine if your content qualifies as 
+    // spam on a scale from 1 to 10, with 10 being most strict, or most 
+    // likely to be considered as spam
     private $threshold;
+    // @var string An Inbound Parse URL that you would like a copy of your 
+    // email along with the spam report to be sent to
     private $post_to_url;
 
+    /**
+     * Optional constructor
+     *
+     * @param bool|null   $enable      Indicates if this setting is enabled
+     * @param int|null    $threshold   The threshold used to determine if your 
+     *                                 content qualifies as spam on a scale 
+     *                                 from 1 to 10, with 10 being most strict, 
+     *                                 or most 
+     * @param string|null $post_to_url An Inbound Parse URL that you would like 
+     *                                 a copy of your email along with the spam 
+     *                                 report to be sent to
+     */ 
     public function __construct($enable=null, $threshold=null, $post_to_url=null)
     {
-        if(isset($enable)) $this->setEnable($enable);
-        if(isset($threshold)) $this->setThreshold($threshold);
-        if(isset($post_to_url)) $this->setPostToUrl($post_to_url);
+        if (isset($enable)) {
+            $this->setEnable($enable);
+        }
+        if (isset($threshold)) {
+            $this->setThreshold($threshold);
+        }
+        if (isset($post_to_url)) {
+            $this->setPostToUrl($post_to_url);
+        }
     }
 
     public function setEnable($enable)
@@ -43,6 +85,11 @@ class SpamCheck implements \JsonSerializable
         return $this->post_to_url;
     }
 
+    /**
+     * Return an array representing a SpamCheck object for the SendGrid API
+     * 
+     * @return null|array
+     */  
     public function jsonSerialize()
     {
         return array_filter(

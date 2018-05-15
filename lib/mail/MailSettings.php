@@ -1,13 +1,49 @@
-<?php namespace SendGrid\Mail;
+<?php 
+/**
+ * This helper builds the MailSettings object for a /mail/send API call
+ * 
+ * PHP Version - 5.6, 7.0, 7.1, 7.2
+ *
+ * @package   SendGrid\Mail
+ * @author    Elmer Thomas <dx@sendgrid.com>
+ * @copyright 2018 SendGrid
+ * @license   https://opensource.org/licenses/MIT The MIT License
+ * @version   GIT: <git_id>
+ * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ */
+namespace SendGrid\Mail;
 
+/**
+ * This class is used to construct a MailSettings object for the /mail/send API call
+ * 
+ * A collection of different mail settings that you can use to specify how you would 
+ * like this email to be handled
+ * 
+ * @package SendGrid\Mail
+ */
 class MailSettings implements \JsonSerializable
 {
+    // @var Bcc object
     private $bcc;
+    // @var BypassListManagement object
     private $bypass_list_management;
+    // @var Footer object
     private $footer;
+    // @var SandBoxMode object
     private $sandbox_mode;
+    // @var SpamCheck object
     private $spam_check;
 
+    /**
+     * Optional constructor
+     *
+     * @param Bcc|null                  $bcc                    Bcc object
+     * @param BypassListManagement|null $bypass_list_management BypassListManagement 
+     *                                                          object
+     * @param Footer|null               $footer                 Footer object
+     * @param SandBoxMode|null          $sandbox_mode           SandBoxMode object
+     * @param SpamCheck|null            $spam_check             SpamCheck object
+     */ 
     public function __construct(
         $bcc=null,
         $bypass_list_management=null,
@@ -15,11 +51,21 @@ class MailSettings implements \JsonSerializable
         $sandbox_mode=null,
         $spam_check=null
     ) {
-        if(isset($bcc)) $this->setBccSettings($bcc);
-        if(isset($bypass_list_management)) $this->setBypassListManagement($bypass_list_management);
-        if(isset($footer)) $this->setFooter($footer);
-        if(isset($sandbox_mode)) $this->setSandboxMode($sandbox_mode);
-        if(isset($spam_check)) $this->setSpamCheck($spam_check);
+        if (isset($bcc)) {
+            $this->setBccSettings($bcc);
+        }
+        if (isset($bypass_list_management)) {
+            $this->setBypassListManagement($bypass_list_management);
+        }
+        if (isset($footer)) {
+            $this->setFooter($footer);
+        }
+        if (isset($sandbox_mode)) {
+            $this->setSandboxMode($sandbox_mode);
+        }
+        if (isset($spam_check)) {
+            $this->setSpamCheck($spam_check);
+        }
     }
     
     public function setBccSettings($enable, $email=null)
@@ -108,6 +154,11 @@ class MailSettings implements \JsonSerializable
         return $this->spam_check;
     }
 
+    /**
+     * Return an array representing a MailSettings object for the SendGrid API
+     * 
+     * @return null|array
+     */  
     public function jsonSerialize()
     {
         return array_filter(

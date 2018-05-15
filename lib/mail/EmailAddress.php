@@ -1,12 +1,46 @@
-<?php namespace SendGrid\Mail;
+<?php 
+/**
+ * This helper builds the EmailAddress object for a /mail/send API call
+ * 
+ * PHP Version - 5.6, 7.0, 7.1, 7.2
+ *
+ * @package   SendGrid\Mail
+ * @author    Elmer Thomas <dx@sendgrid.com>
+ * @copyright 2018 SendGrid
+ * @license   https://opensource.org/licenses/MIT The MIT License
+ * @version   GIT: <git_id>
+ * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ */
+namespace SendGrid\Mail;
 
+/**
+ * This class is used to construct a EmailAddress object for the /mail/send API call
+ * 
+ * @package SendGrid\Mail
+ */
 class EmailAddress implements \JsonSerializable
 {
-    private $name;
+    // @var string The name of the person associated with the email
+    private $name; 
+    // @var string The email address
     private $email;
+    // @var array An array of key/value substitutions to be be applied to the text 
+    // and html content of the email body
     private $substitutions;
+    // @var subject The personalized subject of the email
     private $subject;
 
+    /**
+     * Optional constructor
+     *
+     * @param string|null $emailAddress  The email address
+     * @param string|null $name          The name of the person associated with 
+     *                                   the email
+     * @param array|null  $substitutions An array of key/value substitutions to 
+     *                                   be be applied to the text and html content 
+     *                                   of the email body
+     * @param string|null $subject       The personalized subject of the email
+     */ 
     public function __construct(
         $emailAddress=null,
         $name=null,
@@ -85,6 +119,11 @@ class EmailAddress implements \JsonSerializable
         return $this->subject;
     }
 
+    /**
+     * Return an array representing a EmailAddress object for the SendGrid API
+     * 
+     * @return null|array
+     */  
     public function jsonSerialize()
     {
         return array_filter(

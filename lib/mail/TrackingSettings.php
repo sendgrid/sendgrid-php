@@ -1,10 +1,32 @@
-<?php namespace SendGrid\Mail;
+<?php 
+/**
+ * This helper builds the TrackingSettings object for a /mail/send API call
+ * 
+ * PHP Version - 5.6, 7.0, 7.1, 7.2
+ *
+ * @package   SendGrid\Mail
+ * @author    Elmer Thomas <dx@sendgrid.com>
+ * @copyright 2018 SendGrid
+ * @license   https://opensource.org/licenses/MIT The MIT License
+ * @version   GIT: <git_id>
+ * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ */
+namespace SendGrid\Mail;
 
+/**
+ * This class is used to construct a TrackingSettings object for the /mail/send API call
+ * 
+ * @package SendGrid\Mail
+ */
 class TrackingSettings implements \JsonSerializable
 {
+    // @var ClickTracking object
     private $click_tracking;
+    // @var OpenTracking object
     private $open_tracking;
+    // @var SubscriptionTracking object
     private $subscription_tracking;
+    // @var Ganalytics object
     private $ganalytics;
 
     public function __construct(
@@ -81,6 +103,11 @@ class TrackingSettings implements \JsonSerializable
         return $this->ganalytics;
     }
 
+    /**
+     * Return an array representing a TrackingSettings object for the SendGrid API
+     * 
+     * @return null|array
+     */  
     public function jsonSerialize()
     {
         return array_filter(

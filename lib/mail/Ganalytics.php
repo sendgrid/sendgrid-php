@@ -1,14 +1,51 @@
-<?php namespace SendGrid\Mail;
+<?php 
+/**
+ * This helper builds the Ganalytics object for a /mail/send API call
+ * 
+ * PHP Version - 5.6, 7.0, 7.1, 7.2
+ *
+ * @package   SendGrid\Mail
+ * @author    Elmer Thomas <dx@sendgrid.com>
+ * @copyright 2018 SendGrid
+ * @license   https://opensource.org/licenses/MIT The MIT License
+ * @version   GIT: <git_id>
+ * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ */
+namespace SendGrid\Mail;
 
+/**
+ * This class is used to construct a Ganalytics object for the /mail/send API call
+ * 
+ * @package SendGrid\Mail
+ */
 class Ganalytics implements \JsonSerializable
 {
+    // @var bool Indicates if this setting is enabled
     private $enable;
+    // @var string Name of the referrer source. (e.g. Google, SomeDomain.com, or 
+    // Marketing Email)
     private $utm_source;
+    // @var string Name of the marketing medium. (e.g. Email)
     private $utm_medium;
+    // @var string Used to identify any paid keywords
     private $utm_term;
+    // @var string Used to differentiate your campaign from advertisements
     private $utm_content;
+    // @var string The name of the campaign
     private $utm_campaign;
 
+    /**
+     * Optional constructor
+     *
+     * @param bool|null   $enable       Indicates if this setting is enabled
+     * @param string|null $utm_source   Name of the referrer source. (e.g. 
+     *                                  Google, SomeDomain.com, or Marketing Email)
+     * @param string|null $utm_medium   Name of the marketing medium. (e.g. Email)
+     * @param string|null $utm_term     Used to identify any paid keywords
+     * @param string|null $utm_content  Used to differentiate your campaign from 
+     *                                  advertisements
+     * @param string|null $utm_campaign The name of the campaign
+     */ 
     public function __construct(
         $enable=null,
         $utm_source=null,
@@ -17,12 +54,24 @@ class Ganalytics implements \JsonSerializable
         $utm_content=null,
         $utm_campaign=null
     ) {
-        if(isset($enable)) $this->setEnable($enable);
-        if(isset($utm_source)) $this->setCampaignSource($utm_source);
-        if(isset($utm_medium)) $this->setCampaignMedium($utm_medium);
-        if(isset($utm_term)) $this->setCampaignTerm($utm_term);
-        if(isset($utm_content)) $this->setCampaignContent($utm_content);
-        if(isset($utm_campaign)) $this->setCampaignName($utm_campaign);
+        if (isset($enable)) {
+            $this->setEnable($enable);
+        }
+        if (isset($utm_source)) {
+            $this->setCampaignSource($utm_source);
+        }
+        if (isset($utm_medium)) {
+            $this->setCampaignMedium($utm_medium);
+        }
+        if (isset($utm_term)) {
+            $this->setCampaignTerm($utm_term);
+        }
+        if (isset($utm_content)) {
+            $this->setCampaignContent($utm_content);
+        }
+        if (isset($utm_campaign)) {
+            $this->setCampaignName($utm_campaign);
+        }
     }
 
     public function setEnable($enable)
@@ -85,6 +134,11 @@ class Ganalytics implements \JsonSerializable
         return $this->utm_campaign;
     }
 
+    /**
+     * Return an array representing a Ganalytics object for the SendGrid API
+     * 
+     * @return null|array
+     */  
     public function jsonSerialize()
     {
         return array_filter(

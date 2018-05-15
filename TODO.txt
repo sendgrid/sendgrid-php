@@ -11,3 +11,4 @@ For the community
 - Increase the number of tests for each existing unit test (e.g. failure cases, edge cases, etc.)
 - Refeactor internals to adhere to DRY
 - Ensure text/plain is always first in getContents()
+- Add objects to the Attachment object

@@ -1,43 +1,37 @@
 <?php
 /**
-  * This library allows you to quickly and easily send emails through SendGrid using PHP.
-  *
-  * @author    Elmer Thomas <dx@sendgrid.com>
-  * @copyright 2018 SendGrid
-  * @license   https://opensource.org/licenses/MIT The MIT License
-  * @version   GIT: <git_id>
-  * @link      http://packagist.org/packages/sendgrid/sendgrid
-  */
+ * This library allows you to quickly and easily send emails through 
+ * SendGrid using PHP.
+ *
+ * @author    Elmer Thomas <dx@sendgrid.com>
+ * @copyright 2018 SendGrid
+ * @license   https://opensource.org/licenses/MIT The MIT License
+ * @version   GIT: <git_id>
+ * @link      http://packagist.org/packages/sendgrid/sendgrid
+ */
 
 /**
-  * Interface to the SendGrid Web API
-  */
+ * Interface to the SendGrid Web API
+ */
 class SendGrid
 {
     const VERSION = '6.2.0';
 
-    /**
-     *
-     * @var string
-     */
+    // @var string
     protected $namespace = 'SendGrid';
 
-    /**
-     * @var \SendGrid\Client
-     */
+    // @var \SendGrid\Client
     public $client;
-
-    /**
-     * @var string
-     */
+    // @var string
     public $version = self::VERSION;
 
     /**
-      * Setup the HTTP Client
-      *
-      * @param string $apiKey  your SendGrid API Key.
-      * @param array  $options an array of options, currently only "host" and "curl" are implemented.
-      */
+     * Setup the HTTP Client
+     *
+     * @param string $apiKey  Your SendGrid API Key.
+     * @param array  $options An array of options, currently only "host" and 
+     *                        "curl" are implemented.
+     */
     public function __construct($apiKey, $options = array())
     {
         $headers = array(
