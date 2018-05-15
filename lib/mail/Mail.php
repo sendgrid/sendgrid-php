@@ -1495,6 +1495,14 @@ class Mail implements \JsonSerializable
         return $this->asm;
     }
 
+    /**
+     * Add the IP pool name to a Mail object
+     *
+     * @param string|IpPoolName $ip_pool_name The IP Pool that you would 
+     *                                        like to send this email from
+     * 
+     * @return null
+     */ 
     public function setIpPoolName($ip_pool_name)
     {
         if ($ip_pool_name instanceof IpPoolName) {
@@ -1505,22 +1513,51 @@ class Mail implements \JsonSerializable
         
     }
 
+    /**
+     * Retrieve the IP pool name attached to a Mail object
+     * 
+     * @return IpPoolName
+     */ 
     public function getIpPoolName()
     {
         return $this->ip_pool_name;
     }
 
+    /**
+     * Add a MailSettings object to a Mail object
+     *
+     * @param MailSettings $mail_settings A collection of different 
+     *                                    mail settings that you can 
+     *                                    use to specify how you would 
+     *                                    like this email to be handled
+     * 
+     * @return null
+     */ 
     public function setMailSettings($mail_settings)
     {
         $this->mail_settings = $mail_settings;
     }
 
+    /**
+     * Retrieve the MailSettings object attached to a Mail object
+     * 
+     * @return MailSettings
+     */  
     public function getMailSettings()
     {
         return $this->mail_settings;
     }
 
-    public function setBccSettings($enable=null, $email=null)
+    /**
+     * Set the Bcc settings on a MailSettings object
+     *
+     * @param bool|BccSettings $enable A BccSettings object or a boolean
+     *                                 to determine if this setting is active
+     * @param string|null      $email  The email address to be bcc'ed
+     * 
+     * @return null
+     */ 
+    public function setBccSettings($enable, $email=null)
     {
         if (!$this->mail_settings instanceof MailSettings) {
             $this->mail_settings = new MailSettings();
@@ -1528,6 +1565,16 @@ class Mail implements \JsonSerializable
         $this->mail_settings->setBccSettings($enable, $email);
     }
 
+    /**
+     * Enable bypass list management on a MailSettings object
+     * 
+     * Allows you to bypass all unsubscribe groups and suppressions to ensure 
+     * that the email is delivered to every single recipient. This should only 
+     * be used in emergencies when it is absolutely necessary that every 
+     * recipient receives your email.
+     * 
+     * @return null
+     */ 
     public function enableBypassListManagement()
     {
         if (!$this->mail_settings instanceof MailSettings) {
@@ -1536,6 +1583,16 @@ class Mail implements \JsonSerializable
         $this->mail_settings->setBypassListManagement(true);
     }
 
+    /**
+     * Disable bypass list management on a MailSettings object
+     * 
+     * Allows you to bypass all unsubscribe groups and suppressions to ensure 
+     * that the email is delivered to every single recipient. This should only 
+     * be used in emergencies when it is absolutely necessary that every 
+     * recipient receives your email.
+     * 
+     * @return null
+     */ 
     public function disableBypassListManagement()
     {
         if (!$this->mail_settings instanceof MailSettings) {
@@ -1544,6 +1601,16 @@ class Mail implements \JsonSerializable
         $this->mail_settings->setBypassListManagement(false);
     }
 
+    /**
+     * Set the Footer settings on a MailSettings object
+     *
+     * @param bool|Footer $enable A Footer object or a boolean
+     *                            to determine if this setting is active
+     * @param string|null $text   The plain text content of the footer
+     * @param string|null $html   The HTML content of the footer
+     * 
+     * @return null
+     */ 
     public function setFooter($enable=null, $text=null, $html=null)
     {
         if (!$this->mail_settings instanceof MailSettings) {
@@ -1552,6 +1619,14 @@ class Mail implements \JsonSerializable
         $this->mail_settings->setFooter($enable, $text, $html);
     }
 
+    /**
+     * Enable sandbox mode on a MailSettings object
+     * 
+     * This allows you to send a test email to ensure that your request 
+     * body is valid and formatted correctly.
+     * 
+     * @return null
+     */ 
     public function enableSandBoxMode()
     {
         if (!$this->mail_settings instanceof MailSettings) {
@@ -1560,6 +1635,14 @@ class Mail implements \JsonSerializable
         $this->mail_settings->setSandBoxMode(true);
     }
 
+    /**
+     * Disable sandbox mode on a MailSettings object
+     * 
+     * This allows you to send a test email to ensure that your request 
+     * body is valid and formatted correctly.
+     * 
+     * @return null
+     */ 
     public function disableSandBoxMode()
     {
         if (!$this->mail_settings instanceof MailSettings) {
@@ -1568,6 +1651,21 @@ class Mail implements \JsonSerializable
         $this->mail_settings->setSandBoxMode(false);
     }
 
+    /**
+     * Set the spam check settings on a MailSettings object
+     *
+     * @param bool|SpamCheck $enable      A SpamCheck object or a boolean
+     *                                    to determine if this setting is active
+     * @param int|null       $threshold   The threshold used to determine if your 
+     *                                    content qualifies as spam on a scale from 
+     *                                    1 to 10, with 10 being most strict, or 
+     *                                    most likely to be considered as spam
+     * @param string|null    $post_to_url An Inbound Parse URL that you would like 
+     *                                    a copy of your email along with the spam 
+     *                                    report to be sent to
+     * 
+     * @return null
+     */ 
     public function setSpamCheck($enable=null, $threshold=null, $post_to_url=null)
     {
         if (!$this->mail_settings instanceof MailSettings) {
@@ -1576,16 +1674,42 @@ class Mail implements \JsonSerializable
         $this->mail_settings->setSpamCheck($enable, $threshold, $post_to_url);
     }
 
+    /**
+     * Add a TrackingSettings object to a Mail object
+     *
+     * @param TrackingSettings $tracking_settings Settings to determine how you 
+     *                                            would like to track the metrics 
+     *                                            of how your recipients interact 
+     *                                            with your email
+     * 
+     * @return null
+     */ 
     public function setTrackingSettings($tracking_settings)
     {
         $this->tracking_settings = $tracking_settings;
     }
 
+    /**
+     * Retrieve the TrackingSettings object attached to a Mail object
+     * 
+     * @return TrackingSettings
+     */  
     public function getTrackingSettings()
     {
         return $this->tracking_settings;
     }
 
+    /**
+     * Set the click tracking settings on a TrackingSettings object
+     *
+     * @param bool|ClickTracking $enable      A ClickTracking object or a boolean
+     *                                        to determine if this setting is active
+     * @param bool|null          $enable_text Indicates if this setting should be 
+     *                                        included in the text/plain portion of 
+     *                                        your email
+     * 
+     * @return null
+     */ 
     public function setClickTracking($enable=null, $enable_text=null)
     {
         if (!$this->tracking_settings instanceof TrackingSettings) {
@@ -1594,6 +1718,21 @@ class Mail implements \JsonSerializable
         $this->tracking_settings->setClickTracking($enable, $enable_text);
     }
 
+    /**
+     * Set the open tracking settings on a TrackingSettings object
+     *
+     * @param bool|OpenTracking $enable           A OpenTracking object or a boolean
+     *                                            to determine if this setting is 
+     *                                            active
+     * @param string|null       $substitution_tag Allows you to specify a 
+     *                                            substitution tag that you can 
+     *                                            insert in the body of your email 
+     *                                            at a location that you desire. 
+     *                                            This tag will be replaced by the 
+     *                                            open tracking pixel
+     * 
+     * @return null
+     */     
     public function setOpenTracking($enable=null, $substitution_tag=null)
     {
         if (!$this->tracking_settings instanceof TrackingSettings) {
@@ -1602,6 +1741,40 @@ class Mail implements \JsonSerializable
         $this->tracking_settings->setOpenTracking($enable, $substitution_tag);
     }
 
+    /**
+     * Set the subscription tracking settings on a TrackingSettings object
+     *
+     * @param bool|SubscriptionTracking $enable           A SubscriptionTracking 
+     *                                                    object or a boolean to 
+     *                                                    determine if this setting 
+     *                                                    is active
+     * @param string|null               $text             Text to be appended to the 
+     *                                                    email, with the 
+     *                                                    subscription tracking 
+     *                                                    link. You may control 
+     *                                                    where the link is by using 
+     *                                                    the tag <% %>
+     * @param string|null               $html             HTML to be appended to the 
+     *                                                    email, with the 
+     *                                                    subscription tracking 
+     *                                                    link. You may control 
+     *                                                    where the link is by using 
+     *                                                    the tag <% %>
+     * @param string|null               $substitution_tag A tag that will be 
+     *                                                    replaced with the 
+     *                                                    unsubscribe URL. for 
+     *                                                    example: 
+     *                                                    [unsubscribe_url]. If this 
+     *                                                    parameter is used, it will 
+     *                                                    override both the text and 
+     *                                                    html parameters. The URL 
+     *                                                    of the link will be placed 
+     *                                                    at the substitution tag’s 
+     *                                                    location, with no 
+     *                                                    additional formatting
+     * 
+     * @return null
+     */     
     public function setSubscriptionTracking($enable=null, $text=null, $html=null, $substitution_tag=null)
     {
         if (!$this->tracking_settings instanceof TrackingSettings) {
@@ -1610,6 +1783,24 @@ class Mail implements \JsonSerializable
         $this->tracking_settings->setSubscriptionTracking($enable, $text, $html, $substitution_tag);
     }
 
+    /**
+     * Set the Google anatlyics settings on a TrackingSettings object
+     *
+     * @param bool|Ganalytics $enable       A Ganalytics object or a boolean to 
+     *                                      determine if this setting 
+     *                                      is active
+     * @param string|null     $utm_source   Name of the referrer source. (e.g. 
+     *                                      Google, SomeDomain.com, or 
+     *                                      Marketing Email)
+     * @param string|null     $utm_medium   Name of the marketing medium. 
+     *                                      (e.g. Email)
+     * @param string|null     $utm_term     Used to identify any paid keywords.
+     * @param string|null     $utm_content  Used to differentiate your campaign 
+     *                                      from advertisements
+     * @param string|null     $utm_campaign The name of the campaign
+     * 
+     * @return null
+     */  
     public function setGanalytics(
         $enable=null,
         $utm_source=null,
@@ -1631,6 +1822,11 @@ class Mail implements \JsonSerializable
         );
     }
 
+    /**
+     * Return an array representing a request object for the SendGrid API
+     * 
+     * @return null|array
+     */  
     public function jsonSerialize()
     {
         return array_filter(
