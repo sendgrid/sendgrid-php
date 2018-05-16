@@ -48,20 +48,45 @@ class CustomArg implements \JsonSerializable
         }
     }
 
+    /**
+     * Add a custom arg key on a CustomArg object
+     *
+     * @param string $key Custom arg key
+     * 
+     * @return null
+     */ 
     public function setKey($key)
     {
         $this->key = $key;
     }
 
+    /**
+     * Retrieve a custom arg key on a CustomArg object
+     * 
+     * @return string
+     */ 
     public function getKey()
     {
         return $this->key;
     }
+
+    /**
+     * Add a custom arg value on a CustomArg object
+     *
+     * @param string $value Custom arg value
+     * 
+     * @return null
+     */ 
     public function setValue($value)
     {
         $this->value = (string)$value;
     }
 
+    /**
+     * Retrieve a custom arg key on a CustomArg object
+     * 
+     * @return string
+     */ 
     public function getValue()
     {
         return $this->value;

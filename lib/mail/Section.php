@@ -44,15 +44,35 @@ class Section implements \JsonSerializable
         }
     }
 
+    /**
+     * Add the key on a Section object
+     *
+     * @param string $key Section key
+     * 
+     * @return null
+     */ 
     public function setKey($key)
     {
         $this->key = $key;
     }
 
+    /**
+     * Retrieve the key from a Section object
+     * 
+     * @return string
+     */ 
     public function getKey()
     {
         return $this->key;
     }
+
+    /**
+     * Add the value on a Section object
+     *
+     * @param string $value Section value
+     * 
+     * @return null
+     */ 
     public function setValue($value)
     {
         $this->value = (string)$value;
@@ -64,10 +84,10 @@ class Section implements \JsonSerializable
     }
 
     /**
-     * Return an array representing a Section object for the SendGrid API
+     * Retrieve the value from a Section object
      * 
-     * @return null|array
-     */  
+     * @return string
+     */ 
     public function jsonSerialize()
     {
         return array_filter(

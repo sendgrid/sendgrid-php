@@ -25,19 +25,46 @@ class TemplateId implements \JsonSerializable
     // not need to specify those at the personalizations nor message level
     private $template_id;
 
+    /**
+     * Optional constructor
+     *
+     * @param string|null $template_id The id of a template that you would like 
+     *                                 to use. If you use a template that contains 
+     *                                 a subject and content (either text or html), 
+     *                                 you do not need to specify those at the 
+     *                                 personalizations nor message level
+     */ 
     public function __construct($template_id=null)
     {
-        if(isset($template_id)) $this->setTemplateId($template_id);
+        if (isset($template_id)) {
+            $this->setTemplateId($template_id);
+        }
     }
 
-    public function getTemplateId()
-    {
-        return $this->template_id;
-    }
-
+    /**
+     * Add a template id to a TemplateId object
+     *
+     * @param string $template_id The id of a template that you would like 
+     *                            to use. If you use a template that contains 
+     *                            a subject and content (either text or html), 
+     *                            you do not need to specify those at the 
+     *                            personalizations nor message level
+     * 
+     * @return null
+     */ 
     public function setTemplateId($template_id)
     {
         $this->template_id = $template_id;
+    }
+
+    /**
+     * Retrieve a template id from a TemplateId object
+     * 
+     * @return string
+     */ 
+    public function getTemplateId()
+    {
+        return $this->template_id;
     }
 
     /**

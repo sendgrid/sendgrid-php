@@ -38,14 +38,28 @@ class Category implements \JsonSerializable
         }
     }
 
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
+    /**
+     * Add a category to a Category object
+     *
+     * @param string $category A category name for an email message. 
+     *                         Each category name may not exceed 255 
+     *                         characters
+     * 
+     * @return null
+     */ 
     public function setCategory($category)
     {
         $this->category = $category;
+    }
+
+    /**
+     * Retrieve a category from a Category object
+     * 
+     * @return string
+     */ 
+    public function getCategory()
+    {
+        return $this->category;
     }
 
     /**

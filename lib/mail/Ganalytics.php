@@ -74,61 +74,135 @@ class Ganalytics implements \JsonSerializable
         }
     }
 
+    /**
+     * Update the enable setting on a Ganalytics object
+     *
+     * @param bool $enable Indicates if this setting is enabled
+     * 
+     * @return null
+     */ 
     public function setEnable($enable)
     {
         $this->enable = $enable;
     }
 
+    /**
+     * Retrieve the enable setting on a Ganalytics object
+     * 
+     * @return bool
+     */ 
     public function getEnable()
     {
         return $this->enable;
     }
 
+    /**
+     * Add the campaign source to a Ganalytics object
+     *
+     * @param string $utm_source Name of the referrer source. (e.g. 
+     *                           Google, SomeDomain.com, or Marketing Email)
+     * 
+     * @return null
+     */ 
     public function setCampaignSource($utm_source)
     {
         $this->utm_source = $utm_source;
     }
 
+    /**
+     * Return the campaign source from a Ganalytics object
+     * 
+     * @return string
+     */ 
     public function getCampaignSource()
     {
         return $this->utm_source;
     }
 
+    /**
+     * Add the campaign medium to a Ganalytics object
+     *
+     * @param string $utm_medium Name of the marketing medium. (e.g. Email)
+     * 
+     * @return null
+     */ 
     public function setCampaignMedium($utm_medium)
     {
         $this->utm_medium = $utm_medium;
     }
 
+    /**
+     * Return the campaign medium from a Ganalytics object
+     * 
+     * @return string
+     */ 
     public function getCampaignMedium()
     {
         return $this->utm_medium;
     }
 
+    /**
+     * Add the campaign term to a Ganalytics object
+     *
+     * @param string $utm_term Used to identify any paid keywords
+     * 
+     * @return null
+     */ 
     public function setCampaignTerm($utm_term)
     {
         $this->utm_term = $utm_term;
     }
 
+    /**
+     * Return the campaign term from a Ganalytics object
+     * 
+     * @return string
+     */ 
     public function getCampaignTerm()
     {
         return $this->utm_term;
     }
 
+    /**
+     * Add the campaign content to a Ganalytics object
+     *
+     * @param string $utm_content Used to differentiate your campaign from 
+     *                            advertisements
+     * 
+     * @return null
+     */ 
     public function setCampaignContent($utm_content)
     {
         $this->utm_content = $utm_content;
     }
 
+    /**
+     * Return the campaign content from a Ganalytics object
+     * 
+     * @return string
+     */ 
     public function getCampaignContent()
     {
         return $this->utm_content;
     }
 
+    /**
+     * Add the campaign name to a Ganalytics object
+     *
+     * @param string $utm_campaign The name of the campaign
+     * 
+     * @return null
+     */ 
     public function setCampaignName($utm_campaign)
     {
         $this->utm_campaign = $utm_campaign;
     }
 
+    /**
+     * Return the campaign name from a Ganalytics object
+     * 
+     * @return string
+     */ 
     public function getCampaignName()
     {
         return $this->utm_campaign;

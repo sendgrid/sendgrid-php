@@ -29,12 +29,12 @@ class GroupsToDisplay implements \JsonSerializable
     /**
      * Optional constructor
      *
-     * @param int[]|null $groups_to_display An array containing 
-     *                                      the unsubscribe groups 
-     *                                      that you would like to 
-     *                                      be displayed on the 
-     *                                      unsubscribe preferences 
-     *                                      page. Maximum of 25
+     * @param int[]|int|null $groups_to_display An array containing 
+     *                                          the unsubscribe groups 
+     *                                          that you would like to 
+     *                                          be displayed on the 
+     *                                          unsubscribe preferences 
+     *                                          page. Maximum of 25
      */ 
     public function __construct($groups_to_display=null)
     {
@@ -43,14 +43,29 @@ class GroupsToDisplay implements \JsonSerializable
         }
     }
 
-    public function getGroupsToDisplay()
-    {
-        return $this->groups_to_display;
-    }
-
+    /**
+     * Add a group to display on a GroupsToDisplay object
+     *
+     * @param int|int[] $groups_to_display The unsubscribe group(s) 
+     *                                     that you would like to be 
+     *                                     displayed on the unsubscribe 
+     *                                     preferences page
+     * 
+     * @return null
+     */ 
     public function setGroupsToDisplay($groups_to_display)
     {
         $this->groups_to_display[] = $groups_to_display;
+    }
+
+    /**
+     * Return the group(s) to display on a GroupsToDisplay object
+     * 
+     * @return int[]
+     */ 
+    public function getGroupsToDisplay()
+    {
+        return $this->groups_to_display;
     }
 
     /**

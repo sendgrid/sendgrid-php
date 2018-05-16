@@ -51,21 +51,49 @@ class OpenTracking implements \JsonSerializable
         }
     }
 
+    /**
+     * Update the enable setting on a OpenTracking object
+     *
+     * @param bool $enable Indicates if this setting is enabled
+     * 
+     * @return null
+     */ 
     public function setEnable($enable)
     {
         $this->enable = $enable;
     }
 
+    /**
+     * Retrieve the enable setting on a OpenTracking object
+     * 
+     * @return bool
+     */ 
     public function getEnable()
     {
         return $this->enable;
     }
 
+    /**
+     * Set the substitution tag on a OpenTracking object
+     *
+     * @param string $substitution_tag Allows you to specify a substitution 
+     *                                 tag that you can insert in the body 
+     *                                 of your email at a location that you 
+     *                                 desire. This tag will be replaced by 
+     *                                 the open tracking pixel
+     * 
+     * @return null
+     */ 
     public function setSubstitutionTag($substitution_tag)
     {
         $this->substitution_tag = $substitution_tag;
     }
 
+    /**
+     * Retrieve the substitution tag from a OpenTracking object
+     * 
+     * @return string
+     */ 
     public function getSubstitutionTag()
     {
         return $this->substitution_tag;

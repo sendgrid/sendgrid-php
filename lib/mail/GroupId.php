@@ -35,14 +35,26 @@ class GroupId implements \JsonSerializable
         }
     }
 
-    public function getGroupId()
-    {
-        return $this->group_id;
-    }
-
+    /**
+     * Add the group id to a GroupId object
+     *
+     * @param int $group_id The unsubscribe group to associate with this email
+     * 
+     * @return null
+     */ 
     public function setGroupId($group_id)
     {
         $this->group_id = $group_id;
+    }
+
+    /**
+     * Retrieve the group id from a GroupId object
+     * 
+     * @return int
+     */ 
+    public function getGroupId()
+    {
+        return $this->group_id;
     }
 
     /**

@@ -57,7 +57,7 @@ class SubscriptionTracking implements \JsonSerializable
      *                                      control where the link is by using the 
      *                                      tag <% %>
      * @param string|null $substitution_tag A tag that will be replaced with the 
-     *                                      unsubscribe URL. for example: 
+     *                                      unsubscribe URL. For example: 
      *                                      [unsubscribe_url]. If this parameter 
      *                                      is used, it will override both the text 
      *                                      and html parameters. The URL of the link 
@@ -84,41 +84,101 @@ class SubscriptionTracking implements \JsonSerializable
         }
     }
 
+    /**
+     * Update the enable setting on a SubscriptionTracking object
+     *
+     * @param bool $enable Indicates if this setting is enabled
+     * 
+     * @return null
+     */ 
     public function setEnable($enable)
     {
         $this->enable = $enable;
     }
 
+    /**
+     * Retrieve the enable setting from a SubscriptionTracking object
+     * 
+     * @return bool
+     */ 
     public function getEnable()
     {
         return $this->enable;
     }
 
+    /**
+     * Add text to a SubscriptionTracking object
+     *
+     * @param string $text Text to be appended to the email, with 
+     *                     the subscription tracking link. You may 
+     *                     control where the link is by using the 
+     *                     tag <% %>
+     * 
+     * @return null
+     */ 
     public function setText($text)
     {
         $this->text = $text;
     }
 
+    /**
+     * Retrieve text from a SubscriptionTracking object
+     * 
+     * @return string
+     */ 
     public function getText()
     {
         return $this->text;
     }
 
+    /**
+     * Add HTML to a SubscriptionTracking object
+     *
+     * @param string $html HTML to be appended to the email, with 
+     *                     the subscription tracking link. You may 
+     *                     control where the link is by using the 
+     *                     tag <% %>
+     * 
+     * @return null
+     */ 
     public function setHtml($html)
     {
         $this->html = $html;
     }
 
+    /**
+     * Retrieve HTML from a SubscriptionTracking object
+     * 
+     * @return string
+     */ 
     public function getHtml()
     {
         return $this->html;
     }
 
+    /**
+     * Add a substitution tag to a SubscriptionTracking object
+     *
+     * @param string $substitution_tag A tag that will be replaced with the 
+     *                                 unsubscribe URL. for example: 
+     *                                 [unsubscribe_url]. If this parameter 
+     *                                 is used, it will override both the text 
+     *                                 and html parameters. The URL of the link 
+     *                                 will be placed at the substitution tag’s 
+     *                                 location, with no additional formatting %>
+     * 
+     * @return null
+     */ 
     public function setSubstitutionTag($substitution_tag)
     {
         $this->substitution_tag = $substitution_tag;
     }
 
+    /**
+     * Retrieve a substitution tag from a SubscriptionTracking object
+     * 
+     * @return string
+     */ 
     public function getSubstitutionTag()
     {
         return $this->substitution_tag;

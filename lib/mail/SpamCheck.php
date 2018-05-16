@@ -55,31 +55,72 @@ class SpamCheck implements \JsonSerializable
         }
     }
 
+    /**
+     * Update the enable setting on a SpamCheck object
+     *
+     * @param bool $enable Indicates if this setting is enabled
+     * 
+     * @return null
+     */ 
     public function setEnable($enable)
     {
         $this->enable = $enable;
     }
 
+    /**
+     * Retrieve the enable setting on a SpamCheck object
+     * 
+     * @return bool
+     */ 
     public function getEnable()
     {
         return $this->enable;
     }
 
+    /**
+     * Set the threshold value on a SpamCheck object
+     *
+     * @param int $threshold The threshold used to determine if your 
+     *                       content qualifies as spam on a scale 
+     *                       from 1 to 10, with 10 being most strict, 
+     *                       or most 
+     * 
+     * @return null
+     */ 
     public function setThreshold($threshold)
     {
         $this->threshold = $threshold;
     }
 
+    /**
+     * Retrieve the threshold value from a SpamCheck object
+     * 
+     * @return int
+     */ 
     public function getThreshold()
     {
         return $this->threshold;
     }
 
+    /**
+     * Set the post to url value on a SpamCheck object
+     *
+     * @param string $post_to_url An Inbound Parse URL that you would like 
+     *                            a copy of your email along with the spam 
+     *                            report to be sent to
+     * 
+     * @return null
+     */ 
     public function setPostToUrl($post_to_url)
     {
         $this->post_to_url = $post_to_url;
     }
 
+    /**
+     * Retrieve the post to url value from a SpamCheck object
+     * 
+     * @return string
+     */ 
     public function getPostToUrl()
     {
         return $this->post_to_url;

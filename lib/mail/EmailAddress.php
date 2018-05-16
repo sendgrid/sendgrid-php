@@ -47,32 +47,59 @@ class EmailAddress implements \JsonSerializable
         $substitutions=null,
         $subject=null
     ) {
-        if(isset($emailAddress)) $this->setEmailAddress($emailAddress);
-        if(isset($name)) $this->setName($name);
-        if(isset($substitutions)) $this->setSubstitutions($substitutions);
-        if(isset($subject)) $this->setSubject($subject);
+        if (isset($emailAddress)) {
+            $this->setEmailAddress($emailAddress);
+        }
+        if (isset($name)) {
+            $this->setName($name);
+        }
+        if (isset($substitutions)) {
+            $this->setSubstitutions($substitutions);
+        }
+        if (isset($subject)) {
+            $this->setSubject($subject);
+        }
     }
 
-    public function getEmail()
-    {
-        return $this->getEmailAddress();
-    }
-
-    public function getEmailAddress()
-    {
-        return $this->email;
-    }
-
+    /**
+     * Add the email address to a EmailAddress object
+     *
+     * @param string $emailAddress The email address
+     * 
+     * @return null
+     */ 
     public function setEmailAddress($emailAddress)
     {
         $this->email = $emailAddress;
     }
 
-    public function getName()
+    /**
+     * Retrieve the email address from a EmailAddress object
+     *
+     * @return string
+     */ 
+    public function getEmailAddress()
     {
-        return $this->name;
+        return $this->email;
     }
 
+    /**
+     * Retrieve the email address from a EmailAddress object
+     *
+     * @return string
+     */ 
+    public function getEmail()
+    {
+        return $this->getEmailAddress();
+    }
+
+    /**
+     * Add a name to a EmailAddress object
+     *
+     * @param string $name The name of the person associated with the email
+     * 
+     * @return null
+     */ 
     public function setName($name)
     {
         /*
@@ -99,21 +126,57 @@ class EmailAddress implements \JsonSerializable
         $this->name = (!empty($name)) ? $name : null;
     }
 
+    /**
+     * Retrieve the name from a EmailAddress object
+     * 
+     * @return string
+     */ 
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Add substitutions to a EmailAddress object
+     *
+     * @param array $substitutions An array of key/value substitutions to 
+     *                             be be applied to the text and html content 
+     *                             of the email body
+     * 
+     * @return null
+     */ 
     public function setSubstitutions($substitutions)
     {
         $this->substitutions = $substitutions;
     }
 
+    /**
+     * Retrieve substitutions from a EmailAddress object
+     * 
+     * @return array
+     */ 
     public function getSubstitions()
     {
         return $this->substitutions;
     }
 
+    /**
+     * Add a subject to a EmailAddress object
+     *
+     * @param string $subject The personalized subject of the email
+     * 
+     * @return null
+     */ 
     public function setSubject($subject)
     {
         $this->subject = $subject;
     }
 
+    /**
+     * Retrieve a subject from a EmailAddress object
+     * 
+     * @return string
+     */ 
     public function getSubject()
     {
         return $this->subject;

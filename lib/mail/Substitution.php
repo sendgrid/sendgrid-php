@@ -16,41 +16,76 @@ namespace SendGrid\Mail;
 /**
  * This class is used to construct a Substitution object for the /mail/send API call 
  * 
- * A collection of key/value pairs following the pattern "substitution_tag":"value to 
- * substitute". All are assumed to be strings. These substitutions will apply to the 
- * text and html content of the body of your email, in addition to the subject and 
- * reply-to parameters. The total collective size of your substitutions may not exceed 
- * 10,000 bytes per personalization object
+ * A collection of key/value pairs following the pattern "substitution_tag":"value 
+ * to substitute". All are assumed to be strings. These substitutions will apply 
+ * to the text and html content of the body of your email, in addition to the 
+ * subject and reply-to parameters. The total collective size of your substitutions 
+ * may not exceed 10,000 bytes per personalization object
  * 
  * @package SendGrid\Mail
  */
 class Substitution implements \JsonSerializable
 {
-    // @var string Key
+    // @var string Substitution key
     private $key;
-    // @var string Value
+    // @var string Substitution value
     private $value;
 
+    /**
+     * Optional constructor
+     *
+     * @param string|null $key   Substitution key
+     * @param string|null $value Substitution value
+     */ 
     public function __construct($key=null, $value=null)
     {
-        if(isset($key)) $this->setKey($key);
-        if(isset($value)) $this->setValue($value);
+        if (isset($key)) {
+            $this->setKey($key);
+        }
+        if (isset($value)) {
+            $this->setValue($value);
+        }
     }
 
+    /**
+     * Add the key on a Substitution object
+     *
+     * @param string $key Substitution key
+     * 
+     * @return null
+     */ 
     public function setKey($key)
     {
         $this->key = $key;
     }
 
+    /**
+     * Retrieve the key from a Substitution object
+     * 
+     * @return string
+     */ 
     public function getKey()
     {
         return $this->key;
     }
+
+    /**
+     * Add the value on a Substitution object
+     *
+     * @param string $value Substitution value
+     * 
+     * @return null
+     */ 
     public function setValue($value)
     {
         $this->value = $value;
     }
 
+    /**
+     * Retrieve the value from a Substitution object
+     * 
+     * @return string
+     */ 
     public function getValue()
     {
         return $this->value;

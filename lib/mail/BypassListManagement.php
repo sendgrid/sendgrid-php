@@ -39,11 +39,23 @@ class BypassListManagement implements \JsonSerializable
         if(isset($enable)) $this->setEnable($enable);
     }
 
+    /**
+     * Update the enable setting on a BypassListManagement object
+     *
+     * @param bool $enable Indicates if this setting is enabled
+     * 
+     * @return null
+     */ 
     public function setEnable($enable)
     {
         $this->enable = $enable;
     }
 
+    /**
+     * Retrieve the enable setting on a BypassListManagement object
+     * 
+     * @return bool
+     */ 
     public function getEnable()
     {
         return $this->enable;

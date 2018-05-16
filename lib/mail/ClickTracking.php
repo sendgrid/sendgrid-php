@@ -44,21 +44,45 @@ class ClickTracking implements \JsonSerializable
         }
     }
 
+    /**
+     * Update the enable setting on a ClickTracking object
+     *
+     * @param bool $enable Indicates if this setting is enabled
+     * 
+     * @return null
+     */ 
     public function setEnable($enable)
     {
         $this->enable = $enable;
     }
 
+    /**
+     * Retrieve the enable setting on a ClickTracking object
+     * 
+     * @return bool
+     */ 
     public function getEnable()
     {
         return $this->enable;
     }
 
+    /**
+     * Update the enable text setting on a ClickTracking object
+     *
+     * @param bool $enable_text Indicates if this setting is enabled
+     * 
+     * @return null
+     */ 
     public function setEnableText($enable_text)
     {
         $this->enable_text = $enable_text;
     }
 
+    /**
+     * Retrieve the enable_text setting on a ClickTracking object
+     * 
+     * @return bool
+     */ 
     public function getEnableText()
     {
         return $this->enable_text;

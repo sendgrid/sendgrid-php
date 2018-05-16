@@ -38,14 +38,28 @@ class IpPoolName implements \JsonSerializable
         }
     }
 
-    public function getIpPoolName()
-    {
-        return $this->ip_pool_name;
-    }
-
+    /**
+     * Set the ip pool name on a IpPoolName object
+     *
+     * @param string $ip_pool_name The IP Pool that you would like to 
+     *                             send this email from. Minimum length: 
+     *                             2, Maximum Length: 64
+     * 
+     * @return null
+     */ 
     public function setIpPoolName($ip_pool_name)
     {
         $this->ip_pool_name = $ip_pool_name;
+    }
+
+    /**
+     * Retrieve the ip pool name from a IpPoolName object
+     * 
+     * @return string
+     */ 
+    public function getIpPoolName()
+    {
+        return $this->ip_pool_name;
     }
 
     /**

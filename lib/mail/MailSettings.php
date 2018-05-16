@@ -37,7 +37,7 @@ class MailSettings implements \JsonSerializable
     /**
      * Optional constructor
      *
-     * @param Bcc|null                  $bcc                    Bcc object
+     * @param BccSettings|null          $bcc_settings           BccSettings object
      * @param BypassListManagement|null $bypass_list_management BypassListManagement 
      *                                                          object
      * @param Footer|null               $footer                 Footer object
@@ -45,14 +45,14 @@ class MailSettings implements \JsonSerializable
      * @param SpamCheck|null            $spam_check             SpamCheck object
      */ 
     public function __construct(
-        $bcc=null,
+        $bcc_settings=null,
         $bypass_list_management=null,
         $footer=null,
         $sandbox_mode=null,
         $spam_check=null
     ) {
-        if (isset($bcc)) {
-            $this->setBccSettings($bcc);
+        if (isset($bcc_settings)) {
+            $this->setBccSettings($bcc_settings);
         }
         if (isset($bypass_list_management)) {
             $this->setBypassListManagement($bypass_list_management);
@@ -68,6 +68,16 @@ class MailSettings implements \JsonSerializable
         }
     }
     
+    /**
+     * Set the bcc settings on a MailSettings object
+     *
+     * @param BccSettings|bool $enable The BccSettings object or an indication
+     *                                 if the setting is enabled
+     * @param string|null      $email  The email address that you would like 
+     *                                 to receive the BCC
+     * 
+     * @return null
+     */ 
     public function setBccSettings($enable, $email=null)
     {
         if ($enable instanceof BccSettings) {
@@ -79,25 +89,56 @@ class MailSettings implements \JsonSerializable
         return;
     }
 
+    /**
+     * Retrieve the bcc settings from a MailSettings object
+     * 
+     * @return BccSettings
+     */ 
     public function getBccSettings()
     {
         return $this->bcc;
     }
 
-    public function setBypassListManagement($bypass_list_management)
+    /**
+     * Set bypass list management settings on a MailSettings object
+     *
+     * @param BypassListManagement|bool $enable The BypassListManagement 
+     *                                          object or an indication
+     *                                          if the setting is enabled
+     * 
+     * @return null
+     */ 
+    public function setBypassListManagement($enable)
     {
-        if ($bypass_list_management instanceof BypassListManagement) {
+        if ($enable instanceof BypassListManagement) {
+            $bypass_list_management = $enable;
             $this->bypass_list_management = $bypass_list_management;
             return;
         }
-        $this->bypass_list_management = new BypassListManagement($bypass_list_management);
+        $this->bypass_list_management = new BypassListManagement($enable);
+        return;
     }
 
+    /**
+     * Retrieve bypass list management settings from a MailSettings object
+     * 
+     * @return BypassListManagement
+     */ 
     public function getBypassListManagement()
     {
         return $this->bypass_list_management;
     }
-
+    
+    /**
+     * Set the footer settings on a MailSettings object
+     *
+     * @param Footer|bool $enable The Footer object or an indication
+     *                            if the setting is enabled
+     * @param string|null $text   The plain text content of your footer
+     * @param string|null $html   The HTML content of your footer
+     * 
+     * @return null
+     */ 
     public function setFooter($enable, $text=null, $html=null)
     {
         if ($enable instanceof Footer) {
@@ -109,35 +150,80 @@ class MailSettings implements \JsonSerializable
         return;
     }
 
+    /**
+     * Retrieve the footer settings from a MailSettings object
+     * 
+     * @return Footer
+     */ 
     public function getFooter()
     {
         return $this->footer;
     }
 
-    public function setSandboxMode($sandbox_mode)
+    /**
+     * Set sandbox mode settings on a MailSettings object
+     *
+     * @param SandBoxMode|bool $enable The SandBoxMode object or an 
+     *                                 indication if the setting is enabled
+     * 
+     * @return null
+     */ 
+    public function setSandboxMode($enable)
     {
-        if ($sandbox_mode instanceof SandBoxMode) {
+        if ($enable instanceof SandBoxMode) {
+            $sandbox_mode = $enable;
             $this->sandbox_mode = $sandbox_mode;
-        } else {
-            $this->sandbox_mode = new SandBoxMode($sandbox_mode);
+            return;
         }
+        $this->sandbox_mode = new SandBoxMode($enable);
+        return;
     }
 
+    /**
+     * Retrieve sandbox mode settings on a MailSettings object
+     * 
+     * @return SandBoxMode
+     */ 
     public function getSandboxMode()
     {
         return $this->sandbox_mode;
     }
 
+    /**
+     * Enable sandbox mode on a MailSettings object
+     * 
+     * @return null
+     */ 
     public function enableSandboxMode()
     {
         $this->setSandboxMode(true);
     }
 
+    /**
+     * Disable sandbox mode on a MailSettings object
+     * 
+     * @return null
+     */ 
     public function disableSandboxMode()
     {
         $this->setSandboxMode(false);
     }
 
+    /**
+     * Set spam check settings on a MailSettings object
+     *
+     * @param SpamCheck|bool $enable      The SpamCheck object or an 
+     *                                    indication if the setting is enabled
+     * @param int            $threshold   The threshold used to determine if your 
+     *                                    content qualifies as spam on a scale 
+     *                                    from 1 to 10, with 10 being most strict, 
+     *                                    or most
+     * @param string         $post_to_url An Inbound Parse URL that you would like 
+     *                                    a copy of your email along with the spam 
+     *                                    report to be sent to
+     * 
+     * @return null
+     */ 
     public function setSpamCheck($enable, $threshold=null, $post_to_url=null)
     {
         if ($enable instanceof SpamCheck) {
@@ -149,6 +235,11 @@ class MailSettings implements \JsonSerializable
         return;
     }
 
+    /**
+     * Retrieve spam check settings from a MailSettings object
+     * 
+     * @return SpamCheck
+     */ 
     public function getSpamCheck()
     {
         return $this->spam_check;

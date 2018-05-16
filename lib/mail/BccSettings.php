@@ -34,25 +34,54 @@ class BccSettings implements \JsonSerializable
      */
     public function __construct($enable=null, $email=null)
     {
-        if(isset($enable)) $this->setEnable($enable);
-        if(isset($email)) $this->setEmail($email);
+        if (isset($enable)) {
+            $this->setEnable($enable);
+        }
+        if (isset($email)) {
+            $this->setEmail($email);
+        }
     }
 
+    /**
+     * Update the enable setting on a BccSettings object
+     *
+     * @param bool $enable Indicates if this setting is enabled
+     * 
+     * @return null
+     */ 
     public function setEnable($enable)
     {
         $this->enable = $enable;
     }
 
+    /**
+     * Retrieve the enable setting on a BccSettings object
+     * 
+     * @return bool
+     */ 
     public function getEnable()
     {
         return $this->enable;
     }
 
+    /**
+     * Add the email setting on a BccSettings object
+     *
+     * @param bool $email The email address that you would like 
+     *                    to receive the BCC
+     * 
+     * @return null
+     */ 
     public function setEmail($email)
     {
         $this->email = $email;
     }
 
+    /**
+     * Retrieve the email setting on a BccSettings object
+     * 
+     * @return string
+     */ 
     public function getEmail()
     {
         return $this->email;

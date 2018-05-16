@@ -45,20 +45,45 @@ class Header implements \JsonSerializable
         }
     }
 
+    /**
+     * Add the key on a Header object
+     *
+     * @param string $key Header key
+     * 
+     * @return null
+     */ 
     public function setKey($key)
     {
         $this->key = $key;
     }
 
+    /**
+     * Retrieve the key from a Header object
+     * 
+     * @return string
+     */ 
     public function getKey()
     {
         return $this->key;
     }
+
+    /**
+     * Add the value on a Header object
+     *
+     * @param string $value Header value
+     * 
+     * @return null
+     */ 
     public function setValue($value)
     {
         $this->value = $value;
     }
 
+    /**
+     * Retrieve the value from a Header object
+     * 
+     * @return string
+     */ 
     public function getValue()
     {
         return $this->value;

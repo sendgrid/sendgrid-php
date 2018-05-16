@@ -35,11 +35,23 @@ class SandBoxMode implements \JsonSerializable
         }
     }
 
+    /**
+     * Update the enable setting on a SandBoxMode object
+     *
+     * @param bool $enable Indicates if this setting is enabled
+     * 
+     * @return null
+     */ 
     public function setEnable($enable)
     {
         $this->enable = $enable;
     }
 
+    /**
+     * Retrieve the enable setting on a SandBoxMode object
+     * 
+     * @return bool
+     */ 
     public function getEnable()
     {
         return $this->enable;

@@ -1,4 +1,4 @@
-Run through linter and update phpdocs
+Run through linter
 - shout out to https://github.com/martijnmelchers for helping with this: https://github.com/martijnmelchers/sendgrid-php/blob/v7
 Review all related PRs and original requests to capture anything missed or that should be added to "For the community"
 Update documentation files (.md)

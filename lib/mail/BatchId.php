@@ -26,8 +26,8 @@ class BatchId implements \JsonSerializable
     /**
      * Optional constructor
      *
-     * @param string|BatchId|null $batch_id This ID represents a batch of emails to 
-     *                                      be sent at the same time
+     * @param string|null $batch_id This ID represents a batch of emails to 
+     *                              be sent at the same time
      */
     public function __construct($batch_id=null)
     {
@@ -36,14 +36,27 @@ class BatchId implements \JsonSerializable
         }
     }
 
-    public function getBatchId()
-    {
-        return $this->batch_id;
-    }
-
+    /**
+     * Add the batch id to a BatchId object
+     *
+     * @param string $batch_id This ID represents a batch of emails to be sent 
+     *                         at the same time
+     * 
+     * @return null
+     */ 
     public function setBatchId($batch_id)
     {
         $this->batch_id = $batch_id;
+    }
+
+    /**
+     * Return the batch id from a BatchId object
+     * 
+     * @return string
+     */ 
+    public function getBatchId()
+    {
+        return $this->batch_id;
     }
 
     /**

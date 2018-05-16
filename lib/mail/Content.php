@@ -46,24 +46,51 @@ class Content implements \JsonSerializable
         }
     }
 
-    public function getType()
-    {
-        return $this->type;
-    }
-
+    /**
+     * Add the mime type on a Content object
+     *
+     * @param string $type The mime type of the content you are including 
+     *                     in your email. For example, “text/plain” or 
+     *                     “text/html”
+     * 
+     * @return null
+     */ 
     public function setType($type)
     {
         $this->type = $type;
     }
 
-    public function getValue()
+    /**
+     * Retrieve the mime type on a Content object
+     * 
+     * @return string
+     */ 
+    public function getType()
     {
-        return $this->value;
+        return $this->type;
     }
 
+    /**
+     * Add the content value to a Content object
+     *
+     * @param string $value The actual content of the specified mime type 
+     *                      that you are including in your email
+     * 
+     * @return null
+     */ 
     public function setValue($value)
     {
         $this->value = mb_convert_encoding($value, 'UTF-8', 'UTF-8');
+    }
+
+    /**
+     * Retrieve the content value to a Content object
+     * 
+     * @return string
+     */ 
+    public function getValue()
+    {
+        return $this->value;
     }
 
     /**

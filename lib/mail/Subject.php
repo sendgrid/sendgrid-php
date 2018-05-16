@@ -35,14 +35,26 @@ class Subject implements \JsonSerializable
         }
     }
 
-    public function getSubject()
-    {
-        return mb_convert_encoding($this->subject, 'UTF-8', 'UTF-8');
-    }
-
+    /**
+     * Set the subject on a Subject object
+     *
+     * @param string $subject The email subject
+     * 
+     * @return null
+     */ 
     public function setSubject($subject)
     {
         $this->subject = $subject;
+    }
+
+    /**
+     * Retrieve the subject from a Subject object
+     * 
+     * @return string
+     */ 
+    public function getSubject()
+    {
+        return mb_convert_encoding($this->subject, 'UTF-8', 'UTF-8');
     }
 
     /**

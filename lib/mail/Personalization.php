@@ -41,56 +41,125 @@ class Personalization implements \JsonSerializable
     // @var SendAt object
     private $send_at;
 
+    /**
+     * Add a To object to a Personalization object
+     *
+     * @param To $email To object
+     * 
+     * @return null
+     */ 
     public function addTo($email)
     {
         $this->tos[] = $email;
     }
 
+    /**
+     * Retrieve To object(s) from a Personalization object
+     * 
+     * @return To[]
+     */ 
     public function getTos()
     {
         return $this->tos;
     }
 
+    /**
+     * Add a Cc object to a Personalization object
+     *
+     * @param Cc $email Cc object
+     * 
+     * @return null
+     */ 
     public function addCc($email)
     {
         $this->ccs[] = $email;
     }
 
+    /**
+     * Retrieve Cc object(s) from a Personalization object
+     * 
+     * @return Cc[]
+     */ 
     public function getCcs()
     {
         return $this->ccs;
     }
 
+    /**
+     * Add a Bcc object to a Personalization object
+     *
+     * @param Bcc $email Bcc object
+     * 
+     * @return null
+     */ 
     public function addBcc($email)
     {
         $this->bccs[] = $email;
     }
 
+    /**
+     * Retrieve Bcc object(s) from a Personalization object
+     * 
+     * @return Bcc[]
+     */ 
     public function getBccs()
     {
         return $this->bccs;
     }
 
+    /**
+     * Add a subject object to a Personalization object
+     *
+     * @param Subject $subject Subject object
+     * 
+     * @return null
+     */ 
     public function setSubject($subject)
     {
         $this->subject = $subject;
     }
 
+    /**
+     * Retrieve a Subject object from a Personalization object
+     * 
+     * @return Subject
+     */ 
     public function getSubject()
     {
         return $this->subject;
     }
 
+    /**
+     * Add a Header object to a Personalization object
+     *
+     * @param Header $header Header object
+     * 
+     * @return null
+     */ 
     public function addHeader($header)
     {
         $this->headers[$header->getKey()] = $header->getValue();
     }
 
+    /**
+     * Retrieve header key/value pairs from a Personalization object
+     * 
+     * @return array
+     */ 
     public function getHeaders()
     {
         return $this->headers;
     }
 
+    /**
+     * Add a Substitution object or key/value to a Personalization object
+     *
+     * @param Substitution|string $substitution Substitution object or the key of a
+     *                                          substitution
+     * @param string|null         $value        The value of a substitution
+     * 
+     * @return null
+     */ 
     public function addSubstitution($substitution, $value=null)
     {
         if (!$substitution instanceof Substitution) {
@@ -98,29 +167,57 @@ class Personalization implements \JsonSerializable
             $substitution = new Substitution($key, $value);
         }
         $this->substitutions[$substitution->getKey()] = $substitution->getValue();
-        
     }
 
+    /**
+     * Retrieve substitution key/value pairs from a Personalization object
+     * 
+     * @return array
+     */ 
     public function getSubstitutions()
     {
         return $this->substitutions;
     }
 
+    /**
+     * Add a CustomArg object to a Personalization object
+     *
+     * @param CustomArg $custom_arg CustomArg object
+     * 
+     * @return null
+     */ 
     public function addCustomArg($custom_arg)
     {
         $this->custom_args[$custom_arg->getKey()] = (string)$custom_arg->getValue();
     }
 
+    /**
+     * Retrieve custom arg key/value pairs from a Personalization object
+     * 
+     * @return array
+     */ 
     public function getCustomArgs()
     {
         return $this->custom_args;
     }
 
+    /**
+     * Add a SendAt object to a Personalization object
+     *
+     * @param SendAt $send_at SendAt object
+     * 
+     * @return null
+     */ 
     public function setSendAt($send_at)
     {
         $this->send_at = $send_at;
     }
 
+    /**
+     * Retrieve a SendAt object from a Personalization object
+     * 
+     * @return SendAt
+     */ 
     public function getSendAt()
     {
         return $this->send_at;

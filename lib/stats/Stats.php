@@ -34,9 +34,10 @@ class Stats
     private $aggregatedBy;
 
     /**
-     * Stats constructor.
-     * @param string $startDate YYYYMMDD
-     * @param string $endDate YYYYMMDD
+     * Stats constructor
+     * 
+     * @param string $startDate    YYYYMMDD
+     * @param string $endDate      YYYYMMDD
      * @param string $aggregatedBy day|week|month
      */
     public function __construct($startDate, $endDate = null, $aggregatedBy = null)
@@ -46,7 +47,11 @@ class Stats
             $this->validateDateFormat($endDate);
         }
         if (null !== $aggregatedBy) {
-            $this->validateOptions('aggregatedBy', $aggregatedBy, self::OPTIONS_AGGREGATED_BY);
+            $this->validateOptions(
+                'aggregatedBy',
+                $aggregatedBy,
+                self::OPTIONS_AGGREGATED_BY
+            );
         }
         $this->startDate = $startDate;
         $this->endDate = $endDate;
@@ -66,7 +71,10 @@ class Stats
     }
 
     /**
-     * @param array $categories
+     * Retrieve an array of categories
+     * 
+     * @param array $categories 
+     * 
      * @return array
      * @throws \Exception
      */
@@ -79,7 +87,9 @@ class Stats
     }
 
     /**
+     * 
      * @param array $subusers
+     * 
      * @return array
      * @throws \Exception
      */
@@ -92,10 +102,12 @@ class Stats
     }
 
     /**
+     * 
      * @param string $sortByMetric
      * @param string $sortByDirection asc|desc
      * @param integer $limit
      * @param integer $offset
+     * 
      * @return array
      * @throws \Exception
      */
@@ -113,11 +125,13 @@ class Stats
     }
 
     /**
+     * 
      * @param string $subuser
      * @param string $sortByMetric
      * @param string $sortByDirection asc|desc
      * @param integer $limit
      * @param integer $offset
+     * 
      * @return array
      * @throws \Exception
      */
@@ -137,7 +151,9 @@ class Stats
     }
 
     /**
+     * 
      * @param string $date
+     * 
      * @throws \Exception
      */
     protected function validateDateFormat($date)
@@ -148,9 +164,11 @@ class Stats
     }
 
     /**
+     * 
      * @param string $name
      * @param string $value
      * @param array $options
+     * 
      * @throws \Exception
      */
     protected function validateOptions($name, $value, $options)
@@ -161,8 +179,10 @@ class Stats
     }
 
     /**
+     * 
      * @param string $name
      * @param integer $value
+     * 
      * @throws \Exception
      */
     protected function validateInteger($name, $value)
@@ -173,8 +193,10 @@ class Stats
     }
 
     /**
+     * 
      * @param string $name
      * @param array $value
+     * 
      * @throws \Exception
      */
     protected function validateNumericArray($name, $value)
@@ -185,7 +207,9 @@ class Stats
     }
 
     /**
+     * 
      * @param array $array
+     * 
      * @return bool
      */
     protected function isNumeric(array $array)
