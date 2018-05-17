@@ -1,13 +1,24 @@
-Review all related PRs and original requests to capture anything missed or that should be added to "For the community"
 Update documentation files (.md)
 Double check Getting Started deliverables (See Google Docs)
-Try some live calls for final sanity check / Review error handling
+Add example_sendmail.php to .gitignore
+Verify /examples work
+Verify /Usage works
 Release
+Close out these issues:
+- https://github.com/sendgrid/sendgrid-php/issues/413
+- https://github.com/sendgrid/sendgrid-php/issues/434 
 
-For the community
+Create these issues for the community
 - Object level unit Tests (e.g. test each function in the lib directory)
 - Increase the number of tests for each existing unit test (e.g. failure cases, edge cases, etc.)
 - Refeactor internals to adhere to DRY
 - Ensure text/plain is always first in getContents()
 - Add objects to the Attachment object
 - Remove warnings about missing links and private member variables from the linter
+- Auto Base64 encode the Attachment content
+- Validate values and throw exceptions when not verified
+- Better error handling
+- Mime Type constants for Attachments
+- See ToDo in addRecipientEmail
+- When calling multiple `addTos` with substitutions, we should not have to specify the personalizationIndex
+- Need to test Kitchen Sink with more variations perosnalization index

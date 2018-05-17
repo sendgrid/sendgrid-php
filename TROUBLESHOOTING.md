@@ -19,10 +19,14 @@ If you can't find a solution below, please open an [issue](https://github.com/se
 <a name="migrating"></a>
 ## Migrating from v2 to v3
 
+In this context, we are referring to the version of the SendGrid API.
+
 Please review [our guide](https://sendgrid.com/docs/Classroom/Send/v3_Mail_Send/how_to_migrate_from_v2_to_v3_mail_send.html) on how to migrate from v2 to v3.
 
 <a name="v2"></a>
 ## Continue Using v2
+
+In this context, we are referring to the version of the SendGrid API.
 
 [Here](https://github.com/sendgrid/sendgrid-php/tree/75970eb82f5629e66db4d6da08ff7ef0c507e9b0) is the last working version with v2 support.
 
@@ -51,6 +55,9 @@ To read the error message returned by SendGrid's API:
 ```php
 try {
     $response = $sendgrid->client->mail()->send()->post($mail);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n"; // SendGrid specific errors are found here
 } catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
 }
@@ -107,10 +114,10 @@ It is most likely due to a linebreak in your API key. Passing your key through `
 
 When debugging or testing, it may be useful to examine the raw request body to compare against the [documented format](https://sendgrid.com/docs/API_Reference/api_v3.html).
 
-You can do this right before you call `$response = $sg->client->mail()->send()->post($mail);` like so:
+You can do this right before you call `$response = $sg->send($email);` like so:
 
 ```php
-echo json_encode($mail, JSON_PRETTY_PRINT);
+echo json_encode($email, JSON_PRETTY_PRINT);
 ```
 
 <a name="GAE-instructions"></a>

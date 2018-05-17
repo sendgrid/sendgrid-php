@@ -13,3 +13,5 @@ test/prism/*
 !test/prim
 *.code-workspace
 .vscode
+prism*
+temp.php

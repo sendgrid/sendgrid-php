@@ -56,7 +56,7 @@ class Substitution implements \JsonSerializable
      */ 
     public function setKey($key)
     {
-        $this->key = $key;
+        $this->key = (string) $key;
     }
 
     /**
@@ -78,7 +78,7 @@ class Substitution implements \JsonSerializable
      */ 
     public function setValue($value)
     {
-        $this->value = $value;
+        $this->value = (string) $value;
     }
 
     /**

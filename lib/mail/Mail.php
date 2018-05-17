@@ -174,15 +174,19 @@ class Mail implements \JsonSerializable
     /**
      * Adds a To, Cc or Bcc object to a Personalization object
      *
-     * @param string               $emailType            Object type name: To, Cc 
-     *                                                   or Bcc
-     * @param string               $email                Recipient email address
-     * @param string|null          $name                 Recipient name
-     * @param int|null             $personalizationIndex Index into an array of 
-     *                                                   existing Personalization 
-     *                                                   objects
-     * @param Personalization|null $personalization      A pre-created 
-     *                                                   Personalization object
+     * @param string                     $emailType            Object type name: 
+     *                                                         To, Cc or Bcc
+     * @param string                     $email                Recipient email 
+     *                                                         address
+     * @param string|null                $name                 Recipient name
+     * @param Substitutions[]|array|null $substitutions        Personalized 
+     *                                                         substitutions
+     * @param int|null                   $personalizationIndex Index into an array 
+     *                                                         of existing 
+     *                                                         Personalization 
+     *                                                         objects
+     * @param Personalization|null       $personalization      A pre-created 
+     *                                                         Personalization object
      * 
      * @return null
      */    
@@ -190,29 +194,66 @@ class Mail implements \JsonSerializable
         $emailType,
         $email,
         $name = null,
+        $substitutions = null,
         $personalizationIndex = null,
         $personalization = null
     ) {
         $personalizationFunctionCall = "add".$emailType;
         $emailType = "\SendGrid\Mail\\".$emailType;
         if (!$email instanceof $emailType) {
-            $email = new $emailType($email, $name);
+            $email = new $emailType(
+                $email,
+                $name,
+                $substitutions
+            );
         }
         if ($personalization != null) {
             $personalization->$personalizationFunctionCall($email);
+            if ($subs = $email->getSubstitions()) {
+                foreach ($subs as $key => $value) {
+                    $personalization->addSubstitution($key, $value);
+                }
+            }
             $this->addPersonalization($personalization);
             return;
         } else {
-            if ($this->personalization[0] != null) {
+            if (isset($personalizationIndex) 
+                && !isset($this->personalization[$personalizationIndex])
+            ) {
+                // TODO: We should only do this if there exists an index
+                // previous. For example, if given an index 3 and there is
+                // no index 2, we should throw an error.
+                $this->personalization[$personalizationIndex] 
+                    = new Personalization();
+            }
+            if ($this->personalization[0] != null && $personalizationIndex == 0) {
                 $this->personalization[0]->$personalizationFunctionCall($email);
+                if ($subs = $email->getSubstitions()) {
+                    foreach ($subs as $key => $value) {
+                        $this->personalization[0]->addSubstitution($key, $value);
+                    }
+                }
                 return;
             } elseif ($this->personalization[$personalizationIndex] != null) {
                 $this->personalization[
                     $personalizationIndex]->$personalizationFunctionCall($email);
+                if ($subs = $email->getSubstitions()) {
+                    foreach ($subs as $key => $value) {
+                        $this->personalization[$personalizationIndex]->addSubstitution(
+                            $key, 
+                            $value
+                        );
+                    }
+                }
                 return;
             } else {
                 $personalization = new Personalization();
                 $personalization->$personalizationFunctionCall($email);
+                if ($subs = $email->getSubstitions()) {
+                    foreach ($subs as $key => $value) {
+                        $personalization->addSubstitution($key, $value);
+                    }
+                }
                 if (($personalizationIndex != 0)
                     && ($this->getPersonalizationCount() <= $personalizationIndex)
                 ) {
@@ -292,30 +333,34 @@ class Mail implements \JsonSerializable
     /**
      * Adds an email recipient to a Personalization object
      *
-     * @param string|To            $to                   Email address or To object
-     * @param string               $name                 Recipient name
-     * @param int|null             $personalizationIndex Index into an array of 
-     *                                                   existing Personalization 
-     *                                                   objects
-     * @param Personalization|null $personalization      A pre-created 
-     *                                                   Personalization object
+     * @param string|To             $to                   Email address or To object
+     * @param string                $name                 Recipient name
+     * @param array|Substitutions[] $substitutions        Personalized substitutions               
+     * @param int|null              $personalizationIndex Index into an array of 
+     *                                                    existing Personalization 
+     *                                                    objects
+     * @param Personalization|null  $personalization      A pre-created 
+     *                                                    Personalization object
      * 
      * @return null
      */   
     public function addTo(
         $to,
         $name = null,
+        $substitutions = null,
         $personalizationIndex = null,
         $personalization = null
     ) {
         if ($to instanceof To) {
             $name = $to->getName();
+            $substitutions = $to->getSubstitions();
             $to = $to->getEmailAddress();
         }
         $this->addRecipientEmail(
             "To",
             $to,
             $name,
+            $substitutions,
             $personalizationIndex,
             $personalization
         );

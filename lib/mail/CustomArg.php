@@ -57,7 +57,7 @@ class CustomArg implements \JsonSerializable
      */ 
     public function setKey($key)
     {
-        $this->key = $key;
+        $this->key = (string) $key;
     }
 
     /**
@@ -79,7 +79,7 @@ class CustomArg implements \JsonSerializable
      */ 
     public function setValue($value)
     {
-        $this->value = (string)$value;
+        $this->value = (string) $value;
     }
 
     /**

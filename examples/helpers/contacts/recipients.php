@@ -7,7 +7,7 @@ require __DIR__ . '<PATH_TO>/vendor/autoload.php';
 // This will build an HTML form to be embedded in your page. This form allows users to subscribe using their name and email.
 function buildRecipientForm($url = 'http://www.example.com/recipientFormSubmit')
 {
-    $form = (string) new RecipientForm($url);
+    $form = (string) new \SendGrid\Contacts\RecipientForm($url);
     echo $form . PHP_EOL;
 }
 
@@ -27,7 +27,7 @@ function recipientFormSubmit()
     $firstName = $post_body['first-name'];
     $lastName = $post_body['last-name'];
     $email = $post_body['email'];
-    $recipient = new Recipient($firstName, $lastName, $email);
+    $recipient = new \SendGrid\Contacts\Recipient($firstName, $lastName, $email);
     // $request_body = json_encode(array($recipient));
     $request_body = json_decode(
         '[
