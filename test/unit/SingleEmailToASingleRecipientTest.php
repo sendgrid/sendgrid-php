@@ -1,11 +1,25 @@
 <?php
-
+/**
+ * This file tests the request object generation for a /mail/send API call
+ * 
+ * PHP Version - 5.6, 7.0, 7.1, 7.2
+ *
+ * @package   SendGrid\Tests
+ * @author    Elmer Thomas <dx@sendgrid.com>
+ * @copyright 2018 SendGrid
+ * @license   https://opensource.org/licenses/MIT The MIT License
+ * @version   GIT: <git_id>
+ * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ */
 namespace SendGrid\Tests;
 
 use SendGrid\Tests\BaseTestClass;
 
-
-
+/**
+ * This class tests the request object generation for a /mail/send API call
+ * 
+ * @package SendGrid\Tests
+ */
 class SingleEmailToASingleRecipientTest extends BaseTestClass
 {
     
@@ -39,6 +53,11 @@ class SingleEmailToASingleRecipientTest extends BaseTestClass
 }
 JSON;
     
+    /**
+     * Test all parameters using objects
+     * 
+     * @return null
+     */ 
     public function testWithObjects()
     {
         $from = new \SendGrid\Mail\From("test@example.com", "Example User");
@@ -62,6 +81,11 @@ JSON;
         $this->assertTrue($isEqual);
     }
 
+    /**
+     * Test all parameters without using objects
+     * 
+     * @return null
+     */ 
     public function testWithoutObjects()
     {
         $email = new \SendGrid\Mail\Mail(); 

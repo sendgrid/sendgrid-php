@@ -1,5 +1,3 @@
-Run through linter
-- shout out to https://github.com/martijnmelchers for helping with this: https://github.com/martijnmelchers/sendgrid-php/blob/v7
 Review all related PRs and original requests to capture anything missed or that should be added to "For the community"
 Update documentation files (.md)
 Double check Getting Started deliverables (See Google Docs)
@@ -12,3 +10,4 @@ For the community
 - Refeactor internals to adhere to DRY
 - Ensure text/plain is always first in getContents()
 - Add objects to the Attachment object
+- Remove warnings about missing links and private member variables from the linter

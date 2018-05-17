@@ -1,9 +1,25 @@
 <?php
-
+/**
+ * This file tests the request object generation for a /mail/send API call
+ * 
+ * PHP Version - 5.6, 7.0, 7.1, 7.2
+ *
+ * @package   SendGrid\Tests
+ * @author    Elmer Thomas <dx@sendgrid.com>
+ * @copyright 2018 SendGrid
+ * @license   https://opensource.org/licenses/MIT The MIT License
+ * @version   GIT: <git_id>
+ * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ */
 namespace SendGrid\Tests;
 
 use SendGrid\Tests\BaseTestClass;
 
+/**
+ * This class tests the request object generation for a /mail/send API call
+ * 
+ * @package SendGrid\Tests
+ */
 class KitchenSinkTest extends BaseTestClass
 {
 
@@ -207,11 +223,18 @@ class KitchenSinkTest extends BaseTestClass
 }
 JSON;
 
+    /**
+     * Test all parameters without using objects
+     * 
+     * @return null
+     */ 
     public function testKitchenSinkExampleWithoutObjects()
     {
         $email = new \SendGrid\Mail\Mail();
 
-        // For a detailed description of each of these settings, please see the [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
+        // For a detailed description of each of these settings, 
+        // please see the 
+        // [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
         $email->setSubject("Sending with SendGrid is Fun 2");
     
         $email->addTo("test@example.com", "Example User");
@@ -270,8 +293,14 @@ JSON;
 
         $email->setGlobalSubject("Sending with SendGrid is Fun and Global 2");
 
-        $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
-        $email->addContent("text/html", "<strong>and easy to do anywhere, even with PHP</strong>");
+        $email->addContent(
+            "text/plain",
+            "and easy to do anywhere, even with PHP"
+        );
+        $email->addContent(
+            "text/html",
+            "<strong>and easy to do anywhere, even with PHP</strong>"
+        );
         $contents = [
             "text/calendar" => "Party Time!!",
             "text/calendar2" => "Party Time 2!!"
@@ -326,7 +355,9 @@ JSON;
         ];
         $email->addCategories($categories);
 
-        $email->setBatchId("MWQxZmIyODYtNjE1Ni0xMWU1LWI3ZTUtMDgwMDI3OGJkMmY2LWEzMmViMjYxMw");
+        $email->setBatchId(
+            "MWQxZmIyODYtNjE1Ni0xMWU1LWI3ZTUtMDgwMDI3OGJkMmY2LWEzMmViMjYxMw"
+        );
 
         $email->setReplyTo("dx+replyto2@example.com", "DX Team Reply To 2");
 
@@ -346,20 +377,41 @@ JSON;
         // Tracking Settings
         $email->setClickTracking(true, true);
         $email->setOpenTracking(true, "--sub--");
-        $email->setSubscriptionTracking(true, "subscribe", "<bold>subscribe</bold>", "%%sub%%");
-        $email->setGanalytics(true, "utm_source", "utm_medium", "utm_term", "utm_content", "utm_campaign");
+        $email->setSubscriptionTracking(
+            true,
+            "subscribe",
+            "<bold>subscribe</bold>",
+            "%%sub%%"
+        );
+        $email->setGanalytics(
+            true,
+            "utm_source",
+            "utm_medium",
+            "utm_term",
+            "utm_content",
+            "utm_campaign"
+        );
 
         $json = json_encode($email->jsonSerialize());
         $isEqual = BaseTestClass::compareJSONObjects($json, $this->REQUEST_OBJECT);
         $this->assertTrue($isEqual);
     }
 
+    /**
+     * Test all parameters using objects
+     * 
+     * @return null
+     */ 
     public function testKitchenSinkExampleWithObjects()
     {
         $email = new \SendGrid\Mail\Mail();
 
-        // For a detailed description of each of these settings, please see the [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
-        $email->setSubject(new \SendGrid\Mail\Subject("Sending with SendGrid is Fun 2"));
+        // For a detailed description of each of these settings, 
+        // please see the 
+        // [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
+        $email->setSubject(
+            new \SendGrid\Mail\Subject("Sending with SendGrid is Fun 2")
+        );
 
         $email->addTo(new \SendGrid\Mail\To("test@example.com", "Example User"));
         $email->addTo(new \SendGrid\Mail\To("test+1@example.com", "Example User1"));
@@ -376,7 +428,9 @@ JSON;
         ];
         $email->addCcs($ccEmails);
  
-        $email->addBcc(new \SendGrid\Mail\Bcc("test+7@example.com", "Example User7"));
+        $email->addBcc(
+            new \SendGrid\Mail\Bcc("test+7@example.com", "Example User7")
+        );
         $bccEmails = [ 
             new \SendGrid\Mail\Bcc("test+8@example.com", "Example User8"),
             new \SendGrid\Mail\Bcc("test+9@example.com", "Example User9")
@@ -391,8 +445,12 @@ JSON;
         ];
         $email->addHeaders($headers);
 
-        $email->addSubstitution(new \SendGrid\Mail\Substitution("%name1%", "Example Name 1"));
-        $email->addSubstitution(new \SendGrid\Mail\Substitution("%city1%", "Denver"));
+        $email->addSubstitution(
+            new \SendGrid\Mail\Substitution("%name1%", "Example Name 1")
+        );
+        $email->addSubstitution(
+            new \SendGrid\Mail\Substitution("%city1%", "Denver")
+        );
         $substitutions = [
             new \SendGrid\Mail\Substitution("%name2%", "Example Name 2"),
             new \SendGrid\Mail\Substitution("%city2%", "Orange")
@@ -415,7 +473,9 @@ JSON;
 
         $email->setFrom(new \SendGrid\Mail\From("test@example.com", "DX"));
 
-        $email->setGlobalSubject(new \SendGrid\Mail\Subject("Sending with SendGrid is Fun and Global 2"));
+        $email->setGlobalSubject(
+            new \SendGrid\Mail\Subject("Sending with SendGrid is Fun and Global 2")
+        );
 
         $plainTextContent = new \SendGrid\Mail\PlainTextContent(
             "and easy to do anywhere, even with PHP"
@@ -458,7 +518,9 @@ JSON;
         ];
         $email->addAttachments($attachments);
 
-        $email->setTemplateId(new \SendGrid\Mail\TemplateId("13b8f94f-bcae-4ec6-b752-70d6cb59f932"));
+        $email->setTemplateId(
+            new \SendGrid\Mail\TemplateId("13b8f94f-bcae-4ec6-b752-70d6cb59f932")
+        );
 
         $email->addGlobalHeader(new \SendGrid\Mail\Header("X-Day", "Monday"));
         $globalHeaders = [
@@ -467,11 +529,22 @@ JSON;
         ];
         $email->addGlobalHeaders($globalHeaders);
 
-        $email->addSection(new \SendGrid\Mail\Section("%section1%", "Substitution for Section 1 Tag"));
+        $email->addSection(
+            new \SendGrid\Mail\Section(
+                "%section1%",
+                "Substitution for Section 1 Tag"
+            )
+        );
 
         $sections = [
-            new \SendGrid\Mail\Section("%section3%", "Substitution for Section 3 Tag"),
-            new \SendGrid\Mail\Section("%section4%", "Substitution for Section 4 Tag")
+            new \SendGrid\Mail\Section(
+                "%section3%",
+                "Substitution for Section 3 Tag"
+            ),
+            new \SendGrid\Mail\Section(
+                "%section4%",
+                "Substitution for Section 4 Tag"
+            )
         ];
         $email->addSections($sections);
 
@@ -482,9 +555,18 @@ JSON;
         ];
         $email->addCategories($categories);
 
-        $email->setBatchId(new \SendGrid\Mail\BatchId("MWQxZmIyODYtNjE1Ni0xMWU1LWI3ZTUtMDgwMDI3OGJkMmY2LWEzMmViMjYxMw"));
+        $email->setBatchId(
+            new \SendGrid\Mail\BatchId(
+                "MWQxZmIyODYtNjE1Ni0xMWU1LWI3ZTUtMDgwMDI3OGJkMmY2LWEzMmViMjYxMw"
+            )
+        );
 
-        $email->setReplyTo(new \SendGrid\Mail\ReplyTo("dx+replyto2@example.com", "DX Team Reply To 2"));
+        $email->setReplyTo(
+            new \SendGrid\Mail\ReplyTo(
+                "dx+replyto2@example.com",
+                "DX Team Reply To 2"
+            )
+        );
 
         $asm = new \SendGrid\Mail\Asm(
             new \SendGrid\Mail\GroupId(1),
@@ -495,18 +577,46 @@ JSON;
         $email->setIpPoolName(new \SendGrid\Mail\IpPoolName("23"));
 
         $mail_settings = new \SendGrid\Mail\MailSettings();
-        $mail_settings->setBccSettings(new \SendGrid\Mail\BccSettings(true, "bcc@example.com"));
-        $mail_settings->setBypassListManagement(new \SendGrid\Mail\BypassListManagement(true));
-        $mail_settings->setFooter(new \SendGrid\Mail\Footer(true, "Footer", "<strong>Footer</strong>"));
+        $mail_settings->setBccSettings(
+            new \SendGrid\Mail\BccSettings(true, "bcc@example.com")
+        );
+        $mail_settings->setBypassListManagement(
+            new \SendGrid\Mail\BypassListManagement(true)
+        );
+        $mail_settings->setFooter(
+            new \SendGrid\Mail\Footer(true, "Footer", "<strong>Footer</strong>")
+        );
         $mail_settings->setSandBoxMode(new \SendGrid\Mail\SandBoxMode(true));
-        $mail_settings->setSpamCheck(new \SendGrid\Mail\SpamCheck(true, 1, "http://mydomain.com"));
+        $mail_settings->setSpamCheck(
+            new \SendGrid\Mail\SpamCheck(true, 1, "http://mydomain.com")
+        );
         $email->setMailSettings($mail_settings);
 
         $tracking_settings = new \SendGrid\Mail\TrackingSettings();
-        $tracking_settings->setClickTracking(new \SendGrid\Mail\ClickTracking(true, true));
-        $tracking_settings->setOpenTracking(new \SendGrid\Mail\OpenTracking(true, "--sub--"));
-        $tracking_settings->setSubscriptionTracking(new \SendGrid\Mail\SubscriptionTracking(true, "subscribe", "<bold>subscribe</bold>", "%%sub%%"));
-        $tracking_settings->setGanalytics(new \SendGrid\Mail\Ganalytics(true, "utm_source", "utm_medium", "utm_term", "utm_content", "utm_campaign"));
+        $tracking_settings->setClickTracking(
+            new \SendGrid\Mail\ClickTracking(true, true)
+        );
+        $tracking_settings->setOpenTracking(
+            new \SendGrid\Mail\OpenTracking(true, "--sub--")
+        );
+        $tracking_settings->setSubscriptionTracking(
+            new \SendGrid\Mail\SubscriptionTracking(
+                true,
+                "subscribe",
+                "<bold>subscribe</bold>",
+                "%%sub%%"
+            )
+        );
+        $tracking_settings->setGanalytics(
+            new \SendGrid\Mail\Ganalytics(
+                true,
+                "utm_source",
+                "utm_medium",
+                "utm_term",
+                "utm_content",
+                "utm_campaign"
+            )
+        );
         $email->setTrackingSettings($tracking_settings);
 
         $json = json_encode($email->jsonSerialize());

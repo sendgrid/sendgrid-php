@@ -27,6 +27,6 @@ class HtmlContent extends Content
      */ 
     public function __construct($value)
     {
-        parent::__construct(MimeType::Html, $value);
+        parent::__construct(MimeType::HTML, $value);
     }
 }

@@ -117,8 +117,10 @@ class Mail implements \JsonSerializable
             $this->personalization[] = new Personalization();
             return;
         }
-        if(isset($from)) $this->setFrom($from);
-        if(isset($to)) {
+        if (isset($from)) {
+            $this->setFrom($from);
+        }
+        if (isset($to)) {
             if (!is_array($to)) {
                 $to = [ $to ];
             }
@@ -161,8 +163,12 @@ class Mail implements \JsonSerializable
                 $this->setSubject($subject);
             }
         }
-        if(isset($plainTextContent)) $this->addContent($plainTextContent);
-        if(isset($htmlContent)) $this->addContent($htmlContent);
+        if (isset($plainTextContent)) {
+            $this->addContent($plainTextContent);
+        }
+        if (isset($htmlContent)) {
+            $this->addContent($htmlContent);
+        }
     }
 
     /**
@@ -273,7 +279,11 @@ class Mail implements \JsonSerializable
         $this->personalization[] = $personalization;
     }
 
-    // @return Personalization[] Array of Personalization objects
+    /**
+     * Retrieve a Personalization object from the Mail object
+     *
+     * @return Personalization[]
+     */ 
     public function getPersonalizations()
     {
         return $this->personalization;
@@ -767,7 +777,9 @@ class Mail implements \JsonSerializable
             if ($this->personalization[0] != null) {
                 $this->personalization[0]->addCustomArg($custom_arg);
             } elseif ($this->personalization[$personalizationIndex] != null) {
-                $this->personalization[$personalizationIndex]->addCustomArg($custom_arg);
+                $this->personalization[$personalizationIndex]->addCustomArg(
+                    $custom_arg
+                );
             } else {
                 $personalization = new Personalization();
                 $personalization->addCustomArg($custom_arg);
@@ -1775,12 +1787,21 @@ class Mail implements \JsonSerializable
      * 
      * @return null
      */     
-    public function setSubscriptionTracking($enable=null, $text=null, $html=null, $substitution_tag=null)
-    {
+    public function setSubscriptionTracking(
+        $enable=null,
+        $text=null,
+        $html=null,
+        $substitution_tag=null
+    ) {
         if (!$this->tracking_settings instanceof TrackingSettings) {
             $this->tracking_settings = new TrackingSettings();
         }
-        $this->tracking_settings->setSubscriptionTracking($enable, $text, $html, $substitution_tag);
+        $this->tracking_settings->setSubscriptionTracking(
+            $enable,
+            $text,
+            $html,
+            $substitution_tag
+        );
     }
 
     /**

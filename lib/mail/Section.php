@@ -78,16 +78,21 @@ class Section implements \JsonSerializable
         $this->value = (string)$value;
     }
 
+    /**
+     * Retrieve the value from a Section object
+     * 
+     * @return string
+     */ 
     public function getValue()
     {
         return $this->value;
     }
 
     /**
-     * Retrieve the value from a Section object
+     * Return an array representing a Section object for the SendGrid API
      * 
-     * @return string
-     */ 
+     * @return null|array
+     */  
     public function jsonSerialize()
     {
         return array_filter(

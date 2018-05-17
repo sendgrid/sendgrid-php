@@ -1,5 +1,17 @@
 <?php
-
+/**
+ * This file contains the base class for testing the request object 
+ * generation for a /mail/send API call
+ * 
+ * PHP Version - 5.6, 7.0, 7.1, 7.2
+ *
+ * @package   SendGrid\Tests
+ * @author    Elmer Thomas <dx@sendgrid.com>
+ * @copyright 2018 SendGrid
+ * @license   https://opensource.org/licenses/MIT The MIT License
+ * @version   GIT: <git_id>
+ * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ */
 namespace SendGrid\Tests;
 
 use PHPUnit\Framework\TestCase;
@@ -7,88 +19,46 @@ use Swaggest\JsonDiff\JsonDiff;
 use Swaggest\JsonDiff\JsonPatch;
 
 /**
- * Class BaseTestClass
+ * This class facilitates testing the request object 
+ * generation for a /mail/send API call
+ * 
+ * @package SendGrid\Mail
  */
 class BaseTestClass extends TestCase
 {
-    /**
-     * @var string
-     */
+    // @var string SendGrid API Key
     protected static $apiKey;
-    /**
-     * @var SendGrid
-     */
+    // @var SendGrid SendGrid client
     protected static $sg;
-    /**
-     * @var int
-     */
-    protected static $pid;
 
     /**
      * This method is run before the classes are initialised
+     * 
+     * @return null
      */
     public static function setUpBeforeClass()
     {
         self::$apiKey = "SENDGRID_API_KEY";
         $host = ['host' => 'http://localhost:4010'];
         self::$sg = new \SendGrid(self::$apiKey, $host);
-
-    //     if (!is_int(self::$pid)) {
-    //         if (file_exists('/usr/local/bin/prism') == false) {
-    //             if (strtoupper(substr(php_uname('s'), 0, 3)) != 'WIN') {
-    //                 try {
-    //                     $proc_ls = proc_open(
-    //                         "curl https://raw.githubusercontent.com/stoplightio/prism/master/install.sh",
-    //                         [
-    //                             ["pipe", "r"], //stdin
-    //                             ["pipe", "w"], //stdout
-    //                             ["pipe", "w"]  //stderr
-    //                         ],
-    //                         $pipes
-    //                     );
-    //                     $output_ls = stream_get_contents($pipes[1]);
-    //                     fclose($pipes[0]);
-    //                     fclose($pipes[1]);
-    //                     fclose($pipes[2]);
-    //                     $return_value_ls = proc_close($proc_ls);
-    //                     $proc_grep = proc_open(
-    //                         "sh",
-    //                         [
-    //                             ["pipe", "r"], //stdin
-    //                             ["pipe", "w"], //stdout
-    //                             ["pipe", "w"]  //stderr
-    //                         ],
-    //                         $pipes
-    //                     );
-    //                     fwrite($pipes[0], $output_ls);
-    //                     fclose($pipes[0]);
-    //                     $output_grep = stream_get_contents($pipes[1]);
-    //                     fclose($pipes[1]);
-    //                     fclose($pipes[2]);
-    //                     proc_close($proc_grep);
-    //                 } catch (\Exception $e) {
-    //                     print("Error downloading the prism binary, you can try downloading directly here (https://github.com/stoplightio/prism/releases) and place in your /usr/local/bin directory: " . $e->getMessage() . "\n");
-    //                     exit();
-    //                 }
-    //             } else {
-    //                 print("Please download the Windows binary (https://github.com/stoplightio/prism/releases) and place it in your /usr/local/bin directory");
-    //                 exit();
-    //             }
-    //         }
-
-    //         print("Activating Prism (~20 seconds)\n");
-    //         $command = 'nohup prism run -s https://raw.githubusercontent.com/sendgrid/sendgrid-oai/master/oai_stoplight.json > /dev/null 2>&1 & echo $!';
-    //         exec($command, $op);
-    //         self::$pid = (int)$op[0];
-    //         sleep(15);
-    //         print("\nPrism Started\n\n");
-    //     }
     }
 
-    // Returns True if equal, else return array of differences
+    /**
+     * Compares to JSON objects and returns True if equal, 
+     * else return array of differences
+     * 
+     * @param string $json1 A string representation of a JSON object
+     * @param string $json2 A string representation of a JSON object
+     * 
+     * @return bool|array
+     */
     public static function compareJSONObjects($json1, $json2)
     {
-        $diff = new JsonDiff(json_decode($json1), json_decode($json2), JsonDiff::REARRANGE_ARRAYS);
+        $diff = new JsonDiff(
+            json_decode($json1),
+            json_decode($json2),
+            JsonDiff::REARRANGE_ARRAYS
+        );
         $patch = $diff->getPatch();
         $patch_array = JsonPatch::export($patch);
         if (empty($patch_array)) {
@@ -97,11 +67,4 @@ class BaseTestClass extends TestCase
             return $patch_array;
         }
     }
-
-    // public static function tearDownAfterClass()
-    // {
-    //     $command = 'kill '.self::$pid;
-    //     exec($command);
-    //     print("\nPrism shut down");
-    // }
 }

@@ -1,11 +1,25 @@
 <?php
-
+/**
+ * This file tests the request object generation for a /mail/send API call
+ * 
+ * PHP Version - 5.6, 7.0, 7.1, 7.2
+ *
+ * @package   SendGrid\Tests
+ * @author    Elmer Thomas <dx@sendgrid.com>
+ * @copyright 2018 SendGrid
+ * @license   https://opensource.org/licenses/MIT The MIT License
+ * @version   GIT: <git_id>
+ * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ */
 namespace SendGrid\Tests;
 
 use SendGrid\Tests\BaseTestClass;
 
-
-
+/**
+ * This class tests the request object generation for a /mail/send API call
+ * 
+ * @package SendGrid\Tests
+ */
 class MultipleEmailToMulipleRecipientsTest extends BaseTestClass
 {
     
@@ -134,6 +148,11 @@ JSON;
 }
 JSON;
 
+    /**
+     * Test when we have individual subjects for each Personalization object
+     * 
+     * @return null
+     */ 
     public function testWithIndividualSubjects()
     {
         $from = new \SendGrid\Mail\From("test@example.com", "Example User");
@@ -188,6 +207,11 @@ JSON;
         $this->assertTrue($isEqual);
     }
 
+    /**
+     * Test when we pass in an array of subjects
+     * 
+     * @return null
+     */ 
     public function testWithCollectionOfSubjects()
     {
         $from = new \SendGrid\Mail\From("test@example.com", "Example User");

@@ -59,6 +59,9 @@ class Stats
     }
 
     /**
+     * Retrieve global stats parameters, start date, end date and
+     * aggregated by
+     * 
      * @return array
      */
     public function getGlobal()
@@ -87,8 +90,10 @@ class Stats
     }
 
     /**
+     * Retrieve global stats parameters, start date, end date and
+     * aggregated for the given set of subusers 
      * 
-     * @param array $subusers
+     * @param array $subusers Subuser accounts
      * 
      * @return array
      * @throws \Exception
@@ -102,18 +107,35 @@ class Stats
     }
 
     /**
-     * 
-     * @param string $sortByMetric
-     * @param string $sortByDirection asc|desc
-     * @param integer $limit
-     * @param integer $offset
+     * Retrieve global stats parameters, start date, end date, 
+     * aggregated by, sort by metric, sort by direction, limit
+     * and offset
+     *
+     * @param string  $sortByMetric    blocks|bounce_drops|bounces|
+     *                                 clicks|deferred|delivered|
+     *                                 invalid_emails|opens|processed|
+     *                                 requests|spam_report_drops|
+     *                                 spam_reports|unique_clicks|
+     *                                 unique_opens|unsubscribe_drops|
+     *                                 unsubsribes
+     * @param string  $sortByDirection asc|desc
+     * @param integer $limit           The number of results to return
+     * @param integer $offset          The point in the list to begin 
+     *                                 retrieving results
      * 
      * @return array
      * @throws \Exception
      */
-    public function getSum($sortByMetric = 'delivered', $sortByDirection = 'desc', $limit = 5, $offset = 0)
-    {
-        $this->validateOptions('sortByDirection', $sortByDirection, self::OPTIONS_SORT_DIRECTION);
+    public function getSum(
+        $sortByMetric = 'delivered',
+        $sortByDirection = 'desc',
+        $limit = 5, $offset = 0
+    ) {
+        $this->validateOptions(
+            'sortByDirection',
+            $sortByDirection,
+            self::OPTIONS_SORT_DIRECTION
+        );
         $this->validateInteger('limit', $limit);
         $this->validateInteger('offset', $offset);
         $stats = $this->getGlobal();
@@ -125,19 +147,36 @@ class Stats
     }
 
     /**
+     * Retrieve monthly stats by subuser
      * 
-     * @param string $subuser
-     * @param string $sortByMetric
-     * @param string $sortByDirection asc|desc
-     * @param integer $limit
-     * @param integer $offset
+     * @param string  $subuser         Subuser account
+     * @param string  $sortByMetric    blocks|bounce_drops|bounces|
+     *                                 clicks|deferred|delivered|
+     *                                 invalid_emails|opens|processed|
+     *                                 requests|spam_report_drops|
+     *                                 spam_reports|unique_clicks|
+     *                                 unique_opens|unsubscribe_drops|
+     *                                 unsubsribes
+     * @param string  $sortByDirection asc|desc
+     * @param integer $limit           The number of results to return
+     * @param integer $offset          The point in the list to begin 
+     *                                 retrieving results
      * 
      * @return array
      * @throws \Exception
      */
-    public function getSubuserMonthly($subuser = null, $sortByMetric = 'delivered', $sortByDirection = 'desc', $limit = 5, $offset = 0)
-    {
-        $this->validateOptions('sortByDirection', $sortByDirection, self::OPTIONS_SORT_DIRECTION);
+    public function getSubuserMonthly(
+        $subuser = null,
+        $sortByMetric = 'delivered',
+        $sortByDirection = 'desc',
+        $limit = 5,
+        $offset = 0
+    ) {
+        $this->validateOptions(
+            'sortByDirection',
+            $sortByDirection,
+            self::OPTIONS_SORT_DIRECTION
+        );
         $this->validateInteger('limit', $limit);
         $this->validateInteger('offset', $offset);
         return [
@@ -151,9 +190,11 @@ class Stats
     }
 
     /**
+     * Validate the date format
      * 
-     * @param string $date
+     * @param string $date YYYY-MM-DD
      * 
+     * @return null
      * @throws \Exception
      */
     protected function validateDateFormat($date)
@@ -164,25 +205,31 @@ class Stats
     }
 
     /**
+     * Validate options
      * 
-     * @param string $name
-     * @param string $value
-     * @param array $options
+     * @param string $name    Name of option
+     * @param string $value   Value of option
+     * @param array  $options Array of options
      * 
+     * @return null
      * @throws \Exception
      */
     protected function validateOptions($name, $value, $options)
     {
         if (!in_array($value, $options)) {
-            throw new \Exception($name . ' must be one of: ' . implode(', ', $options));
+            throw new \Exception(
+                $name . ' must be one of: ' . implode(', ', $options)
+            );
         }
     }
 
     /**
+     * Validate integer
+     *
+     * @param string  $name  Name as a string
+     * @param integer $value Value as an integer
      * 
-     * @param string $name
-     * @param integer $value
-     * 
+     * @return null
      * @throws \Exception
      */
     protected function validateInteger($name, $value)
@@ -193,10 +240,12 @@ class Stats
     }
 
     /**
+     * Validate a numeric array
      * 
-     * @param string $name
-     * @param array $value
+     * @param string $name  Name as a string
+     * @param array  $value Value as an array of integers
      * 
+     * @return null
      * @throws \Exception
      */
     protected function validateNumericArray($name, $value)
@@ -207,8 +256,9 @@ class Stats
     }
 
     /**
+     * Determine if the array is numeric
      * 
-     * @param array $array
+     * @param array $array Array of values
      * 
      * @return bool
      */

@@ -20,6 +20,6 @@ namespace SendGrid\Mail;
  */
 abstract class MimeType
 {
-    const Html = "text/html";
-    const Text = "text/plain";
+    const HTML = "text/html";
+    const TEXT = "text/plain";
 }
