@@ -77,7 +77,7 @@ Previous versions of the library can be found in the [version index](https://sen
 ## Dependencies
 
 - The SendGrid Service, starting at the [free level](https://sendgrid.com/free?source=sendgrid-php)
-- The dependency free [php-HTTP-Client](https://github.com/sendgrid/php-http-client)
+- The dependency free [php-http-client](https://github.com/sendgrid/php-http-client)
 
 <a name="quick-start"></a>
 # Quick Start
@@ -174,7 +174,7 @@ try {
 <a name="announcements"></a>
 # Announcements
 
-v7 has been releases! Please see the [release notes](https://github.com/sendgrid/sendgrid-php/releases/tag/v7.0.0) for details.
+v7 has been released! Please see the [release notes](https://github.com/sendgrid/sendgrid-php/releases/tag/v7.0.0) for details.
 
 All updates to this library are documented in our [CHANGELOG](https://github.com/sendgrid/sendgrid-php/blob/master/CHANGELOG.md) and [releases](https://github.com/sendgrid/sendgrid-php/releases). You may also subscribe to email [release notifications](https://dx.sendgrid.com/newsletter/php) for releases and breaking changes.
 
