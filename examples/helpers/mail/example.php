@@ -3,7 +3,9 @@ namespace SendGrid;
 
 // If you are using Composer
 require __DIR__ . '/../../../vendor/autoload.php';
-
+// comment out the above line if not using Composer
+// require("./sendgrid-php.php"); 
+// If not using Composer, uncomment the above line
 
 function helloEmail()
 {

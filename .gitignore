@@ -11,3 +11,9 @@ test.php
 test/prism_linux_amd64
 test/prism/*
 !test/prim
+*.code-workspace
+.vscode
+prism*
+temp.php
+example*.php
+TODO.txt

@@ -3,6 +3,19 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [7.0.0] - XXXX-XX-XX ##
+### BREAKING CHANGE
+
+Thanks to the [strong support and feedback of the SendGrid PHP community](https://github.com/sendgrid/sendgrid-php/issues/434), we have a new version of this SDK that should be a big improvement in the developer experience for this SDK.
+
+In particular, I'd like to make special mention of [@caseyw](https://github.com/caseyw), [@vitya1](https://github.com/vitya1), [@Braunson](https://github.com/Braunson), [@cbschuld](https://github.com/cbschuld), [@paoga87](https://github.com/paoga87), [@Taluu](https://github.com/Taluu), [@mazanax](https://github.com/mazanax), [@ninsuo](https://github.com/ninsuo), [@ianh2](https://github.com/ianh2), [@WadeShuler](https://github.com/WadeShuler), [@jaimehing](https://github.com/jaimehing), [@KnightAR](https://github.com/KnightAR), [@alextech](https://github.com/alextech) (my apologies if I've missed you)
+
+Since this is a major departure from v6.X, we advise you refactor your code according to the documentation found in the [README](https://github.com/sendgrid/sendgrid-php/blob/master/README.md) and [USE_CASES](https://github.com/sendgrid/sendgrid-php/blob/master/USE_CASES.md) files. We hope you find the new interface much easier to work with. Please open an [issue](https://github.com/sendgrid/sendgrid-php/issues) or PR if you run into any trouble or have any feedback. 
+
+If you wish to continue using previous versions of this SDK, no problam. However, we will not be updating versions less than v7 except for critical bugs and/or security issues.
+
+We hope this will be the last breaking change in the foreseeable future; that said, let the iterations begin!
+
 ## [6.2.0] - 2018-03-28 ##
 ### Added
 - Closes [#454](https://github.com/sendgrid/sendgrid-php/issues/454), PR [#502](https://github.com/sendgrid/sendgrid-php/pull/502): 

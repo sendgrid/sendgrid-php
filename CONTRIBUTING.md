@@ -65,7 +65,7 @@ We welcome direct contributions to the sendgrid-php code base. Thank you!
 
 ##### Prerequisites #####
 
-- PHP 5.6 or 7.0
+- PHP 5.6, 7.0, 7.1 or 7.2
 
 ##### Initial setup: #####
 
@@ -89,7 +89,7 @@ source ./sendgrid.env
 
 ##### Execute: #####
 
-See the [examples folder](https://github.com/sendgrid/sendgrid-php/tree/master/examples) to get started quickly.
+See the [examples folder](https://github.com/sendgrid/sendgrid-php/tree/master/examples) or [README](https://github.com/sendgrid/sendgrid-php/blob/master/README.md) to get started quickly.
 
 If you are using composer, replace <PATH_TO> with the path to your `vendor/autoload.php`. Otherwise, include lib/loader.php.
 
@@ -108,9 +108,13 @@ php examples/example.php
 
 Unit tests for the HTTP client.
 
+**/test/integration**
+
+Unit tests for the HTTP client.
+
 **/lib**
 
-The interface to the SendGrid API.
+The interface to the SendGrid API. The subfolders are helpers.
 
 <a name="testing"></a>
 ## Testing
@@ -119,13 +123,9 @@ All PRs require passing tests before the PR will be reviewed.
 
 All test files are in the [`/test/unit`](https://github.com/sendgrid/sendgrid-php/tree/master/test/unit) directory.
 
-For the purposes of contributing to this repo, please update the [`SendGridTest.php`](https://github.com/sendgrid/sendgrid-php/tree/master/test/unit/SendGridTest.php) file with unit tests as you modify the code.
+For the purposes of contributing to this repo, please update or add relevant test files here(https://github.com/sendgrid/sendgrid-php/tree/master/test) file with tests as you modify the code.
 
-```bash
-composer install
-cd test/unit
-../../vendor/bin/phpunit . --bootstrap bootstrap.php --filter test*
-```
+To run the tests locally, please review [this documentation](https://github.com/sendgrid/sendgrid-php/tree/master/docker).
 
 <a name="style-guidelines-and-naming-conventions"></a>
 ## Style Guidelines & Naming Conventions

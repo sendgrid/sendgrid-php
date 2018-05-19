@@ -1,47 +1,50 @@
-You can use Docker to easily try out or test sendgrid-python.
+Use Docker to easily try out or contribute to the sendgrid-php library. 
 
-<a name="Quickstart"></a>
-# Quickstart
+This Docker image contains:
+ - PHP 7.1.16
+ - A running instance of [Stoplight.io's Prism](https://stoplight.io/platform/prism/), which lets you try out the SendGrid API without actually sending email
+ - A mirrored copy of sendgrid-php so that you may develop locally and then run the tests within the Docker container.
 
-1. Install Docker on your machine
-2. Run `docker run -it sendgrid/sendgrid-php`.
+# Table of Contents
 
-<a name="Info"></a>
-# Info
+* [Quick Start](#quick-start)
+* [Testing](#testing)
+* [Contributing](#contributing)
 
-This Docker image contains
- - `sendgrid-php` and `php-http-client`
- - Stoplight's Prism, which lets you try out the API without actually sending email
- - A complete setup for testing the repository or your own fork
+<a name="quick-start"></a>
+# Quick Start
 
-You can mount repositories in the `/mnt/sendgrid-php` and `/mnt/php-http-client` directories to use them instead of the default SendGrid libraries.  Read on for more info.
+0. Install Composer:
+  - `php -r "readfile('https://getcomposer.org/installer');" | php`
+  - `mv composer.phar /usr/local/bin/composer`
+1. Clone the sendgrid-php repo
+  - `git clone https://github.com/sendgrid/sendgrid-php.git`
+  - `cd sendgrid-php`
+  - `composer install`
+2. [Install Docker](https://docs.docker.com/install/)
+3. [Setup local environment variable SENDGRID_API_KEY](https://github.com/sendgrid/sendgrid-php#setup-environment-variables)
+4. Build Docker image, run Docker container, login to the Docker container
+  - `docker image build --tag="sendgrid/php7" ./docker`
+  - `docker run -itd --name="sendgrid_php7" -v $(pwd):/root/sendgrid-php sendgrid/php7 /bin/bash`
+5. Run the tests within the Docker container
+  - `sudo docker exec -it sendgrid_php7 /bin/bash -c 'cd sendgrid-php/test; ../vendor/bin/phpunit . --filter test*; exec "${SHELL:-sh}"'`
 
+Now you can continue development locally, and run `../vendor/bin/phpunit . --filter test*` inside of the container to test. Replace `test*` with the name of a particular test if you do not wish to run the entire suite of tests.
 
-## Specifying a version
+To clean up the container: `docker stop sendgrid_php7 && docker rm sendgrid_php7`.
 
-To use a different version of sendgrid-php or php-http-client - for instance, to replicate your production setup - mount it with the `-v <host_dir>:<container_dir>` option.  When you put either repository under `/mnt`, the container will automatically detect it and make the proper symlinks.
+Happy Hacking! 
 
-For instance, to install sendgrid-php v5.6.1 with an older version of php-http-client:
+<a name="testing"></a>
+# For Testing the Library (Kick the Tires)
 
-    $ git clone https://github.com/sendgrid/sendgrid-php.git --branch v5.6.1
-    $ realpath sendgrid-php
-      /path/to/sendgrid-php
-    $ git clone https://github.com/sendgrid/php-http-client.git --branch v3.5.1
-    $ realpath php-http-client
-      /path/to/php-http-client
-    $ docker run -it -v /path/to/sendgrid-php:/mnt/sendgrid-php \
-                     -v /path/to/php-http-client:/mnt/php-http-client \
-                     sendgrid/sendgrid-php
+- After step 5 in the QuickStart, within the Docker container: 
+  - `cd ../`
+  - `php sendmail.php` 
 
-## To install your own version:
+<a name="contributing"></a>
+# For Contributors
 
-    $ git clone https://github.com/you/cool-sendgrid-php.git
-    $ realpath sendgrid-php
-      /path/to/cool-sendgrid-php
-    $ docker run -it -v /path/to/cool-sendgrid-php:/mnt/sendgrid-php sendgrid/sendgrid-php
-
-Note that the paths you specify in `-v` must be absolute.
-
-<a name="Testing"></a>
-# Testing
-Testing is easy!  Run the container, `cd sendgrid`, and run `vendor/bin/phpunit tests`.
+- Develop per usual locally, but before pushing up to GitHub, you can run the tests locally in the Docker container per step 5 of the quickstart.
+- To run all the tests: `../vendor/bin/phpunit . --filter test*`
+- To run an individual test: `../vendor/bin/phpunit . --filter [Name of Test]`
