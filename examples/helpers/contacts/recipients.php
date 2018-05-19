@@ -3,6 +3,9 @@ namespace SendGrid;
 
 // If you are using Composer
 require __DIR__ . '<PATH_TO>/vendor/autoload.php';
+// comment out the above line if not using Composer
+// require("./sendgrid-php.php"); 
+// If not using Composer, uncomment the above line
 
 // This will build an HTML form to be embedded in your page. This form allows users to subscribe using their name and email.
 function buildRecipientForm($url = 'http://www.example.com/recipientFormSubmit')

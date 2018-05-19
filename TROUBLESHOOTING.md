@@ -50,18 +50,22 @@ Download packaged zip [here](https://sendgrid-open-source.s3.amazonaws.com/sendg
 <a name="error"></a>
 ## Error Messages
 
+Failed requests will always return an error response, including a response code, a message explaining the reason for the error, and a link to any relevant documentation that may help you troubleshoot the problem.
+
 To read the error message returned by SendGrid's API:
 
 ```php
 try {
-    $response = $sendgrid->client->mail()->send()->post($mail);
-    print $response->statusCode() . "\n";
+    $response = $sendgrid->send($email);
+    print $response->statusCode() . "\n"; 
     print_r($response->headers());
     print $response->body() . "\n"; // SendGrid specific errors are found here
 } catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
 }
 ```
+
+You may find complete documentation [here](https://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/errors.html).
 
 <a name="versions"></a>
 ## Versions
