@@ -77,7 +77,7 @@ class Attachment implements \JsonSerializable
      */
     public function setContent($content)
     {
-        if(base64_decode($content, true) == "") {
+        if(!base64_decode($content, true)) {
             $this->content = base64_encode($content);
         } else {
             $this->content = $content;
