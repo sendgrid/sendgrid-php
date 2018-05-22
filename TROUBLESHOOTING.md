@@ -28,14 +28,14 @@ Please review [our guide](https://sendgrid.com/docs/Classroom/Send/v3_Mail_Send/
 
 In this context, we are referring to the version of the SendGrid API.
 
-[Here](https://github.com/sendgrid/sendgrid-php/tree/75970eb82f5629e66db4d6da08ff7ef0c507e9b0) is the last working version with v2 support.
+[Here](https://github.com/sendgrid/sendgrid-php/releases/tag/v4.0.4) is the last working version with v2 support.
 
 Using composer:
 
 ```json
 {
   "require": {
-    "sendgrid/sendgrid": "~3.2"
+    "sendgrid/sendgrid": "~4.0.4"
   }
 }
 ```
