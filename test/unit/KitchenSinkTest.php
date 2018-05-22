@@ -1,7 +1,7 @@
 <?php
 /**
  * This file tests the request object generation for a /mail/send API call
- * 
+ *
  * PHP Version - 5.6, 7.0, 7.1, 7.2
  *
  * @package   SendGrid\Tests
@@ -9,15 +9,14 @@
  * @copyright 2018 SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
-namespace SendGrid\Tests;
 
-use SendGrid\Tests\BaseTestClass;
+namespace SendGrid\Tests;
 
 /**
  * This class tests the request object generation for a /mail/send API call
- * 
+ *
  * @package SendGrid\Tests
  */
 class KitchenSinkTest extends BaseTestClass
@@ -225,18 +224,16 @@ JSON;
 
     /**
      * Test all parameters without using objects
-     * 
-     * @return null
-     */ 
+     */
     public function testKitchenSinkExampleWithoutObjects()
     {
         $email = new \SendGrid\Mail\Mail();
 
-        // For a detailed description of each of these settings, 
-        // please see the 
+        // For a detailed description of each of these settings,
+        // please see the
         // [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
         $email->setSubject("Sending with SendGrid is Fun 2");
-    
+
         $email->addTo("test@example.com", "Example User");
         $email->addTo("test+1@example.com", "Example User1");
         $toEmails = [
@@ -244,21 +241,21 @@ JSON;
             "test+3@example.com" => "Example User3"
         ];
         $email->addTos($toEmails);
-    
+
         $email->addCc("test+4@example.com", "Example User4");
         $ccEmails = [
             "test+5@example.com" => "Example User5",
             "test+6@example.com" => "Example User6"
         ];
         $email->addCcs($ccEmails);
-    
+
         $email->addBcc("test+7@example.com", "Example User7");
         $bccEmails = [
             "test+8@example.com" => "Example User8",
             "test+9@example.com" => "Example User9"
         ];
         $email->addBccs($bccEmails);
-   
+
         $email->addHeader("X-Test1", "Test1");
         $email->addHeader("X-Test2", "Test2");
         $headers = [
@@ -266,7 +263,7 @@ JSON;
             "X-Test4" => "Test4",
         ];
         $email->addHeaders($headers);
-     
+
         $email->addSubstitution("%name1%", "Example Name 1");
         $email->addSubstitution("%city1%", "Denver");
         $substitutions = [
@@ -315,7 +312,7 @@ JSON;
             "Banner"
         );
         $attachments = [
-            [   
+            [
                 "base64 encoded content2",
                 "banner2.jpeg",
                 "image/jpeg",
@@ -373,7 +370,7 @@ JSON;
         $email->enableSandBoxMode();
         //$email->disableSandBoxMode();
         $email->setSpamCheck(true, 1, "http://mydomain.com");
-        
+
         // Tracking Settings
         $email->setClickTracking(true, true);
         $email->setOpenTracking(true, "--sub--");
@@ -399,15 +396,13 @@ JSON;
 
     /**
      * Test all parameters using objects
-     * 
-     * @return null
-     */ 
+     */
     public function testKitchenSinkExampleWithObjects()
     {
         $email = new \SendGrid\Mail\Mail();
 
-        // For a detailed description of each of these settings, 
-        // please see the 
+        // For a detailed description of each of these settings,
+        // please see the
         // [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
         $email->setSubject(
             new \SendGrid\Mail\Subject("Sending with SendGrid is Fun 2")
@@ -415,23 +410,23 @@ JSON;
 
         $email->addTo(new \SendGrid\Mail\To("test@example.com", "Example User"));
         $email->addTo(new \SendGrid\Mail\To("test+1@example.com", "Example User1"));
-        $toEmails = [ 
+        $toEmails = [
             new \SendGrid\Mail\To("test+2@example.com", "Example User2"),
             new \SendGrid\Mail\To("test+3@example.com", "Example User3")
         ];
         $email->addTos($toEmails);
 
         $email->addCc(new \SendGrid\Mail\Cc("test+4@example.com", "Example User4"));
-        $ccEmails = [ 
+        $ccEmails = [
             new \SendGrid\Mail\Cc("test+5@example.com", "Example User5"),
             new \SendGrid\Mail\Cc("test+6@example.com", "Example User6")
         ];
         $email->addCcs($ccEmails);
- 
+
         $email->addBcc(
             new \SendGrid\Mail\Bcc("test+7@example.com", "Example User7")
         );
-        $bccEmails = [ 
+        $bccEmails = [
             new \SendGrid\Mail\Bcc("test+8@example.com", "Example User8"),
             new \SendGrid\Mail\Bcc("test+9@example.com", "Example User9")
         ];
@@ -570,7 +565,7 @@ JSON;
 
         $asm = new \SendGrid\Mail\Asm(
             new \SendGrid\Mail\GroupId(1),
-            new \SendGrid\Mail\GroupsToDisplay([1,2,3,4])
+            new \SendGrid\Mail\GroupsToDisplay([1, 2, 3, 4])
         );
         $email->setAsm($asm);
 

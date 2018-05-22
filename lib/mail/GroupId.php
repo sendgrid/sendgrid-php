@@ -59,8 +59,7 @@ class GroupId implements \JsonSerializable
     /**
      * Return an array representing a GroupId object for the SendGrid API
      *
-     * @todo This returns an int, which causes a warning to show: Return value is expected to be 'array|null', 'int' returned
-     * @return null|array
+     * @return int
      */
     public function jsonSerialize()
     {

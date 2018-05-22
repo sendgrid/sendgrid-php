@@ -77,8 +77,6 @@ class MailSettings implements \JsonSerializable
      *                                 if the setting is enabled
      * @param string|null $email The email address that you would like
      *                                 to receive the BCC
-     *
-     * @return null
      */
     public function setBccSettings($enable, $email = null)
     {
@@ -88,7 +86,6 @@ class MailSettings implements \JsonSerializable
             return;
         }
         $this->bcc = new BccSettings($enable, $email);
-        return;
     }
 
     /**

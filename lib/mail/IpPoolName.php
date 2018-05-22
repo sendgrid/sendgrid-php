@@ -63,9 +63,7 @@ class IpPoolName implements \JsonSerializable
     /**
      * Return an array representing a IpPoolName object for the SendGrid API
      *
-     * @todo This returns a string, which causes a warning to show: Return value is expected to be 'array|null', 'string' returned
-     *
-     * @return null|array
+     * @return string
      */
     public function jsonSerialize()
     {

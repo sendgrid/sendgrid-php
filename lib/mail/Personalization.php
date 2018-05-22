@@ -1,7 +1,7 @@
-<?php 
+<?php
 /**
  * This helper builds the Personalization object for a /mail/send API call
- * 
+ *
  * PHP Version - 5.6, 7.0, 7.1, 7.2
  *
  * @package   SendGrid\Mail
@@ -9,45 +9,44 @@
  * @copyright 2018 SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
+
 namespace SendGrid\Mail;
 
 /**
- * This class is used to construct a Personalization object for 
+ * This class is used to construct a Personalization object for
  * the /mail/send API call
- * 
- * Each Personalization can be thought of as an envelope - it defines 
+ *
+ * Each Personalization can be thought of as an envelope - it defines
  * who should receive an individual message and how that message should be handled
- * 
+ *
  * @package SendGrid\Mail
  */
 class Personalization implements \JsonSerializable
 {
-    // @var To[] objects
+    /** @var $tos To[] objects */
     private $tos;
-    // @var Cc[] objects
+    /** @var $ccs Cc[] objects */
     private $ccs;
-    // @var Bcc[] objects
+    /** @var $bccs Bcc[] objects */
     private $bccs;
-    // @var Subject object
+    /** @var $subject Subject object */
     private $subject;
-    // @var array of header key values
+    /** @var $headers Header[] array of header key values */
     private $headers;
-    // @var array of substitution key values
+    /** @var $substitutions Substitution[] array of substitution key values */
     private $substitutions;
-    // @var array of custom arg key values
+    /** @var $custom_args CustomArg[] array of custom arg key values */
     private $custom_args;
-    // @var SendAt object
+    /** @var $send_at SendAt object */
     private $send_at;
 
     /**
      * Add a To object to a Personalization object
      *
      * @param To $email To object
-     * 
-     * @return null
-     */ 
+     */
     public function addTo($email)
     {
         $this->tos[] = $email;
@@ -55,9 +54,9 @@ class Personalization implements \JsonSerializable
 
     /**
      * Retrieve To object(s) from a Personalization object
-     * 
+     *
      * @return To[]
-     */ 
+     */
     public function getTos()
     {
         return $this->tos;
@@ -67,9 +66,7 @@ class Personalization implements \JsonSerializable
      * Add a Cc object to a Personalization object
      *
      * @param Cc $email Cc object
-     * 
-     * @return null
-     */ 
+     */
     public function addCc($email)
     {
         $this->ccs[] = $email;
@@ -77,9 +74,9 @@ class Personalization implements \JsonSerializable
 
     /**
      * Retrieve Cc object(s) from a Personalization object
-     * 
+     *
      * @return Cc[]
-     */ 
+     */
     public function getCcs()
     {
         return $this->ccs;
@@ -89,9 +86,7 @@ class Personalization implements \JsonSerializable
      * Add a Bcc object to a Personalization object
      *
      * @param Bcc $email Bcc object
-     * 
-     * @return null
-     */ 
+     */
     public function addBcc($email)
     {
         $this->bccs[] = $email;
@@ -99,9 +94,9 @@ class Personalization implements \JsonSerializable
 
     /**
      * Retrieve Bcc object(s) from a Personalization object
-     * 
+     *
      * @return Bcc[]
-     */ 
+     */
     public function getBccs()
     {
         return $this->bccs;
@@ -111,9 +106,7 @@ class Personalization implements \JsonSerializable
      * Add a subject object to a Personalization object
      *
      * @param Subject $subject Subject object
-     * 
-     * @return null
-     */ 
+     */
     public function setSubject($subject)
     {
         $this->subject = $subject;
@@ -121,9 +114,9 @@ class Personalization implements \JsonSerializable
 
     /**
      * Retrieve a Subject object from a Personalization object
-     * 
+     *
      * @return Subject
-     */ 
+     */
     public function getSubject()
     {
         return $this->subject;
@@ -133,9 +126,7 @@ class Personalization implements \JsonSerializable
      * Add a Header object to a Personalization object
      *
      * @param Header $header Header object
-     * 
-     * @return null
-     */ 
+     */
     public function addHeader($header)
     {
         $this->headers[$header->getKey()] = $header->getValue();
@@ -143,9 +134,9 @@ class Personalization implements \JsonSerializable
 
     /**
      * Retrieve header key/value pairs from a Personalization object
-     * 
+     *
      * @return array
-     */ 
+     */
     public function getHeaders()
     {
         return $this->headers;
@@ -156,11 +147,9 @@ class Personalization implements \JsonSerializable
      *
      * @param Substitution|string $substitution Substitution object or the key of a
      *                                          substitution
-     * @param string|null         $value        The value of a substitution
-     * 
-     * @return null
-     */ 
-    public function addSubstitution($substitution, $value=null)
+     * @param string|null $value The value of a substitution
+     */
+    public function addSubstitution($substitution, $value = null)
     {
         if (!$substitution instanceof Substitution) {
             $key = $substitution;
@@ -171,9 +160,9 @@ class Personalization implements \JsonSerializable
 
     /**
      * Retrieve substitution key/value pairs from a Personalization object
-     * 
+     *
      * @return array
-     */ 
+     */
     public function getSubstitutions()
     {
         return $this->substitutions;
@@ -183,9 +172,7 @@ class Personalization implements \JsonSerializable
      * Add a CustomArg object to a Personalization object
      *
      * @param CustomArg $custom_arg CustomArg object
-     * 
-     * @return null
-     */ 
+     */
     public function addCustomArg($custom_arg)
     {
         $this->custom_args[$custom_arg->getKey()] = (string)$custom_arg->getValue();
@@ -193,9 +180,9 @@ class Personalization implements \JsonSerializable
 
     /**
      * Retrieve custom arg key/value pairs from a Personalization object
-     * 
+     *
      * @return array
-     */ 
+     */
     public function getCustomArgs()
     {
         return $this->custom_args;
@@ -205,9 +192,7 @@ class Personalization implements \JsonSerializable
      * Add a SendAt object to a Personalization object
      *
      * @param SendAt $send_at SendAt object
-     * 
-     * @return null
-     */ 
+     */
     public function setSendAt($send_at)
     {
         $this->send_at = $send_at;
@@ -215,9 +200,9 @@ class Personalization implements \JsonSerializable
 
     /**
      * Retrieve a SendAt object from a Personalization object
-     * 
+     *
      * @return SendAt
-     */ 
+     */
     public function getSendAt()
     {
         return $this->send_at;
@@ -225,21 +210,21 @@ class Personalization implements \JsonSerializable
 
     /**
      * Return an array representing a Personalization object for the SendGrid API
-     * 
+     *
      * @return null|array
-     */  
+     */
     public function jsonSerialize()
     {
         return array_filter(
             [
-                'to'            => $this->getTos(),
-                'cc'            => $this->getCcs(),
-                'bcc'           => $this->getBccs(),
-                'subject'       => $this->getSubject(),
-                'headers'       => $this->getHeaders(),
+                'to' => $this->getTos(),
+                'cc' => $this->getCcs(),
+                'bcc' => $this->getBccs(),
+                'subject' => $this->getSubject(),
+                'headers' => $this->getHeaders(),
                 'substitutions' => $this->getSubstitutions(),
-                'custom_args'   => $this->getCustomArgs(),
-                'send_at'       => $this->getSendAt()
+                'custom_args' => $this->getCustomArgs(),
+                'send_at' => $this->getSendAt()
             ],
             function ($value) {
                 return $value !== null;

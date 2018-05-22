@@ -1085,14 +1085,8 @@ class Mail implements \JsonSerializable
         $content_id = null
     )
     {
-        if (!($attachment instanceof Attachment)) {
-            $attachment = new Attachment(
-                $attachment,
-                $type,
-                $filename,
-                $disposition,
-                $content_id
-            );
+        if ($attachment instanceof Attachment) {
+            $attachment = $attachment;
         } else if (is_array($attachment)) {
             $attachment = new Attachment(
                 $attachment[0],
@@ -1100,6 +1094,14 @@ class Mail implements \JsonSerializable
                 $attachment[2],
                 $attachment[3],
                 $attachment[4]
+            );
+        } else {
+            $attachment = new Attachment(
+                $attachment,
+                $type,
+                $filename,
+                $disposition,
+                $content_id
             );
         }
         $this->attachments[] = $attachment;

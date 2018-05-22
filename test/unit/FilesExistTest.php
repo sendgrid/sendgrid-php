@@ -1,7 +1,7 @@
 <?php
 /**
  * This file tests the existence of necessary files in this repo
- * 
+ *
  * PHP Version - 5.6, 7.0, 7.1, 7.2
  *
  * @package   SendGrid\Tests
@@ -9,23 +9,22 @@
  * @copyright 2018 SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
+
 namespace SendGrid\Tests;
 
 use PHPUnit\Framework\TestCase;
 
 /**
  * This class tests the existence of necessary files in this repo
- * 
+ *
  * @package SendGrid\Tests
  */
 class FilesExistTest extends TestCase
 {
     /**
      * This method tests that the required files exist in the repo
-     * 
-     * @return null
      */
     public function testFilesArePresentInRepo()
     {
