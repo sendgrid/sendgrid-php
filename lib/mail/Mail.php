@@ -1093,11 +1093,28 @@ class Mail implements \JsonSerializable
 
     /**
      * Retrieve the contents attached to a Mail object
+     *
+     * Will return array of Content Objects with text/plain MimeType first
+     * Array re-ordered before return where this is not already the case
      * 
      * @return Content[]
      */  
     public function getContents()
     {
+        if ($this->contents[0]->getType() !== 'text/plain'
+            && count($this->contents) > 1
+        ) {
+
+            foreach ($this->contents as $key => $value) {
+                if ($value->getType() == 'text/plain') {
+                    $plain_content = $value;
+                    unset($this->contents[$key]);
+                    break;
+                }
+            }
+            array_unshift($this->contents, $plain_content);
+        }
+
         return $this->contents;
     }
 
