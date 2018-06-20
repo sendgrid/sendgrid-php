@@ -14,23 +14,28 @@ If you can't find a solution below, please open an [issue](https://github.com/se
 * [Using the Package Manager](#package-manager)
 * [Fixing Error 415](#error-415)
 * [Viewing the Request Body](#request-body)
+* [Google App Engine installation](#GAE-instructions)
 
 <a name="migrating"></a>
 ## Migrating from v2 to v3
+
+In this context, we are referring to the version of the SendGrid API.
 
 Please review [our guide](https://sendgrid.com/docs/Classroom/Send/v3_Mail_Send/how_to_migrate_from_v2_to_v3_mail_send.html) on how to migrate from v2 to v3.
 
 <a name="v2"></a>
 ## Continue Using v2
 
-[Here](https://github.com/sendgrid/sendgrid-php/tree/75970eb82f5629e66db4d6da08ff7ef0c507e9b0) is the last working version with v2 support.
+In this context, we are referring to the version of the SendGrid API.
+
+[Here](https://github.com/sendgrid/sendgrid-php/releases/tag/v4.0.4) is the last working version with v2 support.
 
 Using composer:
 
 ```json
 {
   "require": {
-    "sendgrid/sendgrid": "~3.2"
+    "sendgrid/sendgrid": "~4.0.4"
   }
 }
 ```
@@ -45,15 +50,22 @@ Download packaged zip [here](https://sendgrid-open-source.s3.amazonaws.com/sendg
 <a name="error"></a>
 ## Error Messages
 
+Failed requests will always return an error response, including a response code, a message explaining the reason for the error, and a link to any relevant documentation that may help you troubleshoot the problem.
+
 To read the error message returned by SendGrid's API:
 
 ```php
 try {
-    $response = $sendgrid->client->mail()->send()->post($mail);
+    $response = $sendgrid->send($email);
+    print $response->statusCode() . "\n"; 
+    print_r($response->headers());
+    print $response->body() . "\n"; // SendGrid specific errors are found here
 } catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
 }
 ```
+
+You may find complete documentation [here](https://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/errors.html).
 
 <a name="versions"></a>
 ## Versions
@@ -106,8 +118,13 @@ It is most likely due to a linebreak in your API key. Passing your key through `
 
 When debugging or testing, it may be useful to examine the raw request body to compare against the [documented format](https://sendgrid.com/docs/API_Reference/api_v3.html).
 
-You can do this right before you call `$response = $sg->client->mail()->send()->post($mail);` like so:
+You can do this right before you call `$response = $sg->send($email);` like so:
 
 ```php
-echo json_encode($mail, JSON_PRETTY_PRINT);
+echo json_encode($email, JSON_PRETTY_PRINT);
 ```
+
+<a name="GAE-instructions"></a>
+## Google App Engine installation
+
+Please refer to [`USE_CASES.md`](https://github.com/sendgrid/sendgrid-php/blob/master/USE_CASES.md#GAE-instructions) for additional instructions.

@@ -1,7 +1,8 @@
 <?php
-// If you are using Composer
-require 'vendor/autoload.php';
-
+require 'vendor/autoload.php'; // If you're using Composer (recommended)
+// comment out the above line if not using Composer
+// require("./sendgrid-php.php"); 
+// If not using Composer, uncomment the above line
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
