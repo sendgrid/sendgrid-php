@@ -21,8 +21,9 @@ Here is an example of attaching a text file to your email, assuming that text fi
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// require({path-to-php-http-client-master/loader.php});    // see https://github.com/sendgrid/php-http-client/blob/master/README.md#install-without-composer
+// require("./lib/loader.php");
+// If not using Composer, uncomment the above two lines
 
 $email = new \SendGrid\Mail\Mail(); 
 $email->setFrom("test@example.com", "Example User");
@@ -59,8 +60,9 @@ try {
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// require({path-to-php-http-client-master/loader.php});    // see https://github.com/sendgrid/php-http-client/blob/master/README.md#install-without-composer
+// require("./lib/loader.php");
+// If not using Composer, uncomment the above two lines
 
 $email = new \SendGrid\Mail\Mail();
 
@@ -245,8 +247,9 @@ OR
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// require({path-to-php-http-client-master/loader.php});    // see https://github.com/sendgrid/php-http-client/blob/master/README.md#install-without-composer
+// require("./lib/loader.php");
+// If not using Composer, uncomment the above two lines
 
 $email = new \SendGrid\Mail\Mail();
 
@@ -485,8 +488,9 @@ try {
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// require({path-to-php-http-client-master/loader.php});    // see https://github.com/sendgrid/php-http-client/blob/master/README.md#install-without-composer
+// require("./lib/loader.php");
+// If not using Composer, uncomment the above two lines
 
 $email = new \SendGrid\Mail\Mail(); 
 $email->setFrom("test@example.com", "Example User");
@@ -513,8 +517,10 @@ OR
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// require({path-to-php-http-client-master/loader.php});    // see https://github.com/sendgrid/php-http-client/blob/master/README.md#install-without-composer
+// require("./lib/loader.php");
+// If not using Composer, uncomment the above two lines
+
 $from = new \SendGrid\Mail\From("test@example.com", "Example User");
 $subject = new \SendGrid\Mail\Subject("Sending with SendGrid is Fun");
 $to = new \SendGrid\Mail\To("test@example.com", "Example User");
@@ -549,8 +555,10 @@ try {
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// require({path-to-php-http-client-master/loader.php});    // see https://github.com/sendgrid/php-http-client/blob/master/README.md#install-without-composer
+// require("./lib/loader.php");
+// If not using Composer, uncomment the above two lines
+
 $email = new \SendGrid\Mail\Mail(); 
 $email->setFrom("test@example.com", "Example User");
 $tos = [ 
@@ -581,8 +589,9 @@ OR
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// require({path-to-php-http-client-master/loader.php});    // see https://github.com/sendgrid/php-http-client/blob/master/README.md#install-without-composer
+// require("./lib/loader.php");
+// If not using Composer, uncomment the above two lines
 
 $from = new \SendGrid\Mail\From("test@example.com", "Example User");
 $tos = [ 
@@ -623,8 +632,10 @@ try {
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// require({path-to-php-http-client-master/loader.php});    // see https://github.com/sendgrid/php-http-client/blob/master/README.md#install-without-composer
+// require("./lib/loader.php");
+// If not using Composer, uncomment the above two lines
+
 $from = new \SendGrid\Mail\From("test@example.com", "Example User");
 $tos = [ 
     new \SendGrid\Mail\To(
@@ -690,8 +701,10 @@ OR
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// require({path-to-php-http-client-master/loader.php});    // see https://github.com/sendgrid/php-http-client/blob/master/README.md#install-without-composer
+// require("./lib/loader.php");
+// If not using Composer, uncomment the above two lines
+
 $from = new \SendGrid\Mail\From("test@example.com", "Example User");
 $tos = [ 
     new \SendGrid\Mail\To(
@@ -795,8 +808,9 @@ I hope you are having a great day in -city- :)
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// require({path-to-php-http-client-master/loader.php});    // see https://github.com/sendgrid/php-http-client/blob/master/README.md#install-without-composer
+// require("./lib/loader.php");
+// If not using Composer, uncomment the above two lines
 
 use \SendGrid\Mail\From as From;
 use \SendGrid\Mail\To as To;
