@@ -5,8 +5,9 @@ This documentation is based on our [OAI specification](https://github.com/sendgr
 ```php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // Comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// require("./lib/loader.php");
+// require({path-to-php-http-client-master/loader.php});    // see https://github.com/sendgrid/php-http-client/blob/master/README.md#install-without-composer
+// If not using Composer, uncomment the above two lines
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);

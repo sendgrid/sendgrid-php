@@ -91,8 +91,9 @@ The following is the minimum needed code to send an email. You may find more exa
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // Comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// require({path-to-php-http-client-master/loader.php});    // see https://github.com/sendgrid/php-http-client/blob/master/README.md#install-without-composer
+// require("./lib/loader.php");
+// If not using Composer, uncomment the above two lines
 
 $email = new \SendGrid\Mail\Mail(); 
 $email->setFrom("test@example.com", "Example User");
@@ -121,8 +122,9 @@ The `SendGrid\Mail` constructor creates a [personalization object](https://sendg
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // Comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// require({path-to-php-http-client-master/loader.php});    // see https://github.com/sendgrid/php-http-client/blob/master/README.md#install-without-composer
+// require("./lib/loader.php");
+// If not using Composer, uncomment the above two lines
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
@@ -143,8 +145,9 @@ try {
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // Comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// require({path-to-php-http-client-master/loader.php});    // see https://github.com/sendgrid/php-http-client/blob/master/README.md#install-without-composer
+// require("./lib/loader.php");
+// If not using Composer, uncomment the above two lines
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
