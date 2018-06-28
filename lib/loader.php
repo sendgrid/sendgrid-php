@@ -16,7 +16,7 @@ require_once __DIR__ . '/contacts/Recipient.php';
 require_once __DIR__ . '/contacts/RecipientForm.php';
 require_once __DIR__ . '/mail/Asm.php';
 require_once __DIR__ . '/mail/Attachment.php';
-require_once __DIR__ . '/mail/BatchId';
+require_once __DIR__ . '/mail/BatchId.php';
 require_once __DIR__ . '/mail/Bcc.php';
 require_once __DIR__ . '/mail/BccSettings.php';
 require_once __DIR__ . '/mail/BypassListManagement.php';
