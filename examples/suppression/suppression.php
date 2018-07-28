@@ -13,10 +13,15 @@ $sg = new \SendGrid($apiKey);
 // GET /suppression/blocks #
 
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
-$response = $sg->client->suppression()->blocks()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->suppression()->blocks()->get(null, $query_params);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Delete blocks #
@@ -29,40 +34,60 @@ $request_body = json_decode('{
     "example2@example.com"
   ]
 }');
-$response = $sg->client->suppression()->blocks()->delete($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->suppression()->blocks()->delete($request_body);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Retrieve a specific block #
 // GET /suppression/blocks/{email} #
 
 $email = "test_url_param";
-$response = $sg->client->suppression()->blocks()->_($email)->get();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->suppression()->blocks()->_($email)->get();
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Delete a specific block #
 // DELETE /suppression/blocks/{email} #
 
 $email = "test_url_param";
-$response = $sg->client->suppression()->blocks()->_($email)->delete();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->suppression()->blocks()->_($email)->delete();
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Retrieve all bounces #
 // GET /suppression/bounces #
 
 $query_params = json_decode('{"start_time": 1, "end_time": 1}');
-$response = $sg->client->suppression()->bounces()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->suppression()->bounces()->get(null, $query_params);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Delete bounces #
@@ -75,20 +100,30 @@ $request_body = json_decode('{
     "example2@example.com"
   ]
 }');
-$response = $sg->client->suppression()->bounces()->delete($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->suppression()->bounces()->delete($request_body);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Retrieve a Bounce #
 // GET /suppression/bounces/{email} #
 
 $email = "test_url_param";
-$response = $sg->client->suppression()->bounces()->_($email)->get();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->suppression()->bounces()->_($email)->get();
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Delete a bounce #
@@ -96,20 +131,30 @@ print_r($response->headers());
 
 $query_params = json_decode('{"email_address": "example@example.com"}');
 $email = "test_url_param";
-$response = $sg->client->suppression()->bounces()->_($email)->delete(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->suppression()->bounces()->_($email)->delete(null, $query_params);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Retrieve all invalid emails #
 // GET /suppression/invalid_emails #
 
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
-$response = $sg->client->suppression()->invalid_emails()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->suppression()->invalid_emails()->get(null, $query_params);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Delete invalid emails #
@@ -122,60 +167,90 @@ $request_body = json_decode('{
     "example2@example.com"
   ]
 }');
-$response = $sg->client->suppression()->invalid_emails()->delete($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->suppression()->invalid_emails()->delete($request_body);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Retrieve a specific invalid email #
 // GET /suppression/invalid_emails/{email} #
 
 $email = "test_url_param";
-$response = $sg->client->suppression()->invalid_emails()->_($email)->get();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->suppression()->invalid_emails()->_($email)->get();
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Delete a specific invalid email #
 // DELETE /suppression/invalid_emails/{email} #
 
 $email = "test_url_param";
-$response = $sg->client->suppression()->invalid_emails()->_($email)->delete();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->suppression()->invalid_emails()->_($email)->delete();
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Retrieve a specific spam report #
 // GET /suppression/spam_report/{email} #
 
 $email = "test_url_param";
-$response = $sg->client->suppression()->spam_reports()->_($email)->get();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->suppression()->spam_reports()->_($email)->get();
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Delete a specific spam report #
 // DELETE /suppression/spam_report/{email} #
 
 $email = "test_url_param";
-$response = $sg->client->suppression()->spam_reports()->_($email)->delete();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->suppression()->spam_reports()->_($email)->delete();
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Retrieve all spam reports #
 // GET /suppression/spam_reports #
 
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
-$response = $sg->client->suppression()->spam_reports()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->suppression()->spam_reports()->get(null, $query_params);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Delete spam reports #
@@ -188,17 +263,27 @@ $request_body = json_decode('{
     "example2@example.com"
   ]
 }');
-$response = $sg->client->suppression()->spam_reports()->delete($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->suppression()->spam_reports()->delete($request_body);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Retrieve all global suppressions #
 // GET /suppression/unsubscribes #
 
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
-$response = $sg->client->suppression()->unsubscribes()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->suppression()->unsubscribes()->get(null, $query_params);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
