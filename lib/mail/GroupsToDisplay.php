@@ -51,10 +51,14 @@ class GroupsToDisplay implements \JsonSerializable
      *                                     displayed on the unsubscribe 
      *                                     preferences page
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setGroupsToDisplay($groups_to_display)
     {
+        if (!is_array($groups_to_display)) {
+            throw new TypeException('$groups_to_display must be an array.');
+        }
         $this->groups_to_display[] = $groups_to_display;
     }
 

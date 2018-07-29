@@ -40,10 +40,14 @@ class GroupId implements \JsonSerializable
      *
      * @param int $group_id The unsubscribe group to associate with this email
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setGroupId($group_id)
     {
+        if (!is_int($group_id)) {
+            throw new TypeException('$group_id must be of type int.');
+        }
         $this->group_id = $group_id;
     }
 

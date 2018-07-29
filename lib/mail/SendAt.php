@@ -67,10 +67,14 @@ class SendAt implements \JsonSerializable
      *                     deferral rates because it won't be going through 
      *                     our servers at the same times as everyone else's mail
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setSendAt($send_at)
     {
+        if (!is_int($send_at)) {
+            throw new TypeException('$send_at must be of type int.');
+        }
         $this->send_at = $send_at;
     }
 

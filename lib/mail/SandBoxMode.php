@@ -40,10 +40,14 @@ class SandBoxMode implements \JsonSerializable
      *
      * @param bool $enable Indicates if this setting is enabled
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setEnable($enable)
     {
+        if (!is_bool($enable)) {
+            throw new TypeException('$enable must be of type bool.');
+        }
         $this->enable = $enable;
     }
 

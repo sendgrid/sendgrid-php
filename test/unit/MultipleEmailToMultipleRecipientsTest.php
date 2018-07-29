@@ -150,7 +150,8 @@ JSON;
 
     /**
      * Test when we have individual subjects for each Personalization object
-     * 
+     *
+     * @expectedException \SendGrid\Mail\TypeException
      * @return null
      */ 
     public function testWithIndividualSubjects()
@@ -209,7 +210,8 @@ JSON;
 
     /**
      * Test when we pass in an array of subjects
-     * 
+     *
+     * @expectedException \SendGrid\Mail\TypeException
      * @return null
      */ 
     public function testWithCollectionOfSubjects()

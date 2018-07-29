@@ -79,10 +79,14 @@ class Ganalytics implements \JsonSerializable
      *
      * @param bool $enable Indicates if this setting is enabled
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setEnable($enable)
     {
+        if (!is_bool($enable)) {
+            throw new TypeException('$enable must be of type bool.');
+        }
         $this->enable = $enable;
     }
 
@@ -102,10 +106,14 @@ class Ganalytics implements \JsonSerializable
      * @param string $utm_source Name of the referrer source. (e.g. 
      *                           Google, SomeDomain.com, or Marketing Email)
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setCampaignSource($utm_source)
     {
+        if (!is_string($utm_source)) {
+            throw new TypeException('$utm_source must be of type string.');
+        }
         $this->utm_source = $utm_source;
     }
 
@@ -124,10 +132,14 @@ class Ganalytics implements \JsonSerializable
      *
      * @param string $utm_medium Name of the marketing medium. (e.g. Email)
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setCampaignMedium($utm_medium)
     {
+        if (!is_string($utm_medium)) {
+            throw new TypeException('$utm_medium must be of type string.');
+        }
         $this->utm_medium = $utm_medium;
     }
 
@@ -146,10 +158,14 @@ class Ganalytics implements \JsonSerializable
      *
      * @param string $utm_term Used to identify any paid keywords
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setCampaignTerm($utm_term)
     {
+        if (!is_string($utm_term)) {
+            throw new TypeException('$utm_term must be of type string');
+        }
         $this->utm_term = $utm_term;
     }
 
@@ -169,10 +185,14 @@ class Ganalytics implements \JsonSerializable
      * @param string $utm_content Used to differentiate your campaign from 
      *                            advertisements
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setCampaignContent($utm_content)
     {
+        if (!is_string($utm_content)) {
+            throw new TypeException('$utm_content must be of type string.');
+        }
         $this->utm_content = $utm_content;
     }
 
@@ -191,10 +211,14 @@ class Ganalytics implements \JsonSerializable
      *
      * @param string $utm_campaign The name of the campaign
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setCampaignName($utm_campaign)
     {
+        if (!is_string($utm_campaign)) {
+            throw new TypeException('$utm_campaign must be of type string.');
+        }
         $this->utm_campaign = $utm_campaign;
     }
 

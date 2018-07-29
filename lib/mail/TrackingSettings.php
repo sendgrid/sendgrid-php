@@ -46,7 +46,7 @@ class TrackingSettings implements \JsonSerializable
         $ganalytics=null
     ) {
         if (isset($click_tracking)) {
-            $this->setClickTracking($click_trackingc);
+            $this->setClickTracking($click_tracking);
         }
         if (isset($open_tracking)) {
             $this->setOpenTracking($open_tracking);

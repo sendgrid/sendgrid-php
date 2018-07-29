@@ -533,9 +533,7 @@ class Mail implements \JsonSerializable
         $personalizationIndex = null,
         $personalization = null
     ) {
-        if ($subject instanceof Subject) {
-            $subject = $subject;
-        } else {
+        if (!$subject instanceof Subject) {
             $subject = new Subject($subject);
         }
 
@@ -916,9 +914,7 @@ class Mail implements \JsonSerializable
         $personalizationIndex = null,
         $personalization = null
     ) {
-        if ($send_at instanceof SendAt) {
-            $send_at = $send_at;
-        } else {
+        if (!$send_at instanceof SendAt) {
             $send_at = new SendAt($send_at);
         }
         if ($personalization != null) {
@@ -966,7 +962,8 @@ class Mail implements \JsonSerializable
      *
      * @param string|From $email Email address or From object
      * @param string|null $name  Sender name
-     * 
+     *
+     * @throws TypeException
      * @return null
      */      
     public function setFrom($email, $name=null)
@@ -974,7 +971,17 @@ class Mail implements \JsonSerializable
         if ($email instanceof From) {
             $this->from = $email;
         } else {
-            $this->from = new From($email, $name);
+
+            if (
+                is_string($email) && filter_var($email, FILTER_VALIDATE_EMAIL)
+            ) {
+                $this->from = new From($email, $name);
+            } else {
+                throw new TypeException(
+                    '$email must be valid and of type string.'
+                );
+            }
+
         }
         return;
     }
@@ -1031,12 +1038,11 @@ class Mail implements \JsonSerializable
      */      
     public function setGlobalSubject($subject)
     {
-        if ($subject instanceof Subject) {
-            $subject = $subject;
+        if (!$subject instanceof Subject) {
+            $this->subject = new Subject($subject);
         } else {
-            $subject = new Subject($subject);
+            $this->subject = $subject;
         }
-        $this->subject = $subject;
     }
 
     /**
@@ -1181,11 +1187,10 @@ class Mail implements \JsonSerializable
      */   
     public function setTemplateId($template_id)
     {
-        if ($template_id instanceof TemplateId) {
-            $template_id = $template_id;
-        } else {
+        if (!$template_id instanceof TemplateId) {
             $template_id = new TemplateId($template_id);
         }
+
         $this->template_id = $template_id;
     }
 
@@ -1370,9 +1375,7 @@ class Mail implements \JsonSerializable
      */  
     public function addCategory($category)
     {
-        if ($category instanceof Category) {
-            $category = $category;
-        } else {
+        if (!$category instanceof Category) {
             $category = new Category($category);
         }
         $this->categories[] = $category;
@@ -1473,9 +1476,7 @@ class Mail implements \JsonSerializable
      */  
     public function setGlobalSendAt($send_at)
     {
-        if ($send_at instanceof SendAt) {
-            $send_at = $send_at;
-        } else {
+        if (!$send_at instanceof SendAt) {
             $send_at = new SendAt($send_at);
         }
         $this->send_at = $send_at;
@@ -1501,9 +1502,7 @@ class Mail implements \JsonSerializable
      */  
     public function setBatchId($batch_id)
     {
-        if ($batch_id instanceof BatchId) {
-            $batch_id = $batch_id;
-        } else {
+        if (!$batch_id instanceof BatchId) {
             $batch_id = new BatchId($batch_id);
         }
         $this->batch_id = $batch_id;
@@ -1587,11 +1586,16 @@ class Mail implements \JsonSerializable
      *                                    mail settings that you can 
      *                                    use to specify how you would 
      *                                    like this email to be handled
-     * 
+     * @throws TypeException
      * @return null
      */ 
     public function setMailSettings($mail_settings)
     {
+        if (!$mail_settings instanceof MailSettings) {
+            throw new TypeException(
+                '$mail_settings must be an instance of SendGrid\Mail\MailSettings'
+            );
+        }
         $this->mail_settings = $mail_settings;
     }
 
@@ -1738,11 +1742,16 @@ class Mail implements \JsonSerializable
      *                                            would like to track the metrics 
      *                                            of how your recipients interact 
      *                                            with your email
-     * 
+     * @throws TypeException
      * @return null
      */ 
     public function setTrackingSettings($tracking_settings)
     {
+        if (!$tracking_settings instanceof TrackingSettings) {
+            throw new TypeException(
+                '$tracking_settings must be an instance of SendGrid\Mail\TrackingSettings'
+            );
+        }
         $this->tracking_settings = $tracking_settings;
     }
 

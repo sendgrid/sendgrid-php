@@ -50,7 +50,7 @@ class EmailAddress implements \JsonSerializable
         if (isset($emailAddress)) {
             $this->setEmailAddress($emailAddress);
         }
-        if (isset($name)) {
+        if (isset($name) && $name !== null) {
             $this->setName($name);
         }
         if (isset($substitutions)) {
@@ -66,10 +66,18 @@ class EmailAddress implements \JsonSerializable
      *
      * @param string $emailAddress The email address
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setEmailAddress($emailAddress)
     {
+        if (!is_string($emailAddress) &&
+            filter_var($emailAddress, FILTER_VALIDATE_EMAIL)
+        ) {
+            throw new TypeException(
+                '$emailAddress must be valid and of type string.'
+            );
+        }
         $this->email = $emailAddress;
     }
 
@@ -98,10 +106,15 @@ class EmailAddress implements \JsonSerializable
      *
      * @param string $name The name of the person associated with the email
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setName($name)
     {
+        if (!is_string($name)) {
+            throw new TypeException('$name must be of type string.');
+        }
+
         /*
             Issue #368
             ==========
@@ -143,10 +156,15 @@ class EmailAddress implements \JsonSerializable
      *                             be be applied to the text and html content 
      *                             of the email body
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setSubstitutions($substitutions)
     {
+        if (!is_array($substitutions)) {
+            throw new Exception('$substitutions must be an array.');
+        }
+
         $this->substitutions = $substitutions;
     }
 
@@ -165,10 +183,15 @@ class EmailAddress implements \JsonSerializable
      *
      * @param string $subject The personalized subject of the email
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setSubject($subject)
     {
+        if (!is_string($subject)) {
+            throw new TypeException('$subject must be of type string.');
+        }
+
         $this->subject = $subject;
     }
 

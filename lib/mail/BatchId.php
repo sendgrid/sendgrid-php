@@ -42,10 +42,14 @@ class BatchId implements \JsonSerializable
      * @param string $batch_id This ID represents a batch of emails to be sent 
      *                         at the same time
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setBatchId($batch_id)
     {
+        if (!is_string($batch_id)) {
+            throw new TypeException('$batch_id must be of type string.');
+        }
         $this->batch_id = $batch_id;
     }
 

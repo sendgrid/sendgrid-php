@@ -45,10 +45,14 @@ class IpPoolName implements \JsonSerializable
      *                             send this email from. Minimum length: 
      *                             2, Maximum Length: 64
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setIpPoolName($ip_pool_name)
     {
+        if (!is_string($ip_pool_name)) {
+            throw new TypeException('$ip_pool_name must be of type string.');
+        }
         $this->ip_pool_name = $ip_pool_name;
     }
 

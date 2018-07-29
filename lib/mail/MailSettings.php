@@ -76,6 +76,7 @@ class MailSettings implements \JsonSerializable
      * @param string|null      $email  The email address that you would like 
      *                                 to receive the BCC
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setBccSettings($enable, $email=null)
@@ -84,6 +85,11 @@ class MailSettings implements \JsonSerializable
             $bcc = $enable;
             $this->bcc = $bcc;
             return;
+        }
+        if (!is_bool($enable)) {
+            throw new TypeException(
+                '$enable must be an instance of SendGrid\Mail\BccSettings or of type bool.'
+            );
         }
         $this->bcc = new BccSettings($enable, $email);
         return;
@@ -106,6 +112,7 @@ class MailSettings implements \JsonSerializable
      *                                          object or an indication
      *                                          if the setting is enabled
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setBypassListManagement($enable)
@@ -114,6 +121,11 @@ class MailSettings implements \JsonSerializable
             $bypass_list_management = $enable;
             $this->bypass_list_management = $bypass_list_management;
             return;
+        }
+        if (!is_bool($enable)) {
+            throw new TypeException(
+                '$enable must be an instance of SendGrid\Mail\BypassListManagement or of type bool.'
+            );
         }
         $this->bypass_list_management = new BypassListManagement($enable);
         return;

@@ -49,10 +49,14 @@ class ClickTracking implements \JsonSerializable
      *
      * @param bool $enable Indicates if this setting is enabled
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setEnable($enable)
     {
+        if (!is_bool($enable)) {
+            throw new TypeException('$enable must be of type bool.');
+        }
         $this->enable = $enable;
     }
 
@@ -71,10 +75,14 @@ class ClickTracking implements \JsonSerializable
      *
      * @param bool $enable_text Indicates if this setting is enabled
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setEnableText($enable_text)
     {
+        if (!is_bool($enable_text)) {
+            throw new TypeException('$enable_text must be of type bool');
+        }
         $this->enable_text = $enable_text;
     }
 

@@ -60,10 +60,14 @@ class SpamCheck implements \JsonSerializable
      *
      * @param bool $enable Indicates if this setting is enabled
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setEnable($enable)
     {
+        if (!is_bool($enable)) {
+            throw new TypeException('$enable must be of type bool.');
+        }
         $this->enable = $enable;
     }
 
@@ -85,10 +89,14 @@ class SpamCheck implements \JsonSerializable
      *                       from 1 to 10, with 10 being most strict, 
      *                       or most 
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setThreshold($threshold)
     {
+        if (!is_int($threshold)) {
+            throw new TypeException('$threshold must be of type int.');
+        }
         $this->threshold = $threshold;
     }
 
@@ -109,10 +117,14 @@ class SpamCheck implements \JsonSerializable
      *                            a copy of your email along with the spam 
      *                            report to be sent to
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setPostToUrl($post_to_url)
     {
+        if (!is_string($post_to_url)) {
+            throw new TypeException('$post_to_url must be of type string.');
+        }
         $this->post_to_url = $post_to_url;
     }
 

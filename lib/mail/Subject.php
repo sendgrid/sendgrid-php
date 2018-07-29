@@ -40,10 +40,15 @@ class Subject implements \JsonSerializable
      *
      * @param string $subject The email subject
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setSubject($subject)
     {
+        if(!is_string($subject)) {
+            throw new TypeException('$subject must be of type string.');
+        }
+
         $this->subject = $subject;
     }
 

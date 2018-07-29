@@ -50,10 +50,15 @@ class TemplateId implements \JsonSerializable
      *                            you do not need to specify those at the 
      *                            personalizations nor message level
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setTemplateId($template_id)
     {
+        if (!is_string($template_id)) {
+            throw new TypeException('$template_id must be of type string.');
+        }
+
         $this->template_id = $template_id;
     }
 

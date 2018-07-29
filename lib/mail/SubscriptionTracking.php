@@ -89,10 +89,14 @@ class SubscriptionTracking implements \JsonSerializable
      *
      * @param bool $enable Indicates if this setting is enabled
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setEnable($enable)
     {
+        if (!is_bool($enable)) {
+            throw new TypeException('$enable must be of type bool.');
+        }
         $this->enable = $enable;
     }
 
@@ -114,10 +118,14 @@ class SubscriptionTracking implements \JsonSerializable
      *                     control where the link is by using the 
      *                     tag <% %>
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setText($text)
     {
+        if (!is_string($text)) {
+            throw new TypeException('$text must be of type string.');
+        }
         $this->text = $text;
     }
 
@@ -139,10 +147,14 @@ class SubscriptionTracking implements \JsonSerializable
      *                     control where the link is by using the 
      *                     tag <% %>
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setHtml($html)
     {
+        if (!is_string($html)) {
+            throw new TypeException('$html must be of type string.');
+        }
         $this->html = $html;
     }
 
@@ -167,10 +179,16 @@ class SubscriptionTracking implements \JsonSerializable
      *                                 will be placed at the substitution tag’s 
      *                                 location, with no additional formatting %>
      * 
+     * @throws TypeException
      * @return null
      */ 
     public function setSubstitutionTag($substitution_tag)
     {
+        if (!is_string($substitution_tag)) {
+            throw new TypeException(
+                '$substitution_tag must be of type string.'
+            );
+        }
         $this->substitution_tag = $substitution_tag;
     }
 

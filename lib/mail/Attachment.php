@@ -72,11 +72,15 @@ class Attachment implements \JsonSerializable
      * Add the content to a Attachment object
      *
      * @param string $content Base64 encoded content
-     * 
+     *
+     * @throws TypeException
      * @return null
      */  
     public function setContent($content)
     {
+        if (!is_string($content)) {
+            throw new TypeException('$content must be of type string.');
+        }
         $this->content = $content;
     }
 
@@ -95,10 +99,14 @@ class Attachment implements \JsonSerializable
      *
      * @param string $type Mime type of the attachment
      * 
+     * @throws TypeException
      * @return null
      */  
     public function setType($type)
     {
+        if (!is_string($type)) {
+            throw new TypeException('$type must be of type string.');
+        }
         $this->type = $type;
     }
 
@@ -117,10 +125,14 @@ class Attachment implements \JsonSerializable
      *
      * @param string $filename File name of the attachment
      * 
+     * @throws TypeException
      * @return null
      */  
     public function setFilename($filename)
     {
+        if (!is_string($filename)) {
+            throw new TypeException('$filename must be of type string');
+        }
         $this->filename = $filename;
     }
 
@@ -140,10 +152,14 @@ class Attachment implements \JsonSerializable
      * @param string $disposition How the attachment should be displayed: 
      *                            inline or attachment, default is attachment
      * 
+     * @throws TypeException
      * @return null
      */  
     public function setDisposition($disposition)
     {
+        if (!is_string($disposition)) {
+            throw new TypeException('$disposition must be of type string.');
+        }
         $this->disposition = $disposition;
     }
 
@@ -167,6 +183,9 @@ class Attachment implements \JsonSerializable
      */  
     public function setContentID($content_id)
     {
+        if (!is_string($content_id)) {
+            throw new TypeException('$content_id must be of type string.');
+        }
         $this->content_id = $content_id;
     }
 
