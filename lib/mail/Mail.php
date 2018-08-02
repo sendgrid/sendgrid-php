@@ -675,6 +675,58 @@ class Mail implements \JsonSerializable
     }
 
     /**
+     * Add a DynamicTemplateData object or key/value to a Personalization object
+     *
+     * @param DynamicTemplateData|string $data DynamicTemplateData object or the key of a
+     *                                          dynamic data
+     * @param string|null         $value        The value of dynmic data
+     * 
+     * @return null
+     */ 
+    public function addDynamicTemplateData($key, $value = null)
+    {
+        if ($this->personalization[0] != null) {
+            $this->personalization[0]->addDynamicTemplateData($key, $value);
+        } else {
+            $personalization = new Personalization();
+            $personalization->addDynamicTemplateData($key, $value);
+            $this->addPersonalization($personalization);
+        }
+        return;
+    }
+
+    /**
+     * Add a DynamicTemplateData object or key/value to a Personalization object
+     *
+     * @param array|DynamicTemplateData[] $data Array of DynamicTemplateData objects or key/values
+     * @param DynamicTemplateData[]|string $data DynamicTemplateData object or the key of a
+     *                                          dynamic data
+     * @param string|null         $value        The value of dynmic data
+     * 
+     * @return null
+     */ 
+    public function addDynamicTemplateDatas($datas)
+    {
+        foreach ($datas as $key => $value) {
+            if ($value instanceof DynamicTemplateData) {
+                $this->addDynamicTemplateData($value);
+            } else {
+                $this->addDynamicTemplateData($key, $value);
+            }
+        }
+    }
+
+    /**
+     * Retrieve dynamic template data key/value pairs from a Personalization object
+     * 
+     * @return array
+     */ 
+    public function getDynamicTemplateDatas()
+    {
+        return $this->personalization[0]->getDynamicTemplateDatas();
+    }
+
+    /**
      * Add a substitution to a Personalization or Mail object
      * 
      * If you don't provide a Personalization object or index, the

@@ -36,6 +36,8 @@ class Personalization implements \JsonSerializable
     private $headers;
     // @var array of substitution key values
     private $substitutions;
+    // @var array of dynamic template data key values
+    private $dynamic_template_data;
     // @var array of custom arg key values
     private $custom_args;
     // @var SendAt object
@@ -152,6 +154,34 @@ class Personalization implements \JsonSerializable
     }
 
     /**
+     * Add a DynamicTemplateData object or key/value to a Personalization object
+     *
+     * @param DynamicTemplateData|string $data DynamicTemplateData object or the key of a
+     *                                          dynamic data
+     * @param string|null         $value        The value of dynmic data
+     * 
+     * @return null
+     */ 
+    public function addDynamicTemplateData($data, $value=null)
+    {
+        if (!$data instanceof DynamicTemplateData) {
+            $key = $data;
+            $data = new DynamicTemplateData($key, $value);
+        }
+        $this->dynamic_template_data[$data->getKey()] = $data->getValue();
+    }
+
+    /**
+     * Retrieve dynamic template data key/value pairs from a Personalization object
+     * 
+     * @return array
+     */ 
+    public function getDynamicTemplateDatas()
+    {
+        return $this->dynamic_template_data;
+    }
+
+    /**
      * Add a Substitution object or key/value to a Personalization object
      *
      * @param Substitution|string $substitution Substitution object or the key of a
@@ -232,14 +262,15 @@ class Personalization implements \JsonSerializable
     {
         return array_filter(
             [
-                'to'            => $this->getTos(),
-                'cc'            => $this->getCcs(),
-                'bcc'           => $this->getBccs(),
-                'subject'       => $this->getSubject(),
-                'headers'       => $this->getHeaders(),
-                'substitutions' => $this->getSubstitutions(),
-                'custom_args'   => $this->getCustomArgs(),
-                'send_at'       => $this->getSendAt()
+                'to'                    => $this->getTos(),
+                'cc'                    => $this->getCcs(),
+                'bcc'                   => $this->getBccs(),
+                'subject'               => $this->getSubject(),
+                'headers'               => $this->getHeaders(),
+                'substitutions'         => $this->getSubstitutions(),
+                'dynamic_template_data' => $this->getDynamicTemplateDatas(),
+                'custom_args'           => $this->getCustomArgs(),
+                'send_at'               => $this->getSendAt()
             ],
             function ($value) {
                 return $value !== null;
