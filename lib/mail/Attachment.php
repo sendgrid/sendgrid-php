@@ -76,7 +76,11 @@ class Attachment implements \JsonSerializable
      */
     public function setContent($content)
     {
-        $this->content = $content;
+        if(!$this->isBase64($content)) {
+            $this->content = base64_encode($content);
+        } else {
+            $this->content = $content;
+        }
     }
 
     /**
@@ -169,6 +173,21 @@ class Attachment implements \JsonSerializable
     public function getContentID()
     {
         return $this->content_id;
+    }
+
+    /**
+     *  Verifies whether or not the provided string is a valid base64 string
+     *
+     * @param $string string The string that has to be checked
+     * @return bool
+     */
+    private function isBase64($string) {
+        $decoded_data = base64_decode($string, true);
+        $encoded_data = base64_encode($decoded_data);
+        if ($encoded_data != $string) return false;
+        else if (!ctype_print($decoded_data)) return false;
+
+        return true;
     }
 
     /**

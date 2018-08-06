@@ -27,31 +27,29 @@ class KitchenSinkTest extends BaseTestClass
   "asm": {
     "group_id": 1,
     "groups_to_display": [
-      [
-        1,
-        2,
-        3,
-        4
-      ]
+      1,
+      2,
+      3,
+      4
     ]
   },
   "attachments": [
     {
-      "content": "base64 encoded content1",
+      "content": "YmFzZTY0IGVuY29kZWQgY29udGVudDE=",
       "content_id": "Banner",
       "disposition": "inline",
       "filename": "banner.png",
       "type": "image/png"
     },
     {
-      "content": "base64 encoded content2",
+      "content": "YmFzZTY0IGVuY29kZWQgY29udGVudDI=",
       "content_id": "Banner 3",
       "disposition": "attachment",
       "filename": "image/jpeg",
       "type": "banner2.jpeg"
     },
     {
-      "content": "base64 encoded content3",
+      "content": "YmFzZTY0IGVuY29kZWQgY29udGVudDM=",
       "content_id": "Banner 3",
       "disposition": "inline",
       "filename": "image/gif",
