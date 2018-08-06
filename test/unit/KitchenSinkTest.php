@@ -28,12 +28,10 @@ class KitchenSinkTest extends BaseTestClass
   "asm": {
     "group_id": 1,
     "groups_to_display": [
-      [
-        1,
-        2,
-        3,
-        4
-      ]
+      1,
+      2,
+      3,
+      4
     ]
   },
   "attachments": [
