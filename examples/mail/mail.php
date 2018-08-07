@@ -12,20 +12,29 @@ $sg = new \SendGrid($apiKey);
 // Create a batch ID #
 // POST /mail/batch #
 
-$response = $sg->client->mail()->batch()->post();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+try {
+    $response = $sg->client->mail()->batch()->post();
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Validate batch ID #
 // GET /mail/batch/{batch_id} #
 
 $batch_id = "test_url_param";
-$response = $sg->client->mail()->batch()->_($batch_id)->get();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->mail()->batch()->_($batch_id)->get();
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // v3 Mail Send #
@@ -170,7 +179,12 @@ $request_body = json_decode('{
     }
   }
 }');
-$response = $sg->client->mail()->send()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->mail()->send()->post($request_body);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}

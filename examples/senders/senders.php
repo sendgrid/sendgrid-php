@@ -29,19 +29,28 @@ $request_body = json_decode('{
   "state": "Colorado", 
   "zip": "80202"
 }');
-$response = $sg->client->senders()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->senders()->post($request_body);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Get all Sender Identities #
 // GET /senders #
 
-$response = $sg->client->senders()->get();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+try {
+    $response = $sg->client->senders()->get();
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Update a Sender Identity #
@@ -65,37 +74,57 @@ $request_body = json_decode('{
   "zip": "80202"
 }');
 $sender_id = "test_url_param";
-$response = $sg->client->senders()->_($sender_id)->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->senders()->_($sender_id)->patch($request_body);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // View a Sender Identity #
 // GET /senders/{sender_id} #
 
 $sender_id = "test_url_param";
-$response = $sg->client->senders()->_($sender_id)->get();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->senders()->_($sender_id)->get();
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Delete a Sender Identity #
 // DELETE /senders/{sender_id} #
 
 $sender_id = "test_url_param";
-$response = $sg->client->senders()->_($sender_id)->delete();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->senders()->_($sender_id)->delete();
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Resend Sender Identity Verification #
 // POST /senders/{sender_id}/resend_verification #
 
 $sender_id = "test_url_param";
-$response = $sg->client->senders()->_($sender_id)->resend_verification()->post();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->senders()->_($sender_id)->resend_verification()->post();
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
