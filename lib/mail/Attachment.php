@@ -49,8 +49,7 @@ class Attachment implements \JsonSerializable
         $filename = null,
         $disposition = null,
         $content_id = null
-    )
-    {
+    ) {
         if (isset($content)) {
             $this->setContent($content);
         }
@@ -76,7 +75,7 @@ class Attachment implements \JsonSerializable
      */
     public function setContent($content)
     {
-        if(!$this->isBase64($content)) {
+        if (!$this->isBase64($content)) {
             $this->content = base64_encode($content);
         } else {
             $this->content = $content;

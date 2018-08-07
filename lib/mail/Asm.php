@@ -47,8 +47,7 @@ class Asm implements \JsonSerializable
     public function __construct(
         $group_id = null,
         $groups_to_display = null
-    )
-    {
+    ) {
         if (isset($group_id)) {
             $this->setGroupId($group_id);
         }

@@ -100,8 +100,7 @@ class Mail implements \JsonSerializable
         $plainTextContent = null,
         $htmlContent = null,
         array $globalSubstitutions = null
-    )
-    {
+    ) {
         if (!isset($from)
             && !isset($to)
             && !isset($subject)
@@ -277,8 +276,7 @@ class Mail implements \JsonSerializable
         $emails,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         $emailFunctionCall = "add" . $emailType;
 
         if (current($emails) instanceof EmailAddress) {
@@ -487,8 +485,7 @@ class Mail implements \JsonSerializable
         $bccEmails,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         $this->addRecipientEmails(
             "Bcc",
             $bccEmails,
@@ -516,8 +513,7 @@ class Mail implements \JsonSerializable
         $subject,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         if (!($subject instanceof Subject)) {
             $subject = new Subject($subject);
         }
@@ -891,8 +887,7 @@ class Mail implements \JsonSerializable
         $send_at,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         if (!($send_at instanceof SendAt)) {
             $send_at = new SendAt($send_at);
         }
@@ -1066,7 +1061,6 @@ class Mail implements \JsonSerializable
         if ($this->contents[0]->getType() !== 'text/plain'
             && count($this->contents) > 1
         ) {
-
             foreach ($this->contents as $key => $value) {
                 if ($value->getType() == 'text/plain') {
                     $plain_content = $value;
@@ -1750,8 +1744,7 @@ class Mail implements \JsonSerializable
         $text = null,
         $html = null,
         $substitution_tag = null
-    )
-    {
+    ) {
         if (!$this->tracking_settings instanceof TrackingSettings) {
             $this->tracking_settings = new TrackingSettings();
         }
@@ -1786,8 +1779,7 @@ class Mail implements \JsonSerializable
         $utm_term = null,
         $utm_content = null,
         $utm_campaign = null
-    )
-    {
+    ) {
         if (!$this->tracking_settings instanceof TrackingSettings) {
             $this->tracking_settings = new TrackingSettings();
         }

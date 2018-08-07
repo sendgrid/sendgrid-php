@@ -51,8 +51,7 @@ class MailSettings implements \JsonSerializable
         $footer = null,
         $sandbox_mode = null,
         $spam_check = null
-    )
-    {
+    ) {
         if (isset($bcc_settings)) {
             $this->setBccSettings($bcc_settings);
         }

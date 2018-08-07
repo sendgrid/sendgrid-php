@@ -76,8 +76,7 @@ class SubscriptionTracking implements \JsonSerializable
         $text = null,
         $html = null,
         $substitution_tag = null
-    )
-    {
+    ) {
         if (isset($enable)) {
             $this->setEnable($enable);
         }

@@ -46,8 +46,7 @@ class EmailAddress implements \JsonSerializable
         $name = null,
         $substitutions = null,
         $subject = null
-    )
-    {
+    ) {
         if (isset($emailAddress)) {
             $this->setEmailAddress($emailAddress);
         }
