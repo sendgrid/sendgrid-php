@@ -41,10 +41,15 @@ function recipientFormSubmit()
         }
     ]'
     );
-    $response = $sg->client->contactdb()->recipients()->post($request_body);
-    echo $response->statusCode();
-    echo $response->body();
-    print_r($response->headers());
+    
+    try {
+        $response = $sg->client->contactdb()->recipients()->post($request_body);    
+        print $response->statusCode() . "\n";
+        print_r($response->headers());
+        print $response->body() . "\n";
+    } catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+    }
 }
 
 buildRecipientForm(); // This will build and output an HTML form

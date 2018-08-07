@@ -1,7 +1,7 @@
 <?php
 /**
  * This file tests the SendGrid Client
- * 
+ *
  * PHP Version - 5.6, 7.0, 7.1, 7.2
  *
  * @package   SendGrid\Tests
@@ -9,24 +9,21 @@
  * @copyright 2018 SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
-namespace SendGrid\Tests;
 
-use SendGrid\Tests\BaseTestClass;
+namespace SendGrid\Tests;
 
 /**
  * This class tests the SendGrid Client
- * 
+ *
  * @package SendGrid\Tests
  */
 class SendGridTest extends BaseTestClass
 {
     /**
      * Test if the version is correct
-     * 
-     * @return null
-     */ 
+     */
     public function testVersionIsCorrect()
     {
         $this->assertEquals(\SendGrid::VERSION, '7.0.0');
@@ -41,9 +38,7 @@ class SendGridTest extends BaseTestClass
 
     /**
      * Test that we can connect to the SendGrid API
-     * 
-     * @return null
-     */ 
+     */
     public function testCanConnectToSendGridApi()
     {
         $sg = new \SendGrid(self::$apiKey);

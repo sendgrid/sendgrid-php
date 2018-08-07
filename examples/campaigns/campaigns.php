@@ -32,20 +32,30 @@ $request_body = json_decode('{
   "suppression_group_id": 42, 
   "title": "March Newsletter"
 }');
-$response = $sg->client->campaigns()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->campaigns()->post($request_body);    
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Retrieve all Campaigns #
 // GET /campaigns #
 
 $query_params = json_decode('{"limit": 1, "offset": 1}');
-$response = $sg->client->campaigns()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->campaigns()->get(null, $query_params);    
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Update a Campaign #
@@ -61,30 +71,45 @@ $request_body = json_decode('{
   "title": "May Newsletter"
 }');
 $campaign_id = "test_url_param";
-$response = $sg->client->campaigns()->_($campaign_id)->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->campaigns()->_($campaign_id)->patch($request_body);    
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Retrieve a single campaign #
 // GET /campaigns/{campaign_id} #
 
 $campaign_id = "test_url_param";
-$response = $sg->client->campaigns()->_($campaign_id)->get();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->campaigns()->_($campaign_id)->get();    
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Delete a Campaign #
 // DELETE /campaigns/{campaign_id} #
 
 $campaign_id = "test_url_param";
-$response = $sg->client->campaigns()->_($campaign_id)->delete();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->campaigns()->_($campaign_id)->delete();    
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Update a Scheduled Campaign #
@@ -94,10 +119,15 @@ $request_body = json_decode('{
   "send_at": 1489451436
 }');
 $campaign_id = "test_url_param";
-$response = $sg->client->campaigns()->_($campaign_id)->schedules()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->campaigns()->_($campaign_id)->schedules()->patch($request_body);    
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Schedule a Campaign #
@@ -107,40 +137,60 @@ $request_body = json_decode('{
   "send_at": 1489771528
 }');
 $campaign_id = "test_url_param";
-$response = $sg->client->campaigns()->_($campaign_id)->schedules()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->campaigns()->_($campaign_id)->schedules()->post($request_body);    
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // View Scheduled Time of a Campaign #
 // GET /campaigns/{campaign_id}/schedules #
 
 $campaign_id = "test_url_param";
-$response = $sg->client->campaigns()->_($campaign_id)->schedules()->get();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->campaigns()->_($campaign_id)->schedules()->get();    
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Unschedule a Scheduled Campaign #
 // DELETE /campaigns/{campaign_id}/schedules #
 
 $campaign_id = "test_url_param";
-$response = $sg->client->campaigns()->_($campaign_id)->schedules()->delete();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->campaigns()->_($campaign_id)->schedules()->delete();    
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Send a Campaign #
 // POST /campaigns/{campaign_id}/schedules/now #
 
 $campaign_id = "test_url_param";
-$response = $sg->client->campaigns()->_($campaign_id)->schedules()->now()->post();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->campaigns()->_($campaign_id)->schedules()->now()->post();    
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Send a Test Campaign #
@@ -150,7 +200,12 @@ $request_body = json_decode('{
   "to": "your.email@example.com"
 }');
 $campaign_id = "test_url_param";
-$response = $sg->client->campaigns()->_($campaign_id)->schedules()->test()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->campaigns()->_($campaign_id)->schedules()->test()->post($request_body);    
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}

@@ -1,7 +1,7 @@
 <?php
 /**
  * This file tests the request object generation for a /mail/send API call
- * 
+ *
  * PHP Version - 5.6, 7.0, 7.1, 7.2
  *
  * @package   SendGrid\Tests
@@ -9,20 +9,19 @@
  * @copyright 2018 SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
-namespace SendGrid\Tests;
 
-use SendGrid\Tests\BaseTestClass;
+namespace SendGrid\Tests;
 
 /**
  * This class tests the request object generation for a /mail/send API call
- * 
+ *
  * @package SendGrid\Tests
  */
 class MultipleEmailToMulipleRecipientsTest extends BaseTestClass
 {
-    
+
     private $REQUEST_OBJECT = <<<'JSON'
 {
   "content": [
@@ -150,13 +149,11 @@ JSON;
 
     /**
      * Test when we have individual subjects for each Personalization object
-     * 
-     * @return null
-     */ 
+     */
     public function testWithIndividualSubjects()
     {
         $from = new \SendGrid\Mail\From("test@example.com", "Example User");
-        $tos = [ 
+        $tos = [
             new \SendGrid\Mail\To(
                 "test+test1@example.com",
                 "Example User1",
@@ -184,7 +181,7 @@ JSON;
                 ]
             )
         ];
-        $subject = new \SendGrid\Mail\Subject("Hi -name-!"); // default subject 
+        $subject = new \SendGrid\Mail\Subject("Hi -name-!"); // default subject
         $globalSubstitutions = [
             '-time-' => "2018-05-03 23:10:29"
         ];
@@ -209,13 +206,11 @@ JSON;
 
     /**
      * Test when we pass in an array of subjects
-     * 
-     * @return null
-     */ 
+     */
     public function testWithCollectionOfSubjects()
     {
         $from = new \SendGrid\Mail\From("test@example.com", "Example User");
-        $tos = [ 
+        $tos = [
             new \SendGrid\Mail\To(
                 "test+test1@example.com",
                 "Example User1",
@@ -266,6 +261,6 @@ JSON;
         );
         $json = json_encode($email->jsonSerialize());
         $isEqual = BaseTestClass::compareJSONObjects($json, $this->REQUEST_OBJECT_2);
-        $this->assertTrue($isEqual);        
+        $this->assertTrue($isEqual);
     }
 }

@@ -180,10 +180,15 @@ function sendHelloEmail()
     $sg = new \SendGrid($apiKey);
 
     $request_body = helloEmail();
-    $response = $sg->client->mail()->send()->post($request_body);
-    echo $response->statusCode();
-    echo $response->body();
-    print_r($response->headers());
+    
+    try {
+        $response = $sg->client->mail()->send()->post($request_body);    
+        print $response->statusCode() . "\n";
+        print_r($response->headers());
+        print $response->body() . "\n";
+    } catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+    }
 }
 
 function sendKitchenSink()
@@ -192,10 +197,15 @@ function sendKitchenSink()
     $sg = new \SendGrid($apiKey);
 
     $request_body = kitchenSink();
-    $response = $sg->client->mail()->send()->post($request_body);
-    echo $response->statusCode();
-    echo $response->body();
-    print_r($response->headers());
+    
+    try {
+        $response = $sg->client->mail()->send()->post($request_body);    
+        print $response->statusCode() . "\n";
+        print_r($response->headers());
+        print $response->body() . "\n";
+    } catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+    }
 }
 
 sendHelloEmail();  // this will actually send an email
