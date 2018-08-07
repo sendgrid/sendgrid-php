@@ -162,8 +162,7 @@ class TrackingSettings implements \JsonSerializable
         $text = null,
         $html = null,
         $substitution_tag = null
-    )
-    {
+    ) {
         if ($enable instanceof SubscriptionTracking) {
             $subscription_tracking = $enable;
             $this->subscription_tracking = $subscription_tracking;
@@ -205,8 +204,7 @@ class TrackingSettings implements \JsonSerializable
         $utm_term = null,
         $utm_content = null,
         $utm_campaign = null
-    )
-    {
+    ) {
         if ($enable instanceof Ganalytics) {
             $ganalytics = $enable;
             $this->ganalytics = $ganalytics;

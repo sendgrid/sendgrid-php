@@ -5,7 +5,7 @@ use SendGrid\Tests\BaseTestClass;
 use SendGrid\Contacts\RecipientForm;
 use SendGrid\Contacts\Recipient;
 
-class RecipientsTest_Recipient extends BaseTestClass
+class RecipientsTestRecipient extends BaseTestClass
 {
     public function testRecipientsForm()
     {

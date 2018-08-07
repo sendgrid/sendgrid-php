@@ -100,8 +100,7 @@ class Mail implements \JsonSerializable
         $plainTextContent = null,
         $htmlContent = null,
         array $globalSubstitutions = null
-    )
-    {
+    ) {
         if (!isset($from)
             && !isset($to)
             && !isset($subject)
@@ -277,8 +276,7 @@ class Mail implements \JsonSerializable
         $emails,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         $emailFunctionCall = "add" . $emailType;
 
         if (current($emails) instanceof EmailAddress) {
@@ -340,8 +338,7 @@ class Mail implements \JsonSerializable
         $substitutions = null,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         if ($to instanceof To) {
             $name = $to->getName();
             $substitutions = $to->getSubstitions();
@@ -373,8 +370,7 @@ class Mail implements \JsonSerializable
         $toEmails,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         $this->addRecipientEmails(
             "To",
             $toEmails,
@@ -399,8 +395,7 @@ class Mail implements \JsonSerializable
         $name = null,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         if ($cc instanceof Cc) {
             $name = $cc->getName();
             $cc = $cc->getEmailAddress();
@@ -430,8 +425,7 @@ class Mail implements \JsonSerializable
         $ccEmails,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         $this->addRecipientEmails(
             "Cc",
             $ccEmails,
@@ -456,8 +450,7 @@ class Mail implements \JsonSerializable
         $name = null,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         if ($bcc instanceof Bcc) {
             $name = $bcc->getName();
             $bcc = $bcc->getEmailAddress();
@@ -487,8 +480,7 @@ class Mail implements \JsonSerializable
         $bccEmails,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         $this->addRecipientEmails(
             "Bcc",
             $bccEmails,
@@ -516,8 +508,7 @@ class Mail implements \JsonSerializable
         $subject,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         if (!($subject instanceof Subject)) {
             $subject = new Subject($subject);
         }
@@ -570,8 +561,7 @@ class Mail implements \JsonSerializable
         $value = null,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         $header = null;
         if ($key instanceof Header) {
             $h = $key;
@@ -623,8 +613,7 @@ class Mail implements \JsonSerializable
         $headers,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         if (current($headers) instanceof Header) {
             foreach ($headers as $header) {
                 $this->addHeader($header);
@@ -678,8 +667,7 @@ class Mail implements \JsonSerializable
         $value = null,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         $substitution = null;
         if ($key instanceof Substitution) {
             $s = $key;
@@ -731,8 +719,7 @@ class Mail implements \JsonSerializable
         $substitutions,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         if (current($substitutions) instanceof Substitution) {
             foreach ($substitutions as $substitution) {
                 $this->addSubstitution($substitution);
@@ -784,8 +771,7 @@ class Mail implements \JsonSerializable
         $value = null,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         $custom_arg = null;
         if ($key instanceof CustomArg) {
             $ca = $key;
@@ -839,8 +825,7 @@ class Mail implements \JsonSerializable
         $custom_args,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         if (current($custom_args) instanceof CustomArg) {
             foreach ($custom_args as $custom_arg) {
                 $this->addCustomArg($custom_arg);
@@ -891,8 +876,7 @@ class Mail implements \JsonSerializable
         $send_at,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         if (!($send_at instanceof SendAt)) {
             $send_at = new SendAt($send_at);
         }
@@ -1066,7 +1050,6 @@ class Mail implements \JsonSerializable
         if ($this->contents[0]->getType() !== 'text/plain'
             && count($this->contents) > 1
         ) {
-
             foreach ($this->contents as $key => $value) {
                 if ($value->getType() == 'text/plain') {
                     $plain_content = $value;
@@ -1100,8 +1083,7 @@ class Mail implements \JsonSerializable
         $filename = null,
         $disposition = null,
         $content_id = null
-    )
-    {
+    ) {
         if ($attachment instanceof Attachment) {
             $attachment = $attachment;
         } else if (is_array($attachment)) {
@@ -1750,8 +1732,7 @@ class Mail implements \JsonSerializable
         $text = null,
         $html = null,
         $substitution_tag = null
-    )
-    {
+    ) {
         if (!$this->tracking_settings instanceof TrackingSettings) {
             $this->tracking_settings = new TrackingSettings();
         }
@@ -1786,8 +1767,7 @@ class Mail implements \JsonSerializable
         $utm_term = null,
         $utm_content = null,
         $utm_campaign = null
-    )
-    {
+    ) {
         if (!$this->tracking_settings instanceof TrackingSettings) {
             $this->tracking_settings = new TrackingSettings();
         }
