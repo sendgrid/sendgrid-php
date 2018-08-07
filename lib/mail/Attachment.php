@@ -11,6 +11,7 @@
  * @version   GIT: <git_id>
  * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
+
 namespace SendGrid\Mail;
 
 /**
@@ -20,36 +21,34 @@ namespace SendGrid\Mail;
  */
 class Attachment implements \JsonSerializable
 {
-    // @var string Base64 encoded content
+    /** @var $content string Base64 encoded content */
     private $content;
-    // @var string Mime type of the attachment
+    /** @var $type string Mime type of the attachment */
     private $type;
-    // @var string File name of the attachment
+    /** @var $filename string File name of the attachment */
     private $filename;
-    // @var string How the attachment should be displayed: inline or attachment,
-    // default is attachment
+    /** @var $disposition string How the attachment should be displayed: inline or attachment, default is attachment */
     private $disposition;
-    // @var string Used when disposition is inline to diplay the file within the
-    // body of the email
+    /** @var $content_id string Used when disposition is inline to diplay the file within the body of the email */
     private $content_id;
 
     /**
      * Optional constructor
      *
-     * @param string $content     Base64 encoded content
-     * @param string $type        Mime type of the attachment
-     * @param string $filename    File name of the attachment
+     * @param string $content Base64 encoded content
+     * @param string $type Mime type of the attachment
+     * @param string $filename File name of the attachment
      * @param string $disposition How the attachment should be displayed: inline
      *                            or attachment, default is attachment
-     * @param string $content_id  Used when disposition is inline to diplay the
+     * @param string $content_id Used when disposition is inline to diplay the
      *                            file within the body of the email
      */
     public function __construct(
-        $content=null,
-        $type=null,
-        $filename=null,
-        $disposition=null,
-        $content_id=null
+        $content = null,
+        $type = null,
+        $filename = null,
+        $disposition = null,
+        $content_id = null
     ) {
         if (isset($content)) {
             $this->setContent($content);
@@ -73,11 +72,10 @@ class Attachment implements \JsonSerializable
      *
      * @param string $content Base64 encoded content
      *
-     * @return null
      */
     public function setContent($content)
     {
-        if(!$this->isBase64($content)) {
+        if (!$this->isBase64($content)) {
             $this->content = base64_encode($content);
         } else {
             $this->content = $content;
@@ -98,8 +96,6 @@ class Attachment implements \JsonSerializable
      * Add the mime type to a Attachment object
      *
      * @param string $type Mime type of the attachment
-     *
-     * @return null
      */
     public function setType($type)
     {
@@ -120,8 +116,6 @@ class Attachment implements \JsonSerializable
      * Add the file name to a Attachment object
      *
      * @param string $filename File name of the attachment
-     *
-     * @return null
      */
     public function setFilename($filename)
     {
@@ -143,8 +137,6 @@ class Attachment implements \JsonSerializable
      *
      * @param string $disposition How the attachment should be displayed:
      *                            inline or attachment, default is attachment
-     *
-     * @return null
      */
     public function setDisposition($disposition)
     {
@@ -166,8 +158,6 @@ class Attachment implements \JsonSerializable
      *
      * @param string $content_id Used when disposition is inline to diplay
      *                           the file within the body of the email
-     *
-     * @return null
      */
     public function setContentID($content_id)
     {
@@ -208,11 +198,11 @@ class Attachment implements \JsonSerializable
     {
         return array_filter(
             [
-                'content'     => $this->getContent(),
-                'type'        => $this->getType(),
-                'filename'    => $this->getFilename(),
+                'content' => $this->getContent(),
+                'type' => $this->getType(),
+                'filename' => $this->getFilename(),
                 'disposition' => $this->getDisposition(),
-                'content_id'  => $this->getContentID()
+                'content_id' => $this->getContentID()
             ],
             function ($value) {
                 return $value !== null;

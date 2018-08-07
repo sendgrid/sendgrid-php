@@ -1,8 +1,8 @@
-<?php 
+<?php
 /**
- * This helper builds a html form and provides a submission endpoint 
+ * This helper builds a html form and provides a submission endpoint
  * for the form that makes a /contactdb/recipients API call.
- * 
+ *
  * PHP Version - 5.6, 7.0, 7.1, 7.2
  *
  * @package   SendGrid\Contacts
@@ -10,20 +10,20 @@
  * @copyright 2018 SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
 namespace SendGrid\Contacts;
 
 /**
- * This class is used to build a html form and provides a submission 
+ * This class is used to build a html form and provides a submission
  * endpoint for the form that makes a /contactdb/recipients API call.
- * 
+ *
  * @package SendGrid\Contacts
  */
 class RecipientForm
 {
-    // @var HTML content for the form
+    /** @var $html string HTML content for the form */
     private $html;
 
     /**
@@ -44,10 +44,10 @@ class RecipientForm
 
     /**
      * Return the HTML form
-     * 
+     *
      * @return string
-     */      
-    public function __toString() 
+     */
+    public function __toString()
     {
         return $this->html;
     }

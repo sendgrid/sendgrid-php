@@ -11,9 +11,8 @@
  * @version   GIT: <git_id>
  * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
-namespace SendGrid\Tests;
 
-use SendGrid\Tests\BaseTestClass;
+namespace SendGrid\Tests;
 
 /**
  * This class tests the request object generation for a /mail/send API call
@@ -223,8 +222,6 @@ JSON;
 
     /**
      * Test all parameters without using objects
-     *
-     * @return null
      */
     public function testKitchenSinkExampleWithoutObjects()
     {
@@ -397,8 +394,6 @@ JSON;
 
     /**
      * Test all parameters using objects
-     *
-     * @return null
      */
     public function testKitchenSinkExampleWithObjects()
     {
@@ -568,7 +563,7 @@ JSON;
 
         $asm = new \SendGrid\Mail\Asm(
             new \SendGrid\Mail\GroupId(1),
-            new \SendGrid\Mail\GroupsToDisplay([1,2,3,4])
+            new \SendGrid\Mail\GroupsToDisplay([1, 2, 3, 4])
         );
         $email->setAsm($asm);
 

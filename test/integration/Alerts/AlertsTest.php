@@ -2,8 +2,6 @@
 
 namespace SendGrid\Tests;
 
-use SendGrid\Tests\BaseTestClass;
-
 class AlertsTest extends BaseTestClass
 {
     public function testAlertsPostMethod()

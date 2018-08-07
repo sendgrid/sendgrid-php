@@ -1,7 +1,7 @@
 <?php
 /**
  * This file tests the request object generation for a /mail/send API call
- * 
+ *
  * PHP Version - 5.6, 7.0, 7.1, 7.2
  *
  * @package   SendGrid\Tests
@@ -9,20 +9,19 @@
  * @copyright 2018 SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
-namespace SendGrid\Tests;
 
-use SendGrid\Tests\BaseTestClass;
+namespace SendGrid\Tests;
 
 /**
  * This class tests the request object generation for a /mail/send API call
- * 
+ *
  * @package SendGrid\Tests
  */
 class SingleEmailToASingleRecipientTest extends BaseTestClass
 {
-    
+
     private $REQUEST_OBJECT = <<<'JSON'
 {
     "personalizations": [
@@ -52,12 +51,10 @@ class SingleEmailToASingleRecipientTest extends BaseTestClass
     ]
 }
 JSON;
-    
+
     /**
      * Test all parameters using objects
-     * 
-     * @return null
-     */ 
+     */
     public function testWithObjects()
     {
         $from = new \SendGrid\Mail\From("test@example.com", "Example User");
@@ -83,12 +80,10 @@ JSON;
 
     /**
      * Test all parameters without using objects
-     * 
-     * @return null
-     */ 
+     */
     public function testWithoutObjects()
     {
-        $email = new \SendGrid\Mail\Mail(); 
+        $email = new \SendGrid\Mail\Mail();
         $email->setFrom("test@example.com", "Example User");
         $email->setSubject("Sending with SendGrid is Fun");
         $email->addTo("test@example.com", "Example User");

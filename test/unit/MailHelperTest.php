@@ -1,7 +1,7 @@
 <?php
 /**
  * This file tests email address encoding
- * 
+ *
  * PHP Version - 5.6, 7.0, 7.1, 7.2
  *
  * @package   SendGrid\Tests
@@ -9,23 +9,22 @@
  * @copyright 2018 SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
+
 namespace SendGrid\Tests;
 
-use \SendGrid\Mail\EmailAddress as EmailAddress;
+use SendGrid\Mail\EmailAddress as EmailAddress;
 
 /**
  * This class tests email address encoding
- * 
+ *
  * @package SendGrid\Tests
  */
 class MailTest_Mail extends \PHPUnit\Framework\TestCase
 {
     /**
      * This method tests various types of unencoded emails
-     * 
-     * @return null
      */
     public function testEmailName()
     {
@@ -44,7 +43,7 @@ class MailTest_Mail extends \PHPUnit\Framework\TestCase
         $email->setName('Doe, John');
         $json = json_encode($email->jsonSerialize());
         $this->assertEquals(
-            $json, 
+            $json,
             '{"name":"\\"Doe, John\\"","email":"test@example.com"}'
         );
 
