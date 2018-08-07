@@ -147,7 +147,7 @@ class EmailAddress implements \JsonSerializable
     /**
      * Retrieve substitutions from a EmailAddress object
      */
-    public function getSubstitions()
+    public function getSubstitutions()
     {
         return $this->substitutions;
     }

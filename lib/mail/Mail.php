@@ -121,11 +121,11 @@ class Mail implements \JsonSerializable
             $subjectCount = 0;
             $personalization = new Personalization();
             foreach ($to as $email) {
-                if ($subs = $email->getSubstitions()) {
+                if ($subs = $email->getSubstitutions()) {
                     $personalization = new Personalization();
                 }
                 $personalization->addTo($email);
-                if ($subs = $email->getSubstitions()) {
+                if ($subs = $email->getSubstitutions()) {
                     foreach ($subs as $key => $value) {
                         $personalization->addSubstitution($key, $value);
                     }
@@ -144,11 +144,11 @@ class Mail implements \JsonSerializable
                         $personalization->addSubstitution($key, $value);
                     }
                 }
-                if ($subs = $email->getSubstitions()) {
+                if ($subs = $email->getSubstitutions()) {
                     $this->addPersonalization($personalization);
                 }
             }
-            if (!$subs = $email->getSubstitions()) {
+            if (!$subs = $email->getSubstitutions()) {
                 $this->addPersonalization($personalization);
             }
         }
@@ -203,7 +203,7 @@ class Mail implements \JsonSerializable
         }
         if ($personalization != null) {
             $personalization->$personalizationFunctionCall($email);
-            if ($subs = $email->getSubstitions()) {
+            if ($subs = $email->getSubstitutions()) {
                 foreach ($subs as $key => $value) {
                     $personalization->addSubstitution($key, $value);
                 }
@@ -222,7 +222,7 @@ class Mail implements \JsonSerializable
             }
             if ($this->personalization[0] != null && $personalizationIndex == 0) {
                 $this->personalization[0]->$personalizationFunctionCall($email);
-                if ($subs = $email->getSubstitions()) {
+                if ($subs = $email->getSubstitutions()) {
                     foreach ($subs as $key => $value) {
                         $this->personalization[0]->addSubstitution($key, $value);
                     }
@@ -230,7 +230,7 @@ class Mail implements \JsonSerializable
                 return;
             } else if ($this->personalization[$personalizationIndex] != null) {
                 $this->personalization[$personalizationIndex]->$personalizationFunctionCall($email);
-                if ($subs = $email->getSubstitions()) {
+                if ($subs = $email->getSubstitutions()) {
                     foreach ($subs as $key => $value) {
                         $this->personalization[$personalizationIndex]->addSubstitution(
                             $key,
@@ -242,7 +242,7 @@ class Mail implements \JsonSerializable
             } else {
                 $personalization = new Personalization();
                 $personalization->$personalizationFunctionCall($email);
-                if ($subs = $email->getSubstitions()) {
+                if ($subs = $email->getSubstitutions()) {
                     foreach ($subs as $key => $value) {
                         $personalization->addSubstitution($key, $value);
                     }
@@ -320,6 +320,16 @@ class Mail implements \JsonSerializable
     }
 
     /**
+     * Retrieve the number of Personalization objects associated with the Mail object
+     *
+     * @return int
+     */
+    public function getPersonalizationCount()
+    {
+        return count($this->personalization);
+    }
+
+    /**
      * Adds an email recipient to a Personalization object
      *
      * @param string|To $to Email address or To object
@@ -340,7 +350,7 @@ class Mail implements \JsonSerializable
     ) {
         if ($to instanceof To) {
             $name = $to->getName();
-            $substitutions = $to->getSubstitions();
+            $substitutions = $to->getSubstitutions();
             $to = $to->getEmailAddress();
         }
         $this->addRecipientEmail(
@@ -1083,9 +1093,7 @@ class Mail implements \JsonSerializable
         $disposition = null,
         $content_id = null
     ) {
-        if ($attachment instanceof Attachment) {
-            $attachment = $attachment;
-        } else if (is_array($attachment)) {
+        if (is_array($attachment)) {
             $attachment = new Attachment(
                 $attachment[0],
                 $attachment[1],
@@ -1093,7 +1101,7 @@ class Mail implements \JsonSerializable
                 $attachment[3],
                 $attachment[4]
             );
-        } else {
+        } else if (!($attachment instanceof Attachment)) {
             $attachment = new Attachment(
                 $attachment,
                 $type,
@@ -1101,7 +1109,7 @@ class Mail implements \JsonSerializable
                 $disposition,
                 $content_id
             );
-        }
+        } 
         $this->attachments[] = $attachment;
     }
 
