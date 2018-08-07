@@ -191,8 +191,7 @@ class Mail implements \JsonSerializable
         $substitutions = null,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         $personalizationFunctionCall = "add" . $emailType;
         $emailType = "\SendGrid\Mail\\" . $emailType;
         if (!$email instanceof $emailType) {
