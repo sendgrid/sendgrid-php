@@ -191,8 +191,7 @@ class Mail implements \JsonSerializable
         $substitutions = null,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         $personalizationFunctionCall = "add" . $emailType;
         $emailType = "\SendGrid\Mail\\" . $emailType;
         if (!$email instanceof $emailType) {
@@ -338,8 +337,7 @@ class Mail implements \JsonSerializable
         $substitutions = null,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         if ($to instanceof To) {
             $name = $to->getName();
             $substitutions = $to->getSubstitions();
@@ -371,8 +369,7 @@ class Mail implements \JsonSerializable
         $toEmails,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         $this->addRecipientEmails(
             "To",
             $toEmails,
@@ -397,8 +394,7 @@ class Mail implements \JsonSerializable
         $name = null,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         if ($cc instanceof Cc) {
             $name = $cc->getName();
             $cc = $cc->getEmailAddress();
@@ -428,8 +424,7 @@ class Mail implements \JsonSerializable
         $ccEmails,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         $this->addRecipientEmails(
             "Cc",
             $ccEmails,
@@ -454,8 +449,7 @@ class Mail implements \JsonSerializable
         $name = null,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         if ($bcc instanceof Bcc) {
             $name = $bcc->getName();
             $bcc = $bcc->getEmailAddress();
@@ -566,8 +560,7 @@ class Mail implements \JsonSerializable
         $value = null,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         $header = null;
         if ($key instanceof Header) {
             $h = $key;
@@ -619,8 +612,7 @@ class Mail implements \JsonSerializable
         $headers,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         if (current($headers) instanceof Header) {
             foreach ($headers as $header) {
                 $this->addHeader($header);
@@ -674,8 +666,7 @@ class Mail implements \JsonSerializable
         $value = null,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         $substitution = null;
         if ($key instanceof Substitution) {
             $s = $key;
@@ -727,8 +718,7 @@ class Mail implements \JsonSerializable
         $substitutions,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         if (current($substitutions) instanceof Substitution) {
             foreach ($substitutions as $substitution) {
                 $this->addSubstitution($substitution);
@@ -780,8 +770,7 @@ class Mail implements \JsonSerializable
         $value = null,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         $custom_arg = null;
         if ($key instanceof CustomArg) {
             $ca = $key;
@@ -835,8 +824,7 @@ class Mail implements \JsonSerializable
         $custom_args,
         $personalizationIndex = null,
         $personalization = null
-    )
-    {
+    ) {
         if (current($custom_args) instanceof CustomArg) {
             foreach ($custom_args as $custom_arg) {
                 $this->addCustomArg($custom_arg);
@@ -1094,8 +1082,7 @@ class Mail implements \JsonSerializable
         $filename = null,
         $disposition = null,
         $content_id = null
-    )
-    {
+    ) {
         if ($attachment instanceof Attachment) {
             $attachment = $attachment;
         } else if (is_array($attachment)) {
