@@ -52,7 +52,11 @@ class GroupsToDisplay implements \JsonSerializable
      */
     public function setGroupsToDisplay($groups_to_display)
     {
-        $this->groups_to_display[] = $groups_to_display;
+        if (is_array($groups_to_display)) {
+            $this->groups_to_display = $groups_to_display;
+        } else {
+            $this->groups_to_display[] = $groups_to_display;
+        }
     }
 
     /**
