@@ -762,10 +762,8 @@ class Mail implements \JsonSerializable
     /**
      * Add a custom arg to a Personalization or Mail object
      *
-     * If you don't provide a Personalization object or index, the
-     * custom arg will be global to entire message. Note that
-     * custom args added to Personalization objects override
-     * global custom args.
+     * Note that custom args added to Personalization objects 
+     * override global custom args.
      *
      * @param string|CustomArg $key Key or CustomArg object
      * @param string|null $value Value
