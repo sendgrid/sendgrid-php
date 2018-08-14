@@ -62,13 +62,18 @@ class Asm implements \JsonSerializable
      * @param int|GroupId $group_id The unsubscribe group to associate with this
      *                              email
      *
-     * @return null
+     * @throws TypeException
      */
     public function setGroupId($group_id)
     {
         if ($group_id instanceof GroupId) {
             $this->group_id = $group_id->getGroupId();
         } else {
+            if (!is_int($group_id)) {
+                throw new TypeException(
+                    '$group_id must be an instance of SendGrid\Mail\GroupId or of type int.'
+                );
+            }
             $this->group_id = new GroupId($group_id);
         }
         return;
@@ -98,13 +103,18 @@ class Asm implements \JsonSerializable
      *                                                 on the unsubscribe
      *                                                 preferences page.
      *
-     * @return null
+     * @throws TypeException
      */
     public function setGroupsToDisplay($groups_to_display)
     {
         if ($groups_to_display instanceof GroupsToDisplay) {
             $this->groups_to_display = $groups_to_display->getGroupsToDisplay();
         } else {
+            if (!is_array($groups_to_display)) {
+                throw new TypeException(
+                    '$groups_to_display must be an instance of SendGrid\Mail\GroupsToDisplay or of type array.'
+                );
+            }
             $this->groups_to_display = new GroupsToDisplay($groups_to_display);
         }
         return;

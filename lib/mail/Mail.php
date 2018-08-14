@@ -931,14 +931,26 @@ class Mail implements \JsonSerializable
      * Add the sender email address to a Mail object
      *
      * @param string|From $email Email address or From object
-     * @param string|null $name Sender name
-     */
+     * @param string|null $name  Sender name
+     *
+     * @throws TypeException
+     */      
     public function setFrom($email, $name = null)
     {
         if ($email instanceof From) {
             $this->from = $email;
         } else {
-            $this->from = new From($email, $name);
+
+            if (
+                is_string($email) && filter_var($email, FILTER_VALIDATE_EMAIL)
+            ) {
+                $this->from = new From($email, $name);
+            } else {
+                throw new TypeException(
+                    '$email must be valid and of type string.'
+                );
+            }
+
         }
         return;
     }
@@ -991,7 +1003,7 @@ class Mail implements \JsonSerializable
     public function setGlobalSubject($subject)
     {
         if (!($subject instanceof Subject)) {
-            $subject = new Subject($subject);
+            $this->subject = new Subject($subject);
         }
         $this->subject = $subject;
     }
@@ -1145,6 +1157,7 @@ class Mail implements \JsonSerializable
         if (!($template_id instanceof TemplateId)) {
             $template_id = new TemplateId($template_id);
         }
+
         $this->template_id = $template_id;
     }
 
@@ -1511,9 +1524,15 @@ class Mail implements \JsonSerializable
      *                                    mail settings that you can
      *                                    use to specify how you would
      *                                    like this email to be handled
-     */
+     * @throws TypeException
+     */ 
     public function setMailSettings($mail_settings)
     {
+        if (!$mail_settings instanceof MailSettings) {
+            throw new TypeException(
+                '$mail_settings must be an instance of SendGrid\Mail\MailSettings'
+            );
+        }
         $this->mail_settings = $mail_settings;
     }
 
@@ -1646,9 +1665,15 @@ class Mail implements \JsonSerializable
      *                                            would like to track the metrics
      *                                            of how your recipients interact
      *                                            with your email
-     */
+     * @throws TypeException
+     */ 
     public function setTrackingSettings($tracking_settings)
     {
+        if (!$tracking_settings instanceof TrackingSettings) {
+            throw new TypeException(
+                '$tracking_settings must be an instance of SendGrid\Mail\TrackingSettings'
+            );
+        }
         $this->tracking_settings = $tracking_settings;
     }
 

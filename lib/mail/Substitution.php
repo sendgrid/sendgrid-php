@@ -52,10 +52,16 @@ class Substitution implements \JsonSerializable
      * Add the key on a Substitution object
      *
      * @param string $key Substitution key
-     */
+     * 
+     * @throws TypeException
+     * @return null
+     */ 
     public function setKey($key)
     {
-        $this->key = (string)$key;
+        if (!is_string($key)) {
+            throw new TypeException('$key must be of type string.');
+        }
+        $this->key = (string) $key;
     }
 
     /**
@@ -72,10 +78,16 @@ class Substitution implements \JsonSerializable
      * Add the value on a Substitution object
      *
      * @param string $value Substitution value
-     */
+     * 
+     * @throws TypeException
+     * @return null
+     */ 
     public function setValue($value)
     {
-        $this->value = (string)$value;
+        if (!is_string($value)) {
+            throw new TypeException('$value must be of type string.');
+        }
+        $this->value = (string) $value;
     }
 
     /**
