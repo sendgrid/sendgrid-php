@@ -33,7 +33,7 @@ class KitchenSinkTest extends BaseTestClass
       4
     ]
   },
-  "attachments": [
+  "attachments": [ 
     {
       "content": "YmFzZTY0IGVuY29kZWQgY29udGVudDE=",
       "content_id": "Banner",

@@ -106,9 +106,16 @@ class Personalization implements \JsonSerializable
      * Add a subject object to a Personalization object
      *
      * @param Subject $subject Subject object
-     */
+     * 
+     * @throws TypeException
+     */ 
     public function setSubject($subject)
     {
+        if (!$subject instanceof Subject) {
+            throw new TypeException(
+                '$subject must be an instance of SendGrid\Mail\Subject'
+            );
+        }
         $this->subject = $subject;
     }
 
@@ -192,9 +199,16 @@ class Personalization implements \JsonSerializable
      * Add a SendAt object to a Personalization object
      *
      * @param SendAt $send_at SendAt object
-     */
+     * 
+     * @throws TypeException
+     */ 
     public function setSendAt($send_at)
     {
+        if (!$send_at instanceof SendAt) {
+            throw new TypeException(
+                '$send_at must be an instance of SendGrid\Mail\SendAt'
+            );
+        }
         $this->send_at = $send_at;
     }
 

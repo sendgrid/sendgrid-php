@@ -51,9 +51,14 @@ class Content implements \JsonSerializable
      * @param string $type The mime type of the content you are including
      *                     in your email. For example, “text/plain” or
      *                     “text/html”
-     */
+     * 
+     * @throws TypeException
+     */ 
     public function setType($type)
     {
+        if (!is_string($type)) {
+            throw new TypeException('$type must be of type string.');
+        }
         $this->type = $type;
     }
 
@@ -72,9 +77,14 @@ class Content implements \JsonSerializable
      *
      * @param string $value The actual content of the specified mime type
      *                      that you are including in your email
-     */
+     * 
+     * @throws TypeException
+     */ 
     public function setValue($value)
     {
+        if (!is_string($value)) {
+            throw new TypeException('$value must be of type string');
+        }
         $this->value = mb_convert_encoding($value, 'UTF-8', 'UTF-8');
     }
 
