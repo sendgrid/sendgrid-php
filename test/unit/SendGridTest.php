@@ -73,5 +73,16 @@ class SendGridTest extends BaseTestClass
             $sg4->client->getCurlOptions(),
             [10004 => '127.0.0.1:8000']
         );
+
+        $subuser = 'abcxyz@this.is.a.test.subuser';
+        $headers[] = 'On-Behalf-Of: ' . $subuser;
+        $sg5 = new \SendGrid(
+            self::$apiKey,
+            ['impersonateSubuser' => $subuser]
+        );
+        $this->assertSame(
+            $headers,
+            $sg5->client->getHeaders()
+        );
     }
 }
