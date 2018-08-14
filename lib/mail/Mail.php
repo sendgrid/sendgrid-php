@@ -1003,8 +1003,9 @@ class Mail implements \JsonSerializable
     public function setGlobalSubject($subject)
     {
         if (!($subject instanceof Subject)) {
-            $subject = new Subject($subject);
+            $this->subject = new Subject($subject);
         }
+        $this->subject = $subject;
     }
 
     /**
