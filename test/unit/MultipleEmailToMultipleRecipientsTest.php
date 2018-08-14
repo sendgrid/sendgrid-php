@@ -149,14 +149,9 @@ JSON;
 
     /**
      * Test when we have individual subjects for each Personalization object
-<<<<<<< HEAD
-     */
-=======
      *
      * @expectedException \SendGrid\Mail\TypeException
-     * @return null
      */ 
->>>>>>> 2318abdda12fae77aae675abce13986e5a56b1f5
     public function testWithIndividualSubjects()
     {
         $from = new \SendGrid\Mail\From("test@example.com", "Example User");
@@ -213,14 +208,9 @@ JSON;
 
     /**
      * Test when we pass in an array of subjects
-<<<<<<< HEAD
-     */
-=======
      *
      * @expectedException \SendGrid\Mail\TypeException
-     * @return null
      */ 
->>>>>>> 2318abdda12fae77aae675abce13986e5a56b1f5
     public function testWithCollectionOfSubjects()
     {
         $from = new \SendGrid\Mail\From("test@example.com", "Example User");
