@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [7.1.1] - 2018-08-15 ##
+### Fixed
+- Closes [#667](https://github.com/sendgrid/sendgrid-php/issues/667), PR [#668](https://github.com/sendgrid/sendgrid-php/pull/668): isBase64 function fix. Thanks to [Tigran M](https://github.com/developer-devPHP) for bringing this to our attention!
+
 ## [7.1.0] - 2018-08-14 ##
 ### Added
 
