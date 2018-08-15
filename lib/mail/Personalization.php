@@ -35,8 +35,12 @@ class Personalization implements \JsonSerializable
     private $subject;
     /** @var $headers Header[] array of header key values */
     private $headers;
-    /** @var $substitutions Substitution[] array of substitution key values */
+    /** @var $substitutions Substitution[] array of substitution key values, used for legacy templates */
     private $substitutions;
+    /** @var array of dynamic template data key values */
+    private $dynamic_template_data;
+    /** @var bool if we are using dynamic templates this will be true */
+    private $has_dynamic_template = false;
     /** @var $custom_args CustomArg[] array of custom arg key values */
     private $custom_args;
     /** @var $send_at SendAt object */
@@ -111,7 +115,7 @@ class Personalization implements \JsonSerializable
      */ 
     public function setSubject($subject)
     {
-        if (!$subject instanceof Subject) {
+        if (!($subject instanceof Subject)) {
             throw new TypeException(
                 '$subject must be an instance of SendGrid\Mail\Subject'
             );
@@ -152,13 +156,37 @@ class Personalization implements \JsonSerializable
     /**
      * Add a Substitution object or key/value to a Personalization object
      *
+     * @param Substitution|string $data DynamicTemplateData object or the key of a
+     *                                  dynamic data
+     * @param string|null         $value The value of dynmic data
+     * 
+     * @return null
+     */ 
+    public function addDynamicTemplateData($data, $value = null)
+    {
+        $this->addSubstitution($data, $value);
+    }
+
+    /**
+     * Retrieve dynamic template data key/value pairs from a Personalization object
+     * 
+     * @return array
+     */ 
+    public function getDynamicTemplateData()
+    {
+        return $this->getSubstitutions();
+    }
+
+    /**
+     * Add a Substitution object or key/value to a Personalization object
+     *
      * @param Substitution|string $substitution Substitution object or the key of a
      *                                          substitution
      * @param string|null $value The value of a substitution
      */
     public function addSubstitution($substitution, $value = null)
     {
-        if (!$substitution instanceof Substitution) {
+        if (!($substitution instanceof Substitution)) {
             $key = $substitution;
             $substitution = new Substitution($key, $value);
         }
@@ -204,7 +232,7 @@ class Personalization implements \JsonSerializable
      */ 
     public function setSendAt($send_at)
     {
-        if (!$send_at instanceof SendAt) {
+        if (!($send_at instanceof SendAt)) {
             throw new TypeException(
                 '$send_at must be an instance of SendGrid\Mail\SendAt'
             );
@@ -223,12 +251,47 @@ class Personalization implements \JsonSerializable
     }
 
     /**
+     * Specify if this personalization is using dynamic templates
+     *
+     * @param bool $has_dynamic_template are we using dynamic templates
+     * 
+     * @throws TypeException
+     */ 
+    public function setHasDynamicTemplate($has_dynamic_template)
+    {
+        if (is_bool($has_dynamic_template) != true) {
+            throw new TypeException(
+                '$has_dynamic_template must be an instance of bool'
+            );
+        }
+        $this->has_dynamic_template = $has_dynamic_template;
+    }
+
+    /**
+     * Determine if this Personalization object is using dynamic templates
+     *
+     * @return bool
+     */
+    public function getHasDynamicTemplate()
+    {
+        return $this->has_dynamic_template;
+    }
+
+    /**
      * Return an array representing a Personalization object for the SendGrid API
      *
      * @return null|array
      */
     public function jsonSerialize()
     {
+        if ($this->getHasDynamicTemplate() == true) {
+            $dynamic_substitutions = $this->getSubstitutions();
+            $substitutions = null;
+        } else {
+            $substitutions = $this->getSubstitutions();
+            $dynamic_substitutions = null;
+        }
+
         return array_filter(
             [
                 'to' => $this->getTos(),
@@ -236,7 +299,8 @@ class Personalization implements \JsonSerializable
                 'bcc' => $this->getBccs(),
                 'subject' => $this->getSubject(),
                 'headers' => $this->getHeaders(),
-                'substitutions' => $this->getSubstitutions(),
+                'substitutions' => $substitutions,
+                'dynamic_template_data' => $dynamic_substitutions,
                 'custom_args' => $this->getCustomArgs(),
                 'send_at' => $this->getSendAt()
             ],

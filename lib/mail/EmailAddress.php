@@ -185,8 +185,11 @@ class EmailAddress implements \JsonSerializable
         if (!is_string($subject)) {
             throw new TypeException('$subject must be of type string.');
         }
-
-        $this->subject = $subject;
+        if (!($subject instanceof Subject)) {
+            $this->subject = new Subject($subject);
+        } else {
+            $this->subject = $subject;
+        }
     }
 
     /**
