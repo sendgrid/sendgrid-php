@@ -8,18 +8,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Closes [#612](https://github.com/sendgrid/sendgrid-php/issues/612), PR [#652](https://github.com/sendgrid/sendgrid-php/pull/652): Fixes #612 Add TypeException and include type validations in classes inside mail/. Thanks to [James Harding](https://github.com/hjmsw) for the PR!
 - Closes [#551](https://github.com/sendgrid/sendgrid-php/issues/551), PR [#571](https://github.com/sendgrid/sendgrid-php/pull/571): Add ability to impersonate subuser. Thanks to [Stian Prestholdt](https://github.com/stianpr) for the PR!
-- Closes [#617](https://github.com/sendgrid/sendgrid-php/issues/617), PR [#651](https://github.com/sendgrid/sendgrid-php/pull/651): 
-Add try / catch to examples. Thanks to [James Harding](https://github.com/hjmsw) for the PR!
-- Closes [#619](https://github.com/sendgrid/sendgrid-php/issues/619), PR [#620](https://github.com/sendgrid/sendgrid-php/pull/620): 
-PHPDoc & code improvements. Thanks to [Martijn Melchers](https://github.com/martijnmelchers) for the PR!
-- Closes [#610](https://github.com/sendgrid/sendgrid-php/issues/610), PR [#628](https://github.com/sendgrid/sendgrid-php/pull/628): 
-Removes unnecessary linter warning from phpcs. Thanks to [James Harding](https://github.com/hjmsw) for the PR!
-- Closes [#608](https://github.com/sendgrid/sendgrid-php/issues/611), PR [#626](https://github.com/sendgrid/sendgrid-php/pull/626): 
-Add check so that getContents() always returns content with MimeType text/plain first in array of Content objects. Thanks to [James Harding](https://github.com/hjmsw) for the PR!
-- Closes [#611](https://github.com/sendgrid/sendgrid-php/issues/611), PR [#618](https://github.com/sendgrid/sendgrid-php/pull/618): 
-Attachments now automatically get base64 encoded if they are not already. Thanks to [Martijn Melchers](https://github.com/martijnmelchers) for the PR!
-- PR [#661](https://github.com/sendgrid/sendgrid-php/pull/661): 
-Add Code Triage tag. Thanks to [Anshul Singhal](https://github.com/af4ro) for the PR!
+- Closes [#617](https://github.com/sendgrid/sendgrid-php/issues/617), PR [#651](https://github.com/sendgrid/sendgrid-php/pull/651): Add try / catch to examples. Thanks to [James Harding](https://github.com/hjmsw) for the PR!
+- Closes [#619](https://github.com/sendgrid/sendgrid-php/issues/619), PR [#620](https://github.com/sendgrid/sendgrid-php/pull/620): PHPDoc & code improvements. Thanks to [Martijn Melchers](https://github.com/martijnmelchers) for the PR!
+- Closes [#610](https://github.com/sendgrid/sendgrid-php/issues/610), PR [#628](https://github.com/sendgrid/sendgrid-php/pull/628): Removes unnecessary linter warning from phpcs. Thanks to [James Harding](https://github.com/hjmsw) for the PR!
+- Closes [#608](https://github.com/sendgrid/sendgrid-php/issues/611), PR [#626](https://github.com/sendgrid/sendgrid-php/pull/626): Add check so that getContents() always returns content with MimeType text/plain first in array of Content objects. Thanks to [James Harding](https://github.com/hjmsw) for the PR!
+- Closes [#611](https://github.com/sendgrid/sendgrid-php/issues/611), PR [#618](https://github.com/sendgrid/sendgrid-php/pull/618): Attachments now automatically get base64 encoded if they are not already. Thanks to [Martijn Melchers](https://github.com/martijnmelchers) for the PR!
+- PR [#661](https://github.com/sendgrid/sendgrid-php/pull/661): Add Code Triage tag. Thanks to [Anshul Singhal](https://github.com/af4ro) for the PR!
 - PR [#663](https://github.com/sendgrid/sendgrid-php/pull/663): Improve Contributing.md readability. Thanks to [Anshul Singhal](https://github.com/af4ro) for the PR!
 
 ### Fixed
