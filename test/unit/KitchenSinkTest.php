@@ -162,6 +162,18 @@ class KitchenSinkTest extends BaseTestClass
         "%name1%": "Example Name 1",
         "%name2%": "Example Name 2"
       },
+      "dynamic_template_data": {
+        "object": {
+          "key1": "Key 1",
+          "key2": "Key 2"
+        },
+        "boolean": false,
+        "array": [
+          "index0",
+          "index1"
+        ],
+        "number": 1
+      },
       "to": [
         {
           "email": "test@example.com",
@@ -269,6 +281,17 @@ JSON;
             "%city2%" => "Orange"
         ];
         $email->addSubstitutions($substitutions);
+
+        $email->addDynamicTemplateData('object', [
+            'key1' => 'Key 1',
+            'key2' => 'Key 2',
+        ]);
+        $email->addDynamicTemplateData('boolean', false);
+        $email->addDynamicTemplateData('array', [
+            'index0',
+            'index1',
+        ]);
+        $email->addDynamicTemplateData('number', 1);
 
         $email->addCustomArg("marketing1", "false");
         $email->addCustomArg("transactional1", "true");
@@ -449,6 +472,23 @@ JSON;
             new \SendGrid\Mail\Substitution("%city2%", "Orange")
         ];
         $email->addSubstitutions($substitutions);
+
+        $email->addDynamicTemplateData(
+            new \SendGrid\Mail\DynamicTemplateData('object', [
+                'key1' => 'Key 1',
+                'key2' => 'Key 2',
+            ])
+        );
+        $email->addDynamicTemplateData(
+            new \SendGrid\Mail\DynamicTemplateData('boolean', false)
+        );
+        $email->addDynamicTemplateDatas([
+            new \SendGrid\Mail\DynamicTemplateData('array', [
+                'index0',
+                'index1',
+            ]),
+            new \SendGrid\Mail\DynamicTemplateData('number', 1),
+        ]);
 
         $email->addCustomArg(new \SendGrid\Mail\CustomArg("marketing1", "false"));
         $email->addCustomArg(new \SendGrid\Mail\CustomArg("transactional1", "true"));

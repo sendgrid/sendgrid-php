@@ -35,8 +35,11 @@ class Personalization implements \JsonSerializable
     private $subject;
     /** @var $headers Header[] array of header key values */
     private $headers;
-    /** @var $substitutions Substitution[] array of substitution key values */
+    /** @var $substitutions Substitution[] array of substitution key values, 
+        used for legacy templates */
     private $substitutions;
+    /** @var array of dynamic template data key values */
+    private $dynamic_template_data;
     /** @var $custom_args CustomArg[] array of custom arg key values */
     private $custom_args;
     /** @var $send_at SendAt object */
@@ -150,6 +153,34 @@ class Personalization implements \JsonSerializable
     }
 
     /**
+     * Add a DynamicTemplateData object or key/value to a Personalization object
+     *
+     * @param DynamicTemplateData|string $data DynamicTemplateData object or the key of a
+     *                                          dynamic data
+     * @param string|null         $value        The value of dynmic data
+     * 
+     * @return null
+     */ 
+    public function addDynamicTemplateData($data, $value=null)
+    {
+        if (!$data instanceof DynamicTemplateData) {
+            $key = $data;
+            $data = new DynamicTemplateData($key, $value);
+        }
+        $this->dynamic_template_data[$data->getKey()] = $data->getValue();
+    }
+
+    /**
+     * Retrieve dynamic template data key/value pairs from a Personalization object
+     * 
+     * @return array
+     */ 
+    public function getDynamicTemplateDatas()
+    {
+        return $this->dynamic_template_data;
+    }
+
+    /**
      * Add a Substitution object or key/value to a Personalization object
      *
      * @param Substitution|string $substitution Substitution object or the key of a
@@ -237,6 +268,7 @@ class Personalization implements \JsonSerializable
                 'subject' => $this->getSubject(),
                 'headers' => $this->getHeaders(),
                 'substitutions' => $this->getSubstitutions(),
+                'dynamic_template_data' => $this->getDynamicTemplateData(),
                 'custom_args' => $this->getCustomArgs(),
                 'send_at' => $this->getSendAt()
             ],
