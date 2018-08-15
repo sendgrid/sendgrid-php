@@ -77,17 +77,17 @@ class Substitution implements \JsonSerializable
     /**
      * Add the value on a Substitution object
      *
-     * @param string $value Substitution value
+     * @param string|array|bool|int $value Substitution value
      * 
      * @throws TypeException
      * @return null
      */ 
     public function setValue($value)
     {
-        if (!is_string($value)) {
-            throw new TypeException('$value must be of type string.');
+        if (!is_string($value) && !is_array($value) && !is_object($value) &&!is_bool($value) &&!is_int($value)) {
+            throw new TypeException('$value must be of type string, array or object.');
         }
-        $this->value = (string) $value;
+        $this->value = $value;
     }
 
     /**
