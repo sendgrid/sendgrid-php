@@ -26,7 +26,7 @@ class SendGridTest extends BaseTestClass
      */
     public function testVersionIsCorrect()
     {
-        $this->assertEquals(\SendGrid::VERSION, '7.1.1');
+        $this->assertEquals(\SendGrid::VERSION, '7.2.0');
         $version = json_decode(
             file_get_contents(__DIR__ . '/../../composer.json')
         )->version;
