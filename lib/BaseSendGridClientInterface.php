@@ -44,15 +44,10 @@ abstract class BaseSendGridClientInterface
             $headers[] = 'On-Behalf-Of: ' . $options['impersonateSubuser'];
         }
 
-        $curlOptions = isset($options['curl']) ? $options['curl'] : null;
+        $this->client = new Client($host, $headers, $version);
 
-        $this->client = new Client(
-            $host,
-            $headers,
-            $version,
-            null,
-            $curlOptions
-        );
+        $this->client->setCurlOptions(isset($options['curl']) ? $options['curl'] : null);
+        $this->client->setVerifySSLCerts(isset($options['verify_ssl']) ? $options['verify_ssl'] : true);
     }
 
     /**
