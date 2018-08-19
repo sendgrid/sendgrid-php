@@ -13,10 +13,15 @@ $sg = new \SendGrid($apiKey);
 // GET /partner_settings #
 
 $query_params = json_decode('{"limit": 1, "offset": 1}');
-$response = $sg->client->partner_settings()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->partner_settings()->get(null, $query_params);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Updates New Relic partner settings. #
@@ -27,16 +32,26 @@ $request_body = json_decode('{
   "enabled": true, 
   "license_key": ""
 }');
-$response = $sg->client->partner_settings()->new_relic()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->partner_settings()->new_relic()->patch($request_body);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Returns all New Relic partner settings. #
 // GET /partner_settings/new_relic #
 
-$response = $sg->client->partner_settings()->new_relic()->get();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->partner_settings()->new_relic()->get();
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}

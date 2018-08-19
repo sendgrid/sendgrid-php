@@ -7,18 +7,31 @@ require __DIR__ . '/../../../vendor/autoload.php';
 // require("./sendgrid-php.php"); 
 // If not using Composer, uncomment the above line
 
+use SendGrid\Mail\To;
+use SendGrid\Mail\From;
+use SendGrid\Mail\Content;
+use SendGrid\Mail\Mail;
+
+
 function helloEmail()
 {
-    $from = new Email(null, "test@example.com");
-    $subject = "Hello World from the SendGrid PHP Library";
-    $to = new Email(null, "test@example.com");
-    $content = new Content("text/plain", "some text here");
-    $mail = new Mail($from, $subject, $to, $content);
-    $to = new Email(null, "test2@example.com");
-    $mail->personalization[0]->addTo($to);
+    try {
+        $from = new From(null, "test@example.com");
+        $subject = "Hello World from the SendGrid PHP Library";
+        $to = new To(null, "test@example.com");
+        $content = new Content("text/plain", "some text here");
+        $mail = new Mail($from, $to, $subject, $content);
 
-    //echo json_encode($mail, JSON_PRETTY_PRINT), "\n";
-    return $mail;
+        $to = new To(null, "test2@example.com");
+        $mail->addPersonalization($to);
+
+        //echo json_encode($mail, JSON_PRETTY_PRINT), "\n";
+        return $mail;
+    } catch (\Exception $e) {
+        echo $e->getMessage();
+    }
+
+    return null;
 }
 
 function kitchenSink()
@@ -180,10 +193,15 @@ function sendHelloEmail()
     $sg = new \SendGrid($apiKey);
 
     $request_body = helloEmail();
-    $response = $sg->client->mail()->send()->post($request_body);
-    echo $response->statusCode();
-    echo $response->body();
-    print_r($response->headers());
+    
+    try {
+        $response = $sg->client->mail()->send()->post($request_body);    
+        print $response->statusCode() . "\n";
+        print_r($response->headers());
+        print $response->body() . "\n";
+    } catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+    }
 }
 
 function sendKitchenSink()
@@ -192,10 +210,15 @@ function sendKitchenSink()
     $sg = new \SendGrid($apiKey);
 
     $request_body = kitchenSink();
-    $response = $sg->client->mail()->send()->post($request_body);
-    echo $response->statusCode();
-    echo $response->body();
-    print_r($response->headers());
+    
+    try {
+        $response = $sg->client->mail()->send()->post($request_body);    
+        print $response->statusCode() . "\n";
+        print_r($response->headers());
+        print $response->body() . "\n";
+    } catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+    }
 }
 
 sendHelloEmail();  // this will actually send an email

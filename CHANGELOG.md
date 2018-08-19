@@ -3,7 +3,36 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [7.0.0] - XXXX-XX-XX ##
+## [7.2.0] - 2018-08-15 ##
+### Added
+- Closes [#648](https://github.com/sendgrid/sendgrid-php/issues/648), PR [#657](https://github.com/sendgrid/sendgrid-php/pull/657): 
+Allow for Dynamic Templates Implementation. Thanks to [Mike Willbanks](https://github.com/mwillbanks) for the PR!
+
+## [7.1.1] - 2018-08-15 ##
+### Fixed
+- Closes [#667](https://github.com/sendgrid/sendgrid-php/issues/667), PR [#668](https://github.com/sendgrid/sendgrid-php/pull/668): isBase64 function fix. Thanks to [Tigran M](https://github.com/developer-devPHP) for bringing this to our attention!
+
+## [7.1.0] - 2018-08-14 ##
+### Added
+
+- Closes [#612](https://github.com/sendgrid/sendgrid-php/issues/612), PR [#652](https://github.com/sendgrid/sendgrid-php/pull/652): Fixes #612 Add TypeException and include type validations in classes inside mail/. Thanks to [James Harding](https://github.com/hjmsw) for the PR!
+- Closes [#551](https://github.com/sendgrid/sendgrid-php/issues/551), PR [#571](https://github.com/sendgrid/sendgrid-php/pull/571): Add ability to impersonate subuser. Thanks to [Stian Prestholdt](https://github.com/stianpr) for the PR!
+- Closes [#617](https://github.com/sendgrid/sendgrid-php/issues/617), PR [#651](https://github.com/sendgrid/sendgrid-php/pull/651): Add try / catch to examples. Thanks to [James Harding](https://github.com/hjmsw) for the PR!
+- Closes [#619](https://github.com/sendgrid/sendgrid-php/issues/619), PR [#620](https://github.com/sendgrid/sendgrid-php/pull/620): PHPDoc & code improvements. Thanks to [Martijn Melchers](https://github.com/martijnmelchers) for the PR!
+- Closes [#610](https://github.com/sendgrid/sendgrid-php/issues/610), PR [#628](https://github.com/sendgrid/sendgrid-php/pull/628): Removes unnecessary linter warning from phpcs. Thanks to [James Harding](https://github.com/hjmsw) for the PR!
+- Closes [#608](https://github.com/sendgrid/sendgrid-php/issues/611), PR [#626](https://github.com/sendgrid/sendgrid-php/pull/626): Add check so that getContents() always returns content with MimeType text/plain first in array of Content objects. Thanks to [James Harding](https://github.com/hjmsw) for the PR!
+- Closes [#611](https://github.com/sendgrid/sendgrid-php/issues/611), PR [#618](https://github.com/sendgrid/sendgrid-php/pull/618): Attachments now automatically get base64 encoded if they are not already. Thanks to [Martijn Melchers](https://github.com/martijnmelchers) for the PR!
+- PR [#661](https://github.com/sendgrid/sendgrid-php/pull/661): Add Code Triage tag. Thanks to [Anshul Singhal](https://github.com/af4ro) for the PR!
+- PR [#663](https://github.com/sendgrid/sendgrid-php/pull/663): Improve Contributing.md readability. Thanks to [Anshul Singhal](https://github.com/af4ro) for the PR!
+
+### Fixed
+- PR [#631](https://github.com/sendgrid/sendgrid-php/pull/631): Broken documentation link. Thanks to [David Duman](https://github.com/dvdnhm) for the PR!
+- PR [#633](https://github.com/sendgrid/sendgrid-php/pull/633): Fixes for non-composer environments. Thanks to [Tom Gordon](https://github.com/apcro) for the PR!
+- PR [#634](https://github.com/sendgrid/sendgrid-php/pull/634): Fixes missing file extension. Thanks to [Muberra Duman Demirtepe](https://github.com/muberraduman) for the PR!
+- PR [#658](https://github.com/sendgrid/sendgrid-php/pull/658): Corrected PHP Syntax. Thanks to [David Passmore](https://github.com/davcpas1234) for the PR!
+- Fixes [#624](https://github.com/sendgrid/sendgrid-php/issues/624), PR [#625](https://github.com/sendgrid/sendgrid-php/pull/625): Fix setGroupsToDisplay's handling of array arguments. Thanks to [Mo Ismailzai](https://github.com/moismailzai) for the PR!
+
+## [7.0.0] - 2018-05-19 ##
 ### BREAKING CHANGE
 
 Thanks to the [strong support and feedback of the SendGrid PHP community](https://github.com/sendgrid/sendgrid-php/issues/434), we have a new version of this SDK that should be a big improvement in the developer experience for this SDK.

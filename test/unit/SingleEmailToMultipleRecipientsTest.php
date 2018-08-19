@@ -1,7 +1,7 @@
 <?php
 /**
  * This file tests the request object generation for a /mail/send API call
- * 
+ *
  * PHP Version - 5.6, 7.0, 7.1, 7.2
  *
  * @package   SendGrid\Tests
@@ -9,21 +9,20 @@
  * @copyright 2018 SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
-namespace SendGrid\Tests;
 
-use SendGrid\Tests\BaseTestClass;
+namespace SendGrid\Tests;
 
 
 /**
  * This class tests the request object generation for a /mail/send API call
- * 
+ *
  * @package SendGrid\Tests
  */
 class SingleEmailToMulipleRecipientsTest extends BaseTestClass
 {
-    
+
     private $REQUEST_OBJECT = <<<'JSON'
 {
     "personalizations": [
@@ -65,13 +64,11 @@ JSON;
 
     /**
      * Test when we are using objects
-     * 
-     * @return null
-     */ 
+     */
     public function testWithObjects()
     {
         $from = new \SendGrid\Mail\From("test@example.com", "Example User");
-        $tos = [ 
+        $tos = [
             new \SendGrid\Mail\To("test+test1@example.com", "Example User1"),
             new \SendGrid\Mail\To("test+test2@example.com", "Example User2"),
             new \SendGrid\Mail\To("test+test3@example.com", "Example User3")
@@ -97,14 +94,12 @@ JSON;
 
     /**
      * Test when we are not using objects
-     * 
-     * @return null
-     */ 
+     */
     public function testWithoutObjects()
     {
-        $email = new \SendGrid\Mail\Mail(); 
+        $email = new \SendGrid\Mail\Mail();
         $email->setFrom("test@example.com", "Example User");
-        $tos = [ 
+        $tos = [
             "test+test1@example.com" => "Example User1",
             "test+test2@example.com" => "Example User2",
             "test+test3@example.com" => "Example User3"

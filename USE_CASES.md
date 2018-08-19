@@ -1,16 +1,18 @@
 This documentation provides examples for specific use cases. Please [open an issue](https://github.com/sendgrid/sendgrid-php/issues) or make a pull request for any use cases you would like us to document here. Thank you!
 
 # Table of Contents
-* [Email - Attachments](#attachments)
-* [Email - Kitchen Sink -  an example with all settings used](#kitchen-sink)
-* [Email - Send an Email to a Single Recipient](#single-email-single-recipient)
-* [Email - Send an Email to Multiple Recipients](#single-email-multiple-recipients)
-* [Email - Send Multiple Emails to Multiple Recipients](#multiple-emails-multiple-recipients)
-* [Email - Transactional Templates](#transactional-templates)
-* [How to Setup a Domain Whitelabel](#domain-whitelabel)
-* [How to View Email Statistics](#email-stats)
-* [Deploying to Heroku](#heroku)
-* [Google App Engine Installation](#GAE-instructions)
+- [Table of Contents](#table-of-contents)
+- [Attachments](#attachments)
+- [Kitchen Sink - an example with all settings used](#kitchen-sink---an-example-with-all-settings-used)
+- [Send an Email to a Single Recipient](#send-an-email-to-a-single-recipient)
+- [Send an Email to Multiple Recipients](#send-an-email-to-multiple-recipients)
+- [Send Multiple Emails to Multiple Recipients](#send-multiple-emails-to-multiple-recipients)
+- [Transactional Templates](#transactional-templates)
+- [Legacy Templates](#legacy-templates)
+- [How to Setup a Domain Whitelabel](#how-to-setup-a-domain-whitelabel)
+- [How to View Email Statistics](#how-to-view-email-statistics)
+- [Deploying to Heroku](#deploying-to-heroku)
+- [Google App Engine Installation](#google-app-engine-installation)
 
 <a name="attachments"></a>
 # Attachments
@@ -20,11 +22,15 @@ Here is an example of attaching a text file to your email, assuming that text fi
 ```php
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// Comment out the above line if not using Composer
+// require("<PATH TO>/sendgrid-php.php");
+// If not using Composer, uncomment the above line and
+// download sendgrid-php.zip from the latest release here,
+// replacing <PATH TO> with the path to the sendgrid-php.php file,
+// which is included in the download:
+// https://github.com/sendgrid/sendgrid-php/releases
 
-$email = new \SendGrid\Mail\Mail(); 
+$email = new \SendGrid\Mail\Mail();
 $email->setFrom("test@example.com", "Example User");
 $email->setSubject("Sending with SendGrid is Fun");
 $email->addTo("test@example.com", "Example User");
@@ -48,7 +54,7 @@ try {
     print_r($response->headers());
     print $response->body() . "\n";
 } catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
+    echo 'Caught exception: '.  $e->getMessage(). "\n";
 }
 ```
 
@@ -58,9 +64,13 @@ try {
 ```php
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// Comment out the above line if not using Composer
+// require("<PATH TO>/sendgrid-php.php");
+// If not using Composer, uncomment the above line and
+// download sendgrid-php.zip from the latest release here,
+// replacing <PATH TO> with the path to the sendgrid-php.php file,
+// which is included in the download:
+// https://github.com/sendgrid/sendgrid-php/releases
 
 $email = new \SendGrid\Mail\Mail();
 
@@ -99,13 +109,15 @@ $headers = [
 ];
 $email->addHeaders($headers);
 
-$email->addSubstitution("%name1%", "Example Name 1");
-$email->addSubstitution("%city1%", "Denver");
+$email->addDynamicTemplateData("subject1", "Example Subject 1");
+$email->addDynamicTemplateData("name1", "Example Name 1");
+$email->addDynamicTemplateData("city1", "Denver");
 $substitutions = [
-    "%name2%" => "Example Name 2",
-    "%city2%" => "Orange"
+    "subject2" => "Example Subject 2",
+    "name2" => "Example Name 2",
+    "city2" => "Orange"
 ];
-$email->addSubstitutions($substitutions);
+$email->addDynamicTemplateDatas($substitutions);
 
 $email->addCustomArg("marketing1", "false");
 $email->addCustomArg("transactional1", "true");
@@ -168,7 +180,7 @@ $attachments = [
 ];
 $email->addAttachments($attachments);
 
-$email->setTemplateId("13b8f94f-bcae-4ec6-b752-70d6cb59f932");
+$email->setTemplateId("d-13b8f94fbcae4ec6b75270d6cb59f932");
 
 $email->addGlobalHeader("X-Day", "Monday");
 $globalHeaders = [
@@ -235,7 +247,7 @@ try {
     print_r($response->headers());
     print $response->body() . "\n";
 } catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
+    echo 'Caught exception: '.  $e->getMessage(). "\n";
 }
 ```
 
@@ -244,9 +256,13 @@ OR
 ```php
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// Comment out the above line if not using Composer
+// require("<PATH TO>/sendgrid-php.php");
+// If not using Composer, uncomment the above line and
+// download sendgrid-php.zip from the latest release here,
+// replacing <PATH TO> with the path to the sendgrid-php.php file,
+// which is included in the download:
+// https://github.com/sendgrid/sendgrid-php/releases
 
 $email = new \SendGrid\Mail\Mail();
 
@@ -289,17 +305,21 @@ $headers = [
 ];
 $email->addHeaders($headers);
 
-$email->addSubstitution(
-    new \SendGrid\Mail\Substitution("%name1%", "Example Name 1")
+$email->addDynamicTemplateData(
+    new \SendGrid\Mail\Substitution("subject1", "Example Subject 1")
 );
-$email->addSubstitution(
-    new \SendGrid\Mail\Substitution("%city1%", "Denver")
+$email->addDynamicTemplateData(
+    new \SendGrid\Mail\Substitution("name", "Example Name 1")
+);
+$email->addDynamicTemplateData(
+    new \SendGrid\Mail\Substitution("city1", "Denver")
 );
 $substitutions = [
-    new \SendGrid\Mail\Substitution("%name2%", "Example Name 2"),
-    new \SendGrid\Mail\Substitution("%city2%", "Orange")
+    new \SendGrid\Mail\Substitution("subject2", "Example Subject 2"),
+    new \SendGrid\Mail\Substitution("name2", "Example Name 2"),
+    new \SendGrid\Mail\Substitution("city2", "Orange")
 ];
-$email->addSubstitutions($substitutions);
+$email->addDynamicTemplateDatas($substitutions);
 
 $email->addCustomArg(new \SendGrid\Mail\CustomArg("marketing1", "false"));
 $email->addCustomArg(new \SendGrid\Mail\CustomArg("transactional1", "true"));
@@ -367,7 +387,7 @@ $attachments = [
 $email->addAttachments($attachments);
 
 $email->setTemplateId(
-    new \SendGrid\Mail\TemplateId("13b8f94f-bcae-4ec6-b752-70d6cb59f932")
+    new \SendGrid\Mail\TemplateId("d-13b8f94fbcae4ec6b75270d6cb59f932")
 );
 
 $email->addGlobalHeader(new \SendGrid\Mail\Header("X-Day", "Monday"));
@@ -474,7 +494,7 @@ try {
     print_r($response->headers());
     print $response->body() . "\n";
 } catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
+    echo 'Caught exception: '.  $e->getMessage(). "\n";
 }
 ```
 
@@ -484,9 +504,13 @@ try {
 ```php
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// Comment out the above line if not using Composer
+// require("<PATH TO>/sendgrid-php.php");
+// If not using Composer, uncomment the above line and
+// download sendgrid-php.zip from the latest release here,
+// replacing <PATH TO> with the path to the sendgrid-php.php file,
+// which is included in the download:
+// https://github.com/sendgrid/sendgrid-php/releases
 
 $email = new \SendGrid\Mail\Mail(); 
 $email->setFrom("test@example.com", "Example User");
@@ -503,7 +527,7 @@ try {
     print_r($response->headers());
     print $response->body() . "\n";
 } catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
+    echo 'Caught exception: '.  $e->getMessage(). "\n";
 }
 ```
 
@@ -512,9 +536,14 @@ OR
 ```php
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// Comment out the above line if not using Composer
+// require("<PATH TO>/sendgrid-php.php");
+// If not using Composer, uncomment the above line and
+// download sendgrid-php.zip from the latest release here,
+// replacing <PATH TO> with the path to the sendgrid-php.php file,
+// which is included in the download:
+// https://github.com/sendgrid/sendgrid-php/releases
+
 $from = new \SendGrid\Mail\From("test@example.com", "Example User");
 $subject = new \SendGrid\Mail\Subject("Sending with SendGrid is Fun");
 $to = new \SendGrid\Mail\To("test@example.com", "Example User");
@@ -538,7 +567,7 @@ try {
     print_r($response->headers());
     print $response->body() . "\n";
 } catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
+    echo 'Caught exception: '.  $e->getMessage(). "\n";
 }
 ```
 
@@ -548,9 +577,14 @@ try {
 ```php
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// Comment out the above line if not using Composer
+// require("<PATH TO>/sendgrid-php.php");
+// If not using Composer, uncomment the above line and
+// download sendgrid-php.zip from the latest release here,
+// replacing <PATH TO> with the path to the sendgrid-php.php file,
+// which is included in the download:
+// https://github.com/sendgrid/sendgrid-php/releases
+
 $email = new \SendGrid\Mail\Mail(); 
 $email->setFrom("test@example.com", "Example User");
 $tos = [ 
@@ -571,7 +605,7 @@ try {
     print_r($response->headers());
     print $response->body() . "\n";
 } catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
+    echo 'Caught exception: '.  $e->getMessage(). "\n";
 }
 ```
 
@@ -580,10 +614,13 @@ OR
 ```php
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
-
+// Comment out the above line if not using Composer
+// require("<PATH TO>/sendgrid-php.php");
+// If not using Composer, uncomment the above line and
+// download sendgrid-php.zip from the latest release here,
+// replacing <PATH TO> with the path to the sendgrid-php.php file,
+// which is included in the download:
+// https://github.com/sendgrid/sendgrid-php/releases
 $from = new \SendGrid\Mail\From("test@example.com", "Example User");
 $tos = [ 
     new \SendGrid\Mail\To("test+test1@example.com", "Example User1"),
@@ -612,21 +649,28 @@ try {
     print_r($response->headers());
     print $response->body() . "\n";
 } catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
+    echo 'Caught exception: '.  $e->getMessage(). "\n";
 }
 ```
 
 <a name="multiple-emails-multiple-recipients"></a>
 # Send Multiple Emails to Multiple Recipients
 
+Note that [transactional templates](#transactional-templates) may be a better option for this use case, especially for more complex uses.
+
 ```php
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// Comment out the above line if not using Composer
+// require("<PATH TO>/sendgrid-php.php");
+// If not using Composer, uncomment the above line and
+// download sendgrid-php.zip from the latest release here,
+// replacing <PATH TO> with the path to the sendgrid-php.php file,
+// which is included in the download:
+// https://github.com/sendgrid/sendgrid-php/releases
+
 $from = new \SendGrid\Mail\From("test@example.com", "Example User");
-$tos = [ 
+$tos = [
     new \SendGrid\Mail\To(
         "test+test1@example.com",
         "Example User1",
@@ -680,7 +724,7 @@ try {
     print_r($response->headers());
     print $response->body() . "\n";
 } catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
+    echo 'Caught exception: '.  $e->getMessage(). "\n";
 }
 ```
 
@@ -689,11 +733,16 @@ OR
 ```php
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// Comment out the above line if not using Composer
+// require("<PATH TO>/sendgrid-php.php");
+// If not using Composer, uncomment the above line and
+// download sendgrid-php.zip from the latest release here,
+// replacing <PATH TO> with the path to the sendgrid-php.php file,
+// which is included in the download:
+// https://github.com/sendgrid/sendgrid-php/releases
+
 $from = new \SendGrid\Mail\From("test@example.com", "Example User");
-$tos = [ 
+$tos = [
     new \SendGrid\Mail\To(
         "test+test1@example.com",
         "Example User1",
@@ -750,14 +799,161 @@ try {
     print_r($response->headers());
     print $response->body() . "\n";
 } catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
+    echo 'Caught exception: '.  $e->getMessage(). "\n";
 }
 ```
 
 <a name="transactional-templates"></a>
 # Transactional Templates
 
-For this example, we assume you have created a [transactional template](https://example.com/docs/User_Guide/Transactional_Templates/index.html). Following is the template content we used for testing.
+For this example, we assume you have created a [transactional template](https://sendgrid.com/docs/User_Guide/Transactional_Templates/create_and_edit_transactional_templates.html). Following is the template content we used for testing.
+
+Template ID (replace with your own):
+
+```text
+d-13b8f94fbcae4ec6b75270d6cb59f932
+```
+
+Email Subject:
+
+```text
+{{ subject }}
+```
+
+Template Body:
+
+```html
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+Hello {{ name }},
+<br /><br/>
+I'm glad you are trying out the template feature!
+<br /><br/>
+I hope you are having a great day in {{ city }} :)
+<br /><br/>
+</body>
+</html>
+```
+
+```php
+<?php
+require 'vendor/autoload.php'; // If you're using Composer (recommended)
+// Comment out the above line if not using Composer
+// require("<PATH TO>/sendgrid-php.php");
+// If not using Composer, uncomment the above line and
+// download sendgrid-php.zip from the latest release here,
+// replacing <PATH TO> with the path to the sendgrid-php.php file,
+// which is included in the download:
+// https://github.com/sendgrid/sendgrid-php/releases
+
+use \SendGrid\Mail\From as From;
+use \SendGrid\Mail\To as To;
+use \SendGrid\Mail\Subject as Subject;
+use \SendGrid\Mail\PlainTextContent as PlainTextContent;
+use \SendGrid\Mail\HtmlContent as HtmlContent;
+use \SendGrid\Mail\Mail as Mail;
+
+$from = new From("test@example.com", "Example User");
+$tos = [
+    new To(
+        "test+test1@example.com",
+        "Example User1",
+        [
+            'subject' => 'Subject 1',
+            'name' => 'Example User 1',
+            'city' => 'Denver'
+        ]
+    ),
+    new To(
+        "test+test2@example.com",
+        "Example User2",
+        [
+            'subject' => 'Subject 2',
+            'name' => 'Example User 2',
+            'city' => 'Irvine'
+        ]
+    ),
+    new To(
+        "test+test3@example.com",
+        "Example User3",
+        [
+            'subject' => 'Subject 3',
+            'name' => 'Example User 3',
+            'city' => 'Redwood City'
+        ]
+    )
+];
+$email = new Mail(
+    $from,
+    $tos
+);
+$email->setTemplateId("d-13b8f94fbcae4ec6b75270d6cb59f932");
+$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+try {
+    $response = $sendgrid->send($email);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: '.  $e->getMessage(). "\n";
+}
+```
+
+OR
+
+```php
+$email = new \SendGrid\Mail\Mail();
+$email->setFrom("test@sendgrid.com", "Example User");
+$email->setSubject("I'm replacing the subject tag");
+$email->addTo(
+    "test+test1@example.com",
+    "Example User1",
+    [
+        "subject" => "Subject 1",
+        "name" => "Example User 1",
+        "city" => "Denver"
+    ],
+    0
+);
+$email->addTo(
+    "test+test2@example.com", 
+    "Example User2",
+    [
+        "subject" => "Subject 2",
+        "name" => "Example User 2",
+        "city" => "Denver"
+    ],
+    1
+);
+$email->addTo(
+    "test+test3@example.com", 
+    "Example User3",
+    [
+        "subject" => "Subject 3",
+        "name" => "Example User 3",
+        "city" => "Redwood City"
+    ],
+    2
+);
+$email->setTemplateId("d-13b8f94fbcae4ec6b75270d6cb59f932");
+$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+try {
+    $response = $sendgrid->send($email);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: '.  $e->getMessage(). "\n";
+}
+```
+
+<a name="legacy-templates"></a>
+# Legacy Templates
+
+For this example, we assume you have created a [legacy template](https://sendgrid.com/docs/User_Guide/Transactional_Templates/create_and_edit_transactional_templates.html). Following is the template content we used for testing.
 
 Template ID (replace with your own):
 
@@ -794,9 +990,13 @@ I hope you are having a great day in -city- :)
 ```php
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+// Comment out the above line if not using Composer
+// require("<PATH TO>/sendgrid-php.php");
+// If not using Composer, uncomment the above line and
+// download sendgrid-php.zip from the latest release here,
+// replacing <PATH TO> with the path to the sendgrid-php.php file,
+// which is included in the download:
+// https://github.com/sendgrid/sendgrid-php/releases
 
 use \SendGrid\Mail\From as From;
 use \SendGrid\Mail\To as To;
@@ -854,7 +1054,7 @@ try {
     print_r($response->headers());
     print $response->body() . "\n";
 } catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
+    echo 'Caught exception: '.  $e->getMessage(). "\n";
 }
 ```
 
@@ -901,7 +1101,7 @@ try {
     print_r($response->headers());
     print $response->body() . "\n";
 } catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
+    echo 'Caught exception: '.  $e->getMessage(). "\n";
 }
 ```
 

@@ -12,7 +12,11 @@ $sg = new \SendGrid($apiKey);
 // Retrieve a list of scopes for which this user has access. #
 // GET /scopes #
 
-$response = $sg->client->scopes()->get();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+try {
+    $response = $sg->client->scopes()->get();    
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}

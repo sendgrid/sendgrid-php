@@ -13,7 +13,12 @@ $sg = new \SendGrid($apiKey);
 // GET /browsers/stats #
 
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "browsers": "test_string", "limit": "test_string", "offset": "test_string", "start_date": "2016-01-01"}');
-$response = $sg->client->browsers()->stats()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->browsers()->stats()->get(null, $query_params);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
