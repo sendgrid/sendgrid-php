@@ -63,6 +63,7 @@ class EmailAddress implements \JsonSerializable
 
     /**
      * Add the email address to a EmailAddress object
+     * Check the provided email address for a name per rfc822 and set it if possible
      *
      * @param string $emailAddress The email address
      * 
@@ -70,6 +71,7 @@ class EmailAddress implements \JsonSerializable
      */ 
     public function setEmailAddress($emailAddress)
     {
+        $emailAddress = $this->emailFormatExtractor($emailAddress);
         $this->email = $emailAddress;
     }
 
@@ -198,5 +200,37 @@ class EmailAddress implements \JsonSerializable
                 return $value !== null;
             }
         ) ?: null;
+    }
+
+    protected function emailFormatExtractor($email)
+    {
+        /*
+        Check if there is a name that can be extracted 
+        */
+        $checkSpaces = strpos($email, ' ');
+        $checkCharacterBegin = strpos($email, '<');
+        $checkCharacterEnd = strpos($email, '>');
+        if (
+            $checkSpaces !== false &&
+            $checkCharacterBegin !== false &&
+            $checkCharacterEnd !== false
+        ) {
+            /*
+            Email address has to be extracted from the string
+            */
+            $explodedString = explode('<', $email, 2);
+            $nameTrimmed = trim($explodedString[0]);
+            $mailExplode = explode('>', $explodedString[1]);
+            $extractedEmail = $mailExplode[0];
+            $extractedName = $nameTrimmed;
+            $this->setName($extractedName);
+        }
+        else {
+            /*
+            Only the email address has been provided
+            */
+            $extractedEmail = $email;
+        }
+        return $extractedEmail;
     }
 }
