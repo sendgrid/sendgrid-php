@@ -5,8 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [7.2.0] - 2018-08-15 ##
 ### Added
-- Closes [#648](https://github.com/sendgrid/sendgrid-php/issues/648), PR [#657](https://github.com/sendgrid/sendgrid-php/pull/657): 
-Allow for Dynamic Templates Implementation. Thanks to [Mike Willbanks](https://github.com/mwillbanks) for the PR!
+- Closes [#648](https://github.com/sendgrid/sendgrid-php/issues/648), PR [#657](https://github.com/sendgrid/sendgrid-php/pull/657): Allow for Dynamic Templates Implementation. Thanks to [Mike Willbanks](https://github.com/mwillbanks) for the PR!
 
 ## [7.1.1] - 2018-08-15 ##
 ### Fixed
