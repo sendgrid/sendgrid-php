@@ -3,7 +3,7 @@ This documentation provides examples for specific use cases. Please [open an iss
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Attachments](#attachments)
-- [Kitchen Sink - an example with all settings used](#kitchen-sink---an-example-with-all-settings-used)
+- [Kitchen Sink - an example with all settings used](#kitchen-sink)
 - [Send an Email to a Single Recipient](#send-an-email-to-a-single-recipient)
 - [Send an Email to Multiple Recipients](#send-an-email-to-multiple-recipients)
 - [Send Multiple Emails to Multiple Recipients](#send-multiple-emails-to-multiple-recipients)
