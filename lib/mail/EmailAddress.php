@@ -159,7 +159,7 @@ class EmailAddress implements \JsonSerializable
     public function setSubstitutions($substitutions)
     {
         if (!is_array($substitutions)) {
-            throw new Exception('$substitutions must be an array.');
+            throw new TypeException('$substitutions must be an array.');
         }
 
         $this->substitutions = $substitutions;
