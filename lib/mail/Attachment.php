@@ -208,13 +208,6 @@ class Attachment implements \JsonSerializable
         $encoded_data = base64_encode($decoded_data);
         if ($encoded_data != $string) {
             return false;
-        } else {
-            $decoded_data = str_ireplace("\t", "", $decoded_data);
-            $decoded_data = str_ireplace("\n", "", $decoded_data);
-            $decoded_data = str_ireplace("\r", "", $decoded_data);
-            if (!ctype_print($decoded_data)) {
-                return false;
-            }
         }
         return true;
     }
