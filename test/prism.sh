@@ -1,5 +1,10 @@
 #!/bin/bash
 
+get_latest_release() {
+  curl --silent "https://api.github.com/repos/stoplightio/prism/releases/latest" | # Get latest release from GitHub api
+    grep '"tag_name":' |                                            # Get tag line
+    sed -E 's/.*"([^"]+)".*/\1/'                                    # Pluck JSON value
+}
 set -eu
 
 install () {
@@ -28,8 +33,7 @@ elif [ "$UNAME" = "Linux" ] ; then
 fi
 
 mkdir -p ../prism/bin
-#LATEST=$(curl -s https://api.github.com/repos/stoplightio/prism/tags | grep -Eo '"name":.*?[^\\]",'  | head -n 1 | sed 's/[," ]//g' | cut -d ':' -f 2)
-LATEST="v2.0.14"
+LATEST=`get_latest_release`
 URL="https://github.com/stoplightio/prism/releases/download/$LATEST/prism_$PLATFORM"
 DEST=../prism/bin/prism
 
