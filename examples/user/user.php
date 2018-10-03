@@ -4,7 +4,6 @@ require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // require("./sendgrid-php.php"); 
 // If not using Composer, uncomment the above line
 
-
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
 
@@ -104,7 +103,6 @@ try {
 ////////////////////////////////////////////////////
 // Get a user's profile #
 // GET /user/profile #
-
 
 try {
     $response = $sg->client->user()->profile()->get();
