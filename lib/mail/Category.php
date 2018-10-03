@@ -44,9 +44,14 @@ class Category implements \JsonSerializable
      * @param string $category A category name for an email message.
      *                         Each category name may not exceed 255
      *                         characters
-     */
+     *
+     * @throws TypeException
+     */ 
     public function setCategory($category)
     {
+        if (!is_string($category)) {
+            throw new TypeException('$category must be of type string.');
+        }
         $this->category = $category;
     }
 

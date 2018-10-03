@@ -52,9 +52,14 @@ class Footer implements \JsonSerializable
      * Update the enable setting on a Footer object
      *
      * @param bool $enable Indicates if this setting is enabled
-     */
+     * 
+     * @throws TypeException
+     */ 
     public function setEnable($enable)
     {
+        if (!is_bool($enable)) {
+            throw new TypeException('$enable must be of type bool');
+        }
         $this->enable = $enable;
     }
 
@@ -72,9 +77,14 @@ class Footer implements \JsonSerializable
      * Add text to a Footer object
      *
      * @param string $text The plain text content of your footer
-     */
+     * 
+     * @throws TypeException
+     */ 
     public function setText($text)
     {
+        if (!is_string($text)) {
+            throw new TypeException('$text must be of type string.');
+        }
         $this->text = $text;
     }
 
@@ -92,9 +102,14 @@ class Footer implements \JsonSerializable
      * Add html to a Footer object
      *
      * @param string $html The HTML content of your footer
-     */
+     * 
+     * @throws TypeException
+     */ 
     public function setHtml($html)
     {
+        if (!is_string($html)) {
+            throw new TypeException('$html must be of type string.');
+        }
         $this->html = $html;
     }
 

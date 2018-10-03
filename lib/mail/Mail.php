@@ -194,7 +194,7 @@ class Mail implements \JsonSerializable
     ) {
         $personalizationFunctionCall = "add" . $emailType;
         $emailType = "\SendGrid\Mail\\" . $emailType;
-        if (!$email instanceof $emailType) {
+        if (!($email instanceof $emailType)) {
             $email = new $emailType(
                 $email,
                 $name,
@@ -654,6 +654,59 @@ class Mail implements \JsonSerializable
     }
 
     /**
+     * Add a DynamicTemplateData object or key/value to a Personalization object
+     *
+     * @param DynamicTemplateData|string $data DynamicTemplateData object or the key of a
+     *                                         dynamic data
+     * @param string|null $value Value
+     * @param int|null $personalizationIndex Index into an array of
+     *                                       existing Personalization
+     *                                       objects
+     * @param Personalization|null $personalization A pre-created
+     *                                              Personalization object
+     */ 
+    public function addDynamicTemplateData(
+        $key,
+        $value = null,
+        $personalizationIndex = null,
+        $personalization = null
+    ) {
+        $this->addSubstitution($key, $value, $personalizationIndex, $personalization);
+    }
+
+    /**
+     * Add a DynamicTemplateData object or key/value to a Personalization object
+     *
+     * @param array|DynamicTemplateData[] $data Array of DynamicTemplateData objects or key/values
+     * @param int|null $personalizationIndex Index into an array of
+     *                                       existing Personalization
+     *                                       objects
+     * @param Personalization|null $personalization A pre-created
+     *                                              Personalization object
+     */ 
+    public function addDynamicTemplateDatas(
+        $datas,
+        $personalizationIndex = null,
+        $personalization = null
+    ) {
+        $this->addSubstitutions($datas);
+    }
+
+    /**
+     * Retrieve dynamic template data key/value pairs from a Personalization object
+     * 
+     * @param int|0 $personalizationIndex Index into an array of
+     *                                    existing Personalization
+     *                                    objects
+     * 
+     * @return array
+     */ 
+    public function getDynamicTemplateDatas($personalizationIndex = 0)
+    {
+        return $this->getSubstitutions($personalizationIndex);
+    }
+
+    /**
      * Add a substitution to a Personalization or Mail object
      *
      * If you don't provide a Personalization object or index, the
@@ -717,12 +770,12 @@ class Mail implements \JsonSerializable
      * global headers.
      *
      * @param array|Substitution[] $substitutions Array of Substitution
-     *                                                   objects or key/values
+     *                                            objects or key/values
      * @param int|null $personalizationIndex Index into an array of
-     *                                                   existing Personalization
-     *                                                   objects
+     *                                       existing Personalization
+     *                                       objects
      * @param Personalization|null $personalization A pre-created
-     *                                                   Personalization object
+     *                                              ersonalization object
      */
     public function addSubstitutions(
         $substitutions,
@@ -931,14 +984,26 @@ class Mail implements \JsonSerializable
      * Add the sender email address to a Mail object
      *
      * @param string|From $email Email address or From object
-     * @param string|null $name Sender name
-     */
+     * @param string|null $name  Sender name
+     *
+     * @throws TypeException
+     */      
     public function setFrom($email, $name = null)
     {
         if ($email instanceof From) {
             $this->from = $email;
         } else {
-            $this->from = new From($email, $name);
+
+            if (
+                is_string($email) && filter_var($email, FILTER_VALIDATE_EMAIL)
+            ) {
+                $this->from = new From($email, $name);
+            } else {
+                throw new TypeException(
+                    '$email must be valid and of type string.'
+                );
+            }
+
         }
         return;
     }
@@ -991,7 +1056,7 @@ class Mail implements \JsonSerializable
     public function setGlobalSubject($subject)
     {
         if (!($subject instanceof Subject)) {
-            $subject = new Subject($subject);
+            $this->subject = new Subject($subject);
         }
         $this->subject = $subject;
     }
@@ -1054,17 +1119,19 @@ class Mail implements \JsonSerializable
      */
     public function getContents()
     {
-        if ($this->contents[0]->getType() !== 'text/plain'
+        if ($this->contents) {
+            if ($this->contents[0]->getType() !== 'text/plain'
             && count($this->contents) > 1
-        ) {
-            foreach ($this->contents as $key => $value) {
-                if ($value->getType() == 'text/plain') {
-                    $plain_content = $value;
-                    unset($this->contents[$key]);
-                    break;
+            ) {
+                foreach ($this->contents as $key => $value) {
+                    if ($value->getType() == 'text/plain') {
+                        $plain_content = $value;
+                        unset($this->contents[$key]);
+                        break;
+                    }
                 }
+                array_unshift($this->contents, $plain_content);
             }
-            array_unshift($this->contents, $plain_content);
         }
 
         return $this->contents;
@@ -1145,6 +1212,7 @@ class Mail implements \JsonSerializable
         if (!($template_id instanceof TemplateId)) {
             $template_id = new TemplateId($template_id);
         }
+
         $this->template_id = $template_id;
     }
 
@@ -1511,9 +1579,15 @@ class Mail implements \JsonSerializable
      *                                    mail settings that you can
      *                                    use to specify how you would
      *                                    like this email to be handled
-     */
+     * @throws TypeException
+     */ 
     public function setMailSettings($mail_settings)
     {
+        if (!($mail_settings instanceof MailSettings)) {
+            throw new TypeException(
+                '$mail_settings must be an instance of SendGrid\Mail\MailSettings'
+            );
+        }
         $this->mail_settings = $mail_settings;
     }
 
@@ -1536,7 +1610,7 @@ class Mail implements \JsonSerializable
      */
     public function setBccSettings($enable, $email = null)
     {
-        if (!$this->mail_settings instanceof MailSettings) {
+        if (!($this->mail_settings instanceof MailSettings)) {
             $this->mail_settings = new MailSettings();
         }
         $this->mail_settings->setBccSettings($enable, $email);
@@ -1568,7 +1642,7 @@ class Mail implements \JsonSerializable
      */
     public function disableBypassListManagement()
     {
-        if (!$this->mail_settings instanceof MailSettings) {
+        if (!($this->mail_settings instanceof MailSettings)) {
             $this->mail_settings = new MailSettings();
         }
         $this->mail_settings->setBypassListManagement(false);
@@ -1598,7 +1672,7 @@ class Mail implements \JsonSerializable
      */
     public function enableSandBoxMode()
     {
-        if (!$this->mail_settings instanceof MailSettings) {
+        if (!($this->mail_settings instanceof MailSettings)) {
             $this->mail_settings = new MailSettings();
         }
         $this->mail_settings->setSandBoxMode(true);
@@ -1612,7 +1686,7 @@ class Mail implements \JsonSerializable
      */
     public function disableSandBoxMode()
     {
-        if (!$this->mail_settings instanceof MailSettings) {
+        if (!($this->mail_settings instanceof MailSettings)) {
             $this->mail_settings = new MailSettings();
         }
         $this->mail_settings->setSandBoxMode(false);
@@ -1646,9 +1720,15 @@ class Mail implements \JsonSerializable
      *                                            would like to track the metrics
      *                                            of how your recipients interact
      *                                            with your email
-     */
+     * @throws TypeException
+     */ 
     public function setTrackingSettings($tracking_settings)
     {
+        if (!($tracking_settings instanceof TrackingSettings)) {
+            throw new TypeException(
+                '$tracking_settings must be an instance of SendGrid\Mail\TrackingSettings'
+            );
+        }
         $this->tracking_settings = $tracking_settings;
     }
 
@@ -1673,7 +1753,7 @@ class Mail implements \JsonSerializable
      */
     public function setClickTracking($enable = null, $enable_text = null)
     {
-        if (!$this->tracking_settings instanceof TrackingSettings) {
+        if (!($this->tracking_settings instanceof TrackingSettings)) {
             $this->tracking_settings = new TrackingSettings();
         }
         $this->tracking_settings->setClickTracking($enable, $enable_text);
@@ -1694,7 +1774,7 @@ class Mail implements \JsonSerializable
      */
     public function setOpenTracking($enable = null, $substitution_tag = null)
     {
-        if (!$this->tracking_settings instanceof TrackingSettings) {
+        if (!($this->tracking_settings instanceof TrackingSettings)) {
             $this->tracking_settings = new TrackingSettings();
         }
         $this->tracking_settings->setOpenTracking($enable, $substitution_tag);
@@ -1738,7 +1818,7 @@ class Mail implements \JsonSerializable
         $html = null,
         $substitution_tag = null
     ) {
-        if (!$this->tracking_settings instanceof TrackingSettings) {
+        if (!($this->tracking_settings instanceof TrackingSettings)) {
             $this->tracking_settings = new TrackingSettings();
         }
         $this->tracking_settings->setSubscriptionTracking(
@@ -1773,7 +1853,7 @@ class Mail implements \JsonSerializable
         $utm_content = null,
         $utm_campaign = null
     ) {
-        if (!$this->tracking_settings instanceof TrackingSettings) {
+        if (!($this->tracking_settings instanceof TrackingSettings)) {
             $this->tracking_settings = new TrackingSettings();
         }
         $this->tracking_settings->setGanalytics(
@@ -1793,6 +1873,15 @@ class Mail implements \JsonSerializable
      */
     public function jsonSerialize()
     {
+        // Detect if we are using the new dynamic templates
+        $template_id = $this->getTemplateId();
+        if ($template_id != null) {
+            if (substr((string) $template_id->getTemplateId(), 0, 2) == "d-") {
+                foreach ($this->personalization as $personalization) {
+                    $personalization->setHasDynamicTemplate(true);
+                }
+            }
+        }
         return array_filter(
             [
                 'personalizations' => $this->getPersonalizations(),

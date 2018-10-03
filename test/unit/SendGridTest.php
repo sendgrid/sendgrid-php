@@ -26,7 +26,7 @@ class SendGridTest extends BaseTestClass
      */
     public function testVersionIsCorrect()
     {
-        $this->assertEquals(\SendGrid::VERSION, '7.0.0');
+        $this->assertEquals(\SendGrid::VERSION, '7.2.1');
         $version = json_decode(
             file_get_contents(__DIR__ . '/../../composer.json')
         )->version;
@@ -72,6 +72,17 @@ class SendGridTest extends BaseTestClass
         $this->assertEquals(
             $sg4->client->getCurlOptions(),
             [10004 => '127.0.0.1:8000']
+        );
+
+        $subuser = 'abcxyz@this.is.a.test.subuser';
+        $headers[] = 'On-Behalf-Of: ' . $subuser;
+        $sg5 = new \SendGrid(
+            self::$apiKey,
+            ['impersonateSubuser' => $subuser]
+        );
+        $this->assertSame(
+            $headers,
+            $sg5->client->getHeaders()
         );
     }
 }
