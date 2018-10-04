@@ -1,5 +1,15 @@
 language: php
 
+matrix:
+  fast_finish: true
+
+  include:
+    - php: 7.0
+      env: PHPCS=1
+
+    - php: 7.1
+      env: PHPSTAN=1
+
 before_script:
 - composer install
 - "./test/prism.sh &"
@@ -7,7 +17,7 @@ before_script:
 - cd test
 
 script:
-- "../vendor/bin/phpstan analyse --no-progress --level 0 lib"
+- "if [[ $PHPSTAN = 1 ]]; then cd ../ && composer require --dev "phpstan/phpstan:^0.10" && cd test && ../vendor/bin/phpstan analyse --no-progress --level 0 ../lib; fi"
 - "../vendor/bin/phpunit . --filter test*"
 
 after_script:
