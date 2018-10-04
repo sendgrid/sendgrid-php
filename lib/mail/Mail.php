@@ -578,28 +578,7 @@ class Mail implements \JsonSerializable
         } else {
             $header = new Header($key, $value);
         }
-        if ($personalization != null) {
-            $personalization->addHeader($header);
-            $this->addPersonalization($personalization);
-            return;
-        } else {
-            if ($this->personalization[0] != null) {
-                $this->personalization[0]->addHeader($header);
-            } else if ($this->personalization[$personalizationIndex] != null) {
-                $this->personalization[$personalizationIndex]->addHeader($header);
-            } else {
-                $personalization = new Personalization();
-                $personalization->addHeader($header);
-                if (($personalizationIndex != 0)
-                    && ($this->getPersonalizationCount() <= $personalizationIndex)
-                ) {
-                    $this->personalization[$personalizationIndex] = $personalization;
-                } else {
-                    $this->addPersonalization($personalization);
-                }
-            }
-            return;
-        }
+        $this->addMailPart('Header', $header, $personalization, $personalizationIndex);
     }
 
     /**
@@ -737,28 +716,7 @@ class Mail implements \JsonSerializable
         } else {
             $substitution = new Substitution($key, $value);
         }
-        if ($personalization != null) {
-            $personalization->addSubstitution($substitution);
-            $this->addPersonalization($personalization);
-            return;
-        } else {
-            if ($this->personalization[0] != null) {
-                $this->personalization[0]->addSubstitution($substitution);
-            } else if ($this->personalization[$personalizationIndex] != null) {
-                $this->personalization[$personalizationIndex]->addSubstitution($substitution);
-            } else {
-                $personalization = new Personalization();
-                $personalization->addSubstitution($substitution);
-                if (($personalizationIndex != 0)
-                    && ($this->getPersonalizationCount() <= $personalizationIndex)
-                ) {
-                    $this->personalization[$personalizationIndex] = $personalization;
-                } else {
-                    $this->addPersonalization($personalization);
-                }
-            }
-            return;
-        }
+        $this->addMailPart('Substitution', $substitution, $personalization, $personalizationIndex);
     }
 
     /**
@@ -839,30 +797,7 @@ class Mail implements \JsonSerializable
         } else {
             $custom_arg = new CustomArg($key, $value);
         }
-        if ($personalization != null) {
-            $personalization->addCustomArg($custom_arg);
-            $this->addPersonalization($personalization);
-            return;
-        } else {
-            if ($this->personalization[0] != null) {
-                $this->personalization[0]->addCustomArg($custom_arg);
-            } else if ($this->personalization[$personalizationIndex] != null) {
-                $this->personalization[$personalizationIndex]->addCustomArg(
-                    $custom_arg
-                );
-            } else {
-                $personalization = new Personalization();
-                $personalization->addCustomArg($custom_arg);
-                if (($personalizationIndex != 0)
-                    && ($this->getPersonalizationCount() <= $personalizationIndex)
-                ) {
-                    $this->personalization[$personalizationIndex] = $personalization;
-                } else {
-                    $this->addPersonalization($personalization);
-                }
-            }
-            return;
-        }
+        $this->addMailPart('CustomArg', $custom_arg, $personalization, $personalizationIndex);
     }
 
     /**
@@ -940,30 +875,7 @@ class Mail implements \JsonSerializable
         if (!($send_at instanceof SendAt)) {
             $send_at = new SendAt($send_at);
         }
-        if ($personalization != null) {
-            $personalization->setSendAt($send_at);
-            $this->addPersonalization($personalization);
-            return;
-        } else {
-            if ($this->personalization[0] != null) {
-                $this->personalization[0]->setSendAt($send_at);
-                return;
-            } else if ($this->personalization[$personalizationIndex] != null) {
-                $this->personalization[$personalizationIndex]->setSendAt($send_at);
-                return;
-            } else {
-                $personalization = new Personalization();
-                $personalization->setSendAt($send_at);
-                if (($personalizationIndex != 0)
-                    && ($this->getPersonalizationCount() <= $personalizationIndex)
-                ) {
-                    $this->personalization[$personalizationIndex] = $personalization;
-                } else {
-                    $this->addPersonalization($personalization);
-                }
-                return;
-            }
-        }
+        $this->addMailPart('SendAt', $send_at, $personalization, $personalizationIndex);
     }
 
     /**
@@ -1907,5 +1819,37 @@ class Mail implements \JsonSerializable
                 return $value !== null;
             }
         ) ?: null;
+    }
+
+    /**
+     * @param $part
+     * @param $value
+     * @param $personalization
+     * @param $personalizationIndex
+     */
+    protected function addMailPart($part, $value, $personalization, $personalizationIndex)
+    {
+        $method = 'add' . $part;
+
+        if ($personalization !== null) {
+            $personalization->{$method}($value);
+            $this->addPersonalization($personalization);
+            return;
+        }
+        if ($this->personalization[0] !== null) {
+            $this->personalization[0]->{$method}($value);
+        } elseif ($this->personalization[$personalizationIndex] !== null) {
+            $this->personalization[$personalizationIndex]->{$method}($value);
+        } else {
+            $personalization = new Personalization();
+            $personalization->{$method}($value);
+            if (($personalizationIndex !== 0)
+                && ($this->getPersonalizationCount() <= $personalizationIndex)
+            ) {
+                $this->personalization[$personalizationIndex] = $personalization;
+            } else {
+                $this->addPersonalization($personalization);
+            }
+        }
     }
 }

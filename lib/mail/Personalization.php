@@ -241,6 +241,19 @@ class Personalization implements \JsonSerializable
     }
 
     /**
+     * Alias to SendAt()
+     * to have similar naming as other mail parts as used in Mail class
+     *
+     * @param SendAt $send_at SendAt object
+     *
+     * @throws TypeException
+     */
+    public function addSendAt($send_at)
+    {
+        $this->setSendAt($send_at);
+    }
+
+    /**
      * Retrieve a SendAt object from a Personalization object
      *
      * @return SendAt
