@@ -7,6 +7,7 @@ before_script:
 - cd test
 
 script:
+- "../vendor/bin/phpstan analyse --no-progress --level 0 lib"
 - "../vendor/bin/phpunit . --filter test*"
 
 after_script:
