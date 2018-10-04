@@ -1887,9 +1887,6 @@ class Mail implements \JsonSerializable
             }
         }
 
-
-
-
         return array_filter(
             [
                 'personalizations' => array_values(array_filter(
