@@ -53,8 +53,7 @@ class Ganalytics implements \JsonSerializable
         $utm_term = null,
         $utm_content = null,
         $utm_campaign = null
-    )
-    {
+    ) {
         if (isset($enable)) {
             $this->setEnable($enable);
         }
@@ -79,9 +78,9 @@ class Ganalytics implements \JsonSerializable
      * Update the enable setting on a Ganalytics object
      *
      * @param bool $enable Indicates if this setting is enabled
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setEnable($enable)
     {
         if (!is_bool($enable)) {
@@ -105,9 +104,9 @@ class Ganalytics implements \JsonSerializable
      *
      * @param string $utm_source Name of the referrer source. (e.g.
      *                           Google, SomeDomain.com, or Marketing Email)
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setCampaignSource($utm_source)
     {
         if (!is_string($utm_source)) {
@@ -130,9 +129,9 @@ class Ganalytics implements \JsonSerializable
      * Add the campaign medium to a Ganalytics object
      *
      * @param string $utm_medium Name of the marketing medium. (e.g. Email)
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setCampaignMedium($utm_medium)
     {
         if (!is_string($utm_medium)) {
@@ -155,9 +154,9 @@ class Ganalytics implements \JsonSerializable
      * Add the campaign term to a Ganalytics object
      *
      * @param string $utm_term Used to identify any paid keywords
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setCampaignTerm($utm_term)
     {
         if (!is_string($utm_term)) {
@@ -181,9 +180,9 @@ class Ganalytics implements \JsonSerializable
      *
      * @param string $utm_content Used to differentiate your campaign from
      *                            advertisements
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setCampaignContent($utm_content)
     {
         if (!is_string($utm_content)) {
@@ -206,9 +205,9 @@ class Ganalytics implements \JsonSerializable
      * Add the campaign name to a Ganalytics object
      *
      * @param string $utm_campaign The name of the campaign
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setCampaignName($utm_campaign)
     {
         if (!is_string($utm_campaign)) {

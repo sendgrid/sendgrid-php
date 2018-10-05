@@ -49,10 +49,10 @@ class GroupsToDisplay implements \JsonSerializable
      *                                     that you would like to be
      *                                     displayed on the unsubscribe
      *                                     preferences page
-     * 
+     *
      * @throws TypeException
      * @return null
-     */ 
+     */
     public function setGroupsToDisplay($groups_to_display)
     {
         if (!is_array($groups_to_display)) {

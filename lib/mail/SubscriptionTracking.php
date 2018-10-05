@@ -95,9 +95,9 @@ class SubscriptionTracking implements \JsonSerializable
      * Update the enable setting on a SubscriptionTracking object
      *
      * @param bool $enable Indicates if this setting is enabled
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setEnable($enable)
     {
         if (!is_bool($enable)) {
@@ -123,9 +123,9 @@ class SubscriptionTracking implements \JsonSerializable
      *                     the subscription tracking link. You may
      *                     control where the link is by using the
      *                     tag <% %>
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setText($text)
     {
         if (!is_string($text)) {
@@ -151,9 +151,9 @@ class SubscriptionTracking implements \JsonSerializable
      *                     the subscription tracking link. You may
      *                     control where the link is by using the
      *                     tag <% %>
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setHtml($html)
     {
         if (!is_string($html)) {
@@ -182,9 +182,9 @@ class SubscriptionTracking implements \JsonSerializable
      *                                 and html parameters. The URL of the link
      *                                 will be placed at the substitution tag’s
      *                                 location, with no additional formatting %>
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setSubstitutionTag($substitution_tag)
     {
         if (!is_string($substitution_tag)) {

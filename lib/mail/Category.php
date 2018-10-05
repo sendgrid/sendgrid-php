@@ -46,7 +46,7 @@ class Category implements \JsonSerializable
      *                         characters
      *
      * @throws TypeException
-     */ 
+     */
     public function setCategory($category)
     {
         if (!is_string($category)) {

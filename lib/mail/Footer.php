@@ -52,9 +52,9 @@ class Footer implements \JsonSerializable
      * Update the enable setting on a Footer object
      *
      * @param bool $enable Indicates if this setting is enabled
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setEnable($enable)
     {
         if (!is_bool($enable)) {
@@ -77,9 +77,9 @@ class Footer implements \JsonSerializable
      * Add text to a Footer object
      *
      * @param string $text The plain text content of your footer
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setText($text)
     {
         if (!is_string($text)) {
@@ -102,9 +102,9 @@ class Footer implements \JsonSerializable
      * Add html to a Footer object
      *
      * @param string $html The HTML content of your footer
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setHtml($html)
     {
         if (!is_string($html)) {

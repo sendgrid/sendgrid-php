@@ -47,9 +47,9 @@ class BccSettings implements \JsonSerializable
      * Update the enable setting on a BccSettings object
      *
      * @param bool $enable Indicates if this setting is enabled
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setEnable($enable)
     {
         if (!is_bool($enable)) {
@@ -73,9 +73,9 @@ class BccSettings implements \JsonSerializable
      *
      * @param string $email The email address that you would like
      *                      to receive the BCC
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setEmail($email)
     {
         if (!is_string($email) &&

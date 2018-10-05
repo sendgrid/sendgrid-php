@@ -52,9 +52,9 @@ class TemplateId implements \JsonSerializable
      *                            a subject and content (either text or html),
      *                            you do not need to specify those at the
      *                            personalizations nor message level
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setTemplateId($template_id)
     {
         if (!is_string($template_id)) {

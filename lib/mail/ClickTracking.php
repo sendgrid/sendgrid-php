@@ -48,9 +48,9 @@ class ClickTracking implements \JsonSerializable
      * Update the enable setting on a ClickTracking object
      *
      * @param bool $enable Indicates if this setting is enabled
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setEnable($enable)
     {
         if (!is_bool($enable)) {
@@ -73,9 +73,9 @@ class ClickTracking implements \JsonSerializable
      * Update the enable text setting on a ClickTracking object
      *
      * @param bool $enable_text Indicates if this setting is enabled
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setEnableText($enable_text)
     {
         if (!is_bool($enable_text)) {

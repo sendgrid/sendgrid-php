@@ -51,5 +51,4 @@ class RecipientForm
     {
         return $this->html;
     }
-
 }

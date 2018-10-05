@@ -13,6 +13,7 @@
  */
 
 namespace SendGrid\Contacts;
+
 /**
  * This class is used to construct a recipient for the /mail/send API call
  *

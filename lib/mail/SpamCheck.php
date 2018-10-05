@@ -64,9 +64,9 @@ class SpamCheck implements \JsonSerializable
      * Update the enable setting on a SpamCheck object
      *
      * @param bool $enable Indicates if this setting is enabled
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setEnable($enable)
     {
         if (!is_bool($enable)) {
@@ -88,13 +88,13 @@ class SpamCheck implements \JsonSerializable
     /**
      * Set the threshold value on a SpamCheck object
      *
-     * @param int $threshold The threshold used to determine if your 
-     *                       content qualifies as spam on a scale 
-     *                       from 1 to 10, with 10 being most strict, 
-     *                       or most 
-     * 
+     * @param int $threshold The threshold used to determine if your
+     *                       content qualifies as spam on a scale
+     *                       from 1 to 10, with 10 being most strict,
+     *                       or most
+     *
      * @throws TypeException
-     */ 
+     */
     public function setThreshold($threshold)
     {
         if (!is_int($threshold)) {
@@ -119,9 +119,9 @@ class SpamCheck implements \JsonSerializable
      * @param string $post_to_url An Inbound Parse URL that you would like
      *                            a copy of your email along with the spam
      *                            report to be sent to
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setPostToUrl($post_to_url)
     {
         if (!is_string($post_to_url)) {

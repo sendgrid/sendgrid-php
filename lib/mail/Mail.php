@@ -664,7 +664,7 @@ class Mail implements \JsonSerializable
      *                                       objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
-     */ 
+     */
     public function addDynamicTemplateData(
         $key,
         $value = null,
@@ -683,7 +683,7 @@ class Mail implements \JsonSerializable
      *                                       objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
-     */ 
+     */
     public function addDynamicTemplateDatas(
         $datas,
         $personalizationIndex = null,
@@ -694,13 +694,13 @@ class Mail implements \JsonSerializable
 
     /**
      * Retrieve dynamic template data key/value pairs from a Personalization object
-     * 
+     *
      * @param int|0 $personalizationIndex Index into an array of
      *                                    existing Personalization
      *                                    objects
-     * 
+     *
      * @return array
-     */ 
+     */
     public function getDynamicTemplateDatas($personalizationIndex = 0)
     {
         return $this->getSubstitutions($personalizationIndex);
@@ -815,7 +815,7 @@ class Mail implements \JsonSerializable
     /**
      * Add a custom arg to a Personalization or Mail object
      *
-     * Note that custom args added to Personalization objects 
+     * Note that custom args added to Personalization objects
      * override global custom args.
      *
      * @param string|CustomArg $key Key or CustomArg object
@@ -987,23 +987,19 @@ class Mail implements \JsonSerializable
      * @param string|null $name  Sender name
      *
      * @throws TypeException
-     */      
+     */
     public function setFrom($email, $name = null)
     {
         if ($email instanceof From) {
             $this->from = $email;
         } else {
-
-            if (
-                is_string($email) && filter_var($email, FILTER_VALIDATE_EMAIL)
-            ) {
+            if (is_string($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $this->from = new From($email, $name);
             } else {
                 throw new TypeException(
                     '$email must be valid and of type string.'
                 );
             }
-
         }
         return;
     }
@@ -1114,7 +1110,7 @@ class Mail implements \JsonSerializable
      *
      * Will return array of Content Objects with text/plain MimeType first
      * Array re-ordered before return where this is not already the case
-     * 
+     *
      * @return Content[]
      */
     public function getContents()
@@ -1174,7 +1170,7 @@ class Mail implements \JsonSerializable
                 $disposition,
                 $content_id
             );
-        } 
+        }
         $this->attachments[] = $attachment;
     }
 
@@ -1559,7 +1555,6 @@ class Mail implements \JsonSerializable
         } else {
             $this->ip_pool_name = new IpPoolName($ip_pool_name);
         }
-
     }
 
     /**
@@ -1580,7 +1575,7 @@ class Mail implements \JsonSerializable
      *                                    use to specify how you would
      *                                    like this email to be handled
      * @throws TypeException
-     */ 
+     */
     public function setMailSettings($mail_settings)
     {
         if (!($mail_settings instanceof MailSettings)) {
@@ -1721,7 +1716,7 @@ class Mail implements \JsonSerializable
      *                                            of how your recipients interact
      *                                            with your email
      * @throws TypeException
-     */ 
+     */
     public function setTrackingSettings($tracking_settings)
     {
         if (!($tracking_settings instanceof TrackingSettings)) {

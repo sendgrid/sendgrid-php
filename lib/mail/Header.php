@@ -50,9 +50,9 @@ class Header implements \JsonSerializable
      * Add the key on a Header object
      *
      * @param string $key Header key
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setKey($key)
     {
         if (!is_string($key)) {
@@ -75,9 +75,9 @@ class Header implements \JsonSerializable
      * Add the value on a Header object
      *
      * @param string $value Header value
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setValue($value)
     {
         if (!is_string($value)) {

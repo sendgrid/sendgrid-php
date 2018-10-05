@@ -65,9 +65,9 @@ class EmailAddress implements \JsonSerializable
      * Add the email address to a EmailAddress object
      *
      * @param string $emailAddress The email address
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setEmailAddress($emailAddress)
     {
         if (!is_string($emailAddress) &&
@@ -104,9 +104,9 @@ class EmailAddress implements \JsonSerializable
      * Add a name to a EmailAddress object
      *
      * @param string $name The name of the person associated with the email
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setName($name)
     {
         if (!is_string($name)) {
@@ -153,9 +153,9 @@ class EmailAddress implements \JsonSerializable
      * @param array $substitutions An array of key/value substitutions to
      *                             be be applied to the text and html content
      *                             of the email body
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setSubstitutions($substitutions)
     {
         if (!is_array($substitutions)) {
@@ -177,9 +177,9 @@ class EmailAddress implements \JsonSerializable
      * Add a subject to a EmailAddress object
      *
      * @param string $subject The personalized subject of the email
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setSubject($subject)
     {
         if (!is_string($subject)) {

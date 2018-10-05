@@ -76,9 +76,9 @@ class MailSettings implements \JsonSerializable
      *                                 if the setting is enabled
      * @param string|null $email The email address that you would like
      *                                 to receive the BCC
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setBccSettings($enable, $email = null)
     {
         if ($enable instanceof BccSettings) {
@@ -110,7 +110,7 @@ class MailSettings implements \JsonSerializable
      * @param BypassListManagement|bool $enable The BypassListManagement
      *                                          object or an indication
      *                                          if the setting is enabled
-     * 
+     *
      * @throws TypeException
      */
     public function setBypassListManagement($enable)
