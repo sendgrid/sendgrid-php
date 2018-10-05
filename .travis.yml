@@ -7,6 +7,7 @@ before_script:
 - cd test
 
 script:
+- "php ../vendor/bin/phpcs --standard=psr2 ../lib/ -n"
 - "../vendor/bin/phpunit . --filter test*"
 
 after_script:
