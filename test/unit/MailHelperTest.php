@@ -25,6 +25,8 @@ class MailTest_Mail extends \PHPUnit\Framework\TestCase
 {
     /**
      * This method tests various types of unencoded emails
+     *
+     * @expectedException \SendGrid\Mail\TypeException
      */
     public function testEmailName()
     {

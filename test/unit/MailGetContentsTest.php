@@ -26,9 +26,9 @@ class MailGetContentsTest extends TestCase
     public function testWillReturnPlainContentFirst()
     {
         $email = new \SendGrid\Mail\Mail();
-        $email->setFrom(null, "test@example.com");
+        $email->setFrom("test@example.com", null);
         $email->setSubject("Hello World from the SendGrid PHP Library");
-        $email->addTo("Test Person", "test@example.com");
+        $email->addTo("test@example.com", "Test Person");
 
         $email->addContent("text/html", "<p>some text here</p>");
         $email->addContent("text/plain", "some text here");

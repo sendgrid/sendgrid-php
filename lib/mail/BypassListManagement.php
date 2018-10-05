@@ -46,9 +46,14 @@ class BypassListManagement implements \JsonSerializable
      * Update the enable setting on a BypassListManagement object
      *
      * @param bool $enable Indicates if this setting is enabled
-     */
+     * 
+     * @throws TypeException
+     */ 
     public function setEnable($enable)
     {
+        if (!is_bool($enable)) {
+            throw new TypeException('$enable must be of type bool.');
+        }
         $this->enable = $enable;
     }
 
