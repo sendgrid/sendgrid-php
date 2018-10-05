@@ -3,6 +3,18 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [7.2.1] - 2018-09-18 ##
+### Fixed
+- Closes [#671](https://github.com/sendgrid/sendgrid-php/issues/671), PR [#689](https://github.com/sendgrid/sendgrid-php/pull/689): isBase64 function returning incorrect. Thanks to [Jmky](https://github.com/Jmky) for the solution!
+
+## [7.2.0] - 2018-08-15 ##
+### Added
+- Closes [#648](https://github.com/sendgrid/sendgrid-php/issues/648), PR [#657](https://github.com/sendgrid/sendgrid-php/pull/657): Allow for Dynamic Templates Implementation. Thanks to [Mike Willbanks](https://github.com/mwillbanks) for the PR!
+
+## [7.1.1] - 2018-08-15 ##
+### Fixed
+- Closes [#667](https://github.com/sendgrid/sendgrid-php/issues/667), PR [#668](https://github.com/sendgrid/sendgrid-php/pull/668): isBase64 function fix. Thanks to [Tigran M](https://github.com/developer-devPHP) for bringing this to our attention!
+
 ## [7.1.0] - 2018-08-14 ##
 ### Added
 
