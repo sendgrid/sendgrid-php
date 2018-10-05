@@ -53,10 +53,15 @@ class CustomArg implements \JsonSerializable
      * Add a custom arg key on a CustomArg object
      *
      * @param string $key Custom arg key
-     */
+     * 
+     * @throws TypeException
+     */ 
     public function setKey($key)
     {
-        $this->key = (string)$key;
+        if (!is_string($key)) {
+            throw new TypeException('$key must be of type string');
+        }
+        $this->key = (string) $key;
     }
 
     /**
@@ -73,10 +78,15 @@ class CustomArg implements \JsonSerializable
      * Add a custom arg value on a CustomArg object
      *
      * @param string $value Custom arg value
-     */
+     * 
+     * @throws TypeException
+     */ 
     public function setValue($value)
     {
-        $this->value = (string)$value;
+        if (!is_string($value)) {
+            throw new TypeException('$value must be of type string.');
+        }
+        $this->value = (string) $value;
     }
 
     /**

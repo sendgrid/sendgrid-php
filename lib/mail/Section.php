@@ -49,9 +49,14 @@ class Section implements \JsonSerializable
      * Add the key on a Section object
      *
      * @param string $key Section key
-     */
+     * 
+     * @throws TypeException
+     */ 
     public function setKey($key)
     {
+        if (!is_string($key)) {
+            throw new TypeException('$key must be of type string.');
+        }
         $this->key = $key;
     }
 
@@ -69,10 +74,15 @@ class Section implements \JsonSerializable
      * Add the value on a Section object
      *
      * @param string $value Section value
-     */
+     * 
+     * @throws TypeException
+     */ 
     public function setValue($value)
     {
-        $this->value = (string)$value;
+        if (!is_string($value)) {
+            throw new TypeException('$value must be of type string.');
+        }
+        $this->value = $value;
     }
 
     /**
