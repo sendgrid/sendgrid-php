@@ -44,7 +44,7 @@ In particular, I'd like to make special mention of [@caseyw](https://github.com/
 
 Since this is a major departure from v6.X, we advise you refactor your code according to the documentation found in the [README](https://github.com/sendgrid/sendgrid-php/blob/master/README.md) and [USE_CASES](https://github.com/sendgrid/sendgrid-php/blob/master/USE_CASES.md) files. We hope you find the new interface much easier to work with. Please open an [issue](https://github.com/sendgrid/sendgrid-php/issues) or PR if you run into any trouble or have any feedback. 
 
-If you wish to continue using previous versions of this SDK, no problam. However, we will not be updating versions less than v7 except for critical bugs and/or security issues.
+If you wish to continue using previous versions of this SDK, no problem. However, we will not be updating versions less than v7 except for critical bugs and/or security issues.
 
 We hope this will be the last breaking change in the foreseeable future; that said, let the iterations begin!
 
@@ -66,7 +66,7 @@ Allow for setting attachment content from path, thanks to [rparpa](https://githu
 ### Added
 - PR [#512](https://github.com/sendgrid/sendgrid-php/pull/512): Omit PHP closing tag in use case sample, thanks to [Sébastien Santoro](https://github.com/dereckson) for the PR!
 
-- PR [#575](https://github.com/sendgrid/sendgrid-php/pull/575): Add an example to the README.md describing how to send emails as html as the content type, thanks to [Benjamin Manford](https://github.com/manfordbenjamin) for the PR!
+- PR [#575](https://github.com/sendgrid/sendgrid-php/pull/575): Add an example to the README.md describing how to send emails as HTML as the content type, thanks to [Benjamin Manford](https://github.com/manfordbenjamin) for the PR!
 
 - Closes [#547](https://github.com/sendgrid/sendgrid-php/issues/547), PR [#549](https://github.com/sendgrid/sendgrid-php/pull/549): 
 Added Code Review to Contributing.md, thanks to [tomhorvat](https://github.com/tomhorvat) for the PR!
@@ -93,7 +93,7 @@ Added CodeCov support, thanks to [Owen Voke](https://github.com/pxgamer) for the
 
 - Closes [#532](https://github.com/sendgrid/sendgrid-php/issues/532), PR [#537](https://github.com/sendgrid/sendgrid-php/pull/537): Add license date range unit test, thanks to [uppe-r](https://github.com/uppe-r) for the PR!
 
-- Closes [#533](https://github.com/sendgrid/sendgrid-php/issues/533), PR [#536](https://github.com/sendgrid/sendgrid-php/pull/536): Add unittest to check that specific files exist in repo, thanks to [Bertus Steenberg](https://github.com/bertuss) for the PR!
+- Closes [#533](https://github.com/sendgrid/sendgrid-php/issues/533), PR [#536](https://github.com/sendgrid/sendgrid-php/pull/536): Add unit test to check that specific files exist in repo, thanks to [Bertus Steenberg](https://github.com/bertuss) for the PR!
 
 - Closes [#524](https://github.com/sendgrid/sendgrid-php/issues/524), PR [#527](https://github.com/sendgrid/sendgrid-php/pull/527): Created code climate YML file, thanks to [Prashu Chaudhary](https://github.com/prashuchaudhary) for the PR!
 
@@ -125,7 +125,7 @@ Added CodeCov support, thanks to [Owen Voke](https://github.com/pxgamer) for the
 
 - PR [#416](https://github.com/sendgrid/sendgrid-php/pull/416): Add release notifications, thanks to [Gabriel Krell](https://github.com/gabrielkrell) for the PR!
 
-- PR [#415](https://github.com/sendgrid/sendgrid-php/pull/415): Updated example.php to fix that there was no way for the sections to get substituted without their being a substition that calls them, thanks to [Kyle Roberts](https://github.com/kylearoberts) for the PR!
+- PR [#415](https://github.com/sendgrid/sendgrid-php/pull/415): Updated example.php to fix that there was no way for the sections to get substituted without their being a substitution that calls them, thanks to [Kyle Roberts](https://github.com/kylearoberts) for the PR!
 
 ### Fixed
 - PR [#545](https://github.com/sendgrid/sendgrid-php/pull/545): Fix typo CONTRIBUTING.md, thanks to [thepriefy](https://github.com/thepriefy) for the PR!
