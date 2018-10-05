@@ -50,7 +50,7 @@ class EmailAddress implements \JsonSerializable
         if (isset($emailAddress)) {
             $this->setEmailAddress($emailAddress);
         }
-        if (isset($name)) {
+        if (isset($name) && $name !== null) {
             $this->setName($name);
         }
         if (isset($substitutions)) {
@@ -65,9 +65,18 @@ class EmailAddress implements \JsonSerializable
      * Add the email address to a EmailAddress object
      *
      * @param string $emailAddress The email address
-     */
+     * 
+     * @throws TypeException
+     */ 
     public function setEmailAddress($emailAddress)
     {
+        if (!is_string($emailAddress) &&
+            filter_var($emailAddress, FILTER_VALIDATE_EMAIL)
+        ) {
+            throw new TypeException(
+                '$emailAddress must be valid and of type string.'
+            );
+        }
         $this->email = $emailAddress;
     }
 
@@ -95,9 +104,15 @@ class EmailAddress implements \JsonSerializable
      * Add a name to a EmailAddress object
      *
      * @param string $name The name of the person associated with the email
-     */
+     * 
+     * @throws TypeException
+     */ 
     public function setName($name)
     {
+        if (!is_string($name)) {
+            throw new TypeException('$name must be of type string.');
+        }
+
         /*
             Issue #368
             ==========
@@ -138,9 +153,15 @@ class EmailAddress implements \JsonSerializable
      * @param array $substitutions An array of key/value substitutions to
      *                             be be applied to the text and html content
      *                             of the email body
-     */
+     * 
+     * @throws TypeException
+     */ 
     public function setSubstitutions($substitutions)
     {
+        if (!is_array($substitutions)) {
+            throw new TypeException('$substitutions must be an array.');
+        }
+
         $this->substitutions = $substitutions;
     }
 
@@ -156,10 +177,19 @@ class EmailAddress implements \JsonSerializable
      * Add a subject to a EmailAddress object
      *
      * @param string $subject The personalized subject of the email
-     */
+     * 
+     * @throws TypeException
+     */ 
     public function setSubject($subject)
     {
-        $this->subject = $subject;
+        if (!is_string($subject)) {
+            throw new TypeException('$subject must be of type string.');
+        }
+        if (!($subject instanceof Subject)) {
+            $this->subject = new Subject($subject);
+        } else {
+            $this->subject = $subject;
+        }
     }
 
     /**

@@ -54,9 +54,14 @@ class OpenTracking implements \JsonSerializable
      * Update the enable setting on a OpenTracking object
      *
      * @param bool $enable Indicates if this setting is enabled
-     */
+     * 
+     * @throws TypeException
+     */ 
     public function setEnable($enable)
     {
+        if (!is_bool($enable)) {
+            throw new TypeException('$enable must be of type bool');
+        }
         $this->enable = $enable;
     }
 
@@ -78,9 +83,14 @@ class OpenTracking implements \JsonSerializable
      *                                 of your email at a location that you
      *                                 desire. This tag will be replaced by
      *                                 the open tracking pixel
-     */
+     * 
+     * @throws TypeException
+     */ 
     public function setSubstitutionTag($substitution_tag)
     {
+        if (!is_string($substitution_tag)) {
+            throw new TypeException('$substitution_tag must be of type string.');
+        }
         $this->substitution_tag = $substitution_tag;
     }
 

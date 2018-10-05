@@ -72,9 +72,13 @@ class Attachment implements \JsonSerializable
      *
      * @param string $content Base64 encoded content
      *
-     */
+     * @throws TypeException
+     */  
     public function setContent($content)
     {
+        if (!is_string($content)) {
+            throw new TypeException('$content must be of type string.');
+        }
         if (!$this->isBase64($content)) {
             $this->content = base64_encode($content);
         } else {
@@ -96,9 +100,14 @@ class Attachment implements \JsonSerializable
      * Add the mime type to a Attachment object
      *
      * @param string $type Mime type of the attachment
-     */
+     * 
+     * @throws TypeException
+     */  
     public function setType($type)
     {
+        if (!is_string($type)) {
+            throw new TypeException('$type must be of type string.');
+        }
         $this->type = $type;
     }
 
@@ -116,9 +125,14 @@ class Attachment implements \JsonSerializable
      * Add the file name to a Attachment object
      *
      * @param string $filename File name of the attachment
-     */
+     * 
+     * @throws TypeException
+     */  
     public function setFilename($filename)
     {
+        if (!is_string($filename)) {
+            throw new TypeException('$filename must be of type string');
+        }
         $this->filename = $filename;
     }
 
@@ -137,9 +151,14 @@ class Attachment implements \JsonSerializable
      *
      * @param string $disposition How the attachment should be displayed:
      *                            inline or attachment, default is attachment
-     */
+     * 
+     * @throws TypeException
+     */  
     public function setDisposition($disposition)
     {
+        if (!is_string($disposition)) {
+            throw new TypeException('$disposition must be of type string.');
+        }
         $this->disposition = $disposition;
     }
 
@@ -161,6 +180,9 @@ class Attachment implements \JsonSerializable
      */
     public function setContentID($content_id)
     {
+        if (!is_string($content_id)) {
+            throw new TypeException('$content_id must be of type string.');
+        }
         $this->content_id = $content_id;
     }
 
@@ -180,12 +202,13 @@ class Attachment implements \JsonSerializable
      * @param $string string The string that has to be checked
      * @return bool
      */
-    private function isBase64($string) {
+    private function isBase64($string) 
+    {
         $decoded_data = base64_decode($string, true);
         $encoded_data = base64_encode($decoded_data);
-        if ($encoded_data != $string) return false;
-        else if (!ctype_print($decoded_data)) return false;
-
+        if ($encoded_data != $string) {
+            return false;
+        }
         return true;
     }
 
