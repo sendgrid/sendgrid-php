@@ -214,28 +214,23 @@ class Mail implements \JsonSerializable
             if (isset($personalizationIndex)
                 && !isset($this->personalization[$personalizationIndex])
             ) {
-                // TODO: We should only do this if there exists an index
-                // previous. For example, if given an index 3 and there is
-                // no index 2, we should throw an error.
+                if ($personalizationIndex !== 0 &&
+                    !isset($this->personalization[$personalizationIndex-1])
+                ) {
+                    throw new \InvalidArgumentException('The personalizationIndex should be ' . ($personalizationIndex-1));
+                }
+
                 $this->personalization[$personalizationIndex]
                     = new Personalization();
             }
-            if ($this->personalization[0] != null && $personalizationIndex == 0) {
-                $this->personalization[0]->$personalizationFunctionCall($email);
-                if ($subs = $email->getSubstitutions()) {
-                    foreach ($subs as $key => $value) {
-                        $this->personalization[0]->addSubstitution($key, $value);
-                    }
-                }
-                return;
-            } else if ($this->personalization[$personalizationIndex] != null) {
+
+            $personalizationIndex = ($personalizationIndex === null ? 0 : $personalizationIndex);
+
+            if ($this->personalization[$personalizationIndex] != null) {
                 $this->personalization[$personalizationIndex]->$personalizationFunctionCall($email);
                 if ($subs = $email->getSubstitutions()) {
                     foreach ($subs as $key => $value) {
-                        $this->personalization[$personalizationIndex]->addSubstitution(
-                            $key,
-                            $value
-                        );
+                        $this->personalization[$personalizationIndex]->addSubstitution($key, $value);
                     }
                 }
                 return;
@@ -664,7 +659,7 @@ class Mail implements \JsonSerializable
      *                                       objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
-     */ 
+     */
     public function addDynamicTemplateData(
         $key,
         $value = null,
@@ -683,7 +678,7 @@ class Mail implements \JsonSerializable
      *                                       objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
-     */ 
+     */
     public function addDynamicTemplateDatas(
         $datas,
         $personalizationIndex = null,
@@ -694,13 +689,13 @@ class Mail implements \JsonSerializable
 
     /**
      * Retrieve dynamic template data key/value pairs from a Personalization object
-     * 
+     *
      * @param int|0 $personalizationIndex Index into an array of
      *                                    existing Personalization
      *                                    objects
-     * 
+     *
      * @return array
-     */ 
+     */
     public function getDynamicTemplateDatas($personalizationIndex = 0)
     {
         return $this->getSubstitutions($personalizationIndex);
@@ -815,7 +810,7 @@ class Mail implements \JsonSerializable
     /**
      * Add a custom arg to a Personalization or Mail object
      *
-     * Note that custom args added to Personalization objects 
+     * Note that custom args added to Personalization objects
      * override global custom args.
      *
      * @param string|CustomArg $key Key or CustomArg object
@@ -987,7 +982,7 @@ class Mail implements \JsonSerializable
      * @param string|null $name  Sender name
      *
      * @throws TypeException
-     */      
+     */
     public function setFrom($email, $name = null)
     {
         if ($email instanceof From) {
@@ -1114,7 +1109,7 @@ class Mail implements \JsonSerializable
      *
      * Will return array of Content Objects with text/plain MimeType first
      * Array re-ordered before return where this is not already the case
-     * 
+     *
      * @return Content[]
      */
     public function getContents()
@@ -1174,7 +1169,7 @@ class Mail implements \JsonSerializable
                 $disposition,
                 $content_id
             );
-        } 
+        }
         $this->attachments[] = $attachment;
     }
 
@@ -1580,7 +1575,7 @@ class Mail implements \JsonSerializable
      *                                    use to specify how you would
      *                                    like this email to be handled
      * @throws TypeException
-     */ 
+     */
     public function setMailSettings($mail_settings)
     {
         if (!($mail_settings instanceof MailSettings)) {
@@ -1721,7 +1716,7 @@ class Mail implements \JsonSerializable
      *                                            of how your recipients interact
      *                                            with your email
      * @throws TypeException
-     */ 
+     */
     public function setTrackingSettings($tracking_settings)
     {
         if (!($tracking_settings instanceof TrackingSettings)) {
