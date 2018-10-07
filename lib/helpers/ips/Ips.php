@@ -29,7 +29,8 @@ class Ips
 		$unassigned_ips=array();
 		foreach($ips as $ip){
 			if (empty($ip['subusers'])) {
-				array_push($unassigned_ips,$ip['ip']);
+                $unassigned_ips[] = $ip['ip'];
+				//array_push($unassigned_ips,$ip['ip']);
 			}
 		}
 		return $unassigned_ips;
