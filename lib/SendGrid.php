@@ -72,6 +72,10 @@ class SendGrid
      */
     public function send(\SendGrid\Mail\Mail $email)
     {
+        $templateId = $email->getTemplateId();
+        $verifyTemplateId = new \SendGrid\Mail\VerifyTemplateId($templateId, $this->client);
+        $verifyTemplateId->verify();
+
         return $this->client->mail()->send()->post($email);
     }
 }

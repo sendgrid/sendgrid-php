@@ -150,4 +150,15 @@ class MailSendTest extends BaseTestClass
         $response = self::$sg->client->mail()->send()->post($request_body, null, $request_headers);
         $this->assertEquals(202, $response->statusCode());
     }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testMailSendOnInvalidTemplateId()
+    {
+        $email = new \SendGrid\Mail\Mail;
+        $host = ['host' => 'http://localhost'];
+        $sg = new \SendGrid('API_KEY', $host);
+        $sg->send($email);
+    }
 }
