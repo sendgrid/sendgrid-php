@@ -13,6 +13,7 @@ This documentation provides examples for specific use cases. Please [open an iss
 - [How to View Email Statistics](#how-to-view-email-statistics)
 - [Deploying to Heroku](#deploying-to-heroku)
 - [Google App Engine Installation](#google-app-engine-installation)
+- [Using a Slack Event API Integration](#using-a-slack-event-api-integration)
 
 <a name="attachments"></a>
 # Attachments
@@ -1138,3 +1139,64 @@ The file `php.ini` should contain:
 ```ini
 google_app_engine.enable_curl_lite = 1
 ```
+
+<a name="slack-event-api"></a>
+# Using a Slack Event API Integration
+
+You can use the Slack Event API to send an email with SendGrid. This tutorial will help you set up a Slack app based on a [defined event](https://api.slack.com/events) to trigger an email. The documentation here is based on the information found at https://api.slack.com/events-api. You can find more details about the Events API there. This example uses the **channel_created** event.
+
+1. Create a file on your server to use as an endpoint for the Slack app. Use the following code temporarily until you verify your endpoint URL in step 5:
+```php
+<?php
+//Verify request by responding with the challenge.
+$data = json_decode(file_get_contents('php://input'), true);
+echo $data['challenge'];
+```
+
+2. Create a Slack app at https://api.slack.com/slack-apps
+
+3. Name your app and choose a workspace
+
+4. From your new app’s Basic Information page, navigate to Event Subscriptions and toggle them On.
+
+5. Paste the URL of the file you created into the Request URL field to verify your new app.
+
+6. Replace the code in your file with the following code, which sends a simple email.
+
+```php
+<?php
+require 'vendor/autoload.php'; // If you're using Composer (recommended)
+// Comment out the above line if not using Composer
+// require("<PATH TO>/sendgrid-php.php");
+// If not using Composer, uncomment the above line and
+// download sendgrid-php.zip from the latest release here,
+// replacing <PATH TO> with the path to the sendgrid-php.php file,
+// which is included in the download:
+// https://github.com/sendgrid/sendgrid-php/releases
+
+$data = json_decode(file_get_contents('php://input'), true);
+$subject = 'A '.$data['event']['type'].' event was triggered.';
+$body = 'A new channel was created with the name #'.$data['event']['channel']['name'].'.';
+
+$email = new \SendGrid\Mail\Mail(); 
+$email->setFrom("test@example.com", "Example User");
+$email->setSubject($subject);
+$email->addTo("test@example.com", "Example User");
+$email->addContent("text/plain", $body);
+$email->addContent(
+    "text/html", "<strong>$body</strong>"
+);
+$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+try {
+    $response = $sendgrid->send($email);
+} catch (Exception $e) {
+    error_log( 'Caught exception: '. $e->getMessage() );
+}
+```
+
+7. Add the **channel_created** workspace event, which will trigger the email send when a new channel is created in your Slack workspace. If you choose a different type of event, be aware that each type of event sends a unique set of JSON data, so you may need to update the PHP code in your file accordingly. You can find more information for each event at https://api.slack.com/events.
+
+8. Save your changes to the app. This action will also update your app’s permissions as needed.
+
+9. Choose the Install App link in the Settings column on your navigation. Once the installation is complete, you will be able to test your new integration from your workspace.
+
