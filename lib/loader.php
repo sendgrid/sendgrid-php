@@ -17,6 +17,7 @@ require_once __DIR__ . '/contacts/RecipientForm.php';
 require_once __DIR__ . '/mail/EmailAddress.php';
 require_once __DIR__ . '/mail/Asm.php';
 require_once __DIR__ . '/mail/Attachment.php';
+require_once __DIR__ . '/mail/AttachmentMimeType.php';
 require_once __DIR__ . '/mail/BatchId.php';
 require_once __DIR__ . '/mail/Bcc.php';
 require_once __DIR__ . '/mail/BccSettings.php';
