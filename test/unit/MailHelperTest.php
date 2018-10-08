@@ -82,7 +82,7 @@ class MailTest_Mail extends \PHPUnit\Framework\TestCase
     	$email->setEmailAddress('test@example.com@wrong');
     }
 
-    public function testIfPersonalizationSerializationIsNotReturningNullObject()
+    public function testJsonSerializeOverPersonalizationsShouldNotReturnNull()
     {
         $objEmail = new \SendGrid\Mail\Mail();
 
