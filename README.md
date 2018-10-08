@@ -208,9 +208,9 @@ Quick links:
 
 - [Feature Request](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#feature_request)
 - [Bug Reports](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#submit_a_bug_report)
-- [Sign the CLA to Create a Pull Request](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#cla)
 - [Improvements to the Codebase](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#improvements_to_the_codebase)
 - [Review Pull Requests](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#code-reviews)
+- [Sign the CLA to Create a Pull Request](https://cla.sendgrid.com/sendgrid/sendgrid-php)
 
 <a name="troubleshooting"></a>
 # Troubleshooting
@@ -220,7 +220,9 @@ Please see our [troubleshooting guide](https://github.com/sendgrid/sendgrid-php/
 <a name="about"></a>
 # About
 
-sendgrid-php is guided and supported by the SendGrid [Developer Experience Team](mailto:dx@sendgrid.com).
+sendgrid-php is guided and supported by the SendGrid Developer Experience Team.
+
+Email the Developer Experience Team [here](mailto:dx@sendgrid.com) in case of any assistance or queries.
 
 sendgrid-php is maintained and funded by SendGrid, Inc. The names and logos for sendgrid-php are trademarks of SendGrid, Inc.
 
