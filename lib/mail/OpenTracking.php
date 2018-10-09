@@ -27,7 +27,11 @@ class OpenTracking implements \JsonSerializable
 {
     /** @var $enable bool Indicates if this setting is enabled */
     private $enable;
-    /** @var $substitution_tag string Allows you to specify a substitution tag that you can insert in the body of your email at a location that you desire. This tag will be replaced by the open tracking pixel */
+    /** 
+     * @var $substitution_tag string Allows you to specify a substitution tag that you can insert in the body of
+     *                               your email at a location that you desire. This tag will be replaced by the
+     *                               open tracking pixel
+     */
     private $substitution_tag;
 
     /**
