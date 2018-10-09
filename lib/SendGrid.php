@@ -1,4 +1,5 @@
 <?php
+// phpcs:ignoreFile
 /**
  * This library allows you to quickly and easily send emails through
  * SendGrid using PHP.
@@ -18,10 +19,8 @@
  *
  * @package SendGrid\Mail
  */
-// phpcs:disable
 class SendGrid
 {
-// phpcs:enable
     const VERSION = '7.2.1';
 
     // @var string
