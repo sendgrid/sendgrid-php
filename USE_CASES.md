@@ -819,6 +819,10 @@ Email Subject:
 ```text
 {{ subject }}
 ```
+Note: If you include the characters ', " or & in a subject line, be sure to use three brackets like below:
+```text
+{{{ subject }}}
+```
 
 Template Body:
 
