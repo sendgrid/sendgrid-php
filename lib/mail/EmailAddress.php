@@ -25,7 +25,10 @@ class EmailAddress implements \JsonSerializable
     private $name;
     /** @var $email string The email address */
     private $email;
-    /** @var $substitutions Substitution[] An array of key/value substitutions to be be applied to the text and html content of the email body */
+    /** 
+     * @var $substitutions Substitution[] An array of key/value substitutions to be be applied to the text and html 
+     *                                    content of the email body 
+     */
     private $substitutions;
     /** @var $subject Subject The personalized subject of the email */
     private $subject;
