@@ -18,8 +18,10 @@
  *
  * @package SendGrid\Mail
  */
+// phpcs:disable
 class SendGrid
 {
+// phpcs:enable
     const VERSION = '7.2.1';
 
     // @var string
