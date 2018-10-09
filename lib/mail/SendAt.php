@@ -48,7 +48,7 @@ class SendAt implements \JsonSerializable
      *                          deferral rates because it won't be going through
      *                          our servers at the same times as everyone else's mail
      */
-    public function __construct($send_at=null)
+    public function __construct($send_at = null)
     {
         if (isset($send_at)) {
             $this->setSendAt($send_at);
