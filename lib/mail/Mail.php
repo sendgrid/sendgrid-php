@@ -46,8 +46,8 @@ class Mail implements \JsonSerializable
     private $categories;
 
     /**
-     * @var $custom_args CustomArg[] Values that are specific to the entire send that will be carried along with the email
-     *                               and its activity data
+     * @var $custom_args CustomArg[] Values that are specific to the entire send that will be carried along with the
+     *                               email and its activity data
      */
     private $custom_args;
 
@@ -70,14 +70,14 @@ class Mail implements \JsonSerializable
     private $ip_pool_name;
 
     /**
-     * @var $mail_settings MailSettings A collection of different mail settings that you can use to specify how you would
-     *                                  like this email to be handled
+     * @var $mail_settings MailSettings A collection of different mail settings that you can use to specify how you
+     *                                  would like this email to be handled
      */
     private $mail_settings;
 
     /**
-     * @var $tracking_settings TrackingSettings Settings to determine how you would like to track the metrics of how your
-     *                                          recipients interact with your email
+     * @var $tracking_settings TrackingSettings Settings to determine how you would like to track the metrics of how
+     *                                          your recipients interact with your email
      */
     private $tracking_settings;
 
