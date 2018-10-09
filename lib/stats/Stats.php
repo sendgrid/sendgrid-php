@@ -129,7 +129,8 @@ class Stats
     public function getSum(
         $sortByMetric = 'delivered',
         $sortByDirection = 'desc',
-        $limit = 5, $offset = 0
+        $limit = 5, 
+        $offset = 0
     ) {
         $this->validateOptions(
             'sortByDirection',
