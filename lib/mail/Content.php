@@ -21,7 +21,10 @@ namespace SendGrid\Mail;
  */
 class Content implements \JsonSerializable
 {
-    /** @var $type string The mime type of the content you are including in your email. For example, “text/plain” or “text/html” */
+    /** 
+     * @var $type string The mime type of the content you are including in your email. For example, “text/plain” 
+     *                   or “text/html” 
+     */
     private $type;
     /** @var $value string The actual content of the specified mime type that you are including in your email */
     private $value;
