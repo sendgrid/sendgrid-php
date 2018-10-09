@@ -8,9 +8,9 @@ before_script:
 
 script:
 - "../vendor/bin/phpunit . --filter test*"
-
-after_script:
 - cd ../
+- "vendor/bin/phpcs"
+
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 
