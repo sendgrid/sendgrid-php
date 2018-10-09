@@ -53,8 +53,7 @@ class Ganalytics implements \JsonSerializable
         $utm_term = null,
         $utm_content = null,
         $utm_campaign = null
-    )
-    {
+    ) {
         if (isset($enable)) {
             $this->setEnable($enable);
         }
