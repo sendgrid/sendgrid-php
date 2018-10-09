@@ -897,6 +897,42 @@ $email = new Mail(
 $email->setTemplateId("d-13b8f94fbcae4ec6b75270d6cb59f932");
 $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 try {
+    //Check if TemplateId is prefixed with d-
+    if(substr($email->getTemplateId()->getTemplateId(), 0, 2) === "d-" ){
+
+        //Start Looking for Subjects
+
+        //1. Global Subject
+        if(($email->getGlobalSubject()) != null){
+            if( preg_match("/'|\"|&/", ($email->getGlobalSubject()->getSubject())) )
+            {
+                    //Throw error or Log
+                    //throw new \Exception('Character \', " or & in subject line of Global Subject, use {{{ subject }}} to avoid escaping.');
+            }
+        }
+
+        //2. Check in Personalization Subject
+        foreach($email->getPersonalizations() as $personalization){
+            if(($personalization->getSubject()) != null){
+                if( preg_match("/'|\"|&/", ($personalization->getSubject()->getSubject())) )
+                {
+                    //Throw error or Log
+                    //throw new \Exception('Character \', " or & in subject line for '.$personalization->getTos()[0]->getEmail().', use {{{ subject }}} to avoid escaping.');
+                }
+            }
+        }
+
+        //3. Check in Personalization Substitution Subject
+        foreach($email->getPersonalizations() as $personalization){
+            if(array_key_exists('subject', $personalization->getSubstitutions())){
+                if( preg_match("/'|\"|&/", (($personalization->getSubstitutions())['subject'])) )
+                {
+                    //Throw error or Log
+                    //throw new \Exception('Character \', " or & in subject line for '.$personalization->getTos()[0]->getEmail().', use {{{ subject }}} to avoid escaping.');
+                }
+            }
+        }
+    }
     $response = $sendgrid->send($email);
     print $response->statusCode() . "\n";
     print_r($response->headers());
@@ -945,6 +981,42 @@ $email->addTo(
 $email->setTemplateId("d-13b8f94fbcae4ec6b75270d6cb59f932");
 $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 try {
+    //Check if TemplateId is prefixed with d-
+    if(substr($email->getTemplateId()->getTemplateId(), 0, 2) === "d-" ){
+
+        //Start Looking for Subjects
+
+        //1. Global Subject
+        if(($email->getGlobalSubject()) != null){
+            if( preg_match("/'|\"|&/", ($email->getGlobalSubject()->getSubject())) )
+            {
+                    //Throw error or Log
+                    //throw new \Exception('Character \', " or & in subject line of Global Subject, use {{{ subject }}} to avoid escaping.');
+            }
+        }
+
+        //2. Check in Personalization Subject
+        foreach($email->getPersonalizations() as $personalization){
+            if(($personalization->getSubject()) != null){
+                if( preg_match("/'|\"|&/", ($personalization->getSubject()->getSubject())) )
+                {
+                    //Throw error or Log
+                    //throw new \Exception('Character \', " or & in subject line for '.$personalization->getTos()[0]->getEmail().', use {{{ subject }}} to avoid escaping.');
+                }
+            }
+        }
+
+        //3. Check in Personalization Substitution Subject
+        foreach($email->getPersonalizations() as $personalization){
+            if(array_key_exists('subject', $personalization->getSubstitutions())){
+                if( preg_match("/'|\"|&/", (($personalization->getSubstitutions())['subject'])) )
+                {
+		    //Throw error or Log
+                    //throw new \Exception('Character \', " or & in subject line for '.$personalization->getTos()[0]->getEmail().', use {{{ subject }}} to avoid escaping.');
+                }
+            }
+        }
+    }
     $response = $sendgrid->send($email);
     print $response->statusCode() . "\n";
     print_r($response->headers());
