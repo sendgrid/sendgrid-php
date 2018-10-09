@@ -21,7 +21,11 @@ namespace SendGrid\Mail;
  */
 class IpPoolName implements \JsonSerializable
 {
-    /** @var $ip_pool_name string The IP Pool that you would like to send this email from. Minimum length: 2, Maximum Length: 64 */
+    /** 
+     * @var $ip_pool_name string The IP Pool that you would like to send 
+     *                           this email from. 
+     *                           Minimum length: 2, Maximum Length: 64 
+     */
     private $ip_pool_name;
 
     /**
