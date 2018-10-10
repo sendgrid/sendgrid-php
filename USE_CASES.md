@@ -3,6 +3,7 @@ This documentation provides examples for specific use cases. Please [open an iss
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Attachments](#attachments)
+- [Attaching a File from S3](#attaching-a-file-from-s3)
 - [Kitchen Sink - an example with all settings used](#kitchen-sink)
 - [Send an Email to a Single Recipient](#send-an-email-to-a-single-recipient)
 - [Send an Email to Multiple Recipients](#send-an-email-to-multiple-recipients)
@@ -55,6 +56,74 @@ try {
     print $response->body() . "\n";
 } catch (Exception $e) {
     echo 'Caught exception: '.  $e->getMessage(). "\n";
+}
+```
+
+<a name="s3-attachment-example"></a>
+# Attaching a File from S3
+
+You can attach a file from [Amazon S3 storage](https://aws.amazon.com/s3/) to your emails. In addition to sendgrid-php, this requires the [AWS SDK for PHP](https://aws.amazon.com/sdk-for-php/). Please follow the [Getting Started](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/getting-started_index.html) tutorial at Amazon if you haven’t set up your AWS SDK installation yet.
+
+```php
+<?php
+
+// This example assumes you're using Composer for both
+// the sendgrid-php library and the AWS SDK for PHP.
+
+require 'vendor/autoload.php';
+
+use Aws\S3\S3Client;
+use Aws\S3\Exception\S3Exception;
+
+$bucket = '*** Your Bucket Name ***';
+$keyname = '*** Your Object Key ***';
+
+$s3 = new S3Client([
+    'version' => 'latest',
+    'region'  => 'us-east-1' // This should match the region of your S3 bucket.
+]);
+
+try {
+    // Get the object.
+	// See https://docs.aws.amazon.com/AmazonS3/latest/dev/RetrieveObjSingleOpPHP.html
+    $result = $s3->getObject([
+        'Bucket' => $bucket,
+        'Key'    => $keyname
+    ]);
+
+    $keyExplode = explode('/',$keyname);
+    $attachmentFilename = end($keyExplode);
+    $attachmentContent = base64_encode($result['Body']);
+    $attachmentContentType = $result['ContentType'];
+	
+    $email = new \SendGrid\Mail\Mail(); 
+    $email->setFrom("test@example.com", "Example User");
+    $email->setSubject("Attaching a File from S3");
+    $email->addTo("test@example.com", "Example User");
+    $email->addContent("text/plain", "See attached file from S3.");
+    $email->addContent(
+        "text/html", "<strong>See attached file from S3.</strong>"
+    );
+	
+    $attachment = new \SendGrid\Mail\Attachment();
+    $attachment->setContent($attachmentContent);
+    $attachment->setType($attachmentContentType);
+    $attachment->setFilename($attachmentFilename);
+    $attachment->setDisposition("attachment");
+    $attachment->setContentId($attachmentFilename); //Only used if disposition is set to inline
+    $email->addAttachment($attachment);
+
+    $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+    try {
+        $response = $sendgrid->send($email);
+        print $response->statusCode() . "\n";
+        print_r($response->headers());
+        print $response->body() . "\n";
+    } catch (Exception $e) {
+        echo 'Caught exception: '. $e->getMessage() ."\n";
+    }
+} catch (S3Exception $e) {
+    echo 'Caught exception: '. $e->getMessage() . "\n";
 }
 ```
 
