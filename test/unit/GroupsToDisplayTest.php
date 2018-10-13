@@ -30,4 +30,38 @@ class GroupsToDisplayTest extends TestCase
         $groups = new GroupsToDisplay($data);
         $groups->addGroupToDisplay(1);
     }
+
+    public function testConstructor()
+    {
+        $groupsToDisplay = new GroupsToDisplay([123456]);
+
+        $this->assertInstanceOf(GroupsToDisplay::class, $groupsToDisplay);
+        $this->assertSame([123456], $groupsToDisplay->getGroupsToDisplay());
+    }
+
+    public function testSetGroupsToDisplay()
+    {
+        $groupsToDisplay = new GroupsToDisplay();
+        $groupsToDisplay->setGroupsToDisplay([123456]);
+
+        $this->assertSame([123456], $groupsToDisplay->getGroupsToDisplay());
+    }
+
+    /**
+     * @expectedException \SendGrid\Mail\TypeException
+     * @expectedExceptionMessage $groups_to_display must be an array.
+     */
+    public function testSetGroupsToDisplayOnInvalidType()
+    {
+        $groupsToDisplay = new GroupsToDisplay();
+        $groupsToDisplay->setGroupsToDisplay('invalid_groups_to_display');
+    }
+
+    public function testJsonSerialize()
+    {
+        $groupsToDisplay = new GroupsToDisplay();
+        $groupsToDisplay->setGroupsToDisplay([123456]);
+
+        $this->assertSame([123456], $groupsToDisplay->jsonSerialize());
+    }
 }

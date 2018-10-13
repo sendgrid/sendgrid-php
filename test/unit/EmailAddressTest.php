@@ -667,4 +667,118 @@ JSON;
         $objEmail = new Mail(new From('testing@bar.com'));
         $objEmail->addTo('foo+1@bar.com', 'foo bar1', null, 1);
     }
+
+    public function testConstructor()
+    {
+        $emailAddress = new EmailAddress('dx@sendgrid.com', 'Elmer', ['key' => 'value'], 'subject');
+
+        $this->assertInstanceOf(EmailAddress::class, $emailAddress);
+        $this->assertSame('dx@sendgrid.com', $emailAddress->getEmailAddress());
+        $this->assertSame('Elmer', $emailAddress->getName());
+        $this->assertSame(['key' => 'value'], $emailAddress->getSubstitutions());
+        $this->assertSame('subject', $emailAddress->getSubject()->getSubject());
+    }
+
+    public function testSetEmailAddress()
+    {
+        $emailAddress = new EmailAddress();
+        $emailAddress->setEmailAddress('dx@sendgrid.com');
+
+        $this->assertSame('dx@sendgrid.com', $emailAddress->getEmailAddress());
+        $this->assertSame('dx@sendgrid.com', $emailAddress->getEmail());
+    }
+
+    /**
+     * @expectedException \SendGrid\Mail\TypeException
+     * @expectedExceptionMessage $emailAddress must be valid format.
+     */
+    public function testSetEmailAddressOnInvalidFormat()
+    {
+        $emailAddress = new EmailAddress();
+        $emailAddress->setEmailAddress('invalid_email_address_format');
+    }
+
+    /**
+     * @expectedException \SendGrid\Mail\TypeException
+     * @expectedExceptionMessage $emailAddress must be of type string.
+     */
+    public function testSetEmailAddressOnInvalidType()
+    {
+        $emailAddress = new EmailAddress();
+        $emailAddress->setEmailAddress(['dx@sendgrid.com']);
+    }
+
+    public function testSetName()
+    {
+        $emailAddress = new EmailAddress();
+        $emailAddress->setName('Elmer');
+
+        $this->assertSame('Elmer', $emailAddress->getName());
+    }
+
+    public function testSetNameOnCommaChar()
+    {
+        $emailAddress = new EmailAddress();
+        $emailAddress->setName('Chun-Sheng, Li');
+
+        $this->assertSame('"Chun-Sheng, Li"', $emailAddress->getName());
+    }
+
+    /**
+     * @expectedException \SendGrid\Mail\TypeException
+     * @expectedExceptionMessage $name must be of type string.
+     */
+    public function testSetNameOnInvalidType()
+    {
+        $emailAddress = new EmailAddress();
+        $emailAddress->setName(['Elmer']);
+    }
+
+    public function testSetSubstitutions()
+    {
+        $emailAddress = new EmailAddress();
+        $emailAddress->setSubstitutions(['key' => 'value']);
+
+        $this->assertSame(['key' => 'value'], $emailAddress->getSubstitutions());
+    }
+
+    /**
+     * @expectedException \SendGrid\Mail\TypeException
+     * @expectedExceptionMessage $substitutions must be an array.
+     */
+    public function testSetSubstitutionsOnInvalidType()
+    {
+        $emailAddress = new EmailAddress();
+        $emailAddress->setSubstitutions('invalid_type');
+    }
+
+    public function testSetSubject()
+    {
+        $emailAddress = new EmailAddress();
+        $emailAddress->setSubject('subject');
+        $subject = $emailAddress->getSubject();
+
+        $this->assertInstanceOf(Subject::class, $subject);
+        $this->assertSame('subject', $subject->getSubject());
+    }
+
+    public function testSetSubjectOnSubjectInstance()
+    {
+        $emailAddress = new EmailAddress();
+        $emailAddress->setSubject(new Subject('subject'));
+        $subject = $emailAddress->getSubject();
+
+        $this->assertInstanceOf(Subject::class, $subject);
+        $this->assertSame('subject', $subject->getSubject());
+    }
+
+    /**
+     * @expectedException \SendGrid\Mail\TypeException
+     * @expectedExceptionMessage $subject must be of type string.
+     */
+    public function testSetSubjectOnInvalidType()
+    {
+        $emailAddress = new EmailAddress();
+        $emailAddress->setSubject(['invalid_subject']);
+    }
 }
