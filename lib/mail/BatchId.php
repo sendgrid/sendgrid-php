@@ -48,7 +48,7 @@ class BatchId implements \JsonSerializable
     public function setBatchId($batch_id)
     {
         if (!is_string($batch_id)) {
-            throw new TypeException('$batch_id must be of type string.');
+            throw new TypeException('$batch_id must be a string.');
         }
         $this->batch_id = $batch_id;
     }
