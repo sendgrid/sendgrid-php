@@ -59,7 +59,7 @@ class Substitution implements \JsonSerializable
     public function setKey($key)
     {
         if (!is_string($key)) {
-            throw new TypeException('$key must be of type string.');
+            throw new TypeException('$key must be a string.');
         }
         $this->key = (string) $key;
     }
@@ -85,7 +85,7 @@ class Substitution implements \JsonSerializable
     public function setValue($value)
     {
         if (!is_string($value) && !is_array($value) && !is_object($value) &&!is_bool($value) &&!is_int($value)) {
-            throw new TypeException('$value must be of type string, array or object.');
+            throw new TypeException('$value can be a string, an array or an object.');
         }
         $this->value = $value;
     }
