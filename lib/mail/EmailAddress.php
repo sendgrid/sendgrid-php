@@ -74,7 +74,7 @@ class EmailAddress implements \JsonSerializable
             filter_var($emailAddress, FILTER_VALIDATE_EMAIL)
         ) {
             throw new TypeException(
-                '$emailAddress must be valid and of type string.'
+                '$emailAddress must be a valid string.'
             );
         }
         $this->email = $emailAddress;
@@ -110,7 +110,7 @@ class EmailAddress implements \JsonSerializable
     public function setName($name)
     {
         if (!is_string($name)) {
-            throw new TypeException('$name must be of type string.');
+            throw new TypeException('$name must be a string.');
         }
 
         /*
@@ -183,7 +183,7 @@ class EmailAddress implements \JsonSerializable
     public function setSubject($subject)
     {
         if (!is_string($subject)) {
-            throw new TypeException('$subject must be of type string.');
+            throw new TypeException('$subject must be a string.');
         }
         if (!($subject instanceof Subject)) {
             $this->subject = new Subject($subject);
