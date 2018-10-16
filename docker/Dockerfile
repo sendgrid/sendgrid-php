@@ -12,6 +12,6 @@ RUN curl -sL https://raw.githubusercontent.com/stoplightio/prism/master/install.
 # set up default sendgrid env
 RUN mkdir sendgrid-php
 COPY entrypoint.sh ./
-RUN chmod +x entrypoint.sh
-ENTRYPOINT ["./entrypoint.sh"]
+
+ENTRYPOINT ["/root/entrypoint.sh"]
 CMD ["--mock"]
