@@ -70,7 +70,7 @@ class SpamCheck implements \JsonSerializable
     public function setEnable($enable)
     {
         if (!is_bool($enable)) {
-            throw new TypeException('$enable must be of type bool.');
+            throw new TypeException('$enable must be a boolean.');
         }
         $this->enable = $enable;
     }
@@ -98,7 +98,7 @@ class SpamCheck implements \JsonSerializable
     public function setThreshold($threshold)
     {
         if (!is_int($threshold)) {
-            throw new TypeException('$threshold must be of type int.');
+            throw new TypeException('$threshold must be an integer.');
         }
         $this->threshold = $threshold;
     }
@@ -125,7 +125,7 @@ class SpamCheck implements \JsonSerializable
     public function setPostToUrl($post_to_url)
     {
         if (!is_string($post_to_url)) {
-            throw new TypeException('$post_to_url must be of type string.');
+            throw new TypeException('$post_to_url must be a string.');
         }
         $this->post_to_url = $post_to_url;
     }
