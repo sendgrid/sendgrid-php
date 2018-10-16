@@ -52,7 +52,7 @@ class BypassListManagement implements \JsonSerializable
     public function setEnable($enable)
     {
         if (!is_bool($enable)) {
-            throw new TypeException('$enable must be of type bool.');
+            throw new TypeException('$enable must be a boolean.');
         }
         $this->enable = $enable;
     }
