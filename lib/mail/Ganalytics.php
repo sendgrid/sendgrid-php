@@ -85,7 +85,7 @@ class Ganalytics implements \JsonSerializable
     public function setEnable($enable)
     {
         if (!is_bool($enable)) {
-            throw new TypeException('$enable must be of type bool.');
+            throw new TypeException('$enable must be a boolean.');
         }
         $this->enable = $enable;
     }
@@ -111,7 +111,7 @@ class Ganalytics implements \JsonSerializable
     public function setCampaignSource($utm_source)
     {
         if (!is_string($utm_source)) {
-            throw new TypeException('$utm_source must be of type string.');
+            throw new TypeException('$utm_source must be a string.');
         }
         $this->utm_source = $utm_source;
     }
@@ -136,7 +136,7 @@ class Ganalytics implements \JsonSerializable
     public function setCampaignMedium($utm_medium)
     {
         if (!is_string($utm_medium)) {
-            throw new TypeException('$utm_medium must be of type string.');
+            throw new TypeException('$utm_medium must be a string.');
         }
         $this->utm_medium = $utm_medium;
     }
@@ -161,7 +161,7 @@ class Ganalytics implements \JsonSerializable
     public function setCampaignTerm($utm_term)
     {
         if (!is_string($utm_term)) {
-            throw new TypeException('$utm_term must be of type string');
+            throw new TypeException('$utm_term must be a string');
         }
         $this->utm_term = $utm_term;
     }
@@ -187,7 +187,7 @@ class Ganalytics implements \JsonSerializable
     public function setCampaignContent($utm_content)
     {
         if (!is_string($utm_content)) {
-            throw new TypeException('$utm_content must be of type string.');
+            throw new TypeException('$utm_content must be a string.');
         }
         $this->utm_content = $utm_content;
     }
@@ -212,7 +212,7 @@ class Ganalytics implements \JsonSerializable
     public function setCampaignName($utm_campaign)
     {
         if (!is_string($utm_campaign)) {
-            throw new TypeException('$utm_campaign must be of type string.');
+            throw new TypeException('$utm_campaign must be a string.');
         }
         $this->utm_campaign = $utm_campaign;
     }
