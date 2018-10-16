@@ -77,7 +77,7 @@ class Attachment implements \JsonSerializable
     public function setContent($content)
     {
         if (!is_string($content)) {
-            throw new TypeException('$content must be of type string.');
+            throw new TypeException('$content must be a string.');
         }
         if (!$this->isBase64($content)) {
             $this->content = base64_encode($content);
@@ -106,7 +106,7 @@ class Attachment implements \JsonSerializable
     public function setType($type)
     {
         if (!is_string($type)) {
-            throw new TypeException('$type must be of type string.');
+            throw new TypeException('$type must be a string.');
         }
         $this->type = $type;
     }
@@ -131,7 +131,7 @@ class Attachment implements \JsonSerializable
     public function setFilename($filename)
     {
         if (!is_string($filename)) {
-            throw new TypeException('$filename must be of type string');
+            throw new TypeException('$filename must be a string');
         }
         $this->filename = $filename;
     }
@@ -157,7 +157,7 @@ class Attachment implements \JsonSerializable
     public function setDisposition($disposition)
     {
         if (!is_string($disposition)) {
-            throw new TypeException('$disposition must be of type string.');
+            throw new TypeException('$disposition must be a string.');
         }
         $this->disposition = $disposition;
     }
@@ -181,7 +181,7 @@ class Attachment implements \JsonSerializable
     public function setContentID($content_id)
     {
         if (!is_string($content_id)) {
-            throw new TypeException('$content_id must be of type string.');
+            throw new TypeException('$content_id must be a string.');
         }
         $this->content_id = $content_id;
     }
