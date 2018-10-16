@@ -50,7 +50,7 @@ class Category implements \JsonSerializable
     public function setCategory($category)
     {
         if (!is_string($category)) {
-            throw new TypeException('$category must be of type string.');
+            throw new TypeException('$category must be a string.');
         }
         $this->category = $category;
     }
