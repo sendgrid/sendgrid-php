@@ -71,7 +71,7 @@ class Asm implements \JsonSerializable
         } else {
             if (!is_int($group_id)) {
                 throw new TypeException(
-                    '$group_id must be an instance of SendGrid\Mail\GroupId or of type int.'
+                    '$group_id must be an instance of SendGrid\Mail\GroupId or an integer.'
                 );
             }
             $this->group_id = new GroupId($group_id);
@@ -112,7 +112,7 @@ class Asm implements \JsonSerializable
         } else {
             if (!is_array($groups_to_display)) {
                 throw new TypeException(
-                    '$groups_to_display must be an instance of SendGrid\Mail\GroupsToDisplay or of type array.'
+                    '$groups_to_display must be an instance of SendGrid\Mail\GroupsToDisplay or an array.'
                 );
             }
             $this->groups_to_display = new GroupsToDisplay($groups_to_display);
