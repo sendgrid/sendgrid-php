@@ -129,7 +129,7 @@ class SubscriptionTracking implements \JsonSerializable
     public function setText($text)
     {
         if (!is_string($text)) {
-            throw new TypeException('$text must be of type string.');
+            throw new TypeException('$text must be a string.');
         }
         $this->text = $text;
     }
@@ -157,7 +157,7 @@ class SubscriptionTracking implements \JsonSerializable
     public function setHtml($html)
     {
         if (!is_string($html)) {
-            throw new TypeException('$html must be of type string.');
+            throw new TypeException('$html must be a string.');
         }
         $this->html = $html;
     }
