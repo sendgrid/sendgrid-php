@@ -60,7 +60,7 @@ class OpenTracking implements \JsonSerializable
     public function setEnable($enable)
     {
         if (!is_bool($enable)) {
-            throw new TypeException('$enable must be of type bool');
+            throw new TypeException('$enable must be a boolean.');
         }
         $this->enable = $enable;
     }
@@ -89,7 +89,7 @@ class OpenTracking implements \JsonSerializable
     public function setSubstitutionTag($substitution_tag)
     {
         if (!is_string($substitution_tag)) {
-            throw new TypeException('$substitution_tag must be of type string.');
+            throw new TypeException('$substitution_tag must be a string.');
         }
         $this->substitution_tag = $substitution_tag;
     }
