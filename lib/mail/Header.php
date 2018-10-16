@@ -56,7 +56,7 @@ class Header implements \JsonSerializable
     public function setKey($key)
     {
         if (!is_string($key)) {
-            throw new TypeException('$key must be of type string.');
+            throw new TypeException('$key must be a string.');
         }
         $this->key = $key;
     }
@@ -81,7 +81,7 @@ class Header implements \JsonSerializable
     public function setValue($value)
     {
         if (!is_string($value)) {
-            throw new TypeException('$value must be of type string.');
+            throw new TypeException('$value must be a string.');
         }
         $this->value = $value;
     }
