@@ -46,7 +46,7 @@ class GroupId implements \JsonSerializable
     public function setGroupId($group_id)
     {
         if (!is_int($group_id)) {
-            throw new TypeException('$group_id must be of type int.');
+            throw new TypeException('$group_id must be an integer.');
         }
         $this->group_id = $group_id;
     }
