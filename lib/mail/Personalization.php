@@ -261,7 +261,7 @@ class Personalization implements \JsonSerializable
     {
         if (is_bool($has_dynamic_template) != true) {
             throw new TypeException(
-                '$has_dynamic_template must be an instance of bool'
+                '$has_dynamic_template must be a boolean'
             );
         }
         $this->has_dynamic_template = $has_dynamic_template;
