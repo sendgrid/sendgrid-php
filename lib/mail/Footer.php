@@ -58,7 +58,7 @@ class Footer implements \JsonSerializable
     public function setEnable($enable)
     {
         if (!is_bool($enable)) {
-            throw new TypeException('$enable must be of type bool');
+            throw new TypeException('$enable must be a boolean');
         }
         $this->enable = $enable;
     }
@@ -83,7 +83,7 @@ class Footer implements \JsonSerializable
     public function setText($text)
     {
         if (!is_string($text)) {
-            throw new TypeException('$text must be of type string.');
+            throw new TypeException('$text must be a string.');
         }
         $this->text = $text;
     }
@@ -108,7 +108,7 @@ class Footer implements \JsonSerializable
     public function setHtml($html)
     {
         if (!is_string($html)) {
-            throw new TypeException('$html must be of type string.');
+            throw new TypeException('$html must be a string.');
         }
         $this->html = $html;
     }
