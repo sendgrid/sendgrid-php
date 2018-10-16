@@ -57,7 +57,7 @@ class Content implements \JsonSerializable
     public function setType($type)
     {
         if (!is_string($type)) {
-            throw new TypeException('$type must be of type string.');
+            throw new TypeException('$type must be a string.');
         }
         $this->type = $type;
     }
@@ -83,7 +83,7 @@ class Content implements \JsonSerializable
     public function setValue($value)
     {
         if (!is_string($value)) {
-            throw new TypeException('$value must be of type string');
+            throw new TypeException('$value must be a string');
         }
         $this->value = mb_convert_encoding($value, 'UTF-8', 'UTF-8');
     }
