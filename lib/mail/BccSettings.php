@@ -53,7 +53,7 @@ class BccSettings implements \JsonSerializable
     public function setEnable($enable)
     {
         if (!is_bool($enable)) {
-            throw new TypeException('$enable must be of type bool.');
+            throw new TypeException('$enable must be a bool.');
         }
         $this->enable = $enable;
     }
@@ -82,7 +82,7 @@ class BccSettings implements \JsonSerializable
             filter_var($email, FILTER_VALIDATE_EMAIL)
         ) {
             throw new TypeException(
-                '$email must valid and be of type string.'
+                '$email must be a valid string.'
             );
         }
         $this->email = $email;
