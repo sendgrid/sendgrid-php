@@ -235,7 +235,7 @@ class Stats
      */
     protected function validateInteger($name, $value)
     {
-        if (!is_integer($value)) {
+        if (!is_int($value)) {
             throw new \Exception($name . ' must be an integer.');
         }
     }
