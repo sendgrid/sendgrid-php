@@ -29,21 +29,22 @@ class Asm implements \JsonSerializable
      */
     private $groups_to_display;
 
-    /**
-     * Optional constructor
-     *
-     * @param int|GroupId|null $group_id A GroupId object or the
-     *                                                      unsubscribe group to
-     *                                                      associate with this email
-     * @param int[]|GroupsToDisplay|null $groups_to_display A GroupsToDisplay
-     *                                                      object or an array
-     *                                                      containing the
-     *                                                      unsubscribe groups
-     *                                                      that you would like
-     *                                                      to be displayed
-     *                                                      on the unsubscribe
-     *                                                      preferences page.
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param int|GroupId|null           $group_id          A GroupId object or the
+	 *                                                      unsubscribe group to
+	 *                                                      associate with this email
+	 * @param int[]|GroupsToDisplay|null $groups_to_display A GroupsToDisplay
+	 *                                                      object or an array
+	 *                                                      containing the
+	 *                                                      unsubscribe groups
+	 *                                                      that you would like
+	 *                                                      to be displayed
+	 *                                                      on the unsubscribe
+	 *                                                      preferences page.
+	 * @throws TypeException
+	 */
     public function __construct(
         $group_id = null,
         $groups_to_display = null
