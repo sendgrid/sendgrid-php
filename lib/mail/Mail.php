@@ -77,22 +77,23 @@ class Mail implements \JsonSerializable
 
     const   VERSION = "7.0.0";
 
-    /**
-     * If passing parameters into this constructor include
-     * $from, $to, $subject, $plainTextContent and
-     * $htmlContent at a minimum. In that case, a Personalization
-     * object will be created for you.
-     *
-     * @param From|null $from Email address of the sender
-     * @param To|To[]|null $to Recipient(s) email
-     *                                                    address(es)
-     * @param Subject|Subject[]|null $subject Subject(s)
-     * @param PlainTextContent|null $plainTextContent Plain text version of
-     *                                                    content
-     * @param HtmlContent|null $htmlContent Html version of content
-     * @param Substitution[]|null $globalSubstitutions Substitutions for entire
-     *                                                    email
-     */
+	/**
+	 * If passing parameters into this constructor include
+	 * $from, $to, $subject, $plainTextContent and
+	 * $htmlContent at a minimum. In that case, a Personalization
+	 * object will be created for you.
+	 *
+	 * @param From|null              $from                Email address of the sender
+	 * @param To|To[]|null           $to                  Recipient(s) email
+	 *                                                    address(es)
+	 * @param Subject|Subject[]|null $subject             Subject(s)
+	 * @param PlainTextContent|null  $plainTextContent    Plain text version of
+	 *                                                    content
+	 * @param HtmlContent|null       $htmlContent         Html version of content
+	 * @param Substitution[]|null    $globalSubstitutions Substitutions for entire
+	 *                                                    email
+	 * @throws TypeException
+	 */
     public function __construct(
         $from = null,
         $to = null,
@@ -498,21 +499,22 @@ class Mail implements \JsonSerializable
         );
     }
 
-    /**
-     * Add a subject to a Personalization or Mail object
-     *
-     * If you don't provide a Personalization object or index, the
-     * subject will be global to entire message. Note that
-     * subjects added to Personalization objects override
-     * global subjects.
-     *
-     * @param string|Subject $subject Email subject
-     * @param int|null $personalizationIndex Index into an array of
-     *                                                   existing Personalization
-     *                                                   objects
-     * @param Personalization|null $personalization A pre-created
-     *                                                   Personalization object
-     */
+	/**
+	 * Add a subject to a Personalization or Mail object
+	 *
+	 * If you don't provide a Personalization object or index, the
+	 * subject will be global to entire message. Note that
+	 * subjects added to Personalization objects override
+	 * global subjects.
+	 *
+	 * @param string|Subject       $subject              Email subject
+	 * @param int|null             $personalizationIndex Index into an array of
+	 *                                                   existing Personalization
+	 *                                                   objects
+	 * @param Personalization|null $personalization      A pre-created
+	 *                                                   Personalization object
+	 * @throws TypeException
+	 */
     public function setSubject(
         $subject,
         $personalizationIndex = null,
@@ -664,7 +666,7 @@ class Mail implements \JsonSerializable
      *                                       objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
-     */ 
+     */
     public function addDynamicTemplateData(
         $key,
         $value = null,
@@ -683,7 +685,7 @@ class Mail implements \JsonSerializable
      *                                       objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
-     */ 
+     */
     public function addDynamicTemplateDatas(
         $datas,
         $personalizationIndex = null,
@@ -694,13 +696,13 @@ class Mail implements \JsonSerializable
 
     /**
      * Retrieve dynamic template data key/value pairs from a Personalization object
-     * 
+     *
      * @param int|0 $personalizationIndex Index into an array of
      *                                    existing Personalization
      *                                    objects
-     * 
+     *
      * @return array
-     */ 
+     */
     public function getDynamicTemplateDatas($personalizationIndex = 0)
     {
         return $this->getSubstitutions($personalizationIndex);
@@ -815,7 +817,7 @@ class Mail implements \JsonSerializable
     /**
      * Add a custom arg to a Personalization or Mail object
      *
-     * Note that custom args added to Personalization objects 
+     * Note that custom args added to Personalization objects
      * override global custom args.
      *
      * @param string|CustomArg $key Key or CustomArg object
@@ -916,22 +918,23 @@ class Mail implements \JsonSerializable
         return $this->personalization[$personalizationIndex]->getCustomArgs();
     }
 
-    /**
-     * Add a unix timestamp allowing you to specify when you want your
-     * email to be delivered to a Personalization or Mail object
-     *
-     * If you don't provide a Personalization object or index, the
-     * send at timestamp will be global to entire message. Note that
-     * timestamps added to Personalization objects override
-     * global timestamps.
-     *
-     * @param int|SendAt $send_at A unix timestamp
-     * @param int|null $personalizationIndex Index into an array of
-     *                                                   existing Personalization
-     *                                                   objects
-     * @param Personalization|null $personalization A pre-created
-     *                                                   Personalization object
-     */
+	/**
+	 * Add a unix timestamp allowing you to specify when you want your
+	 * email to be delivered to a Personalization or Mail object
+	 *
+	 * If you don't provide a Personalization object or index, the
+	 * send at timestamp will be global to entire message. Note that
+	 * timestamps added to Personalization objects override
+	 * global timestamps.
+	 *
+	 * @param int|SendAt           $send_at              A unix timestamp
+	 * @param int|null             $personalizationIndex Index into an array of
+	 *                                                   existing Personalization
+	 *                                                   objects
+	 * @param Personalization|null $personalization      A pre-created
+	 *                                                   Personalization object
+	 * @throws TypeException
+	 */
     public function setSendAt(
         $send_at,
         $personalizationIndex = null,
@@ -987,7 +990,7 @@ class Mail implements \JsonSerializable
      * @param string|null $name  Sender name
      *
      * @throws TypeException
-     */      
+     */
     public function setFrom($email, $name = null)
     {
         if ($email instanceof From) {
@@ -1114,7 +1117,7 @@ class Mail implements \JsonSerializable
      *
      * Will return array of Content Objects with text/plain MimeType first
      * Array re-ordered before return where this is not already the case
-     * 
+     *
      * @return Content[]
      */
     public function getContents()
@@ -1174,7 +1177,7 @@ class Mail implements \JsonSerializable
                 $disposition,
                 $content_id
             );
-        } 
+        }
         $this->attachments[] = $attachment;
     }
 
@@ -1580,7 +1583,7 @@ class Mail implements \JsonSerializable
      *                                    use to specify how you would
      *                                    like this email to be handled
      * @throws TypeException
-     */ 
+     */
     public function setMailSettings($mail_settings)
     {
         if (!($mail_settings instanceof MailSettings)) {
@@ -1601,13 +1604,14 @@ class Mail implements \JsonSerializable
         return $this->mail_settings;
     }
 
-    /**
-     * Set the Bcc settings on a MailSettings object
-     *
-     * @param bool|BccSettings $enable A BccSettings object or a boolean
-     *                                 to determine if this setting is active
-     * @param string|null $email The email address to be bcc'ed
-     */
+	/**
+	 * Set the Bcc settings on a MailSettings object
+	 *
+	 * @param bool|BccSettings $enable A BccSettings object or a boolean
+	 *                                 to determine if this setting is active
+	 * @param string|null      $email  The email address to be bcc'ed
+	 * @throws TypeException
+	 */
     public function setBccSettings($enable, $email = null)
     {
         if (!($this->mail_settings instanceof MailSettings)) {
@@ -1721,7 +1725,7 @@ class Mail implements \JsonSerializable
      *                                            of how your recipients interact
      *                                            with your email
      * @throws TypeException
-     */ 
+     */
     public function setTrackingSettings($tracking_settings)
     {
         if (!($tracking_settings instanceof TrackingSettings)) {
@@ -1866,11 +1870,12 @@ class Mail implements \JsonSerializable
         );
     }
 
-    /**
-     * Return an array representing a request object for the SendGrid API
-     *
-     * @return null|array
-     */
+	/**
+	 * Return an array representing a request object for the SendGrid API
+	 *
+	 * @return null|array
+	 * @throws TypeException
+	 */
     public function jsonSerialize()
     {
         // Detect if we are using the new dynamic templates
