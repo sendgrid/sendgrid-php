@@ -92,7 +92,7 @@ class Mail implements \JsonSerializable
 	 * @param HtmlContent|null       $htmlContent         Html version of content
 	 * @param Substitution[]|null    $globalSubstitutions Substitutions for entire
 	 *                                                    email
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function __construct(
         $from = null,
@@ -513,7 +513,7 @@ class Mail implements \JsonSerializable
 	 *                                                   objects
 	 * @param Personalization|null $personalization      A pre-created
 	 *                                                   Personalization object
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function setSubject(
         $subject,
@@ -933,7 +933,7 @@ class Mail implements \JsonSerializable
 	 *                                                   objects
 	 * @param Personalization|null $personalization      A pre-created
 	 *                                                   Personalization object
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function setSendAt(
         $send_at,
@@ -989,7 +989,7 @@ class Mail implements \JsonSerializable
      * @param string|From $email Email address or From object
      * @param string|null $name  Sender name
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setFrom($email, $name = null)
     {
@@ -1582,7 +1582,7 @@ class Mail implements \JsonSerializable
      *                                    mail settings that you can
      *                                    use to specify how you would
      *                                    like this email to be handled
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setMailSettings($mail_settings)
     {
@@ -1610,7 +1610,7 @@ class Mail implements \JsonSerializable
 	 * @param bool|BccSettings $enable A BccSettings object or a boolean
 	 *                                 to determine if this setting is active
 	 * @param string|null      $email  The email address to be bcc'ed
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function setBccSettings($enable, $email = null)
     {
@@ -1724,7 +1724,7 @@ class Mail implements \JsonSerializable
      *                                            would like to track the metrics
      *                                            of how your recipients interact
      *                                            with your email
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setTrackingSettings($tracking_settings)
     {
@@ -1874,7 +1874,7 @@ class Mail implements \JsonSerializable
 	 * Return an array representing a request object for the SendGrid API
 	 *
 	 * @return null|array
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function jsonSerialize()
     {

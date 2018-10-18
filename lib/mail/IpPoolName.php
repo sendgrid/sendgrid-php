@@ -30,7 +30,7 @@ class IpPoolName implements \JsonSerializable
 	 * @param string|null $ip_pool_name The IP Pool that you would like to
 	 *                                  send this email from. Minimum length:
 	 *                                  2, Maximum Length: 64
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function __construct($ip_pool_name = null)
     {
@@ -46,7 +46,7 @@ class IpPoolName implements \JsonSerializable
      *                             send this email from. Minimum length:
      *                             2, Maximum Length: 64
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setIpPoolName($ip_pool_name)
     {

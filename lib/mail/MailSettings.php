@@ -44,7 +44,7 @@ class MailSettings implements \JsonSerializable
 	 * @param Footer|null               $footer                 Footer object
 	 * @param SandBoxMode|null          $sandbox_mode           SandBoxMode object
 	 * @param SpamCheck|null            $spam_check             SpamCheck object
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function __construct(
         $bcc_settings = null,
@@ -78,7 +78,7 @@ class MailSettings implements \JsonSerializable
      * @param string|null $email The email address that you would like
      *                                 to receive the BCC
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setBccSettings($enable, $email = null)
     {
@@ -112,7 +112,7 @@ class MailSettings implements \JsonSerializable
      *                                          object or an indication
      *                                          if the setting is enabled
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setBypassListManagement($enable)
     {

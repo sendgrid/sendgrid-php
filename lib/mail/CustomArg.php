@@ -38,7 +38,7 @@ class CustomArg implements \JsonSerializable
 	 *
 	 * @param string|null $key   Custom arg key
 	 * @param string|null $value Custom arg value
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function __construct($key = null, $value = null)
     {
@@ -55,7 +55,7 @@ class CustomArg implements \JsonSerializable
      *
      * @param string $key Custom arg key
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setKey($key)
     {
@@ -80,7 +80,7 @@ class CustomArg implements \JsonSerializable
      *
      * @param string $value Custom arg value
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setValue($value)
     {

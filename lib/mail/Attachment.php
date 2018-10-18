@@ -42,7 +42,7 @@ class Attachment implements \JsonSerializable
 	 *                            or attachment, default is attachment
 	 * @param string $content_id  Used when disposition is inline to diplay the
 	 *                            file within the body of the email
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function __construct(
         $content = null,
@@ -73,7 +73,7 @@ class Attachment implements \JsonSerializable
      *
      * @param string $content Base64 encoded content
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setContent($content)
     {
@@ -102,7 +102,7 @@ class Attachment implements \JsonSerializable
      *
      * @param string $type Mime type of the attachment
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setType($type)
     {
@@ -127,7 +127,7 @@ class Attachment implements \JsonSerializable
      *
      * @param string $filename File name of the attachment
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setFilename($filename)
     {
@@ -153,7 +153,7 @@ class Attachment implements \JsonSerializable
      * @param string $disposition How the attachment should be displayed:
      *                            inline or attachment, default is attachment
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setDisposition($disposition)
     {
@@ -178,7 +178,7 @@ class Attachment implements \JsonSerializable
 	 *
 	 * @param string $content_id Used when disposition is inline to diplay
 	 *                           the file within the body of the email
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function setContentID($content_id)
     {

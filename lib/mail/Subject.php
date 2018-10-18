@@ -28,7 +28,7 @@ class Subject implements \JsonSerializable
 	 * Optional constructor
 	 *
 	 * @param string|null $subject The email subject
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function __construct($subject = null)
     {
@@ -42,7 +42,7 @@ class Subject implements \JsonSerializable
      *
      * @param string $subject The email subject
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setSubject($subject)
     {

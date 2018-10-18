@@ -34,7 +34,7 @@ class Content implements \JsonSerializable
 	 *                           “text/html”
 	 * @param string|null $value The actual content of the specified mime type
 	 *                           that you are including in your email
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function __construct($type = null, $value = null)
     {
@@ -53,7 +53,7 @@ class Content implements \JsonSerializable
      *                     in your email. For example, “text/plain” or
      *                     “text/html”
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setType($type)
     {
@@ -79,7 +79,7 @@ class Content implements \JsonSerializable
      * @param string $value The actual content of the specified mime type
      *                      that you are including in your email
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setValue($value)
     {

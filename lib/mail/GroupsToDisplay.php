@@ -34,7 +34,7 @@ class GroupsToDisplay implements \JsonSerializable
 	 *                                          be displayed on the
 	 *                                          unsubscribe preferences
 	 *                                          page. Maximum of 25
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function __construct($groups_to_display = null)
     {
@@ -51,7 +51,7 @@ class GroupsToDisplay implements \JsonSerializable
      *                                     displayed on the unsubscribe
      *                                     preferences page
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      * @return null
      */
     public function setGroupsToDisplay($groups_to_display)

@@ -34,7 +34,7 @@ class Section implements \JsonSerializable
 	 *
 	 * @param string|null $key   Section key
 	 * @param string|null $value Section value
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function __construct($key = null, $value = null)
     {
@@ -51,7 +51,7 @@ class Section implements \JsonSerializable
      *
      * @param string $key Section key
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setKey($key)
     {
@@ -76,7 +76,7 @@ class Section implements \JsonSerializable
      *
      * @param string $value Section value
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setValue($value)
     {

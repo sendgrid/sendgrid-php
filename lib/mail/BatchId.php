@@ -29,7 +29,7 @@ class BatchId implements \JsonSerializable
 	 *
 	 * @param string|null $batch_id This ID represents a batch of emails to
 	 *                              be sent at the same time
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function __construct($batch_id = null)
     {
@@ -44,7 +44,7 @@ class BatchId implements \JsonSerializable
      * @param string $batch_id This ID represents a batch of emails to be sent
      *                         at the same time
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setBatchId($batch_id)
     {

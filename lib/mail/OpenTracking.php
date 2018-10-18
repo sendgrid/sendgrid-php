@@ -39,7 +39,7 @@ class OpenTracking implements \JsonSerializable
 	 *                                      of your email at a location that you
 	 *                                      desire. This tag will be replaced by
 	 *                                      the open tracking pixel
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function __construct($enable = null, $substitution_tag = null)
     {
@@ -56,7 +56,7 @@ class OpenTracking implements \JsonSerializable
      *
      * @param bool $enable Indicates if this setting is enabled
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setEnable($enable)
     {
@@ -85,7 +85,7 @@ class OpenTracking implements \JsonSerializable
      *                                 desire. This tag will be replaced by
      *                                 the open tracking pixel
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setSubstitutionTag($substitution_tag)
     {

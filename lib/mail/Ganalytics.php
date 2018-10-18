@@ -45,7 +45,7 @@ class Ganalytics implements \JsonSerializable
 	 * @param string|null $utm_content  Used to differentiate your campaign from
 	 *                                  advertisements
 	 * @param string|null $utm_campaign The name of the campaign
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function __construct(
         $enable = null,
@@ -81,7 +81,7 @@ class Ganalytics implements \JsonSerializable
      *
      * @param bool $enable Indicates if this setting is enabled
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setEnable($enable)
     {
@@ -107,7 +107,7 @@ class Ganalytics implements \JsonSerializable
      * @param string $utm_source Name of the referrer source. (e.g.
      *                           Google, SomeDomain.com, or Marketing Email)
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setCampaignSource($utm_source)
     {
@@ -132,7 +132,7 @@ class Ganalytics implements \JsonSerializable
      *
      * @param string $utm_medium Name of the marketing medium. (e.g. Email)
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setCampaignMedium($utm_medium)
     {
@@ -157,7 +157,7 @@ class Ganalytics implements \JsonSerializable
      *
      * @param string $utm_term Used to identify any paid keywords
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setCampaignTerm($utm_term)
     {
@@ -183,7 +183,7 @@ class Ganalytics implements \JsonSerializable
      * @param string $utm_content Used to differentiate your campaign from
      *                            advertisements
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setCampaignContent($utm_content)
     {
@@ -208,7 +208,7 @@ class Ganalytics implements \JsonSerializable
      *
      * @param string $utm_campaign The name of the campaign
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setCampaignName($utm_campaign)
     {

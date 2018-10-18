@@ -70,7 +70,7 @@ class SubscriptionTracking implements \JsonSerializable
 	 *                                      and html parameters. The URL of the link
 	 *                                      will be placed at the substitution tag’s
 	 *                                      location, with no additional formatting
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function __construct(
         $enable = null,
@@ -97,7 +97,7 @@ class SubscriptionTracking implements \JsonSerializable
      *
      * @param bool $enable Indicates if this setting is enabled
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setEnable($enable)
     {
@@ -125,7 +125,7 @@ class SubscriptionTracking implements \JsonSerializable
      *                     control where the link is by using the
      *                     tag <% %>
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setText($text)
     {
@@ -153,7 +153,7 @@ class SubscriptionTracking implements \JsonSerializable
      *                     control where the link is by using the
      *                     tag <% %>
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setHtml($html)
     {
@@ -184,7 +184,7 @@ class SubscriptionTracking implements \JsonSerializable
      *                                 will be placed at the substitution tag’s
      *                                 location, with no additional formatting %>
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setSubstitutionTag($substitution_tag)
     {

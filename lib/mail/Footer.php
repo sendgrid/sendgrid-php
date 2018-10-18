@@ -34,7 +34,7 @@ class Footer implements \JsonSerializable
 	 * @param bool|null   $enable Indicates if this setting is enabled
 	 * @param string|null $text   The plain text content of your footer
 	 * @param string|null $html   The HTML content of your footer
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function __construct($enable = null, $text = null, $html = null)
     {
@@ -54,7 +54,7 @@ class Footer implements \JsonSerializable
      *
      * @param bool $enable Indicates if this setting is enabled
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setEnable($enable)
     {
@@ -79,7 +79,7 @@ class Footer implements \JsonSerializable
      *
      * @param string $text The plain text content of your footer
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setText($text)
     {
@@ -104,7 +104,7 @@ class Footer implements \JsonSerializable
      *
      * @param string $html The HTML content of your footer
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setHtml($html)
     {

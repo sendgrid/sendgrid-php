@@ -46,7 +46,7 @@ class SpamCheck implements \JsonSerializable
 	 * @param string|null $post_to_url An Inbound Parse URL that you would like
 	 *                                 a copy of your email along with the spam
 	 *                                 report to be sent to
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function __construct($enable = null, $threshold = null, $post_to_url = null)
     {
@@ -66,7 +66,7 @@ class SpamCheck implements \JsonSerializable
      *
      * @param bool $enable Indicates if this setting is enabled
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setEnable($enable)
     {
@@ -94,7 +94,7 @@ class SpamCheck implements \JsonSerializable
      *                       from 1 to 10, with 10 being most strict,
      *                       or most
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setThreshold($threshold)
     {
@@ -121,7 +121,7 @@ class SpamCheck implements \JsonSerializable
      *                            a copy of your email along with the spam
      *                            report to be sent to
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setPostToUrl($post_to_url)
     {

@@ -110,9 +110,9 @@ class Personalization implements \JsonSerializable
      * Add a subject object to a Personalization object
      *
      * @param Subject $subject Subject object
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setSubject($subject)
     {
         if (!($subject instanceof Subject)) {
@@ -159,9 +159,9 @@ class Personalization implements \JsonSerializable
      * @param Substitution|string $data DynamicTemplateData object or the key of a
      *                                  dynamic data
      * @param string|null         $value The value of dynmic data
-     * 
+     *
      * @return null
-     */ 
+     */
     public function addDynamicTemplateData($data, $value = null)
     {
         $this->addSubstitution($data, $value);
@@ -169,9 +169,9 @@ class Personalization implements \JsonSerializable
 
     /**
      * Retrieve dynamic template data key/value pairs from a Personalization object
-     * 
+     *
      * @return array
-     */ 
+     */
     public function getDynamicTemplateData()
     {
         return $this->getSubstitutions();
@@ -227,9 +227,9 @@ class Personalization implements \JsonSerializable
      * Add a SendAt object to a Personalization object
      *
      * @param SendAt $send_at SendAt object
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setSendAt($send_at)
     {
         if (!($send_at instanceof SendAt)) {
@@ -254,9 +254,9 @@ class Personalization implements \JsonSerializable
      * Specify if this personalization is using dynamic templates
      *
      * @param bool $has_dynamic_template are we using dynamic templates
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setHasDynamicTemplate($has_dynamic_template)
     {
         if (is_bool($has_dynamic_template) != true) {

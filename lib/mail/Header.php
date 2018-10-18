@@ -35,7 +35,7 @@ class Header implements \JsonSerializable
 	 *
 	 * @param string|null $key   Header key
 	 * @param string|null $value Header value
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function __construct($key = null, $value = null)
     {
@@ -52,7 +52,7 @@ class Header implements \JsonSerializable
      *
      * @param string $key Header key
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setKey($key)
     {
@@ -77,7 +77,7 @@ class Header implements \JsonSerializable
      *
      * @param string $value Header value
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setValue($value)
     {

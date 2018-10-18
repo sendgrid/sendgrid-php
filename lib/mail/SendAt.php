@@ -47,7 +47,7 @@ class SendAt implements \JsonSerializable
 	 *                          example, scheduling at 10:53) can result in lower
 	 *                          deferral rates because it won't be going through
 	 *                          our servers at the same times as everyone else's mail
-	 * @throws TypeException
+	 * @throws \SendGrid\Mail\TypeException
 	 */
     public function __construct($send_at=null)
     {
@@ -71,7 +71,7 @@ class SendAt implements \JsonSerializable
      *                     deferral rates because it won't be going through
      *                     our servers at the same times as everyone else's mail
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setSendAt($send_at)
     {
