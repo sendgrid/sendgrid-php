@@ -74,15 +74,15 @@ After completing the setup tutorial, you will want to make sure your app’s
 configuration settings have at least the following options enabled:
 
 **Application Access**
-*Enterprise
+* Enterprise
 
 **Application Scopes**
-*Read all files and folders stored in Box
-*Read and write all files and folders stored in Box
-*Manage users
+* Read all files and folders stored in Box
+* Read and write all files and folders stored in Box
+* Manage users
 
 **Advanced Features**
-*Perform Actions as Users
+* Perform Actions as Users
 
 Remember to reauthorize your app 
 [here](https://app.box.com/master/settings/openbox) after making any changes to 
@@ -117,7 +117,7 @@ $claims = array(
     'sub' => $boxConfig->enterpriseID,
     'box_sub_type' => 'enterprise',
     'aud' => 'https://api.box.com/oauth2/token',
-    'jti' => bin2hex(random_bytes(16)),
+    'jti' => bin2hex(openssl_random_pseudo_bytes(16)),
     'exp' => time() + 50
 );
 
