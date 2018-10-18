@@ -48,3 +48,73 @@ Happy Hacking!
 - Develop per usual locally, but before pushing up to GitHub, you can run the tests locally in the Docker container per step 5 of the quickstart.
 - To run all the tests: `../vendor/bin/phpunit . --filter test*`
 - To run an individual test: `../vendor/bin/phpunit . --filter [Name of Test]`
+
+Sendgrid-php kütüphanesini kolayca denemek veya katkıda bulunmak için Docker'ı kullanın.
+
+Bu Docker resmi şunları içerir:
+
+PHP 7.1.16
+
+Gerçekten de e-posta göndermeden SendGrid API'sini denemenizi sağlayan Stoplight.io's Prism'in çalışan örneği
+
+Sendgrid-php'nin yansıtılmış bir kopyası, böylece yerel olarak gelişebilir ve ardından testleri Docker kabında çalıştırabilirsiniz.
+
+İçindekiler
+
+Hızlı başlangıç
+
+Test yapmak
+
+Katkı
+
+Hızlı başlangıç
+
+Besteci yükle:
+
+php -r "readfile ('https://getcomposer.org/installer');" | php
+
+mv composer.phar / usr / yerel / bin / besteci
+
+Sendgrid-php repo'yu klonlayın
+
+git klon https://github.com/sendgrid/sendgrid-php.git
+
+cd sendgrid-php
+
+besteci yükleme
+
+Docker'ı yükle
+
+SENDGRID_API_KEY yerel ortam değişkenini kur
+
+Docker görüntüsünü oluşturun, Docker kabını çalıştırın, Docker kabına giriş yapın
+
+docker görüntü oluşturma --tag = "sendgrid / php7" ./docker
+
+docker run -itd --name = "sendgrid_php7" -v $ (pwd): / root / sendgrid-php sendgrid / php7 / bin / bash
+
+Testleri Docker kabında çalıştırın
+
+sudo docker exec -it sendgrid_php7 / bin / bash -c 'cd sendgrid-php / test; ../vendor/bin/phpunit. --filtre testi *; exec "$ {SHELL: -sh}" '
+
+Artık yerel olarak gelişmeye devam edebilir ve ../vendor/bin/phpunit dosyasını çalıştırabilirsiniz. - Filtrenin test edilmesi için kabın içinde. Tüm test grubunu çalıştırmak istemiyorsanız, testi * belirli bir testin adıyla değiştirin.
+
+Konteynırı temizlemek için: docker sendgrid_php7 && docker rm sendgrid_php7'yi durdurur.
+
+Mutlu Hacking!
+
+Kütüphaneyi Test Etmek İçin (Lastikleri Kick)
+
+QuickStart'ta 5. adımdan sonra Docker kapsayıcısı içinde:
+
+cd ../
+
+php sendmail.php
+
+Katkıda bulunanlar için
+
+Her zaman yerel olarak geliştirin, ancak GitHub'a ilerlemeden önce, testleri hızlı başlatmanın 5. adımında Docker kabında yerel olarak çalıştırabilirsiniz.
+
+Tüm testleri çalıştırmak için: ../vendor/bin/phpunit. --filtre testi *
+
+Bireysel testi çalıştırmak için: ../vendor/bin/phpunit. --filter [Testin Adı]
