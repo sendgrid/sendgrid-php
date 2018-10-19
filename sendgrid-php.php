@@ -1,6 +1,7 @@
 <?php
 /**
  * This file autoloads the vendored dependencies for a /mail/send API call
+ * Bu dosya, bir / posta / gönderme API çağrısı için satıcıya bağımlılıkları otomatik olarak yükler.
  * 
  * PHP Version - 5.6, 7.0, 7.1, 7.2
  *
