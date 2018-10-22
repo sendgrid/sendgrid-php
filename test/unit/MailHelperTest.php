@@ -70,4 +70,15 @@ class MailTest_Mail extends \PHPUnit\Framework\TestCase
             '{"name":"\\"O\'Keeffe, John \\\\\\"Billy\\\\\\"\\"","email":"test@example.com"}'
         );
     }
+    
+    /**
+     * This method tests TypeException for wrong email address
+     *
+     * @expectedException \SendGrid\Mail\TypeException
+     */
+    public function testEmailAddress()
+    {
+		$email = new EmailAddress();
+    	$email->setEmailAddress('test@example.com@wrong');
+    }    
 }
