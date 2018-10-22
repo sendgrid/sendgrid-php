@@ -3,6 +3,7 @@ This documentation provides examples for specific use cases. Please [open an iss
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Attachments](#attachments)
+- [Attaching a File from Box](#attaching-a-file-from-box)
 - [Kitchen Sink - an example with all settings used](#kitchen-sink)
 - [Send an Email to a Single Recipient](#send-an-email-to-a-single-recipient)
 - [Send an Email to Multiple Recipients](#send-an-email-to-multiple-recipients)
@@ -55,6 +56,181 @@ try {
     print $response->body() . "\n";
 } catch (Exception $e) {
     echo 'Caught exception: '.  $e->getMessage(). "\n";
+}
+```
+
+<a name="box-attachment-example"></a>
+# Attaching a File from Box
+
+You can attach a file from [Box](https://www.box.com) to your emails. 
+Because there is no official Box SDK for PHP, this example requires 
+[firebase/php-jwt](https://github.com/firebase/php-jwt) to generate a 
+[JSON Web Token](https://jwt.io) assertion. Before using this code, you should 
+set up a JWT application on [Box](https://developer.box.com/docs/setting-up-a-jwt-app). 
+For more information about authenticating with JWT, see 
+[this page](https://developer.box.com/docs/construct-jwt-claim-manually).
+
+After completing the setup tutorial, you will want to make sure your app’s 
+configuration settings have at least the following options enabled:
+
+**Application Access**
+* Enterprise
+
+**Application Scopes**
+* Read all files and folders stored in Box
+* Read and write all files and folders stored in Box
+* Manage users
+
+**Advanced Features**
+* Perform Actions as Users
+
+Remember to reauthorize your app 
+[here](https://app.box.com/master/settings/openbox) after making any changes to 
+your app’s JWT scopes.
+
+```php
+<?php
+
+// This example assumes you're using Composer for both
+// the sendgrid-php library and php-jwt.
+
+require 'vendor/autoload.php';
+
+use \Firebase\JWT\JWT;
+
+$fileOwner = 'email@example.com'; // Replace with the email you use to sign in to Box
+$filePath = '/path/to/file.txt'; // Replace with the path on Box to the file you will attach
+$boxConfig = json_decode(file_get_contents('/path/to/boxConfig.json')); // Replace with the path to your Box config file. Keep it in a secure location!
+
+$path = explode('/', $filePath);
+if (!empty($path[0])){
+    array_unshift($path, ''); // Adds a blank element to beginning of array in case $filePath does not have a preceding forward slash.
+}
+
+$header = array(
+    'alg' => 'RS256',
+    'typ' => 'JWT',
+    'kid' => $boxConfig->boxAppSettings->appAuth->publicKeyID
+);
+$claims = array(
+    'iss' => $boxConfig->boxAppSettings->clientID,
+    'sub' => $boxConfig->enterpriseID,
+    'box_sub_type' => 'enterprise',
+    'aud' => 'https://api.box.com/oauth2/token',
+    'jti' => bin2hex(openssl_random_pseudo_bytes(16)),
+    'exp' => time() + 50
+);
+
+$privateKey = openssl_get_privatekey($boxConfig->boxAppSettings->appAuth->privateKey, $boxConfig->boxAppSettings->appAuth->passphrase);
+
+$assertion = JWT::encode($claims, $privateKey, 'RS256', null, $header);
+
+// Get access token
+$url = 'https://api.box.com/oauth2/token';
+$data = array(
+    'grant_type' => 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+    'client_id' => $boxConfig->boxAppSettings->clientID,
+    'client_secret' => $boxConfig->boxAppSettings->clientSecret,
+    'assertion' => $assertion
+);
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+$result = json_decode(curl_exec($ch));
+curl_close($ch);
+$accessToken = $result->access_token;
+
+// Get user ID
+$url = 'https://api.box.com/2.0/users';
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    'Authorization: Bearer '.$accessToken
+));
+$result = json_decode(curl_exec($ch));
+curl_close($ch);
+foreach ($result->entries as $entry){
+    if ($entry->login === $fileOwner){
+        $userId = $entry->id;
+    }
+}
+
+// Get file ID
+$url = 'https://api.box.com/2.0/search';
+$data = array(
+    'query' => urlencode(end($path))
+);
+$urlEncoded = http_build_query($data);
+$ch = curl_init($url.'?'.$urlEncoded);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    'Authorization: Bearer '.$accessToken,
+    'As-User: '.$userId
+));
+$result = json_decode(curl_exec($ch));
+curl_close($ch);
+foreach ($result->entries as $entry){
+    if (count($entry->path_collection->entries) === count($path) -1){
+        if (count($path) > 2){
+            // File is located in a subdirectory.
+            for ($i = 1; $i < (count($path) - 1); $i++){
+                if ($path[$i] === $entry->path_collection->entries[$i]->name){
+                    $fileId = $entry->id;
+                }
+            }
+        } else {
+            // File is located in default directory.
+            $fileId = $entry->id;
+        }
+    }
+}
+
+if (isset($fileId) && isset($userId)){
+    // Get file data
+    $url = 'https://api.box.com/2.0/files/'.$fileId.'/content';
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Authorization: Bearer '.$accessToken,
+        'As-User: '.$userId
+    ));
+    $result = curl_exec($ch);
+    $contentType = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
+    curl_close($ch);
+    
+    $attachmentFilename = end($path);
+    $attachmentContent = base64_encode($result);
+    $attachmentContentType = $contentType;
+    
+    $email = new \SendGrid\Mail\Mail(); 
+    $email->setFrom("test@example.com", "Example User");
+    $email->setSubject("Attaching a File from Box");
+    $email->addTo("test@example.com", "Example User");
+    $email->addContent("text/plain", "See attached file from Box.");
+    $email->addContent(
+        "text/html", "<strong>See attached file from Box.</strong>"
+    );
+    
+    $attachment = new \SendGrid\Mail\Attachment();
+    $attachment->setContent($attachmentContent);
+    $attachment->setType($attachmentContentType);
+    $attachment->setFilename($attachmentFilename);
+    $attachment->setDisposition("attachment");
+    $attachment->setContentId($attachmentFilename); // Only used if disposition is set to inline
+    $email->addAttachment($attachment);
+
+    $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+    try {
+        $response = $sendgrid->send($email);
+        print $response->statusCode() . "\n";
+        print_r($response->headers());
+        print $response->body() . "\n";
+    } catch (Exception $e) {
+        echo 'Caught exception: '. $e->getMessage() ."\n";
+    }
+} else {
+    echo "Error: file or owner could not be located\n";
 }
 ```
 

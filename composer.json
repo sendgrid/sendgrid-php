@@ -16,7 +16,8 @@
     "sendgrid/php-http-client": "~3.9",
     "ext-curl": "*",
     "ext-json": "*",
-    "ext-mbstring": "*"
+    "ext-mbstring": "*",
+    "ext-openssl": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "^5.7.9 || ^6.4.3",
