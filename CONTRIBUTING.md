@@ -87,9 +87,7 @@ source ./sendgrid.env
 
 ##### Execute: #####
 
-See the [examples folder](https://github.com/sendgrid/sendgrid-php/tree/master/examples) or [README](https://github.com/sendgrid/sendgrid-php/blob/master/README.md) to get started quickly.
-
-If you are using composer, replace <PATH_TO> with the path to your `vendor/autoload.php`. Otherwise, include lib/loader.php.
+See the [examples folder](https://github.com/sendgrid/sendgrid-php/tree/master/examples) or [README](https://github.com/sendgrid/sendgrid-php/blob/master/README.md) to get started quickly. (You can use the `sendgrid-php.php` file from the root of this repository.)
 
 <a name="understanding-the-codebase"></a>
 ## Understanding the Code Base
@@ -144,10 +142,10 @@ Please run your code through:
    ```bash
    # Clone your fork of the repo into the current directory
    git clone https://github.com/sendgrid/sendgrid-php
-   
+
    # Navigate to the newly cloned directory
    cd sendgrid-php
-   
+
    # Assign the original repo to a remote called "upstream"
    git remote add upstream https://github.com/sendgrid/sendgrid-php
    ```
