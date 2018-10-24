@@ -23,62 +23,167 @@ use SendGrid\Mail\EmailAddress as EmailAddress;
  */
 class MailTest_Mail extends \PHPUnit\Framework\TestCase
 {
+    /** @var EmailAddress */
+    protected $email;
+
     /**
-     * This method tests various types of unencoded emails
-     *
-     * @expectedException \SendGrid\Mail\TypeException
+     * Use a fresh instance in every test
      */
-    public function testEmailName()
+    public function setUp()
     {
-        $email = new EmailAddress('test@example.com', 'John Doe');
-        $json = json_encode($email->jsonSerialize());
-        $this->assertEquals($json, '{"name":"John Doe","email":"test@example.com"}');
+        $this->email = new EmailAddress();
+    }
 
-        $email->setName('');
-        $json = json_encode($email->jsonSerialize());
-        $this->assertEquals($json, '{"email":"test@example.com"}');
+    /**
+     * This method tests various valid types of email names
+     */
+    public function testValidEmailNames()
+    {
+        $this->email->setName("John Doe");
+        $json = json_encode($this->email->jsonSerialize());
+        $this->assertEquals($json, '{"name":"John Doe"}');
 
-        $email->setName(null);
-        $json = json_encode($email->jsonSerialize());
-        $this->assertEquals($json, '{"email":"test@example.com"}');
+        $this->email->setName('');
+        $json = json_encode($this->email->jsonSerialize());
+        $this->assertEquals($json, 'null');
 
-        $email->setName('Doe, John');
-        $json = json_encode($email->jsonSerialize());
+        $this->email->setName('Doe, John');
+        $json = json_encode($this->email->jsonSerialize());
         $this->assertEquals(
             $json,
-            '{"name":"\\"Doe, John\\"","email":"test@example.com"}'
+            '{"name":"\\"Doe, John\\""}'
         );
 
-        $email->setName('Doe; John');
-        $json = json_encode($email->jsonSerialize());
+        $this->email->setName('Doe; John');
+        $json = json_encode($this->email->jsonSerialize());
         $this->assertEquals(
             $json,
-            '{"name":"\\"Doe; John\\"","email":"test@example.com"}'
+            '{"name":"\\"Doe; John\\""}'
         );
 
-        $email->setName('John "Billy" O\'Keeffe');
-        $json = json_encode($email->jsonSerialize());
+        $this->email->setName('John "Billy" O\'Keeffe');
+        $json = json_encode($this->email->jsonSerialize());
         $this->assertEquals(
             $json,
-            '{"name":"John \\"Billy\\" O\'Keeffe","email":"test@example.com"}'
+            '{"name":"John \\"Billy\\" O\'Keeffe"}'
         );
 
-        $email->setName('O\'Keeffe, John "Billy"');
-        $json = json_encode($email->jsonSerialize());
+        $this->email->setName('O\'Keeffe, John "Billy"');
+        $json = json_encode($this->email->jsonSerialize());
         $this->assertEquals(
             $json,
-            '{"name":"\\"O\'Keeffe, John \\\\\\"Billy\\\\\\"\\"","email":"test@example.com"}'
+            '{"name":"\\"O\'Keeffe, John \\\\\\"Billy\\\\\\"\\""}'
         );
     }
-    
+
     /**
-     * This method tests TypeException for wrong email address
+     * This method tests various valid types of email names
+     */
+    public function testValidEmails()
+    {
+        $this->email->setEmailAddress('john@doe.com');
+        $json = json_encode($this->email->jsonSerialize());
+        $this->assertEquals(
+            $json,
+            '{"email":"john@doe.com"}'
+        );
+
+        $this->email->setEmailAddress('john+doe@example.com');
+        $json = json_encode($this->email->jsonSerialize());
+        $this->assertEquals(
+            $json,
+            '{"email":"john+doe@example.com"}'
+        );
+
+        $this->email->setEmailAddress('john.michael-smith@example.com');
+        $json = json_encode($this->email->jsonSerialize());
+        $this->assertEquals(
+            $json,
+            '{"email":"john.michael-smith@example.com"}'
+        );
+    }
+
+    /**
+     * This method tests a valid type for a substitution
+     */
+    public function testValidSubstitution()
+    {
+        $this->email->setSubstitutions([
+            '-time-' => "2018-05-03 23:10:29"
+        ]);
+        // substitutions will not get output when serialized
+        $json = json_encode($this->email->jsonSerialize());
+        $this->assertEquals(
+            $json,
+            'null'
+        );
+    }
+
+    /**
+     * This method tests valid input for a subject
+     */
+    public function testValidSubject()
+    {
+        $this->email->setSubject('Dear Mr. John Doe');
+        // subject will not get output when serialized
+        $json = json_encode($this->email->jsonSerialize());
+        $this->assertEquals($json, 'null');
+    }
+
+
+    /** Tests for invalid input
+     *
+     * Because phpunit stops after expecting the first Exception,
+     * we need more then one function to test different scenarios with invalid input
+     */
+
+    /**
+     * We can not use null as our name
      *
      * @expectedException \SendGrid\Mail\TypeException
      */
-    public function testEmailAddress()
+    public function testNullIsNotAValidName()
     {
-		$email = new EmailAddress();
-    	$email->setEmailAddress('test@example.com@wrong');
-    }    
+        $this->email->setName(null);
+    }
+
+    /**
+     * We can not use null as our email
+     *
+     * @expectedException \SendGrid\Mail\TypeException
+     */
+    public function testNullIsNotAValidEMail()
+    {
+        $this->email->setEmailAddress(null);
+    }
+
+    /**
+     * We can not use null as substitution
+     *
+     * @expectedException \SendGrid\Mail\TypeException
+     */
+    public function testNullIsNotAValidSubstitution()
+    {
+        $this->email->setSubstitutions(null);
+    }
+
+    /**
+     * We can not use null as our subject
+     *
+     * @expectedException \SendGrid\Mail\TypeException
+     */
+    public function testNullIsNotAValidSubject()
+    {
+        $this->email->setSubject(null);
+    }
+
+    /**
+     * There should only be a single @ in our address
+     *
+     * @expectedException \SendGrid\Mail\TypeException
+     */
+    public function testDoubleAtSymbolIsNoValidEmail()
+    {
+        $this->email->setEmailAddress('test@example.com@wrong');
+    }
 }
