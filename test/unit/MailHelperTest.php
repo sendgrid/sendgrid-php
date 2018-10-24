@@ -21,7 +21,7 @@ use SendGrid\Mail\EmailAddress as EmailAddress;
  *
  * @package SendGrid\Tests
  */
-class MailTest_Mail extends \PHPUnit\Framework\TestCase
+class MailHelperTest extends \PHPUnit\Framework\TestCase
 {
     /** @var EmailAddress */
     protected $email;
