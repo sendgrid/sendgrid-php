@@ -226,4 +226,4 @@ sendgrid-php is maintained and funded by SendGrid, Inc. The names and logos for 
 
 
 # License
-[The MIT License (MIT)](LICENSE.txt)
+[The MIT License (MIT)](LICENSE.md)
