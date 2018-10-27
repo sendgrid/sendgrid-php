@@ -26,7 +26,7 @@ class AttachmentsTests extends TestCase
     public function testWillEncodeNonBase64String() {
 
         $attachment = new Attachment();
-        $testString = 'Sendgrid is awesome!';
+        $testString = 'SendGrid is awesome!';
 
         $attachment->setContent($testString);
 
@@ -36,7 +36,7 @@ class AttachmentsTests extends TestCase
     public function testWillNotEncodeBase64String() {
 
         $attachment = new Attachment();
-        $testString = base64_encode('Sendgrid is awesome!');
+        $testString = base64_encode('SendGrid is awesome!');
 
         $attachment->setContent($testString);
 
