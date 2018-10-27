@@ -53,7 +53,7 @@ class Assert
     {
         static::string($value, $property);
 
-        if (!\filter_var($value, \FILTER_VALIDATE_EMAIL)) {
+        if (!\filter_var($value, FILTER_VALIDATE_EMAIL)) {
             $message = \sprintf(
                 $message ?: 'Value "$%s" is not a valid email.',
                 $property
@@ -74,7 +74,7 @@ class Assert
      */
     public static function integer($value, $property, $message = null)
     {
-        if (!\filter_var($value, \FILTER_VALIDATE_INT)) {
+        if (!\filter_var($value, FILTER_VALIDATE_INT)) {
             $message = \sprintf(
                 $message ?: 'Value "$%s" is not an integer.',
                 $property
