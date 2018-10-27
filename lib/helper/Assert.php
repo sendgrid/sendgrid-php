@@ -20,6 +20,8 @@ use SendGrid\Mail\TypeException;
 class Assert
 {
     /**
+     * Assert that value is a string.
+     *
      * @param mixed $value
      * @param string $property
      * @param string|null $message
@@ -39,6 +41,8 @@ class Assert
     }
 
     /**
+     * Assert that value is a valid email address.
+     *
      * @param mixed $value
      * @param string $property
      * @param string|null $message
@@ -60,6 +64,8 @@ class Assert
     }
 
     /**
+     * Assert that value is an integer.
+     *
      * @param mixed $value
      * @param string $property
      * @param string|null $message
@@ -79,6 +85,8 @@ class Assert
     }
 
     /**
+     * Assert that value is a boolean.
+     *
      * @param mixed $value
      * @param string $property
      * @param string|null $message
@@ -98,6 +106,8 @@ class Assert
     }
 
     /**
+     * Assert that value is an instance of provided class.
+     *
      * @param mixed $value
      * @param string $property
      * @param string $className
@@ -119,6 +129,8 @@ class Assert
     }
 
     /**
+     * Assert that value is an array.
+     *
      * @param mixed $value
      * @param string $property
      * @param string|null $message
@@ -138,6 +150,8 @@ class Assert
     }
 
     /**
+     * Assert that value is a callable.
+     *
      * @param mixed $value
      * @param string|null $property
      * @param string|null $message
@@ -157,6 +171,8 @@ class Assert
     }
 
     /**
+     * Assert that value satisfies the conditions in callback function.
+     *
      * @param mixed $value
      * @param string $property
      * @param callable $callback
@@ -179,6 +195,8 @@ class Assert
     }
 
     /**
+     * Assert that number of elements in array is less than a given limit.
+     *
      * @param mixed $value
      * @param string $property
      * @param int $size
@@ -202,6 +220,8 @@ class Assert
     }
 
     /**
+     * Assert that number of elements in array is more than a given limit.
+     *
      * @param mixed $value
      * @param string $property
      * @param int $size
@@ -225,6 +245,8 @@ class Assert
     }
 
     /**
+     * Assert that a number is smaller as a given limit.
+     *
      * @param mixed $value
      * @param string $property
      * @param int $limit
@@ -248,6 +270,8 @@ class Assert
     }
 
     /**
+     * Assert that a number is at least as big as a given limit.
+     *
      * @param mixed $value
      * @param string $property
      * @param int $limit
@@ -271,6 +295,8 @@ class Assert
     }
 
     /**
+     * Assert that string value is not longer than a given limit.
+     *
      * @param mixed $value
      * @param string $property
      * @param int $limit
@@ -294,6 +320,8 @@ class Assert
     }
 
     /**
+     * Assert that string value length is greater than a given limit.
+     *
      * @param mixed $value
      * @param string $property
      * @param int $limit
@@ -317,6 +345,8 @@ class Assert
     }
 
     /**
+     * Assert that value is in array of choices.
+     *
      * @param mixed $value
      * @param string $property
      * @param array $choices
