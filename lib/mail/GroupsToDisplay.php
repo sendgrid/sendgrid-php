@@ -81,8 +81,12 @@ class GroupsToDisplay implements \JsonSerializable
     {
         Assert::integer($group_to_display, 'group_to_display');
         Assert::accept($group_to_display, 'group_to_display', function () {
-            return sizeof($this->groups_to_display) < 25;
-        }, 'Number of elements in "$groups_to_display" can not exceed 25.');
+            $groups = $this->groups_to_display;
+            if (!\is_array($groups)) {
+                $groups = [];
+            }
+            return sizeof($groups) < 25;
+        }, 'Number of elements in "$groups_to_display" can not be more than 25.');
 
         $this->groups_to_display[] = $group_to_display;
     }
