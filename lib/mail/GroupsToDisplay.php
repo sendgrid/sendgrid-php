@@ -80,7 +80,7 @@ class GroupsToDisplay implements \JsonSerializable
     public function addGroupToDisplay($group_to_display)
     {
         Assert::integer($group_to_display, 'group_to_display');
-        Assert::satisfy($group_to_display, 'group_to_display', function () {
+        Assert::accept($group_to_display, 'group_to_display', function () {
             return sizeof($this->groups_to_display) < 25;
         }, 'Number of elements in "$groups_to_display" can not exceed 25.');
 

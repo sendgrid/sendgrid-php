@@ -23,8 +23,8 @@ use SendGrid\Mail\Attachment;
  */
 class AttachmentsTests extends TestCase
 {
-    public function testWillEncodeNonBase64String() {
-
+    public function testWillEncodeNonBase64String()
+    {
         $attachment = new Attachment();
         $testString = 'Sendgrid is awesome!';
 
@@ -33,8 +33,8 @@ class AttachmentsTests extends TestCase
         $this->assertEquals(base64_encode($testString), $attachment->getContent());
     }
 
-    public function testWillNotEncodeBase64String() {
-
+    public function testWillNotEncodeBase64String()
+    {
         $attachment = new Attachment();
         $testString = base64_encode('Sendgrid is awesome!');
 

@@ -1435,7 +1435,7 @@ class Mail implements \JsonSerializable
             $category = new Category($category);
         }
 
-        Assert::satisfy($category, 'category', function () {
+        Assert::accept($category, 'category', function () {
             return sizeof($this->categories) < 10;
         }, 'Number of elements in "$categories" can not exceed 10.');
 

@@ -144,7 +144,7 @@ class Assert
      *
      * @throws TypeException
      */
-    public static function isCallable($value, $property = null, $message = null)
+    public static function isCallable($value, $property, $message = null)
     {
         if (!\is_callable($value)) {
             $message = \sprintf(
@@ -164,9 +164,9 @@ class Assert
      *
      * @throws TypeException
      */
-    public static function satisfy($value, $property, $callback, $message = null)
+    public static function accept($value, $property, $callback, $message = null)
     {
-        static::isCallable($callback);
+        static::isCallable($callback, $property);
 
         if (!\call_user_func($callback, $value)) {
             $message = \sprintf(
@@ -192,7 +192,7 @@ class Assert
 
         if (sizeof($value) > $size) {
             $message = \sprintf(
-                $message ?: 'Number of elements in "$%s" can not exceed %d.',
+                $message ?: 'Number of elements in "$%s" can not be more than %d.',
                 $property,
                 $size
             );
@@ -215,7 +215,7 @@ class Assert
 
         if (sizeof($value) < $size) {
             $message = \sprintf(
-                $message ?: 'Number of elements in "$%s" can not less than %d.',
+                $message ?: 'Number of elements in "$%s" can not be less than %d.',
                 $property,
                 $size
             );

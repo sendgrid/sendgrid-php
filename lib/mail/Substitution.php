@@ -85,7 +85,7 @@ class Substitution implements \JsonSerializable
      */ 
     public function setValue($value)
     {
-        Assert::satisfy($value, 'value', function ($val) {
+        Assert::accept($value, 'value', function ($val) {
             return \is_string($val)
                 || \filter_var($val, \FILTER_VALIDATE_INT)
                 || \is_bool($val)

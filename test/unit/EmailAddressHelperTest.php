@@ -14,14 +14,15 @@
 
 namespace SendGrid\Tests;
 
-use SendGrid\Mail\EmailAddress as EmailAddress;
+use PHPUnit\Framework\TestCase;
+use SendGrid\Mail\EmailAddress;
 
 /**
  * This class tests email address encoding
  *
  * @package SendGrid\Tests
  */
-class MailTest_Mail extends \PHPUnit\Framework\TestCase
+class EmailAddressTest extends TestCase
 {
     /**
      * This method tests various types of unencoded emails
@@ -78,7 +79,7 @@ class MailTest_Mail extends \PHPUnit\Framework\TestCase
      */
     public function testEmailAddress()
     {
-		$email = new EmailAddress();
-    	$email->setEmailAddress('test@example.com@wrong');
+        $email = new EmailAddress();
+        $email->setEmailAddress('test@example.com@wrong');
     }    
 }
