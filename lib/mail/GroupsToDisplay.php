@@ -24,7 +24,11 @@ use SendGrid\Helper\Assert;
  */
 class GroupsToDisplay implements \JsonSerializable
 {
-    /** @var $groups_to_display int[] An array containing the unsubscribe groups that you would like to be displayed on the unsubscribe preferences page. Maximum of 25 */
+    /**
+     * @var int[]
+     * An array containing the unsubscribe groups
+     * that you would like to be displayed on the unsubscribe preferences page. Maximum of 25
+     */
     private $groups_to_display;
 
     /**
@@ -76,10 +80,9 @@ class GroupsToDisplay implements \JsonSerializable
     public function addGroupToDisplay($group_to_display)
     {
         Assert::integer($group_to_display, 'group_to_display');
-
-        if (sizeof($this->groups_to_display) === 25) {
-            throw new TypeException('Number of elements in "$groups_to_display" can not exceed 25.');
-        }
+        Assert::satisfy($group_to_display, 'group_to_display', function () {
+            return sizeof($this->groups_to_display) < 25;
+        }, 'Number of elements in "$groups_to_display" can not exceed 25.');
 
         $this->groups_to_display[] = $group_to_display;
     }

@@ -181,20 +181,43 @@ class Assert
     /**
      * @param mixed $value
      * @param string $property
-     * @param int $maxCount
+     * @param int $size
      * @param string|null $message
      *
      * @throws TypeException
      */
-    public static function maxItems($value, $property, $maxCount, $message = null)
+    public static function maxItems($value, $property, $size, $message = null)
     {
         static::isArray($value, $property);
 
-        if (sizeof($value) > $maxCount) {
+        if (sizeof($value) > $size) {
             $message = \sprintf(
                 $message ?: 'Number of elements in "$%s" can not exceed %d.',
                 $property,
-                $maxCount
+                $size
+            );
+
+            throw new TypeException($message);
+        }
+    }
+
+    /**
+     * @param mixed $value
+     * @param string $property
+     * @param int $size
+     * @param string|null $message
+     *
+     * @throws TypeException
+     */
+    public static function minItems($value, $property, $size, $message = null)
+    {
+        static::isArray($value, $property);
+
+        if (sizeof($value) < $size) {
+            $message = \sprintf(
+                $message ?: 'Number of elements in "$%s" can not less than %d.',
+                $property,
+                $size
             );
 
             throw new TypeException($message);

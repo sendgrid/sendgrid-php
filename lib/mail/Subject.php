@@ -49,7 +49,7 @@ class Subject implements \JsonSerializable
      */ 
     public function setSubject($subject)
     {
-        Assert::string($subject, 'subject');
+        Assert::minLength($subject, 'subject', 1);
 
         $this->subject = $subject;
     }
