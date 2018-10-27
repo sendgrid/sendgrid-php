@@ -14,6 +14,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a Personalization object for
  * the /mail/send API call
@@ -116,9 +118,7 @@ class Personalization implements \JsonSerializable
     public function setSubject($subject)
     {
         if (!($subject instanceof Subject)) {
-            throw new TypeException(
-                '$subject must be an instance of SendGrid\Mail\Subject'
-            );
+            Assert::isInstanceOf($subject, 'subject', Subject::class);
         }
         $this->subject = $subject;
     }
@@ -138,7 +138,7 @@ class Personalization implements \JsonSerializable
      *
      * @param Header $header Header object
      */
-    public function addHeader($header)
+    public function addHeader(Header $header)
     {
         $this->headers[$header->getKey()] = $header->getValue();
     }
@@ -158,10 +158,10 @@ class Personalization implements \JsonSerializable
      *
      * @param Substitution|string $data DynamicTemplateData object or the key of a
      *                                  dynamic data
-     * @param string|null         $value The value of dynmic data
-     * 
-     * @return null
-     */ 
+     * @param string|null $value The value of dynamic data
+     *
+     * @throws TypeException
+     */
     public function addDynamicTemplateData($data, $value = null)
     {
         $this->addSubstitution($data, $value);
@@ -183,6 +183,8 @@ class Personalization implements \JsonSerializable
      * @param Substitution|string $substitution Substitution object or the key of a
      *                                          substitution
      * @param string|null $value The value of a substitution
+     *
+     * @throws TypeException
      */
     public function addSubstitution($substitution, $value = null)
     {
@@ -208,7 +210,7 @@ class Personalization implements \JsonSerializable
      *
      * @param CustomArg $custom_arg CustomArg object
      */
-    public function addCustomArg($custom_arg)
+    public function addCustomArg(CustomArg $custom_arg)
     {
         $this->custom_args[$custom_arg->getKey()] = (string)$custom_arg->getValue();
     }
@@ -227,16 +229,9 @@ class Personalization implements \JsonSerializable
      * Add a SendAt object to a Personalization object
      *
      * @param SendAt $send_at SendAt object
-     * 
-     * @throws TypeException
      */ 
-    public function setSendAt($send_at)
+    public function setSendAt(SendAt $send_at)
     {
-        if (!($send_at instanceof SendAt)) {
-            throw new TypeException(
-                '$send_at must be an instance of SendGrid\Mail\SendAt'
-            );
-        }
         $this->send_at = $send_at;
     }
 
@@ -259,11 +254,8 @@ class Personalization implements \JsonSerializable
      */ 
     public function setHasDynamicTemplate($has_dynamic_template)
     {
-        if (is_bool($has_dynamic_template) != true) {
-            throw new TypeException(
-                '$has_dynamic_template must be an instance of bool'
-            );
-        }
+        Assert::boolean($has_dynamic_template, 'has_dynamic_template');
+
         $this->has_dynamic_template = $has_dynamic_template;
     }
 
@@ -284,7 +276,7 @@ class Personalization implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        if ($this->getHasDynamicTemplate() == true) {
+        if ($this->getHasDynamicTemplate()) {
             $dynamic_substitutions = $this->getSubstitutions();
             $substitutions = null;
         } else {

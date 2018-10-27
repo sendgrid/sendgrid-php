@@ -14,6 +14,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a Footer object for the /mail/send API call
  *
@@ -34,6 +36,8 @@ class Footer implements \JsonSerializable
      * @param bool|null $enable Indicates if this setting is enabled
      * @param string|null $text The plain text content of your footer
      * @param string|null $html The HTML content of your footer
+     *
+     * @throws TypeException
      */
     public function __construct($enable = null, $text = null, $html = null)
     {
@@ -57,9 +61,8 @@ class Footer implements \JsonSerializable
      */ 
     public function setEnable($enable)
     {
-        if (!is_bool($enable)) {
-            throw new TypeException('$enable must be of type bool');
-        }
+        Assert::boolean($enable, 'enable');
+
         $this->enable = $enable;
     }
 
@@ -82,9 +85,8 @@ class Footer implements \JsonSerializable
      */ 
     public function setText($text)
     {
-        if (!is_string($text)) {
-            throw new TypeException('$text must be of type string.');
-        }
+        Assert::string($text, 'text');
+
         $this->text = $text;
     }
 
@@ -107,9 +109,8 @@ class Footer implements \JsonSerializable
      */ 
     public function setHtml($html)
     {
-        if (!is_string($html)) {
-            throw new TypeException('$html must be of type string.');
-        }
+        Assert::string($html, 'html');
+
         $this->html = $html;
     }
 

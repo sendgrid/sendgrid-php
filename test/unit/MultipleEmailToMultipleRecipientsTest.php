@@ -19,7 +19,7 @@ namespace SendGrid\Tests;
  *
  * @package SendGrid\Tests
  */
-class MultipleEmailToMulipleRecipientsTest extends BaseTestClass
+class MultipleEmailToMultipleRecipientsTest extends BaseTestClass
 {
 
     private $REQUEST_OBJECT = <<<'JSON'
@@ -321,7 +321,7 @@ JSON;
         $email = new \SendGrid\Mail\Mail(
             $from,
             $tos,
-            $subject, // or array of subjects, these take precendence
+            $subject, // or array of subjects, these take precedence
             $plainTextContent,
             $htmlContent,
             $globalSubstitutions
@@ -378,7 +378,7 @@ JSON;
         $email = new \SendGrid\Mail\Mail(
             $from,
             $tos,
-            $subject, // or array of subjects, these take precendence
+            $subject, // or array of subjects, these take precedence
             $plainTextContent,
             $htmlContent,
             $globalSubstitutions
@@ -441,7 +441,7 @@ JSON;
         $email = new \SendGrid\Mail\Mail(
             $from,
             $tos,
-            $subject, // or array of subjects, these take precendence
+            $subject, // or array of subjects, these take precedence
             $plainTextContent,
             $htmlContent,
             $globalSubstitutions
@@ -503,7 +503,7 @@ JSON;
         $email = new \SendGrid\Mail\Mail(
             $from,
             $tos,
-            $subject, // or array of subjects, these take precendence
+            $subject, // or array of subjects, these take precedence
             $plainTextContent,
             $htmlContent,
             $globalSubstitutions

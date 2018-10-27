@@ -14,6 +14,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a Category object for the /mail/send API call
  *
@@ -30,6 +32,8 @@ class Category implements \JsonSerializable
      * @param string|null $category A category name for an email message.
      *                              Each category name may not exceed 255
      *                              characters
+     *
+     * @throws TypeException
      */
     public function __construct($category = null)
     {
@@ -49,9 +53,8 @@ class Category implements \JsonSerializable
      */ 
     public function setCategory($category)
     {
-        if (!is_string($category)) {
-            throw new TypeException('$category must be of type string.');
-        }
+        Assert::maxLength($category, 'category', 255);
+
         $this->category = $category;
     }
 

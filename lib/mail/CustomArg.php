@@ -14,6 +14,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a CustomArg object for the /mail/send API call
  *
@@ -38,6 +40,8 @@ class CustomArg implements \JsonSerializable
      *
      * @param string|null $key Custom arg key
      * @param string|null $value Custom arg value
+     *
+     * @throws TypeException
      */
     public function __construct($key = null, $value = null)
     {
@@ -58,10 +62,9 @@ class CustomArg implements \JsonSerializable
      */ 
     public function setKey($key)
     {
-        if (!is_string($key)) {
-            throw new TypeException('$key must be of type string');
-        }
-        $this->key = (string) $key;
+        Assert::string($key, 'key');
+
+        $this->key = $key;
     }
 
     /**
@@ -83,10 +86,9 @@ class CustomArg implements \JsonSerializable
      */ 
     public function setValue($value)
     {
-        if (!is_string($value)) {
-            throw new TypeException('$value must be of type string.');
-        }
-        $this->value = (string) $value;
+        Assert::string($value, 'value');
+
+        $this->value = $value;
     }
 
     /**

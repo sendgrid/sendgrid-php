@@ -33,7 +33,8 @@
       "SendGrid\\": "lib/",
       "SendGrid\\Mail\\": "lib/mail/",
       "SendGrid\\Contacts\\": "lib/contacts/",
-      "SendGrid\\Stats\\": "lib/stats/"
+      "SendGrid\\Stats\\": "lib/stats/",
+      "SendGrid\\Helper\\": "lib/helper/"
     },
     "files": ["lib/SendGrid.php"]
   },

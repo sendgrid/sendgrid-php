@@ -14,6 +14,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a EmailAddress object for the /mail/send API call
  *
@@ -40,6 +42,8 @@ class EmailAddress implements \JsonSerializable
      *                                   be be applied to the text and html content
      *                                   of the email body
      * @param string|null $subject The personalized subject of the email
+     *
+     * @throws TypeException
      */
     public function __construct(
         $emailAddress = null,
@@ -70,13 +74,8 @@ class EmailAddress implements \JsonSerializable
      */ 
     public function setEmailAddress($emailAddress)
     {
-        if (!(is_string($emailAddress) &&
-            filter_var($emailAddress, FILTER_VALIDATE_EMAIL))
-        ) {
-            throw new TypeException(
-                '$emailAddress must be valid and of type string.'
-            );
-        }
+        Assert::email($emailAddress, 'emailAddress');
+
         $this->email = $emailAddress;
     }
 
@@ -109,9 +108,7 @@ class EmailAddress implements \JsonSerializable
      */ 
     public function setName($name)
     {
-        if (!is_string($name)) {
-            throw new TypeException('$name must be of type string.');
-        }
+        Assert::string($name, 'name');
 
         /*
             Issue #368
@@ -158,9 +155,7 @@ class EmailAddress implements \JsonSerializable
      */ 
     public function setSubstitutions($substitutions)
     {
-        if (!is_array($substitutions)) {
-            throw new TypeException('$substitutions must be an array.');
-        }
+        Assert::maxItems($substitutions, 'substitutions', 10000);
 
         $this->substitutions = $substitutions;
     }
@@ -182,14 +177,9 @@ class EmailAddress implements \JsonSerializable
      */ 
     public function setSubject($subject)
     {
-        if (!is_string($subject)) {
-            throw new TypeException('$subject must be of type string.');
-        }
-        if (!($subject instanceof Subject)) {
-            $this->subject = new Subject($subject);
-        } else {
-            $this->subject = $subject;
-        }
+        Assert::string($subject, 'subject');
+
+        $this->subject = new Subject($subject);
     }
 
     /**

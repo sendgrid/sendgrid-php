@@ -14,6 +14,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a Substitution object for the /mail/send API call
  *
@@ -37,6 +39,8 @@ class Substitution implements \JsonSerializable
      *
      * @param string|null $key Substitution key
      * @param string|null $value Substitution value
+     *
+     * @throws TypeException
      */
     public function __construct($key = null, $value = null)
     {
@@ -54,14 +58,12 @@ class Substitution implements \JsonSerializable
      * @param string $key Substitution key
      * 
      * @throws TypeException
-     * @return null
      */ 
     public function setKey($key)
     {
-        if (!is_string($key)) {
-            throw new TypeException('$key must be of type string.');
-        }
-        $this->key = (string) $key;
+        Assert::string($key, 'key');
+
+        $this->key = $key;
     }
 
     /**
@@ -80,13 +82,17 @@ class Substitution implements \JsonSerializable
      * @param string|array|bool|int $value Substitution value
      * 
      * @throws TypeException
-     * @return null
      */ 
     public function setValue($value)
     {
-        if (!is_string($value) && !is_array($value) && !is_object($value) &&!is_bool($value) &&!is_int($value)) {
-            throw new TypeException('$value must be of type string, array or object.');
-        }
+        Assert::satisfy($value, 'value', function ($val) {
+            return \is_string($val)
+                || \filter_var($val, \FILTER_VALIDATE_INT)
+                || \is_bool($val)
+                || \is_array($val)
+                || \is_object($val);
+        }, 'Value $value must be an array, object, bool, string or integer.');
+
         $this->value = $value;
     }
 

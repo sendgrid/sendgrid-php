@@ -14,6 +14,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a BccSettings object for the /mail/send API call
  *
@@ -32,6 +34,8 @@ class BccSettings implements \JsonSerializable
      * @param bool|null $enable Indicates if this setting is enabled
      * @param string|null $email The email address that you would like
      *                            to receive the BCC
+     *
+     * @throws TypeException
      */
     public function __construct($enable = null, $email = null)
     {
@@ -52,9 +56,8 @@ class BccSettings implements \JsonSerializable
      */ 
     public function setEnable($enable)
     {
-        if (!is_bool($enable)) {
-            throw new TypeException('$enable must be of type bool.');
-        }
+        Assert::boolean($enable, 'enable');
+
         $this->enable = $enable;
     }
 
@@ -78,13 +81,8 @@ class BccSettings implements \JsonSerializable
      */ 
     public function setEmail($email)
     {
-        if (!is_string($email) &&
-            filter_var($email, FILTER_VALIDATE_EMAIL)
-        ) {
-            throw new TypeException(
-                '$email must valid and be of type string.'
-            );
-        }
+        Assert::email($email, 'email');
+
         $this->email = $email;
     }
 

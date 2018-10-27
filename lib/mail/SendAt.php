@@ -13,6 +13,8 @@
  */
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a SendAt object for the /mail/send API call
  *
@@ -21,7 +23,8 @@ namespace SendGrid\Mail;
 class SendAt implements \JsonSerializable
 {
     /**
-     * @var $send_at int A unix timestamp allowing you to specify when you want your email
+     * @var int
+     * A unix timestamp allowing you to specify when you want your email
      * to be delivered. This may be overridden by the personalizations[x].send_at
      * parameter. You can't schedule more than 72 hours in advance. If you have
      * the flexibility, it's better to schedule mail for off-peak times. Most
@@ -30,7 +33,6 @@ class SendAt implements \JsonSerializable
      * result in lower deferral rates because it won't be going through our servers
      * at the same times as everyone else's mail
      */
-
     private $send_at;
 
     /**
@@ -47,8 +49,10 @@ class SendAt implements \JsonSerializable
      *                          example, scheduling at 10:53) can result in lower
      *                          deferral rates because it won't be going through
      *                          our servers at the same times as everyone else's mail
+     *
+     * @throws TypeException
      */
-    public function __construct($send_at=null)
+    public function __construct($send_at = null)
     {
         if (isset($send_at)) {
             $this->setSendAt($send_at);
@@ -74,9 +78,8 @@ class SendAt implements \JsonSerializable
      */ 
     public function setSendAt($send_at)
     {
-        if (!is_int($send_at)) {
-            throw new TypeException('$send_at must be of type int.');
-        }
+        Assert::integer($send_at, 'send_at');
+
         $this->send_at = $send_at;
     }
 

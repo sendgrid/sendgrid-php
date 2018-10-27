@@ -14,6 +14,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a OpenTracking object for the /mail/send API call
  *
@@ -25,9 +27,16 @@ namespace SendGrid\Mail;
  */
 class OpenTracking implements \JsonSerializable
 {
-    /** @var $enable bool Indicates if this setting is enabled */
+    /**
+     * @var bool Indicates if this setting is enabled
+     */
     private $enable;
-    /** @var $substitution_tag string Allows you to specify a substitution tag that you can insert in the body of your email at a location that you desire. This tag will be replaced by the open tracking pixel */
+
+    /**
+     * @var string
+     * Allows you to specify a substitution tag that you can insert in the body of your email
+     * at a location that you desire. This tag will be replaced by the open tracking pixel
+     */
     private $substitution_tag;
 
     /**
@@ -39,6 +48,8 @@ class OpenTracking implements \JsonSerializable
      *                                      of your email at a location that you
      *                                      desire. This tag will be replaced by
      *                                      the open tracking pixel
+     *
+     * @throws TypeException
      */
     public function __construct($enable = null, $substitution_tag = null)
     {
@@ -59,9 +70,8 @@ class OpenTracking implements \JsonSerializable
      */ 
     public function setEnable($enable)
     {
-        if (!is_bool($enable)) {
-            throw new TypeException('$enable must be of type bool');
-        }
+        Assert::boolean($enable, 'enable');
+
         $this->enable = $enable;
     }
 
@@ -88,9 +98,8 @@ class OpenTracking implements \JsonSerializable
      */ 
     public function setSubstitutionTag($substitution_tag)
     {
-        if (!is_string($substitution_tag)) {
-            throw new TypeException('$substitution_tag must be of type string.');
-        }
+        Assert::string($substitution_tag, 'substitution_tag');
+
         $this->substitution_tag = $substitution_tag;
     }
 

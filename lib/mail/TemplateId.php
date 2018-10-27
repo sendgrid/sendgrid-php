@@ -14,6 +14,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a TemplateId object for the /mail/send API call
  *
@@ -22,7 +24,8 @@ namespace SendGrid\Mail;
 class TemplateId implements \JsonSerializable
 {
     /**
-     * @var $template_id string The id of a template that you would like to use. If you use a
+     * @var string
+     * The id of a template that you would like to use. If you use a
      * template that contains a subject and content (either text or html), you do
      * not need to specify those at the personalizations nor message level
      */
@@ -36,6 +39,8 @@ class TemplateId implements \JsonSerializable
      *                                 a subject and content (either text or html),
      *                                 you do not need to specify those at the
      *                                 personalizations nor message level
+     *
+     * @throws TypeException
      */
     public function __construct($template_id = null)
     {
@@ -57,9 +62,7 @@ class TemplateId implements \JsonSerializable
      */ 
     public function setTemplateId($template_id)
     {
-        if (!is_string($template_id)) {
-            throw new TypeException('$template_id must be of type string.');
-        }
+        Assert::string($template_id, 'template_id');
 
         $this->template_id = $template_id;
     }
