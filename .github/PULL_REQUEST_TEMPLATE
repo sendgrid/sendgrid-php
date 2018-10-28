@@ -3,11 +3,11 @@ We appreciate the effort for this pull request but before that please make sure 
 
 
 Please enter each Issue number you are resolving in your PR after one of the following words [Fixes, Closes, Resolves]. This will auto-link these issues and close them when this PR is merged!
-e.g. 
+e.g.
 Fixes #1
 Closes #2
 -->
-# Fixes # 
+# Fixes #
 
 ### Checklist
 - [ ] I have made a material change to the repo (functionality, testing, spelling, grammar)
@@ -18,7 +18,7 @@ Closes #2
 - [ ] I have added in line documentation to the code I modified
 
 ### Short description of what this PR does:
-- 
+-
 - 
 
-If you have questions, please send an email to [Sendgrid](mailto:dx@sendgrid.com), or file a Github Issue in this repository.
+If you have questions, please send an email to [SendGrid](mailto:dx@sendgrid.com), or file a Github Issue in this repository.
