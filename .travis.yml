@@ -1,24 +1,32 @@
 language: php
 
-before_script:
-- composer install
-- "./test/prism.sh &"
-- sleep 60
-- cd test
-
-script:
-- "../vendor/bin/phpunit . --filter test*"
-
-after_script:
-- cd ../
-after_success:
-- bash <(curl -s https://codecov.io/bash)
-
 php:
 - 5.6
 - 7.0
 - 7.1
 - 7.2
+
+cache:
+  directories:
+  - vendor
+  - $HOME/.composer/cache
+
+services:
+- docker
+
+before_install:
+- docker run -d -p 127.0.0.1:4010:4010 stoplight/prism mock --spec https://raw.githubusercontent.com/sendgrid/sendgrid-oai/master/oai_stoplight.json
+
+install:
+- travis_retry composer self-update && composer --version
+- export PATH="$HOME/.composer/vendor/bin:$PATH"
+- travis_retry composer install --prefer-dist --no-interaction
+
+script:
+- vendor/bin/phpunit --configuration=test/phpunit.xml.dist --verbose
+
+after_success:
+- bash <(curl -s https://codecov.io/bash)
 
 notifications:
   hipchat:
