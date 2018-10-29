@@ -40,7 +40,7 @@ We appreciate your continued support, thank you!
 ## Prerequisites
 
 - PHP version 5.6, 7.0, 7.1 or 7.2
-- The SendGrid service, starting at the [free level](https://sendgrid.com/free?source=sendgrid-php)
+- The SendGrid service, starting at the [free level](https://sendgrid.com/free?source=sendgrid-php) to send up to 40,000 emails for the first 30 days, then send 100 emails/day free forever or check out [our pricing](https://sendgrid.com/pricing?source=sendgrid-php).
 
 ## Setup Environment Variables
 
