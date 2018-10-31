@@ -33,7 +33,7 @@ elif [ "$UNAME" = "Linux" ] ; then
 fi
 
 mkdir -p ../prism/bin
-LATEST=`get_latest_release`
+LATEST=$(get_latest_release)
 URL="https://github.com/stoplightio/prism/releases/download/$LATEST/prism_$PLATFORM"
 DEST=../prism/bin/prism
 
