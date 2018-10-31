@@ -37,11 +37,11 @@ class DynamicTemplateTest extends BaseTestClass
     },
     {
       "type": "text/calendar",
-      "value": "Party Time!!"
+      "value": "Party Time!"
     },
     {
       "type": "text/calendar2",
-      "value": "Party Time 2!!"
+      "value": "Party Time 2!"
     }
   ],
   "from": {
@@ -122,11 +122,11 @@ JSON;
     },
     {
       "type": "text/calendar",
-      "value": "Party Time!!"
+      "value": "Party Time!"
     },
     {
       "type": "text/calendar2",
-      "value": "Party Time 2!!"
+      "value": "Party Time 2!"
     }
   ],
   "from": {
