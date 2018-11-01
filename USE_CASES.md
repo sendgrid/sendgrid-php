@@ -133,6 +133,8 @@ $data = array(
     'client_secret' => $boxConfig->boxAppSettings->clientSecret,
     'assertion' => $assertion
 );
+
+// Send Curl Request
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
