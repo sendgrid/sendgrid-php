@@ -9,7 +9,7 @@ $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
 
 ////////////////////////////////////////////////////
-// Create a domain whitelabel. #
+// Create a domain authentication. #
 // POST /whitelabel/domains #
 
 $request_body = json_decode('{
