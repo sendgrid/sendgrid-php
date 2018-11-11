@@ -1789,7 +1789,7 @@ print_r($response->headers());
 
 **This endpoint allows you to retrieve a list of all assigned and unassigned IPs.**
 
-Response includes warm up status, pools, assigned subusers, and whitelabel info. The start_date field corresponds to when warmup started for that IP.
+Response includes warm up status, pools, assigned subusers, and sender authentication info. The start_date field corresponds to when warmup started for that IP.
 
 A single IP address or a range of IP addresses may be dedicated to an account in order to send email for multiple domains. The reputation of this IP is based on the aggregate performance of all the senders who use it.
 
@@ -1826,7 +1826,7 @@ print_r($response->headers());
 
 IP Pools allow you to group your dedicated SendGrid IP addresses together. For example, you could create separate pools for your transactional and marketing email. When sending marketing emails, specify that you want to use the marketing IP pool. This allows you to maintain separate reputations for your different email traffic.
 
-IP pools can only be used with whitelabeled IP addresses.
+IP pools can only be used with sender authenticationed IP addresses.
 
 If an IP pool is NOT specified for an email, it will use any IP available, including ones in pools.
 
@@ -1848,7 +1848,7 @@ print_r($response->headers());
 
 IP Pools allow you to group your dedicated SendGrid IP addresses together. For example, you could create separate pools for your transactional and marketing email. When sending marketing emails, specify that you want to use the marketing IP pool. This allows you to maintain separate reputations for your different email traffic.
 
-IP pools can only be used with whitelabeled IP addresses.
+IP pools can only be used with sender authenticationed IP addresses.
 
 If an IP pool is NOT specified for an email, it will use any IP available, including ones in pools.
 
@@ -4449,15 +4449,15 @@ print_r($response->headers());
 <a name="whitelabel"></a>
 # WHITELABEL
 
-## Create a domain whitelabel.
+## Create a domain sender authentication.
 
-**This endpoint allows you to create a whitelabel for one of your domains.**
+**This endpoint allows you to create a sender authentication for one of your domains.**
 
-If you are creating a domain whitelabel that you would like a subuser to use, you have two options:
-1. Use the "username" parameter. This allows you to create a whitelabel on behalf of your subuser. This means the subuser is able to see and modify the created whitelabel.
-2. Use the Association workflow (see Associate Domain section). This allows you to assign a whitelabel created by the parent to a subuser. This means the subuser will default to the assigned whitelabel, but will not be able to see or modify that whitelabel. However, if the subuser creates their own whitelabel it will overwrite the assigned whitelabel.
+If you are creating a domain sender authentication that you would like a subuser to use, you have two options:
+1. Use the "username" parameter. This allows you to create a sender authentication on behalf of your subuser. This means the subuser is able to see and modify the created sender authentication.
+2. Use the Association workflow (see Associate Domain section). This allows you to assign a sender authentication created by the parent to a subuser. This means the subuser will default to the assigned sender authentication, but will not be able to see or modify that sender authentication. However, if the subuser creates their own sender authentication it will overwrite the assigned sender authentication.
 
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
 
 For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
 
@@ -4482,85 +4482,85 @@ print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
-## List all domain whitelabels.
+## List all domain sender authentications.
 
-**This endpoint allows you to retrieve a list of all domain whitelabels you have created.**
+**This endpoint allows you to retrieve a list of all domain sender authentications you have created.**
 
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+A domain sender authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. sender authenticationing a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
 
-For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
+For more information on sender authenticationing, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/sender authentication/index.html)
 
 
-### GET /whitelabel/domains
+### GET /sender authentication/domains
 
 
 ```php
 $query_params = json_decode('{"username": "test_string", "domain": "test_string", "exclude_subusers": "true", "limit": 1, "offset": 1}');
-$response = $sg->client->whitelabel()->domains()->get(null, $query_params);
+$response = $sg->client->sender authentication()->domains()->get(null, $query_params);
 print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
-## Get the default domain whitelabel.
+## Get the default domain sender authentication.
 
-**This endpoint allows you to retrieve the default whitelabel for a domain.**
+**This endpoint allows you to retrieve the default sender authentication for a domain.**
 
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+A domain sender authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. sender authenticationing a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
 
-For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
+For more information on sender authenticationing, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/sender authentication/index.html)
 
 ## URI Parameters
 | URI Parameter   | Type   | Description  |
 |---|---|---|
-| domain | string  |The domain to find a default domain whitelabel for. |
+| domain | string  |The domain to find a default domain sender authentication for. |
 
-### GET /whitelabel/domains/default
+### GET /sender authentication/domains/default
 
 
 ```php
-$response = $sg->client->whitelabel()->domains()->default()->get();
+$response = $sg->client->sender authentication()->domains()->default()->get();
 print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
-## List the domain whitelabel associated with the given user.
+## List the domain sender authentication associated with the given user.
 
-**This endpoint allows you to retrieve all of the whitelabels that have been assigned to a specific subuser.**
+**This endpoint allows you to retrieve all of the sender authentications that have been assigned to a specific subuser.**
 
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
 
-Domain whitelabels can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's whitelabels. To associate a whitelabel with a subuser, the parent account must first create the whitelabel and validate it. The parent may then associate the whitelabel via the subuser management tools.
+Domain authentications can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's sender authentications. To associate a sender authentication with a subuser, the parent account must first create the sender authentication and validate it. The parent may then associate the sender authentication via the subuser management tools.
 
 For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
 
 ## URI Parameters
 | URI Parameter   | Type  | Description  |
 |---|---|---|
-| username | string  | Username of the subuser to find associated whitelabels for. |
+| username | string  | Username of the subuser to find associated sender authentications for. |
 
 ### GET /whitelabel/domains/subuser
 
 
 ```php
-$response = $sg->client->whitelabel()->domains()->subuser()->get();
+$response = $sg->client->sender authentication()->domains()->subuser()->get();
 print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
-## Disassociate a domain whitelabel from a given user.
+## Disassociate a domain sender authentication from a given user.
 
-**This endpoint allows you to disassociate a specific whitelabel from a subuser.**
+**This endpoint allows you to disassociate a specific sender authentication from a subuser.**
 
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
 
-Domain whitelabels can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's whitelabels. To associate a whitelabel with a subuser, the parent account must first create the whitelabel and validate it. The parent may then associate the whitelabel via the subuser management tools.
+Domain authentications can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's sender authentications. To associate a sender authentication with a subuser, the parent account must first create the sender authentication and validate it. The parent may then associate the sender authentication via the subuser management tools.
 
 For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
 
 ## URI Parameters
 | URI Parameter   | Type  | Required?  | Description  |
 |---|---|---|---|
-| username | string  | required  | Username for the subuser to find associated whitelabels for. |
+| username | string  | required  | Username for the subuser to find associated sender authentications for. |
 
 ### DELETE /whitelabel/domains/subuser
 
@@ -4571,11 +4571,11 @@ print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
-## Update a domain whitelabel.
+## Update a domain sender authentication.
 
-**This endpoint allows you to update the settings for a domain whitelabel.**
+**This endpoint allows you to update the settings for a domain authentication.**
 
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
 
 For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
 
@@ -4593,11 +4593,11 @@ print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
-## Retrieve a domain whitelabel.
+## Retrieve a domain sender authentication.
 
-**This endpoint allows you to retrieve a specific domain whitelabel.**
+**This endpoint allows you to retrieve a specific domain authentication.**
 
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
 
 For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
 
@@ -4612,11 +4612,11 @@ print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
-## Delete a domain whitelabel.
+## Delete a domain authentication.
 
-**This endpoint allows you to delete a domain whitelabel.**
+**This endpoint allows you to delete a domain authentication.**
 
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
 
 For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
 
@@ -4630,20 +4630,20 @@ print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
-## Associate a domain whitelabel with a given user.
+## Associate a domain authentication with a given user.
 
-**This endpoint allows you to associate a specific domain whitelabel with a subuser.**
+**This endpoint allows you to associate a specific domain authentication with a subuser.**
 
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
 
-Domain whitelabels can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's whitelabels. To associate a whitelabel with a subuser, the parent account must first create the whitelabel and validate it. The parent may then associate the whitelabel via the subuser management tools.
+Domain authentications can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's sender authentications. To associate a sender authentication with a subuser, the parent account must first create the sender authentication and validate it. The parent may then associate the sender authentication via the subuser management tools.
 
 For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
 
 ## URI Parameters
 | URI Parameter   | Type   | Description  |
 |---|---|---|
-| domain_id | integer   | ID of the domain whitelabel to associate with the subuser. |
+| domain_id | integer   | ID of the domain authentication to associate with the subuser. |
 
 ### POST /whitelabel/domains/{domain_id}/subuser
 
@@ -4653,16 +4653,16 @@ $request_body = json_decode('{
   "username": "jane@example.com"
 }');
 $domain_id = "test_url_param";
-$response = $sg->client->whitelabel()->domains()->_($domain_id)->subuser()->post($request_body);
+$response = $sg->client->whitelable()->domains()->_($domain_id)->subuser()->post($request_body);
 print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
-## Add an IP to a domain whitelabel.
+## Add an IP to a domain authentication.
 
-**This endpoint allows you to add an IP address to a domain whitelabel.**
+**This endpoint allows you to add an IP address to a domain authentication.**
 
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
 
 For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
 
@@ -4684,11 +4684,11 @@ print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
-## Remove an IP from a domain whitelabel.
+## Remove an IP from a domain authentication.
 
-**This endpoint allows you to remove a domain's IP address from that domain's whitelabel.**
+**This endpoint allows you to remove a domain's IP address from that domain's authentication.**
 
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
 
 For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
 
@@ -4709,18 +4709,18 @@ print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
-## Validate a domain whitelabel.
+## Validate a domain authentication.
 
-**This endpoint allows you to validate a domain whitelabel. If it fails, it will return an error message describing why the whitelabel could not be validated.**
+**This endpoint allows you to validate a domain authentication. If it fails, it will return an error message describing why the sender authentication could not be validated.**
 
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
 
 For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
 
 ## URI Parameters
 | URI Parameter   | Type   | Description  |
 |---|---|---|
-| id | integer  |ID of the domain whitelabel to validate. |
+| id | integer  |ID of the domain authentication to validate. |
 
 ### POST /whitelabel/domains/{id}/validate
 
@@ -4732,13 +4732,13 @@ print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
-## Create an IP whitelabel
+## Create an reverse DNS
 
-**This endpoint allows you to create an IP whitelabel.**
+**This endpoint allows you to create an reverse DNS.**
 
-When creating an IP whitelable, you should use the same subdomain that you used when you created a domain whitelabel.
+When creating a reverse DNS, you should use the same subdomain that you used when you created a domain authentication.
 
-A IP whitelabel consists of a subdomain and domain that will be used to generate a reverse DNS record for a given IP. Once SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.
+A reverse DNS consists of a subdomain and domain that will be used to generate a reverse DNS record for a given IP. Once SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.
 
 For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/ips.html).
 
@@ -4756,13 +4756,13 @@ print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
-## Retrieve all IP whitelabels
+## Retrieve all reverse DNS
 
-**This endpoint allows you to retrieve all of the IP whitelabels that have been createdy by this account.**
+**This endpoint allows you to retrieve all of the reverse DNS that have been createdy by this account.**
 
 You may include a search key by using the "ip" parameter. This enables you to perform a prefix search for a given IP segment (e.g. "192.").
 
-A IP whitelabel consists of a subdomain and domain that will be used to generate a reverse DNS record for a given IP. Once SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.
+A reverse DNS consists of a subdomain and domain that will be used to generate a reverse DNS record for a given IP. Once SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.
 
 For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/ips.html).
 
@@ -4778,9 +4778,9 @@ print_r($response->headers());
 ```
 ## Retrieve an IP whitelabel
 
-**This endpoint allows you to retrieve an IP whitelabel.**
+**This endpoint allows you to retrieve an reverse DNS.**
 
-A IP whitelabel consists of a subdomain and domain that will be used to generate a reverse DNS record for a given IP. Once SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.
+A reverse DNS consists of a subdomain and domain that will be used to generate a reverse DNS record for a given IP. Once SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.
 
 For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/ips.html).
 
@@ -4796,9 +4796,9 @@ print_r($response->headers());
 ```
 ## Delete an IP whitelabel
 
-**This endpoint allows you to delete an IP whitelabel.**
+**This endpoint allows you to delete an reverse DNS.**
 
-A IP whitelabel consists of a subdomain and domain that will be used to generate a reverse DNS record for a given IP. Once SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.
+A reverse DNS consists of a subdomain and domain that will be used to generate a reverse DNS record for a given IP. Once SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.
 
 For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/ips.html).
 
@@ -4812,11 +4812,11 @@ print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
-## Validate an IP whitelabel
+## Validate an reverse DNS
 
-**This endpoint allows you to validate an IP whitelabel.**
+**This endpoint allows you to validate an reverse DNS.**
 
-A IP whitelabel consists of a subdomain and domain that will be used to generate a reverse DNS record for a given IP. Once SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.
+A reverse DNS consists of a subdomain and domain that will be used to generate a reverse DNS record for a given IP. Once SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.
 
 For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/ips.html).
 
@@ -5040,4 +5040,3 @@ print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
-
