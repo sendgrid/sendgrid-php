@@ -10,7 +10,7 @@ This documentation provides examples for specific use cases. Please [open an iss
 - [Send Multiple Emails to Multiple Recipients](#send-multiple-emails-to-multiple-recipients)
 - [Transactional Templates](#transactional-templates)
 - [Legacy Templates](#legacy-templates)
-- [How to Setup a Domain Whitelabel](#how-to-setup-a-domain-whitelabel)
+- [How to Setup a Domain Authentication](#how-to-setup-a-domain-authentication)
 - [How to View Email Statistics](#how-to-view-email-statistics)
 - [Deploying to Heroku](#deploying-to-heroku)
 - [Google App Engine Installation](#google-app-engine-installation)
@@ -1281,12 +1281,12 @@ try {
 }
 ```
 
-<a name="domain-whitelabel"></a>
-# How to Setup a Domain Whitelabel
+<a name="domain-authentication"></a>
+# How to Setup a Domain Authentication
 
-You can find documentation for how to setup a domain whitelabel via the UI [here](https://example.com/docs/Classroom/Basics/Whitelabel/setup_domain_whitelabel.html) and via API [here](https://github.com/sendgrid/sendgrid-php/blob/master/USAGE.md#whitelabel).
+You can find documentation for how to setup a domain authentication via the UI [here](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/) and via API [here](https://github.com/sendgrid/sendgrid-php/blob/master/USAGE.md#sender-authentication).
 
-Find more information about all of SendGrid's whitelabeling related documentation [here](https://example.com/docs/Classroom/Basics/Whitelabel/index.html).
+Find more information about all of SendGrid's authentication related documentation [here](https://sendgrid.com/docs/ui/account-and-settings/).
 
 <a name="email-stats"></a>
 # How to View Email Statistics
