@@ -749,26 +749,51 @@ class PlainTextConverter
     {
         $this->value = $value;
     }
+    
+    private function skipNode($node) {
+      return $node->nodeName === 'link' || $node->nodeName === 'style' || $node->nodeName === '#comment';
+    }
+
+    private function getTextRecursively($node) {
+        if ($this->skipNode($node)) {
+          return array();
+        }
+
+        $text = array();
+        $content = trim((string)$node->textContent);
+        if (strlen($content) > 0) {
+            if ($node->hasAttributes()) {
+              $href = $node->getAttribute('href');
+              $text[] = "{$href} $content";
+            } else {
+              $text[] = $content;
+            }
+        }
+
+        if (isset($node->childNodes) && $node->childNodes->length > 0) {
+          foreach ($node->childNodes as $childNode) {
+            $text = array_merge($text, $this->getTextRecursively($childNode));
+          }
+        }
+
+        return $text;
+    }
 
     /**
      * Convert HTML to plain text
      *
      * @return string
      */
-    public static function toText($value)
-    {
-        $doc = new DOMDocument((string) new self($value));
-        $xpath = new DOMXPath($doc);
-        $textNodes = $xpath->query('//text()');
-
+    public static function toText($value) {
+        libxml_use_internal_errors(true);
+        $doc = new DOMDocument();
+        $doc->preserveWhiteSpace = false;
+        $doc->loadHtml($value);
+        libxml_clear_errors();
         $text = array();
-        foreach($textNodes as $node) {
-            $content = trim((string)$node->textContent);
-            if (strlen($content) > 0) {
-                $text[] = $content;
-            }
+        foreach($doc->childNodes as $node) {
+            $text = array_merge($text, $this->getTextRecursively($node));
         }
-
         return join("\n", $text);
     }
 
