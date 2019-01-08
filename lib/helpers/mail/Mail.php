@@ -805,9 +805,6 @@ class Content implements \JsonSerializable
     public function setValue($value)
     {
         $this->value = mb_convert_encoding($value, 'UTF-8', 'UTF-8');
-        if ($this->type === 'text/plain') {
-            $this->value = PlainTextConverter::toText($this->value);
-        }
     }
 
     public function getValue()
