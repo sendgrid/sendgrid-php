@@ -1293,7 +1293,7 @@ Find more information about all of SendGrid's authentication related documentati
 
 You can find documentation for how to view your email statistics via the UI [here](https://app.example.com/statistics) and via API [here](https://github.com/sendgrid/sendgrid-php/blob/master/USAGE.md#stats).
 
-Alternatively, we can post events to a URL of your choice via our [Event Webhook](https://example.com/docs/API_Reference/Webhooks/event.html) about events that occur as SendGrid processes your email.
+Alternatively, we can post events to a URL of your choice via our [Event Webhook](https://sendgrid.com/docs/API_Reference/Webhooks/event.html) about events that occur as SendGrid processes your email.
 
 <a name="heroku"></a>
 # Deploying to Heroku
