@@ -1,0 +1,15 @@
+* text=auto
+
+/.github export-ignore
+/docker export-ignore
+/scripts export-ignore
+/test export-ignore
+/.codeclimate.yml
+/.editorconfig
+/.gitattributes
+/.gitignore
+/.travis.yml
+/composer.json
+/composer.lock
+/phpcs.xml
+/prism_linux_amd64
