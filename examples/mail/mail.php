@@ -57,7 +57,7 @@ $request_body = json_decode('{
       "disposition": "inline", 
       "filename": "file1.jpg", 
       "name": "file1", 
-      "type": "jpg"
+      "type": "image/jpeg"
     }
   ], 
   "batch_id": "[YOUR BATCH ID GOES HERE]", 
