@@ -546,7 +546,7 @@ class Mail implements \JsonSerializable
      */
     public function getSubject($personalizationIndex = 0)
     {
-        return $this->personalization[$personalizationIndex]->getSubject();
+        return $this->subject->getSubject();
     }
 
     /**
@@ -1056,7 +1056,7 @@ class Mail implements \JsonSerializable
     public function setGlobalSubject($subject)
     {
         if (!($subject instanceof Subject)) {
-            $subject = new Subject($subject);
+            $this->subject = new Subject($subject);
         }
         $this->subject = $subject;
     }
