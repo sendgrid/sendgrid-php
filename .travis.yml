@@ -3,7 +3,7 @@ language: php
 before_script:
 - composer install
 - "./test/prism.sh &"
-- sleep 20
+- sleep 60
 - cd test
 
 script:

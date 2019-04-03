@@ -38,13 +38,13 @@ LATEST=$(get_latest_release)
 URL="https://github.com/stoplightio/prism/releases/download/v2.0.17/prism_$PLATFORM"
 DEST=../prism/bin/prism
 
-if [ -z $LATEST ] ; then
-  echo "Error requesting. Download binary from ${URL}"
-  exit 1
-else
-  curl -L $URL -o $DEST
-  chmod +x $DEST
-fi
+# if [ -z $LATEST ] ; then
+#   echo "Error requesting. Download binary from ${URL}"
+#   exit 1
+# else
+curl -L $URL -o $DEST
+chmod +x $DEST
+# fi
 }
 
 run () {
