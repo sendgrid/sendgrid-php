@@ -34,7 +34,8 @@ fi
 
 mkdir -p ../prism/bin
 LATEST=$(get_latest_release)
-URL="https://github.com/stoplightio/prism/releases/download/$LATEST/prism_$PLATFORM"
+# URL="https://github.com/stoplightio/prism/releases/download/$LATEST/prism_$PLATFORM"
+URL="https://github.com/stoplightio/prism/releases/download/v2.0.17/prism_$PLATFORM"
 DEST=../prism/bin/prism
 
 if [ -z $LATEST ] ; then
