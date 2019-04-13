@@ -2,7 +2,7 @@ Use Docker to easily try out or contribute to the sendgrid-php library.
 
 This Docker image contains:
  - PHP 7.1.16
- - A running instance of [Stoplight.io's Prism](https://stoplight.io/platform/prism/), which lets you try out the SendGrid API without actually sending email
+ - A running instance of [Stoplight.io's Prism](https://stoplight.io/platform/prism/), which lets you try out the Twilio SendGrid API without actually sending email
  - A mirrored copy of sendgrid-php so that you may develop locally and then run the tests within the Docker container.
 
 # Table of Contents
@@ -27,7 +27,7 @@ This Docker image contains:
   - `docker image build --tag="sendgrid/php7" ./docker`
   - `docker run -itd --name="sendgrid_php7" -v $(pwd):/root/sendgrid-php sendgrid/php7 /bin/bash`
 5. Run the tests within the Docker container
-  - `sudo docker exec -it sendgrid_php7 /bin/bash -c 'cd sendgrid-php/test; ../vendor/bin/phpunit . --filter test*; exec "${SHELL:-sh}"'`
+  - `docker exec -it sendgrid_php7 /bin/bash -c 'cd sendgrid-php/test; ../vendor/bin/phpunit . --filter test*; exec "${SHELL:-sh}"'`
 
 Now you can continue development locally, and run `../vendor/bin/phpunit . --filter test*` inside of the container to test. Replace `test*` with the name of a particular test if you do not wish to run the entire suite of tests.
 

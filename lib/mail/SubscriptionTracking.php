@@ -6,7 +6,7 @@
  *
  * @package   SendGrid\Mail
  * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
+ * @copyright 2018-19 Twilio SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
  * @link      http://packagist.org/packages/sendgrid/sendgrid
@@ -207,7 +207,7 @@ class SubscriptionTracking implements \JsonSerializable
 
     /**
      * Return an array representing a SubscriptionTracking object
-     * for the SendGrid API
+     * for the Twilio SendGrid API
      *
      * @return null|array
      */

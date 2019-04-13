@@ -6,7 +6,7 @@
  *
  * @package   SendGrid\Tests
  * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
+ * @copyright 2018-19 Twilio SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
  * @link      http://packagist.org/packages/sendgrid/sendgrid
@@ -15,7 +15,7 @@
 namespace SendGrid\Tests;
 
 /**
- * This class tests the SendGrid Client
+ * This class tests the Twilio SendGrid Client
  *
  * @package SendGrid\Tests
  */
@@ -37,7 +37,7 @@ class SendGridTest extends BaseTestClass
     }
 
     /**
-     * Test that we can connect to the SendGrid API
+     * Test that we can connect to the Twilio SendGrid API
      */
     public function testCanConnectToSendGridApi()
     {
