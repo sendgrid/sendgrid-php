@@ -6,7 +6,7 @@
  *
  * @package   SendGrid\Tests
  * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
+ * @copyright 2018-19 Twilio SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
  * @link      http://packagist.org/packages/sendgrid/sendgrid
@@ -78,7 +78,7 @@ class MailTest_Mail extends \PHPUnit\Framework\TestCase
      */
     public function testEmailAddress()
     {
-		$email = new EmailAddress();
-    	$email->setEmailAddress('test@example.com@wrong');
+        $email = new EmailAddress();
+        $email->setEmailAddress('test@example.com@wrong');
     }    
 }
