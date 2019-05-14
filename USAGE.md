@@ -1500,6 +1500,62 @@ print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
+## Retrieve recipients matching search criteria using segment conditions
+
+**This endpoint allows you to perform a search using segment conditions on all of your Marketing Campaigns recipients.**
+
+Valid operators for search depend on the type of the field you are segmenting:
+
+* **Dates:**
+    * "eq", "ne", "lt" (before), "gt" (after)
+        * You may use MM/DD/YYYY for day granularity or an epoch for second granularity.
+    * "empty", "not_empty"
+    * "is within"
+        * You may use an ISO 8601 date format or the # of days.
+* **Text:** "contains", "eq" (is - matches the full field), "ne" (is not - matches any field where the entire field is not the condition value), "empty", "not_empty"
+* **Numbers:** "eq", "lt", "gt", "empty", "not_empty"
+* **Email Clicks and Opens:** "eq" (opened), "ne" (not opened)
+
+Field values must all be a string.
+
+Search conditions using "eq" or "ne" for email clicks and opens should provide a "field" of either *clicks.campaign_identifier* or *opens.campaign_identifier*. The condition value should be a string containing the id of a completed campaign.
+
+Search conditions list may contain multiple conditions, joined by an "and" or "or" in the "and_or" field. The first condition in the conditions list must have an empty "and_or", and subsequent conditions must all specify an "and_or".
+
+The contactdb is a database of your contacts for [Twilio SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
+
+### POST /contactdb/recipients/search
+
+
+```php
+$query_params = json_decode('{"page": 1, "page_size": 1}');
+$request_body = json_decode('{
+  "conditions": [
+    {
+      "and_or": "",
+      "field": "last_name",
+      "operator": "eq",
+      "value": "Miller"
+    },
+    {
+      "and_or": "and",
+      "field": "last_clicked",
+      "operator": "gt",
+      "value": "01/02/2015"
+    },
+    {
+      "and_or": "or",
+      "field": "clicks.campaign_identifier",
+      "operator": "eq",
+      "value": "513"
+    }
+  ],
+}');
+$response = $sg->client->contactdb()->recipients()->search()->post($request_body, $query_params);
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
 ## Retrieve a single recipient
 
 **This endpoint allows you to retrieve a single recipient by ID from your contact database.**
@@ -1578,10 +1634,17 @@ List Id:
 
 Valid operators for create and update depend on the type of the field you are segmenting:
 
-* **Dates:** "eq", "ne", "lt" (before), "gt" (after)
-* **Text:** "contains", "eq" (is - matches the full field), "ne" (is not - matches any field where the entire field is not the condition value)
-* **Numbers:** "eq", "lt", "gt"
+* **Dates:**
+    * "eq", "ne", "lt" (before), "gt" (after)
+        * You may use MM/DD/YYYY for day granularity or an epoch for second granularity.
+    * "empty", "not_empty"
+    * "is within"
+        * You may use an ISO 8601 date format or the # of days.
+* **Text:** "contains", "eq" (is - matches the full field), "ne" (is not - matches any field where the entire field is not the condition value), "empty", "not_empty"
+* **Numbers:** "eq", "lt", "gt", "empty", "not_empty"
 * **Email Clicks and Opens:** "eq" (opened), "ne" (not opened)
+
+Field values must all be a string.
 
 Segment conditions using "eq" or "ne" for email clicks and opens should provide a "field" of either *clicks.campaign_identifier* or *opens.campaign_identifier*. The condition value should be a string containing the id of a completed campaign.
 
