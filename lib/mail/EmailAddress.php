@@ -74,7 +74,7 @@ class EmailAddress implements \JsonSerializable
             filter_var($emailAddress, FILTER_VALIDATE_EMAIL))
         ) {
             throw new TypeException(
-                '$emailAddress must be valid and of type string.'
+                "{$emailAddress} must be valid and of type string."
             );
         }
         $this->email = $emailAddress;
