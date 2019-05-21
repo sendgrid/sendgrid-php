@@ -6,7 +6,7 @@
  *
  * @package   SendGrid\Mail
  * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
+ * @copyright 2018-19 Twilio SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
  * @link      http://packagist.org/packages/sendgrid/sendgrid
@@ -71,7 +71,7 @@ class Asm implements \JsonSerializable
         } else {
             if (!is_int($group_id)) {
                 throw new TypeException(
-                    '$group_id must be an instance of SendGrid\Mail\GroupId or of type int.'
+                    '$group_id must be an instance of Twilio SendGrid\Mail\GroupId or of type int.'
                 );
             }
             $this->group_id = new GroupId($group_id);
@@ -112,7 +112,7 @@ class Asm implements \JsonSerializable
         } else {
             if (!is_array($groups_to_display)) {
                 throw new TypeException(
-                    '$groups_to_display must be an instance of SendGrid\Mail\GroupsToDisplay or of type array.'
+                    '$groups_to_display must be an instance of Twilio SendGrid\Mail\GroupsToDisplay or of type array.'
                 );
             }
             $this->groups_to_display = new GroupsToDisplay($groups_to_display);
@@ -131,7 +131,7 @@ class Asm implements \JsonSerializable
     }
 
     /**
-     * Return an array representing a Asm object for the SendGrid API
+     * Return an array representing a Asm object for the Twilio SendGrid API
      *
      * @return null|array
      */

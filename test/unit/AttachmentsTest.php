@@ -6,7 +6,7 @@
  *
  * @package   SendGrid\Tests
  * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
+ * @copyright 2018-19 Twilio SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
  * @link      http://packagist.org/packages/sendgrid/sendgrid
@@ -26,7 +26,7 @@ class AttachmentsTests extends TestCase
     public function testWillEncodeNonBase64String() {
 
         $attachment = new Attachment();
-        $testString = 'Sendgrid is awesome!';
+        $testString = 'Twilio Sendgrid is awesome!';
 
         $attachment->setContent($testString);
 
@@ -36,7 +36,7 @@ class AttachmentsTests extends TestCase
     public function testWillNotEncodeBase64String() {
 
         $attachment = new Attachment();
-        $testString = base64_encode('Sendgrid is awesome!');
+        $testString = base64_encode('Twilio Sendgrid is awesome!');
 
         $attachment->setContent($testString);
 

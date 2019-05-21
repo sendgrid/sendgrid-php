@@ -27,7 +27,7 @@ class MailGetContentsTest extends TestCase
     {
         $email = new \SendGrid\Mail\Mail();
         $email->setFrom("test@example.com", null);
-        $email->setSubject("Hello World from the SendGrid PHP Library");
+        $email->setSubject("Hello World from the Twilio SendGrid PHP Library");
         $email->addTo("test@example.com", "Test Person");
 
         $email->addContent("text/html", "<p>some text here</p>");

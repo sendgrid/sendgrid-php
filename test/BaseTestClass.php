@@ -7,7 +7,7 @@
  *
  * @package   SendGrid\Tests
  * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
+ * @copyright 2018-19 Twilio SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
  * @link      http://packagist.org/packages/sendgrid/sendgrid 
@@ -26,9 +26,9 @@ use Swaggest\JsonDiff\JsonPatch;
  */
 class BaseTestClass extends TestCase
 {
-    // @var string SendGrid API Key
+    // @var string Twilio SendGrid API Key
     protected static $apiKey;
-    // @var SendGrid SendGrid client
+    // @var SendGrid Twilio SendGrid client
     protected static $sg;
 
     /**

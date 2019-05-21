@@ -17,7 +17,7 @@ function helloEmail()
 {
     try {
         $from = new From(null, "test@example.com");
-        $subject = "Hello World from the SendGrid PHP Library";
+        $subject = "Hello World from the Twilio SendGrid PHP Library";
         $to = new To(null, "test@example.com");
         $content = new Content("text/plain", "some text here");
         $mail = new Mail($from, $to, $subject, $content);
@@ -37,7 +37,7 @@ function helloEmail()
 function kitchenSink()
 {
     $from = new Email("DX", "test@example.com");
-    $subject = "Hello World from the SendGrid PHP Library";
+    $subject = "Hello World from the Twilio SendGrid PHP Library";
     $to = new Email("Example User", "test1@example.com");
     $content = new Content("text/plain", "some text here");
 
@@ -53,7 +53,7 @@ function kitchenSink()
     $mail->personalization[0]->addBcc($email5);
     $email6 = new Email("Example User", "test6@example.com");
     $mail->personalization[0]->addBcc($email6);
-    $mail->personalization[0]->setSubject("Hello World from the SendGrid PHP Library");
+    $mail->personalization[0]->setSubject("Hello World from the Twilio SendGrid PHP Library");
     $mail->personalization[0]->addHeader("X-Test", "test");
     $mail->personalization[0]->addHeader("X-Mock", "true");
     $mail->personalization[0]->addSubstitution("%name%", "Example User");
@@ -76,7 +76,7 @@ function kitchenSink()
     $personalization1->addBcc($email11);
     $email12 = new Email("Example User", "test12@example.com");
     $personalization1->addBcc($email12);
-    $personalization1->setSubject("Hello World from the SendGrid PHP Library");
+    $personalization1->setSubject("Hello World from the Twilio SendGrid PHP Library");
     $personalization1->addHeader("X-Test", "test");
     $personalization1->addHeader("X-Mock", "true");
     $personalization1->addSubstitution("%name%", "Example User");
