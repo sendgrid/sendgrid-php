@@ -395,6 +395,8 @@ class Mail implements \JsonSerializable
      *
      * @param string|Cc $cc Email address or Cc object
      * @param string $name Recipient name
+     * @param Substitution[]|array|null $substitutions Personalized
+     *                                                         substitutions
      * @param int|null $personalizationIndex Index into an array of
      *                                                   existing Personalization
      *                                                   objects
@@ -404,6 +406,7 @@ class Mail implements \JsonSerializable
     public function addCc(
         $cc,
         $name = null,
+        $substitutions = null,
         $personalizationIndex = null,
         $personalization = null
     ) {
@@ -415,6 +418,7 @@ class Mail implements \JsonSerializable
             "Cc",
             $cc,
             $name,
+            $substitutions,
             $personalizationIndex,
             $personalization
         );
@@ -450,6 +454,8 @@ class Mail implements \JsonSerializable
      *
      * @param string|Bcc $bcc Email address or Bcc object
      * @param string $name Recipient name
+     * @param Substitution[]|array|null $substitutions Personalized
+     *                                                         substitutions
      * @param int|null $personalizationIndex Index into an array of
      *                                                   existing Personalization
      *                                                   objects
@@ -459,6 +465,7 @@ class Mail implements \JsonSerializable
     public function addBcc(
         $bcc,
         $name = null,
+        $substitutions = null,
         $personalizationIndex = null,
         $personalization = null
     ) {
@@ -470,6 +477,7 @@ class Mail implements \JsonSerializable
             "Bcc",
             $bcc,
             $name,
+            $substitutions,
             $personalizationIndex,
             $personalization
         );
