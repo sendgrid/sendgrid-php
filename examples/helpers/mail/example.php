@@ -8,9 +8,30 @@ require __DIR__ . '/../../../vendor/autoload.php';
 // If not using Composer, uncomment the above line
 
 use SendGrid\Mail\To;
+use SendGrid\Mail\Cc;
+use SendGrid\Mail\Bcc;
 use SendGrid\Mail\From;
 use SendGrid\Mail\Content;
 use SendGrid\Mail\Mail;
+use SendGrid\Mail\Personalization;
+use SendGrid\Mail\Subject;
+use SendGrid\Mail\Header;
+use SendGrid\Mail\CustomArg;
+use SendGrid\Mail\SendAt;
+use SendGrid\Mail\Attachment;
+use SendGrid\Mail\Asm;
+use SendGrid\Mail\MailSettings;
+use SendGrid\Mail\BccSettings;
+use SendGrid\Mail\SandBoxMode;
+use SendGrid\Mail\BypassListManagement;
+use SendGrid\Mail\Footer;
+use SendGrid\Mail\SpamCheck;
+use SendGrid\Mail\TrackingSettings;
+use SendGrid\Mail\ClickTracking;
+use SendGrid\Mail\OpenTracking;
+use SendGrid\Mail\SubscriptionTracking;
+use SendGrid\Mail\Ganalytics;
+use SendGrid\Mail\ReplyTo;
 
 
 function helloEmail()
@@ -22,8 +43,9 @@ function helloEmail()
         $content = new Content("text/plain", "some text here");
         $mail = new Mail($from, $to, $subject, $content);
 
-        $to = new To(null, "test2@example.com");
-        $mail->addPersonalization($to);
+        $personalization = new Personalization();
+        $personalization->addTo(new To(null, "test2@example.com"));
+        $mail->addPersonalization($personalization);
 
         //echo json_encode($mail, JSON_PRETTY_PRINT), "\n";
         return $mail;
@@ -36,56 +58,51 @@ function helloEmail()
 
 function kitchenSink()
 {
-    $from = new Email("DX", "test@example.com");
+    $from = new From("test@example.com", "DX");
     $subject = "Hello World from the Twilio SendGrid PHP Library";
-    $to = new Email("Example User", "test1@example.com");
+    $to = new To("test1@example.com", "Example User");
     $content = new Content("text/plain", "some text here");
 
-    $mail = new Mail($from, $subject, $to, $content);
+    $mail = new Mail($from, $to, $subject, $content);
 
-    $email2 = new Email("Example User", "test2@example.com");
-    $mail->personalization[0]->addTo($email2);
-    $email3 = new Email("Example User", "test3@example.com");
-    $mail->personalization[0]->addCc($email3);
-    $email4 = new Email("Example User", "test4@example.com");
-    $mail->personalization[0]->addCc($email4);
-    $email5 = new Email("Example User", "test5@example.com");
-    $mail->personalization[0]->addBcc($email5);
-    $email6 = new Email("Example User", "test6@example.com");
-    $mail->personalization[0]->addBcc($email6);
-    $mail->personalization[0]->setSubject("Hello World from the Twilio SendGrid PHP Library");
-    $mail->personalization[0]->addHeader("X-Test", "test");
-    $mail->personalization[0]->addHeader("X-Mock", "true");
-    $mail->personalization[0]->addSubstitution("%name%", "Example User");
-    $mail->personalization[0]->addSubstitution("%city%", "Denver");
-    $mail->personalization[0]->addSubstitution("%sec1%", "%section1%");
-    $mail->personalization[0]->addCustomArg("user_id", "343");
-    $mail->personalization[0]->addCustomArg("type", "marketing");
-    $mail->personalization[0]->setSendAt(1443636843);
+    $personalization0 = new Personalization();
+    $personalization0->addTo(new To("test2@example.com", "Example User"));
+    $personalization0->addCc(new Cc("test3@example.com", "Example User"));
+    $personalization0->addCc(new Cc("test4@example.com", "Example User"));
+    $personalization0->addBcc(new Bcc("test5@example.com", "Example User"));
+    $personalization0->addBcc(new Bcc("test6@example.com", "Example User"));
+    $personalization0->setSubject(new Subject("Hello World from the Twilio SendGrid PHP Library"));
+    $personalization0->addHeader(new Header("X-Test", "test"));
+    $personalization0->addHeader(new Header("X-Mock", "true"));
+    $personalization0->addSubstitution("%name%", "Example User");
+    $personalization0->addSubstitution("%city%", "Denver");
+    $personalization0->addSubstitution("%sec1%", "%section1%");
+    $personalization0->addCustomArg(new CustomArg("user_id", "343"));
+    $personalization0->addCustomArg(new CustomArg("type", "marketing"));
+    $personalization0->setSendAt(new SendAt(1443636843));
+    $mail->addPersonalization($personalization0);
 
     $personalization1 = new Personalization();
-    $email7 = new Email("Example User", "test7@example.com");
-    $personalization1->addTo($email7);
-    $email8 = new Email("Example User", "test8@example.com");
-    $personalization1->addTo($email8);
-    $email9 = new Email("Example User", "test9@example.com");
-    $personalization1->addCc($email9);
-    $email10 = new Email("Example User", "test10@example.com");
-    $personalization1->addCc($email10);
-    $email11 = new Email("Example User", "test11@example.com");
-    $personalization1->addBcc($email11);
-    $email12 = new Email("Example User", "test12@example.com");
-    $personalization1->addBcc($email12);
-    $personalization1->setSubject("Hello World from the Twilio SendGrid PHP Library");
-    $personalization1->addHeader("X-Test", "test");
-    $personalization1->addHeader("X-Mock", "true");
+    $personalization1->addTo(new To("test7@example.com", "Example User"));
+    $personalization1->addTo(new To("test8@example.com", "Example User"));
+    $personalization1->addCc(new Cc("test9@example.com", "Example User"));
+    $personalization1->addCc(new Cc("test10@example.com", "Example User"));
+    $personalization1->addBcc(new Bcc("test11@example.com", "Example User"));
+    $personalization1->addBcc(new Bcc("test12@example.com", "Example User"));
+    $personalization1->setSubject(new Subject("Hello World from the Twilio SendGrid PHP Library"));
+    $personalization1->addHeader(new Header("X-Test", "test"));
+    $personalization1->addHeader(new Header("X-Mock", "true"));
     $personalization1->addSubstitution("%name%", "Example User");
     $personalization1->addSubstitution("%city%", "Denver");
     $personalization1->addSubstitution("%sec2%", "%section2%");
-    $personalization1->addCustomArg("user_id", "343");
-    $personalization1->addCustomArg("type", "marketing");
-    $personalization1->setSendAt(1443636843);
+    $personalization1->addCustomArg(new CustomArg("user_id", "343"));
+    $personalization1->addCustomArg(new CustomArg("type", "marketing"));
+    $personalization1->setSendAt(new SendAt(1443636843));
     $mail->addPersonalization($personalization1);
+
+    //Examples of adding personalization by specifying personalization indexes
+    $mail->addCc("test13@example.com", "Example User", null, 0);
+    $mail->addBcc("test14@example.com", "Example User", null, 1);
 
     $content = new Content("text/html", "<html><body>some text here</body></html>");
     $mail->addContent($content);
