@@ -85,4 +85,26 @@ class SendGridTest extends BaseTestClass
             $sg5->client->getHeaders()
         );
     }
+    
+
+    /**
+     * Test that user can override the path when instantiating a new SendGrid client
+     */
+    public function testCanOverridePath()
+    {
+        $opts['path'] = 'v4';
+
+        $sg = new \SendGrid(self::$apiKey, $opts);
+        $headers = [
+            'Authorization: Bearer ' . self::$apiKey,
+            'User-Agent: sendgrid/' . $sg->version . ';php',
+            'Accept: application/json'
+        ];
+
+        $this->assertEquals(
+            $sg->client->getHost(),
+            'https://api.sendgrid.com',
+            '/v4'
+        );
+    }
 }
