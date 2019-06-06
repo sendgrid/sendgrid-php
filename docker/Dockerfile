@@ -7,7 +7,7 @@ ENV SENDGRID_API_KEY $SENDGRID_API_KEY
 WORKDIR /root
 
 # install Prism
-ADD https://raw.githubusercontent.com/stoplightio/prism/master/install.sh install.sh
+ADD https://raw.githubusercontent.com/stoplightio/prism/master/install install.sh
 RUN chmod +x ./install.sh && sync && \
     ./install.sh && \
     rm ./install.sh
