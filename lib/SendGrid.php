@@ -34,7 +34,7 @@ class SendGrid
      * Setup the HTTP Client
      *
      * @param string $apiKey  Your Twilio SendGrid API Key.
-     * @param array  $options An array of options, currently only "host", "curl" and
+     * @param array  $options An array of options, currently only "host", "curl", "path" and
      *                        "impersonateSubuser" are implemented.
      */
     public function __construct($apiKey, $options = array())
@@ -48,6 +48,9 @@ class SendGrid
         $host = isset($options['host']) ? $options['host'] :
             'https://api.sendgrid.com';
 
+        $path = isset($options['path']) ? $options['path'] :
+            '/v3';
+
         if (!empty($options['impersonateSubuser'])) {
             $headers[] = 'On-Behalf-Of: '. $options['impersonateSubuser'];
         }
@@ -57,7 +60,7 @@ class SendGrid
         $this->client = new \SendGrid\Client(
             $host,
             $headers,
-            '/v3',
+            $path,
             null,
             $curlOptions
         );
