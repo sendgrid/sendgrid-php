@@ -8,9 +8,12 @@ WORKDIR /root
 
 # install Prism
 ADD https://raw.githubusercontent.com/stoplightio/prism/master/install install.sh
+RUN apt-get update && apt-get install dos2unix
 RUN chmod +x ./install.sh && sync && \
+    dos2unix ./install.sh && \
     ./install.sh && \
     rm ./install.sh
+
 
 # set up default Twilio SendGrid env
 WORKDIR /root
@@ -18,5 +21,6 @@ WORKDIR /root
 RUN mkdir sendgrid-php
 COPY entrypoint.sh entrypoint.sh
 RUN chmod +x entrypoint.sh
+RUN dos2unix ./entrypoint.sh
 ENTRYPOINT ["./entrypoint.sh"]
 CMD ["--mock"]
