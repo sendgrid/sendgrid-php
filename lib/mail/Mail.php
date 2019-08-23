@@ -849,30 +849,27 @@ class Mail implements \JsonSerializable
         } else {
             $custom_arg = new CustomArg($key, $value);
         }
-        if ($personalization != null) {
+        if ($personalization !== null) {
             $personalization->addCustomArg($custom_arg);
             $this->addPersonalization($personalization);
-            return;
-        } else {
-            if ($this->personalization[0] != null) {
-                $this->personalization[0]->addCustomArg($custom_arg);
-            } else if ($this->personalization[$personalizationIndex] != null) {
-                $this->personalization[$personalizationIndex]->addCustomArg(
-                    $custom_arg
-                );
+        } else if ($personalizationIndex !== null) {
+            if ($this->getPersonalizationCount() > $personalizationIndex) {
+                $this->personalization[$personalizationIndex]->addCustomArg($custom_arg);
             } else {
                 $personalization = new Personalization();
                 $personalization->addCustomArg($custom_arg);
-                if (($personalizationIndex != 0)
-                    && ($this->getPersonalizationCount() <= $personalizationIndex)
-                ) {
-                    $this->personalization[$personalizationIndex] = $personalization;
-                } else {
-                    $this->addPersonalization($personalization);
-                }
+                $this->addPersonalization($personalization);
             }
-            return;
+        } else {
+            if ($this->getPersonalizationCount() == 0) {
+                $personalization = new Personalization();
+                $personalization->addCustomArg($custom_arg);
+                $this->addPersonalization($personalization);
+            } else {
+                $this->personalization[$this->getPersonalizationCount - 1]->addCustomArg($custom_arg);
+            }
         }
+        return;
     }
 
     /**
