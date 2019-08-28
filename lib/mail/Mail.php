@@ -866,7 +866,7 @@ class Mail implements \JsonSerializable
                 $personalization->addCustomArg($custom_arg);
                 $this->addPersonalization($personalization);
             } else {
-                $this->personalization[$this->getPersonalizationCount - 1]->addCustomArg($custom_arg);
+                $this->personalization[$this->getPersonalizationCount() - 1]->addCustomArg($custom_arg);
             }
         }
         return;
