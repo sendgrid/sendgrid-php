@@ -197,6 +197,8 @@ v7 has been released! Please see the [release notes](https://github.com/sendgrid
 
 All updates to this library are documented in our [CHANGELOG](https://github.com/sendgrid/sendgrid-php/blob/master/CHANGELOG.md) and [releases](https://github.com/sendgrid/sendgrid-php/releases). You may also subscribe to email [release notifications](https://dx.sendgrid.com/newsletter/php) for releases and breaking changes.
 
+If you're a software engineer who is passionate about #DeveloperExperience and/or #OpenSource, [this is an incredible opportunity to join our #DX team](https://sendgrid.com/careers/role/1421152/?gh_jid=1421152) as a Developer Experience Engineer and work with [**@thinkingserious**](https://github.com/thinkingserious) and [**@aroach**](https://github.com/aroach)! Tell your friends :)
+
 <a name="roadmap"></a>
 # Roadmap
 
