@@ -53,7 +53,7 @@ In order to make the process easier, we've included a [sample bug report templat
 <a name="improvements-to-the-codebase"></a>
 ## Improvements to the Codebase
 
-We welcome direct contributions to the sendgrid-php code base. Thank you!
+We Welcome direct contributions to the sendgrid-php code base. Thank you!
 
 Please note that we utilize the [Gitflow Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) for Git to help keep project development organized and consistent.
 
@@ -77,7 +77,7 @@ composer install
 
 First, get your free Twilio SendGrid account [here](https://sendgrid.com/free?source=sendgrid-php).
 
-Next, update your environment with your [SENDGRID_API_KEY](https://app.sendgrid.com/settings/api_keys).
+Next, Update your environment with your [SENDGRID_API_KEY](https://app.sendgrid.com/settings/api_keys).
 
 ```bash
 echo "export SENDGRID_API_KEY='YOUR_API_KEY'" > sendgrid.env
