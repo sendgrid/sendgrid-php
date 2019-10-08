@@ -556,7 +556,9 @@ class Mail implements \JsonSerializable
      */
     public function getSubject($personalizationIndex = 0)
     {
-        return $this->personalization[$personalizationIndex]->getSubject();
+        return $this->personalization ?
+            $this->personalization[$personalizationIndex]->getSubject() :
+            $this->getGlobalSubject();
     }
 
     /**
