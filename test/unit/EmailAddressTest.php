@@ -31,11 +31,6 @@ use SendGrid\Mail\TypeException;
  */
 class EmailAddressTest extends TestCase
 {
-    /**
-     * This method tests various types of unencoded emails
-     *
-     * @expectedException TypeException
-     */
     public function testEmailName()
     {
         $email = new EmailAddress('test@example.com', 'John Doe');
@@ -43,10 +38,6 @@ class EmailAddressTest extends TestCase
         $this->assertEquals($json, '{"name":"John Doe","email":"test@example.com"}');
 
         $email->setName('');
-        $json = json_encode($email->jsonSerialize());
-        $this->assertEquals($json, '{"email":"test@example.com"}');
-
-        $email->setName(null);
         $json = json_encode($email->jsonSerialize());
         $this->assertEquals($json, '{"email":"test@example.com"}');
 
@@ -79,13 +70,18 @@ class EmailAddressTest extends TestCase
         );
     }
 
-    /**
-     * This method tests TypeException for wrong email address
-     *
-     * @expectedException TypeException
-     */
-    public function testEmailAddress()
+    public function testEmailNameWithInvalidTypeValue()
     {
+        $this->expectException(TypeException::class);
+
+        $email = new EmailAddress();
+        $email->setName(null);
+    }
+
+    public function testEmailAddressWithInvalidTypeValue()
+    {
+        $this->expectException(TypeException::class);
+
         $email = new EmailAddress();
         $email->setEmailAddress('test@example.com@wrong');
     }

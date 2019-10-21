@@ -27,7 +27,10 @@ class EmailAddress implements \JsonSerializable
     private $name;
     /** @var $email string The email address */
     private $email;
-    /** @var $substitutions Substitution[] An array of key/value substitutions to be be applied to the text and html content of the email body */
+    /**
+     * @var $substitutions Substitution[]
+     * An array of key/value substitutions to be be applied to the text and html content of the email body
+     */
     private $substitutions;
     /** @var $subject Subject The personalized subject of the email */
     private $subject;
@@ -103,8 +106,6 @@ class EmailAddress implements \JsonSerializable
      * Add a name to a EmailAddress object
      *
      * @param string $name The name of the person associated with the email
-     *
-     * @throws TypeException
      */
     public function setName($name)
     {
@@ -122,13 +123,13 @@ class EmailAddress implements \JsonSerializable
             Double quotes will be shown in some email clients, so the name should
             only be wrapped when necessary.
         */
-        // Only wrapp in double quote if comma or semicolon are found
+        // Only wrap in double quote if comma or semicolon are found
         if (false !== strpos($name, ',') || false !== strpos($name, ';')) {
             // Unescape quotes
             $name = stripslashes(html_entity_decode($name, ENT_QUOTES));
             // Escape only double quotes
             $name = str_replace('"', '\\"', $name);
-            // Wrapp in double quotes
+            // Wrap in double quotes
             $name = '"' . $name . '"';
         }
         $this->name = (!empty($name)) ? $name : null;
