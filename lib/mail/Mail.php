@@ -6,7 +6,7 @@
  *
  * @package   SendGrid\Mail
  * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
+ * @copyright 2018-19 Twilio SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
  * @link      http://packagist.org/packages/sendgrid/sendgrid
@@ -165,8 +165,10 @@ class Mail implements \JsonSerializable
                     $this->addPersonalization($personalization);
                 }
             }
-            if (!$subs = $email->getSubstitutions()) {
-                $this->addPersonalization($personalization);
+            if (isset($email)) {
+                if (!$subs = $email->getSubstitutions()) {
+                    $this->addPersonalization($personalization);
+                }
             }
         }
         if (isset($subject)) {
@@ -417,6 +419,8 @@ class Mail implements \JsonSerializable
      *
      * @param string|Cc $cc Email address or Cc object
      * @param string $name Recipient name
+     * @param Substitution[]|array|null $substitutions Personalized
+     *                                                         substitutions
      * @param int|null $personalizationIndex Index into an array of
      *                                                   existing Personalization
      *                                                   objects
@@ -428,6 +432,7 @@ class Mail implements \JsonSerializable
     public function addCc(
         $cc,
         $name = null,
+        $substitutions = null,
         $personalizationIndex = null,
         $personalization = null
     ) {
@@ -439,6 +444,7 @@ class Mail implements \JsonSerializable
             "Cc",
             $cc,
             $name,
+            $substitutions,
             $personalizationIndex,
             $personalization
         );
@@ -479,6 +485,8 @@ class Mail implements \JsonSerializable
      *
      * @param string|Bcc $bcc Email address or Bcc object
      * @param string $name Recipient name
+     * @param Substitution[]|array|null $substitutions Personalized
+     *                                                         substitutions
      * @param int|null $personalizationIndex Index into an array of
      *                                                   existing Personalization
      *                                                   objects
@@ -490,6 +498,7 @@ class Mail implements \JsonSerializable
     public function addBcc(
         $bcc,
         $name = null,
+        $substitutions = null,
         $personalizationIndex = null,
         $personalization = null
     ) {
@@ -501,6 +510,7 @@ class Mail implements \JsonSerializable
             "Bcc",
             $bcc,
             $name,
+            $substitutions,
             $personalizationIndex,
             $personalization
         );
@@ -708,8 +718,6 @@ class Mail implements \JsonSerializable
      *                                       objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
-     *
-     * @throws TypeException
      */
     public function addDynamicTemplateData(
         $key,
@@ -723,24 +731,30 @@ class Mail implements \JsonSerializable
     /**
      * Add a DynamicTemplateData object or key/value to a Personalization object
      *
-     * @param array $data Array of DynamicTemplateData objects or key/values
-     *
-     * @throws TypeException
+     * @param array|DynamicTemplateData[] $data Array of DynamicTemplateData objects or key/values
+     * @param int|null $personalizationIndex Index into an array of
+     *                                       existing Personalization
+     *                                       objects
+     * @param Personalization|null $personalization A pre-created
+     *                                              Personalization object
      */
-    public function addDynamicTemplateDatas($data)
-    {
-        $this->addSubstitutions($data);
+    public function addDynamicTemplateDatas(
+        $datas,
+        $personalizationIndex = null,
+        $personalization = null
+    ) {
+        $this->addSubstitutions($datas);
     }
 
     /**
      * Retrieve dynamic template data key/value pairs from a Personalization object
-     * 
+     *
      * @param int|0 $personalizationIndex Index into an array of
      *                                    existing Personalization
      *                                    objects
-     * 
+     *
      * @return array
-     */ 
+     */
     public function getDynamicTemplateDatas($personalizationIndex = 0)
     {
         return $this->getSubstitutions($personalizationIndex);
@@ -1031,7 +1045,7 @@ class Mail implements \JsonSerializable
      * @param string|null $name  Sender name
      *
      * @throws TypeException
-     */      
+     */
     public function setFrom($email, $name = null)
     {
         if ($email instanceof From) {
@@ -1094,7 +1108,7 @@ class Mail implements \JsonSerializable
     public function setGlobalSubject($subject)
     {
         if (!($subject instanceof Subject)) {
-            $this->subject = new Subject($subject);
+            $subject = new Subject($subject);
         }
         $this->subject = $subject;
     }
@@ -1156,7 +1170,7 @@ class Mail implements \JsonSerializable
      *
      * Will return array of Content Objects with text/plain MimeType first
      * Array re-ordered before return where this is not already the case
-     * 
+     *
      * @return Content[]
      */
     public function getContents()
@@ -1172,7 +1186,9 @@ class Mail implements \JsonSerializable
                         break;
                     }
                 }
-                array_unshift($this->contents, $plain_content);
+                if (isset($plain_content)) {
+                    array_unshift($this->contents, $plain_content);
+                }
             }
         }
 
@@ -1218,7 +1234,7 @@ class Mail implements \JsonSerializable
                 $disposition,
                 $content_id
             );
-        } 
+        }
         $this->attachments[] = $attachment;
     }
 
@@ -1531,8 +1547,11 @@ class Mail implements \JsonSerializable
      *
      * @param int|SendAt $send_at A unix timestamp
      */
-    public function setGlobalSendAt(SendAt $send_at)
+    public function setGlobalSendAt($send_at)
     {
+        if (!($send_at instanceof SendAt)) {
+            $send_at = new SendAt($send_at);
+        }
         $this->send_at = $send_at;
     }
 
@@ -1638,7 +1657,7 @@ class Mail implements \JsonSerializable
      *                                    mail settings that you can
      *                                    use to specify how you would
      *                                    like this email to be handled
-     */ 
+     */
     public function setMailSettings(MailSettings $mail_settings)
     {
         $this->mail_settings = $mail_settings;
@@ -1787,7 +1806,7 @@ class Mail implements \JsonSerializable
      *                                            would like to track the metrics
      *                                            of how your recipients interact
      *                                            with your email
-     */ 
+     */
     public function setTrackingSettings(TrackingSettings $tracking_settings)
     {
         $this->tracking_settings = $tracking_settings;
@@ -1936,7 +1955,7 @@ class Mail implements \JsonSerializable
     }
 
     /**
-     * Return an array representing a request object for the SendGrid API
+     * Return an array representing a request object for the Twilio SendGrid API
      *
      * @return null|array
      *
@@ -1953,9 +1972,15 @@ class Mail implements \JsonSerializable
                 }
             }
         }
+
         return array_filter(
             [
-                'personalizations' => $this->getPersonalizations(),
+                'personalizations' => array_values(array_filter(
+                    $this->getPersonalizations(),
+                    function ($value) {
+                        return null !== $value && null !== $value->jsonSerialize();
+                    }
+                )),
                 'from' => $this->getFrom(),
                 'reply_to' => $this->getReplyTo(),
                 'subject' => $this->getGlobalSubject(),

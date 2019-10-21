@@ -6,7 +6,7 @@
  *
  * @package   SendGrid\Mail
  * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
+ * @copyright 2018-19 Twilio SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
  * @link      http://packagist.org/packages/sendgrid/sendgrid
@@ -69,9 +69,9 @@ class EmailAddress implements \JsonSerializable
      * Add the email address to a EmailAddress object
      *
      * @param string $emailAddress The email address
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setEmailAddress($emailAddress)
     {
         Assert::email($emailAddress, 'emailAddress');
@@ -103,9 +103,9 @@ class EmailAddress implements \JsonSerializable
      * Add a name to a EmailAddress object
      *
      * @param string $name The name of the person associated with the email
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setName($name)
     {
         Assert::string($name, 'name');
@@ -150,9 +150,9 @@ class EmailAddress implements \JsonSerializable
      * @param array $substitutions An array of key/value substitutions to
      *                             be be applied to the text and html content
      *                             of the email body
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setSubstitutions($substitutions)
     {
         Assert::maxItems($substitutions, 'substitutions', 10000);
@@ -172,9 +172,9 @@ class EmailAddress implements \JsonSerializable
      * Add a subject to a EmailAddress object
      *
      * @param string $subject The personalized subject of the email
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setSubject($subject)
     {
         Assert::string($subject, 'subject');
@@ -193,7 +193,7 @@ class EmailAddress implements \JsonSerializable
     }
 
     /**
-     * Return an array representing a EmailAddress object for the SendGrid API
+     * Return an array representing a EmailAddress object for the Twilio SendGrid API
      *
      * @return null|array
      */

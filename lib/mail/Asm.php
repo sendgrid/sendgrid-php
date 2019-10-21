@@ -6,7 +6,7 @@
  *
  * @package   SendGrid\Mail
  * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
+ * @copyright 2018-19 Twilio SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
  * @link      http://packagist.org/packages/sendgrid/sendgrid
@@ -74,7 +74,7 @@ class Asm implements \JsonSerializable
             $this->group_id = $group_id->getGroupId();
         } else {
             Assert::integer(
-                $group_id, 'group_id', 'Value "$group_id" must be an instance of SendGrid\Mail\GroupId or an integer.'
+                $group_id, 'group_id', 'Value "$group_id" must be an instance of Twilio SendGrid\Mail\GroupId or an integer.'
             );
 
             $this->group_id = new GroupId($group_id);
@@ -114,7 +114,7 @@ class Asm implements \JsonSerializable
         } else {
             Assert::isArray(
                 $groups_to_display, 'groups_to_display',
-                'Value "$groups_to_display" must be an instance of SendGrid\Mail\GroupsToDisplay or an array.'
+                'Value "$groups_to_display" must be an instance of Twilio SendGrid\Mail\GroupsToDisplay or an array.'
             );
             Assert::maxItems($groups_to_display, 'groups_to_display', 25);
 
@@ -133,7 +133,7 @@ class Asm implements \JsonSerializable
     }
 
     /**
-     * Return an array representing a Asm object for the SendGrid API
+     * Return an array representing a Asm object for the Twilio SendGrid API
      *
      * @return null|array
      */

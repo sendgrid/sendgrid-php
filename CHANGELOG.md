@@ -3,6 +3,22 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [7.3.0] - 2019-04-15 ##
+### Fixed
+- PR [#821](https://github.com/sendgrid/sendgrid-php/pull/821): PHP 7.3 support and fix Prism download problem. 
+- Closes [#669](https://github.com/sendgrid/sendgrid-php/issues/669), PR [#670](https://github.com/sendgrid/sendgrid-php/pull/670): Fix Mail::setGlobalSubject(). Thanks to [Spencer Salisbury](https://github.com/smsalisbury) for the solution!
+- Closes [#782](https://github.com/sendgrid/sendgrid-php/issues/782), PR [#783](https://github.com/sendgrid/sendgrid-php/pull/783): Remove references to 'whitelabel'. Thanks to [Chandler Weiner](https://github.com/crweiner) for the solution!
+- Closes [#763](https://github.com/sendgrid/sendgrid-php/issues/763), PR [#764](https://github.com/sendgrid/sendgrid-php/pull/764): Update link to license. Thanks to [Pranjal Vyas](https://github.com/vyaspranjal33) for the solution!
+- PR [#760](https://github.com/sendgrid/sendgrid-php/pull/760): Clean up Prism shell script. Thanks to [gy741](https://github.com/gy741) for the solution!
+- Closes [#739](https://github.com/sendgrid/sendgrid-php/issues/739), PR [#740](https://github.com/sendgrid/sendgrid-php/pull/740): . Thanks to [Alex Borisov](https://github.com/smrtab) for the solution!
+
+### Added
+- PR [#828](https://github.com/sendgrid/sendgrid-php/pull/828): Update Twilio branding, CLA policy.
+- Closes [#768](https://github.com/sendgrid/sendgrid-php/issues/768), PR [#769](https://github.com/sendgrid/sendgrid-php/pull/769): Update prerequisites. Thanks to [Rishabh](https://github.com/Rishabh04-02) for the solution!
+- Closes [#733](https://github.com/sendgrid/sendgrid-php/issues/733), PR [#736](https://github.com/sendgrid/sendgrid-php/pull/736): Update CONTRIBUTING - contribution guideline to branch off development. Thanks to [Alex](https://github.com/myzeprog) for the solution!
+- Closes [#481](https://github.com/sendgrid/sendgrid-php/issues/481), PR [#743](https://github.com/sendgrid/sendgrid-php/pull/743): Added Box attachment example. Thanks to [Joel](https://github.com/semijoelon) for the solution!
+- Closes [#690](https://github.com/sendgrid/sendgrid-php/issues/690), PR [#698](https://github.com/sendgrid/sendgrid-php/pull/698): Update prism version. Thanks to [Gergo Juhasz](https://github.com/geryjuhasz) for the solution!
+
 ## [7.2.1] - 2018-09-18 ##
 ### Fixed
 - Closes [#671](https://github.com/sendgrid/sendgrid-php/issues/671), PR [#689](https://github.com/sendgrid/sendgrid-php/pull/689): isBase64 function returning incorrect. Thanks to [Jmky](https://github.com/Jmky) for the solution!
