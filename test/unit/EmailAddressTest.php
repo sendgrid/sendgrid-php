@@ -15,7 +15,14 @@
 namespace SendGrid\Tests;
 
 use PHPUnit\Framework\TestCase;
+use SendGrid\Mail\Content;
 use SendGrid\Mail\EmailAddress;
+use SendGrid\Mail\From;
+use SendGrid\Mail\Mail;
+use SendGrid\Mail\Personalization;
+use SendGrid\Mail\Subject;
+use SendGrid\Mail\To;
+use SendGrid\Mail\TypeException;
 
 /**
  * This class tests email address encoding
@@ -27,7 +34,7 @@ class EmailAddressTest extends TestCase
     /**
      * This method tests various types of unencoded emails
      *
-     * @expectedException \SendGrid\Mail\TypeException
+     * @expectedException TypeException
      */
     public function testEmailName()
     {
@@ -75,7 +82,7 @@ class EmailAddressTest extends TestCase
     /**
      * This method tests TypeException for wrong email address
      *
-     * @expectedException \SendGrid\Mail\TypeException
+     * @expectedException TypeException
      */
     public function testEmailAddress()
     {
@@ -85,21 +92,21 @@ class EmailAddressTest extends TestCase
 
     public function testJsonSerializeOverPersonalizationsShouldNotReturnNull()
     {
-        $objEmail = new \SendGrid\Mail\Mail();
+        $objEmail = new Mail();
 
-        $objFrom = new \SendGrid\Mail\From('my@self.com', 'my self');
+        $objFrom = new From('my@self.com', 'my self');
         $objEmail->setFrom($objFrom);
 
-        $objSubject = new \SendGrid\Mail\Subject("test subject");
+        $objSubject = new Subject("test subject");
         $objEmail->setSubject($objSubject);
 
-        $objContent = new \SendGrid\Mail\Content("text/html", "test content");
+        $objContent = new Content("text/html", "test content");
         $objEmail->addContent($objContent);
 
 
-        $objPersonalization = new \SendGrid\Mail\Personalization();
+        $objPersonalization = new Personalization();
 
-        $objTo = new \SendGrid\Mail\To('foo@bar.com', 'foo bar');
+        $objTo = new To('foo@bar.com', 'foo bar');
         $objPersonalization->addTo($objTo);
 
         $objPersonalization->addSubstitution("{{firstname}}", 'foo');

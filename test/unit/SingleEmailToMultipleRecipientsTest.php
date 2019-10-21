@@ -20,7 +20,7 @@ namespace SendGrid\Tests;
  *
  * @package SendGrid\Tests
  */
-class SingleEmailToMulipleRecipientsTest extends BaseTestClass
+class SingleEmailToMultipleRecipientsTest extends BaseTestClass
 {
 
     private $REQUEST_OBJECT = <<<'JSON'

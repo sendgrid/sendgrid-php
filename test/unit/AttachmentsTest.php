@@ -21,7 +21,7 @@ use SendGrid\Mail\Attachment;
  *
  * @package SendGrid\Tests
  */
-class AttachmentsTests extends TestCase
+class AttachmentsTest extends TestCase
 {
     public function testWillEncodeNonBase64String()
     {
