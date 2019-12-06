@@ -4,7 +4,7 @@
  *
  * PHP Version - 5.6, 7.0, 7.1, 7.2
  *
- * @package   SendGrid\Tests
+ * @package   SendGrid\Tests\Unit
  * @author    Elmer Thomas <dx@sendgrid.com>
  * @copyright 2018-19 Twilio SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
@@ -12,12 +12,14 @@
  * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
+
+use SendGrid\Tests\BaseTestClass;
 
 /**
  * This class tests the request object generation for a /mail/send API call
  *
- * @package SendGrid\Tests
+ * @package SendGrid\Tests\Unit
  */
 class KitchenSinkTest extends BaseTestClass
 {
@@ -33,7 +35,7 @@ class KitchenSinkTest extends BaseTestClass
       4
     ]
   },
-  "attachments": [ 
+  "attachments": [
     {
       "content": "YmFzZTY0IGVuY29kZWQgY29udGVudDE=",
       "content_id": "Banner",
@@ -237,7 +239,7 @@ JSON;
       4
     ]
   },
-  "attachments": [ 
+  "attachments": [
     {
       "content": "YmFzZTY0IGVuY29kZWQgY29udGVudDE=",
       "content_id": "Banner",

@@ -4,7 +4,7 @@
  *
  * PHP Version - 5.6, 7.0, 7.1, 7.2
  *
- * @package   SendGrid\Tests
+ * @package   SendGrid\Tests\Unit
  * @author    Elmer Thomas <dx@sendgrid.com>
  * @copyright 2018-19 Twilio SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
@@ -12,16 +12,17 @@
  * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
 
+use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\EmailAddress as EmailAddress;
 
 /**
  * This class tests email address encoding
  *
- * @package SendGrid\Tests
+ * @package SendGrid\Tests\Unit
  */
-class MailTest_Mail extends \PHPUnit\Framework\TestCase
+class MailHelperTest extends TestCase
 {
     /**
      * This method tests various types of unencoded emails
