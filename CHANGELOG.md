@@ -3,6 +3,19 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2019-12-11] Version 7.4.0
+--------------------------
+
+**Library - Fix**
+- [PR #705](https://github.com/sendgrid/sendgrid-php/pull/705): Fixing issue #686: NULL Item in Personalizations. Thanks to [@reisraff](https://github.com/reisraff)!
+- [PR #788](https://github.com/sendgrid/sendgrid-php/pull/788): Fixes #788 - Add missing parameter for addCc and addBcc methods. Thanks to [@hjmsw](https://github.com/hjmsw)!
+
+**Library - Docs**
+- [PR #836](https://github.com/sendgrid/sendgrid-php/pull/836): Update example.php. Add personalization example as per #792. Thanks to [@hjmsw](https://github.com/hjmsw)!
+
+**Library - Feature**
+- [PR #841](https://github.com/sendgrid/sendgrid-php/pull/841): Make $emailAddress on TypeException to be evaluated. Thanks to [@yehudah](https://github.com/yehudah)!
+
 ## [7.3.0] - 2019-04-15 ##
 ### Fixed
 - PR [#821](https://github.com/sendgrid/sendgrid-php/pull/821): PHP 7.3 support and fix Prism download problem. 

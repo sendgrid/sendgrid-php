@@ -73,9 +73,9 @@ Add Twilio SendGrid to your `composer.json` file. If you are not using [Composer
 
 #### Alternative: Install package from zip
 
-If you are not using Composer, simply download and install the **[latest packaged release of the library as a zip](https://github.com/sendgrid/sendgrid-php/releases/download/v7.3.0/sendgrid-php.zip)**.
+If you are not using Composer, simply download and install the **[latest packaged release of the library as a zip](https://github.com/sendgrid/sendgrid-php/releases/download/v7.4.0/sendgrid-php.zip)**.
 
-[**⬇︎ Download Packaged Library ⬇︎**](https://github.com/sendgrid/sendgrid-php/releases/download/v7.3.0/sendgrid-php.zip)
+[**⬇︎ Download Packaged Library ⬇︎**](https://github.com/sendgrid/sendgrid-php/releases/download/v7.4.0/sendgrid-php.zip)
 
 Previous versions of the library can be found in the [version index](https://sendgrid-open-source.s3.amazonaws.com/index.html) or downloaded directly from [GitHub](https://github.com/sendgrid/sendgrid-php/releases).
 
