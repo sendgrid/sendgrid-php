@@ -7,7 +7,7 @@
  *
  * @package   SendGrid\Contacts
  * @author    Kraig Hufstedler <kraigory@gmail.com>
- * @copyright 2018 SendGrid
+ * @copyright 2018-19 Twilio SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
  * @link      http://packagist.org/packages/sendgrid/sendgrid

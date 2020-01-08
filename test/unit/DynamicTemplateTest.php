@@ -6,7 +6,7 @@
  *
  * @package   SendGrid\Tests
  * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
+ * @copyright 2018-19 Twilio SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
  * @link      http://packagist.org/packages/sendgrid/sendgrid
@@ -48,7 +48,7 @@ class DynamicTemplateTest extends BaseTestClass
     "email": "test@example.com",
     "name": "DX"
   },
-  "subject": "Sending with SendGrid is Fun and Global 2",
+  "subject": "Sending with Twilio SendGrid is Fun and Global 2",
   "personalizations": [
     {
       "bcc": [
@@ -133,7 +133,7 @@ JSON;
     "email": "test@example.com",
     "name": "DX"
   },
-  "subject": "Sending with SendGrid is Fun and Global 2",
+  "subject": "Sending with Twilio SendGrid is Fun and Global 2",
   "personalizations": [
     {
       "bcc": [
@@ -204,7 +204,7 @@ JSON;
         // For a detailed description of each of these settings,
         // please see the
         // [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
-        $email->setSubject("Sending with SendGrid is Fun 2");
+        $email->setSubject("Sending with Twilio SendGrid is Fun 2");
 
         $email->addTo("test@example.com", "Example User");
         $email->addTo("test+1@example.com", "Example User1");
@@ -240,7 +240,7 @@ JSON;
 
         $email->setFrom("test@example.com", "DX");
 
-        $email->setGlobalSubject("Sending with SendGrid is Fun and Global 2");
+        $email->setGlobalSubject("Sending with Twilio SendGrid is Fun and Global 2");
 
         $email->addContent(
             "text/plain",
@@ -273,7 +273,7 @@ JSON;
         // For a detailed description of each of these settings,
         // please see the
         // [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
-        $email->setSubject("Sending with SendGrid is Fun 2");
+        $email->setSubject("Sending with Twilio SendGrid is Fun 2");
 
         $email->addTo("test@example.com", "Example User");
         $email->addTo("test+1@example.com", "Example User1");
@@ -309,7 +309,7 @@ JSON;
 
         $email->setFrom("test@example.com", "DX");
 
-        $email->setGlobalSubject("Sending with SendGrid is Fun and Global 2");
+        $email->setGlobalSubject("Sending with Twilio SendGrid is Fun and Global 2");
 
         $email->addContent(
             "text/plain",
@@ -343,7 +343,7 @@ JSON;
         // please see the
         // [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
         $email->setSubject(
-            new \SendGrid\Mail\Subject("Sending with SendGrid is Fun 2")
+            new \SendGrid\Mail\Subject("Sending with Twilio SendGrid is Fun 2")
         );
 
         $email->addTo(new \SendGrid\Mail\To("test@example.com", "Example User"));
@@ -387,7 +387,7 @@ JSON;
         $email->setFrom(new \SendGrid\Mail\From("test@example.com", "DX"));
 
         $email->setGlobalSubject(
-            new \SendGrid\Mail\Subject("Sending with SendGrid is Fun and Global 2")
+            new \SendGrid\Mail\Subject("Sending with Twilio SendGrid is Fun and Global 2")
         );
 
         $plainTextContent = new \SendGrid\Mail\PlainTextContent(
