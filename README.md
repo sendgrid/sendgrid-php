@@ -9,7 +9,7 @@
 [![GitHub contributors](https://img.shields.io/github/contributors/sendgrid/sendgrid-php.svg)](https://github.com/sendgrid/sendgrid-php/graphs/contributors)
 [![Open Source Helpers](https://www.codetriage.com/sendgrid/sendgrid-php/badges/users.svg)](https://www.codetriage.com/sendgrid/sendgrid-php)
 
-**NEW:** 
+**NEW:**
 - Subscribe to email [notifications](https://dx.sendgrid.com/newsletter/php) for releases and breaking changes.
 - Send SMS messages with [Twilio](https://github.com/sendgrid/sendgrid-php/blob/master/USE_CASES.md#sms).
 
@@ -41,7 +41,7 @@ We appreciate your continued support, thank you!
 
 ## Prerequisites
 
-- PHP version 5.6, 7.0, 7.1 or 7.2
+- PHP version 5.6, 7.0, 7.1, 7.2, or 7.3
 - The Twilio SendGrid service, starting at the [free level](https://sendgrid.com/free?source=sendgrid-php) to send up to 40,000 emails for the first 30 days, then send 100 emails/day free forever or check out [our pricing](https://sendgrid.com/pricing?source=sendgrid-php).
 - For SMS messages, you will need a free [Twilio account](https://www.twilio.com/try-twilio?source=sendgrid-php).
 
@@ -102,7 +102,7 @@ require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // which is included in the download:
 // https://github.com/sendgrid/sendgrid-php/releases
 
-$email = new \SendGrid\Mail\Mail(); 
+$email = new \SendGrid\Mail\Mail();
 $email->setFrom("test@example.com", "Example User");
 $email->setSubject("Sending with Twilio SendGrid is Fun");
 $email->addTo("test@example.com", "Example User");
