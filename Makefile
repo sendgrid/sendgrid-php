@@ -3,14 +3,14 @@
 clean:
 	@rm -rf vendor composer.lock sendgrid-php.zip
 
-install:
+install: clean
 	composer install
 
-ci-install:
+ci-install: clean
 	composer install --no-dev
 
-test:
+test: install
 	vendor/bin/phpunit test/unit --filter test*
 
-bundle: clean ci-install
+bundle: ci-install
 	zip -r sendgrid-php.zip . -x \*.git\* \*composer.json\* \*scripts\* \*test\* \*.travis.yml\* \*prism\*
