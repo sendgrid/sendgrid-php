@@ -229,4 +229,4 @@ sendgrid-php is maintained and funded by Twilio SendGrid, Inc. The names and log
 
 
 # License
-[The MIT License (MIT)](LICENSE.txt)
+[The MIT License (MIT)](LICENSE.md)
