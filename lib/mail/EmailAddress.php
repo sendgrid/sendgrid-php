@@ -6,7 +6,7 @@
  *
  * @package   SendGrid\Mail
  * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
+ * @copyright 2018-19 Twilio SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
  * @link      http://packagist.org/packages/sendgrid/sendgrid
@@ -74,7 +74,7 @@ class EmailAddress implements \JsonSerializable
             filter_var($emailAddress, FILTER_VALIDATE_EMAIL))
         ) {
             throw new TypeException(
-                '$emailAddress must be valid and of type string.'
+                "{$emailAddress} must be valid and of type string."
             );
         }
         $this->email = $emailAddress;
@@ -203,7 +203,7 @@ class EmailAddress implements \JsonSerializable
     }
 
     /**
-     * Return an array representing a EmailAddress object for the SendGrid API
+     * Return an array representing a EmailAddress object for the Twilio SendGrid API
      *
      * @return null|array
      */

@@ -1,5 +1,4 @@
 #!/bin/bash
-GIT_VERSION=`git rev-parse --short HEAD`
 
 rm -rf vendor composer.lock
 composer install --no-dev
