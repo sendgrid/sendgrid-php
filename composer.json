@@ -1,7 +1,6 @@
 {
   "name": "sendgrid/sendgrid",
   "description": "This library allows you to quickly and easily send emails through Twilio SendGrid using PHP.",
-  "version": "7.4.0",
   "homepage": "http://github.com/sendgrid/sendgrid-php",
   "license": "MIT",
   "keywords": [

@@ -1,33 +1,19 @@
 language: php
 
 before_script:
-- composer install
-- "./test/prism.sh &"
-- sleep 60
-- cd test
+  - composer install
+  - "./test/prism.sh &"
+  - sleep 60
 
 script:
-- "../vendor/bin/phpunit . --filter test*"
+  - "vendor/bin/phpunit test --filter test*"
 
-after_script:
-- cd ../
 after_success:
-- bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash)
 
 php:
-- 5.6
-- 7.0
-- 7.1
-- 7.2
-- 7.3
-
-notifications:
-  hipchat:
-    rooms:
-      secure: l4RUOBY44kVhSxx54NU3cmvn598rRMB7Y272Ct/W0fBm1tdGncp42A/rwg7JkiZH9EWXs3tKtoSjqw5xT6QeScUGQDdykS5QVO8lEIkDRGD4WwQ3VDJmRy1+04WtgqFEK8SyYTCcCl4ZJ0rtOcJZgDMvigkOJuLxwGXTDuvfu1k=
-    template:
-    - '<a href="https://travis-ci.org/%{repository}/builds/%{build_id}">%{repository}
-      Build %{build_number}</a> on branch <i>%{branch}</i> by %{author}: <strong>%{message}</strong>
-      <a href="https://github.com/%{repository}/commits/%{commit}">View on GitHub</a>'
-    format: html
-    notify: true
+  - 5.6
+  - 7.0
+  - 7.1
+  - 7.2
+  - 7.3

@@ -22,21 +22,6 @@ namespace SendGrid\Tests;
 class SendGridTest extends BaseTestClass
 {
     /**
-     * Test if the version is correct
-     */
-    public function testVersionIsCorrect()
-    {
-        $this->assertEquals(\SendGrid::VERSION, '7.4.0');
-        $version = json_decode(
-            file_get_contents(__DIR__ . '/../../composer.json')
-        )->version;
-        $this->assertEquals(
-            $version,
-            \SendGrid::VERSION
-        );
-    }
-
-    /**
      * Test that we can connect to the Twilio SendGrid API
      */
     public function testCanConnectToSendGridApi()
