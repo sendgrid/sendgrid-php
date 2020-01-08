@@ -312,7 +312,7 @@ $email->setSendAt(1461775051);
 // methods to add and update multiple personalizations. You can learn more about 
 // personalizations [here](https://sendgrid.com/docs/Classroom/Send/v3_Mail_Send/personalizations.html).
 
-// The values below this comment are global to entire message
+// The values below this comment are global to an entire message
 
 $email->setFrom("test@example.com", "DX");
 
@@ -514,7 +514,7 @@ $email->setSendAt(new \SendGrid\Mail\SendAt(1461775051));
 // methods to add and update multiple personalizations. You can learn more about 
 // personalizations [here](https://sendgrid.com/docs/Classroom/Send/v3_Mail_Send/personalizations.html).
 
-// The values below this comment are global to entire message
+// The values below this comment are global to an entire message
 
 $email->setFrom(new \SendGrid\Mail\From("test@example.com", "DX"));
 
@@ -1369,7 +1369,7 @@ Use the button below to instantly setup your own Simple instance for sending ema
 <a name="GAE-instructions"></a>
 # Google App Engine Installation
 
-Google App Engine installations with composer require creation of file `php.ini` in the base folder(the same directory as the `app.yaml` file). You can read more about this file [here](https://cloud.google.com/appengine/docs/standard/php/config/php_ini).
+Google App Engine installations with composer require the creation of file `php.ini` in the base folder(the same directory as the `app.yaml` file). You can read more about this file [here](https://cloud.google.com/appengine/docs/standard/php/config/php_ini).
 
 The file `php.ini` should contain:
 
