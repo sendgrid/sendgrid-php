@@ -6,7 +6,7 @@
  *
  * @package   SendGrid\Tests
  * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
+ * @copyright 2018-19 Twilio SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
  * @link      http://packagist.org/packages/sendgrid/sendgrid
@@ -43,7 +43,7 @@ class SingleEmailToMulipleRecipientsTest extends BaseTestClass
         ]
       }
     ],
-    "subject": "Sending with SendGrid is Fun",
+    "subject": "Sending with Twilio SendGrid is Fun",
     "content": [
       {
         "type": "text/plain",
@@ -73,7 +73,7 @@ JSON;
             new \SendGrid\Mail\To("test+test2@example.com", "Example User2"),
             new \SendGrid\Mail\To("test+test3@example.com", "Example User3")
         ];
-        $subject = new \SendGrid\Mail\Subject("Sending with SendGrid is Fun");
+        $subject = new \SendGrid\Mail\Subject("Sending with Twilio SendGrid is Fun");
         $plainTextContent = new \SendGrid\Mail\PlainTextContent(
             "and easy to do anywhere, even with PHP"
         );
@@ -105,7 +105,7 @@ JSON;
             "test+test3@example.com" => "Example User3"
         ];
         $email->addTos($tos);
-        $email->setSubject("Sending with SendGrid is Fun");
+        $email->setSubject("Sending with Twilio SendGrid is Fun");
         $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
         $email->addContent(
             "text/html", "<strong>and easy to do anywhere, even with PHP</strong>"

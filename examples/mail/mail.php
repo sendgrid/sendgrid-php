@@ -39,7 +39,7 @@ try {
 ////////////////////////////////////////////////////
 // v3 Mail Send #
 // POST /mail/send #
-// This endpoint has a helper, check it out [here](https://github.com/sendgrid/sendgrid-php/blob/master/lib/helpers/mail/README.md).
+// This endpoint has a helper, check it out [here](https://github.com/sendgrid/sendgrid-php/blob/master/lib/mail/README.md).
 
 $request_body = json_decode('{
   "asm": {
@@ -57,7 +57,7 @@ $request_body = json_decode('{
       "disposition": "inline", 
       "filename": "file1.jpg", 
       "name": "file1", 
-      "type": "jpg"
+      "type": "image/jpeg"
     }
   ], 
   "batch_id": "[YOUR BATCH ID GOES HERE]", 
@@ -92,8 +92,8 @@ $request_body = json_decode('{
     }, 
     "footer": {
       "enable": true, 
-      "html": "<p>Thanks</br>The SendGrid Team</p>", 
-      "text": "Thanks,/n The SendGrid Team"
+      "html": "<p>Thanks</br>The Twilio SendGrid Team</p>", 
+      "text": "Thanks,/n The Twilio SendGrid Team"
     }, 
     "sandbox_mode": {
       "enable": false

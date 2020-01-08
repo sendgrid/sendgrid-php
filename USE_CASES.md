@@ -3,13 +3,15 @@ This documentation provides examples for specific use cases. Please [open an iss
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Attachments](#attachments)
+- [Attaching a File from Box](#attaching-a-file-from-box)
 - [Kitchen Sink - an example with all settings used](#kitchen-sink)
 - [Send an Email to a Single Recipient](#send-an-email-to-a-single-recipient)
 - [Send an Email to Multiple Recipients](#send-an-email-to-multiple-recipients)
 - [Send Multiple Emails to Multiple Recipients](#send-multiple-emails-to-multiple-recipients)
 - [Transactional Templates](#transactional-templates)
 - [Legacy Templates](#legacy-templates)
-- [How to Setup a Domain Whitelabel](#how-to-setup-a-domain-whitelabel)
+- [Send a SMS Message](#send-a-sms-message)
+- [How to Setup a Domain Authentication](#how-to-setup-a-domain-authentication)
 - [How to View Email Statistics](#how-to-view-email-statistics)
 - [Deploying to Heroku](#deploying-to-heroku)
 - [Google App Engine Installation](#google-app-engine-installation)
@@ -32,7 +34,7 @@ require 'vendor/autoload.php'; // If you're using Composer (recommended)
 
 $email = new \SendGrid\Mail\Mail();
 $email->setFrom("test@example.com", "Example User");
-$email->setSubject("Sending with SendGrid is Fun");
+$email->setSubject("Sending with Twilio SendGrid is Fun");
 $email->addTo("test@example.com", "Example User");
 $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
 $email->addContent(
@@ -58,6 +60,181 @@ try {
 }
 ```
 
+<a name="box-attachment-example"></a>
+# Attaching a File from Box
+
+You can attach a file from [Box](https://www.box.com) to your emails. 
+Because there is no official Box SDK for PHP, this example requires 
+[firebase/php-jwt](https://github.com/firebase/php-jwt) to generate a 
+[JSON Web Token](https://jwt.io) assertion. Before using this code, you should 
+set up a JWT application on [Box](https://developer.box.com/docs/setting-up-a-jwt-app). 
+For more information about authenticating with JWT, see 
+[this page](https://developer.box.com/docs/construct-jwt-claim-manually).
+
+After completing the setup tutorial, you will want to make sure your app’s 
+configuration settings have at least the following options enabled:
+
+**Application Access**
+* Enterprise
+
+**Application Scopes**
+* Read all files and folders stored in Box
+* Read and write all files and folders stored in Box
+* Manage users
+
+**Advanced Features**
+* Perform Actions as Users
+
+Remember to reauthorize your app 
+[here](https://app.box.com/master/settings/openbox) after making any changes to 
+your app’s JWT scopes.
+
+```php
+<?php
+
+// This example assumes you're using Composer for both
+// the sendgrid-php library and php-jwt.
+
+require 'vendor/autoload.php';
+
+use \Firebase\JWT\JWT;
+
+$fileOwner = 'email@example.com'; // Replace with the email you use to sign in to Box
+$filePath = '/path/to/file.txt'; // Replace with the path on Box to the file you will attach
+$boxConfig = json_decode(file_get_contents('/path/to/boxConfig.json')); // Replace with the path to your Box config file. Keep it in a secure location!
+
+$path = explode('/', $filePath);
+if (!empty($path[0])){
+    array_unshift($path, ''); // Adds a blank element to beginning of array in case $filePath does not have a preceding forward slash.
+}
+
+$header = array(
+    'alg' => 'RS256',
+    'typ' => 'JWT',
+    'kid' => $boxConfig->boxAppSettings->appAuth->publicKeyID
+);
+$claims = array(
+    'iss' => $boxConfig->boxAppSettings->clientID,
+    'sub' => $boxConfig->enterpriseID,
+    'box_sub_type' => 'enterprise',
+    'aud' => 'https://api.box.com/oauth2/token',
+    'jti' => bin2hex(openssl_random_pseudo_bytes(16)),
+    'exp' => time() + 50
+);
+
+$privateKey = openssl_get_privatekey($boxConfig->boxAppSettings->appAuth->privateKey, $boxConfig->boxAppSettings->appAuth->passphrase);
+
+$assertion = JWT::encode($claims, $privateKey, 'RS256', null, $header);
+
+// Get access token
+$url = 'https://api.box.com/oauth2/token';
+$data = array(
+    'grant_type' => 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+    'client_id' => $boxConfig->boxAppSettings->clientID,
+    'client_secret' => $boxConfig->boxAppSettings->clientSecret,
+    'assertion' => $assertion
+);
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+$result = json_decode(curl_exec($ch));
+curl_close($ch);
+$accessToken = $result->access_token;
+
+// Get user ID
+$url = 'https://api.box.com/2.0/users';
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    'Authorization: Bearer '.$accessToken
+));
+$result = json_decode(curl_exec($ch));
+curl_close($ch);
+foreach ($result->entries as $entry){
+    if ($entry->login === $fileOwner){
+        $userId = $entry->id;
+    }
+}
+
+// Get file ID
+$url = 'https://api.box.com/2.0/search';
+$data = array(
+    'query' => urlencode(end($path))
+);
+$urlEncoded = http_build_query($data);
+$ch = curl_init($url.'?'.$urlEncoded);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    'Authorization: Bearer '.$accessToken,
+    'As-User: '.$userId
+));
+$result = json_decode(curl_exec($ch));
+curl_close($ch);
+foreach ($result->entries as $entry){
+    if (count($entry->path_collection->entries) === count($path) -1){
+        if (count($path) > 2){
+            // File is located in a subdirectory.
+            for ($i = 1; $i < (count($path) - 1); $i++){
+                if ($path[$i] === $entry->path_collection->entries[$i]->name){
+                    $fileId = $entry->id;
+                }
+            }
+        } else {
+            // File is located in default directory.
+            $fileId = $entry->id;
+        }
+    }
+}
+
+if (isset($fileId) && isset($userId)){
+    // Get file data
+    $url = 'https://api.box.com/2.0/files/'.$fileId.'/content';
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Authorization: Bearer '.$accessToken,
+        'As-User: '.$userId
+    ));
+    $result = curl_exec($ch);
+    $contentType = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
+    curl_close($ch);
+    
+    $attachmentFilename = end($path);
+    $attachmentContent = base64_encode($result);
+    $attachmentContentType = $contentType;
+    
+    $email = new \SendGrid\Mail\Mail(); 
+    $email->setFrom("test@example.com", "Example User");
+    $email->setSubject("Attaching a File from Box");
+    $email->addTo("test@example.com", "Example User");
+    $email->addContent("text/plain", "See attached file from Box.");
+    $email->addContent(
+        "text/html", "<strong>See attached file from Box.</strong>"
+    );
+    
+    $attachment = new \SendGrid\Mail\Attachment();
+    $attachment->setContent($attachmentContent);
+    $attachment->setType($attachmentContentType);
+    $attachment->setFilename($attachmentFilename);
+    $attachment->setDisposition("attachment");
+    $attachment->setContentId($attachmentFilename); // Only used if disposition is set to inline
+    $email->addAttachment($attachment);
+
+    $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+    try {
+        $response = $sendgrid->send($email);
+        print $response->statusCode() . "\n";
+        print_r($response->headers());
+        print $response->body() . "\n";
+    } catch (Exception $e) {
+        echo 'Caught exception: '. $e->getMessage() ."\n";
+    }
+} else {
+    echo "Error: file or owner could not be located\n";
+}
+```
+
 <a name="kitchen-sink"></a>
 # Kitchen Sink -  an example with all settings used
 
@@ -77,7 +254,7 @@ $email = new \SendGrid\Mail\Mail();
 // For a detailed description of each of these settings, 
 // please see the 
 // [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
-$email->setSubject("Sending with SendGrid is Fun 2");
+$email->setSubject("Sending with Twilio SendGrid is Fun 2");
 
 $email->addTo("test@example.com", "Example User");
 $email->addTo("test+1@example.com", "Example User1");
@@ -139,7 +316,7 @@ $email->setSendAt(1461775051);
 
 $email->setFrom("test@example.com", "DX");
 
-$email->setGlobalSubject("Sending with SendGrid is Fun and Global 2");
+$email->setGlobalSubject("Sending with Twilio SendGrid is Fun and Global 2");
 
 $email->addContent(
     "text/plain",
@@ -270,7 +447,7 @@ $email = new \SendGrid\Mail\Mail();
 // please see the 
 // [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
 $email->setSubject(
-    new \SendGrid\Mail\Subject("Sending with SendGrid is Fun 2")
+    new \SendGrid\Mail\Subject("Sending with Twilio SendGrid is Fun 2")
 );
 
 $email->addTo(new \SendGrid\Mail\To("test@example.com", "Example User"));
@@ -342,7 +519,7 @@ $email->setSendAt(new \SendGrid\Mail\SendAt(1461775051));
 $email->setFrom(new \SendGrid\Mail\From("test@example.com", "DX"));
 
 $email->setGlobalSubject(
-    new \SendGrid\Mail\Subject("Sending with SendGrid is Fun and Global 2")
+    new \SendGrid\Mail\Subject("Sending with Twilio SendGrid is Fun and Global 2")
 );
 
 $plainTextContent = new \SendGrid\Mail\PlainTextContent(
@@ -514,7 +691,7 @@ require 'vendor/autoload.php'; // If you're using Composer (recommended)
 
 $email = new \SendGrid\Mail\Mail(); 
 $email->setFrom("test@example.com", "Example User");
-$email->setSubject("Sending with SendGrid is Fun");
+$email->setSubject("Sending with Twilio SendGrid is Fun");
 $email->addTo("test@example.com", "Example User");
 $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
 $email->addContent(
@@ -545,7 +722,7 @@ require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // https://github.com/sendgrid/sendgrid-php/releases
 
 $from = new \SendGrid\Mail\From("test@example.com", "Example User");
-$subject = new \SendGrid\Mail\Subject("Sending with SendGrid is Fun");
+$subject = new \SendGrid\Mail\Subject("Sending with Twilio SendGrid is Fun");
 $to = new \SendGrid\Mail\To("test@example.com", "Example User");
 $plainTextContent = new \SendGrid\Mail\PlainTextContent(
     "and easy to do anywhere, even with PHP"
@@ -593,7 +770,7 @@ $tos = [
     "test+test3@example.com" => "Example User3"
 ];
 $email->addTos($tos);
-$email->setSubject("Sending with SendGrid is Fun");
+$email->setSubject("Sending with Twilio SendGrid is Fun");
 $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
 $email->addContent(
     "text/html", "<strong>and easy to do anywhere, even with PHP</strong>"
@@ -627,7 +804,7 @@ $tos = [
     new \SendGrid\Mail\To("test+test2@example.com", "Example User2"),
     new \SendGrid\Mail\To("test+test3@example.com", "Example User3")
 ];
-$subject = new \SendGrid\Mail\Subject("Sending with SendGrid is Fun");
+$subject = new \SendGrid\Mail\Subject("Sending with Twilio SendGrid is Fun");
 $plainTextContent = new \SendGrid\Mail\PlainTextContent(
     "and easy to do anywhere, even with PHP"
 );
@@ -806,7 +983,7 @@ try {
 <a name="transactional-templates"></a>
 # Transactional Templates
 
-For this example, we assume you have created a [transactional template](https://sendgrid.com/docs/User_Guide/Transactional_Templates/create_and_edit_transactional_templates.html). Following is the template content we used for testing.
+For this example, we assume you have created a [transactional template](https://sendgrid.com/docs/User_Guide/Transactional_Templates/create_and_edit_transactional_templates.html) in the UI or via the API. Following is the template content we used for testing.
 
 Template ID (replace with your own):
 
@@ -1105,19 +1282,80 @@ try {
 }
 ```
 
-<a name="domain-whitelabel"></a>
-# How to Setup a Domain Whitelabel
+<a name="sms"></a>
+# Send a SMS Message
 
-You can find documentation for how to setup a domain whitelabel via the UI [here](https://example.com/docs/Classroom/Basics/Whitelabel/setup_domain_whitelabel.html) and via API [here](https://github.com/sendgrid/sendgrid-php/blob/master/USAGE.md#whitelabel).
+Following are the steps to add Twilio SMS to your app:
 
-Find more information about all of SendGrid's whitelabeling related documentation [here](https://example.com/docs/Classroom/Basics/Whitelabel/index.html).
+**1. Obtain a Free Twilio Account**
+
+Sign up for a free Twilio account [here](https://www.twilio.com/try-twilio?source=sendgrid-php).
+
+**2. Update Your Environment Variables**
+
+You can obtain your Account Sid and Auth Token from [twilio.com/console](https://twilio.com/console).
+
+**__Mac__**
+
+```bash
+echo "export TWILIO_ACCOUNT_SID='YOUR_TWILIO_ACCOUNT_SID'" > twilio.env
+echo "export TWILIO_AUTH_TOKEN='YOUR_TWILIO_AUTH_TOKEN'" >> twilio.env
+echo "twilio.env" >> .gitignore
+source ./twilio.env
+```
+
+**__Windows__**
+
+Temporarily set the environment variable (accessible only during the current CLI session):
+
+```bash
+set TWILIO_ACCOUNT_SID=YOUR_TWILIO_ACCOUNT_SID
+set TWILIO_AUTH_TOKEN=YOUR_TWILIO_AUTH_TOKEN
+```
+
+Permanently set the environment variable (accessible in all subsequent CLI sessions):
+
+```bash
+setx TWILIO_ACCOUNT_SID "YOUR_TWILIO_ACCOUNT_SID"
+setx TWILIO_AUTH_TOKEN "YOUR_TWILIO_AUTH_TOKEN"
+```
+
+**3. Install the Twilio Helper Library**
+
+`composer require twilio/sdk`
+
+Then, you can execute the following code.
+
+```php
+<?php
+$sid = getenv('TWILIO_ACCOUNT_SID');
+$token = getenv('TWILIO_AUTH_TOKEN');
+
+$client = new Twilio\Rest\Client($sid, $token);
+$message = $client->messages->create(
+  '8881231234', // Text this number
+  array(
+    'from' => '9991231234', // From a valid Twilio number
+    'body' => 'Hello from Twilio!'
+  )
+);
+```
+
+For more information, please visit the [Twilio SMS PHP documentation](https://www.twilio.com/docs/sms/quickstart/python).
+
+<a name="domain-authentication"></a>
+# How to Setup a Domain Authentication
+
+You can find documentation for how to setup a domain authentication via the UI [here](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/) and via API [here](https://github.com/sendgrid/sendgrid-php/blob/master/USAGE.md#sender-authentication).
+
+Find more information about all of Twilio SendGrid's authentication related documentation [here](https://sendgrid.com/docs/ui/account-and-settings/).
 
 <a name="email-stats"></a>
 # How to View Email Statistics
 
 You can find documentation for how to view your email statistics via the UI [here](https://app.example.com/statistics) and via API [here](https://github.com/sendgrid/sendgrid-php/blob/master/USAGE.md#stats).
 
-Alternatively, we can post events to a URL of your choice via our [Event Webhook](https://example.com/docs/API_Reference/Webhooks/event.html) about events that occur as SendGrid processes your email.
+Alternatively, we can post events to a URL of your choice via our [Event Webhook](https://example.com/docs/API_Reference/Webhooks/event.html) about events that occur as Twilio SendGrid processes your email.
 
 <a name="heroku"></a>
 # Deploying to Heroku
