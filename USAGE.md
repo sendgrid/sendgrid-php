@@ -1536,7 +1536,7 @@ print_r($response->headers());
 
 **This endpoint allows you to retrieve the lists that a given recipient belongs to.**
 
-Each recipient can be on many lists. This endpoint gives you all of the lists that anyone recipient has been added to.
+Each recipient can be on many lists. This endpoint gives you all of the lists that any one recipient has been added to.
 
 The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
 
