@@ -6,7 +6,7 @@
  *
  * @package   SendGrid\Tests
  * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
+ * @copyright 2018-19 Twilio SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
  * @version   GIT: <git_id>
  * @link      http://packagist.org/packages/sendgrid/sendgrid
@@ -69,5 +69,76 @@ class MailTest_Mail extends \PHPUnit\Framework\TestCase
             $json,
             '{"name":"\\"O\'Keeffe, John \\\\\\"Billy\\\\\\"\\"","email":"test@example.com"}'
         );
+    }
+
+    /**
+     * This method tests TypeException for wrong email address
+     *
+     * @expectedException \SendGrid\Mail\TypeException
+     */
+    public function testEmailAddress()
+    {
+		$email = new EmailAddress();
+    	$email->setEmailAddress('test@example.com@wrong');
+    }
+
+    public function testJsonSerializeOverPersonalizationsShouldNotReturnNull()
+    {
+        $objEmail = new \SendGrid\Mail\Mail();
+
+        $objFrom = new \SendGrid\Mail\From('my@self.com', 'my self');
+        $objEmail->setFrom($objFrom);
+
+        $objSubject = new \SendGrid\Mail\Subject("test subject");
+        $objEmail->setSubject($objSubject);
+
+        $objContent = new \SendGrid\Mail\Content("text/html", "test content");
+        $objEmail->addContent($objContent);
+
+
+        $objPersonalization = new \SendGrid\Mail\Personalization();
+
+        $objTo = new \SendGrid\Mail\To('foo@bar.com', 'foo bar');
+        $objPersonalization->addTo($objTo);
+
+        $objPersonalization->addSubstitution("{{firstname}}", 'foo');
+
+        $objPersonalization->addSubstitution("{{lastname}}", 'bar');
+
+        $objEmail->addPersonalization($objPersonalization);
+
+        $json = json_encode($objEmail, JSON_PRETTY_PRINT);
+
+        $expectedJson = <<<JSON
+{
+    "personalizations": [
+        {
+            "to": [
+                {
+                    "name": "foo bar",
+                    "email": "foo@bar.com"
+                }
+            ],
+            "substitutions": {
+                "{{firstname}}": "foo",
+                "{{lastname}}": "bar"
+            }
+        }
+    ],
+    "from": {
+        "name": "my self",
+        "email": "my@self.com"
+    },
+    "subject": "test subject",
+    "content": [
+        {
+            "type": "text\/html",
+            "value": "test content"
+        }
+    ]
+}
+JSON;
+
+        $this->assertEquals($expectedJson, $json);
     }
 }

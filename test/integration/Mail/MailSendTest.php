@@ -59,8 +59,8 @@ class MailSendTest extends BaseTestClass
     },
     "footer": {
       "enable": true,
-      "html": "<p>Thanks</br>The SendGrid Team</p>",
-      "text": "Thanks,/n The SendGrid Team"
+      "html": "<p>Thanks</br>The Twilio SendGrid Team</p>",
+      "text": "Thanks,/n The Twilio SendGrid Team"
     },
     "sandbox_mode": {
       "enable": false

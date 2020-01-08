@@ -12,7 +12,7 @@ RUN chmod +x ./install.sh && sync && \
     ./install.sh && \
     rm ./install.sh
 
-# set up default sendgrid env
+# set up default Twilio SendGrid env
 WORKDIR /root
 
 RUN mkdir sendgrid-php
