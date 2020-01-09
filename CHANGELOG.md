@@ -3,6 +3,24 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2020-01-09] Version 7.4.1
+--------------------------
+**Library - Docs**
+- [PR #710](https://github.com/sendgrid/sendgrid-php/pull/710): correct the *.md files using Grammarly. Thanks to [@myzeprog](https://github.com/myzeprog)!
+- [PR #742](https://github.com/sendgrid/sendgrid-php/pull/742): properly capitalize brands GitHub and SendGrid. Thanks to [@aslafy-z](https://github.com/aslafy-z)!
+- [PR #737](https://github.com/sendgrid/sendgrid-php/pull/737): remove `sudo` requirement for running docker. Thanks to [@jamietanna](https://github.com/jamietanna)!
+
+**Library - Chore**
+- [PR #926](https://github.com/sendgrid/sendgrid-php/pull/926): prep the repo for automated releasing. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Library - Fix**
+- [PR #765](https://github.com/sendgrid/sendgrid-php/pull/765): correct typo in PR template from "Sendgrid" to "SendGrid". Thanks to [@JoeRomeo](https://github.com/JoeRomeo)!
+- [PR #757](https://github.com/sendgrid/sendgrid-php/pull/757): remove dead code when setting the subject. Thanks to [@2mt-heuser](https://github.com/2mt-heuser)!
+- [PR #761](https://github.com/sendgrid/sendgrid-php/pull/761): correct the License file path in ReadMe. Thanks to [@sanjaysingh](https://github.com/sanjaysingh)!
+- [PR #770](https://github.com/sendgrid/sendgrid-php/pull/770): update the link for cURL example in Troubleshooting.MD. Thanks to [@music-mind](https://github.com/music-mind)!
+- [PR #887](https://github.com/sendgrid/sendgrid-php/pull/887): correct the mail helper readme link in example. Thanks to [@flashadvocate](https://github.com/flashadvocate)!
+
+
 [2019-12-11] Version 7.4.0
 --------------------------
 
