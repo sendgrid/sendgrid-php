@@ -33,8 +33,8 @@ class FilesExistTest extends TestCase
         //$this->assertFileExists("$rootDir/docker/docker-compose.yml");
         $this->assertFileExists("$rootDir/.codeclimate.yml");
         $this->assertFileExists("$rootDir/.env.sample");
-        $this->assertFileExists("$rootDir/.github/ISSUE_TEMPLATE");
-        $this->assertFileExists("$rootDir/.github/PULL_REQUEST_TEMPLATE");
+        $this->assertFileExists("$rootDir/ISSUE_TEMPLATE.md");
+        $this->assertFileExists("$rootDir/PULL_REQUEST_TEMPLATE.md");
         $this->assertFileExists("$rootDir/.gitignore");
         $this->assertFileExists("$rootDir/.travis.yml");
         $this->assertFileExists("$rootDir/CHANGELOG.md");
