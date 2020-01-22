@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2020-01-22] Version 7.4.2
+--------------------------
+**Library - Docs**
+- [PR #928](https://github.com/sendgrid/sendgrid-php/pull/928): baseline all the templated markdown docs. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+
 [2020-01-09] Version 7.4.1
 --------------------------
 **Library - Docs**
