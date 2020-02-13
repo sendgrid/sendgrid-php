@@ -4,7 +4,7 @@
  *
  * PHP Version - 5.6, 7.0, 7.1, 7.2
  *
- * @package   SendGrid\Tests
+ * @package   SendGrid\Tests\Unit
  * @author    Elmer Thomas <dx@sendgrid.com>
  * @copyright 2018-19 Twilio SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
@@ -12,14 +12,14 @@
  * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 
 /**
  * This class tests the existence of necessary files in this repo
  *
- * @package SendGrid\Tests
+ * @package SendGrid\Tests\Unit
  */
 class FilesExistTest extends TestCase
 {

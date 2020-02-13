@@ -4,7 +4,7 @@
  *
  * PHP Version - 5.6, 7.0, 7.1, 7.2
  *
- * @package   SendGrid\Tests
+ * @package   SendGrid\Tests\Unit
  * @author    Elmer Thomas <dx@sendgrid.com>
  * @copyright 2018-19 Twilio SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
@@ -12,14 +12,16 @@
  * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
+
+use SendGrid\Tests\BaseTestClass;
 
 /**
  * This class tests the request object generation for a /mail/send API call
  *
- * @package SendGrid\Tests
+ * @package SendGrid\Tests\Unit
  */
-class MultipleEmailToMulipleRecipientsTest extends BaseTestClass
+class MultipleEmailToMultipleRecipientsTest extends BaseTestClass
 {
 
     private $REQUEST_OBJECT = <<<'JSON'
@@ -276,7 +278,7 @@ JSON;
 
     /**
      * Test when we have individual subjects for each Personalization object
-     */ 
+     */
     public function testWithIndividualSubjects()
     {
         $from = new \SendGrid\Mail\From("test@example.com", "Example User");
@@ -333,7 +335,7 @@ JSON;
 
     /**
      * Test when we have individual subjects using dynamic templates for each Personalization object
-     */ 
+     */
     public function testWithIndividualSubjectsDynamicTemplates()
     {
         $from = new \SendGrid\Mail\From("test@example.com", "Example User");
@@ -393,7 +395,7 @@ JSON;
      * Test when we pass in an array of subjects
      *
      * @expectedException \SendGrid\Mail\TypeException
-     */ 
+     */
     public function testWithCollectionOfSubjects()
     {
         $from = new \SendGrid\Mail\From("test@example.com", "Example User");
@@ -455,7 +457,7 @@ JSON;
      * Test when we pass in an array of subjects
      *
      * @expectedException \SendGrid\Mail\TypeException
-     */ 
+     */
     public function testWithCollectionOfSubjectsDynamic()
     {
         $from = new \SendGrid\Mail\From("test@example.com", "Example User");

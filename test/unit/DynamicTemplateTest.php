@@ -4,7 +4,7 @@
  *
  * PHP Version - 5.6, 7.0, 7.1, 7.2
  *
- * @package   SendGrid\Tests
+ * @package   SendGrid\Tests\Unit
  * @author    Elmer Thomas <dx@sendgrid.com>
  * @copyright 2018-19 Twilio SendGrid
  * @license   https://opensource.org/licenses/MIT The MIT License
@@ -12,14 +12,16 @@
  * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
+
+use SendGrid\Tests\BaseTestClass;
 
 // Test each use case that uses substitutions
 
 /**
  * This class tests the dynamic/transactional template functionality for a /mail/send API call
  *
- * @package SendGrid\Tests
+ * @package SendGrid\Tests\Unit
  */
 class DynamicTemplateTest extends BaseTestClass
 {
@@ -330,7 +332,7 @@ JSON;
         $json = json_encode($email->jsonSerialize());
         $isEqual = BaseTestClass::compareJSONObjects($json, $this->REQUEST_OBJECT);
         $this->assertTrue($isEqual);
-    }    
+    }
 
     /**
      * Test all parameters using objects

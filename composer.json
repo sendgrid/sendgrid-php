@@ -31,7 +31,6 @@
   "type": "library",
   "autoload": {
     "psr-4": {
-      "SendGrid\\": "lib/",
       "SendGrid\\Mail\\": "lib/mail/",
       "SendGrid\\Contacts\\": "lib/contacts/",
       "SendGrid\\Stats\\": "lib/stats/"
@@ -40,7 +39,9 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "SendGrid\\Tests\\": "test/"
-    }
+      "SendGrid\\Tests\\Integration\\": "test/integration",
+      "SendGrid\\Tests\\Unit\\": "test/unit"
+    },
+    "files": ["test/BaseTestClass.php"]
   }
 }
