@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2020-02-19] Version 7.4.3
+--------------------------
+**Library - Fix**
+- [PR #918](https://github.com/sendgrid/sendgrid-php/pull/918): resolve deprecation notices when using Composer 1.10(-dev). Thanks to [@kampalex](https://github.com/kampalex)!
+- [PR #939](https://github.com/sendgrid/sendgrid-php/pull/939): drop the prism binary and ignore unneeded files from the archive. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+
 [2020-01-22] Version 7.4.2
 --------------------------
 **Library - Docs**
