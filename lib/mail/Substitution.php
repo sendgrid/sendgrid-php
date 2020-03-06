@@ -32,12 +32,13 @@ class Substitution implements \JsonSerializable
     /** @var $value string Substitution value */
     private $value;
 
-    /**
-     * Optional constructor
-     *
-     * @param string|null $key Substitution key
-     * @param string|null $value Substitution value
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param string|null $key   Substitution key
+	 * @param string|null $value Substitution value
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct($key = null, $value = null)
     {
         if (isset($key)) {
@@ -52,10 +53,10 @@ class Substitution implements \JsonSerializable
      * Add the key on a Substitution object
      *
      * @param string $key Substitution key
-     * 
-     * @throws TypeException
+     *
+     * @throws \SendGrid\Mail\TypeException
      * @return null
-     */ 
+     */
     public function setKey($key)
     {
         if (!is_string($key)) {
@@ -78,10 +79,10 @@ class Substitution implements \JsonSerializable
      * Add the value on a Substitution object
      *
      * @param string|array|bool|int $value Substitution value
-     * 
-     * @throws TypeException
+     *
+     * @throws \SendGrid\Mail\TypeException
      * @return null
-     */ 
+     */
     public function setValue($value)
     {
         if (!is_string($value) && !is_array($value) && !is_object($value) &&!is_bool($value) &&!is_int($value)) {

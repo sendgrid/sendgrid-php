@@ -24,11 +24,12 @@ class GroupId implements \JsonSerializable
     /** @var $group_id int The unsubscribe group to associate with this email */
     private $group_id;
 
-    /**
-     * Optional constructor
-     *
-     * @param int|null $group_id The unsubscribe group to associate with this email
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param int|null $group_id The unsubscribe group to associate with this email
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct($group_id = null)
     {
         if (isset($group_id)) {
@@ -40,9 +41,9 @@ class GroupId implements \JsonSerializable
      * Add the group id to a GroupId object
      *
      * @param int $group_id The unsubscribe group to associate with this email
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setGroupId($group_id)
     {
         if (!is_int($group_id)) {

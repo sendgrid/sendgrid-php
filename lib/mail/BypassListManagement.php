@@ -30,11 +30,12 @@ class BypassListManagement implements \JsonSerializable
     /** @var $enable bool Indicates if this setting is enabled */
     private $enable;
 
-    /**
-     * Optional constructor
-     *
-     * @param bool|null $enable Indicates if this setting is enabled
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param bool|null $enable Indicates if this setting is enabled
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct($enable = null)
     {
         if (isset($enable)) {
@@ -46,9 +47,9 @@ class BypassListManagement implements \JsonSerializable
      * Update the enable setting on a BypassListManagement object
      *
      * @param bool $enable Indicates if this setting is enabled
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setEnable($enable)
     {
         if (!is_bool($enable)) {

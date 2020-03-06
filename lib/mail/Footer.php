@@ -28,13 +28,14 @@ class Footer implements \JsonSerializable
     /** @var $html string The HTML content of your footer */
     private $html;
 
-    /**
-     * Optional constructor
-     *
-     * @param bool|null $enable Indicates if this setting is enabled
-     * @param string|null $text The plain text content of your footer
-     * @param string|null $html The HTML content of your footer
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param bool|null   $enable Indicates if this setting is enabled
+	 * @param string|null $text   The plain text content of your footer
+	 * @param string|null $html   The HTML content of your footer
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct($enable = null, $text = null, $html = null)
     {
         if (isset($enable)) {
@@ -52,9 +53,9 @@ class Footer implements \JsonSerializable
      * Update the enable setting on a Footer object
      *
      * @param bool $enable Indicates if this setting is enabled
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setEnable($enable)
     {
         if (!is_bool($enable)) {
@@ -77,9 +78,9 @@ class Footer implements \JsonSerializable
      * Add text to a Footer object
      *
      * @param string $text The plain text content of your footer
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setText($text)
     {
         if (!is_string($text)) {
@@ -102,9 +103,9 @@ class Footer implements \JsonSerializable
      * Add html to a Footer object
      *
      * @param string $html The HTML content of your footer
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setHtml($html)
     {
         if (!is_string($html)) {

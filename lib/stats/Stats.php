@@ -33,14 +33,14 @@ class Stats
     // @var string
     private $aggregatedBy;
 
-    /**
-     * Stats constructor
-     *
-     * @param string $startDate YYYYMMDD
-     * @param string $endDate YYYYMMDD
-     * @param string $aggregatedBy day|week|month
-     * @throws \Exception
-     */
+	/**
+	 * Stats constructor
+	 *
+	 * @param string $startDate    YYYYMMDD
+	 * @param string $endDate      YYYYMMDD
+	 * @param string $aggregatedBy day|week|month
+	 * @throws \Exception
+	 */
     public function __construct($startDate, $endDate = null, $aggregatedBy = null)
     {
         $this->validateDateFormat($startDate);

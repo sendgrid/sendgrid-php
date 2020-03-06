@@ -35,16 +35,17 @@ class MailSettings implements \JsonSerializable
     /** @var $spam_check SpamCheck object */
     private $spam_check;
 
-    /**
-     * Optional constructor
-     *
-     * @param BccSettings|null $bcc_settings BccSettings object
-     * @param BypassListManagement|null $bypass_list_management BypassListManagement
-     *                                                          object
-     * @param Footer|null $footer Footer object
-     * @param SandBoxMode|null $sandbox_mode SandBoxMode object
-     * @param SpamCheck|null $spam_check SpamCheck object
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param BccSettings|null          $bcc_settings           BccSettings object
+	 * @param BypassListManagement|null $bypass_list_management BypassListManagement
+	 *                                                          object
+	 * @param Footer|null               $footer                 Footer object
+	 * @param SandBoxMode|null          $sandbox_mode           SandBoxMode object
+	 * @param SpamCheck|null            $spam_check             SpamCheck object
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct(
         $bcc_settings = null,
         $bypass_list_management = null,
@@ -76,9 +77,9 @@ class MailSettings implements \JsonSerializable
      *                                 if the setting is enabled
      * @param string|null $email The email address that you would like
      *                                 to receive the BCC
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setBccSettings($enable, $email = null)
     {
         if ($enable instanceof BccSettings) {
@@ -110,8 +111,8 @@ class MailSettings implements \JsonSerializable
      * @param BypassListManagement|bool $enable The BypassListManagement
      *                                          object or an indication
      *                                          if the setting is enabled
-     * 
-     * @throws TypeException
+     *
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setBypassListManagement($enable)
     {
