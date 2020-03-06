@@ -15,14 +15,14 @@ use SendGrid\Mail\From;
  */
 class MailGetContentsTest extends TestCase
 {
-
-    /**
-     * This method tests that array from Mail getContents() returns with
-     * text/plain Content object first when Mail instantiated with text/html
-     * content before text/plain
-     *
-     * @return null
-     */
+	/**
+	 * This method tests that array from Mail getContents() returns with
+	 * text/plain Content object first when Mail instantiated with text/html
+	 * content before text/plain
+	 *
+	 * @return null
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function testWillReturnPlainContentFirst()
     {
         $email = new \SendGrid\Mail\Mail();

@@ -30,16 +30,17 @@ class OpenTracking implements \JsonSerializable
     /** @var $substitution_tag string Allows you to specify a substitution tag that you can insert in the body of your email at a location that you desire. This tag will be replaced by the open tracking pixel */
     private $substitution_tag;
 
-    /**
-     * Optional constructor
-     *
-     * @param bool|null $enable Indicates if this setting is enabled
-     * @param string|null $substitution_tag Allows you to specify a substitution
-     *                                      tag that you can insert in the body
-     *                                      of your email at a location that you
-     *                                      desire. This tag will be replaced by
-     *                                      the open tracking pixel
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param bool|null   $enable           Indicates if this setting is enabled
+	 * @param string|null $substitution_tag Allows you to specify a substitution
+	 *                                      tag that you can insert in the body
+	 *                                      of your email at a location that you
+	 *                                      desire. This tag will be replaced by
+	 *                                      the open tracking pixel
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct($enable = null, $substitution_tag = null)
     {
         if (isset($enable)) {
@@ -54,9 +55,9 @@ class OpenTracking implements \JsonSerializable
      * Update the enable setting on a OpenTracking object
      *
      * @param bool $enable Indicates if this setting is enabled
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setEnable($enable)
     {
         if (!is_bool($enable)) {
@@ -83,9 +84,9 @@ class OpenTracking implements \JsonSerializable
      *                                 of your email at a location that you
      *                                 desire. This tag will be replaced by
      *                                 the open tracking pixel
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setSubstitutionTag($substitution_tag)
     {
         if (!is_string($substitution_tag)) {

@@ -28,15 +28,16 @@ class TemplateId implements \JsonSerializable
      */
     private $template_id;
 
-    /**
-     * Optional constructor
-     *
-     * @param string|null $template_id The id of a template that you would like
-     *                                 to use. If you use a template that contains
-     *                                 a subject and content (either text or html),
-     *                                 you do not need to specify those at the
-     *                                 personalizations nor message level
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param string|null $template_id The id of a template that you would like
+	 *                                 to use. If you use a template that contains
+	 *                                 a subject and content (either text or html),
+	 *                                 you do not need to specify those at the
+	 *                                 personalizations nor message level
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct($template_id = null)
     {
         if (isset($template_id)) {
@@ -52,9 +53,9 @@ class TemplateId implements \JsonSerializable
      *                            a subject and content (either text or html),
      *                            you do not need to specify those at the
      *                            personalizations nor message level
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setTemplateId($template_id)
     {
         if (!is_string($template_id)) {

@@ -34,18 +34,19 @@ class Ganalytics implements \JsonSerializable
     /** @var $utm_campaign string The name of the campaign */
     private $utm_campaign;
 
-    /**
-     * Optional constructor
-     *
-     * @param bool|null $enable Indicates if this setting is enabled
-     * @param string|null $utm_source Name of the referrer source. (e.g.
-     *                                  Google, SomeDomain.com, or Marketing Email)
-     * @param string|null $utm_medium Name of the marketing medium. (e.g. Email)
-     * @param string|null $utm_term Used to identify any paid keywords
-     * @param string|null $utm_content Used to differentiate your campaign from
-     *                                  advertisements
-     * @param string|null $utm_campaign The name of the campaign
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param bool|null   $enable       Indicates if this setting is enabled
+	 * @param string|null $utm_source   Name of the referrer source. (e.g.
+	 *                                  Google, SomeDomain.com, or Marketing Email)
+	 * @param string|null $utm_medium   Name of the marketing medium. (e.g. Email)
+	 * @param string|null $utm_term     Used to identify any paid keywords
+	 * @param string|null $utm_content  Used to differentiate your campaign from
+	 *                                  advertisements
+	 * @param string|null $utm_campaign The name of the campaign
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct(
         $enable = null,
         $utm_source = null,
@@ -79,9 +80,9 @@ class Ganalytics implements \JsonSerializable
      * Update the enable setting on a Ganalytics object
      *
      * @param bool $enable Indicates if this setting is enabled
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setEnable($enable)
     {
         if (!is_bool($enable)) {
@@ -105,9 +106,9 @@ class Ganalytics implements \JsonSerializable
      *
      * @param string $utm_source Name of the referrer source. (e.g.
      *                           Google, SomeDomain.com, or Marketing Email)
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setCampaignSource($utm_source)
     {
         if (!is_string($utm_source)) {
@@ -130,9 +131,9 @@ class Ganalytics implements \JsonSerializable
      * Add the campaign medium to a Ganalytics object
      *
      * @param string $utm_medium Name of the marketing medium. (e.g. Email)
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setCampaignMedium($utm_medium)
     {
         if (!is_string($utm_medium)) {
@@ -155,9 +156,9 @@ class Ganalytics implements \JsonSerializable
      * Add the campaign term to a Ganalytics object
      *
      * @param string $utm_term Used to identify any paid keywords
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setCampaignTerm($utm_term)
     {
         if (!is_string($utm_term)) {
@@ -181,9 +182,9 @@ class Ganalytics implements \JsonSerializable
      *
      * @param string $utm_content Used to differentiate your campaign from
      *                            advertisements
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setCampaignContent($utm_content)
     {
         if (!is_string($utm_content)) {
@@ -206,9 +207,9 @@ class Ganalytics implements \JsonSerializable
      * Add the campaign name to a Ganalytics object
      *
      * @param string $utm_campaign The name of the campaign
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setCampaignName($utm_campaign)
     {
         if (!is_string($utm_campaign)) {

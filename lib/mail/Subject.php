@@ -24,11 +24,12 @@ class Subject implements \JsonSerializable
     /** @var $subject string The email subject */
     private $subject;
 
-    /**
-     * Optional constructor
-     *
-     * @param string|null $subject The email subject
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param string|null $subject The email subject
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct($subject = null)
     {
         if (isset($subject)) {
@@ -40,9 +41,9 @@ class Subject implements \JsonSerializable
      * Set the subject on a Subject object
      *
      * @param string $subject The email subject
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setSubject($subject)
     {
         if (!is_string($subject)) {

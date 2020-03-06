@@ -32,17 +32,18 @@ class Attachment implements \JsonSerializable
     /** @var $content_id string Used when disposition is inline to diplay the file within the body of the email */
     private $content_id;
 
-    /**
-     * Optional constructor
-     *
-     * @param string $content Base64 encoded content
-     * @param string $type Mime type of the attachment
-     * @param string $filename File name of the attachment
-     * @param string $disposition How the attachment should be displayed: inline
-     *                            or attachment, default is attachment
-     * @param string $content_id Used when disposition is inline to diplay the
-     *                            file within the body of the email
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param string $content     Base64 encoded content
+	 * @param string $type        Mime type of the attachment
+	 * @param string $filename    File name of the attachment
+	 * @param string $disposition How the attachment should be displayed: inline
+	 *                            or attachment, default is attachment
+	 * @param string $content_id  Used when disposition is inline to diplay the
+	 *                            file within the body of the email
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct(
         $content = null,
         $type = null,
@@ -72,8 +73,8 @@ class Attachment implements \JsonSerializable
      *
      * @param string $content Base64 encoded content
      *
-     * @throws TypeException
-     */  
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setContent($content)
     {
         if (!is_string($content)) {
@@ -100,9 +101,9 @@ class Attachment implements \JsonSerializable
      * Add the mime type to a Attachment object
      *
      * @param string $type Mime type of the attachment
-     * 
-     * @throws TypeException
-     */  
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setType($type)
     {
         if (!is_string($type)) {
@@ -125,9 +126,9 @@ class Attachment implements \JsonSerializable
      * Add the file name to a Attachment object
      *
      * @param string $filename File name of the attachment
-     * 
-     * @throws TypeException
-     */  
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setFilename($filename)
     {
         if (!is_string($filename)) {
@@ -151,9 +152,9 @@ class Attachment implements \JsonSerializable
      *
      * @param string $disposition How the attachment should be displayed:
      *                            inline or attachment, default is attachment
-     * 
-     * @throws TypeException
-     */  
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setDisposition($disposition)
     {
         if (!is_string($disposition)) {
@@ -172,12 +173,13 @@ class Attachment implements \JsonSerializable
         return $this->disposition;
     }
 
-    /**
-     * Add the content id to a Attachment object
-     *
-     * @param string $content_id Used when disposition is inline to diplay
-     *                           the file within the body of the email
-     */
+	/**
+	 * Add the content id to a Attachment object
+	 *
+	 * @param string $content_id Used when disposition is inline to diplay
+	 *                           the file within the body of the email
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function setContentID($content_id)
     {
         if (!is_string($content_id)) {
@@ -202,7 +204,7 @@ class Attachment implements \JsonSerializable
      * @param $string string The string that has to be checked
      * @return bool
      */
-    private function isBase64($string) 
+    private function isBase64($string)
     {
         $decoded_data = base64_decode($string, true);
         $encoded_data = base64_encode($decoded_data);
