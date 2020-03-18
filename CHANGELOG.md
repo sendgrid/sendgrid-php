@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2020-03-18] Version 7.4.5
+--------------------------
+**Library - Docs**
+- [PR #749](https://github.com/sendgrid/sendgrid-php/pull/749): add @throws to docblock. Thanks to [@iPoul](https://github.com/iPoul)!
+
+
 [2020-03-04] Version 7.4.4
 --------------------------
 **Library - Chore**
