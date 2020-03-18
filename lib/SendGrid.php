@@ -20,7 +20,7 @@
  */
 class SendGrid
 {
-    const VERSION = '7.4.4';
+    const VERSION = '7.4.5';
 
     // @var string
     protected $namespace = 'SendGrid';
