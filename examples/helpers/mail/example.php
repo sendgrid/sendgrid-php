@@ -37,9 +37,9 @@ use SendGrid\Mail\ReplyTo;
 function helloEmail()
 {
     try {
-        $from = new From(null, "test@example.com");
+        $from = new From("test@example.com");
         $subject = "Hello World from the Twilio SendGrid PHP Library";
-        $to = new To(null, "test@example.com");
+        $to = new To("test@example.com");
         $content = new Content("text/plain", "some text here");
         $mail = new Mail($from, $to, $subject, $content);
 
