@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2020-04-01] Version 7.4.6
+--------------------------
+**Library - Docs**
+- [PR #947](https://github.com/sendgrid/sendgrid-php/pull/947): support verbiage for login issues. Thanks to [@adamchasetaylor](https://github.com/adamchasetaylor)!
+- [PR #946](https://github.com/sendgrid/sendgrid-php/pull/946): correct params order in example.php. Thanks to [@spaze](https://github.com/spaze)!
+
+
 [2020-03-18] Version 7.4.5
 --------------------------
 **Library - Docs**
