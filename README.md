@@ -223,10 +223,11 @@ Please see our [troubleshooting guide](https://github.com/sendgrid/sendgrid-php/
 <a name="about"></a>
 # About
 
-sendgrid-php is guided and supported by the Twilio [Developer Experience Team](mailto:dx@sendgrid.com).
-
 sendgrid-php is maintained and funded by Twilio SendGrid, Inc. The names and logos for sendgrid-php are trademarks of Twilio SendGrid, Inc.
 
+If you need help installing or using the library, please check the [Twilio SendGrid Support Help Center](https://support.sendgrid.com).
+
+If you've instead found a bug in the library or would like new features added, go ahead and open issues or pull requests against this repo!
 
 # License
 [The MIT License (MIT)](LICENSE.md)

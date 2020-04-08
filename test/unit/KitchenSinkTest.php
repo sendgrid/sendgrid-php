@@ -3,13 +3,6 @@
  * This file tests the request object generation for a /mail/send API call
  *
  * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Tests\Unit
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018-19 Twilio SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
 namespace SendGrid\Tests\Unit;
@@ -84,7 +77,7 @@ class KitchenSinkTest extends BaseTestClass
   ],
   "from": {
     "email": "test@example.com",
-    "name": "DX"
+    "name": "Twilio SendGrid"
   },
   "headers": {
     "X-Day": "Monday",
@@ -288,7 +281,7 @@ JSON;
   ],
   "from": {
     "email": "test@example.com",
-    "name": "DX"
+    "name": "Twilio SendGrid"
   },
   "headers": {
     "X-Day": "Monday",
@@ -490,7 +483,7 @@ JSON;
 
         // The values below this comment are global to entire message
 
-        $email->setFrom("test@example.com", "DX");
+        $email->setFrom("test@example.com", "Twilio SendGrid");
 
         $email->setGlobalSubject("Sending with Twilio SendGrid is Fun and Global 2");
 
@@ -665,7 +658,7 @@ JSON;
 
         // The values below this comment are global to entire message
 
-        $email->setFrom("test@example.com", "DX");
+        $email->setFrom("test@example.com", "Twilio SendGrid");
 
         $email->setGlobalSubject("Sending with Twilio SendGrid is Fun and Global 2");
 
@@ -846,7 +839,7 @@ JSON;
 
         // The values below this comment are global to entire message
 
-        $email->setFrom(new \SendGrid\Mail\From("test@example.com", "DX"));
+        $email->setFrom(new \SendGrid\Mail\From("test@example.com", "Twilio SendGrid"));
 
         $email->setGlobalSubject(
             new \SendGrid\Mail\Subject("Sending with Twilio SendGrid is Fun and Global 2")
@@ -1076,7 +1069,7 @@ JSON;
 
         // The values below this comment are global to entire message
 
-        $email->setFrom(new \SendGrid\Mail\From("test@example.com", "DX"));
+        $email->setFrom(new \SendGrid\Mail\From("test@example.com", "Twilio SendGrid"));
 
         $email->setGlobalSubject(
             new \SendGrid\Mail\Subject("Sending with Twilio SendGrid is Fun and Global 2")

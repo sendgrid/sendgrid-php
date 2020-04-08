@@ -314,7 +314,7 @@ $email->setSendAt(1461775051);
 
 // The values below this comment are global to an entire message
 
-$email->setFrom("test@example.com", "DX");
+$email->setFrom("test@example.com", "Twilio SendGrid");
 
 $email->setGlobalSubject("Sending with Twilio SendGrid is Fun and Global 2");
 
@@ -516,7 +516,7 @@ $email->setSendAt(new \SendGrid\Mail\SendAt(1461775051));
 
 // The values below this comment are global to an entire message
 
-$email->setFrom(new \SendGrid\Mail\From("test@example.com", "DX"));
+$email->setFrom(new \SendGrid\Mail\From("test@example.com", "Twilio SendGrid"));
 
 $email->setGlobalSubject(
     new \SendGrid\Mail\Subject("Sending with Twilio SendGrid is Fun and Global 2")

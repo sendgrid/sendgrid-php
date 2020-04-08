@@ -4,7 +4,7 @@ namespace SendGrid;
 // If you are using Composer
 require __DIR__ . '/../../../vendor/autoload.php';
 // comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
+// require("./sendgrid-php.php");
 // If not using Composer, uncomment the above line
 
 use SendGrid\Mail\To;
@@ -58,7 +58,7 @@ function helloEmail()
 
 function kitchenSink()
 {
-    $from = new From("test@example.com", "DX");
+    $from = new From("test@example.com", "Twilio SendGrid");
     $subject = "Hello World from the Twilio SendGrid PHP Library";
     $to = new To("test1@example.com", "Example User");
     $content = new Content("text/plain", "some text here");
@@ -210,9 +210,9 @@ function sendHelloEmail()
     $sg = new \SendGrid($apiKey);
 
     $request_body = helloEmail();
-    
+
     try {
-        $response = $sg->client->mail()->send()->post($request_body);    
+        $response = $sg->client->mail()->send()->post($request_body);
         print $response->statusCode() . "\n";
         print_r($response->headers());
         print $response->body() . "\n";
@@ -227,9 +227,9 @@ function sendKitchenSink()
     $sg = new \SendGrid($apiKey);
 
     $request_body = kitchenSink();
-    
+
     try {
-        $response = $sg->client->mail()->send()->post($request_body);    
+        $response = $sg->client->mail()->send()->post($request_body);
         print $response->statusCode() . "\n";
         print_r($response->headers());
         print $response->body() . "\n";
