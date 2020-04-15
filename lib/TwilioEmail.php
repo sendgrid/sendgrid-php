@@ -6,19 +6,20 @@
  *
  * @package SendGrid\Mail
  */
-class SendGrid extends BaseInterface
+class TwilioEmail extends BaseInterface
 {
     /**
      * Set up the HTTP Client.
      *
-     * @param string $apiKey Your Twilio SendGrid API Key.
+     * @param string $username Username to authenticate with
+     * @param string $password Password to authenticate with
      * @param array $options An array of options, currently only "host", "curl", and
      *                       "impersonateSubuser", are implemented.
      */
-    public function __construct($apiKey, $options = array())
+    public function __construct($username, $password, $options = array())
     {
-        $auth = 'Authorization: Bearer ' . $apiKey;
-        $host = 'https://api.sendgrid.com';
+        $auth = 'Authorization: Basic ' . \base64_encode("$username:$password");
+        $host = 'https://email.twilio.com';
         parent::__construct($auth, $host, $options);
     }
 }

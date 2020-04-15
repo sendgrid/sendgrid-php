@@ -2,7 +2,9 @@
 /**
  * Allows us to include one file instead of two when working without composer.
  */
+require_once __DIR__ . '/BaseInterface.php';
 require_once __DIR__ . '/SendGrid.php';
+require_once __DIR__ . '/TwilioEmail.php';
 require_once __DIR__ . '/contacts/Recipient.php';
 require_once __DIR__ . '/contacts/RecipientForm.php';
 require_once __DIR__ . '/mail/EmailAddress.php';
