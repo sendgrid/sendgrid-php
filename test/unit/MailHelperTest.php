@@ -6,7 +6,14 @@
 namespace SendGrid\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use SendGrid\Mail\EmailAddress as EmailAddress;
+use SendGrid\Mail\Content;
+use SendGrid\Mail\EmailAddress;
+use SendGrid\Mail\From;
+use SendGrid\Mail\Mail;
+use SendGrid\Mail\Personalization;
+use SendGrid\Mail\Subject;
+use SendGrid\Mail\To;
+use SendGrid\Mail\TypeException;
 
 /**
  * This class tests email address encoding
@@ -70,32 +77,32 @@ class MailHelperTest extends TestCase
      */
     public function testEmailAddress()
     {
-		$email = new EmailAddress();
-    	$email->setEmailAddress('test@example.com@wrong');
+        $email = new EmailAddress();
+        $email->setEmailAddress('test@example.com@wrong');
     }
 
     public function testJsonSerializeOverPersonalizationsShouldNotReturnNull()
     {
-        $objEmail = new \SendGrid\Mail\Mail();
+        $objEmail = new Mail();
 
-        $objFrom = new \SendGrid\Mail\From('my@self.com', 'my self');
+        $objFrom = new From('my@self.com', 'my self');
         $objEmail->setFrom($objFrom);
 
-        $objSubject = new \SendGrid\Mail\Subject("test subject");
+        $objSubject = new Subject('test subject');
         $objEmail->setSubject($objSubject);
 
-        $objContent = new \SendGrid\Mail\Content("text/html", "test content");
+        $objContent = new Content('text/html', 'test content');
         $objEmail->addContent($objContent);
 
 
-        $objPersonalization = new \SendGrid\Mail\Personalization();
+        $objPersonalization = new Personalization();
 
-        $objTo = new \SendGrid\Mail\To('foo@bar.com', 'foo bar');
+        $objTo = new To('foo@bar.com', 'foo bar');
         $objPersonalization->addTo($objTo);
 
-        $objPersonalization->addSubstitution("{{firstname}}", 'foo');
+        $objPersonalization->addSubstitution('{{firstname}}', 'foo');
 
-        $objPersonalization->addSubstitution("{{lastname}}", 'bar');
+        $objPersonalization->addSubstitution('{{lastname}}', 'bar');
 
         $objEmail->addPersonalization($objPersonalization);
 
@@ -128,6 +135,64 @@ class MailHelperTest extends TestCase
             "value": "test content"
         }
     ]
+}
+JSON;
+
+        $this->assertEquals($expectedJson, $json);
+    }
+
+    /**
+     * @throws TypeException
+     */
+    public function testMailPersonalizations()
+    {
+        $objEmail = new Mail('me@example.com');
+
+        // Add the first personalization.
+        $objEmail->addTo('foo@bar.com', 'foo bar', ['this' => 'that']);
+        // Update the last personalization.
+        $objEmail->setSendAt(1234567890);
+        // Update the first personalization.
+        $objEmail->addHeader('Head', 'der', 0);
+        // Append an existing personalization.
+        $objEmail->addSubstitution('sub', 'this', new Personalization());
+        // Append a new personalization.
+        $objEmail->addCustomArg('CUSTOM', 'ARG', 99);
+
+        $json = json_encode($objEmail, JSON_PRETTY_PRINT);
+
+        $expectedJson = <<<JSON
+{
+    "personalizations": [
+        {
+            "to": [
+                {
+                    "name": "foo bar",
+                    "email": "foo@bar.com"
+                }
+            ],
+            "headers": {
+                "Head": "der"
+            },
+            "substitutions": {
+                "this": "that"
+            },
+            "send_at": 1234567890
+        },
+        {
+            "substitutions": {
+                "sub": "this"
+            }
+        },
+        {
+            "custom_args": {
+                "CUSTOM": "ARG"
+            }
+        }
+    ],
+    "from": {
+        "email": "me@example.com"
+    }
 }
 JSON;
 
