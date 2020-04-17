@@ -637,10 +637,10 @@ class Mail implements \JsonSerializable
     /**
      * Add a DynamicTemplateData object or key/value to a Personalization object
      *
-     * @param array|DynamicTemplateData[] $data Array of DynamicTemplateData objects or key/values
-     * @param int|null $personalizationIndex Index into an array of
-     *                                       existing Personalization
-     *                                       objects
+     * @param array|DynamicTemplateData[] $datas Array of DynamicTemplateData
+     *                                           objects or key/values
+     * @param int|null $personalizationIndex Index into the array of existing
+     *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
      */
@@ -649,7 +649,7 @@ class Mail implements \JsonSerializable
         $personalizationIndex = null,
         $personalization = null
     ) {
-        $this->addSubstitutions($datas);
+        $this->addSubstitutions($datas, $personalizationIndex, $personalization);
     }
 
     /**
@@ -676,11 +676,10 @@ class Mail implements \JsonSerializable
      *
      * @param string|Substitution $key Key or Substitution object
      * @param string|null $value Value
-     * @param int|null $personalizationIndex Index into an array of
-     *                                                   existing Personalization
-     *                                                   objects
+     * @param int|null $personalizationIndex Index into the array of existing
+     *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
-     *                                                   Personalization object
+     *                                              Personalization object
      *
      * @return null
      */
@@ -716,7 +715,7 @@ class Mail implements \JsonSerializable
      *                                       existing Personalization
      *                                       objects
      * @param Personalization|null $personalization A pre-created
-     *                                              ersonalization object
+     *                                              Personalization object
      */
     public function addSubstitutions(
         $substitutions,
