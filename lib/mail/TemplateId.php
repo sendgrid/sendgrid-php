@@ -1,15 +1,6 @@
 <?php
 /**
  * This helper builds the TemplateId object for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Mail
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018-19 Twilio SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
 namespace SendGrid\Mail;
@@ -28,15 +19,16 @@ class TemplateId implements \JsonSerializable
      */
     private $template_id;
 
-    /**
-     * Optional constructor
-     *
-     * @param string|null $template_id The id of a template that you would like
-     *                                 to use. If you use a template that contains
-     *                                 a subject and content (either text or html),
-     *                                 you do not need to specify those at the
-     *                                 personalizations nor message level
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param string|null $template_id The id of a template that you would like
+	 *                                 to use. If you use a template that contains
+	 *                                 a subject and content (either text or html),
+	 *                                 you do not need to specify those at the
+	 *                                 personalizations nor message level
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct($template_id = null)
     {
         if (isset($template_id)) {
@@ -52,9 +44,9 @@ class TemplateId implements \JsonSerializable
      *                            a subject and content (either text or html),
      *                            you do not need to specify those at the
      *                            personalizations nor message level
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setTemplateId($template_id)
     {
         if (!is_string($template_id)) {

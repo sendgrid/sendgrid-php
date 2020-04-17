@@ -1,15 +1,6 @@
 <?php
 /**
  * This helper builds the SubscriptionTracking object for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Mail
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018-19 Twilio SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
 namespace SendGrid\Mail;
@@ -51,26 +42,27 @@ class SubscriptionTracking implements \JsonSerializable
      */
     private $substitution_tag;
 
-    /**
-     * Optional constructor
-     *
-     * @param bool|null $enable Indicates if this setting is enabled
-     * @param string|null $text Text to be appended to the email, with
-     *                                      the subscription tracking link. You may
-     *                                      control where the link is by using the
-     *                                      tag <% %>
-     * @param string|null $html HTML to be appended to the email, with
-     *                                      the subscription tracking link. You may
-     *                                      control where the link is by using the
-     *                                      tag <% %>
-     * @param string|null $substitution_tag A tag that will be replaced with the
-     *                                      unsubscribe URL. For example:
-     *                                      [unsubscribe_url]. If this parameter
-     *                                      is used, it will override both the text
-     *                                      and html parameters. The URL of the link
-     *                                      will be placed at the substitution tag’s
-     *                                      location, with no additional formatting
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param bool|null   $enable           Indicates if this setting is enabled
+	 * @param string|null $text             Text to be appended to the email, with
+	 *                                      the subscription tracking link. You may
+	 *                                      control where the link is by using the
+	 *                                      tag <% %>
+	 * @param string|null $html             HTML to be appended to the email, with
+	 *                                      the subscription tracking link. You may
+	 *                                      control where the link is by using the
+	 *                                      tag <% %>
+	 * @param string|null $substitution_tag A tag that will be replaced with the
+	 *                                      unsubscribe URL. For example:
+	 *                                      [unsubscribe_url]. If this parameter
+	 *                                      is used, it will override both the text
+	 *                                      and html parameters. The URL of the link
+	 *                                      will be placed at the substitution tag’s
+	 *                                      location, with no additional formatting
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct(
         $enable = null,
         $text = null,
@@ -95,9 +87,9 @@ class SubscriptionTracking implements \JsonSerializable
      * Update the enable setting on a SubscriptionTracking object
      *
      * @param bool $enable Indicates if this setting is enabled
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setEnable($enable)
     {
         if (!is_bool($enable)) {
@@ -123,9 +115,9 @@ class SubscriptionTracking implements \JsonSerializable
      *                     the subscription tracking link. You may
      *                     control where the link is by using the
      *                     tag <% %>
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setText($text)
     {
         if (!is_string($text)) {
@@ -151,9 +143,9 @@ class SubscriptionTracking implements \JsonSerializable
      *                     the subscription tracking link. You may
      *                     control where the link is by using the
      *                     tag <% %>
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setHtml($html)
     {
         if (!is_string($html)) {
@@ -182,9 +174,9 @@ class SubscriptionTracking implements \JsonSerializable
      *                                 and html parameters. The URL of the link
      *                                 will be placed at the substitution tag’s
      *                                 location, with no additional formatting %>
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setSubstitutionTag($substitution_tag)
     {
         if (!is_string($substitution_tag)) {

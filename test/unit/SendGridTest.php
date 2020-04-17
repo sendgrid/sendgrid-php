@@ -1,41 +1,20 @@
 <?php
 /**
  * This file tests the SendGrid Client
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Tests
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018-19 Twilio SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
+
+use SendGrid\Tests\BaseTestClass;
+
 
 /**
  * This class tests the Twilio SendGrid Client
  *
- * @package SendGrid\Tests
+ * @package SendGrid\Tests\Unit
  */
 class SendGridTest extends BaseTestClass
 {
-    /**
-     * Test if the version is correct
-     */
-    public function testVersionIsCorrect()
-    {
-        $this->assertEquals(\SendGrid::VERSION, '7.3.0');
-        $version = json_decode(
-            file_get_contents(__DIR__ . '/../../composer.json')
-        )->version;
-        $this->assertEquals(
-            $version,
-            \SendGrid::VERSION
-        );
-    }
-
     /**
      * Test that we can connect to the Twilio SendGrid API
      */
