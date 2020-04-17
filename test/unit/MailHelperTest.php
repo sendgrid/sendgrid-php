@@ -1,10 +1,11 @@
 <?php
 /**
- * This file tests email address encoding
+ * This file tests mail helper functionality.
  */
 
 namespace SendGrid\Tests\Unit;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\Content;
 use SendGrid\Mail\EmailAddress;
@@ -16,7 +17,7 @@ use SendGrid\Mail\To;
 use SendGrid\Mail\TypeException;
 
 /**
- * This class tests email address encoding
+ * This class tests mail helper functionality.
  *
  * @package SendGrid\Tests\Unit
  */
@@ -25,7 +26,7 @@ class MailHelperTest extends TestCase
     /**
      * This method tests various types of unencoded emails
      *
-     * @expectedException \SendGrid\Mail\TypeException
+     * @throws TypeException
      */
     public function testEmailName()
     {
@@ -35,50 +36,44 @@ class MailHelperTest extends TestCase
 
         $email->setName('');
         $json = json_encode($email->jsonSerialize());
-        $this->assertEquals($json, '{"email":"test@example.com"}');
-
-        $email->setName(null);
-        $json = json_encode($email->jsonSerialize());
-        $this->assertEquals($json, '{"email":"test@example.com"}');
+        $this->assertEquals('{"email":"test@example.com"}', $json);
 
         $email->setName('Doe, John');
         $json = json_encode($email->jsonSerialize());
         $this->assertEquals(
-            $json,
-            '{"name":"\\"Doe, John\\"","email":"test@example.com"}'
+            '{"name":"\\"Doe, John\\"","email":"test@example.com"}',
+            $json
         );
 
         $email->setName('Doe; John');
         $json = json_encode($email->jsonSerialize());
         $this->assertEquals(
-            $json,
-            '{"name":"\\"Doe; John\\"","email":"test@example.com"}'
+            '{"name":"\\"Doe; John\\"","email":"test@example.com"}',
+            $json
         );
 
         $email->setName('John "Billy" O\'Keeffe');
         $json = json_encode($email->jsonSerialize());
         $this->assertEquals(
-            $json,
-            '{"name":"John \\"Billy\\" O\'Keeffe","email":"test@example.com"}'
+            '{"name":"John \\"Billy\\" O\'Keeffe","email":"test@example.com"}',
+            $json
         );
 
         $email->setName('O\'Keeffe, John "Billy"');
         $json = json_encode($email->jsonSerialize());
         $this->assertEquals(
-            $json,
-            '{"name":"\\"O\'Keeffe, John \\\\\\"Billy\\\\\\"\\"","email":"test@example.com"}'
+            '{"name":"\\"O\'Keeffe, John \\\\\\"Billy\\\\\\"\\"","email":"test@example.com"}',
+            $json
         );
     }
 
     /**
      * This method tests TypeException for wrong email address
-     *
-     * @expectedException \SendGrid\Mail\TypeException
      */
     public function testEmailAddress()
     {
-        $email = new EmailAddress();
-        $email->setEmailAddress('test@example.com@wrong');
+        $this->expectException(TypeException::class);
+        new EmailAddress('test@example.com@wrong');
     }
 
     public function testJsonSerializeOverPersonalizationsShouldNotReturnNull()
@@ -93,7 +88,6 @@ class MailHelperTest extends TestCase
 
         $objContent = new Content('text/html', 'test content');
         $objEmail->addContent($objContent);
-
 
         $objPersonalization = new Personalization();
 
@@ -155,9 +149,7 @@ JSON;
         // Update the first personalization.
         $objEmail->addHeader('Head', 'der', 0);
         // Append an existing personalization.
-        $objEmail->addSubstitution('sub', 'this', new Personalization());
-        // Append a new personalization.
-        $objEmail->addCustomArg('CUSTOM', 'ARG', 99);
+        $objEmail->addSubstitution('sub', 'this', null, new Personalization());
 
         $json = json_encode($objEmail, JSON_PRETTY_PRINT);
 
@@ -183,11 +175,6 @@ JSON;
             "substitutions": {
                 "sub": "this"
             }
-        },
-        {
-            "custom_args": {
-                "CUSTOM": "ARG"
-            }
         }
     ],
     "from": {
@@ -197,5 +184,13 @@ JSON;
 JSON;
 
         $this->assertEquals($expectedJson, $json);
+    }
+
+    public function testInvalidPersonalizationIndex()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $objEmail = new Mail();
+        $objEmail->addCustomArg('CUSTOM', 'ARG', 99);
     }
 }

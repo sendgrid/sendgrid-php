@@ -263,12 +263,13 @@ class Mail implements \JsonSerializable
         if ($personalization !== null) {
             $this->addPersonalization($personalization);
         } else if ($personalizationIndex !== null) {
-            if ($this->getPersonalizationCount() > $personalizationIndex) {
-                $personalization = $this->personalization[$personalizationIndex];
-            } else {
-                $personalization = new Personalization();
-                $this->addPersonalization($personalization);
+            if ($personalizationIndex >= $this->getPersonalizationCount()) {
+                throw new \InvalidArgumentException(
+                    'personalizationIndex ' . $personalizationIndex .
+                    ' must be less than ' . $this->getPersonalizationCount());
             }
+
+            $personalization = $this->personalization[$personalizationIndex];
         } else if ($this->getPersonalizationCount() === 0) {
             $personalization = new Personalization();
             $this->addPersonalization($personalization);
