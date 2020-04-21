@@ -10,8 +10,9 @@ This documentation provides examples for specific use cases. Please [open an iss
 - [Send Multiple Emails to Multiple Recipients](#send-multiple-emails-to-multiple-recipients)
 - [Transactional Templates](#transactional-templates)
 - [Legacy Templates](#legacy-templates)
-- [Send a SMS Message](#send-a-sms-message)
-- [How to Setup a Domain Authentication](#how-to-setup-a-domain-authentication)
+- [Send an Email With Twilio Email (Pilot)](#send-an-email-with-twilio-email-pilot)
+- [Send an SMS Message](#send-an-sms-message)
+- [How to Set up a Domain Authentication](#how-to-set-up-a-domain-authentication)
 - [How to View Email Statistics](#how-to-view-email-statistics)
 - [Deploying to Heroku](#deploying-to-heroku)
 - [Google App Engine Installation](#google-app-engine-installation)
@@ -1282,69 +1283,106 @@ try {
 }
 ```
 
-<a name="sms"></a>
-# Send a SMS Message
+# Send an Email With Twilio Email (Pilot)
 
-Following are the steps to add Twilio SMS to your app:
-
-**1. Obtain a Free Twilio Account**
+### 1. Obtain a Free Twilio Account
 
 Sign up for a free Twilio account [here](https://www.twilio.com/try-twilio?source=sendgrid-php).
 
-**2. Update Your Environment Variables**
+### 2. Set Up Your Environment Variables
 
-You can obtain your Account Sid and Auth Token from [twilio.com/console](https://twilio.com/console).
+The Twilio API allows for authentication using with either an API key/secret or your Account SID/Auth Token. You can create an API key [here](https://twil.io/get-api-key) or obtain your Account SID and Auth Token [here](https://twil.io/console).
 
-**__Mac__**
+Once you have those, follow the steps below based on your operating system.
+
+#### Linux/Mac
 
 ```bash
+echo "export TWILIO_API_KEY='YOUR_TWILIO_API_KEY'" > twilio.env
+echo "export TWILIO_API_SECRET='YOUR_TWILIO_API_SECRET'" >> twilio.env
+
+# or
+
 echo "export TWILIO_ACCOUNT_SID='YOUR_TWILIO_ACCOUNT_SID'" > twilio.env
 echo "export TWILIO_AUTH_TOKEN='YOUR_TWILIO_AUTH_TOKEN'" >> twilio.env
+```
+
+Then:
+
+```bash
 echo "twilio.env" >> .gitignore
 source ./twilio.env
 ```
 
-**__Windows__**
+#### Windows
 
 Temporarily set the environment variable (accessible only during the current CLI session):
 
 ```bash
+set TWILIO_API_KEY=YOUR_TWILIO_API_KEY
+set TWILIO_API_SECRET=YOUR_TWILIO_API_SECRET
+
+: or
+
 set TWILIO_ACCOUNT_SID=YOUR_TWILIO_ACCOUNT_SID
 set TWILIO_AUTH_TOKEN=YOUR_TWILIO_AUTH_TOKEN
 ```
 
-Permanently set the environment variable (accessible in all subsequent CLI sessions):
+Or permanently set the environment variable (accessible in all subsequent CLI sessions):
 
 ```bash
+setx TWILIO_API_KEY "YOUR_TWILIO_API_KEY"
+setx TWILIO_API_SECRET "YOUR_TWILIO_API_SECRET"
+
+: or
+
 setx TWILIO_ACCOUNT_SID "YOUR_TWILIO_ACCOUNT_SID"
 setx TWILIO_AUTH_TOKEN "YOUR_TWILIO_AUTH_TOKEN"
 ```
 
-**3. Install the Twilio Helper Library**
+### 3. Initialize the Twilio Email Client
 
-`composer require twilio/sdk`
+```php
+$twilioEmail = new \TwilioEmail(\getenv('TWILIO_API_KEY'), \getenv('TWILIO_API_SECRET'));
 
-Then, you can execute the following code.
+// or
+
+$twilioEmail = new \TwilioEmail(\getenv('TWILIO_ACCOUNT_SID'), \getenv('TWILIO_AUTH_TOKEN'));
+```
+
+This client has the same interface as the `SendGrid` client.
+
+# Send an SMS Message
+
+First, follow the above steps for creating a Twilio account and setting up environment variables with the proper credentials.
+
+Then, install the Twilio Helper Library.
+
+```bash
+composer require twilio/sdk
+```
+
+Finally, send a message.
 
 ```php
 <?php
-$sid = getenv('TWILIO_ACCOUNT_SID');
-$token = getenv('TWILIO_AUTH_TOKEN');
+$sid = \getenv('TWILIO_ACCOUNT_SID');
+$token = \getenv('TWILIO_AUTH_TOKEN');
 
-$client = new Twilio\Rest\Client($sid, $token);
+$client = new \Twilio\Rest\Client($sid, $token);
 $message = $client->messages->create(
   '8881231234', // Text this number
-  array(
+  [
     'from' => '9991231234', // From a valid Twilio number
     'body' => 'Hello from Twilio!'
-  )
+  ]
 );
 ```
 
 For more information, please visit the [Twilio SMS PHP documentation](https://www.twilio.com/docs/sms/quickstart/python).
 
 <a name="domain-authentication"></a>
-# How to Setup a Domain Authentication
+# How to Set up a Domain Authentication
 
 You can find documentation for how to setup a domain authentication via the UI [here](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/) and via API [here](https://github.com/sendgrid/sendgrid-php/blob/master/USAGE.md#sender-authentication).
 

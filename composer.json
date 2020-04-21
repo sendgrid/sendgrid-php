@@ -35,13 +35,19 @@
       "SendGrid\\Contacts\\": "lib/contacts/",
       "SendGrid\\Stats\\": "lib/stats/"
     },
-    "files": ["lib/SendGrid.php"]
+    "files": [
+      "lib/BaseInterface.php",
+      "lib/SendGrid.php",
+      "lib/TwilioEmail.php"
+    ]
   },
   "autoload-dev": {
     "psr-4": {
       "SendGrid\\Tests\\Integration\\": "test/integration",
       "SendGrid\\Tests\\Unit\\": "test/unit"
     },
-    "files": ["test/BaseTestClass.php"]
+    "files": [
+      "test/BaseTestClass.php"
+    ]
   }
 }
