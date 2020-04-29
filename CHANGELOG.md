@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2020-04-29] Version 7.5.0
+--------------------------
+**Library - Fix**
+- [PR #952](https://github.com/sendgrid/sendgrid-php/pull/952): refactor and fix personalization inserts/updates. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Library - Feature**
+- [PR #951](https://github.com/sendgrid/sendgrid-php/pull/951): add support for Twilio Email. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+
 [2020-04-01] Version 7.4.6
 --------------------------
 **Library - Docs**
