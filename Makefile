@@ -23,9 +23,10 @@ test:
 test-integ: test
 	vendor/bin/phpunit test --filter test*
 
+version ?= latest
 test-docker:
-	curl -s https://raw.githubusercontent.com/sendgrid/sendgrid-oai/master/prism/prism.sh | dependencies=lowest bash
-	curl -s https://raw.githubusercontent.com/sendgrid/sendgrid-oai/master/prism/prism.sh | dependencies=highest bash
+	curl -s https://raw.githubusercontent.com/sendgrid/sendgrid-oai/master/prism/prism.sh | dependencies=lowest version=$(version) bash
+	curl -s https://raw.githubusercontent.com/sendgrid/sendgrid-oai/master/prism/prism.sh | dependencies=highest version=$(version) bash
 
 bundle: ci-install
 	zip -r sendgrid-php.zip . -x \*.git\* \*composer.json\* \*scripts\* \*test\* \*.travis.yml\* \*prism\*
