@@ -31,9 +31,8 @@ class BaseTestClass extends TestCase
      */
     public static function setUpBeforeClass()
     {
-        self::$apiKey = "SENDGRID_API_KEY";
-        $host = ['host' => 'http://localhost:4010'];
-        self::$sg = new SendGrid(self::$apiKey, $host);
+        self::$apiKey = 'SENDGRID_API_KEY';
+        self::$sg = new SendGrid(self::$apiKey);
     }
 
 	/**

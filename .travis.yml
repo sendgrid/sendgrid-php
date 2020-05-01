@@ -1,29 +1,21 @@
 language: php
 
-before_script:
-  - if [ -n "$GIT_HUB_TOKEN" ]; then composer config -g github-oauth.github.com "$GIT_HUB_TOKEN"; fi;
-  - composer install
-  - if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest --prefer-stable -n; fi;
-  - "./test/prism.sh &"
-  - sleep 60
+services:
+  - docker
 
 script:
-  - "vendor/bin/phpunit test --filter test*"
+  - make test-docker
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
-php:
-  - 5.6
-  - 7.0
-  - 7.1
-  - 7.2
-  - 7.3
-  - 7.4
-
 env:
-  - dependencies=lowest
-  - dependencies=highest
+  - version=5.6
+  - version=7.0
+  - version=7.1
+  - version=7.2
+  - version=7.3
+  - version=7.4
 
 notifications:
   slack:
