@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2020-05-13] Version 7.5.1
+--------------------------
+**Library - Fix**
+- [PR #960](https://github.com/sendgrid/sendgrid-php/pull/960): migrate to common prism setup. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+
 [2020-04-29] Version 7.5.0
 --------------------------
 **Library - Fix**
