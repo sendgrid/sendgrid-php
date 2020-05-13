@@ -7,7 +7,7 @@
  */
 class BaseInterface
 {
-    const VERSION = '7.5.0';
+    const VERSION = '7.5.1';
 
     // @var \SendGrid\Client
     public $client;
