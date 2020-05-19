@@ -1,17 +1,8 @@
 <?php
 /**
  * This file tests attachments.
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Tests
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018-19 Twilio SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\Attachment;
@@ -19,14 +10,14 @@ use SendGrid\Mail\Attachment;
 /**
  * This file tests attachments.
  *
- * @package SendGrid\Tests
+ * @package SendGrid\Tests\Unit
  */
-class AttachmentsTests extends TestCase
+class AttachmentsTest extends TestCase
 {
     public function testWillEncodeNonBase64String() {
 
         $attachment = new Attachment();
-        $testString = 'Twilio Sendgrid is awesome!';
+        $testString = 'Twilio SendGrid is awesome!';
 
         $attachment->setContent($testString);
 
@@ -36,7 +27,7 @@ class AttachmentsTests extends TestCase
     public function testWillNotEncodeBase64String() {
 
         $attachment = new Attachment();
-        $testString = base64_encode('Twilio Sendgrid is awesome!');
+        $testString = base64_encode('Twilio SendGrid is awesome!');
 
         $attachment->setContent($testString);
 
