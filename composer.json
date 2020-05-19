@@ -35,7 +35,7 @@
       "SendGrid\\Contacts\\": "lib/contacts/",
       "SendGrid\\Stats\\": "lib/stats/"
     },
-    "files": [
+    "classmap": [
       "lib/BaseInterface.php",
       "lib/SendGrid.php",
       "lib/TwilioEmail.php"
@@ -46,7 +46,7 @@
       "SendGrid\\Tests\\Integration\\": "test/integration",
       "SendGrid\\Tests\\Unit\\": "test/unit"
     },
-    "files": [
+    "classmap": [
       "test/BaseTestClass.php"
     ]
   }
