@@ -36,7 +36,7 @@
       "SendGrid\\Stats\\": "lib/stats/"
     },
     "classmap": [
-      "lib/BaseInterface.php",
+      "lib/BaseSendGridClientInterface.php",
       "lib/SendGrid.php",
       "lib/TwilioEmail.php"
     ]
