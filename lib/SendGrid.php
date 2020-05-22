@@ -6,7 +6,7 @@
  *
  * @package SendGrid\Mail
  */
-class SendGrid extends BaseInterface
+class SendGrid extends BaseSendGridClientInterface
 {
     /**
      * Set up the HTTP Client.
