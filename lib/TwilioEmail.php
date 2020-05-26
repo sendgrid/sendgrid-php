@@ -6,7 +6,7 @@
  *
  * @package SendGrid\Mail
  */
-class TwilioEmail extends BaseInterface
+class TwilioEmail extends BaseSendGridClientInterface
 {
     /**
      * Set up the HTTP Client.
