@@ -102,6 +102,7 @@ class MailHelperTest extends TestCase
 
     /**
      * Expect a TypeException when using invalid email address containing unicode in domain part
+     *
      * @requires PHP 7.1
      */
     public function testInvalidEmailAddressLocalPartUnicode()
@@ -144,6 +145,7 @@ class MailHelperTest extends TestCase
 
     /**
      * Expect a TypeException when using invalid email address containing unicode in domain part
+     *
      * @requires PHP 7.1
      */
     public function testInvalidBccEmailAddressLocalPartUnicode()
