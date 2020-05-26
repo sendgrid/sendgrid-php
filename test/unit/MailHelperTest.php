@@ -7,6 +7,7 @@ namespace SendGrid\Tests\Unit;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use SendGrid\Mail\BccSettings;
 use SendGrid\Mail\Content;
 use SendGrid\Mail\EmailAddress;
 use SendGrid\Mail\From;
@@ -67,15 +68,6 @@ class MailHelperTest extends TestCase
         );
     }
 
-    /**
-     * This method tests TypeException for wrong email address
-     */
-    public function testInvalidEmailAddress()
-    {
-        $this->expectException(TypeException::class);
-        new EmailAddress('test@example.com@wrong');
-    }
-
     public function testEmailAddress()
     {
         $email = new EmailAddress('test@example.com');
@@ -84,6 +76,15 @@ class MailHelperTest extends TestCase
             '{"email":"test@example.com"}',
             $json
         );
+    }
+
+    /**
+     * A TypeException must be thrown when using invalid email address
+     */
+    public function testInvalidEmailAddress()
+    {
+        $this->expectException(TypeException::class);
+        new EmailAddress('test@example.com@wrong');
     }
 
     /**
@@ -97,6 +98,58 @@ class MailHelperTest extends TestCase
             '{"email":"fran\u00e7ois@domain.tld"}',
             $json
         );
+    }
+
+    /**
+     * Expect a TypeException when using invalid email address containing unicode in domain part
+     * @requires PHP 7.1
+     */
+    public function testInvalidEmailAddressLocalPartUnicode()
+    {
+        $this->expectException(TypeException::class);
+        new EmailAddress('françois.localpart@françois.domain.tld');
+    }
+
+    public function testBccEmailAddress()
+    {
+        $settings = new BccSettings(null, 'test@example.com');
+        $json = json_encode($settings->jsonSerialize());
+        $this->assertEquals(
+            '{"email":"test@example.com"}',
+            $json
+        );
+    }
+
+    /**
+     * A TypeException must be thrown when using invalid email address for Bcc
+     */
+    public function testInvalidBccEmailAddress()
+    {
+        $this->expectException(TypeException::class);
+        new BccSettings(true, 'test@example.com@wrong');
+    }
+
+    /**
+     * @requires PHP 7.1
+     */
+    public function testBccEmailAddressLocalPartUnicode()
+    {
+        $settings = new BccSettings(null, 'françois@domain.tld');
+        $json = json_encode($settings->jsonSerialize());
+        $this->assertEquals(
+            '{"email":"fran\u00e7ois@domain.tld"}',
+            $json
+        );
+    }
+
+    /**
+     * Expect a TypeException when using invalid email address containing unicode in domain part
+     * @requires PHP 7.1
+     */
+    public function testInvalidBccEmailAddressLocalPartUnicode()
+    {
+        $this->expectException(TypeException::class);
+        new BccSettings(null, 'françois.localpart@françois.domain.tld');
     }
 
     public function testJsonSerializeOverPersonalizationsShouldNotReturnNull()
