@@ -5,7 +5,7 @@
  *
  * @package SendGrid\Mail
  */
-class BaseInterface
+class BaseSendGridClientInterface
 {
     const VERSION = '7.5.1';
 
