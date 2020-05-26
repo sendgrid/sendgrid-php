@@ -70,9 +70,7 @@ class BccSettings implements \JsonSerializable
      */
     public function setEmail($email)
     {
-        if (!is_string($email) &&
-            filter_var($email, FILTER_VALIDATE_EMAIL)
-        ) {
+        if (!EmailAddress::isValidEmailAddress($email)) {
             throw new TypeException(
                 '$email must valid and be of type string.'
             );

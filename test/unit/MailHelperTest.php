@@ -32,7 +32,7 @@ class MailHelperTest extends TestCase
     {
         $email = new EmailAddress('test@example.com', 'John Doe');
         $json = json_encode($email->jsonSerialize());
-        $this->assertEquals($json, '{"name":"John Doe","email":"test@example.com"}');
+        $this->assertEquals('{"name":"John Doe","email":"test@example.com"}', $json);
 
         $email->setName('');
         $json = json_encode($email->jsonSerialize());
@@ -70,10 +70,33 @@ class MailHelperTest extends TestCase
     /**
      * This method tests TypeException for wrong email address
      */
-    public function testEmailAddress()
+    public function testInvalidEmailAddress()
     {
         $this->expectException(TypeException::class);
         new EmailAddress('test@example.com@wrong');
+    }
+
+    public function testEmailAddress()
+    {
+        $email = new EmailAddress('test@example.com');
+        $json = json_encode($email->jsonSerialize());
+        $this->assertEquals(
+            '{"email":"test@example.com"}',
+            $json
+        );
+    }
+
+    /**
+     * @requires PHP 7.1
+     */
+    public function testEmailAddressLocalPartUnicode()
+    {
+        $email = new EmailAddress('françois@domain.tld');
+        $json = json_encode($email->jsonSerialize());
+        $this->assertEquals(
+            '{"email":"fran\u00e7ois@domain.tld"}',
+            $json
+        );
     }
 
     public function testJsonSerializeOverPersonalizationsShouldNotReturnNull()

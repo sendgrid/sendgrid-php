@@ -56,6 +56,28 @@ class EmailAddress implements \JsonSerializable
     }
 
     /**
+     * Validates given emailAddress against expected type and filter
+     *
+     * @param string $emailAddress The email address
+     *
+     * @return bool Result of validating the email address
+     */
+    public static function isValidEmailAddress($emailAddress)
+    {
+        //  Define additional flags for filter_var to verify unicode characters on local part
+        //  Constant FILTER_FLAG_EMAIL_UNICODE is available since PHP 7.1
+        $flags = (defined('FILTER_FLAG_EMAIL_UNICODE')) ? FILTER_FLAG_EMAIL_UNICODE : null;
+
+        //  Return result of having string type and valid emailAddress
+        //  The filter_var returns the filtered data on success
+        //  (which must be a string), otherwise bool(false)
+        return (
+            is_string($emailAddress) &&
+            is_string(filter_var($emailAddress, FILTER_VALIDATE_EMAIL, $flags))
+        );
+    }
+
+    /**
      * Add the email address to a EmailAddress object
      *
      * @param string $emailAddress The email address
@@ -64,9 +86,7 @@ class EmailAddress implements \JsonSerializable
      */
     public function setEmailAddress($emailAddress)
     {
-        if (!(is_string($emailAddress) &&
-            filter_var($emailAddress, FILTER_VALIDATE_EMAIL))
-        ) {
+        if (!static::isValidEmailAddress($emailAddress)) {
             throw new TypeException(
                 "{$emailAddress} must be valid and of type string."
             );
