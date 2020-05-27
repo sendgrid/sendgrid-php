@@ -23,18 +23,18 @@ class EmailAddress implements \JsonSerializable
     /** @var $subject Subject The personalized subject of the email */
     private $subject;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param string|null $emailAddress  The email address
-	 * @param string|null $name          The name of the person associated with
-	 *                                   the email
-	 * @param array|null  $substitutions An array of key/value substitutions to
-	 *                                   be be applied to the text and html content
-	 *                                   of the email body
-	 * @param string|null $subject       The personalized subject of the email
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param string|null $emailAddress  The email address
+     * @param string|null $name          The name of the person associated with
+     *                                   the email
+     * @param array|null  $substitutions An array of key/value substitutions to
+     *                                   be be applied to the text and html content
+     *                                   of the email body
+     * @param string|null $subject       The personalized subject of the email
+     * @throws TypeException
+     */
     public function __construct(
         $emailAddress = null,
         $name = null,
@@ -82,7 +82,7 @@ class EmailAddress implements \JsonSerializable
      *
      * @param string $emailAddress The email address
      *
-     * @throws \SendGrid\Mail\TypeException
+     * @throws TypeException
      */
     public function setEmailAddress($emailAddress)
     {
@@ -119,7 +119,7 @@ class EmailAddress implements \JsonSerializable
      *
      * @param string $name The name of the person associated with the email
      *
-     * @throws \SendGrid\Mail\TypeException
+     * @throws TypeException
      */
     public function setName($name)
     {
@@ -168,7 +168,7 @@ class EmailAddress implements \JsonSerializable
      *                             be be applied to the text and html content
      *                             of the email body
      *
-     * @throws \SendGrid\Mail\TypeException
+     * @throws TypeException
      */
     public function setSubstitutions($substitutions)
     {
@@ -192,7 +192,7 @@ class EmailAddress implements \JsonSerializable
      *
      * @param string $subject The personalized subject of the email
      *
-     * @throws \SendGrid\Mail\TypeException
+     * @throws TypeException
      */
     public function setSubject($subject)
     {
