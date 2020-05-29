@@ -12,6 +12,5 @@ test.php
 .vscode
 prism*
 temp.php
-example*.php
 TODO.txt
 sendgrid-php.zip
