@@ -863,9 +863,7 @@ class Mail implements \JsonSerializable
     {
         if ($email instanceof From) {
             $this->from = $email;
-        } else if (
-            is_string($email) && filter_var($email, FILTER_VALIDATE_EMAIL)
-        ) {
+        } elseif (EmailAddress::isValidEmailAddress($email)) {
             $this->from = new From($email, $name);
         } else {
             throw new TypeException('$email must be valid and of type string.');
