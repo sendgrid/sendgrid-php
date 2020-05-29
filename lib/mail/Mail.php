@@ -5,6 +5,10 @@
 
 namespace SendGrid\Mail;
 
+use InvalidArgumentException;
+use OverflowException;
+
+
 /**
  * This class is used to construct a request body for the /mail/send API call
  *
@@ -65,6 +69,11 @@ class Mail implements \JsonSerializable
 
     /** @var $personalization Personalization[] Messages and their metadata */
     private $personalization;
+
+    /** @var int Maximum number of allowed Personalization objects
+     *  Source: https://sendgrid.com/docs/for-developers/sending-email/personalizations/
+     */
+    const   PERSONALIZATION_MAX = 1000;
 
     const   VERSION = "7.0.0";
 
@@ -167,6 +176,8 @@ class Mail implements \JsonSerializable
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
+     *
+     * @throws TypeException
      */
     private function addRecipientEmail(
         $emailType,
@@ -177,6 +188,7 @@ class Mail implements \JsonSerializable
         $personalization = null
     ) {
         $personalizationFunctionCall = 'add' . $emailType;
+        $personalizationRequired = ($emailType !== 'To');
         $emailType = '\SendGrid\Mail\\' . $emailType;
         if (!($email instanceof $emailType)) {
             $email = new $emailType(
@@ -186,7 +198,7 @@ class Mail implements \JsonSerializable
             );
         }
 
-        $personalization = $this->getPersonalization($personalizationIndex, $personalization);
+        $personalization = $this->getPersonalization($personalizationIndex, $personalization, $personalizationRequired);
         $personalization->$personalizationFunctionCall($email);
 
         if ($subs = $email->getSubstitutions()) {
@@ -205,6 +217,8 @@ class Mail implements \JsonSerializable
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
+     *
+     * @throws TypeException
      */
     private function addRecipientEmails(
         $emailType,
@@ -212,6 +226,11 @@ class Mail implements \JsonSerializable
         $personalizationIndex = null,
         $personalization = null
     ) {
+        //  Reject if emails isn't an array
+        if (!is_array($emails)) {
+            return;
+        }
+
         $emailFunctionCall = 'add' . $emailType;
 
         if (current($emails) instanceof EmailAddress) {
@@ -219,6 +238,7 @@ class Mail implements \JsonSerializable
                 $this->$emailFunctionCall(
                     $email,
                     $name = null,
+                    null,
                     $personalizationIndex,
                     $personalization
                 );
@@ -228,6 +248,7 @@ class Mail implements \JsonSerializable
                 $this->$emailFunctionCall(
                     $email,
                     $name,
+                    null,
                     $personalizationIndex,
                     $personalization
                 );
@@ -239,10 +260,54 @@ class Mail implements \JsonSerializable
      * Add a Personalization object to the Mail object
      *
      * @param Personalization $personalization A Personalization object
+     * @param int|null $personalizationIndex Index into the array of existing
+     *                                       Personalization objects
+     *
+     * @return int|null Index used to store the Personalization
      */
-    public function addPersonalization($personalization)
+    public function addPersonalization($personalization, $personalizationIndex = null)
     {
+        //  Reached maximum allowed Personalization instances?
+        if (!$this->allowsPersonalizationAddition()) {
+            throw new OverflowException(
+                'The number of Personalization instances per API request has reached the limit of ' .
+                self::PERSONALIZATION_MAX . '. Please divide across multiple API requests.'
+            );
+        }
+
+        //  If not an array yet, create
+        if (!is_array($this->personalization)) {
+            $this->personalization = [];
+        }
+
+        //  If provided a custom personalizationIndex
+        if (null !== $personalizationIndex) {
+            //  Verify if personalizationIndex is valid to use
+            if (!$this->isValidPersonalizationIndex($personalizationIndex)) {
+                throw new InvalidArgumentException(
+                    'personalizationIndex must be a non negative integer (>=0)'
+                );
+            }
+
+            //  If already in use, refuse (due to the explicit meaning of this function)
+            if ($this->isExistingPersonalizationIndex($personalizationIndex)) {
+                throw new InvalidArgumentException(
+                    'personalizationIndex does already exists'
+                );
+            }
+
+            //  Attach Personalization using personalizationIndex
+            $this->personalization[$personalizationIndex] = $personalization;
+
+            //  Return used personalizationIndex
+            return $personalizationIndex;
+        }
+
+        //  Append provided personalization
         $this->personalization[] = $personalization;
+
+        //  Return key of last inserted personalization
+        return $this->getPersonalizationIndex();
     }
 
     /**
@@ -253,34 +318,207 @@ class Mail implements \JsonSerializable
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
+     * @param bool $requireExisting Require existing Personalization
+     *
      * @return Personalization
      */
-    public function getPersonalization($personalizationIndex = null, $personalization = null)
+    public function getPersonalization($personalizationIndex = null, $personalization = null, $requireExisting = false)
     {
-        if ($personalization !== null) {
-            $this->addPersonalization($personalization);
-        } else if ($personalizationIndex !== null) {
-            if ($personalizationIndex >= $this->getPersonalizationCount()) {
-                throw new \InvalidArgumentException(
-                    'personalizationIndex ' . $personalizationIndex .
-                    ' must be less than ' . $this->getPersonalizationCount());
-            }
+        //  Evaluate presence of personalizationIndex
+        $hasIndex = ($personalizationIndex !== null);
 
-            $personalization = $this->personalization[$personalizationIndex];
-        } else if ($this->getPersonalizationCount() === 0) {
-            $personalization = new Personalization();
-            $this->addPersonalization($personalization);
-        } else {
-            $personalization = \end($this->personalization);
+        //  If index was given, expect to have a valid one
+        if ($hasIndex && !$this->isValidPersonalizationIndex($personalizationIndex)) {
+            throw new InvalidArgumentException(
+                '(Optional) personalizationIndex must be a non negative integer (>=0)'
+            );
         }
 
+        //  Also verify for Personalization instance
+        $hasInstance = ($personalization instanceof Personalization);
+
+        //  If having both, try to merge if existing
+        if ($hasIndex && $hasInstance) {
+            //  Index doesn't exists?
+            if (!$this->isExistingPersonalizationIndex($personalizationIndex)) {
+                //  Append this Personalization using provided personalizationIndex
+                $this->addPersonalization($personalization, $personalizationIndex);
+
+                //  Return given Personalization
+                return $personalization;
+            }
+
+            //  Merge existing Personalization
+            return $this->mergePersonalizationAtIndex($personalizationIndex, $personalization);
+        }
+
+        //  Only having the personalizationIndex? Lookup
+        if ($hasIndex) {
+            //  If existing, return Personalization at that index
+            if ($this->isExistingPersonalizationIndex($personalizationIndex)) {
+                return $this->getPersonalizationAtIndex($personalizationIndex);
+            }
+
+            //  If requiring existing Personalization
+            if ($requireExisting) {
+                throw new InvalidArgumentException(
+                    "Invalid personalizationIndex {$personalizationIndex} given"
+                );
+            }
+        } elseif (!$hasInstance) {
+            //  Method getPersonalization has been called without arguments
+            //  Assume to look for first Personalization instance
+            if ($this->getPersonalizationCount() > 0) {
+                //  Pick last Personalization instance
+                return end($this->personalization);
+            }
+        }
+
+        //  Create new Personalization instance if not having one
+        if (!$hasInstance) {
+            $personalization = new Personalization();
+        }
+
+        //  Bind (created) Personalization using (optional) personalizationIndex
+        $this->addPersonalization($personalization, $personalizationIndex);
+
+        //  Return (created) Personalization
         return $personalization;
     }
 
     /**
-     * Retrieve a Personalization object from the Mail object
+     * Returns latest added personalizationIndex in personalization array.
      *
-     * @return Personalization[]
+     * @return int|null Index which is used last or no Personalization existing
+     */
+    public function getPersonalizationIndex()
+    {
+        //  If not having personalization instances, return null
+        if (!is_array($this->personalization) || 0 === count($this->personalization)) {
+            return null;
+        }
+
+        //  Reset pointer to last entry and return key
+        end($this->personalization);
+        return key($this->personalization);
+    }
+
+    /**
+     * Verifies if given personalizationIndex parameter is valid for usage.
+     *
+     * @param int $personalizationIndex Index identifier (of expected Personalization)
+     *
+     * @return bool Result of having valid personalizationIndex
+     */
+    public function isValidPersonalizationIndex($personalizationIndex)
+    {
+        //  Expecting to have an integer and index equals/greater than 0
+        return is_int($personalizationIndex) && ($personalizationIndex >= 0);
+    }
+
+    /**
+     * Evaluates presence of provided personalizationIndex in personalization collection.
+     *
+     * @param int $personalizationIndex Index identifier
+     *
+     * @return bool Existence evaluation of given personalizationIndex
+     */
+    public function isExistingPersonalizationIndex($personalizationIndex)
+    {
+        //  Lookup of existence of personalizationIndex
+        return isset($this->personalization, $this->personalization[$personalizationIndex]);
+    }
+
+    /**
+     * Evaluates availability of adding more Personalization instances.
+     *
+     * @return bool Availability to add more Personalization instances
+     */
+    public function allowsPersonalizationAddition()
+    {
+        //  The number of existing Personalization instances must below maximum
+        return $this->getPersonalizationCount() < self::PERSONALIZATION_MAX;
+    }
+
+    /**
+     * Compares and matches provided Personalization against provided index.
+     *
+     * @param int             $personalizationIndex Index to lookup
+     * @param Personalization $personalization      Personalization instance to compare/assign
+     *
+     * @return Personalization Merged Personalization instance
+     */
+    protected function mergePersonalizationAtIndex($personalizationIndex, $personalization)
+    {
+        //  Not having valid identifier? Reject
+        if (!$this->isValidPersonalizationIndex($personalizationIndex)) {
+            throw new InvalidArgumentException(
+                'personalizationIndex must be a non negative integer (>=0)'
+            );
+        }
+
+        //  Provided Personalization not valid? Reject
+        if (!($personalization instanceof Personalization)) {
+            throw new InvalidArgumentException(
+                'personalization must be a valid Personalization instance'
+            );
+        }
+
+        //  Locate Personalization instance using given index
+        $existingPersonalization = $this->getPersonalizationAtIndex($personalizationIndex);
+        if (!($existingPersonalization instanceof Personalization)) {
+            throw new InvalidArgumentException(
+                "personalizationIndex {$personalizationIndex} doesn't point to existing instance"
+            );
+        }
+
+        //  Compare objects by comparing unique identifier
+        //  This prevents merging attempts on the same object
+        if ($existingPersonalization->getObjectIdentifier() === $personalization->getObjectIdentifier()) {
+            return $personalization;
+        }
+
+        //  Different objects
+        //  Patch existingPersonalization entries onto provided Personalization
+        $personalization->copyFromPersonalization($existingPersonalization);
+
+        //  Overwrite existingPersonalization
+        $this->personalization[$personalizationIndex] = $personalization;
+
+        //  Return merged object
+        return $personalization;
+    }
+
+    /**
+     * Retrieves Personalization instance using given array index.
+     *
+     * @param int $personalizationIndex Index to lookup
+     *
+     * @return Personalization|null Personalization instance at index or null if not found
+     */
+    public function getPersonalizationAtIndex($personalizationIndex)
+    {
+        return $this->hasPersonalizationIndex($personalizationIndex) ?
+            $this->personalization[$personalizationIndex] : null;
+    }
+
+    /**
+     * Verifies existence of given personalizationIndex in personalization array.
+     *
+     * @param int $personalizationIndex Index to lookup
+     *
+     * @return bool Existence evaluation of having the Personalization
+     */
+    public function hasPersonalizationIndex($personalizationIndex)
+    {
+        //  This method is an alias of isExistingPersonalizationIndex
+        return $this->isExistingPersonalizationIndex($personalizationIndex);
+    }
+
+    /**
+     * Retrieve Personalization object collection from the Mail object
+     *
+     * @return Personalization[]|null
      */
     public function getPersonalizations()
     {
@@ -307,6 +545,8 @@ class Mail implements \JsonSerializable
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
+     *
+     * @throws TypeException
      */
     public function addTo(
         $to,
@@ -339,6 +579,8 @@ class Mail implements \JsonSerializable
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
+     *
+     * @throws TypeException
      */
     public function addTos(
         $toEmails,
@@ -364,6 +606,8 @@ class Mail implements \JsonSerializable
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
+     *
+     * @throws TypeException
      */
     public function addCc(
         $cc,
@@ -395,6 +639,8 @@ class Mail implements \JsonSerializable
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
+     *
+     * @throws TypeException
      */
     public function addCcs(
         $ccEmails,
@@ -420,6 +666,8 @@ class Mail implements \JsonSerializable
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
+     *
+     * @throws TypeException
      */
     public function addBcc(
         $bcc,
@@ -451,6 +699,8 @@ class Mail implements \JsonSerializable
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
+     *
+     * @throws TypeException
      */
     public function addBccs(
         $bccEmails,
@@ -489,15 +739,11 @@ class Mail implements \JsonSerializable
             $subject = new Subject($subject);
         }
 
-        if ($personalization !== null) {
-            $personalization->setSubject($subject);
-            $this->addPersonalization($personalization);
+        if (($personalization !== null) || ($personalizationIndex !== null)) {
+            $this->getPersonalization($personalizationIndex, $personalization, true)->setSubject($subject);
             return;
         }
-        if ($personalizationIndex !== null) {
-            $this->personalization[$personalizationIndex]->setSubject($subject);
-            return;
-        }
+
         $this->setGlobalSubject($subject);
     }
 
@@ -506,11 +752,19 @@ class Mail implements \JsonSerializable
      *
      * @param int|0 $personalizationIndex Index into the array of existing
      *                                    Personalization objects
-     * @return Subject
+     * @return Subject|null
      */
     public function getSubject($personalizationIndex = 0)
     {
-        return $this->personalization[$personalizationIndex]->getSubject();
+        //  If personalizationIndex doesn't exists, report
+        if (!$this->isExistingPersonalizationIndex($personalizationIndex)) {
+            throw new InvalidArgumentException(
+                "personalizationIndex {$personalizationIndex}  doesn't exists"
+            );
+        }
+
+        //  Return possible Subject existence
+        return $this->getPersonalizationAtIndex($personalizationIndex)->getSubject();
     }
 
     /**
@@ -543,7 +797,7 @@ class Mail implements \JsonSerializable
             $header = new Header($key, $value);
         }
 
-        $personalization = $this->getPersonalization($personalizationIndex, $personalization);
+        $personalization = $this->getPersonalization($personalizationIndex, $personalization, true);
         $personalization->addHeader($header);
     }
 
@@ -592,7 +846,14 @@ class Mail implements \JsonSerializable
      */
     public function getHeaders($personalizationIndex = 0)
     {
-        return $this->personalization[$personalizationIndex]->getHeaders();
+        //  If personalizationIndex doesn't exists, report
+        if (!$this->isExistingPersonalizationIndex($personalizationIndex)) {
+            throw new InvalidArgumentException(
+                "personalizationIndex {$personalizationIndex}  doesn't exists"
+            );
+        }
+
+        return $this->getPersonalizationAtIndex($personalizationIndex)->getHeaders();
     }
 
     /**
@@ -677,7 +938,7 @@ class Mail implements \JsonSerializable
             $substitution = new Substitution($key, $value);
         }
 
-        $personalization = $this->getPersonalization($personalizationIndex, $personalization);
+        $personalization = $this->getPersonalization($personalizationIndex, $personalization, true);
         $personalization->addSubstitution($substitution);
     }
 
@@ -727,7 +988,14 @@ class Mail implements \JsonSerializable
      */
     public function getSubstitutions($personalizationIndex = 0)
     {
-        return $this->personalization[$personalizationIndex]->getSubstitutions();
+        //  If personalizationIndex doesn't exists, report
+        if (!$this->isExistingPersonalizationIndex($personalizationIndex)) {
+            throw new InvalidArgumentException(
+                "personalizationIndex {$personalizationIndex}  doesn't exists"
+            );
+        }
+
+        return $this->getPersonalizationAtIndex($personalizationIndex)->getSubstitutions();
     }
 
     /**
@@ -758,7 +1026,7 @@ class Mail implements \JsonSerializable
             $custom_arg = new CustomArg($key, $value);
         }
 
-        $personalization = $this->getPersonalization($personalizationIndex, $personalization);
+        $personalization = $this->getPersonalization($personalizationIndex, $personalization, true);
         $personalization->addCustomArg($custom_arg);
     }
 
@@ -808,7 +1076,14 @@ class Mail implements \JsonSerializable
      */
     public function getCustomArgs($personalizationIndex = 0)
     {
-        return $this->personalization[$personalizationIndex]->getCustomArgs();
+        //  If personalizationIndex doesn't exists, report
+        if (!$this->isExistingPersonalizationIndex($personalizationIndex)) {
+            throw new InvalidArgumentException(
+                "personalizationIndex {$personalizationIndex}  doesn't exists"
+            );
+        }
+
+        return $this->getPersonalizationAtIndex($personalizationIndex)->getCustomArgs();
     }
 
 	/**
@@ -836,7 +1111,7 @@ class Mail implements \JsonSerializable
             $send_at = new SendAt($send_at);
         }
 
-        $personalization = $this->getPersonalization($personalizationIndex, $personalization);
+        $personalization = $this->getPersonalization($personalizationIndex, $personalization, true);
         $personalization->setSendAt($send_at);
     }
 
@@ -845,11 +1120,18 @@ class Mail implements \JsonSerializable
      *
      * @param int|0 $personalizationIndex Index into the array of existing
      *                                    Personalization objects
-     * @return SendAt
+     * @return SendAt|null
      */
     public function getSendAt($personalizationIndex = 0)
     {
-        return $this->personalization[$personalizationIndex]->getSendAt();
+        //  If personalizationIndex doesn't exists, report
+        if (!$this->isExistingPersonalizationIndex($personalizationIndex)) {
+            throw new InvalidArgumentException(
+                "personalizationIndex {$personalizationIndex}  doesn't exists"
+            );
+        }
+
+        return $this->getPersonalizationAtIndex($personalizationIndex)->getSendAt();
     }
 
     /**
