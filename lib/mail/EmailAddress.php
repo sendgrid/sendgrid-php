@@ -23,18 +23,18 @@ class EmailAddress implements \JsonSerializable
     /** @var $subject Subject The personalized subject of the email */
     private $subject;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param string|null $emailAddress  The email address
-	 * @param string|null $name          The name of the person associated with
-	 *                                   the email
-	 * @param array|null  $substitutions An array of key/value substitutions to
-	 *                                   be be applied to the text and html content
-	 *                                   of the email body
-	 * @param string|null $subject       The personalized subject of the email
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param string|null $emailAddress  The email address
+     * @param string|null $name          The name of the person associated with
+     *                                   the email
+     * @param array|null  $substitutions An array of key/value substitutions to
+     *                                   be be applied to the text and html content
+     *                                   of the email body
+     * @param string|null $subject       The personalized subject of the email
+     * @throws TypeException
+     */
     public function __construct(
         $emailAddress = null,
         $name = null,
@@ -56,17 +56,37 @@ class EmailAddress implements \JsonSerializable
     }
 
     /**
+     * Validates given emailAddress against expected type and filter
+     *
+     * @param string $emailAddress The email address
+     *
+     * @return bool Result of validating the email address
+     */
+    public static function isValidEmailAddress($emailAddress)
+    {
+        //  Define additional flags for filter_var to verify unicode characters on local part
+        //  Constant FILTER_FLAG_EMAIL_UNICODE is available since PHP 7.1
+        $flags = (defined('FILTER_FLAG_EMAIL_UNICODE')) ? FILTER_FLAG_EMAIL_UNICODE : null;
+
+        //  Return result of having string type and valid emailAddress
+        //  The filter_var returns the filtered data on success
+        //  (which must be a string), otherwise bool(false)
+        return (
+            is_string($emailAddress) &&
+            is_string(filter_var($emailAddress, FILTER_VALIDATE_EMAIL, $flags))
+        );
+    }
+
+    /**
      * Add the email address to a EmailAddress object
      *
      * @param string $emailAddress The email address
      *
-     * @throws \SendGrid\Mail\TypeException
+     * @throws TypeException
      */
     public function setEmailAddress($emailAddress)
     {
-        if (!(is_string($emailAddress) &&
-            filter_var($emailAddress, FILTER_VALIDATE_EMAIL))
-        ) {
+        if (!static::isValidEmailAddress($emailAddress)) {
             throw new TypeException(
                 "{$emailAddress} must be valid and of type string."
             );
@@ -99,7 +119,7 @@ class EmailAddress implements \JsonSerializable
      *
      * @param string $name The name of the person associated with the email
      *
-     * @throws \SendGrid\Mail\TypeException
+     * @throws TypeException
      */
     public function setName($name)
     {
@@ -148,7 +168,7 @@ class EmailAddress implements \JsonSerializable
      *                             be be applied to the text and html content
      *                             of the email body
      *
-     * @throws \SendGrid\Mail\TypeException
+     * @throws TypeException
      */
     public function setSubstitutions($substitutions)
     {
@@ -172,7 +192,7 @@ class EmailAddress implements \JsonSerializable
      *
      * @param string $subject The personalized subject of the email
      *
-     * @throws \SendGrid\Mail\TypeException
+     * @throws TypeException
      */
     public function setSubject($subject)
     {

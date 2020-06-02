@@ -10,8 +10,7 @@ test.php
 .idea/
 *.code-workspace
 .vscode
-prism
+prism*
 temp.php
-example*.php
 TODO.txt
 sendgrid-php.zip
