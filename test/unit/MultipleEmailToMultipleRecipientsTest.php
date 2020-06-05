@@ -384,8 +384,6 @@ JSON;
 
     /**
      * Test when we pass in an array of subjects
-     *
-     * @expectedException \SendGrid\Mail\TypeException
      */
     public function testWithCollectionOfSubjects()
     {
@@ -446,8 +444,6 @@ JSON;
 
     /**
      * Test when we pass in an array of subjects
-     *
-     * @expectedException \SendGrid\Mail\TypeException
      */
     public function testWithCollectionOfSubjectsDynamic()
     {
@@ -503,8 +499,7 @@ JSON;
         );
         $email->setTemplateId("d-13b8f94f-bcae-4ec6-b752-70d6cb59f932");
         $json = json_encode($email->jsonSerialize());
-        $isEqual = BaseTestClass::compareJSONObjects($json, $this->REQUEST_OBJECT_2);
+        $isEqual = BaseTestClass::compareJSONObjects($json, $this->REQUEST_OBJECT_4);
         $this->assertTrue($isEqual);
     }
-
 }
