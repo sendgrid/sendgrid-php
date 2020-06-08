@@ -103,16 +103,20 @@ class Personalization implements \JsonSerializable
     /**
      * Add a subject object to a Personalization object
      *
-     * @param Subject $subject Subject object
+     * @param Subject|string $subject Subject object or string
      *
      * @throws TypeException
      */
     public function setSubject($subject)
     {
         if (!($subject instanceof Subject)) {
-            throw new TypeException(
-                '$subject must be an instance of SendGrid\Mail\Subject'
-            );
+            //  If not a string, Subject can't be created
+            if (!is_string($subject)) {
+                throw new TypeException(
+                    '$subject must be an instance of SendGrid\Mail\Subject or of type string.'
+                );
+            }
+            $subject = new Subject($subject);
         }
         $this->subject = $subject;
     }

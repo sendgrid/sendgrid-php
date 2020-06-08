@@ -857,10 +857,10 @@ class Mail implements \JsonSerializable
     }
 
     /**
-     * Add a DynamicTemplateData object or key/value to a Personalization object
+     * Add a Substitution object or key/value to a Personalization object
      *
-     * @param DynamicTemplateData|string $key DynamicTemplateData object or the key of a
-     *                                         dynamic data
+     * @param Substitution|string $key Substitution object or the key of a
+     *                                 dynamic data
      * @param string|null $value Value
      * @param int|null $personalizationIndex Index into the array of existing
      *                                       Personalization objects
@@ -878,10 +878,10 @@ class Mail implements \JsonSerializable
     }
 
     /**
-     * Add a DynamicTemplateData object or key/value to a Personalization object
+     * Add a Substitution object or key/value to a Personalization object
      *
-     * @param array|DynamicTemplateData[] $datas Array of DynamicTemplateData
-     *                                           objects or key/values
+     * @param array|Substitution[] $datas Array of Substitution
+     *                                    objects or key/values
      * @param int|null $personalizationIndex Index into the array of existing
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
@@ -1145,9 +1145,7 @@ class Mail implements \JsonSerializable
     {
         if ($email instanceof From) {
             $this->from = $email;
-        } else if (
-            is_string($email) && filter_var($email, FILTER_VALIDATE_EMAIL)
-        ) {
+        } elseif (EmailAddress::isValidEmailAddress($email)) {
             $this->from = new From($email, $name);
         } else {
             throw new TypeException('$email must be valid and of type string.');

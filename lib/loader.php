@@ -7,6 +7,7 @@ require_once __DIR__ . '/SendGrid.php';
 require_once __DIR__ . '/TwilioEmail.php';
 require_once __DIR__ . '/contacts/Recipient.php';
 require_once __DIR__ . '/contacts/RecipientForm.php';
+require_once __DIR__ . '/eventwebhook/EventWebhook.php';
 require_once __DIR__ . '/mail/EmailAddress.php';
 require_once __DIR__ . '/mail/Asm.php';
 require_once __DIR__ . '/mail/Attachment.php';

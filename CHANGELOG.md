@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2020-05-27] Version 7.5.2
+--------------------------
+**Library - Fix**
+- [PR #966](https://github.com/sendgrid/sendgrid-php/pull/966): Rename 'BaseInterface' to 'BaseSendGridClientInterface.php'. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #965](https://github.com/sendgrid/sendgrid-php/pull/965): use classmap instead of files for Composer autoload. Thanks to [@kampalex](https://github.com/kampalex)!
+
+**Library - Docs**
+- [PR #839](https://github.com/sendgrid/sendgrid-php/pull/839): add documentation for segments in USAGE.md. Thanks to [@rwhirn](https://github.com/rwhirn)!
+
+
 [2020-05-13] Version 7.5.1
 --------------------------
 **Library - Fix**
