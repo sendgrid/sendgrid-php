@@ -16,6 +16,7 @@ use SendGrid\Mail\Personalization;
 use SendGrid\Mail\Subject;
 use SendGrid\Mail\To;
 use SendGrid\Mail\TypeException;
+use SendGrid\Tests\BaseTestClass;
 
 /**
  * This class tests mail helper functionality.
@@ -210,12 +211,10 @@ class MailHelperTest extends TestCase
 }
 JSON;
 
-        $this->assertEquals($expectedJson, $json);
+        $isEqual = BaseTestClass::compareJSONObjects($json, $expectedJson);
+        $this->assertTrue($isEqual);
     }
 
-    /**
-     * @throws TypeException
-     */
     public function testMailPersonalizations()
     {
         $objEmail = new Mail('me@example.com');
@@ -261,7 +260,8 @@ JSON;
 }
 JSON;
 
-        $this->assertEquals($expectedJson, $json);
+        $isEqual = BaseTestClass::compareJSONObjects($json, $expectedJson);
+        $this->assertTrue($isEqual);
     }
 
     public function testInvalidPersonalizationIndex()
