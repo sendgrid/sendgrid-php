@@ -5,9 +5,6 @@
 
 namespace SendGrid\Mail;
 
-use InvalidArgumentException;
-
-
 /**
  * This class is used to construct a Personalization object for
  * the /mail/send API call
@@ -34,7 +31,7 @@ class Personalization implements \JsonSerializable
     /** @var array of dynamic template data key values */
     private $dynamic_template_data;
     /** @var bool if we are using dynamic templates this will be true */
-    private $has_dynamic_template;
+    private $has_dynamic_template = false;
     /** @var $custom_args array array of custom arg key values */
     private $custom_args;
     /** @var $send_at SendAt object */
@@ -207,12 +204,13 @@ class Personalization implements \JsonSerializable
      * Add a CustomArg object to a Personalization object
      *
      * @param CustomArg $custom_arg CustomArg object
+     *
+     * @throws TypeException
      */
     public function addCustomArg($custom_arg)
     {
-        //  Not provided a CustomArg instance? Reject
         if (!($custom_arg instanceof CustomArg)) {
-            throw new InvalidArgumentException(
+            throw new TypeException(
                 '$custom_arg must be an instance of SendGrid\Mail\CustomArg'
             );
         }
@@ -281,95 +279,7 @@ class Personalization implements \JsonSerializable
      */
     public function getHasDynamicTemplate()
     {
-        return is_bool($this->has_dynamic_template) && ($this->has_dynamic_template);
-    }
-
-    /**
-     * Collects all properties of Personalization instance and return.
-     *
-     * @return array
-     */
-    public function getProperties()
-    {
-        return [
-            'tos' => $this->tos,
-            'ccs' => $this->ccs,
-            'bccs' => $this->bccs,
-            'subject' => $this->subject,
-            'headers' => $this->headers,
-            'substitutions' => $this->substitutions,
-            'dynamic_template_data' => $this->dynamic_template_data,
-            'has_dynamic_template' => $this->has_dynamic_template,
-            'custom_args' => $this->custom_args,
-            'send_at' => $this->send_at
-        ];
-    }
-
-    /**
-     * Returns unique object identifier.
-     *
-     * @return string
-     */
-    public function getObjectIdentifier()
-    {
-        //  Starting PHP version 7.2, spl_object_id can be used
-        //  Due to supporting PHP 5.6 and IDE error flag, spl_object_hash is used
-        return spl_object_hash($this);
-    }
-
-    /**
-     * Copies properties from provided Personalization to this instance.
-     *
-     * @param Personalization $personalization Source Personalization
-     */
-    public function copyFromPersonalization($personalization)
-    {
-        //  Not a Personalization instance? Reject
-        if (!($personalization instanceof Personalization)) {
-            throw new InvalidArgumentException(
-                "Provided personalization isn't a Personalization instance"
-            );
-        }
-
-        //  Define properties able for merge
-        $mergeProperties = [
-            'substitutions',
-            'dynamic_template_data',
-            'custom_args'
-        ];
-
-        //  Collect arguments to copy from source
-        foreach ($personalization->getProperties() as $property => $value) {
-            //  Value equals null or given property doesn't exists?
-            if ((null === $value) || !property_exists($this, $property)) {
-                //  Ignore this property
-                continue;
-            }
-
-            //  If property of instance equals null
-            if (null === $this->{$property}) {
-                //  Overwrite value and move on
-                $this->{$property} = $value;
-                continue;
-            }
-
-            //  Collision: both Personalization properties have value set
-            //  Get value of existing property
-            $existingValue = $this->{$property};
-
-            //  Don't overwrite existingValue if an object or array
-            //  Also skip if property can't be merged
-            if (
-                !is_array($existingValue) ||
-                !is_array($value) ||
-                !in_array($property, $mergeProperties)
-            ) {
-                continue;
-            }
-
-            //  Merge properties stored in array
-            $this->{$property} = array_merge($value, $existingValue);
-        }
+        return $this->has_dynamic_template;
     }
 
     /**
