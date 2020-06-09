@@ -46,7 +46,7 @@ function helloEmail()
         $personalization->addTo(new To("test2@example.com"));
         $mail->addPersonalization($personalization);
 
-        //  echo json_encode($mail, JSON_PRETTY_PRINT), "\n";
+        //echo json_encode($mail, JSON_PRETTY_PRINT), "\n";
         return $mail;
     } catch (\Exception $e) {
         echo $e->getMessage();
