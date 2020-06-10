@@ -3,6 +3,18 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2020-06-10] Version 7.6.0
+--------------------------
+**Library - Fix**
+- [PR #975](https://github.com/sendgrid/sendgrid-php/pull/975): Inspected code of Stats, example helpers. Thanks to [@kampalex](https://github.com/kampalex)!
+- [PR #967](https://github.com/sendgrid/sendgrid-php/pull/967): add support for unicode in local part of email address when using PHP>=7.1. Thanks to [@kampalex](https://github.com/kampalex)!
+- [PR #974](https://github.com/sendgrid/sendgrid-php/pull/974): Accept string typed Subject in Personalization. Thanks to [@kampalex](https://github.com/kampalex)!
+- [PR #973](https://github.com/sendgrid/sendgrid-php/pull/973): Replace dynamic template data typehints. Thanks to [@kampalex](https://github.com/kampalex)!
+
+**Library - Feature**
+- [PR #969](https://github.com/sendgrid/sendgrid-php/pull/969): verify signature from event webhook. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+
 [2020-05-27] Version 7.5.2
 --------------------------
 **Library - Fix**
