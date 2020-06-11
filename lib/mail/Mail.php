@@ -68,23 +68,20 @@ class Mail implements \JsonSerializable
 
     const   VERSION = "7.0.0";
 
-	/**
-	 * If passing parameters into this constructor include
-	 * $from, $to, $subject, $plainTextContent and
-	 * $htmlContent at a minimum. In that case, a Personalization
-	 * object will be created for you.
-	 *
-	 * @param From|null              $from                Email address of the sender
-	 * @param To|To[]|null           $to                  Recipient(s) email
-	 *                                                    address(es)
-	 * @param Subject|Subject[]|null $subject             Subject(s)
-	 * @param PlainTextContent|null  $plainTextContent    Plain text version of
-	 *                                                    content
-	 * @param HtmlContent|null       $htmlContent         Html version of content
-	 * @param Substitution[]|null    $globalSubstitutions Substitutions for entire
-	 *                                                    email
-	 * @throws TypeException
-	 */
+    /**
+     * If passing parameters into this constructor, include $from, $to, $subject,
+     * $plainTextContent, $htmlContent and $globalSubstitutions at a minimum.
+     * If you don't supply any, a Personalization object will be created for you.
+     *
+     * @param From|null                 $from                Email address of the sender
+     * @param To|To[]|null              $to                  Recipient(s) email address(es)
+     * @param Subject|Subject[]|null    $subject             Subject(s)
+     * @param PlainTextContent|null     $plainTextContent    Plain text version of content
+     * @param HtmlContent|null          $htmlContent         Html version of content
+     * @param Substitution[]|array|null $globalSubstitutions Substitutions for entire email
+     *
+     * @throws TypeException
+     */
     public function __construct(
         $from = null,
         $to = null,
@@ -133,7 +130,11 @@ class Mail implements \JsonSerializable
                 }
                 if (is_array($globalSubstitutions)) {
                     foreach ($globalSubstitutions as $key => $value) {
-                        $personalization->addSubstitution($key, $value);
+                        if ($value instanceof Substitution) {
+                            $personalization->addSubstitution($value);
+                        } else {
+                            $personalization->addSubstitution($key, $value);
+                        }
                     }
                 }
                 if ($email->getSubstitutions()) {
