@@ -148,9 +148,19 @@ class Mail implements \JsonSerializable
             $this->setSubject($subject);
         }
         if (isset($plainTextContent)) {
+            if (!($plainTextContent instanceof Content)) {
+                throw new TypeException(
+                    '$plainTextContent must be of type Content.'
+                );
+            }
             $this->addContent($plainTextContent);
         }
         if (isset($htmlContent)) {
+            if (!($htmlContent instanceof Content)) {
+                throw new TypeException(
+                    '$htmlContent must be of type Content.'
+                );
+            }
             $this->addContent($htmlContent);
         }
     }
