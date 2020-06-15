@@ -5,6 +5,8 @@
 
 namespace SendGrid\Mail;
 
+use InvalidArgumentException;
+
 /**
  * This class is used to construct a request body for the /mail/send API call
  *
@@ -168,6 +170,8 @@ class Mail implements \JsonSerializable
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
+     *
+     * @throws TypeException
      */
     private function addRecipientEmail(
         $emailType,
@@ -206,6 +210,8 @@ class Mail implements \JsonSerializable
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
+     *
+     * @throws TypeException
      */
     private function addRecipientEmails(
         $emailType,
@@ -220,6 +226,7 @@ class Mail implements \JsonSerializable
                 $this->$emailFunctionCall(
                     $email,
                     $name = null,
+                    $substitutions = null,
                     $personalizationIndex,
                     $personalization
                 );
@@ -229,6 +236,7 @@ class Mail implements \JsonSerializable
                 $this->$emailFunctionCall(
                     $email,
                     $name,
+                    $substitutions = null,
                     $personalizationIndex,
                     $personalization
                 );
@@ -240,9 +248,17 @@ class Mail implements \JsonSerializable
      * Add a Personalization object to the Mail object
      *
      * @param Personalization $personalization A Personalization object
+     *
+     * @throws TypeException
      */
     public function addPersonalization($personalization)
     {
+        if (!($personalization instanceof Personalization)) {
+            throw new TypeException(
+                '$personalization must be an instance of SendGrid\Mail\Personalization.'
+            );
+        }
+
         $this->personalization[] = $personalization;
     }
 
@@ -254,34 +270,72 @@ class Mail implements \JsonSerializable
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
+     *
      * @return Personalization
+     *
+     * @throws TypeException
      */
     public function getPersonalization($personalizationIndex = null, $personalization = null)
     {
-        if ($personalization !== null) {
-            $this->addPersonalization($personalization);
-        } else if ($personalizationIndex !== null) {
-            if ($personalizationIndex >= $this->getPersonalizationCount()) {
-                throw new \InvalidArgumentException(
-                    'personalizationIndex ' . $personalizationIndex .
-                    ' must be less than ' . $this->getPersonalizationCount());
-            }
+        /**
+         * Approach:
+         * - Append if provided personalization + return
+         * - Return last added if not provided personalizationIndex (create on empty)
+         * - Return existing personalizationIndex
+         * - InvalidArgumentException on unexpected personalizationIndex ( > count)
+         * - Create + add Personalization and return
+         */
 
-            $personalization = $this->personalization[$personalizationIndex];
-        } else if ($this->getPersonalizationCount() === 0) {
-            $personalization = new Personalization();
+        //  If given a Personalization instance
+        if (null !== $personalization) {
+            //  Just append it onto Mail and return it
             $this->addPersonalization($personalization);
-        } else {
-            $personalization = \end($this->personalization);
+            return $personalization;
         }
 
+        //  Retrieve count of existing Personalization instances
+        $personalizationCount = $this->getPersonalizationCount();
+
+        //  Not providing a personalizationIndex?
+        if (null === $personalizationIndex) {
+            //  Create new Personalization instance depending on current count
+            if (0 === $personalizationCount) {
+                $this->addPersonalization(new Personalization());
+            }
+
+            //  Return last added Personalization instance
+            return end($this->personalization);
+        }
+
+        //  Existing personalizationIndex in personalization?
+        if (isset($this->personalization[$personalizationIndex])) {
+            //  Return referred personalization
+            return $this->personalization[$personalizationIndex];
+        }
+
+        //  Non-existent personalizationIndex given
+        //  Only allow creation of next Personalization if given
+        //  personalizationIndex equals personalizationCount
+        if (
+            ($personalizationIndex < 0) ||
+            ($personalizationIndex > $personalizationCount)
+        ) {
+            throw new InvalidArgumentException(
+                'personalizationIndex ' . $personalizationIndex .
+                ' must be less than ' . $personalizationCount
+            );
+        }
+
+        //  Create new Personalization and return it
+        $personalization = new Personalization();
+        $this->addPersonalization($personalization);
         return $personalization;
     }
 
     /**
-     * Retrieve a Personalization object from the Mail object
+     * Retrieves Personalization object collection from the Mail object.
      *
-     * @return Personalization[]
+     * @return Personalization[]|null
      */
     public function getPersonalizations()
     {
@@ -308,6 +362,8 @@ class Mail implements \JsonSerializable
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
+     *
+     * @throws TypeException
      */
     public function addTo(
         $to,
@@ -340,6 +396,8 @@ class Mail implements \JsonSerializable
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
+     *
+     * @throws TypeException
      */
     public function addTos(
         $toEmails,
@@ -365,6 +423,8 @@ class Mail implements \JsonSerializable
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
+     *
+     * @throws TypeException
      */
     public function addCc(
         $cc,
@@ -396,6 +456,8 @@ class Mail implements \JsonSerializable
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
+     *
+     * @throws TypeException
      */
     public function addCcs(
         $ccEmails,
@@ -421,6 +483,8 @@ class Mail implements \JsonSerializable
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
+     *
+     * @throws TypeException
      */
     public function addBcc(
         $bcc,
@@ -452,6 +516,8 @@ class Mail implements \JsonSerializable
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
+     *
+     * @throws TypeException
      */
     public function addBccs(
         $bccEmails,
@@ -846,7 +912,7 @@ class Mail implements \JsonSerializable
      *
      * @param int|0 $personalizationIndex Index into the array of existing
      *                                    Personalization objects
-     * @return SendAt
+     * @return SendAt|null
      */
     public function getSendAt($personalizationIndex = 0)
     {
