@@ -247,9 +247,17 @@ class Mail implements \JsonSerializable
      * Add a Personalization object to the Mail object
      *
      * @param Personalization $personalization A Personalization object
+     *
+     * @throws TypeException
      */
     public function addPersonalization($personalization)
     {
+        if (!($personalization instanceof Personalization)) {
+            throw new TypeException(
+                '$personalization must be an instance of SendGrid\Mail\Personalization.'
+            );
+        }
+
         $this->personalization[] = $personalization;
     }
 
@@ -261,7 +269,10 @@ class Mail implements \JsonSerializable
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
+     *
      * @return Personalization
+     *
+     * @throws TypeException
      */
     public function getPersonalization($personalizationIndex = null, $personalization = null)
     {

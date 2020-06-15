@@ -264,6 +264,29 @@ JSON;
         $this->assertTrue($isEqual);
     }
 
+    public function testInvalidPersonalizationVariant1()
+    {
+        //  Try to add invalid Personalization instance
+        //  TypeException must be thrown by Mail->addPersonalization()
+        $this->expectException(TypeException::class);
+
+        $objEmail = new Mail();
+        $objEmail->addPersonalization(null);
+    }
+
+    public function testInvalidPersonalizationVariant2()
+    {
+        //  Try to add invalid Personalization instance
+        //  Route: addTo -> addRecipientEmail() -> getPersonalization() -> addPersonalization()
+        $this->expectException(TypeException::class);
+
+        //  Create new Personalization...Subject
+        $personalization = new Subject('Not a real Personalization instance');
+
+        $objEmail = new Mail();
+        $objEmail->addTo('foo+bar@example.com', 'foo bar', null, null, $personalization);
+    }
+
     public function testInvalidPersonalizationIndex()
     {
         $this->expectException(InvalidArgumentException::class);
