@@ -77,7 +77,7 @@ class Substitution implements \JsonSerializable
     public function setValue($value)
     {
         if (!is_string($value) && !is_array($value) && !is_object($value) && !is_bool($value) && !is_numeric($value)) {
-            throw new TypeException("The value: '$value' must be of type string, array, object, bool, int or float.");
+            throw new TypeException("The value '$value' must be of type string, array, object, bool, int, or float.");
         }
         $this->value = $value;
     }
