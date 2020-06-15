@@ -88,6 +88,99 @@ class MailHelperTest extends TestCase
         new EmailAddress('test@example.com@wrong');
     }
 
+    public function testEmailAddressRfc822Variant1()
+    {
+        //  Valid pattern: '<[address]>', no name set
+        $email = new EmailAddress('<test@example.com>');
+        $json = json_encode($email->jsonSerialize());
+        $this->assertEquals(
+            '{"email":"test@example.com"}',
+            $json
+        );
+    }
+
+    public function testEmailAddressRfc822Variant2()
+    {
+        //  Valid pattern: '[name]<[address]>' (no space between)
+        $email = new EmailAddress('Testing Please<test@example.com>');
+        $json = json_encode($email->jsonSerialize());
+        $this->assertEquals(
+            '{"name":"Testing Please","email":"test@example.com"}',
+            $json
+        );
+    }
+
+    public function testEmailAddressRfc822Variant3()
+    {
+        //  Valid pattern: '[name] <[address]>'
+        $email = new EmailAddress('Testing Please <test@example.com>');
+        $json = json_encode($email->jsonSerialize());
+        $this->assertEquals(
+            '{"name":"Testing Please","email":"test@example.com"}',
+            $json
+        );
+    }
+
+    public function testInvalidEmailAddressRfc822Variant1()
+    {
+        //  Empty address part
+        $this->expectException(TypeException::class);
+        new EmailAddress('Testing Please <>');
+    }
+
+    public function testInvalidEmailAddressRfc822Variant2()
+    {
+        //  Missing address marker (ending >)
+        $this->expectException(TypeException::class);
+        new EmailAddress('Testing Please ><');
+    }
+
+    public function testInvalidEmailAddressRfc822Variant3()
+    {
+        //  Invalid address
+        $this->expectException(TypeException::class);
+        new EmailAddress('Testing Please <test@example.com@wrong>');
+    }
+
+    public function testInvalidEmailAddressRfc822Variant4()
+    {
+        //  Missing '>' after address part
+        $this->expectException(TypeException::class);
+        new EmailAddress('Testing Please <test@example.com');
+    }
+
+    public function testInvalidEmailAddressRfc822Variant5()
+    {
+        //  Missing '<' before address part
+        $this->expectException(TypeException::class);
+        new EmailAddress('Testing Please test@example.com>');
+    }
+
+    public function testInvalidEmailAddressRfc822Variant6()
+    {
+        //  Invalid address due to space at address ending ' >'
+        $this->expectException(TypeException::class);
+        new EmailAddress('Testing Please <test@example.com >');
+    }
+
+    public function testInvalidEmailAddressRfc822Variant7()
+    {
+        //  Reject display name after valid address
+        $this->expectException(TypeException::class);
+        new EmailAddress('<test@example.com> Testing Please');
+    }
+
+    public function testEmailAddressRfc822NameAlreadySet()
+    {
+        //  The address is valid, but given display name is not overwritten
+        $email = new EmailAddress('Messy stuff <test@example.com>', 'My real name');
+        $json = json_encode($email->jsonSerialize());
+        $this->assertEquals(
+            '{"name":"My real name","email":"test@example.com"}',
+            $json
+        );
+    }
+
     /**
      * @requires PHP 7.1
      */
@@ -115,6 +208,17 @@ class MailHelperTest extends TestCase
     public function testBccEmailAddress()
     {
         $settings = new BccSettings(null, 'test@example.com');
+        $json = json_encode($settings->jsonSerialize());
+        $this->assertEquals(
+            '{"email":"test@example.com"}',
+            $json
+        );
+    }
+
+    public function testBccEmailAddressRfc822()
+    {
+        //  The provided display name of email will be ignored
+        $settings = new BccSettings(null, 'My testing example <test@example.com>');
         $json = json_encode($settings->jsonSerialize());
         $this->assertEquals(
             '{"email":"test@example.com"}',

@@ -56,14 +56,53 @@ class EmailAddress implements \JsonSerializable
     }
 
     /**
-     * Validates given emailAddress against expected type and filter
+     * Validates given emailAddress against expected type and filter.
+     * If given emailAddress is of format 'name <emailAddress>', parts will be
+     * extracted and the given arguments will be updated for external use.
+     * Note: Only the last occurrence of <emailAddress> will be used of above format.
      *
-     * @param string $emailAddress The email address
+     * @param string $emailAddress The email address (may be updated)
+     * @param string $name         Display name (may be updated if null is provided)
      *
      * @return bool Result of validating the email address
      */
-    public static function isValidEmailAddress($emailAddress)
+    public static function isValidEmailAddress(&$emailAddress, &$name = null)
     {
+        //  The emailAddress must be type of string
+        if (!is_string($emailAddress)) {
+            //  Its not! Reject
+            return false;
+        }
+
+        //  Verify if this emailAddress has close tag
+        $addressLastPosClose = strrpos($emailAddress, '>');
+
+        //  Detect if this emailAddress has format 'name <emailAddress>'
+        if (is_int($addressLastPosClose) && ($addressLastPosClose === (strlen($emailAddress) - 1))) {
+            //  It should also contain the open tag - otherwise reject
+            if (!is_int($addressLastPosOpen = strrpos($emailAddress, '<'))) {
+                return false;
+            }
+
+            //  If having display name, only overwrite if not present yet
+            if (($addressLastPosOpen > 0) && !is_string($name)) {
+                //  Extract the name from emailAddress
+                $addressName = trim(substr($emailAddress, 0, $addressLastPosOpen));
+
+                //  If not empty, overwrite the name
+                if ($addressName <> '') {
+                    $name = $addressName;
+                }
+            }
+
+            //  Overwrite address so it can be validated
+            $emailAddress = substr(
+                $emailAddress,
+                $addressLastPosOpen + 1,
+                $addressLastPosClose - $addressLastPosOpen - 1
+            );
+        }
+
         //  Define additional flags for filter_var to verify unicode characters on local part
         //  Constant FILTER_FLAG_EMAIL_UNICODE is available since PHP 7.1
         $flags = (defined('FILTER_FLAG_EMAIL_UNICODE')) ? FILTER_FLAG_EMAIL_UNICODE : null;
@@ -71,14 +110,11 @@ class EmailAddress implements \JsonSerializable
         //  Return result of having string type and valid emailAddress
         //  The filter_var returns the filtered data on success
         //  (which must be a string), otherwise bool(false)
-        return (
-            is_string($emailAddress) &&
-            is_string(filter_var($emailAddress, FILTER_VALIDATE_EMAIL, $flags))
-        );
+        return (is_string(filter_var($emailAddress, FILTER_VALIDATE_EMAIL, $flags)));
     }
 
     /**
-     * Add the email address to a EmailAddress object
+     * Add the email address to an EmailAddress object
      *
      * @param string $emailAddress The email address
      *
@@ -86,12 +122,25 @@ class EmailAddress implements \JsonSerializable
      */
     public function setEmailAddress($emailAddress)
     {
-        if (!static::isValidEmailAddress($emailAddress)) {
+        //  Method isValidEmailAddress may extract name
+        //  if provided emailAddress is of format '[name] <address>'
+        $name = null;
+
+        //  If emailAddress contains unexpected type/format, reject
+        if (!static::isValidEmailAddress($emailAddress, $name)) {
             throw new TypeException(
                 "{$emailAddress} must be valid and of type string."
             );
         }
+
+        //  Assign the (possibly extracted and) validated emailAddress
         $this->email = $emailAddress;
+
+        //  If having an extracted name, set it
+        //  (If this method is called from constructor, it may be overwritten)
+        if (is_string($name)) {
+            $this->setName($name);
+        }
     }
 
     /**
