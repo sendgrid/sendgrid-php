@@ -51,7 +51,7 @@ class Substitution implements \JsonSerializable
     public function setKey($key)
     {
         if (!is_string($key)) {
-            throw new TypeException("The '$key' must be of type string.");
+            throw new TypeException("The key: '$key' must be of type string.");
         }
         $this->key = (string) $key;
     }
