@@ -1,10 +1,7 @@
 <?php
 
-// If you are using Composer
-require __DIR__ . '<PATH_TO>/vendor/autoload.php';
-// comment out the above line if not using Composer
-// require("./sendgrid-php.php");
-// If not using Composer, uncomment the above line
+// If you're using Composer or have load the dependencies earlier, comment line below
+require_once __DIR__ . '/../../../sendgrid-php.php';
 
 use SendGrid\Mail\To;
 use SendGrid\Mail\Cc;

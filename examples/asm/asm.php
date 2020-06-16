@@ -1,9 +1,7 @@
 <?php
-require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
 
+// If you're using Composer or have load the dependencies earlier, comment line below
+require_once __DIR__ . '/../../sendgrid-php.php';
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
@@ -13,13 +11,13 @@ $sg = new \SendGrid($apiKey);
 // POST /asm/groups #
 
 $request_body = json_decode('{
-  "description": "Suggestions for products our users might like.", 
-  "is_default": true, 
+  "description": "Suggestions for products our users might like.",
+  "is_default": true,
   "name": "Product Suggestions"
 }');
 
 try {
-    $response = $sg->client->asm()->groups()->post($request_body);    
+    $response = $sg->client->asm()->groups()->post($request_body);
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -34,7 +32,7 @@ try {
 $query_params = json_decode('{"id": 1}');
 
 try {
-    $response = $sg->client->asm()->groups()->get(null, $query_params);    
+    $response = $sg->client->asm()->groups()->get(null, $query_params);
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -47,14 +45,14 @@ try {
 // PATCH /asm/groups/{group_id} #
 
 $request_body = json_decode('{
-  "description": "Suggestions for items our users might like.", 
-  "id": 103, 
+  "description": "Suggestions for items our users might like.",
+  "id": 103,
   "name": "Item Suggestions"
 }');
 $group_id = "test_url_param";
 
 try {
-    $response = $sg->client->asm()->groups()->_($group_id)->patch($request_body);    
+    $response = $sg->client->asm()->groups()->_($group_id)->patch($request_body);
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -69,7 +67,7 @@ try {
 $group_id = "test_url_param";
 
 try {
-    $response = $sg->client->asm()->groups()->_($group_id)->get();    
+    $response = $sg->client->asm()->groups()->_($group_id)->get();
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -84,7 +82,7 @@ try {
 $group_id = "test_url_param";
 
 try {
-    $response = $sg->client->asm()->groups()->_($group_id)->delete();    
+    $response = $sg->client->asm()->groups()->_($group_id)->delete();
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -98,14 +96,14 @@ try {
 
 $request_body = json_decode('{
   "recipient_emails": [
-    "test1@example.com", 
+    "test1@example.com",
     "test2@example.com"
   ]
 }');
 $group_id = "test_url_param";
 
 try {
-    $response = $sg->client->asm()->groups()->_($group_id)->suppressions()->post($request_body);    
+    $response = $sg->client->asm()->groups()->_($group_id)->suppressions()->post($request_body);
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -120,7 +118,7 @@ try {
 $group_id = "test_url_param";
 
 try {
-    $response = $sg->client->asm()->groups()->_($group_id)->suppressions()->get();    
+    $response = $sg->client->asm()->groups()->_($group_id)->suppressions()->get();
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -134,15 +132,15 @@ try {
 
 $request_body = json_decode('{
   "recipient_emails": [
-    "exists1@example.com", 
-    "exists2@example.com", 
+    "exists1@example.com",
+    "exists2@example.com",
     "doesnotexists@example.com"
   ]
 }');
 $group_id = "test_url_param";
 
 try {
-    $response = $sg->client->asm()->groups()->_($group_id)->suppressions()->search()->post($request_body);    
+    $response = $sg->client->asm()->groups()->_($group_id)->suppressions()->search()->post($request_body);
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -158,7 +156,7 @@ $group_id = "test_url_param";
 $email = "test_url_param";
 
 try {
-    $response = $sg->client->asm()->groups()->_($group_id)->suppressions()->_($email)->delete();    
+    $response = $sg->client->asm()->groups()->_($group_id)->suppressions()->_($email)->delete();
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -172,7 +170,7 @@ try {
 
 
 try {
-    $response = $sg->client->asm()->suppressions()->get();    
+    $response = $sg->client->asm()->suppressions()->get();
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -186,13 +184,13 @@ try {
 
 $request_body = json_decode('{
   "recipient_emails": [
-    "test1@example.com", 
+    "test1@example.com",
     "test2@example.com"
   ]
 }');
 
 try {
-    $response = $sg->client->asm()->suppressions()->global()->post($request_body);    
+    $response = $sg->client->asm()->suppressions()->global()->post($request_body);
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -207,7 +205,7 @@ try {
 $email = "test_url_param";
 
 try {
-    $response = $sg->client->asm()->suppressions()->global()->_($email)->get();    
+    $response = $sg->client->asm()->suppressions()->global()->_($email)->get();
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -222,7 +220,7 @@ try {
 $email = "test_url_param";
 
 try {
-    $response = $sg->client->asm()->suppressions()->global()->_($email)->delete();    
+    $response = $sg->client->asm()->suppressions()->global()->_($email)->delete();
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -237,7 +235,7 @@ try {
 $email = "test_url_param";
 
 try {
-    $response = $sg->client->asm()->suppressions()->_($email)->get();    
+    $response = $sg->client->asm()->suppressions()->_($email)->get();
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";

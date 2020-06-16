@@ -1,8 +1,7 @@
 <?php
-require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
+
+// If you're using Composer or have load the dependencies earlier, comment line below
+require_once __DIR__ . '/../../sendgrid-php.php';
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
@@ -14,7 +13,7 @@ $sg = new \SendGrid($apiKey);
 $query_params = json_decode('{"aggregated_by": "day", "limit": 1, "start_date": "2016-01-01", "end_date": "2016-04-01", "offset": 1}');
 
 try {
-    $response = $sg->client->devices()->stats()->get(null, $query_params);    
+    $response = $sg->client->devices()->stats()->get(null, $query_params);
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";

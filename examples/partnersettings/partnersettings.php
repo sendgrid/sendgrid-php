@@ -1,9 +1,7 @@
 <?php
-require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
 
+// If you're using Composer or have load the dependencies earlier, comment line below
+require_once __DIR__ . '/../../sendgrid-php.php';
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
@@ -28,8 +26,8 @@ try {
 // PATCH /partner_settings/new_relic #
 
 $request_body = json_decode('{
-  "enable_subuser_statistics": true, 
-  "enabled": true, 
+  "enable_subuser_statistics": true,
+  "enabled": true,
   "license_key": ""
 }');
 

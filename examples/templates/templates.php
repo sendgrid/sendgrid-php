@@ -1,9 +1,7 @@
 <?php
-require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
 
+// If you're using Composer or have load the dependencies earlier, comment line below
+require_once __DIR__ . '/../../sendgrid-php.php';
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
@@ -93,11 +91,11 @@ try {
 // POST /templates/{template_id}/versions #
 
 $request_body = json_decode('{
-  "active": 1, 
-  "html_content": "<%body%>", 
-  "name": "example_version_name", 
-  "plain_content": "<%body%>", 
-  "subject": "<%subject%>", 
+  "active": 1,
+  "html_content": "<%body%>",
+  "name": "example_version_name",
+  "plain_content": "<%body%>",
+  "subject": "<%subject%>",
   "template_id": "ddb96bbc-9b92-425e-8979-99464621b543"
 }');
 $template_id = "test_url_param";
@@ -116,10 +114,10 @@ try {
 // PATCH /templates/{template_id}/versions/{version_id} #
 
 $request_body = json_decode('{
-  "active": 1, 
-  "html_content": "<%body%>", 
-  "name": "updated_example_name", 
-  "plain_content": "<%body%>", 
+  "active": 1,
+  "html_content": "<%body%>",
+  "name": "updated_example_name",
+  "plain_content": "<%body%>",
   "subject": "<%subject%>"
 }');
 $template_id = "test_url_param";
