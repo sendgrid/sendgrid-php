@@ -368,11 +368,268 @@ JSON;
         $this->assertTrue($isEqual);
     }
 
+    public function testInvalidPersonalizationVariant1()
+    {
+        //  Try to add invalid Personalization instance
+        //  TypeException must be thrown by Mail->addPersonalization()
+        $this->expectException(TypeException::class);
+
+        $objEmail = new Mail();
+        $objEmail->addPersonalization(null);
+    }
+
+    public function testInvalidPersonalizationVariant2()
+    {
+        //  Try to add invalid Personalization instance
+        //  Route: addTo -> addRecipientEmail() -> getPersonalization() -> addPersonalization()
+        $this->expectException(TypeException::class);
+
+        //  Create new Personalization...Subject
+        $personalization = new Subject('Not a real Personalization instance');
+
+        $objEmail = new Mail();
+        $objEmail->addTo('foo+bar@example.com', 'foo bar', null, null, $personalization);
+    }
+
     public function testInvalidPersonalizationIndex()
     {
         $this->expectException(InvalidArgumentException::class);
 
         $objEmail = new Mail();
         $objEmail->addCustomArg('CUSTOM', 'ARG', 99);
+    }
+
+    private $EXPECT_PERSONALIZATIONS_SINGLE = <<<JSON
+{
+    "personalizations": [
+        {
+            "to": [
+                {
+                    "name": "foo bar1",
+                    "email": "foo+1@bar.com"
+                },
+                {
+                    "name": "foo bar2",
+                    "email": "foo+2@bar.com"
+                },
+                {
+                    "name": "foo bar3",
+                    "email": "foo+3@bar.com"
+                }
+            ]
+        }
+    ]
+}
+JSON;
+
+    public function testLastRetrievedPersonalization()
+    {
+        //  Scenario: last added (2x)
+        $objEmail = new Mail();
+        $personalization = $objEmail->getPersonalization();
+        $objEmail->addTo('foo+1@bar.com', 'foo bar1');
+        $personalization->addTo(new To('foo+2@bar.com', 'foo bar2'));
+        $personalization->addTo(new To('foo+3@bar.com', 'foo bar3'));
+
+        $json = json_encode($objEmail, JSON_PRETTY_PRINT);
+
+        $isEqual = BaseTestClass::compareJSONObjects($json, $this->EXPECT_PERSONALIZATIONS_SINGLE);
+        $this->assertTrue($isEqual);
+    }
+
+    private $EXPECT_PERSONALIZATIONS_SINGLE_SENDER = <<<JSON
+{
+    "personalizations": [
+        {
+            "to": [
+                {
+                    "name": "foo bar1",
+                    "email": "foo+1@bar.com"
+                },
+                {
+                    "name": "foo bar2",
+                    "email": "foo+2@bar.com"
+                },
+                {
+                    "name": "foo bar3",
+                    "email": "foo+3@bar.com"
+                }
+            ]
+        }
+    ],
+    "from": {
+        "email": "testing@bar.com"
+    }
+}
+JSON;
+
+    public function testLastRetrievedPersonalizationWithSender()
+    {
+        //  Scenario: add + last added, last added
+        $objEmail = new Mail(new From('testing@bar.com'));
+        $objEmail->addTo('foo+1@bar.com', 'foo bar1');
+        $personalization = $objEmail->getPersonalization();
+        $personalization->addTo(new To('foo+2@bar.com', 'foo bar2'));
+        $personalization->addTo(new To('foo+3@bar.com', 'foo bar3'));
+
+        $json = json_encode($objEmail, JSON_PRETTY_PRINT);
+
+        $isEqual = BaseTestClass::compareJSONObjects($json, $this->EXPECT_PERSONALIZATIONS_SINGLE_SENDER);
+        $this->assertTrue($isEqual);
+    }
+
+    private $EXPECT_PERSONALIZATIONS_SEPARATED = <<<JSON
+{
+    "personalizations": [
+        {
+            "to": [
+                {
+                    "name": "foo bar1",
+                    "email": "foo+1@bar.com"
+                }
+            ]
+        },
+        {
+            "to": [
+                {
+                    "name": "foo bar2",
+                    "email": "foo+2@bar.com"
+                }
+            ]
+        },
+        {
+            "to": [
+                {
+                    "name": "foo bar3",
+                    "email": "foo+3@bar.com"
+                }
+            ]
+        }
+    ]
+}
+JSON;
+
+    public function testNextPersonalizationAsArgument()
+    {
+        //  Scenario: add provided (3x)
+        $objEmail = new Mail();
+        $objEmail->addTo('foo+1@bar.com', 'foo bar1', null, null, new Personalization());
+        $objEmail->addTo('foo+2@bar.com', 'foo bar2', null, null, new Personalization());
+        $objEmail->addTo('foo+3@bar.com', 'foo bar3', null, null, new Personalization());
+
+        $json = json_encode($objEmail, JSON_PRETTY_PRINT);
+
+        $isEqual = BaseTestClass::compareJSONObjects($json, $this->EXPECT_PERSONALIZATIONS_SEPARATED);
+        $this->assertTrue($isEqual);
+    }
+
+    public function testNextPersonalizationIndexArgumentStarting0()
+    {
+        //  Scenario: existing, add, add
+        $objEmail = new Mail();
+        $objEmail->addTo('foo+1@bar.com', 'foo bar1', null, 0);
+        $objEmail->addTo('foo+2@bar.com', 'foo bar2', null, 1);
+        $objEmail->addTo('foo+3@bar.com', 'foo bar3', null, 2);
+
+        $json = json_encode($objEmail, JSON_PRETTY_PRINT);
+
+        $isEqual = BaseTestClass::compareJSONObjects($json, $this->EXPECT_PERSONALIZATIONS_SEPARATED);
+        $this->assertTrue($isEqual);
+    }
+
+    public function testNextPersonalizationIndexArgumentStarting1()
+    {
+        //  Scenario: add (3x)
+        $objEmail = new Mail();
+        $objEmail->addTo('foo+1@bar.com', 'foo bar1', null, 1);
+        $objEmail->addTo('foo+2@bar.com', 'foo bar2', null, 2);
+        $objEmail->addTo('foo+3@bar.com', 'foo bar3', null, 3);
+
+        $json = json_encode($objEmail, JSON_PRETTY_PRINT);
+
+        $isEqual = BaseTestClass::compareJSONObjects($json, $this->EXPECT_PERSONALIZATIONS_SEPARATED);
+        $this->assertTrue($isEqual);
+    }
+
+    public function testInvalidNextPersonalizationIndexArgument()
+    {
+        //  Scenario: add, exception (count=2, expected index 2, 3 provided)
+        $this->expectException(InvalidArgumentException::class);
+
+        $objEmail = new Mail();
+        $objEmail->addTo('foo+1@bar.com', 'foo bar1', null, 1);
+        $objEmail->addTo('foo+3@bar.com', 'foo bar3', null, 3);
+    }
+
+    private $EXPECT_PERSONALIZATIONS_SEPARATED_SENDER = <<<JSON
+{
+    "personalizations": [
+        {
+            "to": [
+                {
+                    "name": "foo bar1",
+                    "email": "foo+1@bar.com"
+                }
+            ]
+        },
+        {
+            "to": [
+                {
+                    "name": "foo bar2",
+                    "email": "foo+2@bar.com"
+                }
+            ]
+        },
+        {
+            "to": [
+                {
+                    "name": "foo bar3",
+                    "email": "foo+3@bar.com"
+                }
+            ]
+        }
+    ],
+    "from": {
+        "email": "testing@bar.com"
+    }
+}
+JSON;
+
+    public function testNextPersonalizationAsArgumentWithSender()
+    {
+        //  Scenario: add provided (3x)
+        $objEmail = new Mail(new From('testing@bar.com'));
+        $objEmail->addTo('foo+1@bar.com', 'foo bar1', null, null, new Personalization());
+        $objEmail->addTo('foo+2@bar.com', 'foo bar2', null, null, new Personalization());
+        $objEmail->addTo('foo+3@bar.com', 'foo bar3', null, null, new Personalization());
+
+        $json = json_encode($objEmail, JSON_PRETTY_PRINT);
+
+        $isEqual = BaseTestClass::compareJSONObjects($json, $this->EXPECT_PERSONALIZATIONS_SEPARATED_SENDER);
+        $this->assertTrue($isEqual);
+    }
+
+    public function testNextPersonalizationIndexArgumentWithSenderStarting0()
+    {
+        //  Scenario: add (3x)
+        $objEmail = new Mail(new From('testing@bar.com'));
+        $objEmail->addTo('foo+1@bar.com', 'foo bar1', null, 0);
+        $objEmail->addTo('foo+2@bar.com', 'foo bar2', null, 1);
+        $objEmail->addTo('foo+3@bar.com', 'foo bar3', null, 2);
+
+        $json = json_encode($objEmail, JSON_PRETTY_PRINT);
+
+        $isEqual = BaseTestClass::compareJSONObjects($json, $this->EXPECT_PERSONALIZATIONS_SEPARATED_SENDER);
+        $this->assertTrue($isEqual);
+    }
+
+    public function testInvalidNextPersonalizationIndexArgumentWithSenderStarting1()
+    {
+        //  Scenario: exception (no first Personalization is created, index 0 is expected)
+        //  In this situation Mail constructor doesn't create first Personalization
+        $this->expectException(InvalidArgumentException::class);
+
+        $objEmail = new Mail(new From('testing@bar.com'));
+        $objEmail->addTo('foo+1@bar.com', 'foo bar1', null, 1);
     }
 }
