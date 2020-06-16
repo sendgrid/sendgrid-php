@@ -51,7 +51,7 @@ class Substitution implements \JsonSerializable
     public function setKey($key)
     {
         if (!is_string($key)) {
-            throw new TypeException('$key must be of type string.');
+            throw new TypeException("The key '$key' must be of type string.");
         }
         $this->key = (string) $key;
     }
@@ -69,15 +69,15 @@ class Substitution implements \JsonSerializable
     /**
      * Add the value on a Substitution object
      *
-     * @param string|array|bool|int $value Substitution value
+     * @param string|array|object|bool|int|float $value Substitution value
      *
      * @throws \SendGrid\Mail\TypeException
      * @return null
      */
     public function setValue($value)
     {
-        if (!is_string($value) && !is_array($value) && !is_object($value) &&!is_bool($value) &&!is_int($value)) {
-            throw new TypeException('$value must be of type string, array or object.');
+        if (!is_string($value) && !is_array($value) && !is_object($value) && !is_bool($value) && !is_numeric($value)) {
+            throw new TypeException("The value '$value' must be of type string, array, object, bool, int, or float.");
         }
         $this->value = $value;
     }
