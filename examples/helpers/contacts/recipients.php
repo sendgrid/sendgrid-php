@@ -1,6 +1,6 @@
 <?php
 
-// If you're using Composer or have load the dependencies earlier, comment line below
+// If you're using Composer or have loaded the dependencies before, comment next line
 require_once __DIR__ . '/../../../sendgrid-php.php';
 
 // This will build an HTML form to be embedded in your page.
