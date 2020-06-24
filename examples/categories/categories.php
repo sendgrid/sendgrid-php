@@ -1,6 +1,7 @@
 <?php
 
-// If you're using Composer or have loaded the dependencies before, comment next line
+// Next line will load dependencies to run this example
+// Please refer to the README how to use in your project
 require_once __DIR__ . '/../../sendgrid-php.php';
 
 $apiKey = getenv('SENDGRID_API_KEY');
