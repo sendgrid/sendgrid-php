@@ -15,7 +15,7 @@ All third party contributors acknowledge that any contributions they provide wil
 - [Understanding the Code Base](#understanding-the-code-base)
 - [Testing](#testing)
 - [Style Guidelines & Naming Conventions](#style-guidelines--naming-conventions)
-- [Creating a Pull Request<a name="creating_a_pull_request"></a>](#creating-a-pull-requesta-name%22creatingapullrequest%22a)
+- [Creating a Pull Request](#creating-a-pull-request)
 - [Code Reviews](#code-reviews)
 
 <a name="roadmap"></a>
@@ -63,7 +63,7 @@ Please note that we utilize the [Gitflow Workflow](https://www.atlassian.com/git
 
 ##### Prerequisites #####
 
-- PHP 5.6, 7.0, 7.1 or 7.2
+- PHP 5.6, 7.0, 7.1, 7.2, 7.3 or 7.4
 
 ##### Initial setup: #####
 
@@ -89,7 +89,11 @@ source ./sendgrid.env
 
 See the [examples folder](https://github.com/sendgrid/sendgrid-php/tree/master/examples) or [README](https://github.com/sendgrid/sendgrid-php/blob/master/README.md) to get started quickly.
 
-If you are using composer, replace <PATH_TO> with the path to your `vendor/autoload.php`. Otherwise, include lib/loader.php.
+We prefer the use of the Composer autoloader by loading `vendor/autoload.php`.
+
+The examples will load `sendgrid-php.php` which is in the project root. This file verifies the existence of the Composer autoloader and warns you if dependencies are missing.
+
+As an alternative, include `lib/loader.php` to load all files in this project. However, this does not load all the dependencies needed to run this library properly.
 
 <a name="understanding-the-codebase"></a>
 ## Understanding the Code Base
@@ -136,7 +140,7 @@ Please run your code through:
 
 - [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer)
 
-## Creating a Pull Request<a name="creating_a_pull_request"></a>
+## Creating a Pull Request
 
 1. [Fork](https://help.github.com/fork-a-repo/) the project, clone your fork,
    and configure the remotes:
