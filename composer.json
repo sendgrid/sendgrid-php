@@ -35,8 +35,7 @@
       "SendGrid\\": "lib/",
       "SendGrid\\Mail\\": "lib/mail/",
       "SendGrid\\Contacts\\": "lib/contacts/",
-      "SendGrid\\Stats\\": "lib/stats/",
-      "SendGrid\\Helper\\": "lib/helper/"
+      "SendGrid\\Stats\\": "lib/stats/"
     },
     "files": ["lib/SendGrid.php"]
   },
