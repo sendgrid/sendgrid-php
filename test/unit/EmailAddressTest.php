@@ -157,9 +157,9 @@ class MailHelperTest extends TestCase
 
     public function testJsonSerializeOverPersonalizationsShouldNotReturnNull()
     {
-        $objEmail = new \SendGrid\Mail\Mail();
+        $objEmail = new Mail();
 
-        $objFrom = new \SendGrid\Mail\From('my@self.com', 'my self');
+        $objFrom = new From('my@self.com', 'my self');
         $objEmail->setFrom($objFrom);
 
         $objSubject = new Subject('test subject');

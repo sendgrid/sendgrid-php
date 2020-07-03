@@ -1,17 +1,8 @@
 <?php
 /**
  * Assert class unit tests.
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Tests
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use SendGrid\Helper\Assert;
@@ -177,7 +168,7 @@ class AssertTest extends TestCase
 
     public function testIsCallableWithCorrectValue()
     {
-        $callback = function () {
+        $callback = static function () {
             return true;
         };
 
@@ -191,7 +182,7 @@ class AssertTest extends TestCase
         $this->expectException(TypeException::class);
         $this->expectExceptionMessage('Provided "$test" is not valid.');
 
-        Assert::accept('test', 'test', function ($val) {
+        Assert::accept('test', 'test', static function ($val) {
             return $val === [];
         });
     }
@@ -201,14 +192,14 @@ class AssertTest extends TestCase
         $this->expectException(TypeException::class);
         $this->expectExceptionMessage('Custom message');
 
-        Assert::accept('test', 'test', function ($val) {
+        Assert::accept('test', 'test', static function ($val) {
             return $val === [];
         }, 'Custom message');
     }
 
     public function testAcceptWithCorrectValue()
     {
-        Assert::accept([], 'test', function ($val) {
+        Assert::accept([], 'test', static function ($val) {
             return $val === [];
         });
 

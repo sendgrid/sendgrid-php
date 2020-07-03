@@ -71,11 +71,8 @@ class BccSettings implements \JsonSerializable
      */
     public function setEmail($email)
     {
-        if (!EmailAddress::isValidEmailAddress($email)) {
-            throw new TypeException(
-                '$email must valid and be of type string.'
-            );
-        }
+        Assert::email($email, 'email');
+
         $this->email = $email;
     }
 
@@ -101,7 +98,7 @@ class BccSettings implements \JsonSerializable
                 'enable' => $this->getEnable(),
                 'email' => $this->getEmail()
             ],
-            function ($value) {
+            static function ($value) {
                 return $value !== null;
             }
         ) ?: null;

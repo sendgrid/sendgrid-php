@@ -3,14 +3,7 @@
 /**
  * Helper class for input parameters validation
  *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Helper
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
+ * @package SendGrid\Helper
  */
 
 namespace SendGrid\Helper;
@@ -31,7 +24,7 @@ class Assert
     public static function string($value, $property, $message = null)
     {
         if (!\is_string($value)) {
-            $message = \sprintf(
+            $message = sprintf(
                 $message ?: 'Value "$%s" is not a string.',
                 $property
             );
@@ -53,7 +46,11 @@ class Assert
     {
         static::string($value, $property);
 
-        if (!\filter_var($value, FILTER_VALIDATE_EMAIL)) {
+        //  Define additional flags for filter_var to verify unicode characters on local part
+        //  Constant FILTER_FLAG_EMAIL_UNICODE is available since PHP 7.1
+        $flags = (defined('FILTER_FLAG_EMAIL_UNICODE')) ? FILTER_FLAG_EMAIL_UNICODE : null;
+
+        if (filter_var($value, FILTER_VALIDATE_EMAIL, $flags) === false) {
             $message = \sprintf(
                 $message ?: 'Value "$%s" is not a valid email.',
                 $property
@@ -74,8 +71,8 @@ class Assert
      */
     public static function integer($value, $property, $message = null)
     {
-        if (!\filter_var($value, FILTER_VALIDATE_INT)) {
-            $message = \sprintf(
+        if (filter_var($value, FILTER_VALIDATE_INT) === false) {
+            $message = sprintf(
                 $message ?: 'Value "$%s" is not an integer.',
                 $property
             );
@@ -96,7 +93,7 @@ class Assert
     public static function boolean($value, $property, $message = null)
     {
         if (!\is_bool($value)) {
-            $message = \sprintf(
+            $message = sprintf(
                 $message ?: 'Value "$%s" is not a boolean.',
                 $property
             );
@@ -118,7 +115,7 @@ class Assert
     public static function isInstanceOf($value, $property, $className, $message = null)
     {
         if (!($value instanceof $className)) {
-            $message = \sprintf(
+            $message = sprintf(
                 $message ?: 'Object "$%s" is not an instance of "%s".',
                 $property,
                 $className
@@ -140,7 +137,7 @@ class Assert
     public static function isArray($value, $property, $message = null)
     {
         if (!\is_array($value)) {
-            $message = \sprintf(
+            $message = sprintf(
                 $message ?: 'Value "$%s" is not an array.',
                 $property
             );
@@ -161,7 +158,7 @@ class Assert
     public static function isCallable($value, $property, $message = null)
     {
         if (!\is_callable($value)) {
-            $message = \sprintf(
+            $message = sprintf(
                 $message ?: 'Provided "$%s" is not a callable.',
                 $property
             );
@@ -184,8 +181,8 @@ class Assert
     {
         static::isCallable($callback, $property);
 
-        if (!\call_user_func($callback, $value)) {
-            $message = \sprintf(
+        if (!$callback($value)) {
+            $message = sprintf(
                 $message ?: 'Provided "$%s" is not valid.',
                 $property
             );
@@ -208,8 +205,8 @@ class Assert
     {
         static::isArray($value, $property);
 
-        if (sizeof($value) > $size) {
-            $message = \sprintf(
+        if (\count($value) > $size) {
+            $message = sprintf(
                 $message ?: 'Number of elements in "$%s" can not be more than %d.',
                 $property,
                 $size
@@ -233,8 +230,8 @@ class Assert
     {
         static::isArray($value, $property);
 
-        if (sizeof($value) < $size) {
-            $message = \sprintf(
+        if (\count($value) < $size) {
+            $message = sprintf(
                 $message ?: 'Number of elements in "$%s" can not be less than %d.',
                 $property,
                 $size
@@ -259,7 +256,7 @@ class Assert
         static::integer($value, $property);
 
         if ($value > $limit) {
-            $message = \sprintf(
+            $message = sprintf(
                 $message ?: 'Value "$%s" expected to be at most %d.',
                 $property,
                 $limit
@@ -284,7 +281,7 @@ class Assert
         static::integer($value, $property);
 
         if ($value < $limit) {
-            $message = \sprintf(
+            $message = sprintf(
                 $message ?: 'Value "$%s" expected to be at least %d.',
                 $property,
                 $limit
@@ -308,8 +305,8 @@ class Assert
     {
         static::string($value, $property);
 
-        if (\mb_strlen($value, 'utf8') > $limit) {
-            $message = \sprintf(
+        if (mb_strlen($value, 'utf8') > $limit) {
+            $message = sprintf(
                 $message ?: 'Value "$%s" must have no more than %d characters.',
                 $property,
                 $limit
@@ -333,8 +330,8 @@ class Assert
     {
         static::string($value, $property);
 
-        if (\mb_strlen($value, 'utf8') < $limit) {
-            $message = \sprintf(
+        if (mb_strlen($value, 'utf8') < $limit) {
+            $message = sprintf(
                 $message ?: 'Value "$%s" must have at least %d characters.',
                 $property,
                 $limit
@@ -357,10 +354,10 @@ class Assert
     public static function anyOf($value, $property, array $choices, $message = null)
     {
         if (!\in_array($value, $choices, true)) {
-            $message = \sprintf(
+            $message = sprintf(
                 $message ?: 'Value "$%s" is not in given "%s".',
                 $property,
-                \implode(',', $choices)
+                implode(',', $choices)
             );
 
             throw new TypeException($message);

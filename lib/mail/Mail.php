@@ -262,8 +262,10 @@ class Mail implements \JsonSerializable
      *
      * @throws TypeException
      */
-    public function addPersonalization(Personalization $personalization)
+    public function addPersonalization($personalization)
     {
+        Assert::isInstanceOf($personalization, 'personalization', Personalization::class);
+
         $this->personalization[] = $personalization;
     }
 
@@ -948,7 +950,7 @@ class Mail implements \JsonSerializable
         } elseif (EmailAddress::isValidEmailAddress($email)) {
             $this->from = new From($email, $name);
         } else {
-            throw new TypeException('$email must be valid and of type string.');
+            Assert::string($email, 'string');
         }
     }
 
@@ -1159,7 +1161,7 @@ class Mail implements \JsonSerializable
     /**
      * Add a template id to a Mail object
      *
-     * @param string $template_id The id of the template to be
+     * @param TemplateId|string $template_id The id of the template to be
      *                            appied to this email
      * @throws TypeException
      */
@@ -1192,8 +1194,7 @@ class Mail implements \JsonSerializable
     {
         if ($key instanceof Section) {
             $section = $key;
-            $this->sections[$section->getKey()]
-                = $section->getValue();
+            $this->sections[$section->getKey()] = $section->getValue();
             return;
         }
         $this->sections[$key] = (string)$value;
@@ -1347,7 +1348,7 @@ class Mail implements \JsonSerializable
             if (!\is_array($categories)) {
                 $categories = [];
             }
-            return sizeof($categories) < 10;
+            return \count($categories) < 10;
         }, 'Number of elements in "$categories" can not exceed 10.');
 
         $this->categories[] = $category;
@@ -1560,14 +1561,14 @@ class Mail implements \JsonSerializable
         return $this->mail_settings;
     }
 
-	/**
-	 * Set the Bcc settings on a MailSettings object
-	 *
-	 * @param bool|BccSettings $enable A BccSettings object or a boolean
-	 *                                 to determine if this setting is active
-	 * @param string|null      $email  The email address to be bcc'ed
-	 * @throws TypeException
-	 */
+    /**
+     * Set the Bcc settings on a MailSettings object
+     *
+     * @param bool|BccSettings $enable A BccSettings object or a boolean
+     *                                 to determine if this setting is active
+     * @param string|null      $email  The email address to be bcc'ed
+     * @throws TypeException
+     */
     public function setBccSettings($enable, $email = null)
     {
         if (!($this->mail_settings instanceof MailSettings)) {
