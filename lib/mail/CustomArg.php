@@ -1,15 +1,6 @@
 <?php
 /**
  * This helper builds the CustomArg object for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Mail
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018-19 Twilio SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
 namespace SendGrid\Mail;
@@ -35,14 +26,13 @@ class CustomArg implements \JsonSerializable
     /** @var $value string Custom arg value */
     private $value;
 
-    /**
-     * Optional constructor
-     *
-     * @param string|null $key Custom arg key
-     * @param string|null $value Custom arg value
-     *
-     * @throws TypeException
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param string|null $key   Custom arg key
+	 * @param string|null $value Custom arg value
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct($key = null, $value = null)
     {
         if (isset($key)) {
@@ -57,9 +47,9 @@ class CustomArg implements \JsonSerializable
      * Add a custom arg key on a CustomArg object
      *
      * @param string $key Custom arg key
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setKey($key)
     {
         Assert::string($key, 'key');
@@ -81,9 +71,9 @@ class CustomArg implements \JsonSerializable
      * Add a custom arg value on a CustomArg object
      *
      * @param string $value Custom arg value
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setValue($value)
     {
         Assert::string($value, 'value');

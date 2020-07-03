@@ -1,15 +1,6 @@
 <?php
 /**
  * This helper builds the Asm object for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Mail
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018-19 Twilio SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
 namespace SendGrid\Mail;
@@ -31,23 +22,22 @@ class Asm implements \JsonSerializable
      */
     private $groups_to_display;
 
-    /**
-     * Optional constructor
-     *
-     * @param int|GroupId|null $group_id A GroupId object or the
-     *                                                      unsubscribe group to
-     *                                                      associate with this email
-     * @param int[]|GroupsToDisplay|null $groups_to_display A GroupsToDisplay
-     *                                                      object or an array
-     *                                                      containing the
-     *                                                      unsubscribe groups
-     *                                                      that you would like
-     *                                                      to be displayed
-     *                                                      on the unsubscribe
-     *                                                      preferences page.
-     *
-     * @throws TypeException
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param int|GroupId|null           $group_id          A GroupId object or the
+	 *                                                      unsubscribe group to
+	 *                                                      associate with this email
+	 * @param int[]|GroupsToDisplay|null $groups_to_display A GroupsToDisplay
+	 *                                                      object or an array
+	 *                                                      containing the
+	 *                                                      unsubscribe groups
+	 *                                                      that you would like
+	 *                                                      to be displayed
+	 *                                                      on the unsubscribe
+	 *                                                      preferences page.
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct(
         $group_id = null,
         $groups_to_display = null
@@ -66,7 +56,7 @@ class Asm implements \JsonSerializable
      * @param int|GroupId $group_id The unsubscribe group to associate with this
      *                              email
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setGroupId($group_id)
     {
@@ -105,7 +95,7 @@ class Asm implements \JsonSerializable
      *                                                 on the unsubscribe
      *                                                 preferences page.
      *
-     * @throws TypeException
+     * @throws \SendGrid\Mail\TypeException
      */
     public function setGroupsToDisplay($groups_to_display)
     {

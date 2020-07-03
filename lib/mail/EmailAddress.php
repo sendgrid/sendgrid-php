@@ -1,15 +1,6 @@
 <?php
 /**
  * This helper builds the EmailAddress object for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Mail
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018-19 Twilio SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
 namespace SendGrid\Mail;
@@ -27,9 +18,8 @@ class EmailAddress implements \JsonSerializable
     private $name;
     /** @var $email string The email address */
     private $email;
-    /**
-     * @var $substitutions Substitution[]
-     * An array of key/value substitutions to be be applied to the text and html content of the email body
+    /** @var $substitutions Substitution[] An array of key/value substitutions
+     * to be be applied to the text and html content of the email body
      */
     private $substitutions;
     /** @var $subject Subject The personalized subject of the email */
@@ -38,14 +28,13 @@ class EmailAddress implements \JsonSerializable
     /**
      * Optional constructor
      *
-     * @param string|null $emailAddress The email address
-     * @param string|null $name The name of the person associated with
+     * @param string|null $emailAddress  The email address
+     * @param string|null $name          The name of the person associated with
      *                                   the email
-     * @param array|null $substitutions An array of key/value substitutions to
+     * @param array|null  $substitutions An array of key/value substitutions to
      *                                   be be applied to the text and html content
      *                                   of the email body
-     * @param string|null $subject The personalized subject of the email
-     *
+     * @param string|null $subject       The personalized subject of the email
      * @throws TypeException
      */
     public function __construct(
@@ -66,6 +55,28 @@ class EmailAddress implements \JsonSerializable
         if (isset($subject)) {
             $this->setSubject($subject);
         }
+    }
+
+    /**
+     * Validates given emailAddress against expected type and filter
+     *
+     * @param string $emailAddress The email address
+     *
+     * @return bool Result of validating the email address
+     */
+    public static function isValidEmailAddress($emailAddress)
+    {
+        //  Define additional flags for filter_var to verify unicode characters on local part
+        //  Constant FILTER_FLAG_EMAIL_UNICODE is available since PHP 7.1
+        $flags = (defined('FILTER_FLAG_EMAIL_UNICODE')) ? FILTER_FLAG_EMAIL_UNICODE : null;
+
+        //  Return result of having string type and valid emailAddress
+        //  The filter_var returns the filtered data on success
+        //  (which must be a string), otherwise bool(false)
+        return (
+            is_string($emailAddress) &&
+            is_string(filter_var($emailAddress, FILTER_VALIDATE_EMAIL, $flags))
+        );
     }
 
     /**
@@ -106,6 +117,8 @@ class EmailAddress implements \JsonSerializable
      * Add a name to a EmailAddress object
      *
      * @param string $name The name of the person associated with the email
+     *
+     * @throws TypeException
      */
     public function setName($name)
     {
@@ -180,11 +193,12 @@ class EmailAddress implements \JsonSerializable
     {
         Assert::string($subject, 'subject');
 
+        // Now that we know it is a string, we can safely create a new subject
         $this->subject = new Subject($subject);
     }
 
     /**
-     * Retrieve a subject from a EmailAddress object
+     * Retrieve a subject from an EmailAddress object
      *
      * @return Subject
      */
@@ -194,7 +208,7 @@ class EmailAddress implements \JsonSerializable
     }
 
     /**
-     * Return an array representing a EmailAddress object for the Twilio SendGrid API
+     * Return an array representing an EmailAddress object for the Twilio SendGrid API
      *
      * @return null|array
      */

@@ -1,15 +1,6 @@
 <?php
 /**
  * This helper builds the Substitution object for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Mail
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018-19 Twilio SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
 namespace SendGrid\Mail;
@@ -34,14 +25,13 @@ class Substitution implements \JsonSerializable
     /** @var $value string Substitution value */
     private $value;
 
-    /**
-     * Optional constructor
-     *
-     * @param string|null $key Substitution key
-     * @param string|null $value Substitution value
-     *
-     * @throws TypeException
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param string|null $key   Substitution key
+	 * @param string|null $value Substitution value
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct($key = null, $value = null)
     {
         if (isset($key)) {
@@ -56,9 +46,9 @@ class Substitution implements \JsonSerializable
      * Add the key on a Substitution object
      *
      * @param string $key Substitution key
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setKey($key)
     {
         Assert::string($key, 'key');
@@ -79,10 +69,10 @@ class Substitution implements \JsonSerializable
     /**
      * Add the value on a Substitution object
      *
-     * @param string|array|bool|int $value Substitution value
-     * 
-     * @throws TypeException
-     */ 
+     * @param string|array|object|bool|int|float $value Substitution value
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setValue($value)
     {
         Assert::accept($value, 'value', function ($val) {

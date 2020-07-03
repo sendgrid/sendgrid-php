@@ -1,6 +1,6 @@
 <?php
 
-namespace SendGrid\Tests\ApiKeys;
+namespace SendGrid\Tests\Integration\ApiKeys;
 
 use SendGrid\Tests\BaseTestClass;
 

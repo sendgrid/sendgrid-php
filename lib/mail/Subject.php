@@ -1,15 +1,6 @@
 <?php
 /**
  * This helper builds the Subject object for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Mail
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018-19 Twilio SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
 namespace SendGrid\Mail;
@@ -44,9 +35,9 @@ class Subject implements \JsonSerializable
      * Set the subject on a Subject object
      *
      * @param string $subject The email subject
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setSubject($subject)
     {
         Assert::minLength($subject, 'subject', 1);

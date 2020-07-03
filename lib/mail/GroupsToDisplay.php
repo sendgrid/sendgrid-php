@@ -1,15 +1,6 @@
 <?php
 /**
  * This helper builds the GroupsToDisplay object for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Mail
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018-19 Twilio SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
 namespace SendGrid\Mail;
@@ -24,25 +15,20 @@ use SendGrid\Helper\Assert;
  */
 class GroupsToDisplay implements \JsonSerializable
 {
-    /**
-     * @var int[]
-     * An array containing the unsubscribe groups
-     * that you would like to be displayed on the unsubscribe preferences page. Maximum of 25
-     */
+    /** @var $groups_to_display int[] An array containing the unsubscribe groups that you would like to be displayed on the unsubscribe preferences page. Maximum of 25 */
     private $groups_to_display;
 
-    /**
-     * Optional constructor
-     *
-     * @param int[]|null $groups_to_display An array containing
-     *                                          the unsubscribe groups
-     *                                          that you would like to
-     *                                          be displayed on the
-     *                                          unsubscribe preferences
-     *                                          page. Maximum of 25
-     *
-     * @throws TypeException
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param int[]|int|null $groups_to_display An array containing
+	 *                                          the unsubscribe groups
+	 *                                          that you would like to
+	 *                                          be displayed on the
+	 *                                          unsubscribe preferences
+	 *                                          page. Maximum of 25
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct($groups_to_display = null)
     {
         if (isset($groups_to_display)) {
@@ -57,9 +43,9 @@ class GroupsToDisplay implements \JsonSerializable
      *                                     that you would like to be
      *                                     displayed on the unsubscribe
      *                                     preferences page
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setGroupsToDisplay($groups_to_display)
     {
         Assert::maxItems($groups_to_display, 'groups_to_display', 25);

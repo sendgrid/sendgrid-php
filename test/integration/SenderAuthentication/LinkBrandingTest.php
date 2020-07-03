@@ -1,10 +1,10 @@
 <?php
 
-namespace SendGrid\Tests\Whitelabel;
+namespace SendGrid\Tests\Integration\SenderAuthentication;
 
 use SendGrid\Tests\BaseTestClass;
 
-class WhitelabelLinksTest extends BaseTestClass
+class LinkBrandingTest extends BaseTestClass
 {
     public function testWhitelabelLinksPostMethod()
     {

@@ -1,15 +1,6 @@
 <?php
 /**
  * This helper builds the Attachment object for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Mail
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018-19 Twilio SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
 namespace SendGrid\Mail;
@@ -31,22 +22,21 @@ class Attachment implements \JsonSerializable
     private $filename;
     /** @var $disposition string How the attachment should be displayed: inline or attachment, default is attachment */
     private $disposition;
-    /** @var $content_id string Used when disposition is inline to diplay the file within the body of the email */
+    /** @var $content_id string Used when disposition is inline to display the file within the body of the email */
     private $content_id;
 
-    /**
-     * Optional constructor
-     *
-     * @param string $content Base64 encoded content
-     * @param string $type Mime type of the attachment
-     * @param string $filename File name of the attachment
-     * @param string $disposition How the attachment should be displayed: inline
-     *                            or attachment, default is attachment
-     * @param string $content_id Used when disposition is inline to diplay the
-     *                            file within the body of the email
-     *
-     * @throws TypeException
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param string $content     Base64 encoded content
+	 * @param string $type        Mime type of the attachment
+	 * @param string $filename    File name of the attachment
+	 * @param string $disposition How the attachment should be displayed: inline
+	 *                            or attachment, default is attachment
+	 * @param string $content_id  Used when disposition is inline to display the
+	 *                            file within the body of the email
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct(
         $content = null,
         $type = null,
@@ -76,8 +66,8 @@ class Attachment implements \JsonSerializable
      *
      * @param string $content Base64 encoded content
      *
-     * @throws TypeException
-     */  
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setContent($content)
     {
         Assert::minLength($content, 'content', 1);
@@ -103,9 +93,9 @@ class Attachment implements \JsonSerializable
      * Add the mime type to a Attachment object
      *
      * @param string $type Mime type of the attachment
-     * 
-     * @throws TypeException
-     */  
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setType($type)
     {
         Assert::minLength($type, 'type', 1);
@@ -127,9 +117,9 @@ class Attachment implements \JsonSerializable
      * Add the file name to a Attachment object
      *
      * @param string $filename File name of the attachment
-     * 
-     * @throws TypeException
-     */  
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setFilename($filename)
     {
         Assert::string($filename, 'filename');
@@ -152,9 +142,9 @@ class Attachment implements \JsonSerializable
      *
      * @param string $disposition How the attachment should be displayed:
      *                            inline or attachment, default is attachment
-     * 
-     * @throws TypeException
-     */  
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setDisposition($disposition)
     {
         Assert::anyOf($disposition, 'disposition', ['inline', 'attachment']);
@@ -172,14 +162,13 @@ class Attachment implements \JsonSerializable
         return $this->disposition;
     }
 
-    /**
-     * Add the content id to a Attachment object
-     *
-     * @param string $content_id Used when disposition is inline to diplay
-     *                           the file within the body of the email
-     *
-     * @throws TypeException
-     */
+	/**
+	 * Add the content id to a Attachment object
+	 *
+	 * @param string $content_id Used when disposition is inline to display
+	 *                           the file within the body of the email
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function setContentID($content_id)
     {
         Assert::string($content_id, 'content_id');
@@ -203,7 +192,7 @@ class Attachment implements \JsonSerializable
      * @param $string string The string that has to be checked
      * @return bool
      */
-    private function isBase64($string) 
+    private function isBase64($string)
     {
         $decoded_data = base64_decode($string, true);
         $encoded_data = base64_encode($decoded_data);

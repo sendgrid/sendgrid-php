@@ -1,15 +1,6 @@
 <?php
 /**
  * This helper builds the Personalization object for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Mail
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018-19 Twilio SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
 namespace SendGrid\Mail;
@@ -111,14 +102,16 @@ class Personalization implements \JsonSerializable
     /**
      * Add a subject object to a Personalization object
      *
-     * @param Subject $subject Subject object
-     * 
+     * @param Subject|string $subject Subject object or string
+     *
      * @throws TypeException
-     */ 
+     */
     public function setSubject($subject)
     {
         if (!($subject instanceof Subject)) {
-            Assert::isInstanceOf($subject, 'subject', Subject::class);
+            Assert::string($subject, 'subject');
+
+            $subject = new Subject($subject);
         }
         $this->subject = $subject;
     }
@@ -126,7 +119,7 @@ class Personalization implements \JsonSerializable
     /**
      * Retrieve a Subject object from a Personalization object
      *
-     * @return Subject
+     * @return Subject|null
      */
     public function getSubject()
     {
@@ -146,7 +139,7 @@ class Personalization implements \JsonSerializable
     /**
      * Retrieve header key/value pairs from a Personalization object
      *
-     * @return array
+     * @return array|null
      */
     public function getHeaders()
     {
@@ -169,9 +162,9 @@ class Personalization implements \JsonSerializable
 
     /**
      * Retrieve dynamic template data key/value pairs from a Personalization object
-     * 
-     * @return array
-     */ 
+     *
+     * @return array|null
+     */
     public function getDynamicTemplateData()
     {
         return $this->getSubstitutions();
@@ -198,7 +191,7 @@ class Personalization implements \JsonSerializable
     /**
      * Retrieve substitution key/value pairs from a Personalization object
      *
-     * @return array
+     * @return array|null
      */
     public function getSubstitutions()
     {
@@ -209,6 +202,8 @@ class Personalization implements \JsonSerializable
      * Add a CustomArg object to a Personalization object
      *
      * @param CustomArg $custom_arg CustomArg object
+     *
+     * @throws TypeException
      */
     public function addCustomArg(CustomArg $custom_arg)
     {
@@ -218,7 +213,7 @@ class Personalization implements \JsonSerializable
     /**
      * Retrieve custom arg key/value pairs from a Personalization object
      *
-     * @return array
+     * @return array|null
      */
     public function getCustomArgs()
     {
@@ -229,7 +224,9 @@ class Personalization implements \JsonSerializable
      * Add a SendAt object to a Personalization object
      *
      * @param SendAt $send_at SendAt object
-     */ 
+     *
+     * @throws TypeException
+     */
     public function setSendAt(SendAt $send_at)
     {
         $this->send_at = $send_at;
@@ -238,7 +235,7 @@ class Personalization implements \JsonSerializable
     /**
      * Retrieve a SendAt object from a Personalization object
      *
-     * @return SendAt
+     * @return SendAt|null
      */
     public function getSendAt()
     {
@@ -249,9 +246,9 @@ class Personalization implements \JsonSerializable
      * Specify if this personalization is using dynamic templates
      *
      * @param bool $has_dynamic_template are we using dynamic templates
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setHasDynamicTemplate($has_dynamic_template)
     {
         Assert::boolean($has_dynamic_template, 'has_dynamic_template');

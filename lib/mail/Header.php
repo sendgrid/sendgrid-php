@@ -1,15 +1,6 @@
 <?php
 /**
  * This helper builds the Header object for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Mail
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018-19 Twilio SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
 namespace SendGrid\Mail;
@@ -32,14 +23,13 @@ class Header implements \JsonSerializable
     /** @var $value string Header value */
     private $value;
 
-    /**
-     * Optional constructor
-     *
-     * @param string|null $key Header key
-     * @param string|null $value Header value
-     *
-     * @throws TypeException
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param string|null $key   Header key
+	 * @param string|null $value Header value
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct($key = null, $value = null)
     {
         if (isset($key)) {
@@ -54,9 +44,9 @@ class Header implements \JsonSerializable
      * Add the key on a Header object
      *
      * @param string $key Header key
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setKey($key)
     {
         Assert::string($key, 'key');
@@ -78,9 +68,9 @@ class Header implements \JsonSerializable
      * Add the value on a Header object
      *
      * @param string $value Header value
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setValue($value)
     {
         Assert::string($value, 'value');
