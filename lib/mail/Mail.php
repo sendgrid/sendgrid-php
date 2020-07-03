@@ -152,19 +152,13 @@ class Mail implements \JsonSerializable
             $this->setSubject($subject);
         }
         if (isset($plainTextContent)) {
-            if (!($plainTextContent instanceof Content)) {
-                throw new TypeException(
-                    '$plainTextContent must be of type Content.'
-                );
-            }
+            Assert::isInstanceOf($plainTextContent, 'plainTextContent', Content::class);
+
             $this->addContent($plainTextContent);
         }
         if (isset($htmlContent)) {
-            if (!($htmlContent instanceof Content)) {
-                throw new TypeException(
-                    '$htmlContent must be of type Content.'
-                );
-            }
+            Assert::isInstanceOf($htmlContent, 'htmlContent', Content::class);
+
             $this->addContent($htmlContent);
         }
     }
