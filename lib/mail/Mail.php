@@ -126,7 +126,7 @@ class Mail implements \JsonSerializable
                     $personalization->setSubject($email->getSubject());
                 }
                 if (is_array($subject)) {
-                    if ($subjectCount < sizeof($subject)) {
+                    if ($subjectCount < \count($subject)) {
                         $personalization->setSubject($subject[$subjectCount]);
                     }
                     $subjectCount++;
@@ -542,21 +542,21 @@ class Mail implements \JsonSerializable
         );
     }
 
-	/**
-	 * Add a subject to a Personalization or Mail object
-	 *
-	 * If you don't provide a Personalization object or index, the
-	 * subject will be global to entire message. Note that
-	 * subjects added to Personalization objects override
-	 * global subjects.
-	 *
-	 * @param string|Subject $subject Email subject
+    /**
+     * Add a subject to a Personalization or Mail object
+     *
+     * If you don't provide a Personalization object or index, the
+     * subject will be global to entire message. Note that
+     * subjects added to Personalization objects override
+     * global subjects.
+     *
+     * @param string|Subject $subject Email subject
      * @param int|null $personalizationIndex Index into the array of existing
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
-	 * @throws TypeException
-	 */
+     * @throws TypeException
+     */
     public function setSubject(
         $subject,
         $personalizationIndex = null,
@@ -888,22 +888,22 @@ class Mail implements \JsonSerializable
         return $this->personalization[$personalizationIndex]->getCustomArgs();
     }
 
-	/**
-	 * Add a unix timestamp allowing you to specify when you want your
-	 * email to be delivered to a Personalization or Mail object
-	 *
-	 * If you don't provide a Personalization object or index, the
-	 * send at timestamp will be global to entire message. Note that
-	 * timestamps added to Personalization objects override
-	 * global timestamps.
-	 *
-	 * @param int|SendAt $send_at A unix timestamp
+    /**
+     * Add a unix timestamp allowing you to specify when you want your
+     * email to be delivered to a Personalization or Mail object
+     *
+     * If you don't provide a Personalization object or index, the
+     * send at timestamp will be global to entire message. Note that
+     * timestamps added to Personalization objects override
+     * global timestamps.
+     *
+     * @param int|SendAt $send_at A unix timestamp
      * @param int|null $personalizationIndex Index into the array of existing
      *                                       Personalization objects
      * @param Personalization|null $personalization A pre-created
      *                                              Personalization object
-	 * @throws TypeException
-	 */
+     * @throws TypeException
+     */
     public function setSendAt(
         $send_at,
         $personalizationIndex = null,
@@ -941,10 +941,9 @@ class Mail implements \JsonSerializable
     {
         if ($email instanceof From) {
             $this->from = $email;
-        } elseif (EmailAddress::isValidEmailAddress($email)) {
-            $this->from = new From($email, $name);
         } else {
-            Assert::string($email, 'string');
+            Assert::email($email, 'email');
+            $this->from = new From($email, $name);
         }
     }
 
@@ -1067,11 +1066,9 @@ class Mail implements \JsonSerializable
     public function getContents()
     {
         if ($this->contents) {
-            if ($this->contents[0]->getType() !== 'text/plain'
-            && count($this->contents) > 1
-            ) {
+            if ($this->contents[0]->getType() !== MimeType::TEXT && \count($this->contents) > 1) {
                 foreach ($this->contents as $key => $value) {
-                    if ($value->getType() == 'text/plain') {
+                    if ($value->getType() === MimeType::TEXT) {
                         $plain_content = $value;
                         unset($this->contents[$key]);
                         break;
@@ -1833,12 +1830,12 @@ class Mail implements \JsonSerializable
         );
     }
 
-	/**
-	 * Return an array representing a request object for the Twilio SendGrid API
-	 *
-	 * @return null|array
-	 * @throws TypeException
-	 */
+    /**
+     * Return an array representing a request object for the Twilio SendGrid API
+     *
+     * @return null|array
+     * @throws TypeException
+     */
     public function jsonSerialize()
     {
         // Detect if we are using the new dynamic templates

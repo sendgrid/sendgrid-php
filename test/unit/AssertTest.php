@@ -13,7 +13,7 @@ class AssertTest extends TestCase
     public function testStringThrowExceptionWithDefaultMessage()
     {
         $this->expectException(TypeException::class);
-        $this->expectExceptionMessage('Value "$test" is not a string.');
+        $this->expectExceptionMessage('"$test" must be a string. Got: ');
 
         Assert::string(false, 'test');
     }
@@ -36,7 +36,7 @@ class AssertTest extends TestCase
     public function testEmailThrowExceptionWithDefaultMessage()
     {
         $this->expectException(TypeException::class);
-        $this->expectExceptionMessage('Value "$test" is not a valid email.');
+        $this->expectExceptionMessage('"$test" must be a valid email address. Got: test');
 
         Assert::email('test', 'test');
     }
@@ -59,7 +59,7 @@ class AssertTest extends TestCase
     public function testIntegerThrowExceptionWithDefaultMessage()
     {
         $this->expectException(TypeException::class);
-        $this->expectExceptionMessage('Value "$test" is not an integer.');
+        $this->expectExceptionMessage('"$test" must be an integer. Got: test');
 
         Assert::integer('test', 'test');
     }
@@ -82,7 +82,7 @@ class AssertTest extends TestCase
     public function testBooleanThrowExceptionWithDefaultMessage()
     {
         $this->expectException(TypeException::class);
-        $this->expectExceptionMessage('Value "$test" is not a boolean.');
+        $this->expectExceptionMessage('"$test" must be a boolean. Got: test');
 
         Assert::boolean('test', 'test');
     }
@@ -106,7 +106,7 @@ class AssertTest extends TestCase
     public function testIsInstanceOfThrowExceptionWithDefaultMessage()
     {
         $this->expectException(TypeException::class);
-        $this->expectExceptionMessage('Object "$test" is not an instance of "' . static::class . '".');
+        $this->expectExceptionMessage('"$test" must be an instance of "' . static::class . '". Got: test');
 
         Assert::isInstanceOf('test', 'test', static::class);
     }
@@ -129,7 +129,7 @@ class AssertTest extends TestCase
     public function testIsArrayThrowExceptionWithDefaultMessage()
     {
         $this->expectException(TypeException::class);
-        $this->expectExceptionMessage('Value "$test" is not an array.');
+        $this->expectExceptionMessage('"$test" must be an array. Got: test');
 
         Assert::isArray('test', 'test');
     }
@@ -153,7 +153,7 @@ class AssertTest extends TestCase
     public function testIsCallableThrowExceptionWithDefaultMessage()
     {
         $this->expectException(TypeException::class);
-        $this->expectExceptionMessage('Provided "$test" is not a callable.');
+        $this->expectExceptionMessage('"$test" must be callable. Got: test');
 
         Assert::isCallable('test', 'test');
     }
@@ -180,7 +180,7 @@ class AssertTest extends TestCase
     public function testAcceptThrowExceptionWithDefaultMessage()
     {
         $this->expectException(TypeException::class);
-        $this->expectExceptionMessage('Provided "$test" is not valid.');
+        $this->expectExceptionMessage('"$test" is not valid.');
 
         Assert::accept('test', 'test', static function ($val) {
             return $val === [];
@@ -259,7 +259,7 @@ class AssertTest extends TestCase
     public function testMinValueThrowExceptionWithDefaultMessage()
     {
         $this->expectException(TypeException::class);
-        $this->expectExceptionMessage('Value "$test" expected to be at least 5.');
+        $this->expectExceptionMessage('"$test" expected to be at least 5. Got: 3');
 
         Assert::minValue(3, 'test', 5);
     }
@@ -282,7 +282,7 @@ class AssertTest extends TestCase
     public function testMaxValueThrowExceptionWithDefaultMessage()
     {
         $this->expectException(TypeException::class);
-        $this->expectExceptionMessage('Value "$test" expected to be at most 3.');
+        $this->expectExceptionMessage('"$test" expected to be at most 3. Got: 5');
 
         Assert::maxValue(5, 'test', 3);
     }
@@ -305,7 +305,7 @@ class AssertTest extends TestCase
     public function testMinLengthThrowExceptionWithDefaultMessage()
     {
         $this->expectException(TypeException::class);
-        $this->expectExceptionMessage('Value "$test" must have at least 5 characters.');
+        $this->expectExceptionMessage('"$test" must have at least 5 characters. Got: 4');
 
         Assert::minLength('test', 'test', 5);
     }
@@ -328,7 +328,7 @@ class AssertTest extends TestCase
     public function testMaxLengthThrowExceptionWithDefaultMessage()
     {
         $this->expectException(TypeException::class);
-        $this->expectExceptionMessage('Value "$test" must have no more than 3 characters.');
+        $this->expectExceptionMessage('"$test" must have no more than 3 characters. Got: 4');
 
         Assert::maxLength('test', 'test', 3);
     }
@@ -351,7 +351,7 @@ class AssertTest extends TestCase
     public function testAnyOfThrowExceptionWithDefaultMessage()
     {
         $this->expectException(TypeException::class);
-        $this->expectExceptionMessage('Value "$test" is not in given "foo,bar".');
+        $this->expectExceptionMessage('"$test" must be any of "foo, bar". Got: test');
 
         Assert::anyOf('test', 'test', ['foo', 'bar']);
     }

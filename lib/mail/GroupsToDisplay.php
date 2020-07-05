@@ -18,17 +18,17 @@ class GroupsToDisplay implements \JsonSerializable
     /** @var $groups_to_display int[] An array containing the unsubscribe groups that you would like to be displayed on the unsubscribe preferences page. Maximum of 25 */
     private $groups_to_display;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param int[]|int|null $groups_to_display An array containing
-	 *                                          the unsubscribe groups
-	 *                                          that you would like to
-	 *                                          be displayed on the
-	 *                                          unsubscribe preferences
-	 *                                          page. Maximum of 25
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param int[]|int|null $groups_to_display An array containing
+     *                                          the unsubscribe groups
+     *                                          that you would like to
+     *                                          be displayed on the
+     *                                          unsubscribe preferences
+     *                                          page. Maximum of 25
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct($groups_to_display = null)
     {
         if (isset($groups_to_display)) {
@@ -71,7 +71,7 @@ class GroupsToDisplay implements \JsonSerializable
             if (!\is_array($groups)) {
                 $groups = [];
             }
-            return sizeof($groups) < 25;
+            return \count($groups) < 25;
         }, 'Number of elements in "$groups_to_display" can not be more than 25.');
 
         $this->groups_to_display[] = $group_to_display;

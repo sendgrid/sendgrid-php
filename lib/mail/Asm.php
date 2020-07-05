@@ -22,22 +22,22 @@ class Asm implements \JsonSerializable
      */
     private $groups_to_display;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param int|GroupId|null           $group_id          A GroupId object or the
-	 *                                                      unsubscribe group to
-	 *                                                      associate with this email
-	 * @param int[]|GroupsToDisplay|null $groups_to_display A GroupsToDisplay
-	 *                                                      object or an array
-	 *                                                      containing the
-	 *                                                      unsubscribe groups
-	 *                                                      that you would like
-	 *                                                      to be displayed
-	 *                                                      on the unsubscribe
-	 *                                                      preferences page.
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param int|GroupId|null $group_id A GroupId object or the
+     *                                   unsubscribe group to
+     *                                   associate with this email
+     * @param int[]|GroupsToDisplay|null $groups_to_display A GroupsToDisplay
+     *                                                      object or an array
+     *                                                      containing the
+     *                                                      unsubscribe groups
+     *                                                      that you would like
+     *                                                      to be displayed
+     *                                                      on the unsubscribe
+     *                                                      preferences page.
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct(
         $group_id = null,
         $groups_to_display = null
@@ -64,7 +64,7 @@ class Asm implements \JsonSerializable
             $this->group_id = $group_id->getGroupId();
         } else {
             Assert::integer(
-                $group_id, 'group_id', 'Value "$group_id" must be an instance of Twilio SendGrid\Mail\GroupId or an integer.'
+                $group_id, 'group_id', 'Value "$group_id" must be an instance of SendGrid\Mail\GroupId or an integer.'
             );
 
             $this->group_id = new GroupId($group_id);
@@ -104,7 +104,7 @@ class Asm implements \JsonSerializable
         } else {
             Assert::isArray(
                 $groups_to_display, 'groups_to_display',
-                'Value "$groups_to_display" must be an instance of Twilio SendGrid\Mail\GroupsToDisplay or an array.'
+                'Value "$groups_to_display" must be an instance of SendGrid\Mail\GroupsToDisplay or an array.'
             );
             Assert::maxItems($groups_to_display, 'groups_to_display', 25);
 
