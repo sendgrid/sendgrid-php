@@ -123,7 +123,7 @@ class Assert
                 $message ?: '"$%s" must be an instance of "%s". Got: %s',
                 $property,
                 $className,
-                $value
+                \is_object($value) ? \get_class($value) : (string) $value
             );
 
             throw new TypeException($message);
