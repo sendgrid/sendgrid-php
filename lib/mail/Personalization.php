@@ -131,8 +131,10 @@ class Personalization implements \JsonSerializable
      *
      * @param Header $header Header object
      */
-    public function addHeader(Header $header)
+    public function addHeader($header)
     {
+        Assert::isInstanceOf($header, 'header', Header::class);
+
         $this->headers[$header->getKey()] = $header->getValue();
     }
 
@@ -205,8 +207,10 @@ class Personalization implements \JsonSerializable
      *
      * @throws TypeException
      */
-    public function addCustomArg(CustomArg $custom_arg)
+    public function addCustomArg($custom_arg)
     {
+        Assert::isInstanceOf($custom_arg, 'custom_arg', CustomArg::class);
+
         $this->custom_args[$custom_arg->getKey()] = (string)$custom_arg->getValue();
     }
 
@@ -227,8 +231,10 @@ class Personalization implements \JsonSerializable
      *
      * @throws TypeException
      */
-    public function setSendAt(SendAt $send_at)
+    public function setSendAt($send_at)
     {
+        Assert::isInstanceOf($send_at, 'send_at', SendAt::class);
+
         $this->send_at = $send_at;
     }
 
