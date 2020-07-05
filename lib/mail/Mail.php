@@ -15,7 +15,7 @@ use SendGrid\Helper\Assert;
  */
 class Mail implements \JsonSerializable
 {
-    const VERSION = "7.0.0";
+    const VERSION = "7.6.0";
 
     /** @var $from From Email address of the sender */
     private $from;
@@ -1153,7 +1153,7 @@ class Mail implements \JsonSerializable
      * Add a template id to a Mail object
      *
      * @param TemplateId|string $template_id The id of the template to be
-     *                            appied to this email
+     *                                       applied to this email
      * @throws TypeException
      */
     public function setTemplateId($template_id)

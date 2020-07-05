@@ -25,13 +25,13 @@ class Substitution implements \JsonSerializable
     /** @var $value string Substitution value */
     private $value;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param string|null $key   Substitution key
-	 * @param string|null $value Substitution value
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param string|null $key Substitution key
+     * @param string|null $value Substitution value
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct($key = null, $value = null)
     {
         if (isset($key)) {
@@ -75,13 +75,13 @@ class Substitution implements \JsonSerializable
      */
     public function setValue($value)
     {
-        Assert::accept($value, 'value', function ($val) {
+        Assert::accept($value, 'value', static function ($val) {
             return \is_string($val)
-                || \filter_var($val, FILTER_VALIDATE_INT)
+                || filter_var($val, FILTER_VALIDATE_INT) !== false
                 || \is_bool($val)
                 || \is_array($val)
                 || \is_object($val);
-        }, 'Value $value must be an array, object, bool, string or integer.');
+        }, '$value must be an array, object, boolean, string or integer.');
 
         $this->value = $value;
     }

@@ -299,7 +299,7 @@ class Personalization implements \JsonSerializable
                 'custom_args' => $this->getCustomArgs(),
                 'send_at' => $this->getSendAt()
             ],
-            function ($value) {
+            static function ($value) {
                 return $value !== null;
             }
         ) ?: null;
