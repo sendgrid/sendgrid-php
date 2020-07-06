@@ -20,8 +20,6 @@ class FilesExistTest extends TestCase
     public function testFilesArePresentInRepo()
     {
         $rootDir = __DIR__ . '/../..';
-        $this->assertFileExists("$rootDir/docker/Dockerfile");
-        //$this->assertFileExists("$rootDir/docker/docker-compose.yml");
         $this->assertFileExists("$rootDir/.codeclimate.yml");
         $this->assertFileExists("$rootDir/.env.sample");
         $this->assertFileExists("$rootDir/ISSUE_TEMPLATE.md");
