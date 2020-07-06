@@ -59,7 +59,7 @@ Please note that we utilize the [Gitflow Workflow](https://www.atlassian.com/git
 
 ##### Prerequisites #####
 
-- PHP 5.6, 7.0, 7.1 or 7.2
+- PHP 5.6, 7.0, 7.1, 7.2, 7.3 or 7.4
 
 ##### Initial setup: #####
 
@@ -85,7 +85,11 @@ source ./sendgrid.env
 
 See the [examples folder](https://github.com/sendgrid/sendgrid-php/tree/master/examples) or [README](https://github.com/sendgrid/sendgrid-php/blob/master/README.md) to get started quickly.
 
-If you are using composer, replace <PATH_TO> with the path to your `vendor/autoload.php`. Otherwise, include lib/loader.php.
+We prefer the use of the Composer autoloader by loading `vendor/autoload.php`.
+
+The examples will load `sendgrid-php.php` which is in the project root. This file verifies the existence of the Composer autoloader and warns you if dependencies are missing.
+
+As an alternative, include `lib/loader.php` to load all files in this project. However, this does not load all the dependencies needed to run this library properly.
 
 ## Understanding the Codebase
 
