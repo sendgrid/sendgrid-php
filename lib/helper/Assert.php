@@ -45,7 +45,7 @@ class Assert
      */
     public static function email($value, $property, $message = null)
     {
-        static::string($value, $property);
+        static::string($value, $property, $message);
 
         //  Define additional flags for filter_var to verify unicode characters on local part
         //  Constant FILTER_FLAG_EMAIL_UNICODE is available since PHP 7.1
@@ -186,7 +186,7 @@ class Assert
      */
     public static function accept($value, $property, $callback, $message = null)
     {
-        static::isCallable($callback, $property);
+        static::isCallable($callback, 'callback', $message);
 
         if (!$callback($value)) {
             $message = sprintf(
@@ -210,7 +210,7 @@ class Assert
      */
     public static function maxItems($value, $property, $size, $message = null)
     {
-        static::isArray($value, $property);
+        static::isArray($value, $property, $message);
 
         if (\count($value) > $size) {
             $message = sprintf(
@@ -235,7 +235,7 @@ class Assert
      */
     public static function minItems($value, $property, $size, $message = null)
     {
-        static::isArray($value, $property);
+        static::isArray($value, $property, $message);
 
         if (\count($value) < $size) {
             $message = sprintf(
@@ -260,7 +260,7 @@ class Assert
      */
     public static function maxValue($value, $property, $limit, $message = null)
     {
-        static::integer($value, $property);
+        static::integer($value, $property, $message);
 
         $limit = (int) $limit;
 
@@ -288,7 +288,7 @@ class Assert
      */
     public static function minValue($value, $property, $limit, $message = null)
     {
-        static::integer($value, $property);
+        static::integer($value, $property, $message);
 
         $limit = (int) $limit;
 
@@ -316,7 +316,7 @@ class Assert
      */
     public static function maxLength($value, $property, $limit, $message = null)
     {
-        static::string($value, $property);
+        static::string($value, $property, $message);
 
         $length = mb_strlen($value, 'utf8');
 
@@ -344,7 +344,7 @@ class Assert
      */
     public static function minLength($value, $property, $limit, $message = null)
     {
-        static::string($value, $property);
+        static::string($value, $property, $message);
 
         $length = mb_strlen($value, 'utf8');
 

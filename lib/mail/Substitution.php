@@ -78,10 +78,11 @@ class Substitution implements \JsonSerializable
         Assert::accept($value, 'value', static function ($val) {
             return \is_string($val)
                 || filter_var($val, FILTER_VALIDATE_INT) !== false
+                || \is_float($val)
                 || \is_bool($val)
                 || \is_array($val)
                 || \is_object($val);
-        }, '$value must be an array, object, boolean, string or integer.');
+        }, '"$value" must be an array, object, boolean, string, numeric or integer.');
 
         $this->value = $value;
     }

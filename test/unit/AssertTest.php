@@ -30,7 +30,7 @@ class AssertTest extends TestCase
     {
         Assert::string('test', 'test');
 
-        $this->doesNotPerformAssertions();
+        $this->assertTrue(true);
     }
 
     public function testEmailThrowExceptionWithDefaultMessage()
@@ -53,7 +53,7 @@ class AssertTest extends TestCase
     {
         Assert::email('test@example.com', 'test');
 
-        $this->doesNotPerformAssertions();
+        $this->assertTrue(true);
     }
 
     public function testIntegerThrowExceptionWithDefaultMessage()
@@ -76,7 +76,7 @@ class AssertTest extends TestCase
     {
         Assert::integer(64627492, 'test');
 
-        $this->doesNotPerformAssertions();
+        $this->assertTrue(true);
     }
 
     public function testBooleanThrowExceptionWithDefaultMessage()
@@ -100,7 +100,7 @@ class AssertTest extends TestCase
         Assert::boolean(false, 'test');
         Assert::boolean(true, 'test');
 
-        $this->doesNotPerformAssertions();
+        $this->assertTrue(true);
     }
 
     public function testIsInstanceOfThrowExceptionWithDefaultMessage()
@@ -123,7 +123,7 @@ class AssertTest extends TestCase
     {
         Assert::isInstanceOf(new \stdClass(), 'test', \stdClass::class);
 
-        $this->doesNotPerformAssertions();
+        $this->assertTrue(true);
     }
 
     public function testIsArrayThrowExceptionWithDefaultMessage()
@@ -147,7 +147,7 @@ class AssertTest extends TestCase
         Assert::isArray(['test'], 'test');
         Assert::isArray([64627492, 8482842], 'test');
 
-        $this->doesNotPerformAssertions();
+        $this->assertTrue(true);
     }
 
     public function testIsCallableThrowExceptionWithDefaultMessage()
@@ -174,7 +174,7 @@ class AssertTest extends TestCase
 
         Assert::isCallable($callback, 'test');
 
-        $this->doesNotPerformAssertions();
+        $this->assertTrue(true);
     }
 
     public function testAcceptThrowExceptionWithDefaultMessage()
@@ -203,7 +203,7 @@ class AssertTest extends TestCase
             return $val === [];
         });
 
-        $this->doesNotPerformAssertions();
+        $this->assertTrue(true);
     }
 
     public function testMinItemsThrowExceptionWithDefaultMessage()
@@ -228,7 +228,7 @@ class AssertTest extends TestCase
 
         Assert::minItems($range, 'test', 2);
 
-        $this->doesNotPerformAssertions();
+        $this->assertTrue(true);
     }
 
     public function testMaxItemsThrowExceptionWithDefaultMessage()
@@ -253,7 +253,7 @@ class AssertTest extends TestCase
 
         Assert::maxItems($range, 'test', 5);
 
-        $this->doesNotPerformAssertions();
+        $this->assertTrue(true);
     }
 
     public function testMinValueThrowExceptionWithDefaultMessage()
@@ -276,7 +276,7 @@ class AssertTest extends TestCase
     {
         Assert::minValue(5, 'test', 2);
 
-        $this->doesNotPerformAssertions();
+        $this->assertTrue(true);
     }
 
     public function testMaxValueThrowExceptionWithDefaultMessage()
@@ -299,7 +299,7 @@ class AssertTest extends TestCase
     {
         Assert::maxValue(2, 'test', 5);
 
-        $this->doesNotPerformAssertions();
+        $this->assertTrue(true);
     }
 
     public function testMinLengthThrowExceptionWithDefaultMessage()
@@ -322,7 +322,7 @@ class AssertTest extends TestCase
     {
         Assert::minLength('test', 'test', 2);
 
-        $this->doesNotPerformAssertions();
+        $this->assertTrue(true);
     }
 
     public function testMaxLengthThrowExceptionWithDefaultMessage()
@@ -345,7 +345,7 @@ class AssertTest extends TestCase
     {
         Assert::maxLength('test', 'test', 5);
 
-        $this->doesNotPerformAssertions();
+        $this->assertTrue(true);
     }
 
     public function testAnyOfThrowExceptionWithDefaultMessage()
@@ -368,6 +368,6 @@ class AssertTest extends TestCase
     {
         Assert::anyOf(3, 'test', [1, 3, 5]);
 
-        $this->doesNotPerformAssertions();
+        $this->assertTrue(true);
     }
 }

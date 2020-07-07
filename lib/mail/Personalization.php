@@ -109,7 +109,7 @@ class Personalization implements \JsonSerializable
     public function setSubject($subject)
     {
         if (!($subject instanceof Subject)) {
-            Assert::string($subject, 'subject');
+            Assert::string($subject, 'subject', '"$subject" must be an instance of SendGrid\Mail\Subject or a string');
 
             $subject = new Subject($subject);
         }

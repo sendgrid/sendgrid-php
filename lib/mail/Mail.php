@@ -709,7 +709,7 @@ class Mail implements \JsonSerializable
         $personalizationIndex = null,
         $personalization = null
     ) {
-        $this->addSubstitutions($datas);
+        $this->addSubstitutions($datas, $personalizationIndex, $personalization);
     }
 
     /**
@@ -942,7 +942,11 @@ class Mail implements \JsonSerializable
         if ($email instanceof From) {
             $this->from = $email;
         } else {
-            Assert::email($email, 'email');
+            Assert::email(
+                $email,
+                'email',
+                '"$email" must be an instance of SendGrid\Mail\From or a valid email address'
+            );
             $this->from = new From($email, $name);
         }
     }
@@ -1537,7 +1541,7 @@ class Mail implements \JsonSerializable
      *                                    use to specify how you would
      *                                    like this email to be handled
      */
-    public function setMailSettings(MailSettings $mail_settings)
+    public function setMailSettings($mail_settings)
     {
         $this->mail_settings = $mail_settings;
     }
@@ -1685,7 +1689,7 @@ class Mail implements \JsonSerializable
      *                                            of how your recipients interact
      *                                            with your email
      */
-    public function setTrackingSettings(TrackingSettings $tracking_settings)
+    public function setTrackingSettings($tracking_settings)
     {
         $this->tracking_settings = $tracking_settings;
     }
