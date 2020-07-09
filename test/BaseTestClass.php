@@ -56,8 +56,8 @@ class BaseTestClass extends TestCase
         $patch_array = JsonPatch::export($patch);
         if (empty($patch_array)) {
             return true;
-        } else {
-            return $patch_array;
         }
+
+        return $patch_array;
     }
 }

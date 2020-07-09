@@ -4,6 +4,8 @@
  */
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a SendAt object for the /mail/send API call
  *
@@ -21,7 +23,6 @@ class SendAt implements \JsonSerializable
      * result in lower deferral rates because it won't be going through our servers
      * at the same times as everyone else's mail
      */
-
     private $send_at;
 
 	/**
@@ -66,9 +67,8 @@ class SendAt implements \JsonSerializable
      */
     public function setSendAt($send_at)
     {
-        if (!is_int($send_at)) {
-            throw new TypeException('$send_at must be of type int.');
-        }
+        Assert::integer($send_at, 'send_at');
+
         $this->send_at = $send_at;
     }
 

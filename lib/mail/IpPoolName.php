@@ -5,6 +5,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a IpPoolName object for the /mail/send API call
  *
@@ -41,9 +43,9 @@ class IpPoolName implements \JsonSerializable
      */
     public function setIpPoolName($ip_pool_name)
     {
-        if (!is_string($ip_pool_name)) {
-            throw new TypeException('$ip_pool_name must be of type string.');
-        }
+        Assert::minLength($ip_pool_name, 'ip_pool_name', 2);
+        Assert::maxLength($ip_pool_name, 'ip_pool_name', 64);
+
         $this->ip_pool_name = $ip_pool_name;
     }
 

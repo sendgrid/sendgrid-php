@@ -46,3 +46,4 @@ require_once __DIR__ . '/mail/TemplateId.php';
 require_once __DIR__ . '/mail/TrackingSettings.php';
 require_once __DIR__ . '/mail/To.php';
 require_once __DIR__ . '/stats/Stats.php';
+require_once __DIR__ . '/helper/Assert.php';

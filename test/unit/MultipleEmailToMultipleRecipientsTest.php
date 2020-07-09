@@ -314,7 +314,7 @@ JSON;
         $email = new \SendGrid\Mail\Mail(
             $from,
             $tos,
-            $subject, // or array of subjects, these take precendence
+            $subject, // or array of subjects, these take precedence
             $plainTextContent,
             $htmlContent,
             $globalSubstitutions
@@ -371,7 +371,7 @@ JSON;
         $email = new \SendGrid\Mail\Mail(
             $from,
             $tos,
-            $subject, // or array of subjects, these take precendence
+            $subject, // or array of subjects, these take precedence
             $plainTextContent,
             $htmlContent,
             $globalSubstitutions
@@ -432,7 +432,7 @@ JSON;
         $email = new \SendGrid\Mail\Mail(
             $from,
             $tos,
-            $subject, // or array of subjects, these take precendence
+            $subject, // or array of subjects, these take precedence
             $plainTextContent,
             $htmlContent,
             $globalSubstitutions
@@ -492,7 +492,7 @@ JSON;
         $email = new \SendGrid\Mail\Mail(
             $from,
             $tos,
-            $subject, // or array of subjects, these take precendence
+            $subject, // or array of subjects, these take precedence
             $plainTextContent,
             $htmlContent,
             $globalSubstitutions

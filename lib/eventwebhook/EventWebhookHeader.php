@@ -8,7 +8,7 @@ namespace SendGrid\EventWebhook;
  *
  * @package SendGrid\EventWebhook
  */
-abstract class EventWebhookHeader
+final class EventWebhookHeader
 {
     const SIGNATURE = "X-Twilio-Email-Event-Webhook-Signature";
     const TIMESTAMP = "X-Twilio-Email-Event-Webhook-Timestamp";
