@@ -15,8 +15,6 @@ use SendGrid\Helper\Assert;
  */
 class Mail implements \JsonSerializable
 {
-    const VERSION = "7.6.0";
-
     /** @var $from From Email address of the sender */
     private $from;
 
