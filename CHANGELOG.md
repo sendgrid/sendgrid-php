@@ -3,6 +3,18 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2020-07-08] Version 7.7.0
+--------------------------
+**Library - Feature**
+- [PR #985](https://github.com/sendgrid/sendgrid-php/pull/985): Additional check for existence of Composer autoloader. Thanks to [@kampalex](https://github.com/kampalex)!
+- [PR #978](https://github.com/sendgrid/sendgrid-php/pull/978): Mail constructor: Added support for array of Substitution instances using $globalSubstitutions. Thanks to [@kampalex](https://github.com/kampalex)!
+
+**Library - Fix**
+- [PR #976](https://github.com/sendgrid/sendgrid-php/pull/976): allow a float type as a substitution value in transactional templates. Thanks to [@thinkingserious](https://github.com/thinkingserious)!
+- [PR #977](https://github.com/sendgrid/sendgrid-php/pull/977): Mail constructor: Verify arguments $plainTextContent and $htmlContent if provided. Thanks to [@kampalex](https://github.com/kampalex)!
+- [PR #971](https://github.com/sendgrid/sendgrid-php/pull/971): Optional Personalization arguments handling. Thanks to [@kampalex](https://github.com/kampalex)!
+
+
 [2020-06-10] Version 7.6.0
 --------------------------
 **Library - Fix**
