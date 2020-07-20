@@ -1,18 +1,11 @@
 <?php
 /**
  * This helper builds the EmailAddress object for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Mail
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
 namespace SendGrid\Mail;
+
+use SendGrid\Helper\Assert;
 
 /**
  * This class is used to construct a EmailAddress object for the /mail/send API call
@@ -25,7 +18,9 @@ class EmailAddress implements \JsonSerializable
     private $name;
     /** @var $email string The email address */
     private $email;
-    /** @var $substitutions Substitution[] An array of key/value substitutions to be be applied to the text and html content of the email body */
+    /** @var $substitutions Substitution[] An array of key/value substitutions
+     * to be be applied to the text and html content of the email body
+     */
     private $substitutions;
     /** @var $subject Subject The personalized subject of the email */
     private $subject;
@@ -33,13 +28,14 @@ class EmailAddress implements \JsonSerializable
     /**
      * Optional constructor
      *
-     * @param string|null $emailAddress The email address
-     * @param string|null $name The name of the person associated with
+     * @param string|null $emailAddress  The email address
+     * @param string|null $name          The name of the person associated with
      *                                   the email
-     * @param array|null $substitutions An array of key/value substitutions to
+     * @param array|null  $substitutions An array of key/value substitutions to
      *                                   be be applied to the text and html content
      *                                   of the email body
-     * @param string|null $subject The personalized subject of the email
+     * @param string|null $subject       The personalized subject of the email
+     * @throws TypeException
      */
     public function __construct(
         $emailAddress = null,
@@ -65,18 +61,13 @@ class EmailAddress implements \JsonSerializable
      * Add the email address to a EmailAddress object
      *
      * @param string $emailAddress The email address
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setEmailAddress($emailAddress)
     {
-        if (!(is_string($emailAddress) &&
-            filter_var($emailAddress, FILTER_VALIDATE_EMAIL))
-        ) {
-            throw new TypeException(
-                '$emailAddress must be valid and of type string.'
-            );
-        }
+        Assert::email($emailAddress, 'emailAddress');
+
         $this->email = $emailAddress;
     }
 
@@ -104,14 +95,12 @@ class EmailAddress implements \JsonSerializable
      * Add a name to a EmailAddress object
      *
      * @param string $name The name of the person associated with the email
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setName($name)
     {
-        if (!is_string($name)) {
-            throw new TypeException('$name must be of type string.');
-        }
+        Assert::string($name, 'name');
 
         /*
             Issue #368
@@ -125,13 +114,13 @@ class EmailAddress implements \JsonSerializable
             Double quotes will be shown in some email clients, so the name should
             only be wrapped when necessary.
         */
-        // Only wrapp in double quote if comma or semicolon are found
+        // Only wrap in double quote if comma or semicolon are found
         if (false !== strpos($name, ',') || false !== strpos($name, ';')) {
             // Unescape quotes
             $name = stripslashes(html_entity_decode($name, ENT_QUOTES));
             // Escape only double quotes
             $name = str_replace('"', '\\"', $name);
-            // Wrapp in double quotes
+            // Wrap in double quotes
             $name = '"' . $name . '"';
         }
         $this->name = (!empty($name)) ? $name : null;
@@ -153,14 +142,12 @@ class EmailAddress implements \JsonSerializable
      * @param array $substitutions An array of key/value substitutions to
      *                             be be applied to the text and html content
      *                             of the email body
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setSubstitutions($substitutions)
     {
-        if (!is_array($substitutions)) {
-            throw new TypeException('$substitutions must be an array.');
-        }
+        Assert::maxItems($substitutions, 'substitutions', 10000);
 
         $this->substitutions = $substitutions;
     }
@@ -177,23 +164,19 @@ class EmailAddress implements \JsonSerializable
      * Add a subject to a EmailAddress object
      *
      * @param string $subject The personalized subject of the email
-     * 
+     *
      * @throws TypeException
-     */ 
+     */
     public function setSubject($subject)
     {
-        if (!is_string($subject)) {
-            throw new TypeException('$subject must be of type string.');
-        }
-        if (!($subject instanceof Subject)) {
-            $this->subject = new Subject($subject);
-        } else {
-            $this->subject = $subject;
-        }
+        Assert::string($subject, 'subject');
+
+        // Now that we know it is a string, we can safely create a new subject
+        $this->subject = new Subject($subject);
     }
 
     /**
-     * Retrieve a subject from a EmailAddress object
+     * Retrieve a subject from an EmailAddress object
      *
      * @return Subject
      */
@@ -203,7 +186,7 @@ class EmailAddress implements \JsonSerializable
     }
 
     /**
-     * Return an array representing a EmailAddress object for the SendGrid API
+     * Return an array representing an EmailAddress object for the Twilio SendGrid API
      *
      * @return null|array
      */

@@ -1,33 +1,27 @@
-Hello! Thank you for choosing to help contribute to one of the SendGrid open source libraries. There are many ways you can contribute and help is always welcome. We simply ask that you follow the following contribution policies.
+Hello! Thank you for choosing to help contribute to one of the Twilio SendGrid open source libraries. There are many ways you can contribute and help is always welcome. We simply ask that you follow the following contribution policies.
 
-- [CLAs and CCLAs](#cla)
-- [Roadmap & Milestones](#roadmap)
+All third party contributors acknowledge that any contributions they provide will be made under the same open source license that the open source project is provided under.
+
 - [Feature Request](#feature-request)
 - [Submit a Bug Report](#submit-a-bug-report)
+  - [Please use our Bug Report Template](#please-use-our-bug-report-template)
 - [Improvements to the Codebase](#improvements-to-the-codebase)
+  - [Development Environment](#development-environment)
+    - [Install and Run Locally](#install-and-run-locally)
+      - [Prerequisites](#prerequisites)
+      - [Initial setup:](#initial-setup)
+  - [Environment Variables](#environment-variables)
+      - [Execute:](#execute)
 - [Understanding the Code Base](#understanding-the-codebase)
 - [Testing](#testing)
-- [Style Guidelines & Naming Conventions](#style-guidelines-and-naming-conventions)
+- [Style Guidelines & Naming Conventions](#style-guidelines--naming-conventions)
 - [Creating a Pull Request](#creating-a-pull-request)
 - [Code Reviews](#code-reviews)
 
-<a name="roadmap"></a>
-We use [Milestones](https://github.com/sendgrid/sendgrid-php/milestones) to help define current roadmaps, please feel free to grab an issue from the current milestone. Please indicate that you have begun work on it to avoid collisions. Once a PR is made, community review, comments, suggestions and additional PRs are welcomed and encouraged.
-
-<a name="cla"></a>
-## CLAs and CCLAs
-
-Before you get started, SendGrid requires that a SendGrid Contributor License Agreement (CLA) be filled out by every contributor to a SendGrid open source project.
-
-Our goal with the CLA is to clarify the rights of our contributors and reduce other risks arising from inappropriate contributions.  The CLA also clarifies the rights SendGrid holds in each contribution and helps to avoid misunderstandings over what rights each contributor is required to grant to SendGrid when making a contribution.  In this way the CLA encourages broad participation by our open source community and helps us build strong open source projects, free from any individual contributor withholding or revoking rights to any contribution.
-
-SendGrid does not merge a pull request made against a SendGrid open source project until that pull request is associated with a signed CLA. Copies of the CLA are available [here](https://gist.github.com/SendGridDX/98b42c0a5d500058357b80278fde3be8#file-sendgrid_cla).
-
-When you create a Pull Request, after a few seconds, a comment will appear with a link to the CLA. Click the link and fill out the brief form and then click the "I agree" button and you are all set. You will not be asked to re-sign the CLA unless we make a change.
+We use [Milestones](https://github.com/sendgrid/sendgrid-php/milestones) to help define current roadmaps, please feel free to grab an issue from the current milestone. Please indicate that you have begun work on it to avoid collisions. Once a PR is made, community review, comments, suggestions, and additional PRs are welcomed and encouraged.
 
 There are a few ways to contribute, which we'll enumerate below:
 
-<a name="feature-request"></a>
 ## Feature Request
 
 If you'd like to make a feature request, please read this section.
@@ -37,7 +31,6 @@ The GitHub issue tracker is the preferred channel for library feature requests, 
 - Please **search for existing issues** in order to ensure we don't have duplicate bugs/feature requests.
 - Please be respectful and considerate of others when commenting on issues
 
-<a name="submit-a-bug-report"></a>
 ## Submit a Bug Report
 
 Note: DO NOT include your credentials in ANY code examples, descriptions, or media you make public.
@@ -46,15 +39,14 @@ A software bug is a demonstrable issue in the code base. In order for us to diag
 
 Before you decide to create a new issue, please try the following:
 
-1. Check the Github issues tab if the identified issue has already been reported, if so, please add a +1 to the existing post.
-2. Update to the latest version of this code and check if issue has already been fixed
+1. Check the GitHub issues tab if the identified issue has already been reported, if so, please add a +1 to the existing post.
+2. Update to the latest version of this code and check if the issue has already been fixed
 3. Copy and fill in the Bug Report Template we have provided below
 
 ### Please use our Bug Report Template
 
-In order to make the process easier, we've included a [sample bug report template](https://github.com/sendgrid/sendgrid-php/blob/master/.github/ISSUE_TEMPLATE) (borrowed from [Ghost](https://github.com/TryGhost/Ghost/)). The template uses [GitHub flavored markdown](https://help.github.com/articles/github-flavored-markdown/) for formatting.
+In order to make the process easier, we've included a [sample bug report template](ISSUE_TEMPLATE.md).
 
-<a name="improvements-to-the-codebase"></a>
 ## Improvements to the Codebase
 
 We welcome direct contributions to the sendgrid-php code base. Thank you!
@@ -67,7 +59,7 @@ Please note that we utilize the [Gitflow Workflow](https://www.atlassian.com/git
 
 ##### Prerequisites #####
 
-- PHP 5.6, 7.0, 7.1 or 7.2
+- PHP 5.6, 7.0, 7.1, 7.2, 7.3 or 7.4
 
 ##### Initial setup: #####
 
@@ -79,7 +71,7 @@ composer install
 
 ### Environment Variables
 
-First, get your free SendGrid account [here](https://sendgrid.com/free?source=sendgrid-php).
+First, get your free Twilio SendGrid account [here](https://sendgrid.com/free?source=sendgrid-php).
 
 Next, update your environment with your [SENDGRID_API_KEY](https://app.sendgrid.com/settings/api_keys).
 
@@ -93,10 +85,13 @@ source ./sendgrid.env
 
 See the [examples folder](https://github.com/sendgrid/sendgrid-php/tree/master/examples) or [README](https://github.com/sendgrid/sendgrid-php/blob/master/README.md) to get started quickly.
 
-If you are using composer, replace <PATH_TO> with the path to your `vendor/autoload.php`. Otherwise, include lib/loader.php.
+We prefer the use of the Composer autoloader by loading `vendor/autoload.php`.
 
-<a name="understanding-the-codebase"></a>
-## Understanding the Code Base
+The examples will load `sendgrid-php.php` which is in the project root. This file verifies the existence of the Composer autoloader and warns you if dependencies are missing.
+
+As an alternative, include `lib/loader.php` to load all files in this project. However, this does not load all the dependencies needed to run this library properly.
+
+## Understanding the Codebase
 
 **/examples**
 
@@ -116,20 +111,16 @@ Unit tests for the HTTP client.
 
 **/lib**
 
-The interface to the SendGrid API. The subfolders are helpers.
+The interface to the Twilio SendGrid API. The subfolders are helpers.
 
-<a name="testing"></a>
 ## Testing
 
-All PRs require passing tests before the PR will be reviewed.
+All PRs require passing tests before the PR will be reviewed. All test files are in the [`/test/unit`](https://github.com/sendgrid/sendgrid-php/tree/master/test/unit) directory. For the purposes of contributing to this repo, please update or add relevant test files [here](https://github.com/sendgrid/sendgrid-php/tree/master/test) with tests as you modify the code.
 
-All test files are in the [`/test/unit`](https://github.com/sendgrid/sendgrid-php/tree/master/test/unit) directory.
+The integration tests require a Twilio SendGrid mock API in order to execute. We've simplified setting this up using Docker to run the tests. You will just need [Docker Desktop](https://docs.docker.com/get-docker/) and `make`.
 
-For the purposes of contributing to this repo, please update or add relevant test files here(https://github.com/sendgrid/sendgrid-php/tree/master/test) file with tests as you modify the code.
+Once these are available, simply execute the Docker test target to run all tests: `make test-docker`. This command can also be used to open an interactive shell into the container where this library is installed. To start a *bash* shell for example, use this command: `command=bash make test-docker`.
 
-To run the tests locally, please review [this documentation](https://github.com/sendgrid/sendgrid-php/tree/master/docker).
-
-<a name="style-guidelines-and-naming-conventions"></a>
 ## Style Guidelines & Naming Conventions
 
 Generally, we follow the style guidelines as suggested by the official language. However, we ask that you conform to the styles that already exist in the library. If you wish to deviate, please explain your reasoning.
@@ -140,7 +131,7 @@ Please run your code through:
 
 - [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer)
 
-## Creating a Pull Request<a name="creating_a_pull_request"></a>
+## Creating a Pull Request
 
 1. [Fork](https://help.github.com/fork-a-repo/) the project, clone your fork,
    and configure the remotes:
@@ -173,7 +164,7 @@ Please run your code through:
 
 4. Commit your changes in logical chunks. Please adhere to these [git commit
    message guidelines](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
-   or your code is unlikely be merged into the main project. Use Git's
+   or your code is unlikely to be merged into the main project. Use Git's
    [interactive rebase](https://help.github.com/articles/interactive-rebase)
    feature to tidy up your commits before making them public.
 
@@ -196,9 +187,6 @@ Please run your code through:
 7. [Open a Pull Request](https://help.github.com/articles/using-pull-requests/)
 	with a clear title and description against the `development` branch. All tests must be passing before we will review the PR.
 
-If you have any additional questions, please feel free to [email](mailto:dx@sendgrid.com) us or create an issue in this repo.
-
-<a name="code-reviews"></a>
 ## Code Reviews
 
-If you can, please look at open PRs and review them. Give feedback and help us merge these PRs much faster! If you don't know how, Github has some [great information on how to review a Pull Request](https://help.github.com/articles/about-pull-request-reviews/).
+If you can, please look at open PRs and review them. Give feedback and help us merge these PRs much faster! If you don't know how, GitHub has some [great information on how to review a Pull Request](https://help.github.com/articles/about-pull-request-reviews/).

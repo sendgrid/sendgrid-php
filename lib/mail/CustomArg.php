@@ -1,18 +1,11 @@
 <?php
 /**
  * This helper builds the CustomArg object for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Mail
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
 namespace SendGrid\Mail;
+
+use SendGrid\Helper\Assert;
 
 /**
  * This class is used to construct a CustomArg object for the /mail/send API call
@@ -33,12 +26,13 @@ class CustomArg implements \JsonSerializable
     /** @var $value string Custom arg value */
     private $value;
 
-    /**
-     * Optional constructor
-     *
-     * @param string|null $key Custom arg key
-     * @param string|null $value Custom arg value
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param string|null $key   Custom arg key
+	 * @param string|null $value Custom arg value
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct($key = null, $value = null)
     {
         if (isset($key)) {
@@ -53,15 +47,14 @@ class CustomArg implements \JsonSerializable
      * Add a custom arg key on a CustomArg object
      *
      * @param string $key Custom arg key
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setKey($key)
     {
-        if (!is_string($key)) {
-            throw new TypeException('$key must be of type string');
-        }
-        $this->key = (string) $key;
+        Assert::string($key, 'key');
+
+        $this->key = $key;
     }
 
     /**
@@ -78,15 +71,14 @@ class CustomArg implements \JsonSerializable
      * Add a custom arg value on a CustomArg object
      *
      * @param string $value Custom arg value
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setValue($value)
     {
-        if (!is_string($value)) {
-            throw new TypeException('$value must be of type string.');
-        }
-        $this->value = (string) $value;
+        Assert::string($value, 'value');
+
+        $this->value = $value;
     }
 
     /**
@@ -100,7 +92,7 @@ class CustomArg implements \JsonSerializable
     }
 
     /**
-     * Return an array representing a CustomArg object for the SendGrid API
+     * Return an array representing a CustomArg object for the Twilio SendGrid API
      *
      * @return null|array
      */

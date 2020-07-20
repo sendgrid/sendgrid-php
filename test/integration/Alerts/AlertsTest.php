@@ -1,6 +1,8 @@
 <?php
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Integration\Alerts;
+
+use SendGrid\Tests\BaseTestClass;
 
 class AlertsTest extends BaseTestClass
 {
