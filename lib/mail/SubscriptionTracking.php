@@ -1,18 +1,11 @@
 <?php
 /**
  * This helper builds the SubscriptionTracking object for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Mail
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
 namespace SendGrid\Mail;
+
+use SendGrid\Helper\Assert;
 
 /**
  * This class is used to construct a SubscriptionTracking object for
@@ -51,26 +44,27 @@ class SubscriptionTracking implements \JsonSerializable
      */
     private $substitution_tag;
 
-    /**
-     * Optional constructor
-     *
-     * @param bool|null $enable Indicates if this setting is enabled
-     * @param string|null $text Text to be appended to the email, with
-     *                                      the subscription tracking link. You may
-     *                                      control where the link is by using the
-     *                                      tag <% %>
-     * @param string|null $html HTML to be appended to the email, with
-     *                                      the subscription tracking link. You may
-     *                                      control where the link is by using the
-     *                                      tag <% %>
-     * @param string|null $substitution_tag A tag that will be replaced with the
-     *                                      unsubscribe URL. For example:
-     *                                      [unsubscribe_url]. If this parameter
-     *                                      is used, it will override both the text
-     *                                      and html parameters. The URL of the link
-     *                                      will be placed at the substitution tag’s
-     *                                      location, with no additional formatting
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param bool|null   $enable           Indicates if this setting is enabled
+	 * @param string|null $text             Text to be appended to the email, with
+	 *                                      the subscription tracking link. You may
+	 *                                      control where the link is by using the
+	 *                                      tag <% %>
+	 * @param string|null $html             HTML to be appended to the email, with
+	 *                                      the subscription tracking link. You may
+	 *                                      control where the link is by using the
+	 *                                      tag <% %>
+	 * @param string|null $substitution_tag A tag that will be replaced with the
+	 *                                      unsubscribe URL. For example:
+	 *                                      [unsubscribe_url]. If this parameter
+	 *                                      is used, it will override both the text
+	 *                                      and html parameters. The URL of the link
+	 *                                      will be placed at the substitution tag’s
+	 *                                      location, with no additional formatting
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct(
         $enable = null,
         $text = null,
@@ -95,14 +89,13 @@ class SubscriptionTracking implements \JsonSerializable
      * Update the enable setting on a SubscriptionTracking object
      *
      * @param bool $enable Indicates if this setting is enabled
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setEnable($enable)
     {
-        if (!is_bool($enable)) {
-            throw new TypeException('$enable must be of type bool.');
-        }
+        Assert::boolean($enable, 'enable');
+
         $this->enable = $enable;
     }
 
@@ -123,14 +116,13 @@ class SubscriptionTracking implements \JsonSerializable
      *                     the subscription tracking link. You may
      *                     control where the link is by using the
      *                     tag <% %>
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setText($text)
     {
-        if (!is_string($text)) {
-            throw new TypeException('$text must be of type string.');
-        }
+        Assert::string($text, 'text');
+
         $this->text = $text;
     }
 
@@ -151,14 +143,13 @@ class SubscriptionTracking implements \JsonSerializable
      *                     the subscription tracking link. You may
      *                     control where the link is by using the
      *                     tag <% %>
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setHtml($html)
     {
-        if (!is_string($html)) {
-            throw new TypeException('$html must be of type string.');
-        }
+        Assert::string($html, 'html');
+
         $this->html = $html;
     }
 
@@ -182,16 +173,13 @@ class SubscriptionTracking implements \JsonSerializable
      *                                 and html parameters. The URL of the link
      *                                 will be placed at the substitution tag’s
      *                                 location, with no additional formatting %>
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setSubstitutionTag($substitution_tag)
     {
-        if (!is_string($substitution_tag)) {
-            throw new TypeException(
-                '$substitution_tag must be of type string.'
-            );
-        }
+        Assert::string($substitution_tag, 'subscription_tag');
+
         $this->substitution_tag = $substitution_tag;
     }
 
@@ -207,7 +195,7 @@ class SubscriptionTracking implements \JsonSerializable
 
     /**
      * Return an array representing a SubscriptionTracking object
-     * for the SendGrid API
+     * for the Twilio SendGrid API
      *
      * @return null|array
      */

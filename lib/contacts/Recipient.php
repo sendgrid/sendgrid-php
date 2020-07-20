@@ -1,15 +1,6 @@
 <?php
 /**
  * This helper builds a recipient for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Contacts
- * @author    Kraig Hufstedler <kraigory@gmail.com>
- * @copyright 2018 SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
 namespace SendGrid\Contacts;
@@ -72,7 +63,7 @@ class Recipient implements \JsonSerializable
     }
 
     /**
-     * Return an array representing a recipient object for the SendGrid API
+     * Return an array representing a recipient object for the Twilio SendGrid API
      *
      * @return null|array
      */

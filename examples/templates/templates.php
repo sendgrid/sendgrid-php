@@ -29,9 +29,10 @@ try {
 // Retrieve all transactional templates. #
 // GET /templates #
 
+$query_params = ['generations' => 'legacy,dynamic'];
 
 try {
-    $response = $sg->client->templates()->get();
+    $response = $sg->client->templates()->get(null, $query_params);
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -86,7 +87,6 @@ try {
 } catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
 }
-
 
 ////////////////////////////////////////////////////
 // Create a new transactional template version. #

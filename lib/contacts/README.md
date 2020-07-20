@@ -1,6 +1,6 @@
 # Recipients Helper
 
-**This helper allows you to quickly and easily build a subscription form to add contacts to your contactdb in Sendgrid.**
+**This helper allows you to quickly and easily build a subscription form to add contacts to your contactdb in SendGrid.**
 
 ## Quick Start
 

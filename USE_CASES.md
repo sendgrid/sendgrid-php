@@ -10,7 +10,9 @@ This documentation provides examples for specific use cases. Please [open an iss
 - [Send Multiple Emails to Multiple Recipients](#send-multiple-emails-to-multiple-recipients)
 - [Transactional Templates](#transactional-templates)
 - [Legacy Templates](#legacy-templates)
-- [How to Setup a Domain Whitelabel](#how-to-setup-a-domain-whitelabel)
+- [Send an Email With Twilio Email (Pilot)](#send-an-email-with-twilio-email-pilot)
+- [Send an SMS Message](#send-an-sms-message)
+- [How to Set up a Domain Authentication](#how-to-set-up-a-domain-authentication)
 - [How to View Email Statistics](#how-to-view-email-statistics)
 - [Deploying to Heroku](#deploying-to-heroku)
 - [Google App Engine Installation](#google-app-engine-installation)
@@ -33,7 +35,7 @@ require 'vendor/autoload.php'; // If you're using Composer (recommended)
 
 $email = new \SendGrid\Mail\Mail();
 $email->setFrom("test@example.com", "Example User");
-$email->setSubject("Sending with SendGrid is Fun");
+$email->setSubject("Sending with Twilio SendGrid is Fun");
 $email->addTo("test@example.com", "Example User");
 $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
 $email->addContent(
@@ -255,7 +257,7 @@ $email = new \SendGrid\Mail\Mail();
 // For a detailed description of each of these settings, 
 // please see the 
 // [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
-$email->setSubject("Sending with SendGrid is Fun 2");
+$email->setSubject("Sending with Twilio SendGrid is Fun 2");
 
 $email->addTo("test@example.com", "Example User");
 $email->addTo("test+1@example.com", "Example User1");
@@ -313,11 +315,11 @@ $email->setSendAt(1461775051);
 // methods to add and update multiple personalizations. You can learn more about 
 // personalizations [here](https://sendgrid.com/docs/Classroom/Send/v3_Mail_Send/personalizations.html).
 
-// The values below this comment are global to entire message
+// The values below this comment are global to an entire message
 
-$email->setFrom("test@example.com", "DX");
+$email->setFrom("test@example.com", "Twilio SendGrid");
 
-$email->setGlobalSubject("Sending with SendGrid is Fun and Global 2");
+$email->setGlobalSubject("Sending with Twilio SendGrid is Fun and Global 2");
 
 $email->addContent(
     "text/plain",
@@ -448,7 +450,7 @@ $email = new \SendGrid\Mail\Mail();
 // please see the 
 // [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
 $email->setSubject(
-    new \SendGrid\Mail\Subject("Sending with SendGrid is Fun 2")
+    new \SendGrid\Mail\Subject("Sending with Twilio SendGrid is Fun 2")
 );
 
 $email->addTo(new \SendGrid\Mail\To("test@example.com", "Example User"));
@@ -515,12 +517,12 @@ $email->setSendAt(new \SendGrid\Mail\SendAt(1461775051));
 // methods to add and update multiple personalizations. You can learn more about 
 // personalizations [here](https://sendgrid.com/docs/Classroom/Send/v3_Mail_Send/personalizations.html).
 
-// The values below this comment are global to entire message
+// The values below this comment are global to an entire message
 
-$email->setFrom(new \SendGrid\Mail\From("test@example.com", "DX"));
+$email->setFrom(new \SendGrid\Mail\From("test@example.com", "Twilio SendGrid"));
 
 $email->setGlobalSubject(
-    new \SendGrid\Mail\Subject("Sending with SendGrid is Fun and Global 2")
+    new \SendGrid\Mail\Subject("Sending with Twilio SendGrid is Fun and Global 2")
 );
 
 $plainTextContent = new \SendGrid\Mail\PlainTextContent(
@@ -692,7 +694,7 @@ require 'vendor/autoload.php'; // If you're using Composer (recommended)
 
 $email = new \SendGrid\Mail\Mail(); 
 $email->setFrom("test@example.com", "Example User");
-$email->setSubject("Sending with SendGrid is Fun");
+$email->setSubject("Sending with Twilio SendGrid is Fun");
 $email->addTo("test@example.com", "Example User");
 $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
 $email->addContent(
@@ -723,7 +725,7 @@ require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // https://github.com/sendgrid/sendgrid-php/releases
 
 $from = new \SendGrid\Mail\From("test@example.com", "Example User");
-$subject = new \SendGrid\Mail\Subject("Sending with SendGrid is Fun");
+$subject = new \SendGrid\Mail\Subject("Sending with Twilio SendGrid is Fun");
 $to = new \SendGrid\Mail\To("test@example.com", "Example User");
 $plainTextContent = new \SendGrid\Mail\PlainTextContent(
     "and easy to do anywhere, even with PHP"
@@ -771,7 +773,7 @@ $tos = [
     "test+test3@example.com" => "Example User3"
 ];
 $email->addTos($tos);
-$email->setSubject("Sending with SendGrid is Fun");
+$email->setSubject("Sending with Twilio SendGrid is Fun");
 $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
 $email->addContent(
     "text/html", "<strong>and easy to do anywhere, even with PHP</strong>"
@@ -805,7 +807,7 @@ $tos = [
     new \SendGrid\Mail\To("test+test2@example.com", "Example User2"),
     new \SendGrid\Mail\To("test+test3@example.com", "Example User3")
 ];
-$subject = new \SendGrid\Mail\Subject("Sending with SendGrid is Fun");
+$subject = new \SendGrid\Mail\Subject("Sending with Twilio SendGrid is Fun");
 $plainTextContent = new \SendGrid\Mail\PlainTextContent(
     "and easy to do anywhere, even with PHP"
 );
@@ -984,7 +986,7 @@ try {
 <a name="transactional-templates"></a>
 # Transactional Templates
 
-For this example, we assume you have created a [transactional template](https://sendgrid.com/docs/User_Guide/Transactional_Templates/create_and_edit_transactional_templates.html). Following is the template content we used for testing.
+For this example, we assume you have created a [transactional template](https://sendgrid.com/docs/User_Guide/Transactional_Templates/create_and_edit_transactional_templates.html) in the UI or via the API. Following is the template content we used for testing.
 
 Template ID (replace with your own):
 
@@ -1283,19 +1285,117 @@ try {
 }
 ```
 
-<a name="domain-whitelabel"></a>
-# How to Setup a Domain Whitelabel
+# Send an Email With Twilio Email (Pilot)
 
-You can find documentation for how to setup a domain whitelabel via the UI [here](https://example.com/docs/Classroom/Basics/Whitelabel/setup_domain_whitelabel.html) and via API [here](https://github.com/sendgrid/sendgrid-php/blob/master/USAGE.md#whitelabel).
+### 1. Obtain a Free Twilio Account
 
-Find more information about all of SendGrid's whitelabeling related documentation [here](https://example.com/docs/Classroom/Basics/Whitelabel/index.html).
+Sign up for a free Twilio account [here](https://www.twilio.com/try-twilio?source=sendgrid-php).
+
+### 2. Set Up Your Environment Variables
+
+The Twilio API allows for authentication using with either an API key/secret or your Account SID/Auth Token. You can create an API key [here](https://twil.io/get-api-key) or obtain your Account SID and Auth Token [here](https://twil.io/console).
+
+Once you have those, follow the steps below based on your operating system.
+
+#### Linux/Mac
+
+```bash
+echo "export TWILIO_API_KEY='YOUR_TWILIO_API_KEY'" > twilio.env
+echo "export TWILIO_API_SECRET='YOUR_TWILIO_API_SECRET'" >> twilio.env
+
+# or
+
+echo "export TWILIO_ACCOUNT_SID='YOUR_TWILIO_ACCOUNT_SID'" > twilio.env
+echo "export TWILIO_AUTH_TOKEN='YOUR_TWILIO_AUTH_TOKEN'" >> twilio.env
+```
+
+Then:
+
+```bash
+echo "twilio.env" >> .gitignore
+source ./twilio.env
+```
+
+#### Windows
+
+Temporarily set the environment variable (accessible only during the current CLI session):
+
+```bash
+set TWILIO_API_KEY=YOUR_TWILIO_API_KEY
+set TWILIO_API_SECRET=YOUR_TWILIO_API_SECRET
+
+: or
+
+set TWILIO_ACCOUNT_SID=YOUR_TWILIO_ACCOUNT_SID
+set TWILIO_AUTH_TOKEN=YOUR_TWILIO_AUTH_TOKEN
+```
+
+Or permanently set the environment variable (accessible in all subsequent CLI sessions):
+
+```bash
+setx TWILIO_API_KEY "YOUR_TWILIO_API_KEY"
+setx TWILIO_API_SECRET "YOUR_TWILIO_API_SECRET"
+
+: or
+
+setx TWILIO_ACCOUNT_SID "YOUR_TWILIO_ACCOUNT_SID"
+setx TWILIO_AUTH_TOKEN "YOUR_TWILIO_AUTH_TOKEN"
+```
+
+### 3. Initialize the Twilio Email Client
+
+```php
+$twilioEmail = new \TwilioEmail(\getenv('TWILIO_API_KEY'), \getenv('TWILIO_API_SECRET'));
+
+// or
+
+$twilioEmail = new \TwilioEmail(\getenv('TWILIO_ACCOUNT_SID'), \getenv('TWILIO_AUTH_TOKEN'));
+```
+
+This client has the same interface as the `SendGrid` client.
+
+# Send an SMS Message
+
+First, follow the above steps for creating a Twilio account and setting up environment variables with the proper credentials.
+
+Then, install the Twilio Helper Library.
+
+```bash
+composer require twilio/sdk
+```
+
+Finally, send a message.
+
+```php
+<?php
+$sid = \getenv('TWILIO_ACCOUNT_SID');
+$token = \getenv('TWILIO_AUTH_TOKEN');
+
+$client = new \Twilio\Rest\Client($sid, $token);
+$message = $client->messages->create(
+  '8881231234', // Text this number
+  [
+    'from' => '9991231234', // From a valid Twilio number
+    'body' => 'Hello from Twilio!'
+  ]
+);
+```
+
+For more information, please visit the [Twilio SMS PHP documentation](https://www.twilio.com/docs/sms/quickstart/php).
+
+<a name="domain-authentication"></a>
+# How to Set up a Domain Authentication
+
+You can find documentation for how to setup a domain authentication via the UI [here](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/) and via API [here](https://github.com/sendgrid/sendgrid-php/blob/master/USAGE.md#sender-authentication).
+
+Find more information about all of Twilio SendGrid's authentication related documentation [here](https://sendgrid.com/docs/ui/account-and-settings/).
 
 <a name="email-stats"></a>
 # How to View Email Statistics
 
 You can find documentation for how to view your email statistics via the UI [here](https://app.example.com/statistics) and via API [here](https://github.com/sendgrid/sendgrid-php/blob/master/USAGE.md#stats).
 
-Alternatively, we can post events to a URL of your choice via our [Event Webhook](https://example.com/docs/API_Reference/Webhooks/event.html) about events that occur as SendGrid processes your email.
+Alternatively, we can post events to a URL of your choice via our [Event Webhook](https://example.com/docs/API_Reference/Webhooks/event.html) about events that occur as Twilio SendGrid processes your email.
 
 <a name="heroku"></a>
 # Deploying to Heroku
@@ -1309,7 +1409,7 @@ Use the button below to instantly setup your own Simple instance for sending ema
 <a name="GAE-instructions"></a>
 # Google App Engine Installation
 
-Google App Engine installations with composer require creation of file `php.ini` in the base folder(the same directory as the `app.yaml` file). You can read more about this file [here](https://cloud.google.com/appengine/docs/standard/php/config/php_ini).
+Google App Engine installations with composer require the creation of file `php.ini` in the base folder(the same directory as the `app.yaml` file). You can read more about this file [here](https://cloud.google.com/appengine/docs/standard/php/config/php_ini).
 
 The file `php.ini` should contain:
 

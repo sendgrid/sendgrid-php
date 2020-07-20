@@ -1,19 +1,20 @@
 <?php
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Integration\Helpers\Stats;
 
 use SendGrid\Tests\BaseTestClass;
 use SendGrid\Stats\Stats;
 
 class StatsTest extends BaseTestClass
 {
-    /**
-     * @param array $expectedGlobal
-     * @param array $expectedCategory
-     * @param array $expectedSubuser
-     * @param array $expectedSum
-     * @param array $expectedSubuserMonthly
-     * @dataProvider validValues
-     */
+	/**
+	 * @param array $expectedGlobal
+	 * @param array $expectedCategory
+	 * @param array $expectedSubuser
+	 * @param array $expectedSum
+	 * @param array $expectedSubuserMonthly
+	 * @dataProvider validValues
+	 * @throws \Exception
+	 */
     public function testGetValues(
         $expectedGlobal,
         $expectedCategory,
@@ -47,7 +48,7 @@ class StatsTest extends BaseTestClass
      * @param array $expectedSum
      * @param array $expectedSubuserMonthly
      * @dataProvider invalidValues
-     * @expectedException Exception
+     * @expectedException \Exception
      */
     public function testGetValuesFail(
         $expectedGlobal,

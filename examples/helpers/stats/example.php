@@ -1,16 +1,19 @@
 <?php
 
 // If you are using Composer
-require __DIR__ . '/../../../vendor/autoload.php';
+require __DIR__ . '<PATH_TO>/vendor/autoload.php';
+// comment out the above line if not using Composer
+// require("./sendgrid-php.php");
+// If not using Composer, uncomment the above line
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
 
-$stats = new \SendGrid\Stats('2017-10-18');
+// Provide date in YYYY-MM-DD format
+$stats = new \SendGrid\Stats\Stats('2017-10-18');
 
 //$response = $sg->client->categories()->post(['category' => 'cat2']);
 //$response = $sg->client->categories()->get(null, $query_params);
-
 $globalResponse = $sg->client->stats()->get(null, $stats->getGlobal());
 
 $categoryResponse = $sg->client->categories()->stats()->get(null, $stats->getCategory(['category1', 'category2']));
