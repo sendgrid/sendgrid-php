@@ -1,6 +1,6 @@
 <?php
 
-namespace SendGrid\Tests\Ip;
+namespace SendGrid\Tests\Integration\Ip;
 
 use SendGrid\Tests\BaseTestClass;
 

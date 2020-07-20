@@ -1,11 +1,11 @@
 <?php
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Integration\Helpers\Contacts;
 
 use SendGrid\Tests\BaseTestClass;
 use SendGrid\Contacts\RecipientForm;
 use SendGrid\Contacts\Recipient;
 
-class RecipientsTestRecipient extends BaseTestClass
+class RecipientsTest extends BaseTestClass
 {
     public function testRecipientsForm()
     {
