@@ -25,8 +25,8 @@ abstract class BaseSendGridClientInterface
      *
      * @param string $auth Authorization header value.
      * @param string $host Default host/base URL for the client.
-     * @param array $options An array of options, currently only "host", "curl", and
-     *                       "impersonateSubuser" are implemented.
+     * @param array $options An array of options, currently only "host", "curl",
+     *                       "version", and "impersonateSubuser", are implemented.
      */
     public function __construct($auth, $host, $options = array())
     {
@@ -38,6 +38,8 @@ abstract class BaseSendGridClientInterface
 
         $host = isset($options['host']) ? $options['host'] : $host;
 
+        $version = isset($options['version']) ? $options['version'] : '/v3';
+
         if (!empty($options['impersonateSubuser'])) {
             $headers[] = 'On-Behalf-Of: ' . $options['impersonateSubuser'];
         }
@@ -47,7 +49,7 @@ abstract class BaseSendGridClientInterface
         $this->client = new Client(
             $host,
             $headers,
-            '/v3',
+            $version,
             null,
             $curlOptions
         );
