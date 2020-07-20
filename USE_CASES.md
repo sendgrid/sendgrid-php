@@ -14,10 +14,9 @@ This documentation provides examples for specific use cases. Please [open an iss
 - [Send an SMS Message](#send-an-sms-message)
 - [How to Set up a Domain Authentication](#how-to-set-up-a-domain-authentication)
 - [How to View Email Statistics](#how-to-view-email-statistics)
+- [How to Use the Email Activity Feed](#how-to-use-the-email-activity-feed-api)
 - [Deploying to Heroku](#deploying-to-heroku)
 - [Google App Engine Installation](#google-app-engine-installation)
-- [How to Use the Email Activity Feed](#email-activity)
-
 
 <a name="attachments"></a>
 # Attachments
@@ -1397,6 +1396,11 @@ You can find documentation for how to view your email statistics via the UI [her
 
 Alternatively, we can post events to a URL of your choice via our [Event Webhook](https://example.com/docs/API_Reference/Webhooks/event.html) about events that occur as Twilio SendGrid processes your email.
 
+<a name="email-activity"></a>
+# How to Use the Email Activity Feed API
+
+In order to gain access to the Email Activity Feed API, you must [purchase](https://app.sendgrid.com/settings/billing/addons/email_activity) additional email activity history. To learn about Sendgrid's API to download information from the Email Activity feed, get started [here](https://sendgrid.com/docs/API_Reference/Web_API_v3/Tutorials/getting_started_email_activity_api.html).
+
 <a name="heroku"></a>
 # Deploying to Heroku
 
@@ -1416,8 +1420,3 @@ The file `php.ini` should contain:
 ```ini
 google_app_engine.enable_curl_lite = 1
 ```
-<a name="email-activity"></a>
-# Getting Started With the Email Activity Feed API
-
-In order to gain access to the Email Activity Feed API, you must [purchase](https://app.sendgrid.com/settings/billing/addons/email_activity) additional email activity history.
- To learn about Sendgrid's API to download information from the Email Activity feed, get started [here.](https://sendgrid.com/docs/API_Reference/Web_API_v3/Tutorials/getting_started_email_activity_api.html) 
