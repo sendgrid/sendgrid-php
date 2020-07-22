@@ -3,6 +3,20 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2020-07-22] Version 7.8.0
+--------------------------
+**Library - Chore**
+- [PR #990](https://github.com/sendgrid/sendgrid-php/pull/990): migrate to new default sendgrid-oai branch. Thanks to [@eshanholtz](https://github.com/eshanholtz)!
+
+**Library - Docs**
+- [PR #778](https://github.com/sendgrid/sendgrid-php/pull/778): fix grammar issue in CHANGELOG. Thanks to [@Hestersue43](https://github.com/Hestersue43)!
+- [PR #759](https://github.com/sendgrid/sendgrid-php/pull/759): add Email Activity API to usage docs. Thanks to [@ajloria](https://github.com/ajloria)!
+
+**Library - Feature**
+- [PR #850](https://github.com/sendgrid/sendgrid-php/pull/850): Add an option to override SendGrid Client path version. Thanks to [@erbaker](https://github.com/erbaker)!
+- [PR #762](https://github.com/sendgrid/sendgrid-php/pull/762): enhanced type exception handling. Thanks to [@misantron](https://github.com/misantron)!
+
+
 [2020-07-08] Version 7.7.0
 --------------------------
 **Library - Feature**
