@@ -89,8 +89,6 @@ We prefer the use of the Composer autoloader by loading `vendor/autoload.php`.
 
 The examples will load `sendgrid-php.php` which is in the project root. This file verifies the existence of the Composer autoloader and warns you if dependencies are missing.
 
-As an alternative, include `lib/loader.php` to load all files in this project. However, this does not load all the dependencies needed to run this library properly.
-
 ## Understanding the Codebase
 
 **/examples**
@@ -139,10 +137,10 @@ Please run your code through:
    ```bash
    # Clone your fork of the repo into the current directory
    git clone https://github.com/sendgrid/sendgrid-php
-   
+
    # Navigate to the newly cloned directory
    cd sendgrid-php
-   
+
    # Assign the original repo to a remote called "upstream"
    git remote add upstream https://github.com/sendgrid/sendgrid-php
    ```
