@@ -10,6 +10,9 @@
 [![Open Source Helpers](https://www.codetriage.com/sendgrid/sendgrid-php/badges/users.svg)](https://www.codetriage.com/sendgrid/sendgrid-php)
 
 **NEW:**
+
+**The default branch name for this repository has been changed to `main` as of 07/27/2020.**
+
 - Subscribe to email [notifications](https://dx.sendgrid.com/newsletter/php) for releases and breaking changes.
 - Send SMS messages with [Twilio](https://github.com/sendgrid/sendgrid-php/blob/master/USE_CASES.md#sms).
 
