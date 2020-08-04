@@ -1,6 +1,6 @@
-![SendGrid Logo](https://github.com/sendgrid/sendgrid-python/raw/master/twilio_sendgrid_logo.png)
+![SendGrid Logo](https://github.com/sendgrid/sendgrid-python/raw/HEAD/twilio_sendgrid_logo.png)
 
-[![BuildStatus](https://travis-ci.org/sendgrid/sendgrid-php.svg?branch=master)](https://travis-ci.org/sendgrid/sendgrid-php)
+[![BuildStatus](https://travis-ci.org/sendgrid/sendgrid-php.svg?branch=main)](https://travis-ci.org/sendgrid/sendgrid-php)
 [![Packagist](https://img.shields.io/packagist/v/sendgrid/sendgrid.svg)](https://packagist.org/packages/sendgrid/sendgrid)
 [![Downloads](https://img.shields.io/packagist/dt/sendgrid/sendgrid.svg?maxAge=3600)](https://packagist.org/packages/sendgrid/sendgrid)
 [![Email Notifications Badge](https://dx.sendgrid.com/badge/php)](https://dx.sendgrid.com/newsletter/php)
@@ -14,13 +14,13 @@
 **The default branch name for this repository has been changed to `main` as of 07/27/2020.**
 
 - Subscribe to email [notifications](https://dx.sendgrid.com/newsletter/php) for releases and breaking changes.
-- Send SMS messages with [Twilio](https://github.com/sendgrid/sendgrid-php/blob/master/USE_CASES.md#sms).
+- Send SMS messages with [Twilio](https://github.com/sendgrid/sendgrid-php/blob/HEAD/USE_CASES.md#sms).
 
 **This library allows you to quickly and easily use the Twilio SendGrid Web API v3 via PHP.**
 
 Version 7.X.X of this library provides full support for all Twilio SendGrid [Web API v3](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html) endpoints, including the new [v3 /mail/send](https://sendgrid.com/blog/introducing-v3mailsend-sendgrids-new-mail-endpoint).
 
-We want this library to be community driven and Twilio SendGrid led. Your help is needed to realize this goal. To help make sure we are building the right things in the right order, we ask that you create [issues](https://github.com/sendgrid/sendgrid-php/issues) and [pull requests](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md) or simply upvote or comment on existing issues or pull requests.
+We want this library to be community driven and Twilio SendGrid led. Your help is needed to realize this goal. To help make sure we are building the right things in the right order, we ask that you create [issues](https://github.com/sendgrid/sendgrid-php/issues) and [pull requests](https://github.com/sendgrid/sendgrid-php/blob/HEAD/CONTRIBUTING.md) or simply upvote or comment on existing issues or pull requests.
 
 Please browse the rest of this README for further details.
 
@@ -124,7 +124,7 @@ try {
 }
 ```
 
-The `SendGrid\Mail` constructor creates a [personalization object](https://sendgrid.com/docs/Classroom/Send/v3_Mail_Send/personalizations.html) for you. [Here](https://github.com/sendgrid/sendgrid-php/blob/master/USE_CASES.md#kitchen-sink) is an example of how to add to it.
+The `SendGrid\Mail` constructor creates a [personalization object](https://sendgrid.com/docs/Classroom/Send/v3_Mail_Send/personalizations.html) for you. [Here](https://github.com/sendgrid/sendgrid-php/blob/HEAD/USE_CASES.md#kitchen-sink) is an example of how to add to it.
 
 ## General v3 Web API Usage (With Fluent Interface)
 
@@ -183,22 +183,22 @@ try {
 <a name="use-cases"></a>
 # Use Cases
 
-[Examples of common API use cases](https://github.com/sendgrid/sendgrid-php/blob/master/USE_CASES.md), such as how to send an email with a transactional template.
+[Examples of common API use cases](https://github.com/sendgrid/sendgrid-php/blob/HEAD/USE_CASES.md), such as how to send an email with a transactional template.
 
 <a name="usage"></a>
 # Usage
 
 - [Twilio SendGrid Docs](https://sendgrid.com/docs/API_Reference/index.html)
 - [Generic Library Usage
-    Documentation](https://github.com/sendgrid/sendgrid-php/tree/master/USAGE.md)
-- [Example Code](https://github.com/sendgrid/sendgrid-php/blob/master/USE_CASES.md)
+    Documentation](https://github.com/sendgrid/sendgrid-php/tree/HEAD/USAGE.md)
+- [Example Code](https://github.com/sendgrid/sendgrid-php/blob/HEAD/USE_CASES.md)
 
 <a name="announcements"></a>
 # Announcements
 
 v7 has been released! Please see the [release notes](https://github.com/sendgrid/sendgrid-php/releases/tag/v7.0.0) for details.
 
-All updates to this library are documented in our [CHANGELOG](https://github.com/sendgrid/sendgrid-php/blob/master/CHANGELOG.md) and [releases](https://github.com/sendgrid/sendgrid-php/releases). You may also subscribe to email [release notifications](https://dx.sendgrid.com/newsletter/php) for releases and breaking changes.
+All updates to this library are documented in our [CHANGELOG](https://github.com/sendgrid/sendgrid-php/blob/HEAD/CHANGELOG.md) and [releases](https://github.com/sendgrid/sendgrid-php/releases). You may also subscribe to email [release notifications](https://dx.sendgrid.com/newsletter/php) for releases and breaking changes.
 
 <a name="roadmap"></a>
 # Roadmap
@@ -208,19 +208,19 @@ If you are interested in the future direction of this project, please take a loo
 <a name="contribute"></a>
 # How to Contribute
 
-We encourage contribution to our libraries (you might even score some nifty swag), please see our [CONTRIBUTING](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md) guide for details.
+We encourage contribution to our libraries (you might even score some nifty swag), please see our [CONTRIBUTING](https://github.com/sendgrid/sendgrid-php/blob/HEAD/CONTRIBUTING.md) guide for details.
 
 Quick links:
 
-- [Feature Request](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#feature_request)
-- [Bug Reports](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#submit_a_bug_report)
-- [Improvements to the Codebase](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#improvements_to_the_codebase)
-- [Review Pull Requests](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#code-reviews)
+- [Feature Request](https://github.com/sendgrid/sendgrid-php/blob/HEAD/CONTRIBUTING.md#feature_request)
+- [Bug Reports](https://github.com/sendgrid/sendgrid-php/blob/HEAD/CONTRIBUTING.md#submit_a_bug_report)
+- [Improvements to the Codebase](https://github.com/sendgrid/sendgrid-php/blob/HEAD/CONTRIBUTING.md#improvements_to_the_codebase)
+- [Review Pull Requests](https://github.com/sendgrid/sendgrid-php/blob/HEAD/CONTRIBUTING.md#code-reviews)
 
 <a name="troubleshooting"></a>
 # Troubleshooting
 
-Please see our [troubleshooting guide](https://github.com/sendgrid/sendgrid-php/blob/master/TROUBLESHOOTING.md) for common library issues.
+Please see our [troubleshooting guide](https://github.com/sendgrid/sendgrid-php/blob/HEAD/TROUBLESHOOTING.md) for common library issues.
 
 <a name="about"></a>
 # About
