@@ -10,6 +10,9 @@
 [![Open Source Helpers](https://www.codetriage.com/sendgrid/sendgrid-php/badges/users.svg)](https://www.codetriage.com/sendgrid/sendgrid-php)
 
 **NEW:**
+
+**The default branch name for this repository has been changed to `main` as of 07/27/2020.**
+
 - Subscribe to email [notifications](https://dx.sendgrid.com/newsletter/php) for releases and breaking changes.
 - Send SMS messages with [Twilio](https://github.com/sendgrid/sendgrid-php/blob/master/USE_CASES.md#sms).
 
@@ -73,9 +76,9 @@ Add Twilio SendGrid to your `composer.json` file. If you are not using [Composer
 
 #### Alternative: Install package from zip
 
-If you are not using Composer, simply download and install the **[latest packaged release of the library as a zip](https://github.com/sendgrid/sendgrid-php/releases/download/7.6.0/sendgrid-php.zip)**.
+If you are not using Composer, simply download and install the **[latest packaged release of the library as a zip](https://github.com/sendgrid/sendgrid-php/releases/download/7.8.1/sendgrid-php.zip)**.
 
-[**⬇︎ Download Packaged Library ⬇︎**](https://github.com/sendgrid/sendgrid-php/releases/download/7.6.0/sendgrid-php.zip)
+[**⬇︎ Download Packaged Library ⬇︎**](https://github.com/sendgrid/sendgrid-php/releases/download/7.8.1/sendgrid-php.zip)
 
 Previous versions of the library can be found in the [version index](https://sendgrid-open-source.s3.amazonaws.com/index.html) or downloaded directly from [GitHub](https://github.com/sendgrid/sendgrid-php/releases).
 
@@ -191,7 +194,6 @@ Quick links:
 
 - [Feature Request](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#feature_request)
 - [Bug Reports](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#submit_a_bug_report)
-- [Sign the CLA to Create a Pull Request](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#cla)
 - [Improvements to the Codebase](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#improvements_to_the_codebase)
 - [Review Pull Requests](https://github.com/sendgrid/sendgrid-php/blob/master/CONTRIBUTING.md#code-reviews)
 

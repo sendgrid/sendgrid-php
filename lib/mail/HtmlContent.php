@@ -16,6 +16,8 @@ class HtmlContent extends Content
      * Create a Content object with a HTML mime type
      *
      * @param string $value HTML formatted content
+     *
+     * @throws TypeException
      */
     public function __construct($value)
     {

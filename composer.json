@@ -34,6 +34,7 @@
     "psr-4": {
       "SendGrid\\Contacts\\": "lib/contacts/",
       "SendGrid\\EventWebhook\\": "lib/eventwebhook/",
+      "SendGrid\\Helper\\": "lib/helper/",
       "SendGrid\\Mail\\": "lib/mail/",
       "SendGrid\\Stats\\": "lib/stats/"
     },

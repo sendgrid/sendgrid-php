@@ -14,8 +14,8 @@ use SendGrid\Mail\Attachment;
  */
 class AttachmentsTest extends TestCase
 {
-    public function testWillEncodeNonBase64String() {
-
+    public function testWillEncodeNonBase64String()
+    {
         $attachment = new Attachment();
         $testString = 'Twilio SendGrid is awesome!';
 
@@ -24,8 +24,8 @@ class AttachmentsTest extends TestCase
         $this->assertEquals(base64_encode($testString), $attachment->getContent());
     }
 
-    public function testWillNotEncodeBase64String() {
-
+    public function testWillNotEncodeBase64String()
+    {
         $attachment = new Attachment();
         $testString = base64_encode('Twilio SendGrid is awesome!');
 

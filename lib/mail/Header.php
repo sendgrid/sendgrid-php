@@ -5,6 +5,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a Header object for the /mail/send API call
  *
@@ -47,9 +49,8 @@ class Header implements \JsonSerializable
      */
     public function setKey($key)
     {
-        if (!is_string($key)) {
-            throw new TypeException('$key must be of type string.');
-        }
+        Assert::string($key, 'key');
+
         $this->key = $key;
     }
 
@@ -72,9 +73,8 @@ class Header implements \JsonSerializable
      */
     public function setValue($value)
     {
-        if (!is_string($value)) {
-            throw new TypeException('$value must be of type string.');
-        }
+        Assert::string($value, 'value');
+
         $this->value = $value;
     }
 

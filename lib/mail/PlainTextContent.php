@@ -16,6 +16,8 @@ class PlainTextContent extends Content
      * Create a Content object with a plain text mime type
      *
      * @param string $value plain text formatted content
+     *
+     * @throws TypeException
      */
     public function __construct($value)
     {

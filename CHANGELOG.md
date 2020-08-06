@@ -3,6 +3,38 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2020-08-05] Version 7.8.1
+--------------------------
+**Library - Fix**
+- [PR #755](https://github.com/sendgrid/sendgrid-php/pull/755): remove loader.php and update CONTRIBUTING.md. Thanks to [@mkasberg](https://github.com/mkasberg)!
+
+
+[2020-07-22] Version 7.8.0
+--------------------------
+**Library - Chore**
+- [PR #990](https://github.com/sendgrid/sendgrid-php/pull/990): migrate to new default sendgrid-oai branch. Thanks to [@eshanholtz](https://github.com/eshanholtz)!
+
+**Library - Docs**
+- [PR #778](https://github.com/sendgrid/sendgrid-php/pull/778): fix grammar issue in CHANGELOG. Thanks to [@Hestersue43](https://github.com/Hestersue43)!
+- [PR #759](https://github.com/sendgrid/sendgrid-php/pull/759): add Email Activity API to usage docs. Thanks to [@ajloria](https://github.com/ajloria)!
+
+**Library - Feature**
+- [PR #850](https://github.com/sendgrid/sendgrid-php/pull/850): Add an option to override SendGrid Client path version. Thanks to [@erbaker](https://github.com/erbaker)!
+- [PR #762](https://github.com/sendgrid/sendgrid-php/pull/762): enhanced type exception handling. Thanks to [@misantron](https://github.com/misantron)!
+
+
+[2020-07-08] Version 7.7.0
+--------------------------
+**Library - Feature**
+- [PR #985](https://github.com/sendgrid/sendgrid-php/pull/985): Additional check for existence of Composer autoloader. Thanks to [@kampalex](https://github.com/kampalex)!
+- [PR #978](https://github.com/sendgrid/sendgrid-php/pull/978): Mail constructor: Added support for array of Substitution instances using $globalSubstitutions. Thanks to [@kampalex](https://github.com/kampalex)!
+
+**Library - Fix**
+- [PR #976](https://github.com/sendgrid/sendgrid-php/pull/976): allow a float type as a substitution value in transactional templates. Thanks to [@thinkingserious](https://github.com/thinkingserious)!
+- [PR #977](https://github.com/sendgrid/sendgrid-php/pull/977): Mail constructor: Verify arguments $plainTextContent and $htmlContent if provided. Thanks to [@kampalex](https://github.com/kampalex)!
+- [PR #971](https://github.com/sendgrid/sendgrid-php/pull/971): Optional Personalization arguments handling. Thanks to [@kampalex](https://github.com/kampalex)!
+
+
 [2020-06-10] Version 7.6.0
 --------------------------
 **Library - Fix**
@@ -158,7 +190,7 @@ Thanks to the [strong support and feedback of the SendGrid PHP community](https:
 
 In particular, I'd like to make special mention of [@caseyw](https://github.com/caseyw), [@vitya1](https://github.com/vitya1), [@Braunson](https://github.com/Braunson), [@cbschuld](https://github.com/cbschuld), [@paoga87](https://github.com/paoga87), [@Taluu](https://github.com/Taluu), [@mazanax](https://github.com/mazanax), [@ninsuo](https://github.com/ninsuo), [@ianh2](https://github.com/ianh2), [@WadeShuler](https://github.com/WadeShuler), [@jaimehing](https://github.com/jaimehing), [@KnightAR](https://github.com/KnightAR), [@alextech](https://github.com/alextech) (my apologies if I've missed you)
 
-Since this is a major departure from v6.X, we advise you refactor your code according to the documentation found in the [README](https://github.com/sendgrid/sendgrid-php/blob/master/README.md) and [USE_CASES](https://github.com/sendgrid/sendgrid-php/blob/master/USE_CASES.md) files. We hope you find the new interface much easier to work with. Please open an [issue](https://github.com/sendgrid/sendgrid-php/issues) or PR if you run into any trouble or have any feedback. 
+Since this is a major departure from v6.X, we advise you to refactor your code according to the documentation found in the [README](https://github.com/sendgrid/sendgrid-php/blob/master/README.md) and [USE_CASES](https://github.com/sendgrid/sendgrid-php/blob/master/USE_CASES.md) files. We hope you find the new interface much easier to work with. Please open an [issue](https://github.com/sendgrid/sendgrid-php/issues) or PR if you run into any trouble or have any feedback. 
 
 If you wish to continue using previous versions of this SDK, no problem. However, we will not be updating versions less than v7 except for critical bugs and/or security issues.
 

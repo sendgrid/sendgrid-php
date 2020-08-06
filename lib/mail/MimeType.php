@@ -10,7 +10,7 @@ namespace SendGrid\Mail;
  *
  * @package SendGrid\Mail
  */
-abstract class MimeType
+final class MimeType
 {
     const HTML = "text/html";
     const TEXT = "text/plain";

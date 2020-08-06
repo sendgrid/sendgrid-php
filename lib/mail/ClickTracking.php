@@ -5,6 +5,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a ClickTracking object for the /mail/send API call
  *
@@ -45,9 +47,8 @@ class ClickTracking implements \JsonSerializable
      */
     public function setEnable($enable)
     {
-        if (!is_bool($enable)) {
-            throw new TypeException('$enable must be of type bool.');
-        }
+        Assert::boolean($enable, 'enable');
+
         $this->enable = $enable;
     }
 
@@ -70,9 +71,8 @@ class ClickTracking implements \JsonSerializable
      */
     public function setEnableText($enable_text)
     {
-        if (!is_bool($enable_text)) {
-            throw new TypeException('$enable_text must be of type bool');
-        }
+        Assert::boolean($enable_text, 'enable_text');
+
         $this->enable_text = $enable_text;
     }
 

@@ -5,6 +5,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a SpamCheck object for the /mail/send API call
  *
@@ -14,12 +16,14 @@ class SpamCheck implements \JsonSerializable
 {
     /** @var $enable bool Indicates if this setting is enabled */
     private $enable;
+
     /**
      * @var $threshold int The threshold used to determine if your content qualifies as
      * spam on a scale from 1 to 10, with 10 being most strict, or most
      * likely to be considered as spam
      */
     private $threshold;
+
     /**
      * @var $post_to_urlstring An Inbound Parse URL that you would like a copy of your
      * email along with the spam report to be sent to
@@ -61,9 +65,8 @@ class SpamCheck implements \JsonSerializable
      */
     public function setEnable($enable)
     {
-        if (!is_bool($enable)) {
-            throw new TypeException('$enable must be of type bool.');
-        }
+        Assert::boolean($enable, 'enable');
+
         $this->enable = $enable;
     }
 
@@ -89,9 +92,9 @@ class SpamCheck implements \JsonSerializable
      */
     public function setThreshold($threshold)
     {
-        if (!is_int($threshold)) {
-            throw new TypeException('$threshold must be of type int.');
-        }
+        Assert::minValue($threshold, 'threshold', 1);
+        Assert::maxValue($threshold, 'threshold', 10);
+
         $this->threshold = $threshold;
     }
 
@@ -116,9 +119,8 @@ class SpamCheck implements \JsonSerializable
      */
     public function setPostToUrl($post_to_url)
     {
-        if (!is_string($post_to_url)) {
-            throw new TypeException('$post_to_url must be of type string.');
-        }
+        Assert::string($post_to_url, 'post_to_url');
+
         $this->post_to_url = $post_to_url;
     }
 
