@@ -1,9 +1,8 @@
 <?php
-require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
 
+// Next line will load dependencies to run this example
+// Please refer to the README how to use in your project
+require_once __DIR__ . '/../../sendgrid-php.php';
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
@@ -28,9 +27,9 @@ try {
 // DELETE /suppression/blocks #
 
 $request_body = json_decode('{
-  "delete_all": false, 
+  "delete_all": false,
   "emails": [
-    "example1@example.com", 
+    "example1@example.com",
     "example2@example.com"
   ]
 }');
@@ -94,9 +93,9 @@ try {
 // DELETE /suppression/bounces #
 
 $request_body = json_decode('{
-  "delete_all": true, 
+  "delete_all": true,
   "emails": [
-    "example@example.com", 
+    "example@example.com",
     "example2@example.com"
   ]
 }');
@@ -161,9 +160,9 @@ try {
 // DELETE /suppression/invalid_emails #
 
 $request_body = json_decode('{
-  "delete_all": false, 
+  "delete_all": false,
   "emails": [
-    "example1@example.com", 
+    "example1@example.com",
     "example2@example.com"
   ]
 }');
@@ -257,9 +256,9 @@ try {
 // DELETE /suppression/spam_reports #
 
 $request_body = json_decode('{
-  "delete_all": false, 
+  "delete_all": false,
   "emails": [
-    "example1@example.com", 
+    "example1@example.com",
     "example2@example.com"
   ]
 }');

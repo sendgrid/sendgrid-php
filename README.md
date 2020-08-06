@@ -74,37 +74,38 @@ Add Twilio SendGrid to your `composer.json` file. If you are not using [Composer
 }
 ```
 
-#### Alternative: Install package from zip
+### Alternative: Install package from zip
 
-If you are not using Composer, simply download and install the **[latest packaged release of the library as a zip](https://github.com/sendgrid/sendgrid-php/releases/download/7.8.0/sendgrid-php.zip)**.
+If you are not using Composer, simply download and install the **[latest packaged release of the library as a zip](https://github.com/sendgrid/sendgrid-php/releases/download/7.8.1/sendgrid-php.zip)**.
 
-[**⬇︎ Download Packaged Library ⬇︎**](https://github.com/sendgrid/sendgrid-php/releases/download/7.8.0/sendgrid-php.zip)
+[**⬇︎ Download Packaged Library ⬇︎**](https://github.com/sendgrid/sendgrid-php/releases/download/7.8.1/sendgrid-php.zip)
 
-Previous versions of the library can be found in the [version index](https://sendgrid-open-source.s3.amazonaws.com/index.html) or downloaded directly from [GitHub](https://github.com/sendgrid/sendgrid-php/releases).
+Previous versions of the library can be downloaded directly from [GitHub](https://github.com/sendgrid/sendgrid-php/releases).
 
 ## Dependencies
 
 - The Twilio SendGrid Service, starting at the [free level](https://sendgrid.com/free?source=sendgrid-php)
-- The dependency free [php-http-client](https://github.com/sendgrid/php-http-client)
+- The dependency-free [php-http-client](https://github.com/sendgrid/php-http-client)
 
 <a name="quick-start"></a>
 # Quick Start
+
+Include the proper lines from below at the top of each example based on your installation method:
+
+```php
+<?php
+// Uncomment the next line if you're using a dependency loader (such as Composer) (recommended)
+// require 'vendor/autoload.php';
+
+// Uncomment the next line if you're not using a dependency loader (such as Composer), replacing <PATH TO> with the path to the sendgrid-php.php file
+// require_once '<PATH TO>/sendgrid-php.php';
+```
 
 ## Hello Email
 
 The following is the minimum needed code to send an email. You may find more examples in our USE_CASES file:
 
 ```php
-<?php
-require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// Comment out the above line if not using Composer
-// require("<PATH TO>/sendgrid-php.php");
-// If not using Composer, uncomment the above line and
-// download sendgrid-php.zip from the latest release here,
-// replacing <PATH TO> with the path to the sendgrid-php.php file,
-// which is included in the download:
-// https://github.com/sendgrid/sendgrid-php/releases
-
 $email = new \SendGrid\Mail\Mail();
 $email->setFrom("test@example.com", "Example User");
 $email->setSubject("Sending with Twilio SendGrid is Fun");
@@ -129,17 +130,6 @@ The `SendGrid\Mail` constructor creates a [personalization object](https://sendg
 ## General v3 Web API Usage (With Fluent Interface)
 
 ```php
-<?php
-require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// Comment out the above line if not using Composer
-// Comment out the above line if not using Composer
-// require("<PATH TO>/sendgrid-php.php");
-// If not using Composer, uncomment the above line and
-// download sendgrid-php.zip from the latest release here,
-// replacing <PATH TO> with the path to the sendgrid-php.php file,
-// which is included in the download:
-// https://github.com/sendgrid/sendgrid-php/releases
-
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
 
@@ -156,17 +146,6 @@ try {
 ## General v3 Web API Usage (Without Fluent Interface)
 
 ```php
-<?php
-require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// Comment out the above line if not using Composer
-// Comment out the above line if not using Composer
-// require("<PATH TO>/sendgrid-php.php");
-// If not using Composer, uncomment the above line and
-// download sendgrid-php.zip from the latest release here,
-// replacing <PATH TO> with the path to the sendgrid-php.php file,
-// which is included in the download:
-// https://github.com/sendgrid/sendgrid-php/releases
-
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
 

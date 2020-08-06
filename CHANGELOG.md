@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2020-08-05] Version 7.8.1
+--------------------------
+**Library - Fix**
+- [PR #755](https://github.com/sendgrid/sendgrid-php/pull/755): remove loader.php and update CONTRIBUTING.md. Thanks to [@mkasberg](https://github.com/mkasberg)!
+
+
 [2020-07-22] Version 7.8.0
 --------------------------
 **Library - Chore**
