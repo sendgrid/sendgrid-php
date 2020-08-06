@@ -2179,7 +2179,7 @@ For more detailed information about how to use the v3 Mail Send endpoint, please
 
 ### POST /mail/send
 
-This endpoint has a helper, check it out [here](https://github.com/sendgrid/sendgrid-php/blob/HEAD/lib/helpers/mail/README.md).
+This endpoint has a helper, check it out [here](lib/helpers/mail/README.md).
 
 ```php
 $request_body = json_decode('{

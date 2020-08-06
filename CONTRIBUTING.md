@@ -83,7 +83,7 @@ source ./sendgrid.env
 
 ##### Execute: #####
 
-See the [examples folder](https://github.com/sendgrid/sendgrid-php/tree/HEAD/examples) or [README](https://github.com/sendgrid/sendgrid-php/blob/HEAD/README.md) to get started quickly.
+See the [examples folder](examples) or [README](README.md) to get started quickly.
 
 We prefer the use of the Composer autoloader by loading `vendor/autoload.php`.
 
@@ -113,7 +113,7 @@ The interface to the Twilio SendGrid API. The subfolders are helpers.
 
 ## Testing
 
-All PRs require passing tests before the PR will be reviewed. All test files are in the [`/test/unit`](https://github.com/sendgrid/sendgrid-php/tree/HEAD/test/unit) directory. For the purposes of contributing to this repo, please update or add relevant test files [here](https://github.com/sendgrid/sendgrid-php/tree/HEAD/test) with tests as you modify the code.
+All PRs require passing tests before the PR will be reviewed. All test files are in the [`/test/unit`](test/unit) directory. For the purposes of contributing to this repo, please update or add relevant test files [here](test) with tests as you modify the code.
 
 The integration tests require a Twilio SendGrid mock API in order to execute. We've simplified setting this up using Docker to run the tests. You will just need [Docker Desktop](https://docs.docker.com/get-docker/) and `make`.
 
