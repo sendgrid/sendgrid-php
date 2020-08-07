@@ -84,7 +84,7 @@ configuration settings have at least the following options enabled:
 * Perform Actions as Users
 
 Remember to reauthorize your app 
-[here](https://app.box.com/HEAD/settings/openbox) after making any changes to 
+[here](https://app.box.com/master/settings/openbox) after making any changes to 
 your app’s JWT scopes.
 
 ```php
