@@ -1,9 +1,8 @@
 <?php
-require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
 
+// Next line will load dependencies to run this example
+// Please refer to the README how to use in your project
+require_once __DIR__ . '/../../sendgrid-php.php';
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
@@ -13,11 +12,11 @@ $sg = new \SendGrid($apiKey);
 // POST /api_keys #
 
 $request_body = json_decode('{
-  "name": "My API Key", 
-  "sample": "data", 
+  "name": "My API Key",
+  "sample": "data",
   "scopes": [
-    "mail.send", 
-    "alerts.create", 
+    "mail.send",
+    "alerts.create",
     "alerts.read"
   ]
 }');
@@ -51,16 +50,16 @@ try {
 // PUT /api_keys/{api_key_id} #
 
 $request_body = json_decode('{
-  "name": "A New Hope", 
+  "name": "A New Hope",
   "scopes": [
-    "user.profile.read", 
+    "user.profile.read",
     "user.profile.update"
   ]
 }');
 $api_key_id = "test_url_param";
 
 try {
-    $response = $sg->client->api_keys()->_($api_key_id)->put($request_body);    
+    $response = $sg->client->api_keys()->_($api_key_id)->put($request_body);
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -78,7 +77,7 @@ $request_body = json_decode('{
 $api_key_id = "test_url_param";
 
 try {
-    $response = $sg->client->api_keys()->_($api_key_id)->patch($request_body);    
+    $response = $sg->client->api_keys()->_($api_key_id)->patch($request_body);
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -93,7 +92,7 @@ try {
 $api_key_id = "test_url_param";
 
 try {
-    $response = $sg->client->api_keys()->_($api_key_id)->get();    
+    $response = $sg->client->api_keys()->_($api_key_id)->get();
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -108,7 +107,7 @@ try {
 $api_key_id = "test_url_param";
 
 try {
-    $response = $sg->client->api_keys()->_($api_key_id)->delete();    
+    $response = $sg->client->api_keys()->_($api_key_id)->delete();
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";

@@ -1,18 +1,11 @@
 <?php
 /**
  * This helper builds the Category object for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Mail
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
 namespace SendGrid\Mail;
+
+use SendGrid\Helper\Assert;
 
 /**
  * This class is used to construct a Category object for the /mail/send API call
@@ -24,13 +17,14 @@ class Category implements \JsonSerializable
     /** @var $category string A category name for an email message. Each category name may not exceed 255 characters */
     private $category;
 
-    /**
-     * Optional constructor
-     *
-     * @param string|null $category A category name for an email message.
-     *                              Each category name may not exceed 255
-     *                              characters
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param string|null $category A category name for an email message.
+	 *                              Each category name may not exceed 255
+	 *                              characters
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct($category = null)
     {
         if (isset($category)) {
@@ -45,13 +39,12 @@ class Category implements \JsonSerializable
      *                         Each category name may not exceed 255
      *                         characters
      *
-     * @throws TypeException
-     */ 
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setCategory($category)
     {
-        if (!is_string($category)) {
-            throw new TypeException('$category must be of type string.');
-        }
+        Assert::maxLength($category, 'category', 255);
+
         $this->category = $category;
     }
 
@@ -66,7 +59,7 @@ class Category implements \JsonSerializable
     }
 
     /**
-     * Return an array representing a Category object for the SendGrid API
+     * Return an array representing a Category object for the Twilio SendGrid API
      *
      * @return string
      */
