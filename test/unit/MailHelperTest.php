@@ -77,7 +77,7 @@ class MailHelperTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * This method tests various valid types of email names
+     * This method tests various valid types of email addresses
      */
     public function testValidEmails()
     {
