@@ -190,7 +190,7 @@ Thanks to the [strong support and feedback of the SendGrid PHP community](https:
 
 In particular, I'd like to make special mention of [@caseyw](https://github.com/caseyw), [@vitya1](https://github.com/vitya1), [@Braunson](https://github.com/Braunson), [@cbschuld](https://github.com/cbschuld), [@paoga87](https://github.com/paoga87), [@Taluu](https://github.com/Taluu), [@mazanax](https://github.com/mazanax), [@ninsuo](https://github.com/ninsuo), [@ianh2](https://github.com/ianh2), [@WadeShuler](https://github.com/WadeShuler), [@jaimehing](https://github.com/jaimehing), [@KnightAR](https://github.com/KnightAR), [@alextech](https://github.com/alextech) (my apologies if I've missed you)
 
-Since this is a major departure from v6.X, we advise you to refactor your code according to the documentation found in the [README](https://github.com/sendgrid/sendgrid-php/blob/master/README.md) and [USE_CASES](https://github.com/sendgrid/sendgrid-php/blob/master/USE_CASES.md) files. We hope you find the new interface much easier to work with. Please open an [issue](https://github.com/sendgrid/sendgrid-php/issues) or PR if you run into any trouble or have any feedback. 
+Since this is a major departure from v6.X, we advise you to refactor your code according to the documentation found in the [README](README.md) and [USE_CASES](USE_CASES.md) files. We hope you find the new interface much easier to work with. Please open an [issue](https://github.com/sendgrid/sendgrid-php/issues) or PR if you run into any trouble or have any feedback. 
 
 If you wish to continue using previous versions of this SDK, no problem. However, we will not be updating versions less than v7 except for critical bugs and/or security issues.
 
@@ -408,11 +408,11 @@ Added CodeCov support, thanks to [Owen Voke](https://github.com/pxgamer) for the
 ## [5.0.8] - 2016-08-24 ##
 ### Added
 - Table of Contents in the README
-- Added a [USE_CASES.md](https://github.com/sendgrid/sendgrid-php/blob/master/USE_CASES.md) section, with the first use case example for transactional templates
+- Added a [USE_CASES.md](USE_CASES.md) section, with the first use case example for transactional templates
 
 ## [5.0.7] - 2016-07-25 ##
 ### Added
-- [Troubleshooting](https://github.com/sendgrid/sendgrid-php/blob/master/TROUBLESHOOTING.md) section
+- [Troubleshooting](TROUBLESHOOTING.md) section
 
 ## [5.0.6] - 2016-07-20 ##
 ### Added

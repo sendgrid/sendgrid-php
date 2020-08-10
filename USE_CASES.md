@@ -1401,14 +1401,14 @@ For more information, please visit the [Twilio SMS PHP documentation](https://ww
 <a name="domain-authentication"></a>
 # How to Set up a Domain Authentication
 
-You can find documentation for how to setup a domain authentication via the UI [here](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/) and via API [here](https://github.com/sendgrid/sendgrid-php/blob/master/USAGE.md#sender-authentication).
+You can find documentation for how to setup a domain authentication via the UI [here](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/) and via API [here](USAGE.md#sender-authentication).
 
 Find more information about all of Twilio SendGrid's authentication related documentation [here](https://sendgrid.com/docs/ui/account-and-settings/).
 
 <a name="email-stats"></a>
 # How to View Email Statistics
 
-You can find documentation for how to view your email statistics via the UI [here](https://app.example.com/statistics) and via API [here](https://github.com/sendgrid/sendgrid-php/blob/master/USAGE.md#stats).
+You can find documentation for how to view your email statistics via the UI [here](https://app.example.com/statistics) and via API [here](USAGE.md#stats).
 
 Alternatively, we can post events to a URL of your choice via our [Event Webhook](https://example.com/docs/API_Reference/Webhooks/event.html) about events that occur as Twilio SendGrid processes your email.
 

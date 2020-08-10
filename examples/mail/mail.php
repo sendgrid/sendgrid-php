@@ -38,7 +38,7 @@ try {
 ////////////////////////////////////////////////////
 // v3 Mail Send #
 // POST /mail/send #
-// This endpoint has a helper, check it out [here](https://github.com/sendgrid/sendgrid-php/blob/master/lib/mail/README.md).
+// This endpoint has a helper, check it out [here](https://github.com/sendgrid/sendgrid-php/blob/HEAD/lib/mail/README.md).
 
 $request_body = json_decode('{
   "asm": {
