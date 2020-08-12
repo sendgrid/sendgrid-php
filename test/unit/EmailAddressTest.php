@@ -1,6 +1,6 @@
 <?php
 /**
- * This file tests email address encoding
+ * This file tests email address encoding.
  */
 
 namespace SendGrid\Tests\Unit;
@@ -20,7 +20,7 @@ use SendGrid\Tests\BaseTestClass;
 use Swaggest\JsonDiff\Exception as JsonDiffException;
 
 /**
- * This class tests email address encoding
+ * This class tests email address encoding.
  *
  * @package SendGrid\Tests\Unit
  */

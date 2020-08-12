@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\Mail;
 
 /**
- * This class tests the getContents() function in SendGrid\Mail\Mail
+ * This class tests the getContents() function in SendGrid\Mail\Mail.
  *
  * @package SendGrid\Tests\Unit
  */

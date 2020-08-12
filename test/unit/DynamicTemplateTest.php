@@ -1,6 +1,6 @@
 <?php
 /**
- * This file tests the dynamic/transactional template functionality for a /mail/send API call
+ * This file tests the dynamic/transactional template functionality for a /mail/send API call.
  */
 
 namespace SendGrid\Tests\Unit;
@@ -10,7 +10,7 @@ use SendGrid\Tests\BaseTestClass;
 // Test each use case that uses substitutions
 
 /**
- * This class tests the dynamic/transactional template functionality for a /mail/send API call
+ * This class tests the dynamic/transactional template functionality for a /mail/send API call.
  *
  * @package SendGrid\Tests\Unit
  */

@@ -5,7 +5,7 @@ namespace SendGrid\Tests\Unit;
 use SendGrid\Tests\BaseTestClass;
 
 /**
- * This class tests the Twilio Email Client
+ * This class tests the Twilio Email Client.
  *
  * @package SendGrid\Tests\Unit
  */

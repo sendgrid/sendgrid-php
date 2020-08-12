@@ -1,8 +1,6 @@
 <?php
 /**
- * This file tests the request object generation for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
+ * This file tests the request object generation for a /mail/send API call.
  */
 
 namespace SendGrid\Tests\Unit;
@@ -10,7 +8,7 @@ namespace SendGrid\Tests\Unit;
 use SendGrid\Tests\BaseTestClass;
 
 /**
- * This class tests the request object generation for a /mail/send API call
+ * This class tests the request object generation for a /mail/send API call.
  *
  * @package SendGrid\Tests\Unit
  */
