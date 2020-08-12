@@ -1,27 +1,26 @@
 <?php
-require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
 
+// Next line will load dependencies to run this example
+// Please refer to the README how to use in your project
+require_once __DIR__ . '/../../sendgrid-php.php';
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
 
 ////////////////////////////////////////////////////
-// Create a domain whitelabel. #
+// Create a domain authentication. #
 // POST /whitelabel/domains #
 
 $request_body = json_decode('{
-  "automatic_security": false, 
-  "custom_spf": true, 
-  "default": true, 
-  "domain": "example.com", 
+  "automatic_security": false,
+  "custom_spf": true,
+  "default": true,
+  "domain": "example.com",
   "ips": [
-    "192.168.1.1", 
+    "192.168.1.1",
     "192.168.1.2"
-  ], 
-  "subdomain": "news", 
+  ],
+  "subdomain": "news",
   "username": "john@example.com"
 }');
 
@@ -35,7 +34,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// List all domain whitelabels. #
+// List all domain authentications. #
 // GET /whitelabel/domains #
 
 $query_params = json_decode('{"username": "test_string", "domain": "test_string", "exclude_subusers": "true", "limit": 1, "offset": 1}');
@@ -50,7 +49,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Get the default domain whitelabel. #
+// Get the default domain authentication. #
 // GET /whitelabel/domains/default #
 
 try {
@@ -63,7 +62,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// List the domain whitelabel associated with the given user. #
+// List the domain authentication associated with the given user. #
 // GET /whitelabel/domains/subuser #
 
 try {
@@ -76,7 +75,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Disassociate a domain whitelabel from a given user. #
+// Disassociate a domain authentication from a given user. #
 // DELETE /whitelabel/domains/subuser #
 
 try {
@@ -89,11 +88,11 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Update a domain whitelabel. #
+// Update a domain authentication. #
 // PATCH /whitelabel/domains/{domain_id} #
 
 $request_body = json_decode('{
-  "custom_spf": true, 
+  "custom_spf": true,
   "default": false
 }');
 $domain_id = "test_url_param";
@@ -108,7 +107,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Retrieve a domain whitelabel. #
+// Retrieve a domain authentication. #
 // GET /whitelabel/domains/{domain_id} #
 
 $domain_id = "test_url_param";
@@ -123,7 +122,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Delete a domain whitelabel. #
+// Delete a domain authentication. #
 // DELETE /whitelabel/domains/{domain_id} #
 
 $domain_id = "test_url_param";
@@ -138,7 +137,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Associate a domain whitelabel with a given user. #
+// Associate a domain authentication with a given user. #
 // POST /whitelabel/domains/{domain_id}/subuser #
 
 $request_body = json_decode('{
@@ -156,7 +155,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Add an IP to a domain whitelabel. #
+// Add an IP to a domain authentication. #
 // POST /whitelabel/domains/{id}/ips #
 
 $request_body = json_decode('{
@@ -174,7 +173,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Remove an IP from a domain whitelabel. #
+// Remove an IP from a domain authentication. #
 // DELETE /whitelabel/domains/{id}/ips/{ip} #
 
 $id = "test_url_param";
@@ -190,7 +189,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Validate a domain whitelabel. #
+// Validate a domain authentication. #
 // POST /whitelabel/domains/{id}/validate #
 
 $id = "test_url_param";
@@ -205,12 +204,12 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Create an IP whitelabel #
+// Create a reverse DNS record #
 // POST /whitelabel/ips #
 
 $request_body = json_decode('{
-  "domain": "example.com", 
-  "ip": "192.168.1.1", 
+  "domain": "example.com",
+  "ip": "192.168.1.1",
   "subdomain": "email"
 }');
 
@@ -224,7 +223,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Retrieve all IP whitelabels #
+// Retrieve all reverse DNS records #
 // GET /whitelabel/ips #
 
 $query_params = json_decode('{"ip": "test_string", "limit": 1, "offset": 1}');
@@ -239,7 +238,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Retrieve an IP whitelabel #
+// Retrieve a reverse DNS record #
 // GET /whitelabel/ips/{id} #
 
 $id = "test_url_param";
@@ -254,7 +253,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Delete an IP whitelabel #
+// Delete a reverse DNS record #
 // DELETE /whitelabel/ips/{id} #
 
 $id = "test_url_param";
@@ -269,7 +268,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Validate an IP whitelabel #
+// Validate a reverse DNS record #
 // POST /whitelabel/ips/{id}/validate #
 
 $id = "test_url_param";
@@ -284,12 +283,12 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Create a Link Whitelabel #
+// Create a Branded Link #
 // POST /whitelabel/links #
 
 $request_body = json_decode('{
-  "default": true, 
-  "domain": "example.com", 
+  "default": true,
+  "domain": "example.com",
   "subdomain": "mail"
 }');
 $query_params = json_decode('{"limit": 1, "offset": 1}');
@@ -304,7 +303,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Retrieve all link whitelabels #
+// Retrieve all link brandings #
 // GET /whitelabel/links #
 
 $query_params = json_decode('{"limit": 1}');
@@ -319,7 +318,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Retrieve a Default Link Whitelabel #
+// Retrieve a Default Link BrandingBranding #
 // GET /whitelabel/links/default #
 
 $query_params = json_decode('{"domain": "test_string"}');
@@ -334,7 +333,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Retrieve Associated Link Whitelabel #
+// Retrieve Associated Link Branding #
 // GET /whitelabel/links/subuser #
 
 $query_params = json_decode('{"username": "test_string"}');
@@ -349,7 +348,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Disassociate a Link Whitelabel #
+// Disassociate a Link Branding #
 // DELETE /whitelabel/links/subuser #
 
 $query_params = json_decode('{"username": "test_string"}');
@@ -364,7 +363,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Update a Link Whitelabel #
+// Update a Link Branding #
 // PATCH /whitelabel/links/{id} #
 
 $request_body = json_decode('{
@@ -382,7 +381,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Retrieve a Link Whitelabel #
+// Retrieve a Link Branding #
 // GET /whitelabel/links/{id} #
 
 $id = "test_url_param";
@@ -397,7 +396,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Delete a Link Whitelabel #
+// Delete a Link Branding #
 // DELETE /whitelabel/links/{id} #
 
 $id = "test_url_param";
@@ -412,7 +411,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Validate a Link Whitelabel #
+// Validate a Link Branding #
 // POST /whitelabel/links/{id}/validate #
 
 $id = "test_url_param";
@@ -427,7 +426,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Associate a Link Whitelabel #
+// Associate a Link Branding #
 // POST /whitelabel/links/{link_id}/subuser #
 
 $request_body = json_decode('{
