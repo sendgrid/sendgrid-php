@@ -1,6 +1,6 @@
 <?php
 /**
- * This file tests the existence of necessary files in this repo
+ * This file tests the existence of necessary files in this repo.
  */
 
 namespace SendGrid\Tests\Unit;
@@ -8,7 +8,7 @@ namespace SendGrid\Tests\Unit;
 use PHPUnit\Framework\TestCase;
 
 /**
- * This class tests the existence of necessary files in this repo
+ * This class tests the existence of necessary files in this repo.
  *
  * @package SendGrid\Tests\Unit
  */

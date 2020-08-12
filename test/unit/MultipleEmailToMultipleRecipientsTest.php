@@ -1,6 +1,6 @@
 <?php
 /**
- * This file tests the request object generation for a /mail/send API call
+ * This file tests the request object generation for a /mail/send API call.
  */
 
 namespace SendGrid\Tests\Unit;
@@ -8,7 +8,7 @@ namespace SendGrid\Tests\Unit;
 use SendGrid\Tests\BaseTestClass;
 
 /**
- * This class tests the request object generation for a /mail/send API call
+ * This class tests the request object generation for a /mail/send API call.
  *
  * @package SendGrid\Tests\Unit
  */

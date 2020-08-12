@@ -1,6 +1,6 @@
 <?php
 /**
- * This file tests attachments.
+ * This file tests Attachments.
  */
 namespace SendGrid\Tests\Unit;
 
@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\Attachment;
 
 /**
- * This file tests attachments.
+ * This file tests Attachments.
  *
  * @package SendGrid\Tests\Unit
  */
