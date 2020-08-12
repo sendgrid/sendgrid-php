@@ -31,7 +31,7 @@ class GroupIdTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $group_id must be of type int.
+     * @expectedExceptionMessage "$group_id" must be an integer.
      */
     public function testSetGroupIdOnInvalidType()
     {

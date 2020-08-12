@@ -178,7 +178,7 @@ class SubscriptionTracking implements \JsonSerializable
      */
     public function setSubstitutionTag($substitution_tag)
     {
-        Assert::string($substitution_tag, 'subscription_tag');
+        Assert::string($substitution_tag, 'substitution_tag');
 
         $this->substitution_tag = $substitution_tag;
     }

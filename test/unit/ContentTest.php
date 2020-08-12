@@ -33,7 +33,7 @@ class ContentTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $type must be of type string.
+     * @expectedExceptionMessage "$type" must be a string.
      */
     public function testSetTypeOnInvalidType()
     {
@@ -51,7 +51,7 @@ class ContentTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $value must be of type string.
+     * @expectedExceptionMessage "$value" must be a string.
      */
     public function testSetValueOnInvalidType()
     {

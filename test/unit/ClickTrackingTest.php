@@ -33,7 +33,7 @@ class ClickTrackingTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $enable must be of type bool.
+     * @expectedExceptionMessage "$enable" must be a boolean.
      */
     public function testSetEnableOnInvalidType()
     {
@@ -51,7 +51,7 @@ class ClickTrackingTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $enable_text must be of type bool.
+     * @expectedExceptionMessage "$enable_text" must be a boolean.
      */
     public function testSetEnableTextOnInvalidType()
     {

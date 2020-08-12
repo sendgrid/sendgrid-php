@@ -32,7 +32,7 @@ class TemplateIdTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $template_id must be of type string.
+     * @expectedExceptionMessage "$template_id" must be a string.
      */
     public function testSetTemplateIdOnInvalidType()
     {

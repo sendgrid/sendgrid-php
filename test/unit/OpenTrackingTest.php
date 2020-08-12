@@ -33,7 +33,7 @@ class OpenTrackingTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $enable must be of type bool.
+     * @expectedExceptionMessage "$enable" must be a boolean.
      */
     public function testSetEnableOnInvalidType()
     {
@@ -51,7 +51,7 @@ class OpenTrackingTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $substitution_tag must be of type string.
+     * @expectedExceptionMessage "$substitution_tag" must be a string.
      */
     public function testSetSubstitutionTagOnInvalidType()
     {

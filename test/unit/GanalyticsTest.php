@@ -37,7 +37,7 @@ class GanalyticsTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $enable must be of type bool.
+     * @expectedExceptionMessage "$enable" must be a boolean.
      */
     public function testSetEnableOnInvalidType()
     {
@@ -55,7 +55,7 @@ class GanalyticsTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $utm_content must be of type string.
+     * @expectedExceptionMessage "$utm_content" must be a string.
      */
     public function testSetCampaignContentOnInvalidType()
     {
@@ -73,7 +73,7 @@ class GanalyticsTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $utm_term must be of type string.
+     * @expectedExceptionMessage "$utm_term" must be a string.
      */
     public function testSetCampaignTermOnInvalidType()
     {
@@ -91,7 +91,7 @@ class GanalyticsTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $utm_medium must be of type string.
+     * @expectedExceptionMessage "$utm_medium" must be a string.
      */
     public function testSetCampaignMediumOnInvalidType()
     {
@@ -109,7 +109,7 @@ class GanalyticsTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $utm_source must be of type string.
+     * @expectedExceptionMessage "$utm_source" must be a string.
      */
     public function testSetCampaignSourceOnInvalidType()
     {
@@ -127,7 +127,7 @@ class GanalyticsTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $utm_campaign must be of type string.
+     * @expectedExceptionMessage "$utm_campaign" must be a string.
      */
     public function testSetCampaignNameOnInvalidType()
     {

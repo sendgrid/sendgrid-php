@@ -41,7 +41,7 @@ class SubjectTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $subject must be of type string.
+     * @expectedExceptionMessage "$subject" must be a string.
      */
     public function testSetSubjectOnInvalidType()
     {

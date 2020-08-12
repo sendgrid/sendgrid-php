@@ -54,7 +54,7 @@ class SubstitutionTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $key must be of type string.
+     * @expectedExceptionMessage "$key" must be a string.
      */
     public function testSetKeyOnInvalidType()
     {
@@ -72,11 +72,11 @@ class SubstitutionTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $value must be of type string, array or object.
+     * @expectedExceptionMessage "$value" must be an array, object, boolean, string, numeric or integer.
      */
     public function testSetValueOnInvalidType()
     {
         $substitution = new Substitution();
-        $substitution->setValue(12.3);
+        $substitution->setValue(null);
     }
 }

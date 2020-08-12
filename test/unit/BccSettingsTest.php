@@ -33,7 +33,7 @@ class BccSettingsTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $email must be valid format.
+     * @expectedExceptionMessage "$email" must be a valid email address.
      */
     public function testSetEmailOnInvalidEmailFormat()
     {
@@ -43,7 +43,7 @@ class BccSettingsTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $email must be of type string.
+     * @expectedExceptionMessage "$email" must be a string.
      */
     public function testSetEmailOnInvalidType()
     {
@@ -61,7 +61,7 @@ class BccSettingsTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $enable must be of type bool.
+     * @expectedExceptionMessage "$enable" must be a boolean.
      */
     public function testSetEnableOnInvalidType()
     {

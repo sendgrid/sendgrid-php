@@ -49,7 +49,7 @@ class GroupsToDisplayTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $groups_to_display must be an array.
+     * @expectedExceptionMessage "$groups_to_display" must be an array.
      */
     public function testSetGroupsToDisplayOnInvalidType()
     {

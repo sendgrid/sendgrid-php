@@ -32,7 +32,7 @@ class HeaderTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $key must be of type string.
+     * @expectedExceptionMessage "$key" must be a string.
      */
     public function testSetKeyOnInvalidType()
     {
@@ -50,7 +50,7 @@ class HeaderTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $value must be of type string.
+     * @expectedExceptionMessage "$value" must be a string.
      */
     public function testSetValueOnInvalidType()
     {

@@ -32,7 +32,7 @@ class IpPoolNameTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $ip_pool_name must be of type string.
+     * @expectedExceptionMessage "$ip_pool_name" must be a string.
      */
     public function testSetIpPoolNmeOnInvalidType()
     {

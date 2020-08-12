@@ -690,7 +690,7 @@ JSON;
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $emailAddress must be valid format.
+     * @expectedExceptionMessage "$emailAddress" must be a valid email address.
      */
     public function testSetEmailAddressOnInvalidFormat()
     {
@@ -700,7 +700,7 @@ JSON;
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $emailAddress must be of type string.
+     * @expectedExceptionMessage "$emailAddress" must be a string.
      */
     public function testSetEmailAddressOnInvalidType()
     {
@@ -726,7 +726,7 @@ JSON;
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $name must be of type string.
+     * @expectedExceptionMessage "$name" must be a string.
      */
     public function testSetNameOnInvalidType()
     {
@@ -744,7 +744,7 @@ JSON;
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $substitutions must be an array.
+     * @expectedExceptionMessage "$substitutions" must be an array.
      */
     public function testSetSubstitutionsOnInvalidType()
     {
@@ -762,19 +762,9 @@ JSON;
         $this->assertSame('subject', $subject->getSubject());
     }
 
-    public function testSetSubjectOnSubjectInstance()
-    {
-        $emailAddress = new EmailAddress();
-        $emailAddress->setSubject(new Subject('subject'));
-        $subject = $emailAddress->getSubject();
-
-        $this->assertInstanceOf(Subject::class, $subject);
-        $this->assertSame('subject', $subject->getSubject());
-    }
-
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $subject must be of type string.
+     * @expectedExceptionMessage "$subject" must be a string.
      */
     public function testSetSubjectOnInvalidType()
     {

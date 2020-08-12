@@ -35,7 +35,7 @@ class SpamCheckTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $enable must be of type bool.
+     * @expectedExceptionMessage "$enable" must be a boolean.
      */
     public function testSetEnableOnInvalidType()
     {
@@ -53,7 +53,7 @@ class SpamCheckTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $threshold must be of type int.
+     * @expectedExceptionMessage "$threshold" must be an integer.
      */
     public function testSetThresholdOnInvalidType()
     {
@@ -71,7 +71,7 @@ class SpamCheckTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $post_to_url must be of type string.
+     * @expectedExceptionMessage "$post_to_url" must be a string.
      */
     public function testSetPostToUrlOnInvalidType()
     {

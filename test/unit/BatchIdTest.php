@@ -32,7 +32,7 @@ class BatchIdTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $batch_id must be of type string.
+     * @expectedExceptionMessage "$batch_id" must be a string.
      */
     public function testSetBatchIdOnInvalidBatchId()
     {

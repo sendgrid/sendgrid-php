@@ -36,7 +36,7 @@ class SubscriptionTrackingTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $enable must be of type bool.
+     * @expectedExceptionMessage "$enable" must be a boolean.
      */
     public function testSetEnableOnInvalidType()
     {
@@ -54,7 +54,7 @@ class SubscriptionTrackingTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $text must be of type string.
+     * @expectedExceptionMessage "$text" must be a string.
      */
     public function testSetTextOnInvalidType()
     {
@@ -72,7 +72,7 @@ class SubscriptionTrackingTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $html must be of type string.
+     * @expectedExceptionMessage "$html" must be a string.
      */
     public function testSetHtmlOnInvalidType()
     {
@@ -90,7 +90,7 @@ class SubscriptionTrackingTest extends TestCase
 
     /**
      * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage $substitution_tag must be of type string.
+     * @expectedExceptionMessage "$substitution_tag" must be a string.
      */
     public function testSetSubstitutionTagOnInvalidType()
     {
