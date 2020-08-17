@@ -4209,7 +4209,7 @@ print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
-## Retrieve all transactional templates.
+## Retrieve all transactional templates (legacy & dynamic).
 
 **This endpoint allows you to retrieve all transactional templates.**
 
@@ -4221,7 +4221,8 @@ Transactional templates are templates created specifically for transactional ema
 
 
 ```php
-$response = $sg->client->templates()->get();
+$query_params = json_decode('{"generations": "legacy,dynamic"}');
+$response = $sg->client->templates()->get(null, $query_params);
 print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());

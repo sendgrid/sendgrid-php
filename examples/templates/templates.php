@@ -25,7 +25,7 @@ try {
 }
 
 ////////////////////////////////////////////////////
-// Retrieve all transactional templates. #
+// Retrieve all transactional templates (legacy & dynamic). #
 // GET /templates #
 
 $query_params = ['generations' => 'legacy,dynamic'];
