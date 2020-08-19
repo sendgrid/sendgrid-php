@@ -3,6 +3,21 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2020-08-19] Version 7.8.2
+--------------------------
+**Library - Docs**
+- [PR #717](https://github.com/sendgrid/sendgrid-php/pull/717): Update documentation for retrieving a list of all templates. Thanks to [@renshuki](https://github.com/renshuki)!
+- [PR #729](https://github.com/sendgrid/sendgrid-php/pull/729): Added S3 attachment example. Thanks to [@semijoelon](https://github.com/semijoelon)!
+- [PR #984](https://github.com/sendgrid/sendgrid-php/pull/984): Reduce excessive comments in code examples. Thanks to [@kampalex](https://github.com/kampalex)!
+
+**Library - Test**
+- [PR #735](https://github.com/sendgrid/sendgrid-php/pull/735): add unit tests for lib/email. Thanks to [@peter279k](https://github.com/peter279k)!
+- [PR #756](https://github.com/sendgrid/sendgrid-php/pull/756): Add more scenarios for email address encoding. Thanks to [@2mt-heuser](https://github.com/2mt-heuser)!
+
+**Library - Chore**
+- [PR #993](https://github.com/sendgrid/sendgrid-php/pull/993): update GitHub branch references to use HEAD. Thanks to [@thinkingserious](https://github.com/thinkingserious)!
+
+
 [2020-08-05] Version 7.8.1
 --------------------------
 **Library - Fix**
