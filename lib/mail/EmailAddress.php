@@ -186,6 +186,17 @@ class EmailAddress implements \JsonSerializable
     }
 
     /**
+     * Determine if this EmailAddress object is personalized by either
+     * containing substitutions or a specific subject.
+     *
+     * @return bool
+     */
+    public function isPersonalized()
+    {
+        return $this->getSubstitutions() || $this->getSubject();
+    }
+
+    /**
      * Return an array representing an EmailAddress object for the Twilio SendGrid API
      *
      * @return null|array

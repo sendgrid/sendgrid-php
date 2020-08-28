@@ -5,6 +5,12 @@
 
 namespace SendGrid\Tests\Unit;
 
+use SendGrid\Mail\From;
+use SendGrid\Mail\HtmlContent;
+use SendGrid\Mail\Mail;
+use SendGrid\Mail\PlainTextContent;
+use SendGrid\Mail\Subject;
+use SendGrid\Mail\To;
 use SendGrid\Tests\BaseTestClass;
 
 /**
@@ -272,9 +278,9 @@ JSON;
      */
     public function testWithIndividualSubjects()
     {
-        $from = new \SendGrid\Mail\From("test@example.com", "Example User");
+        $from = new From("test@example.com", "Example User");
         $tos = [
-            new \SendGrid\Mail\To(
+            new To(
                 "test+test1@example.com",
                 "Example User1",
                 [
@@ -283,7 +289,7 @@ JSON;
                 ],
                 "Subject 1 -name-"
             ),
-            new \SendGrid\Mail\To(
+            new To(
                 "test+test2@example.com",
                 "Example User2",
                 [
@@ -292,7 +298,7 @@ JSON;
                 ],
                 "Subject 2 -name-"
             ),
-            new \SendGrid\Mail\To(
+            new To(
                 "test+test3@example.com",
                 "Example User3",
                 [
@@ -301,17 +307,17 @@ JSON;
                 ]
             )
         ];
-        $subject = new \SendGrid\Mail\Subject("Hi -name-!"); // default subject
+        $subject = new Subject("Hi -name-!"); // default subject
         $globalSubstitutions = [
             '-time-' => "2018-05-03 23:10:29"
         ];
-        $plainTextContent = new \SendGrid\Mail\PlainTextContent(
+        $plainTextContent = new PlainTextContent(
             "Hello -name-, your github is -github- sent at -time-"
         );
-        $htmlContent = new \SendGrid\Mail\HtmlContent(
+        $htmlContent = new HtmlContent(
             "<strong>Hello -name-, your github is <a href=\"-github-\">here</a></strong> sent at -time-"
         );
-        $email = new \SendGrid\Mail\Mail(
+        $email = new Mail(
             $from,
             $tos,
             $subject, // or array of subjects, these take precedence
@@ -321,7 +327,7 @@ JSON;
         );
         $json = json_encode($email->jsonSerialize());
         $isEqual = BaseTestClass::compareJSONObjects($json, $this->REQUEST_OBJECT);
-        $this->assertTrue($isEqual);
+        self::assertTrue($isEqual);
     }
 
     /**
@@ -329,9 +335,9 @@ JSON;
      */
     public function testWithIndividualSubjectsDynamicTemplates()
     {
-        $from = new \SendGrid\Mail\From("test@example.com", "Example User");
+        $from = new From("test@example.com", "Example User");
         $tos = [
-            new \SendGrid\Mail\To(
+            new To(
                 "test+test1@example.com",
                 "Example User1",
                 [
@@ -340,7 +346,7 @@ JSON;
                 ],
                 "Subject 1 -name-"
             ),
-            new \SendGrid\Mail\To(
+            new To(
                 "test+test2@example.com",
                 "Example User2",
                 [
@@ -349,7 +355,7 @@ JSON;
                 ],
                 "Subject 2 -name-"
             ),
-            new \SendGrid\Mail\To(
+            new To(
                 "test+test3@example.com",
                 "Example User3",
                 [
@@ -358,17 +364,17 @@ JSON;
                 ]
             )
         ];
-        $subject = new \SendGrid\Mail\Subject("Hi -name-!"); // default subject
+        $subject = new Subject("Hi -name-!"); // default subject
         $globalSubstitutions = [
             '-time-' => "2018-05-03 23:10:29"
         ];
-        $plainTextContent = new \SendGrid\Mail\PlainTextContent(
+        $plainTextContent = new PlainTextContent(
             "Hello -name-, your github is -github- sent at -time-"
         );
-        $htmlContent = new \SendGrid\Mail\HtmlContent(
+        $htmlContent = new HtmlContent(
             "<strong>Hello -name-, your github is <a href=\"-github-\">here</a></strong> sent at -time-"
         );
-        $email = new \SendGrid\Mail\Mail(
+        $email = new Mail(
             $from,
             $tos,
             $subject, // or array of subjects, these take precedence
@@ -379,7 +385,7 @@ JSON;
         $email->setTemplateId("d-13b8f94f-bcae-4ec6-b752-70d6cb59f932");
         $json = json_encode($email->jsonSerialize());
         $isEqual = BaseTestClass::compareJSONObjects($json, $this->REQUEST_OBJECT_3);
-        $this->assertTrue($isEqual);
+        self::assertTrue($isEqual);
     }
 
     /**
@@ -387,9 +393,9 @@ JSON;
      */
     public function testWithCollectionOfSubjects()
     {
-        $from = new \SendGrid\Mail\From("test@example.com", "Example User");
+        $from = new From("test@example.com", "Example User");
         $tos = [
-            new \SendGrid\Mail\To(
+            new To(
                 "test+test1@example.com",
                 "Example User1",
                 [
@@ -398,7 +404,7 @@ JSON;
                 ],
                 "Example User1 -name-"
             ),
-            new \SendGrid\Mail\To(
+            new To(
                 "test+test2@example.com",
                 "Example User2",
                 [
@@ -407,7 +413,7 @@ JSON;
                 ],
                 "Example User2 -name-"
             ),
-            new \SendGrid\Mail\To(
+            new To(
                 "test+test3@example.com",
                 "Example User3",
                 [
@@ -423,13 +429,13 @@ JSON;
         $globalSubstitutions = [
             '-time-' => "2018-05-03 23:10:29"
         ];
-        $plainTextContent = new \SendGrid\Mail\PlainTextContent(
+        $plainTextContent = new PlainTextContent(
             "Hello -name-, your github is -github- sent at -time-"
         );
-        $htmlContent = new \SendGrid\Mail\HtmlContent(
+        $htmlContent = new HtmlContent(
             "<strong>Hello -name-, your github is <a href=\"-github-\">here</a></strong> sent at -time-"
         );
-        $email = new \SendGrid\Mail\Mail(
+        $email = new Mail(
             $from,
             $tos,
             $subject, // or array of subjects, these take precedence
@@ -439,7 +445,7 @@ JSON;
         );
         $json = json_encode($email->jsonSerialize());
         $isEqual = BaseTestClass::compareJSONObjects($json, $this->REQUEST_OBJECT_2);
-        $this->assertTrue($isEqual);
+        self::assertTrue($isEqual);
     }
 
     /**
@@ -447,9 +453,9 @@ JSON;
      */
     public function testWithCollectionOfSubjectsDynamic()
     {
-        $from = new \SendGrid\Mail\From("test@example.com", "Example User");
+        $from = new From("test@example.com", "Example User");
         $tos = [
-            new \SendGrid\Mail\To(
+            new To(
                 "test+test1@example.com",
                 "Example User1",
                 [
@@ -458,7 +464,7 @@ JSON;
                 ],
                 "Example User1 -name-"
             ),
-            new \SendGrid\Mail\To(
+            new To(
                 "test+test2@example.com",
                 "Example User2",
                 [
@@ -467,7 +473,7 @@ JSON;
                 ],
                 "Example User2 -name-"
             ),
-            new \SendGrid\Mail\To(
+            new To(
                 "test+test3@example.com",
                 "Example User3",
                 [
@@ -483,13 +489,13 @@ JSON;
         $globalSubstitutions = [
             '-time-' => "2018-05-03 23:10:29"
         ];
-        $plainTextContent = new \SendGrid\Mail\PlainTextContent(
+        $plainTextContent = new PlainTextContent(
             "Hello -name-, your github is -github- sent at -time-"
         );
-        $htmlContent = new \SendGrid\Mail\HtmlContent(
+        $htmlContent = new HtmlContent(
             "<strong>Hello -name-, your github is <a href=\"-github-\">here</a></strong> sent at -time-"
         );
-        $email = new \SendGrid\Mail\Mail(
+        $email = new Mail(
             $from,
             $tos,
             $subject, // or array of subjects, these take precedence
@@ -500,6 +506,54 @@ JSON;
         $email->setTemplateId("d-13b8f94f-bcae-4ec6-b752-70d6cb59f932");
         $json = json_encode($email->jsonSerialize());
         $isEqual = BaseTestClass::compareJSONObjects($json, $this->REQUEST_OBJECT_4);
-        $this->assertTrue($isEqual);
+        self::assertTrue($isEqual);
+    }
+
+    public function testAddTosWithSubjects()
+    {
+        $expectedPayload = <<<'JSON'
+{
+  "personalizations": [
+    {
+      "subject": "Example User1 -name-",
+      "to": [
+        {
+          "email": "test+test1@example.com",
+          "name": "Example User1"
+        }
+      ]
+    },
+    {
+      "subject": "Example User2 -name-",
+      "to": [
+        {
+          "email": "test+test2@example.com",
+          "name": "Example User2"
+        }
+      ]
+    }
+  ]
+}
+JSON;
+
+        $tos = [
+            new To(
+                "test+test1@example.com",
+                "Example User1",
+                null,
+                "Example User1 -name-"
+            ),
+            new To(
+                "test+test2@example.com",
+                "Example User2",
+                null,
+                "Example User2 -name-"
+            )
+        ];
+        $email = new Mail();
+        $email->addTos($tos);
+        $json = json_encode($email->jsonSerialize());
+        $isEqual = BaseTestClass::compareJSONObjects($json, $expectedPayload);
+        self::assertTrue($isEqual);
     }
 }
