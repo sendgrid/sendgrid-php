@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2020-09-02] Version 7.8.3
+--------------------------
+**Library - Fix**
+- [PR #1001](https://github.com/sendgrid/sendgrid-php/pull/1001): support 'to' addresses with subjects. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+
 [2020-08-19] Version 7.8.2
 --------------------------
 **Library - Docs**
