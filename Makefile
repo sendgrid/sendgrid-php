@@ -19,7 +19,7 @@ ci-install: clean
 
 test:
 	vendor/bin/phpunit test/unit --filter test*
-	vendor/bin/phpcs lib
+	vendor/bin/phpcs lib/*/*
 
 test-integ: test
 	vendor/bin/phpunit test --filter test*
