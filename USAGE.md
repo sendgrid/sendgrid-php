@@ -1803,7 +1803,7 @@ print_r($response->headers());
 | **Device** | **Description** | **Example** |
 |---|---|---|
 | Desktop | Email software on a desktop computer. | I.E., Outlook, Sparrow, or Apple Mail. |
-| Webmail |	A web-based email client. | I.E., Yahoo, Google, AOL, or Outlook.com. |
+| Webmail | A web-based email client. | I.E., Yahoo, Google, AOL, or Outlook.com. |
 | Phone | A smartphone. | iPhone, Android, Blackberry, etc.
 | Tablet | A tablet computer. | iPad, Android based tablet, etc. |
 | Other | An unrecognized device. |

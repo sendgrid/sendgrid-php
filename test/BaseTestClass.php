@@ -35,16 +35,16 @@ class BaseTestClass extends TestCase
         self::$sg = new SendGrid(self::$apiKey);
     }
 
-	/**
-	 * Compares to JSON objects and returns True if equal,
-	 * else return array of differences
-	 *
-	 * @param string $json1 A string representation of a JSON object
-	 * @param string $json2 A string representation of a JSON object
-	 *
-	 * @return bool|array
-	 * @throws \Swaggest\JsonDiff\Exception
-	 */
+    /**
+     * Compares to JSON objects and returns True if equal,
+     * else return array of differences
+     *
+     * @param string $json1 A string representation of a JSON object
+     * @param string $json2 A string representation of a JSON object
+     *
+     * @return bool|array
+     * @throws \Swaggest\JsonDiff\Exception
+     */
     public static function compareJSONObjects($json1, $json2)
     {
         $diff = new JsonDiff(

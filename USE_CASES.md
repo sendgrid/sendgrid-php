@@ -256,7 +256,7 @@ $s3 = new S3Client([
 ]);
 try {
     // Get the object.
-	// See https://docs.aws.amazon.com/AmazonS3/latest/dev/RetrieveObjSingleOpPHP.html
+    // See https://docs.aws.amazon.com/AmazonS3/latest/dev/RetrieveObjSingleOpPHP.html
     $result = $s3->getObject([
         'Bucket' => $bucket,
         'Key'    => $keyname
@@ -265,7 +265,7 @@ try {
     $attachmentFilename = end($keyExplode);
     $attachmentContent = base64_encode($result['Body']);
     $attachmentContentType = $result['ContentType'];
-	
+
     $email = new \SendGrid\Mail\Mail();
     $email->setFrom("test@example.com", "Example User");
     $email->setSubject("Attaching a File from S3");
@@ -274,7 +274,7 @@ try {
     $email->addContent(
         "text/html", "<strong>See attached file from S3.</strong>"
     );
-	
+
     $attachment = new \SendGrid\Mail\Attachment();
     $attachment->setContent($attachmentContent);
     $attachment->setType($attachmentContentType);

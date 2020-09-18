@@ -181,7 +181,7 @@ Please run your code through:
    ```
 
 7. [Open a Pull Request](https://help.github.com/articles/using-pull-requests/)
-	with a clear title and description against the `development` branch. All tests must be passing before we will review the PR.
+    with a clear title and description against the `development` branch. All tests must be passing before we will review the PR.
 
 ## Code Reviews
 
