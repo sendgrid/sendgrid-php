@@ -59,7 +59,7 @@ To read the error message returned by Twilio SendGrid's API:
 ```php
 try {
     $response = $sendgrid->send($email);
-    print $response->statusCode() . "\n"; 
+    print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n"; // Twilio SendGrid specific errors are found here
 } catch (Exception $e) {
