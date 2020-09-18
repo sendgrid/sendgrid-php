@@ -1,15 +1,28 @@
 <?php
 /**
- * This file autoloads the vendored dependencies for a /mail/send API call
- * 
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Mail
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid 
+ * This file is used to load the Composer autoloader if required.
  */
-require __DIR__ . '/vendor/autoload.php';
-?>
+
+use SendGrid\Mail\Mail;
+
+// Define path/existence of Composer autoloader
+$composerAutoloadFile = __DIR__ . '/vendor/autoload.php';
+$composerAutoloadFileExists = (is_file($composerAutoloadFile));
+
+// Can't locate SendGrid\Mail\Mail class?
+if (!class_exists(Mail::class)) {
+    // Suggest to load Composer autoloader of project
+    if (!$composerAutoloadFileExists) {
+        //  Can't load the Composer autoloader in this project folder
+        error_log("Composer autoloader not found. Execute 'composer install' in the project folder first.");
+    } else {
+        // Load Composer autoloader
+        require_once $composerAutoloadFile;
+
+        // If desired class still not existing
+        if (!class_exists(Mail::class)) {
+            // Suggest to review the Composer autoloader settings
+            error_log("Error finding SendGrid classes. Please review your autoloading configuration.");
+        }
+    }
+}

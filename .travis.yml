@@ -1,32 +1,27 @@
 language: php
 
-before_script:
-- composer install
-- "./test/prism.sh &"
-- sleep 30
-- cd test
+services:
+  - docker
 
 script:
-- "../vendor/bin/phpunit . --filter test*"
-- cd ../
-- "vendor/bin/phpcs lib" 
+  - make test-docker
 
 after_success:
-- bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash)
 
-php:
-- 5.6
-- 7.0
-- 7.1
-- 7.2
+env:
+  - version=5.6
+  - version=7.0
+  - version=7.1
+  - version=7.2
+  - version=7.3
+  - version=7.4
 
 notifications:
-  hipchat:
+  slack:
+    if: branch = main
+    on_pull_requests: false
+    on_success: never
+    on_failure: change
     rooms:
-      secure: l4RUOBY44kVhSxx54NU3cmvn598rRMB7Y272Ct/W0fBm1tdGncp42A/rwg7JkiZH9EWXs3tKtoSjqw5xT6QeScUGQDdykS5QVO8lEIkDRGD4WwQ3VDJmRy1+04WtgqFEK8SyYTCcCl4ZJ0rtOcJZgDMvigkOJuLxwGXTDuvfu1k=
-    template:
-    - '<a href="https://travis-ci.org/%{repository}/builds/%{build_id}">%{repository}
-      Build %{build_number}</a> on branch <i>%{branch}</i> by %{author}: <strong>%{message}</strong>
-      <a href="https://github.com/%{repository}/commits/%{commit}">View on GitHub</a>'
-    format: html
-    notify: true
+      - secure: R9JCklL/+TTher3FyJ2h3jFCnxkMHF8T9FszoOLfZeIR1hNADN9wqsLu8bItuKr3hcLzzR/1dG/rDQnHH2TmYuen0VSXBNoN/D1qGJPGayRrsAAUQXrcI9YVwdGwIcuoszM1GYFh3kQRf7RztUJeIw4P6Hl5WQyQC27UmflHK/M=

@@ -1,18 +1,11 @@
 <?php
 /**
  * This helper builds the OpenTracking object for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Mail
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
 namespace SendGrid\Mail;
+
+use SendGrid\Helper\Assert;
 
 /**
  * This class is used to construct a OpenTracking object for the /mail/send API call
@@ -34,16 +27,17 @@ class OpenTracking implements \JsonSerializable
      */
     private $substitution_tag;
 
-    /**
-     * Optional constructor
-     *
-     * @param bool|null $enable Indicates if this setting is enabled
-     * @param string|null $substitution_tag Allows you to specify a substitution
-     *                                      tag that you can insert in the body
-     *                                      of your email at a location that you
-     *                                      desire. This tag will be replaced by
-     *                                      the open tracking pixel
-     */
+	/**
+	 * Optional constructor
+	 *
+	 * @param bool|null   $enable           Indicates if this setting is enabled
+	 * @param string|null $substitution_tag Allows you to specify a substitution
+	 *                                      tag that you can insert in the body
+	 *                                      of your email at a location that you
+	 *                                      desire. This tag will be replaced by
+	 *                                      the open tracking pixel
+	 * @throws \SendGrid\Mail\TypeException
+	 */
     public function __construct($enable = null, $substitution_tag = null)
     {
         if (isset($enable)) {
@@ -58,14 +52,13 @@ class OpenTracking implements \JsonSerializable
      * Update the enable setting on a OpenTracking object
      *
      * @param bool $enable Indicates if this setting is enabled
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setEnable($enable)
     {
-        if (!is_bool($enable)) {
-            throw new TypeException('$enable must be of type bool');
-        }
+        Assert::boolean($enable, 'enable');
+
         $this->enable = $enable;
     }
 
@@ -87,14 +80,13 @@ class OpenTracking implements \JsonSerializable
      *                                 of your email at a location that you
      *                                 desire. This tag will be replaced by
      *                                 the open tracking pixel
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setSubstitutionTag($substitution_tag)
     {
-        if (!is_string($substitution_tag)) {
-            throw new TypeException('$substitution_tag must be of type string.');
-        }
+        Assert::string($substitution_tag, 'substitution_tag');
+
         $this->substitution_tag = $substitution_tag;
     }
 
@@ -109,7 +101,7 @@ class OpenTracking implements \JsonSerializable
     }
 
     /**
-     * Return an array representing a OpenTracking object for the SendGrid API
+     * Return an array representing a OpenTracking object for the Twilio SendGrid API
      *
      * @return null|array
      */

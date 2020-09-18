@@ -1,23 +1,16 @@
 <?php
 /**
- * This file tests the request object generation for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Tests
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
+ * This file tests the request object generation for a /mail/send API call.
  */
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
+
+use SendGrid\Tests\BaseTestClass;
 
 /**
- * This class tests the request object generation for a /mail/send API call
+ * This class tests the request object generation for a /mail/send API call.
  *
- * @package SendGrid\Tests
+ * @package SendGrid\Tests\Unit
  */
 class KitchenSinkTest extends BaseTestClass
 {
@@ -33,7 +26,7 @@ class KitchenSinkTest extends BaseTestClass
       4
     ]
   },
-  "attachments": [ 
+  "attachments": [
     {
       "content": "YmFzZTY0IGVuY29kZWQgY29udGVudDE=",
       "content_id": "Banner",
@@ -82,7 +75,7 @@ class KitchenSinkTest extends BaseTestClass
   ],
   "from": {
     "email": "test@example.com",
-    "name": "DX"
+    "name": "Twilio SendGrid"
   },
   "headers": {
     "X-Day": "Monday",
@@ -197,7 +190,7 @@ class KitchenSinkTest extends BaseTestClass
     "%section3%": "Substitution for Section 3 Tag",
     "%section4%": "Substitution for Section 4 Tag"
   },
-  "subject": "Sending with SendGrid is Fun and Global 2",
+  "subject": "Sending with Twilio SendGrid is Fun and Global 2",
   "template_id": "d-13b8f94fbcae4ec6b75270d6cb59f932",
   "tracking_settings": {
     "click_tracking": {
@@ -237,7 +230,7 @@ JSON;
       4
     ]
   },
-  "attachments": [ 
+  "attachments": [
     {
       "content": "YmFzZTY0IGVuY29kZWQgY29udGVudDE=",
       "content_id": "Banner",
@@ -286,7 +279,7 @@ JSON;
   ],
   "from": {
     "email": "test@example.com",
-    "name": "DX"
+    "name": "Twilio SendGrid"
   },
   "headers": {
     "X-Day": "Monday",
@@ -395,7 +388,7 @@ JSON;
     "%section3%": "Substitution for Section 3 Tag",
     "%section4%": "Substitution for Section 4 Tag"
   },
-  "subject": "Sending with SendGrid is Fun and Global 2",
+  "subject": "Sending with Twilio SendGrid is Fun and Global 2",
   "template_id": "13b8f94f-bcae-4ec6-b752-70d6cb59f932",
   "tracking_settings": {
     "click_tracking": {
@@ -434,7 +427,7 @@ JSON;
         // For a detailed description of each of these settings,
         // please see the
         // [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
-        $email->setSubject("Sending with SendGrid is Fun 2");
+        $email->setSubject("Sending with Twilio SendGrid is Fun 2");
 
         $email->addTo("test@example.com", "Example User");
         $email->addTo("test+1@example.com", "Example User1");
@@ -488,9 +481,9 @@ JSON;
 
         // The values below this comment are global to entire message
 
-        $email->setFrom("test@example.com", "DX");
+        $email->setFrom("test@example.com", "Twilio SendGrid");
 
-        $email->setGlobalSubject("Sending with SendGrid is Fun and Global 2");
+        $email->setGlobalSubject("Sending with Twilio SendGrid is Fun and Global 2");
 
         $email->addContent(
             "text/plain",
@@ -606,7 +599,7 @@ JSON;
         // For a detailed description of each of these settings,
         // please see the
         // [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
-        $email->setSubject("Sending with SendGrid is Fun 2");
+        $email->setSubject("Sending with Twilio SendGrid is Fun 2");
 
         $email->addTo("test@example.com", "Example User");
         $email->addTo("test+1@example.com", "Example User1");
@@ -663,9 +656,9 @@ JSON;
 
         // The values below this comment are global to entire message
 
-        $email->setFrom("test@example.com", "DX");
+        $email->setFrom("test@example.com", "Twilio SendGrid");
 
-        $email->setGlobalSubject("Sending with SendGrid is Fun and Global 2");
+        $email->setGlobalSubject("Sending with Twilio SendGrid is Fun and Global 2");
 
         $email->addContent(
             "text/plain",
@@ -783,7 +776,7 @@ JSON;
         // please see the
         // [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
         $email->setSubject(
-            new \SendGrid\Mail\Subject("Sending with SendGrid is Fun 2")
+            new \SendGrid\Mail\Subject("Sending with Twilio SendGrid is Fun 2")
         );
 
         $email->addTo(new \SendGrid\Mail\To("test@example.com", "Example User"));
@@ -844,10 +837,10 @@ JSON;
 
         // The values below this comment are global to entire message
 
-        $email->setFrom(new \SendGrid\Mail\From("test@example.com", "DX"));
+        $email->setFrom(new \SendGrid\Mail\From("test@example.com", "Twilio SendGrid"));
 
         $email->setGlobalSubject(
-            new \SendGrid\Mail\Subject("Sending with SendGrid is Fun and Global 2")
+            new \SendGrid\Mail\Subject("Sending with Twilio SendGrid is Fun and Global 2")
         );
 
         $plainTextContent = new \SendGrid\Mail\PlainTextContent(
@@ -1008,7 +1001,7 @@ JSON;
         // please see the
         // [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
         $email->setSubject(
-            new \SendGrid\Mail\Subject("Sending with SendGrid is Fun 2")
+            new \SendGrid\Mail\Subject("Sending with Twilio SendGrid is Fun 2")
         );
 
         $email->addTo(new \SendGrid\Mail\To("test@example.com", "Example User"));
@@ -1074,10 +1067,10 @@ JSON;
 
         // The values below this comment are global to entire message
 
-        $email->setFrom(new \SendGrid\Mail\From("test@example.com", "DX"));
+        $email->setFrom(new \SendGrid\Mail\From("test@example.com", "Twilio SendGrid"));
 
         $email->setGlobalSubject(
-            new \SendGrid\Mail\Subject("Sending with SendGrid is Fun and Global 2")
+            new \SendGrid\Mail\Subject("Sending with Twilio SendGrid is Fun and Global 2")
         );
 
         $plainTextContent = new \SendGrid\Mail\PlainTextContent(
