@@ -15,7 +15,10 @@ use SendGrid\Helper\Assert;
  */
 class GroupsToDisplay implements \JsonSerializable
 {
-    /** @var $groups_to_display int[] An array containing the unsubscribe groups that you would like to be displayed on the unsubscribe preferences page. Maximum of 25 */
+    /**
+     * @var $groups_to_display int[] An array containing the unsubscribe groups that you would like to be displayed
+     *                               on the unsubscribe preferences page. Maximum of 25
+     */
     private $groups_to_display;
 
     /**

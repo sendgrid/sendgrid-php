@@ -44,27 +44,27 @@ class SubscriptionTracking implements \JsonSerializable
      */
     private $substitution_tag;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param bool|null   $enable           Indicates if this setting is enabled
-	 * @param string|null $text             Text to be appended to the email, with
-	 *                                      the subscription tracking link. You may
-	 *                                      control where the link is by using the
-	 *                                      tag <% %>
-	 * @param string|null $html             HTML to be appended to the email, with
-	 *                                      the subscription tracking link. You may
-	 *                                      control where the link is by using the
-	 *                                      tag <% %>
-	 * @param string|null $substitution_tag A tag that will be replaced with the
-	 *                                      unsubscribe URL. For example:
-	 *                                      [unsubscribe_url]. If this parameter
-	 *                                      is used, it will override both the text
-	 *                                      and html parameters. The URL of the link
-	 *                                      will be placed at the substitution tag’s
-	 *                                      location, with no additional formatting
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param bool|null   $enable           Indicates if this setting is enabled
+     * @param string|null $text             Text to be appended to the email, with
+     *                                      the subscription tracking link. You may
+     *                                      control where the link is by using the
+     *                                      tag <% %>
+     * @param string|null $html             HTML to be appended to the email, with
+     *                                      the subscription tracking link. You may
+     *                                      control where the link is by using the
+     *                                      tag <% %>
+     * @param string|null $substitution_tag A tag that will be replaced with the
+     *                                      unsubscribe URL. For example:
+     *                                      [unsubscribe_url]. If this parameter
+     *                                      is used, it will override both the text
+     *                                      and html parameters. The URL of the link
+     *                                      will be placed at the substitution tag’s
+     *                                      location, with no additional formatting
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct(
         $enable = null,
         $text = null,

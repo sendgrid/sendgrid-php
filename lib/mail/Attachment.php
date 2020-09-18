@@ -25,18 +25,18 @@ class Attachment implements \JsonSerializable
     /** @var $content_id string Used when disposition is inline to display the file within the body of the email */
     private $content_id;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param string $content     Base64 encoded content
-	 * @param string $type        Mime type of the attachment
-	 * @param string $filename    File name of the attachment
-	 * @param string $disposition How the attachment should be displayed: inline
-	 *                            or attachment, default is attachment
-	 * @param string $content_id  Used when disposition is inline to display the
-	 *                            file within the body of the email
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param string $content     Base64 encoded content
+     * @param string $type        Mime type of the attachment
+     * @param string $filename    File name of the attachment
+     * @param string $disposition How the attachment should be displayed: inline
+     *                            or attachment, default is attachment
+     * @param string $content_id  Used when disposition is inline to display the
+     *                            file within the body of the email
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct(
         $content = null,
         $type = null,
@@ -162,13 +162,13 @@ class Attachment implements \JsonSerializable
         return $this->disposition;
     }
 
-	/**
-	 * Add the content id to a Attachment object
-	 *
-	 * @param string $content_id Used when disposition is inline to display
-	 *                           the file within the body of the email
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Add the content id to a Attachment object
+     *
+     * @param string $content_id Used when disposition is inline to display
+     *                           the file within the body of the email
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setContentID($content_id)
     {
         Assert::string($content_id, 'content_id');

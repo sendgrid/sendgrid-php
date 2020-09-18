@@ -1803,7 +1803,7 @@ print_r($response->headers());
 | **Device** | **Description** | **Example** |
 |---|---|---|
 | Desktop | Email software on a desktop computer. | I.E., Outlook, Sparrow, or Apple Mail. |
-| Webmail |	A web-based email client. | I.E., Yahoo, Google, AOL, or Outlook.com. |
+| Webmail | A web-based email client. | I.E., Yahoo, Google, AOL, or Outlook.com. |
 | Phone | A smartphone. | iPhone, Android, Blackberry, etc.
 | Tablet | A tablet computer. | iPad, Android based tablet, etc. |
 | Other | An unrecognized device. |
@@ -1827,7 +1827,7 @@ print_r($response->headers());
 ## Getting Started With the Email Activity Feed API
 
 **This endpoint allows you to query your messages.**
- 
+
 Email Activity Feed allows you to search and download a CSV of your recent email event activity. For more information on how to get started, please see our [Getting Started Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Tutorials/getting_started_email_activity_api.html).
 
 <a name="geo"></a>

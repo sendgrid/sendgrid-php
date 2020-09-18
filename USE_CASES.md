@@ -62,15 +62,15 @@ try {
 <a name="box-attachment-example"></a>
 # Attaching a File from Box
 
-You can attach a file from [Box](https://www.box.com) to your emails. 
-Because there is no official Box SDK for PHP, this example requires 
-[firebase/php-jwt](https://github.com/firebase/php-jwt) to generate a 
-[JSON Web Token](https://jwt.io) assertion. Before using this code, you should 
-set up a JWT application on [Box](https://developer.box.com/docs/setting-up-a-jwt-app). 
-For more information about authenticating with JWT, see 
+You can attach a file from [Box](https://www.box.com) to your emails.
+Because there is no official Box SDK for PHP, this example requires
+[firebase/php-jwt](https://github.com/firebase/php-jwt) to generate a
+[JSON Web Token](https://jwt.io) assertion. Before using this code, you should
+set up a JWT application on [Box](https://developer.box.com/docs/setting-up-a-jwt-app).
+For more information about authenticating with JWT, see
 [this page](https://developer.box.com/docs/construct-jwt-claim-manually).
 
-After completing the setup tutorial, you will want to make sure your app’s 
+After completing the setup tutorial, you will want to make sure your app’s
 configuration settings have at least the following options enabled:
 
 **Application Access**
@@ -84,8 +84,8 @@ configuration settings have at least the following options enabled:
 **Advanced Features**
 * Perform Actions as Users
 
-Remember to reauthorize your app 
-[here](https://app.box.com/master/settings/openbox) after making any changes to 
+Remember to reauthorize your app
+[here](https://app.box.com/master/settings/openbox) after making any changes to
 your app’s JWT scopes.
 
 ```php
@@ -200,12 +200,12 @@ if (isset($fileId) && isset($userId)){
     $result = curl_exec($ch);
     $contentType = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
     curl_close($ch);
-    
+
     $attachmentFilename = end($path);
     $attachmentContent = base64_encode($result);
     $attachmentContentType = $contentType;
-    
-    $email = new \SendGrid\Mail\Mail(); 
+
+    $email = new \SendGrid\Mail\Mail();
     $email->setFrom("test@example.com", "Example User");
     $email->setSubject("Attaching a File from Box");
     $email->addTo("test@example.com", "Example User");
@@ -213,7 +213,7 @@ if (isset($fileId) && isset($userId)){
     $email->addContent(
         "text/html", "<strong>See attached file from Box.</strong>"
     );
-    
+
     $attachment = new \SendGrid\Mail\Attachment();
     $attachment->setContent($attachmentContent);
     $attachment->setType($attachmentContentType);
@@ -256,7 +256,7 @@ $s3 = new S3Client([
 ]);
 try {
     // Get the object.
-	// See https://docs.aws.amazon.com/AmazonS3/latest/dev/RetrieveObjSingleOpPHP.html
+    // See https://docs.aws.amazon.com/AmazonS3/latest/dev/RetrieveObjSingleOpPHP.html
     $result = $s3->getObject([
         'Bucket' => $bucket,
         'Key'    => $keyname
@@ -265,8 +265,8 @@ try {
     $attachmentFilename = end($keyExplode);
     $attachmentContent = base64_encode($result['Body']);
     $attachmentContentType = $result['ContentType'];
-	
-    $email = new \SendGrid\Mail\Mail(); 
+
+    $email = new \SendGrid\Mail\Mail();
     $email->setFrom("test@example.com", "Example User");
     $email->setSubject("Attaching a File from S3");
     $email->addTo("test@example.com", "Example User");
@@ -274,7 +274,7 @@ try {
     $email->addContent(
         "text/html", "<strong>See attached file from S3.</strong>"
     );
-	
+
     $attachment = new \SendGrid\Mail\Attachment();
     $attachment->setContent($attachmentContent);
     $attachment->setType($attachmentContentType);
@@ -308,8 +308,8 @@ use SendGrid\Mail\Mail;
 
 $email = new Mail();
 
-// For a detailed description of each of these settings, 
-// please see the 
+// For a detailed description of each of these settings,
+// please see the
 // [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
 $email->setSubject("Sending with Twilio SendGrid is Fun 2");
 
@@ -366,7 +366,7 @@ $email->addCustomArgs($customArgs);
 $email->setSendAt(1461775051);
 
 // You can add a personalization index or personalization parameter to the above
-// methods to add and update multiple personalizations. You can learn more about 
+// methods to add and update multiple personalizations. You can learn more about
 // personalizations [here](https://sendgrid.com/docs/Classroom/Send/v3_Mail_Send/personalizations.html).
 
 // The values below this comment are global to an entire message
@@ -397,7 +397,7 @@ $email->addAttachment(
     "Banner"
 );
 $attachments = [
-    [   
+    [
         "base64 encoded content2",
         "banner2.jpeg",
         "image/jpeg",
@@ -529,8 +529,8 @@ use SendGrid\Mail\TrackingSettings;
 
 $email = new Mail();
 
-// For a detailed description of each of these settings, 
-// please see the 
+// For a detailed description of each of these settings,
+// please see the
 // [documentation](https://sendgrid.com/docs/API_Reference/api_v3.html).
 $email->setSubject(
     new Subject("Sending with Twilio SendGrid is Fun 2")
@@ -538,14 +538,14 @@ $email->setSubject(
 
 $email->addTo(new To("test@example.com", "Example User"));
 $email->addTo(new To("test+1@example.com", "Example User1"));
-$toEmails = [ 
+$toEmails = [
     new To("test+2@example.com", "Example User2"),
     new To("test+3@example.com", "Example User3")
 ];
 $email->addTos($toEmails);
 
 $email->addCc(new Cc("test+4@example.com", "Example User4"));
-$ccEmails = [ 
+$ccEmails = [
     new Cc("test+5@example.com", "Example User5"),
     new Cc("test+6@example.com", "Example User6")
 ];
@@ -554,7 +554,7 @@ $email->addCcs($ccEmails);
 $email->addBcc(
     new Bcc("test+7@example.com", "Example User7")
 );
-$bccEmails = [ 
+$bccEmails = [
     new Bcc("test+8@example.com", "Example User8"),
     new Bcc("test+9@example.com", "Example User9")
 ];
@@ -597,7 +597,7 @@ $email->addCustomArgs($customArgs);
 $email->setSendAt(new SendAt(1461775051));
 
 // You can add a personalization index or personalization parameter to the above
-// methods to add and update multiple personalizations. You can learn more about 
+// methods to add and update multiple personalizations. You can learn more about
 // personalizations [here](https://sendgrid.com/docs/Classroom/Send/v3_Mail_Send/personalizations.html).
 
 // The values below this comment are global to an entire message
@@ -771,7 +771,7 @@ try {
 
 use SendGrid\Mail\Mail;
 
-$email = new Mail(); 
+$email = new Mail();
 $email->setFrom("test@example.com", "Example User");
 $email->setSubject("Sending with Twilio SendGrid is Fun");
 $email->addTo("test@example.com", "Example User");
@@ -841,9 +841,9 @@ try {
 
 use SendGrid\Mail\Mail;
 
-$email = new Mail(); 
+$email = new Mail();
 $email->setFrom("test@example.com", "Example User");
-$tos = [ 
+$tos = [
     "test+test1@example.com" => "Example User1",
     "test+test2@example.com" => "Example User2",
     "test+test3@example.com" => "Example User3"
@@ -865,7 +865,7 @@ try {
 }
 ```
 
-OR 
+OR
 
 ```php
 <?php
@@ -880,7 +880,7 @@ use SendGrid\Mail\Subject;
 use SendGrid\Mail\To;
 
 $from = new From("test@example.com", "Example User");
-$tos = [ 
+$tos = [
     new To("test+test1@example.com", "Example User1"),
     new To("test+test2@example.com", "Example User2"),
     new To("test+test3@example.com", "Example User3")
@@ -957,7 +957,7 @@ $tos = [
         ]
     )
 ];
-$subject = new Subject("Hi -name-!"); // default subject 
+$subject = new Subject("Hi -name-!"); // default subject
 $globalSubstitutions = [
     '-time-' => "2018-05-03 23:10:29"
 ];
@@ -1175,7 +1175,7 @@ $email->addTo(
     0
 );
 $email->addTo(
-    "test+test2@example.com", 
+    "test+test2@example.com",
     "Example User2",
     [
         "subject" => "Subject 2",
@@ -1185,7 +1185,7 @@ $email->addTo(
     1
 );
 $email->addTo(
-    "test+test3@example.com", 
+    "test+test3@example.com",
     "Example User3",
     [
         "subject" => "Subject 3",
@@ -1256,7 +1256,7 @@ use \SendGrid\Mail\HtmlContent;
 use \SendGrid\Mail\Mail;
 
 $from = new From("test@example.com", "Example User");
-$tos = [ 
+$tos = [
     new To(
         "test+test1@example.com",
         "Example User1",
@@ -1282,7 +1282,7 @@ $tos = [
         ]
     )
 ];
-$subject = new Subject("I'm replacing the subject tag"); 
+$subject = new Subject("I'm replacing the subject tag");
 $plainTextContent = new PlainTextContent(
     "I'm replacing the **body tag**"
 );
@@ -1317,31 +1317,31 @@ OR
 
 use SendGrid\Mail\Mail;
 
-$email = new Mail(); 
+$email = new Mail();
 $email->setFrom("test@sendgrid.com", "Example User");
 $email->setSubject("I'm replacing the subject tag");
 $email->addTo(
-    "test+test1@example.com", 
+    "test+test1@example.com",
     "Example User1",
-    [ 
+    [
         "-name-" => "Example User 1",
         "-city-" => "Denver"
     ],
     0
 );
 $email->addTo(
-    "test+test2@example.com", 
+    "test+test2@example.com",
     "Example User2",
-    [ 
+    [
         "-name-" => "Example User 2",
         "-city-" => "Denver"
     ],
     1
 );
 $email->addTo(
-    "test+test3@example.com", 
+    "test+test3@example.com",
     "Example User3",
-    [ 
+    [
         "-name-" => "Example User 3",
         "-city-" => "Redwood City"
     ],

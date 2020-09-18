@@ -17,14 +17,14 @@ class Category implements \JsonSerializable
     /** @var $category string A category name for an email message. Each category name may not exceed 255 characters */
     private $category;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param string|null $category A category name for an email message.
-	 *                              Each category name may not exceed 255
-	 *                              characters
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param string|null $category A category name for an email message.
+     *                              Each category name may not exceed 255
+     *                              characters
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct($category = null)
     {
         if (isset($category)) {

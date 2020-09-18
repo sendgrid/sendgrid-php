@@ -14,17 +14,21 @@ use SendGrid\Helper\Assert;
  */
 class IpPoolName implements \JsonSerializable
 {
-    /** @var $ip_pool_name string The IP Pool that you would like to send this email from. Minimum length: 2, Maximum Length: 64 */
+    /**
+     * @var $ip_pool_name string The IP Pool that you would like to send
+     *                           this email from.
+     *                           Minimum length: 2, Maximum Length: 64
+     */
     private $ip_pool_name;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param string|null $ip_pool_name The IP Pool that you would like to
-	 *                                  send this email from. Minimum length:
-	 *                                  2, Maximum Length: 64
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param string|null $ip_pool_name The IP Pool that you would like to
+     *                                  send this email from. Minimum length:
+     *                                  2, Maximum Length: 64
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct($ip_pool_name = null)
     {
         if (isset($ip_pool_name)) {

@@ -30,19 +30,19 @@ class SpamCheck implements \JsonSerializable
      */
     private $post_to_url;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param bool|null   $enable      Indicates if this setting is enabled
-	 * @param int|null    $threshold   The threshold used to determine if your
-	 *                                 content qualifies as spam on a scale
-	 *                                 from 1 to 10, with 10 being most strict,
-	 *                                 or most
-	 * @param string|null $post_to_url An Inbound Parse URL that you would like
-	 *                                 a copy of your email along with the spam
-	 *                                 report to be sent to
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param bool|null   $enable      Indicates if this setting is enabled
+     * @param int|null    $threshold   The threshold used to determine if your
+     *                                 content qualifies as spam on a scale
+     *                                 from 1 to 10, with 10 being most strict,
+     *                                 or most
+     * @param string|null $post_to_url An Inbound Parse URL that you would like
+     *                                 a copy of your email along with the spam
+     *                                 report to be sent to
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct($enable = null, $threshold = null, $post_to_url = null)
     {
         if (isset($enable)) {

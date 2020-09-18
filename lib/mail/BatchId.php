@@ -17,13 +17,13 @@ class BatchId implements \JsonSerializable
     /** @var $batch_id string This ID represents a batch of emails to be sent at the same time */
     private $batch_id;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param string|null $batch_id This ID represents a batch of emails to
-	 *                              be sent at the same time
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param string|null $batch_id This ID represents a batch of emails to
+     *                              be sent at the same time
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct($batch_id = null)
     {
         if (isset($batch_id)) {

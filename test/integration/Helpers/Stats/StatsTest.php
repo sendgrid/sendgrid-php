@@ -6,15 +6,15 @@ use SendGrid\Stats\Stats;
 
 class StatsTest extends BaseTestClass
 {
-	/**
-	 * @param array $expectedGlobal
-	 * @param array $expectedCategory
-	 * @param array $expectedSubuser
-	 * @param array $expectedSum
-	 * @param array $expectedSubuserMonthly
-	 * @dataProvider validValues
-	 * @throws \Exception
-	 */
+    /**
+     * @param array $expectedGlobal
+     * @param array $expectedCategory
+     * @param array $expectedSubuser
+     * @param array $expectedSum
+     * @param array $expectedSubuserMonthly
+     * @dataProvider validValues
+     * @throws \Exception
+     */
     public function testGetValues(
         $expectedGlobal,
         $expectedCategory,

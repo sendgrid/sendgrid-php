@@ -23,13 +23,13 @@ class Header implements \JsonSerializable
     /** @var $value string Header value */
     private $value;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param string|null $key   Header key
-	 * @param string|null $value Header value
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param string|null $key   Header key
+     * @param string|null $value Header value
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct($key = null, $value = null)
     {
         if (isset($key)) {

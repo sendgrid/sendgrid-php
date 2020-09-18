@@ -39,10 +39,16 @@ class Mail implements \JsonSerializable
     /** @var $categories Category[] Category names for this message */
     private $categories;
 
-    /** @var $custom_args CustomArg[] Values that are specific to the entire send that will be carried along with the email and its activity data */
+    /**
+     * @var $custom_args CustomArg[] Values that are specific to the entire send that will be carried along with the
+     *                               email and its activity data
+     */
     private $custom_args;
 
-    /** @var $substitutions Substitution[] Substitutions that will apply to the text and html content of the body of your email, in addition to the subject and reply-to parameters */
+    /**
+     * @var $substitutions Substitution[] Substitutions that will apply to the text and html content of the body of your
+     *                                    email, in addition to the subject and reply-to parameters
+     */
     private $substitutions;
 
     /** @var $send_at SendAt A unix timestamp allowing you to specify when you want your email to be delivered */
@@ -57,10 +63,16 @@ class Mail implements \JsonSerializable
     /** @var $ip_pool_name IpPoolName The IP Pool that you would like to send this email from */
     private $ip_pool_name;
 
-    /** @var $mail_settings MailSettings A collection of different mail settings that you can use to specify how you would like this email to be handled */
+    /**
+     * @var $mail_settings MailSettings A collection of different mail settings that you can use to specify how you
+     *                                  would like this email to be handled
+     */
     private $mail_settings;
 
-    /** @var $tracking_settings TrackingSettings Settings to determine how you would like to track the metrics of how your recipients interact with your email */
+    /**
+     * @var $tracking_settings TrackingSettings Settings to determine how you would like to track the metrics of how
+     *                                          your recipients interact with your email
+     */
     private $tracking_settings;
 
     /** @var $reply_to ReplyTo Email to be use when replied to */
