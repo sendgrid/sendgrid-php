@@ -21,14 +21,14 @@ class Footer implements \JsonSerializable
     /** @var $html string The HTML content of your footer */
     private $html;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param bool|null   $enable Indicates if this setting is enabled
-	 * @param string|null $text   The plain text content of your footer
-	 * @param string|null $html   The HTML content of your footer
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param bool|null   $enable Indicates if this setting is enabled
+     * @param string|null $text   The plain text content of your footer
+     * @param string|null $html   The HTML content of your footer
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct($enable = null, $text = null, $html = null)
     {
         if (isset($enable)) {

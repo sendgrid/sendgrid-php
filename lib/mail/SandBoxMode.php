@@ -19,12 +19,12 @@ class SandBoxMode implements \JsonSerializable
      */
     private $enable;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param bool|null $enable Indicates if this setting is enabled
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param bool|null $enable Indicates if this setting is enabled
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct($enable = null)
     {
         if (isset($enable)) {

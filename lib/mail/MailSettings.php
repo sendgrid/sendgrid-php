@@ -28,17 +28,17 @@ class MailSettings implements \JsonSerializable
     /** @var $spam_check SpamCheck object */
     private $spam_check;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param BccSettings|null          $bcc_settings           BccSettings object
-	 * @param BypassListManagement|null $bypass_list_management BypassListManagement
-	 *                                                          object
-	 * @param Footer|null               $footer                 Footer object
-	 * @param SandBoxMode|null          $sandbox_mode           SandBoxMode object
-	 * @param SpamCheck|null            $spam_check             SpamCheck object
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param BccSettings|null          $bcc_settings           BccSettings object
+     * @param BypassListManagement|null $bypass_list_management BypassListManagement
+     *                                                          object
+     * @param Footer|null               $footer                 Footer object
+     * @param SandBoxMode|null          $sandbox_mode           SandBoxMode object
+     * @param SpamCheck|null            $spam_check             SpamCheck object
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct(
         $bcc_settings = null,
         $bypass_list_management = null,

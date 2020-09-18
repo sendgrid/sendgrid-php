@@ -26,13 +26,13 @@ class CustomArg implements \JsonSerializable
     /** @var $value string Custom arg value */
     private $value;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param string|null $key   Custom arg key
-	 * @param string|null $value Custom arg value
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param string|null $key   Custom arg key
+     * @param string|null $value Custom arg value
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct($key = null, $value = null)
     {
         if (isset($key)) {

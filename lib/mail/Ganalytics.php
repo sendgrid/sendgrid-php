@@ -27,19 +27,19 @@ class Ganalytics implements \JsonSerializable
     /** @var $utm_campaign string The name of the campaign */
     private $utm_campaign;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param bool|null   $enable       Indicates if this setting is enabled
-	 * @param string|null $utm_source   Name of the referrer source. (e.g.
-	 *                                  Google, SomeDomain.com, or Marketing Email)
-	 * @param string|null $utm_medium   Name of the marketing medium. (e.g. Email)
-	 * @param string|null $utm_term     Used to identify any paid keywords
-	 * @param string|null $utm_content  Used to differentiate your campaign from
-	 *                                  advertisements
-	 * @param string|null $utm_campaign The name of the campaign
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param bool|null   $enable       Indicates if this setting is enabled
+     * @param string|null $utm_source   Name of the referrer source. (e.g.
+     *                                  Google, SomeDomain.com, or Marketing Email)
+     * @param string|null $utm_medium   Name of the marketing medium. (e.g. Email)
+     * @param string|null $utm_term     Used to identify any paid keywords
+     * @param string|null $utm_content  Used to differentiate your campaign from
+     *                                  advertisements
+     * @param string|null $utm_campaign The name of the campaign
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct(
         $enable = null,
         $utm_source = null,
