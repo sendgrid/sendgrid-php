@@ -50,34 +50,6 @@ class EmailAddressTest extends TestCase
         $this->email->setName('');
         $json = json_encode($this->email->jsonSerialize());
         self::assertEquals('null', $json);
-
-        $this->email->setName('Doe, John');
-        $json = json_encode($this->email->jsonSerialize());
-        self::assertEquals(
-            '{"name":"\\"Doe, John\\""}',
-            $json
-        );
-
-        $this->email->setName('Doe; John');
-        $json = json_encode($this->email->jsonSerialize());
-        self::assertEquals(
-            '{"name":"\\"Doe; John\\""}',
-            $json
-        );
-
-        $this->email->setName('John "Billy" O\'Keeffe');
-        $json = json_encode($this->email->jsonSerialize());
-        self::assertEquals(
-            '{"name":"John \\"Billy\\" O\'Keeffe"}',
-            $json
-        );
-
-        $this->email->setName('O\'Keeffe, John "Billy"');
-        $json = json_encode($this->email->jsonSerialize());
-        self::assertEquals(
-            '{"name":"\\"O\'Keeffe, John \\\\\\"Billy\\\\\\"\\""}',
-            $json
-        );
     }
 
     /**
@@ -714,14 +686,6 @@ JSON;
         $emailAddress->setName('Elmer');
 
         $this->assertSame('Elmer', $emailAddress->getName());
-    }
-
-    public function testSetNameOnCommaChar()
-    {
-        $emailAddress = new EmailAddress();
-        $emailAddress->setName('Chun-Sheng, Li');
-
-        $this->assertSame('"Chun-Sheng, Li"', $emailAddress->getName());
     }
 
     /**
