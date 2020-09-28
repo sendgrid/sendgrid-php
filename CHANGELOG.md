@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2020-09-28] Version 7.8.4
+--------------------------
+**Library - Fix**
+- [PR #1006](https://github.com/sendgrid/sendgrid-php/pull/1006): don't wrap names in double-quotes. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Library - Chore**
+- [PR #725](https://github.com/sendgrid/sendgrid-php/pull/725): Require conformance to style standards. Thanks to [@jmauerhan](https://github.com/jmauerhan)!
+
+
 [2020-09-02] Version 7.8.3
 --------------------------
 **Library - Fix**
