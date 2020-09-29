@@ -399,15 +399,15 @@ $email->addAttachment(
 $attachments = [
     [
         "base64 encoded content2",
-        "banner2.jpeg",
         "image/jpeg",
+        "banner2.jpeg",
         "attachment",
         "Banner 3"
     ],
     [
         "base64 encoded content3",
-        "banner3.gif",
         "image/gif",
+        "banner3.gif",
         "inline",
         "Banner 3"
     ]
