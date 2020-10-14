@@ -2,9 +2,15 @@ test/coverage/*
 dist/
 composer.lock
 vendor
-.env*
+.env
 sendgrid.env
 composer.phar
 .editorconfig
 test.php
 .idea/
+*.code-workspace
+.vscode
+prism*
+temp.php
+TODO.txt
+sendgrid-php.zip

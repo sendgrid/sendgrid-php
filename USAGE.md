@@ -3,9 +3,9 @@ This documentation is based on our [OAI specification](https://github.com/sendgr
 # INITIALIZATION
 
 ```php
-// If you are using Composer
-require 'vendor/autoload.php';
-
+<?php
+// Uncomment next line if you're not using a dependency loader (such as Composer)
+// require_once '<PATH TO>/sendgrid-php.php';
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
@@ -13,9 +13,9 @@ $sg = new \SendGrid($apiKey);
 
 # Table of Contents
 
-* [ACCESS SETTINGS](#access_settings)
+* [ACCESS SETTINGS](#access-settings)
 * [ALERTS](#alerts)
-* [API KEYS](#api_keys)
+* [API KEYS](#api-keys)
 * [ASM](#asm)
 * [BROWSERS](#browsers)
 * [CAMPAIGNS](#campaigns)
@@ -23,24 +23,25 @@ $sg = new \SendGrid($apiKey);
 * [CLIENTS](#clients)
 * [CONTACTDB](#contactdb)
 * [DEVICES](#devices)
+* [EMAIL ACTIVITY](#email-activity)
 * [GEO](#geo)
 * [IPS](#ips)
 * [MAIL](#mail)
-* [MAIL SETTINGS](#mail_settings)
-* [MAILBOX PROVIDERS](#mailbox_providers)
-* [PARTNER SETTINGS](#partner_settings)
+* [MAIL SETTINGS](#mail-settings)
+* [MAILBOX PROVIDERS](#mailbox-providers)
+* [PARTNER SETTINGS](#partner-settings)
 * [SCOPES](#scopes)
 * [SENDERS](#senders)
+* [SENDER AUTHENTICATION](#sender-authentication)
 * [STATS](#stats)
 * [SUBUSERS](#subusers)
 * [SUPPRESSION](#suppression)
 * [TEMPLATES](#templates)
-* [TRACKING SETTINGS](#tracking_settings)
+* [TRACKING SETTINGS](#tracking-settings)
 * [USER](#user)
-* [WHITELABEL](#whitelabel)
 
 
-<a name="access_settings"></a>
+<a name="access-settings"></a>
 # ACCESS SETTINGS
 
 ## Retrieve all recent access attempts
@@ -57,8 +58,8 @@ For more information, please see our [User Guide](http://sendgrid.com/docs/User_
 ```php
 $query_params = json_decode('{"limit": 1}');
 $response = $sg->client->access_settings()->activity()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Add one or more IPs to the whitelist
@@ -89,8 +90,8 @@ $request_body = json_decode('{
   ]
 }');
 $response = $sg->client->access_settings()->whitelist()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve a list of currently whitelisted IPs
@@ -106,8 +107,8 @@ For more information, please see our [User Guide](http://sendgrid.com/docs/User_
 
 ```php
 $response = $sg->client->access_settings()->whitelist()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Remove one or more IPs from the whitelist
@@ -132,13 +133,13 @@ $request_body = json_decode('{
   ]
 }');
 $response = $sg->client->access_settings()->whitelist()->delete($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve a specific whitelisted IP
 
-**This endpoint allows you to retreive a specific IP address that has been whitelisted.**
+**This endpoint allows you to retrieve a specific IP address that has been whitelisted.**
 
 You must include the ID for the specific IP address you want to retrieve in your call.
 
@@ -152,8 +153,8 @@ For more information, please see our [User Guide](http://sendgrid.com/docs/User_
 ```php
 $rule_id = "test_url_param";
 $response = $sg->client->access_settings()->whitelist()->_($rule_id)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Remove a specific IP from the whitelist
@@ -172,8 +173,8 @@ For more information, please see our [User Guide](http://sendgrid.com/docs/User_
 ```php
 $rule_id = "test_url_param";
 $response = $sg->client->access_settings()->whitelist()->_($rule_id)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 <a name="alerts"></a>
@@ -199,8 +200,8 @@ $request_body = json_decode('{
   "type": "stats_notification"
 }');
 $response = $sg->client->alerts()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all alerts
@@ -218,8 +219,8 @@ For more information about alerts, please see our [User Guide](https://sendgrid.
 
 ```php
 $response = $sg->client->alerts()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update an alert
@@ -241,8 +242,8 @@ $request_body = json_decode('{
 }');
 $alert_id = "test_url_param";
 $response = $sg->client->alerts()->_($alert_id)->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve a specific alert
@@ -261,8 +262,8 @@ For more information about alerts, please see our [User Guide](https://sendgrid.
 ```php
 $alert_id = "test_url_param";
 $response = $sg->client->alerts()->_($alert_id)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete an alert
@@ -281,22 +282,22 @@ For more information about alerts, please see our [User Guide](https://sendgrid.
 ```php
 $alert_id = "test_url_param";
 $response = $sg->client->alerts()->_($alert_id)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
-<a name="api_keys"></a>
+<a name="api-keys"></a>
 # API KEYS
 
 ## Create API keys
 
 **This endpoint allows you to create a new random API Key for the user.**
 
-A JSON request body containing a "name" property is required. If number of maximum keys is reached, HTTP 403 will be returned.
+A JSON request body containing a "name" property is required. If a number of maximum keys is reached, HTTP 403 will be returned.
 
 There is a limit of 100 API Keys on your account.
 
-The API Keys feature allows customers to be able to generate an API Key credential which can be used for authentication with the SendGrid v3 Web API or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).
+The API Keys feature allows customers to be able to generate an API Key credential which can be used for authentication with the Twilio SendGrid v3 Web API or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).
 
 See the [API Key Permissions List](https://sendgrid.com/docs/API_Reference/Web_API_v3/API_Keys/api_key_permissions_list.html) for a list of all available scopes.
 
@@ -314,15 +315,15 @@ $request_body = json_decode('{
   ]
 }');
 $response = $sg->client->api_keys()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all API Keys belonging to the authenticated user
 
 **This endpoint allows you to retrieve all API Keys that belong to the authenticated user.**
 
-The API Keys feature allows customers to be able to generate an API Key credential which can be used for authentication with the SendGrid v3 Web API or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).
+The API Keys feature allows customers to be able to generate an API Key credential which can be used for authentication with the Twilio SendGrid v3 Web API or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).
 
 ### GET /api_keys
 
@@ -330,8 +331,8 @@ The API Keys feature allows customers to be able to generate an API Key credenti
 ```php
 $query_params = json_decode('{"limit": 1}');
 $response = $sg->client->api_keys()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update the name & scopes of an API Key
@@ -339,9 +340,9 @@ print_r($response->headers());
 **This endpoint allows you to update the name and scopes of a given API key.**
 
 A JSON request body with a "name" property is required.
-Most provide the list of all the scopes an api key should have.
+Most provide the list of all the scopes an API key should have.
 
-The API Keys feature allows customers to be able to generate an API Key credential which can be used for authentication with the SendGrid v3 Web API or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).
+The API Keys feature allows customers to be able to generate an API Key credential which can be used for authentication with the Twilio SendGrid v3 Web API or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).
 
 
 ### PUT /api_keys/{api_key_id}
@@ -357,8 +358,8 @@ $request_body = json_decode('{
 }');
 $api_key_id = "test_url_param";
 $response = $sg->client->api_keys()->_($api_key_id)->put($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update API keys
@@ -367,7 +368,7 @@ print_r($response->headers());
 
 A JSON request body with a "name" property is required.
 
-The API Keys feature allows customers to be able to generate an API Key credential which can be used for authentication with the SendGrid v3 Web API or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).
+The API Keys feature allows customers to be able to generate an API Key credential which can be used for authentication with the Twilio SendGrid v3 Web API or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).
 
 ## URI Parameters
 
@@ -384,13 +385,13 @@ $request_body = json_decode('{
 }');
 $api_key_id = "test_url_param";
 $response = $sg->client->api_keys()->_($api_key_id)->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve an existing API Key
 
-**This endpoint allows you to retrieve a single api key.**
+**This endpoint allows you to retrieve a single API key.**
 
 If the API Key ID does not exist an HTTP 404 will be returned.
 
@@ -400,17 +401,17 @@ If the API Key ID does not exist an HTTP 404 will be returned.
 ```php
 $api_key_id = "test_url_param";
 $response = $sg->client->api_keys()->_($api_key_id)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete API keys
 
 **This endpoint allows you to revoke an existing API Key**
 
-Authentications using this API Key will fail after this request is made, with some small propogation delay.If the API Key ID does not exist an HTTP 404 will be returned.
+Authentications using this API Key will fail after this request is made, with some small propagation delay. If the API Key ID does not exist an HTTP 404 will be returned.
 
-The API Keys feature allows customers to be able to generate an API Key credential which can be used for authentication with the SendGrid v3 Web API or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).
+The API Keys feature allows customers to be able to generate an API Key credential which can be used for authentication with the Twilio SendGrid v3 Web API or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).
 
 ## URI Parameters
 
@@ -424,8 +425,8 @@ The API Keys feature allows customers to be able to generate an API Key credenti
 ```php
 $api_key_id = "test_url_param";
 $response = $sg->client->api_keys()->_($api_key_id)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 <a name="asm"></a>
@@ -451,8 +452,8 @@ $request_body = json_decode('{
   "name": "Product Suggestions"
 }');
 $response = $sg->client->asm()->groups()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve information about multiple suppression groups
@@ -463,7 +464,7 @@ This endpoint will return information for each group ID that you include in your
 
 Suppressions are a list of email addresses that will not receive content sent under a given [group](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html).
 
-Suppression groups, or [unsubscribe groups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html), allow you to label a category of content that you regularly send. This gives your recipients the ability to opt out of a specific set of your email. For example, you might define a group for your transactional email, and one for your marketing email so that your users can continue recieving your transactional email witout having to receive your marketing content.
+Suppression groups, or [unsubscribe groups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html), allow you to label a category of content that you regularly send. This gives your recipients the ability to opt out of a specific set of your email. For example, you might define a group for your transactional email, and one for your marketing email so that your users can continue receiving your transactional email without having to receive your marketing content.
 
 ### GET /asm/groups
 
@@ -471,8 +472,8 @@ Suppression groups, or [unsubscribe groups](https://sendgrid.com/docs/API_Refere
 ```php
 $query_params = json_decode('{"id": 1}');
 $response = $sg->client->asm()->groups()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update a suppression group.
@@ -496,8 +497,8 @@ $request_body = json_decode('{
 }');
 $group_id = "test_url_param";
 $response = $sg->client->asm()->groups()->_($group_id)->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Get information on a single suppression group.
@@ -516,8 +517,8 @@ Each user can create up to 25 different suppression groups.
 ```php
 $group_id = "test_url_param";
 $response = $sg->client->asm()->groups()->_($group_id)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete a suppression group.
@@ -538,8 +539,8 @@ Each user can create up to 25 different suppression groups.
 ```php
 $group_id = "test_url_param";
 $response = $sg->client->asm()->groups()->_($group_id)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Add suppressions to a suppression group
@@ -562,8 +563,8 @@ $request_body = json_decode('{
 }');
 $group_id = "test_url_param";
 $response = $sg->client->asm()->groups()->_($group_id)->suppressions()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all suppressions for a suppression group
@@ -578,8 +579,8 @@ Suppressions are recipient email addresses that are added to [unsubscribe groups
 ```php
 $group_id = "test_url_param";
 $response = $sg->client->asm()->groups()->_($group_id)->suppressions()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Search for suppressions within a group
@@ -603,8 +604,8 @@ $request_body = json_decode('{
 }');
 $group_id = "test_url_param";
 $response = $sg->client->asm()->groups()->_($group_id)->suppressions()->search()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete a suppression from a suppression group
@@ -620,8 +621,8 @@ Suppressions are recipient email addresses that are added to [unsubscribe groups
 $group_id = "test_url_param";
 $email = "test_url_param";
 $response = $sg->client->asm()->groups()->_($group_id)->suppressions()->_($email)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all suppressions
@@ -635,8 +636,8 @@ Suppressions are a list of email addresses that will not receive content sent un
 
 ```php
 $response = $sg->client->asm()->suppressions()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Add recipient addresses to the global suppression group.
@@ -656,15 +657,15 @@ $request_body = json_decode('{
   ]
 }');
 $response = $sg->client->asm()->suppressions()->global()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve a Global Suppression
 
-**This endpoint allows you to retrieve a global suppression. You can also use this endpoint to confirm if an email address is already globally suppresed.**
+**This endpoint allows you to retrieve a global suppression. You can also use this endpoint to confirm if an email address is already globally suppressed.**
 
-If the email address you include in the URL path parameter `{email}` is alreayd globally suppressed, the response will include that email address. If the address you enter for `{email}` is not globally suppressed, an empty JSON object `{}` will be returned.
+If the email address you include in the URL path parameter `{email}` is already globally suppressed, the response will include that email address. If the address you enter for `{email}` is not globally suppressed, an empty JSON object `{}` will be returned.
 
 A global suppression (or global unsubscribe) is an email address of a recipient who does not want to receive any of your messages. A globally suppressed recipient will be removed from any email you send. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/global_unsubscribes.html).
 
@@ -674,8 +675,8 @@ A global suppression (or global unsubscribe) is an email address of a recipient 
 ```php
 $email = "test_url_param";
 $response = $sg->client->asm()->suppressions()->global()->_($email)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete a Global Suppression
@@ -690,8 +691,8 @@ A global suppression (or global unsubscribe) is an email address of a recipient 
 ```php
 $email = "test_url_param";
 $response = $sg->client->asm()->suppressions()->global()->_($email)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all suppression groups for an email address
@@ -706,14 +707,14 @@ Suppressions are a list of email addresses that will not receive content sent un
 ```php
 $email = "test_url_param";
 $response = $sg->client->asm()->suppressions()->_($email)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 <a name="browsers"></a>
 # BROWSERS
 
-## Retrieve email statistics by browser.
+## Retrieve email statistics by a browser.
 
 **This endpoint allows you to retrieve your email statistics segmented by browser type.**
 
@@ -727,8 +728,8 @@ Advanced Stats provide a more in-depth view of your email statistics and the act
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "browsers": "test_string", "limit": "test_string", "offset": "test_string", "start_date": "2016-01-01"}');
 $response = $sg->client->browsers()->stats()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 <a name="campaigns"></a>
@@ -740,7 +741,7 @@ print_r($response->headers());
 
 Our Marketing Campaigns API lets you create, manage, send, and schedule campaigns.
 
-Note: In order to send or schedule the campaign, you will be required to provide a subject, sender ID, content (we suggest both html and plain text), and at least one list or segment ID. This information is not required when you create a campaign.
+Note: In order to send or schedule the campaign, you will be required to provide a subject, sender ID, content (we suggest both HTML and plain text), and at least one list or segment ID. This information is not required when you create a campaign.
 
 For more information:
 
@@ -771,8 +772,8 @@ $request_body = json_decode('{
   "title": "March Newsletter"
 }');
 $response = $sg->client->campaigns()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all Campaigns
@@ -793,8 +794,8 @@ For more information:
 ```php
 $query_params = json_decode('{"limit": 1, "offset": 1}');
 $response = $sg->client->campaigns()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update a Campaign
@@ -820,8 +821,8 @@ $request_body = json_decode('{
 }');
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve a single campaign
@@ -840,8 +841,8 @@ For more information:
 ```php
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete a Campaign
@@ -860,8 +861,8 @@ For more information:
 ```php
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update a Scheduled Campaign
@@ -881,8 +882,8 @@ $request_body = json_decode('{
 }');
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Schedule a Campaign
@@ -902,8 +903,8 @@ $request_body = json_decode('{
 }');
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## View Scheduled Time of a Campaign
@@ -920,8 +921,8 @@ For more information:
 ```php
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Unschedule a Scheduled Campaign
@@ -941,8 +942,8 @@ For more information:
 ```php
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Send a Campaign
@@ -961,15 +962,15 @@ For more information:
 ```php
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->now()->post();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Send a Test Campaign
 
 **This endpoint allows you to send a test campaign.**
 
-To send to multiple addresses, use an array for the JSON "to" value ["one@address","two@address"]
+To send to multiple addresses, use an array for the JSON "to" value ["one@address", "two@address"]
 
 For more information:
 
@@ -984,8 +985,8 @@ $request_body = json_decode('{
 }');
 $campaign_id = "test_url_param";
 $response = $sg->client->campaigns()->_($campaign_id)->schedules()->test()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 <a name="categories"></a>
@@ -1003,8 +1004,8 @@ Categories can help organize your email analytics by enabling you to tag emails 
 ```php
 $query_params = json_decode('{"category": "test_string", "limit": 1, "offset": 1}');
 $response = $sg->client->categories()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve Email Statistics for Categories
@@ -1021,8 +1022,8 @@ Categories allow you to group your emails together according to broad topics tha
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "limit": 1, "offset": 1, "start_date": "2016-01-01", "categories": "test_string"}');
 $response = $sg->client->categories()->stats()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve sums of email stats for each category [Needs: Stats object defined, has category ID?]
@@ -1039,8 +1040,8 @@ Categories allow you to group your emails together according to broad topics tha
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "limit": 1, "sort_by_metric": "test_string", "offset": 1, "start_date": "2016-01-01", "sort_by_direction": "asc"}');
 $response = $sg->client->categories()->stats()->sums()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 <a name="clients"></a>
@@ -1060,8 +1061,8 @@ Advanced Stats provide a more in-depth view of your email statistics and the act
 ```php
 $query_params = json_decode('{"aggregated_by": "day", "start_date": "2016-01-01", "end_date": "2016-04-01"}');
 $response = $sg->client->clients()->stats()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve stats by a specific client type.
@@ -1085,8 +1086,8 @@ Advanced Stats provide a more in-depth view of your email statistics and the act
 $query_params = json_decode('{"aggregated_by": "day", "start_date": "2016-01-01", "end_date": "2016-04-01"}');
 $client_type = "test_url_param";
 $response = $sg->client->clients()->_($client_type)->stats()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 <a name="contactdb"></a>
@@ -1096,7 +1097,7 @@ print_r($response->headers());
 
 **This endpoint allows you to create a custom field.**
 
-The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
+The contactdb is a database of your contacts for [Twilio SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
 
 ### POST /contactdb/custom_fields
 
@@ -1107,30 +1108,30 @@ $request_body = json_decode('{
   "type": "text"
 }');
 $response = $sg->client->contactdb()->custom_fields()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all custom fields
 
 **This endpoint allows you to retrieve all custom fields.**
 
-The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
+The contactdb is a database of your contacts for [Twilio SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
 
 ### GET /contactdb/custom_fields
 
 
 ```php
 $response = $sg->client->contactdb()->custom_fields()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve a Custom Field
 
 **This endpoint allows you to retrieve a custom field by ID.**
 
-The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
+The contactdb is a database of your contacts for [Twilio SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
 
 ### GET /contactdb/custom_fields/{custom_field_id}
 
@@ -1138,15 +1139,15 @@ The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](
 ```php
 $custom_field_id = "test_url_param";
 $response = $sg->client->contactdb()->custom_fields()->_($custom_field_id)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete a Custom Field
 
 **This endpoint allows you to delete a custom field by ID.**
 
-The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
+The contactdb is a database of your contacts for [Twilio SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
 
 ### DELETE /contactdb/custom_fields/{custom_field_id}
 
@@ -1154,8 +1155,8 @@ The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](
 ```php
 $custom_field_id = "test_url_param";
 $response = $sg->client->contactdb()->custom_fields()->_($custom_field_id)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Create a List
@@ -1172,8 +1173,8 @@ $request_body = json_decode('{
   "name": "your list name"
 }');
 $response = $sg->client->contactdb()->lists()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all lists
@@ -1187,8 +1188,8 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 
 ```php
 $response = $sg->client->contactdb()->lists()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete Multiple lists
@@ -1208,8 +1209,8 @@ $request_body = json_decode('[
   4
 ]');
 $response = $sg->client->contactdb()->lists()->delete($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update a List
@@ -1229,8 +1230,8 @@ $request_body = json_decode('{
 $query_params = json_decode('{"list_id": 1}');
 $list_id = "test_url_param";
 $response = $sg->client->contactdb()->lists()->_($list_id)->patch($request_body, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve a single list
@@ -1246,8 +1247,8 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 $query_params = json_decode('{"list_id": 1}');
 $list_id = "test_url_param";
 $response = $sg->client->contactdb()->lists()->_($list_id)->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete a List
@@ -1263,8 +1264,8 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 $query_params = json_decode('{"delete_contacts": "true"}');
 $list_id = "test_url_param";
 $response = $sg->client->contactdb()->lists()->_($list_id)->delete(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Add Multiple Recipients to a List
@@ -1285,8 +1286,8 @@ $request_body = json_decode('[
 ]');
 $list_id = "test_url_param";
 $response = $sg->client->contactdb()->lists()->_($list_id)->recipients()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all recipients on a List
@@ -1302,8 +1303,8 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 $query_params = json_decode('{"page": 1, "page_size": 1}');
 $list_id = "test_url_param";
 $response = $sg->client->contactdb()->lists()->_($list_id)->recipients()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Add a Single Recipient to a List
@@ -1319,8 +1320,8 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 $list_id = "test_url_param";
 $recipient_id = "test_url_param";
 $response = $sg->client->contactdb()->lists()->_($list_id)->recipients()->_($recipient_id)->post();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete a Single Recipient from a Single List
@@ -1337,8 +1338,8 @@ $query_params = json_decode('{"recipient_id": 1, "list_id": 1}');
 $list_id = "test_url_param";
 $recipient_id = "test_url_param";
 $response = $sg->client->contactdb()->lists()->_($list_id)->recipients()->_($recipient_id)->delete(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update Recipient
@@ -1347,9 +1348,9 @@ print_r($response->headers());
 
 The body of an API call to this endpoint must include an array of one or more recipient objects.
 
-It is of note that you can add custom field data as parameters on recipient objects. We have provided an example using some of the default custom fields SendGrid provides.
+It is of note that you can add custom field data as parameters on recipient objects. We have provided an example using some of the default custom fields Twilio SendGrid provides.
 
-The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
+The contactdb is a database of your contacts for [Twilio SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
 
 ### PATCH /contactdb/recipients
 
@@ -1363,15 +1364,15 @@ $request_body = json_decode('[
   }
 ]');
 $response = $sg->client->contactdb()->recipients()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Add recipients
 
 **This endpoint allows you to add a Marketing Campaigns recipient.**
 
-It is of note that you can add custom field data as a parameter on this endpoint. We have provided an example using some of the default custom fields SendGrid provides.
+It is of note that you can add custom field data as a parameter on this endpoint. We have provided an example using some of the default custom fields Twilio SendGrid provides.
 
 The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
 
@@ -1394,8 +1395,8 @@ $request_body = json_decode('[
   }
 ]');
 $response = $sg->client->contactdb()->recipients()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve recipients
@@ -1413,17 +1414,17 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 ```php
 $query_params = json_decode('{"page": 1, "page_size": 1}');
 $response = $sg->client->contactdb()->recipients()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete Recipient
 
-**This endpoint allows you to deletes one or more recipients.**
+**This endpoint allows you to delete one or more recipients.**
 
 The body of an API call to this endpoint must include an array of recipient IDs of the recipients you want to delete.
 
-The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
+The contactdb is a database of your contacts for [Twilio SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
 
 ### DELETE /contactdb/recipients
 
@@ -1434,8 +1435,8 @@ $request_body = json_decode('[
   "recipient_id2"
 ]');
 $response = $sg->client->contactdb()->recipients()->delete($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve the count of billable recipients
@@ -1451,23 +1452,23 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 
 ```php
 $response = $sg->client->contactdb()->recipients()->billable_count()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve a Count of Recipients
 
 **This endpoint allows you to retrieve the total number of Marketing Campaigns recipients.**
 
-The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
+The contactdb is a database of your contacts for [Twilio SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
 
 ### GET /contactdb/recipients/count
 
 
 ```php
 $response = $sg->client->contactdb()->recipients()->count()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve recipients matching search criteria
@@ -1477,13 +1478,13 @@ print_r($response->headers());
 field_name:
 
 * is a variable that is substituted for your actual custom field name from your recipient.
-* Text fields must be url-encoded. Date fields are searchable only by unix timestamp (e.g. 2/2/2015 becomes 1422835200)
+* Text fields must be url-encoded. Date fields are searchable only by UNIX timestamp (e.g. 2/2/2015 becomes 1422835200)
 * If field_name is a 'reserved' date field, such as created_at or updated_at, the system will internally convert
 your epoch time to a date range encompassing the entire day. For example, an epoch time of 1422835600 converts to
 Mon, 02 Feb 2015 00:06:40 GMT, but internally the system will search from Mon, 02 Feb 2015 00:00:00 GMT through
 Mon, 02 Feb 2015 23:59:59 GMT.
 
-The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
+The contactdb is a database of your contacts for [Twilio SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
 
 ### GET /contactdb/recipients/search
 
@@ -1491,8 +1492,64 @@ The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](
 ```php
 $query_params = json_decode('{"{field_name}": "test_string"}');
 $response = $sg->client->contactdb()->recipients()->search()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Retrieve recipients matching search criteria using segment conditions
+
+**This endpoint allows you to perform a search using segment conditions on all of your Marketing Campaigns recipients.**
+
+Valid operators for search depend on the type of the field you are segmenting:
+
+* **Dates:**
+    * "eq", "ne", "lt" (before), "gt" (after)
+        * You may use MM/DD/YYYY for day granularity or an epoch for second granularity.
+    * "empty", "not_empty"
+    * "is within"
+        * You may use an ISO 8601 date format or the # of days.
+* **Text:** "contains", "eq" (is - matches the full field), "ne" (is not - matches any field where the entire field is not the condition value), "empty", "not_empty"
+* **Numbers:** "eq", "lt", "gt", "empty", "not_empty"
+* **Email Clicks and Opens:** "eq" (opened), "ne" (not opened)
+
+Field values must all be a string.
+
+Search conditions using "eq" or "ne" for email clicks and opens should provide a "field" of either *clicks.campaign_identifier* or *opens.campaign_identifier*. The condition value should be a string containing the id of a completed campaign.
+
+Search conditions list may contain multiple conditions, joined by an "and" or "or" in the "and_or" field. The first condition in the conditions list must have an empty "and_or", and subsequent conditions must all specify an "and_or".
+
+The contactdb is a database of your contacts for [Twilio SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
+
+### POST /contactdb/recipients/search
+
+
+```php
+$query_params = json_decode('{"page": 1, "page_size": 1}');
+$request_body = json_decode('{
+  "conditions": [
+    {
+      "and_or": "",
+      "field": "last_name",
+      "operator": "eq",
+      "value": "Miller"
+    },
+    {
+      "and_or": "and",
+      "field": "last_clicked",
+      "operator": "gt",
+      "value": "01/02/2015"
+    },
+    {
+      "and_or": "or",
+      "field": "clicks.campaign_identifier",
+      "operator": "eq",
+      "value": "513"
+    }
+  ],
+}');
+$response = $sg->client->contactdb()->recipients()->search()->post($request_body, $query_params);
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve a single recipient
@@ -1507,8 +1564,8 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 ```php
 $recipient_id = "test_url_param";
 $response = $sg->client->contactdb()->recipients()->_($recipient_id)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete a Recipient
@@ -1523,8 +1580,8 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 ```php
 $recipient_id = "test_url_param";
 $response = $sg->client->contactdb()->recipients()->_($recipient_id)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve the lists that a recipient is on
@@ -1541,23 +1598,23 @@ The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.co
 ```php
 $recipient_id = "test_url_param";
 $response = $sg->client->contactdb()->recipients()->_($recipient_id)->lists()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve reserved fields
 
 **This endpoint allows you to list all fields that are reserved and can't be used for custom field names.**
 
-The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
+The contactdb is a database of your contacts for [Twilio SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
 
 ### GET /contactdb/reserved_fields
 
 
 ```php
 $response = $sg->client->contactdb()->reserved_fields()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Create a Segment
@@ -1573,14 +1630,21 @@ List Id:
 
 Valid operators for create and update depend on the type of the field you are segmenting:
 
-* **Dates:** "eq", "ne", "lt" (before), "gt" (after)
-* **Text:** "contains", "eq" (is - matches the full field), "ne" (is not - matches any field where the entire field is not the condition value)
-* **Numbers:** "eq", "lt", "gt"
+* **Dates:**
+    * "eq", "ne", "lt" (before), "gt" (after)
+        * You may use MM/DD/YYYY for day granularity or an epoch for second granularity.
+    * "empty", "not_empty"
+    * "is within"
+        * You may use an ISO 8601 date format or the # of days.
+* **Text:** "contains", "eq" (is - matches the full field), "ne" (is not - matches any field where the entire field is not the condition value), "empty", "not_empty"
+* **Numbers:** "eq", "lt", "gt", "empty", "not_empty"
 * **Email Clicks and Opens:** "eq" (opened), "ne" (not opened)
+
+Field values must all be a string.
 
 Segment conditions using "eq" or "ne" for email clicks and opens should provide a "field" of either *clicks.campaign_identifier* or *opens.campaign_identifier*. The condition value should be a string containing the id of a completed campaign.
 
-Segments may contain multiple condtions, joined by an "and" or "or" in the "and_or" field. The first condition in the conditions list must have an empty "and_or", and subsequent conditions must all specify an "and_or".
+Segments may contain multiple conditions, joined by an "and" or "or" in the "and_or" field. The first condition in the conditions list must have an empty "and_or", and subsequent conditions must all specify an "and_or".
 
 The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
 
@@ -1615,8 +1679,8 @@ $request_body = json_decode('{
   "name": "Last Name Miller"
 }');
 $response = $sg->client->contactdb()->segments()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all segments
@@ -1632,8 +1696,8 @@ For more information about segments in Marketing Campaigns, please see our [User
 
 ```php
 $response = $sg->client->contactdb()->segments()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update a segment
@@ -1663,8 +1727,8 @@ $request_body = json_decode('{
 $query_params = json_decode('{"segment_id": "test_string"}');
 $segment_id = "test_url_param";
 $response = $sg->client->contactdb()->segments()->_($segment_id)->patch($request_body, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve a segment
@@ -1682,8 +1746,8 @@ For more information about segments in Marketing Campaigns, please see our [User
 $query_params = json_decode('{"segment_id": 1}');
 $segment_id = "test_url_param";
 $response = $sg->client->contactdb()->segments()->_($segment_id)->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete a segment
@@ -1703,8 +1767,8 @@ For more information about segments in Marketing Campaigns, please see our [User
 $query_params = json_decode('{"delete_contacts": "true"}');
 $segment_id = "test_url_param";
 $response = $sg->client->contactdb()->segments()->_($segment_id)->delete(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve recipients on a segment
@@ -1722,8 +1786,8 @@ For more information about segments in Marketing Campaigns, please see our [User
 $query_params = json_decode('{"page": 1, "page_size": 1}');
 $segment_id = "test_url_param";
 $response = $sg->client->contactdb()->segments()->_($segment_id)->recipients()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 <a name="devices"></a>
@@ -1738,10 +1802,10 @@ print_r($response->headers());
 ## Available Device Types
 | **Device** | **Description** | **Example** |
 |---|---|---|
-| Desktop | Email software on desktop computer. | I.E., Outlook, Sparrow, or Apple Mail. |
-| Webmail |	A web-based email client. | I.E., Yahoo, Google, AOL, or Outlook.com. |
-| Phone | A smart phone. | iPhone, Android, Blackberry, etc.
-| Tablet | A tablet computer. | iPad, android based tablet, etc. |
+| Desktop | Email software on a desktop computer. | I.E., Outlook, Sparrow, or Apple Mail. |
+| Webmail | A web-based email client. | I.E., Yahoo, Google, AOL, or Outlook.com. |
+| Phone | A smartphone. | iPhone, Android, Blackberry, etc.
+| Tablet | A tablet computer. | iPad, Android based tablet, etc. |
 | Other | An unrecognized device. |
 
 Advanced Stats provide a more in-depth view of your email statistics and the actions taken by your recipients. You can segment these statistics by geographic location, device type, client type, browser, and mailbox provider. For more information about statistics, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/index.html).
@@ -1752,10 +1816,20 @@ Advanced Stats provide a more in-depth view of your email statistics and the act
 ```php
 $query_params = json_decode('{"aggregated_by": "day", "limit": 1, "start_date": "2016-01-01", "end_date": "2016-04-01", "offset": 1}');
 $response = $sg->client->devices()->stats()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
+
+<a name="email-activity"></a>
+# EMAIL ACTIVITY
+
+## Getting Started With the Email Activity Feed API
+
+**This endpoint allows you to query your messages.**
+
+Email Activity Feed allows you to search and download a CSV of your recent email event activity. For more information on how to get started, please see our [Getting Started Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Tutorials/getting_started_email_activity_api.html).
+
 <a name="geo"></a>
 # GEO
 
@@ -1773,8 +1847,8 @@ Advanced Stats provide a more in-depth view of your email statistics and the act
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "country": "US", "aggregated_by": "day", "limit": 1, "offset": 1, "start_date": "2016-01-01"}');
 $response = $sg->client->geo()->stats()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 <a name="ips"></a>
@@ -1784,7 +1858,7 @@ print_r($response->headers());
 
 **This endpoint allows you to retrieve a list of all assigned and unassigned IPs.**
 
-Response includes warm up status, pools, assigned subusers, and whitelabel info. The start_date field corresponds to when warmup started for that IP.
+The response includes warm-up status, pools, assigned subusers, and authentication info. The start_date field corresponds to when warmup started for that IP.
 
 A single IP address or a range of IP addresses may be dedicated to an account in order to send email for multiple domains. The reputation of this IP is based on the aggregate performance of all the senders who use it.
 
@@ -1794,8 +1868,8 @@ A single IP address or a range of IP addresses may be dedicated to an account in
 ```php
 $query_params = json_decode('{"subuser": "test_string", "ip": "test_string", "limit": 1, "exclude_whitelabels": "true", "offset": 1}');
 $response = $sg->client->ips()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all assigned IPs
@@ -1809,8 +1883,8 @@ A single IP address or a range of IP addresses may be dedicated to an account in
 
 ```php
 $response = $sg->client->ips()->assigned()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Create an IP pool.
@@ -1819,9 +1893,9 @@ print_r($response->headers());
 
 **Each user can create up to 10 different IP pools.**
 
-IP Pools allow you to group your dedicated SendGrid IP addresses together. For example, you could create separate pools for your transactional and marketing email. When sending marketing emails, specify that you want to use the marketing IP pool. This allows you to maintain separate reputations for your different email traffic.
+IP Pools allow you to group your dedicated Twilio SendGrid IP addresses together. For example, you could create separate pools for your transactional and marketing email. When sending marketing emails, specify that you want to use the marketing IP pool. This allows you to maintain separate reputations for your different email traffic.
 
-IP pools can only be used with whitelabeled IP addresses.
+IP pools can only be used with authenticated IP addresses.
 
 If an IP pool is NOT specified for an email, it will use any IP available, including ones in pools.
 
@@ -1833,17 +1907,17 @@ $request_body = json_decode('{
   "name": "marketing"
 }');
 $response = $sg->client->ips()->pools()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all IP pools.
 
 **This endpoint allows you to retrieve all of your IP pools.**
 
-IP Pools allow you to group your dedicated SendGrid IP addresses together. For example, you could create separate pools for your transactional and marketing email. When sending marketing emails, specify that you want to use the marketing IP pool. This allows you to maintain separate reputations for your different email traffic.
+IP Pools allow you to group your dedicated Twilio SendGrid IP addresses together. For example, you could create separate pools for your transactional and marketing email. When sending marketing emails, specify that you want to use the marketing IP pool. This allows you to maintain separate reputations for your different email traffic.
 
-IP pools can only be used with whitelabeled IP addresses.
+IP pools can only be used with authenticated IP addresses.
 
 If an IP pool is NOT specified for an email, it will use any IP available, including ones in pools.
 
@@ -1852,17 +1926,17 @@ If an IP pool is NOT specified for an email, it will use any IP available, inclu
 
 ```php
 $response = $sg->client->ips()->pools()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update an IP pools name.
 
 **This endpoint allows you to update the name of an IP pool.**
 
-IP Pools allow you to group your dedicated SendGrid IP addresses together. For example, you could create separate pools for your transactional and marketing email. When sending marketing emails, specify that you want to use the marketing IP pool. This allows you to maintain separate reputations for your different email traffic.
+IP Pools allow you to group your dedicated Twilio SendGrid IP addresses together. For example, you could create separate pools for your transactional and marketing email. When sending marketing emails, specify that you want to use the marketing IP pool. This allows you to maintain separate reputations for your different email traffic.
 
-IP pools can only be used with whitelabeled IP addresses.
+IP pools can only be used with authenticated IP addresses.
 
 If an IP pool is NOT specified for an email, it will use any IP available, including ones in pools.
 
@@ -1875,17 +1949,17 @@ $request_body = json_decode('{
 }');
 $pool_name = "test_url_param";
 $response = $sg->client->ips()->pools()->_($pool_name)->put($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all IPs in a specified pool.
 
 **This endpoint allows you to list all of the IP addresses that are in a specific IP pool.**
 
-IP Pools allow you to group your dedicated SendGrid IP addresses together. For example, you could create separate pools for your transactional and marketing email. When sending marketing emails, specify that you want to use the marketing IP pool. This allows you to maintain separate reputations for your different email traffic.
+IP Pools allow you to group your dedicated Twilio SendGrid IP addresses together. For example, you could create separate pools for your transactional and marketing email. When sending marketing emails, specify that you want to use the marketing IP pool. This allows you to maintain separate reputations for your different email traffic.
 
-IP pools can only be used with whitelabeled IP addresses.
+IP pools can only be used with authenticated IP addresses.
 
 If an IP pool is NOT specified for an email, it will use any IP available, including ones in pools.
 
@@ -1895,17 +1969,17 @@ If an IP pool is NOT specified for an email, it will use any IP available, inclu
 ```php
 $pool_name = "test_url_param";
 $response = $sg->client->ips()->pools()->_($pool_name)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete an IP pool.
 
 **This endpoint allows you to delete an IP pool.**
 
-IP Pools allow you to group your dedicated SendGrid IP addresses together. For example, you could create separate pools for your transactional and marketing email. When sending marketing emails, specify that you want to use the marketing IP pool. This allows you to maintain separate reputations for your different email traffic.
+IP Pools allow you to group your dedicated Twilio SendGrid IP addresses together. For example, you could create separate pools for your transactional and marketing email. When sending marketing emails, specify that you want to use the marketing IP pool. This allows you to maintain separate reputations for your different email traffic.
 
-IP pools can only be used with whitelabeled IP addresses.
+IP pools can only be used with authenticated IP addresses.
 
 If an IP pool is NOT specified for an email, it will use any IP available, including ones in pools.
 
@@ -1915,8 +1989,8 @@ If an IP pool is NOT specified for an email, it will use any IP available, inclu
 ```php
 $pool_name = "test_url_param";
 $response = $sg->client->ips()->pools()->_($pool_name)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Add an IP address to a pool
@@ -1936,8 +2010,8 @@ $request_body = json_decode('{
 }');
 $pool_name = "test_url_param";
 $response = $sg->client->ips()->pools()->_($pool_name)->ips()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Remove an IP address from a pool.
@@ -1955,15 +2029,15 @@ A single IP address or a range of IP addresses may be dedicated to an account in
 $pool_name = "test_url_param";
 $ip = "test_url_param";
 $response = $sg->client->ips()->pools()->_($pool_name)->ips()->_($ip)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Add an IP to warmup
 
 **This endpoint allows you to enter an IP address into warmup mode.**
 
-SendGrid can automatically warm up dedicated IP addresses by limiting the amount of mail that can be sent through them per hour, with the limit determined by how long the IP address has been in warmup. See the [warmup schedule](https://sendgrid.com/docs/API_Reference/Web_API_v3/IP_Management/ip_warmup_schedule.html) for more details on how SendGrid limits your email traffic for IPs in warmup.
+Twilio SendGrid can automatically warm up dedicated IP addresses by limiting the amount of mail that can be sent through them per hour, with the limit determined by how long the IP address has been in warmup. See the [warmup schedule](https://sendgrid.com/docs/API_Reference/Web_API_v3/IP_Management/ip_warmup_schedule.html) for more details on how Twilio SendGrid limits your email traffic for IPs in warmup.
 
 For more general information about warming up IPs, please see our [Classroom](https://sendgrid.com/docs/Classroom/Deliver/Delivery_Introduction/warming_up_ips.html).
 
@@ -1975,15 +2049,15 @@ $request_body = json_decode('{
   "ip": "0.0.0.0"
 }');
 $response = $sg->client->ips()->warmup()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all IPs currently in warmup
 
 **This endpoint allows you to retrieve all of your IP addresses that are currently warming up.**
 
-SendGrid can automatically warm up dedicated IP addresses by limiting the amount of mail that can be sent through them per hour, with the limit determined by how long the IP address has been in warmup. See the [warmup schedule](https://sendgrid.com/docs/API_Reference/Web_API_v3/IP_Management/ip_warmup_schedule.html) for more details on how SendGrid limits your email traffic for IPs in warmup.
+Twilio SendGrid can automatically warm up dedicated IP addresses by limiting the amount of mail that can be sent through them per hour, with the limit determined by how long the IP address has been in warmup. See the [warmup schedule](https://sendgrid.com/docs/API_Reference/Web_API_v3/IP_Management/ip_warmup_schedule.html) for more details on how Twilio SendGrid limits your email traffic for IPs in warmup.
 
 For more general information about warming up IPs, please see our [Classroom](https://sendgrid.com/docs/Classroom/Deliver/Delivery_Introduction/warming_up_ips.html).
 
@@ -1992,15 +2066,15 @@ For more general information about warming up IPs, please see our [Classroom](ht
 
 ```php
 $response = $sg->client->ips()->warmup()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve warmup status for a specific IP address
 
 **This endpoint allows you to retrieve the warmup status for a specific IP address.**
 
-SendGrid can automatically warm up dedicated IP addresses by limiting the amount of mail that can be sent through them per hour, with the limit determined by how long the IP address has been in warmup. See the [warmup schedule](https://sendgrid.com/docs/API_Reference/Web_API_v3/IP_Management/ip_warmup_schedule.html) for more details on how SendGrid limits your email traffic for IPs in warmup.
+Twilio SendGrid can automatically warm up dedicated IP addresses by limiting the amount of mail that can be sent through them per hour, with the limit determined by how long the IP address has been in warmup. See the [warmup schedule](https://sendgrid.com/docs/API_Reference/Web_API_v3/IP_Management/ip_warmup_schedule.html) for more details on how Twilio SendGrid limits your email traffic for IPs in warmup.
 
 For more general information about warming up IPs, please see our [Classroom](https://sendgrid.com/docs/Classroom/Deliver/Delivery_Introduction/warming_up_ips.html).
 
@@ -2010,15 +2084,15 @@ For more general information about warming up IPs, please see our [Classroom](ht
 ```php
 $ip_address = "test_url_param";
 $response = $sg->client->ips()->warmup()->_($ip_address)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Remove an IP from warmup
 
 **This endpoint allows you to remove an IP address from warmup mode.**
 
-SendGrid can automatically warm up dedicated IP addresses by limiting the amount of mail that can be sent through them per hour, with the limit determined by how long the IP address has been in warmup. See the [warmup schedule](https://sendgrid.com/docs/API_Reference/Web_API_v3/IP_Management/ip_warmup_schedule.html) for more details on how SendGrid limits your email traffic for IPs in warmup.
+Twilio SendGrid can automatically warm up dedicated IP addresses by limiting the amount of mail that can be sent through them per hour, with the limit determined by how long the IP address has been in warmup. See the [warmup schedule](https://sendgrid.com/docs/API_Reference/Web_API_v3/IP_Management/ip_warmup_schedule.html) for more details on how Twilio SendGrid limits your email traffic for IPs in warmup.
 
 For more general information about warming up IPs, please see our [Classroom](https://sendgrid.com/docs/Classroom/Deliver/Delivery_Introduction/warming_up_ips.html).
 
@@ -2028,8 +2102,8 @@ For more general information about warming up IPs, please see our [Classroom](ht
 ```php
 $ip_address = "test_url_param";
 $response = $sg->client->ips()->warmup()->_($ip_address)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all IP pools an IP address belongs to
@@ -2046,8 +2120,8 @@ A single IP address or a range of IP addresses may be dedicated to an account in
 ```php
 $ip_address = "test_url_param";
 $response = $sg->client->ips()->_($ip_address)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 <a name="mail"></a>
@@ -2057,7 +2131,7 @@ print_r($response->headers());
 
 **This endpoint allows you to generate a new batch ID. This batch ID can be associated with scheduled sends via the mail/send endpoint.**
 
-If you set the SMTPAPI header `batch_id`, it allows you to then associate multiple scheduled mail/send requests together with the same ID. Then at anytime up to 10 minutes before the schedule date, you can cancel all of the mail/send requests that have this batch ID by calling the Cancel Scheduled Send endpoint.
+If you set the SMTPAPI header `batch_id`, it allows you to then associate multiple scheduled mail/send requests together with the same ID. Then at anytime up to 10 minutes before the scheduled date, you can cancel all of the mail/send requests that have this batch ID by calling the Cancel Scheduled Send endpoint.
 
 More Information:
 
@@ -2068,15 +2142,15 @@ More Information:
 
 ```php
 $response = $sg->client->mail()->batch()->post();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Validate batch ID
 
 **This endpoint allows you to validate a batch ID.**
 
-If you set the SMTPAPI header `batch_id`, it allows you to then associate multiple scheduled mail/send requests together with the same ID. Then at anytime up to 10 minutes before the schedule date, you can cancel all of the mail/send requests that have this batch ID by calling the Cancel Scheduled Send endpoint.
+If you set the SMTPAPI header `batch_id`, it allows you to then associate multiple scheduled mail/send requests together with the same ID. Then at anytime up to 10 minutes before the scheduled date, you can cancel all of the mail/send requests that have this batch ID by calling the Cancel Scheduled Send endpoint.
 
 More Information:
 
@@ -2088,13 +2162,13 @@ More Information:
 ```php
 $batch_id = "test_url_param";
 $response = $sg->client->mail()->batch()->_($batch_id)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## v3 Mail Send
 
-This endpoint allows you to send email over SendGrids v3 Web API, the most recent version of our API. If you are looking for documentation about the v2 Mail Send endpoint, please see our [v2 API Reference](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).
+This endpoint allows you to send the email over Twilio SendGrid's v3 Web API, the most recent version of our API. If you are looking for documentation about the v2 Mail Send endpoint, please see our [v2 API Reference](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).
 
 * Top level parameters are referred to as "global".
 * Individual fields within the personalizations array will override any other global, or message level, parameters that are defined outside of personalizations.
@@ -2105,7 +2179,7 @@ For more detailed information about how to use the v3 Mail Send endpoint, please
 
 ### POST /mail/send
 
-This endpoint has a helper, check it out [here](https://github.com/sendgrid/sendgrid-php/blob/master/lib/helpers/mail/README.md).
+This endpoint has a helper, check it out [here](lib/helpers/mail/README.md).
 
 ```php
 $request_body = json_decode('{
@@ -2159,8 +2233,8 @@ $request_body = json_decode('{
     },
     "footer": {
       "enable": true,
-      "html": "<p>Thanks</br>The SendGrid Team</p>",
-      "text": "Thanks,/n The SendGrid Team"
+      "html": "<p>Thanks</br>The Twilio SendGrid Team</p>",
+      "text": "Thanks,/n The Twilio SendGrid Team"
     },
     "sandbox_mode": {
       "enable": false
@@ -2242,23 +2316,23 @@ $request_body = json_decode('{
       "enable": true,
       "html": "If you would like to unsubscribe and stop receiving these emails <% clickhere %>.",
       "substitution_tag": "<%click here%>",
-      "text": "If you would like to unsubscribe and stop receiveing these emails <% click here %>."
+      "text": "If you would like to unsubscribe and stop receiving these emails <% click here %>."
     }
   }
 }');
 $response = $sg->client->mail()->send()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
-<a name="mail_settings"></a>
+<a name="mail-settings"></a>
 # MAIL SETTINGS
 
 ## Retrieve all mail settings
 
 **This endpoint allows you to retrieve a list of all mail settings.**
 
-Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
+Mail settings allow you to tell Twilio Twilio SendGrid specific things to do to every email that you send to your recipients over Twilio SendGrid's [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### GET /mail_settings
 
@@ -2266,8 +2340,8 @@ Mail settings allow you to tell SendGrid specific things to do to every email th
 ```php
 $query_params = json_decode('{"limit": 1, "offset": 1}');
 $response = $sg->client->mail_settings()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update address whitelist mail settings
@@ -2276,7 +2350,7 @@ print_r($response->headers());
 
 The address whitelist setting whitelists a specified email address or domain for which mail should never be suppressed. For example, you own the domain example.com, and one or more of your recipients use email@example.com addresses, by placing example.com in the address whitelist setting, all bounces, blocks, and unsubscribes logged for that domain will be ignored and sent as if under normal sending conditions.
 
-Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
+Mail settings allow you to tell Twilio Twilio SendGrid specific things to do to every email that you send to your recipients over Twilio SendGrid's [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### PATCH /mail_settings/address_whitelist
 
@@ -2290,8 +2364,8 @@ $request_body = json_decode('{
   ]
 }');
 $response = $sg->client->mail_settings()->address_whitelist()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve address whitelist mail settings
@@ -2300,24 +2374,24 @@ print_r($response->headers());
 
 The address whitelist setting whitelists a specified email address or domain for which mail should never be suppressed. For example, you own the domain example.com, and one or more of your recipients use email@example.com addresses, by placing example.com in the address whitelist setting, all bounces, blocks, and unsubscribes logged for that domain will be ignored and sent as if under normal sending conditions.
 
-Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
+Mail settings allow you to tell Twilio Twilio SendGrid specific things to do to every email that you send to your recipients over Twilio SendGrid's [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### GET /mail_settings/address_whitelist
 
 
 ```php
 $response = $sg->client->mail_settings()->address_whitelist()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update BCC mail settings
 
 **This endpoint allows you to update your current BCC mail settings.**
 
-When the BCC mail setting is enabled, SendGrid will automatically send a blind carbon copy (BCC) to an address for every email sent without adding that address to the header. Please note that only one email address may be entered in this field, if you wish to distribute BCCs to multiple addresses you will need to create a distribution group or use forwarding rules.
+When the BCC mail setting is enabled, Twilio SendGrid will automatically send a blind carbon copy (BCC) to an address for every email sent without adding that address to the header. Please note that only one email address may be entered in this field. If you wish to distribute BCCs to multiple addresses you will need to create a distribution group or use forwarding rules.
 
-Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
+Mail settings allow you to tell Twilio Twilio SendGrid specific things to do to every email that you send to your recipients over Twilio SendGrid's [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### PATCH /mail_settings/bcc
 
@@ -2328,34 +2402,34 @@ $request_body = json_decode('{
   "enabled": false
 }');
 $response = $sg->client->mail_settings()->bcc()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all BCC mail settings
 
 **This endpoint allows you to retrieve your current BCC mail settings.**
 
-When the BCC mail setting is enabled, SendGrid will automatically send a blind carbon copy (BCC) to an address for every email sent without adding that address to the header. Please note that only one email address may be entered in this field, if you wish to distribute BCCs to multiple addresses you will need to create a distribution group or use forwarding rules.
+When the BCC mail setting is enabled, Twilio SendGrid will automatically send a blind carbon copy (BCC) to an address for every email sent without adding that address to the header. Please note that only one email address may be entered in this field. If you wish to distribute BCCs to multiple addresses you will need to create a distribution group or use forwarding rules.
 
-Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
+Mail settings allow you to tell Twilio Twilio SendGrid specific things to do to every email that you send to your recipients over Twilio SendGrid's [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### GET /mail_settings/bcc
 
 
 ```php
 $response = $sg->client->mail_settings()->bcc()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update bounce purge mail settings
 
 **This endpoint allows you to update your current bounce purge settings.**
 
-This setting allows you to set a schedule for SendGrid to automatically delete contacts from your soft and hard bounce suppression lists.
+This setting allows you to set a schedule for Twilio SendGrid to automatically delete contacts from your soft and hard bounce suppression lists.
 
-Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
+Mail settings allow you to tell Twilio Twilio SendGrid specific things to do to every email that you send to your recipients over Twilio SendGrid's [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### PATCH /mail_settings/bounce_purge
 
@@ -2367,25 +2441,25 @@ $request_body = json_decode('{
   "soft_bounces": 5
 }');
 $response = $sg->client->mail_settings()->bounce_purge()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve bounce purge mail settings
 
 **This endpoint allows you to retrieve your current bounce purge settings.**
 
-This setting allows you to set a schedule for SendGrid to automatically delete contacts from your soft and hard bounce suppression lists.
+This setting allows you to set a schedule for Twilio SendGrid to automatically delete contacts from your soft and hard bounce suppression lists.
 
-Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
+Mail settings allow you to tell Twilio Twilio SendGrid specific things to do to every email that you send to your recipients over Twilio SendGrid's [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### GET /mail_settings/bounce_purge
 
 
 ```php
 $response = $sg->client->mail_settings()->bounce_purge()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update footer mail settings
@@ -2394,7 +2468,7 @@ print_r($response->headers());
 
 The footer setting will insert a custom footer at the bottom of the text and HTML bodies. Use the embedded HTML editor and plain text entry fields to create the content of the footers to be inserted into your emails.
 
-Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
+Mail settings allow you to tell Twilio Twilio SendGrid specific things to do to every email that you send to your recipients over Twilio SendGrid's [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### PATCH /mail_settings/footer
 
@@ -2406,8 +2480,8 @@ $request_body = json_decode('{
   "plain_content": "..."
 }');
 $response = $sg->client->mail_settings()->footer()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve footer mail settings
@@ -2416,15 +2490,15 @@ print_r($response->headers());
 
 The footer setting will insert a custom footer at the bottom of the text and HTML bodies. Use the embedded HTML editor and plain text entry fields to create the content of the footers to be inserted into your emails.
 
-Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
+Mail settings allow you to tell Twilio Twilio SendGrid specific things to do to every email that you send to your recipients over Twilio SendGrid's [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### GET /mail_settings/footer
 
 
 ```php
 $response = $sg->client->mail_settings()->footer()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update forward bounce mail settings
@@ -2433,7 +2507,7 @@ print_r($response->headers());
 
 Activating this setting allows you to specify an email address to which bounce reports are forwarded.
 
-Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
+Mail settings allow you to tell Twilio Twilio SendGrid specific things to do to every email that you send to your recipients over Twilio SendGrid's [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### PATCH /mail_settings/forward_bounce
 
@@ -2444,8 +2518,8 @@ $request_body = json_decode('{
   "enabled": true
 }');
 $response = $sg->client->mail_settings()->forward_bounce()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve forward bounce mail settings
@@ -2454,15 +2528,15 @@ print_r($response->headers());
 
 Activating this setting allows you to specify an email address to which bounce reports are forwarded.
 
-Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
+Mail settings allow you to tell Twilio Twilio SendGrid specific things to do to every email that you send to your recipients over Twilio SendGrid's [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### GET /mail_settings/forward_bounce
 
 
 ```php
 $response = $sg->client->mail_settings()->forward_bounce()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update forward spam mail settings
@@ -2471,7 +2545,7 @@ print_r($response->headers());
 
 Enabling the forward spam setting allows you to specify an email address to which spam reports will be forwarded.
 
-Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
+Mail settings allow you to tell Twilio Twilio SendGrid specific things to do to every email that you send to your recipients over Twilio SendGrid's [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### PATCH /mail_settings/forward_spam
 
@@ -2482,8 +2556,8 @@ $request_body = json_decode('{
   "enabled": false
 }');
 $response = $sg->client->mail_settings()->forward_spam()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve forward spam mail settings
@@ -2492,15 +2566,15 @@ print_r($response->headers());
 
 Enabling the forward spam setting allows you to specify an email address to which spam reports will be forwarded.
 
-Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
+Mail settings allow you to tell Twilio Twilio SendGrid specific things to do to every email that you send to your recipients over Twilio SendGrid's [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### GET /mail_settings/forward_spam
 
 
 ```php
 $response = $sg->client->mail_settings()->forward_spam()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update plain content mail settings
@@ -2509,7 +2583,7 @@ print_r($response->headers());
 
 The plain content setting will automatically convert any plain text emails that you send to HTML before sending.
 
-Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
+Mail settings allow you to tell Twilio Twilio SendGrid specific things to do to every email that you send to your recipients over Twilio SendGrid's [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### PATCH /mail_settings/plain_content
 
@@ -2519,8 +2593,8 @@ $request_body = json_decode('{
   "enabled": false
 }');
 $response = $sg->client->mail_settings()->plain_content()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve plain content mail settings
@@ -2529,15 +2603,15 @@ print_r($response->headers());
 
 The plain content setting will automatically convert any plain text emails that you send to HTML before sending.
 
-Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
+Mail settings allow you to tell Twilio Twilio SendGrid specific things to do to every email that you send to your recipients over Twilio SendGrids' [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### GET /mail_settings/plain_content
 
 
 ```php
 $response = $sg->client->mail_settings()->plain_content()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update spam check mail settings
@@ -2546,7 +2620,7 @@ print_r($response->headers());
 
 The spam checker filter notifies you when emails are detected that exceed a predefined spam threshold.
 
-Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
+Mail settings allow you to tell Twilio Twilio SendGrid specific things to do to every email that you send to your recipients over Twilio SendGrid's [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### PATCH /mail_settings/spam_check
 
@@ -2558,8 +2632,8 @@ $request_body = json_decode('{
   "url": "url"
 }');
 $response = $sg->client->mail_settings()->spam_check()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve spam check mail settings
@@ -2568,15 +2642,15 @@ print_r($response->headers());
 
 The spam checker filter notifies you when emails are detected that exceed a predefined spam threshold.
 
-Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
+Mail settings allow you to tell Twilio SendGrid specific things to do to every email that you send to your recipients over Twilio SendGrid's [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### GET /mail_settings/spam_check
 
 
 ```php
 $response = $sg->client->mail_settings()->spam_check()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update template mail settings
@@ -2587,7 +2661,7 @@ This setting refers to our original email templates. We currently support more f
 
 The legacy email template setting wraps an HTML template around your email content. This can be useful for sending out marketing email and/or other HTML formatted messages.
 
-Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
+Mail settings allow you to tell Twilio SendGrid specific things to do to every email that you send to your recipients over Twilio SendGrid's [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### PATCH /mail_settings/template
 
@@ -2598,8 +2672,8 @@ $request_body = json_decode('{
   "html_content": "<% body %>"
 }');
 $response = $sg->client->mail_settings()->template()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve legacy template mail settings
@@ -2610,18 +2684,18 @@ This setting refers to our original email templates. We currently support more f
 
 The legacy email template setting wraps an HTML template around your email content. This can be useful for sending out marketing email and/or other HTML formatted messages.
 
-Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrids [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
+Mail settings allow you to tell Twilio SendGrid specific things to do to every email that you send to your recipients over Twilio SendGrid's [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
 
 ### GET /mail_settings/template
 
 
 ```php
 $response = $sg->client->mail_settings()->template()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
-<a name="mailbox_providers"></a>
+<a name="mailbox-providers"></a>
 # MAILBOX PROVIDERS
 
 ## Retrieve email statistics by mailbox provider.
@@ -2638,18 +2712,18 @@ Advanced Stats provide a more in-depth view of your email statistics and the act
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "mailbox_providers": "test_string", "aggregated_by": "day", "limit": 1, "offset": 1, "start_date": "2016-01-01"}');
 $response = $sg->client->mailbox_providers()->stats()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
-<a name="partner_settings"></a>
+<a name="partner-settings"></a>
 # PARTNER SETTINGS
 
 ## Returns a list of all partner settings.
 
 **This endpoint allows you to retrieve a list of all partner settings that you can enable.**
 
-Our partner settings allow you to integrate your SendGrid account with our partners to increase your SendGrid experience and functionality. For more information about our partners, and how you can begin integrating with them, please visit our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/partners.html).
+Our partner settings allow you to integrate your Twilio SendGrid account with our partners to increase your Twilio SendGrid experience and functionality. For more information about our partners, and how you can begin integrating with them, please visit our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/partners.html).
 
 ### GET /partner_settings
 
@@ -2657,17 +2731,17 @@ Our partner settings allow you to integrate your SendGrid account with our partn
 ```php
 $query_params = json_decode('{"limit": 1, "offset": 1}');
 $response = $sg->client->partner_settings()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Updates New Relic partner settings.
 
 **This endpoint allows you to update or change your New Relic partner settings.**
 
-Our partner settings allow you to integrate your SendGrid account with our partners to increase your SendGrid experience and functionality. For more information about our partners, and how you can begin integrating with them, please visit our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/partners.html).
+Our partner settings allow you to integrate your Twilio SendGrid account with our partners to increase your Twilio SendGrid experience and functionality. For more information about our partners, and how you can begin integrating with them, please visit our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/partners.html).
 
-By integrating with New Relic, you can send your SendGrid email statistics to your New Relic Dashboard. If you enable this setting, your stats will be sent to New Relic every 5 minutes. You will need your New Relic License Key to enable this setting. For more information, please see our [Classroom](https://sendgrid.com/docs/Classroom/Track/Collecting_Data/new_relic.html).
+By integrating with New Relic, you can send your Twilio SendGrid email statistics to your New Relic Dashboard. If you enable this setting, your stats will be sent to New Relic every 5 minutes. You will need your New Relic License Key to enable this setting. For more information, please see our [Classroom](https://sendgrid.com/docs/Classroom/Track/Collecting_Data/new_relic.html).
 
 ### PATCH /partner_settings/new_relic
 
@@ -2679,25 +2753,25 @@ $request_body = json_decode('{
   "license_key": ""
 }');
 $response = $sg->client->partner_settings()->new_relic()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Returns all New Relic partner settings.
 
 **This endpoint allows you to retrieve your current New Relic partner settings.**
 
-Our partner settings allow you to integrate your SendGrid account with our partners to increase your SendGrid experience and functionality. For more information about our partners, and how you can begin integrating with them, please visit our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/partners.html).
+Our partner settings allow you to integrate your Twilio SendGrid account with our partners to increase your Twilio SendGrid experience and functionality. For more information about our partners, and how you can begin integrating with them, please visit our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/partners.html).
 
-By integrating with New Relic, you can send your SendGrid email statistics to your New Relic Dashboard. If you enable this setting, your stats will be sent to New Relic every 5 minutes. You will need your New Relic License Key to enable this setting. For more information, please see our [Classroom](https://sendgrid.com/docs/Classroom/Track/Collecting_Data/new_relic.html).
+By integrating with New Relic, you can send your Twilio SendGrid email statistics to your New Relic Dashboard. If you enable this setting, your stats will be sent to New Relic every 5 minutes. You will need your New Relic License Key to enable this setting. For more information, please see our [Classroom](https://sendgrid.com/docs/Classroom/Track/Collecting_Data/new_relic.html).
 
 ### GET /partner_settings/new_relic
 
 
 ```php
 $response = $sg->client->partner_settings()->new_relic()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 <a name="scopes"></a>
@@ -2707,15 +2781,15 @@ print_r($response->headers());
 
 **This endpoint returns a list of all scopes that this user has access to.**
 
-API Keys can be used to authenticate the use of [SendGrids v3 Web API](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html), or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html). API Keys may be assigned certain permissions, or scopes, that limit which API endpoints they are able to access. For a more detailed explanation of how you can use API Key permissios, please visit our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/api_keys.html#-API-Key-Permissions) or [Classroom](https://sendgrid.com/docs/Classroom/Basics/API/api_key_permissions.html).
+API Keys can be used to authenticate the use of [SendGrids v3 Web API](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html), or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html). API Keys may be assigned certain permissions, or scopes, that limit which API endpoints they are able to access. For a more detailed explanation of how you can use API Key permissions, please visit our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/api_keys.html#-API-Key-Permissions) or [Classroom](https://sendgrid.com/docs/Classroom/Basics/API/api_key_permissions.html).
 
 ### GET /scopes
 
 
 ```php
 $response = $sg->client->scopes()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 <a name="senders"></a>
@@ -2727,7 +2801,7 @@ print_r($response->headers());
 
 *You may create up to 100 unique sender identities.*
 
-Sender Identities are required to be verified before use. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+Sender Identities are required to be verified before use. If your domain has been authenticated it will auto verify on creation. Otherwise, an email will be sent to the `from.email`.
 
 ### POST /senders
 
@@ -2751,30 +2825,30 @@ $request_body = json_decode('{
   "zip": "80202"
 }');
 $response = $sg->client->senders()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Get all Sender Identities
 
 **This endpoint allows you to retrieve a list of all sender identities that have been created for your account.**
 
-Sender Identities are required to be verified before use. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+Sender Identities are required to be verified before use. If your domain has been authenticated it will auto verify on creation. Otherwise, an email will be sent to the `from.email`.
 
 ### GET /senders
 
 
 ```php
 $response = $sg->client->senders()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update a Sender Identity
 
 **This endpoint allows you to update a sender identity.**
 
-Updates to `from.email` require re-verification. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+Updates to `from.email` require re-verification. If your domain has been authenticated it will auto verify on creation. Otherwise, an email will be sent to the `from.email`.
 
 Partial updates are allowed, but fields that are marked as "required" in the POST (create) endpoint must not be nil if that field is included in the PATCH request.
 
@@ -2801,15 +2875,15 @@ $request_body = json_decode('{
 }');
 $sender_id = "test_url_param";
 $response = $sg->client->senders()->_($sender_id)->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## View a Sender Identity
 
 **This endpoint allows you to retrieve a specific sender identity.**
 
-Sender Identities are required to be verified before use. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+Sender Identities are required to be verified before use. If your domain has been authenticated it will auto verify on creation. Otherwise, an email will be sent to the `from.email`.
 
 ### GET /senders/{sender_id}
 
@@ -2817,15 +2891,15 @@ Sender Identities are required to be verified before use. If your domain has bee
 ```php
 $sender_id = "test_url_param";
 $response = $sg->client->senders()->_($sender_id)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete a Sender Identity
 
 **This endpoint allows you to delete one of your sender identities.**
 
-Sender Identities are required to be verified before use. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+Sender Identities are required to be verified before use. If your domain has been authenticated it will auto verify on creation. Otherwise, an email will be sent to the `from.email`.
 
 ### DELETE /senders/{sender_id}
 
@@ -2833,15 +2907,15 @@ Sender Identities are required to be verified before use. If your domain has bee
 ```php
 $sender_id = "test_url_param";
 $response = $sg->client->senders()->_($sender_id)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Resend Sender Identity Verification
 
 **This endpoint allows you to resend a sender identity verification email.**
 
-Sender Identities are required to be verified before use. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+Sender Identities are required to be verified before use. If your domain has been authenticated it will auto verify on creation. Otherwise, an email will be sent to the `from.email`.
 
 ### POST /senders/{sender_id}/resend_verification
 
@@ -2849,10 +2923,604 @@ Sender Identities are required to be verified before use. If your domain has bee
 ```php
 $sender_id = "test_url_param";
 $response = $sg->client->senders()->_($sender_id)->resend_verification()->post();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
+<a name="sender-authentication"></a>
+# SENDER AUTHENTICATION
+
+## Create an authenticated domain.
+
+**This endpoint allows you to create a domain authentication for one of your domains.**
+
+If you are creating a domain authentication that you would like a subuser to use, you have two options:
+1. Use the "username" parameter. This allows you to create am authenticated subuser. This means the subuser is able to see and modify the created authentication.
+2. Use the Association workflow (see Associate Domain section). This allows you to assign a domain authentication created by the parent to a subuser. This means the subuser will default to the assigned domain authentication, but will not be able to see or modify that authentication. However, if the subuser creates their own domain authentication it will overwrite the assigned domain authentication.
+
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Authenticating a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that Twilio SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, Twilio SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+
+For more information on domain authentication, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/)
+
+### POST /whitelabel/domains
+
+
+```php
+$request_body = json_decode('{
+  "automatic_security": false,
+  "custom_spf": true,
+  "default": true,
+  "domain": "example.com",
+  "ips": [
+    "192.168.1.1",
+    "192.168.1.2"
+  ],
+  "subdomain": "news",
+  "username": "john@example.com"
+}');
+$response = $sg->client->whitelabel()->domains()->post($request_body);
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## List all domain authentications.
+
+**This endpoint allows you to retrieve a list of all domain authentications you have created.**
+
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Authenticating a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that Twilio SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, Twilio SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+
+For more information on domain authentication, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/)
+
+### GET /whitelabel/domains
+
+
+```php
+$query_params = json_decode('{"username": "test_string", "domain": "test_string", "exclude_subusers": "true", "limit": 1, "offset": 1}');
+$response = $sg->client->whitelabel()->domains()->get(null, $query_params);
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Get the default domain authentication.
+
+**This endpoint allows you to retrieve the default authentication for a domain.**
+
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Authenticating a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that Twilio SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, Twilio SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+
+For more information on domain authentication, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/)
+
+## URI Parameters
+| URI Parameter   | Type   | Description  |
+|---|---|---|
+| domain | string  |The domain to find a default domain whitelabel for. |
+
+### GET /whitelabel/domains/default
+
+
+```php
+$response = $sg->client->whitelabel()->domains()->default()->get();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## List the domain authentication associated with the given user.
+
+**This endpoint allows you to retrieve all of the domain authentications that have been assigned to a specific subuser.**
+
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Authenticating a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that Twilio  can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, Twilio SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+
+Domain authentications can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's authenticated domains. To associate a domain authentication with a subuser, the parent account must first create the domain authentication and validate it. The parent may then associate the domain authentication via the subuser management tools.
+
+For more information on domain authentication, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/)
+
+## URI Parameters
+| URI Parameter   | Type  | Description  |
+|---|---|---|
+| username | string  | Username of the subuser to find associated whitelabels for. |
+
+### GET /whitelabel/domains/subuser
+
+
+```php
+$response = $sg->client->whitelabel()->domains()->subuser()->get();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Disassociate a domain authentication from a given user.
+
+**This endpoint allows you to disassociate a specific domain authentication from a subuser.**
+
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Authenticating a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that Twilio SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, Twilio SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+
+Domain authentications can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's authenticated domains. To associate a domain authentication with a subuser, the parent account must first create the domain authentication and validate it. The parent may then associate the domain authentication via the subuser management tools.
+
+For more information on domain authentication, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/)
+
+## URI Parameters
+| URI Parameter   | Type  | Required?  | Description  |
+|---|---|---|---|
+| username | string  | required  | Username for the subuser to find associated whitelabels for. |
+
+### DELETE /whitelabel/domains/subuser
+
+
+```php
+$response = $sg->client->whitelabel()->domains()->subuser()->delete();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Update a domain authentication.
+
+**This endpoint allows you to update the settings for a domain authentication.**
+
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Authenticating a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that Twilio SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, Twilio SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+
+For more information on domain authentication, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/)
+
+### PATCH /whitelabel/domains/{domain_id}
+
+
+```php
+$request_body = json_decode('{
+  "custom_spf": true,
+  "default": false
+}');
+$domain_id = "test_url_param";
+$response = $sg->client->whitelabel()->domains()->_($domain_id)->patch($request_body);
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Retrieve a domain authentication.
+
+**This endpoint allows you to retrieve a specific domain authentication.**
+
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Authenticating a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that Twilio SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, Twilio SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+
+For more information on domain authentication, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/)
+
+
+### GET /whitelabel/domains/{domain_id}
+
+
+```php
+$domain_id = "test_url_param";
+$response = $sg->client->whitelabel()->domains()->_($domain_id)->get();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Delete a domain authentication.
+
+**This endpoint allows you to delete a domain authentication.**
+
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Authenticating a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that Twilio SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, Twilio SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+
+For more information on domain authentication, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/)
+
+### DELETE /whitelabel/domains/{domain_id}
+
+
+```php
+$domain_id = "test_url_param";
+$response = $sg->client->whitelabel()->domains()->_($domain_id)->delete();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Associate a domain authentication with a given user.
+
+**This endpoint allows you to associate a specific domain authentication with a subuser.**
+
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Authenticating a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that Twilio SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, Twilio SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+
+Domain authentications can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's authenticated domains. To associate a domain authentication with a subuser, the parent account must first create the domain authentication and validate it. The parent may then associate the domain authentication via the subuser management tools.
+
+For more information on domain authentication, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/)
+
+## URI Parameters
+| URI Parameter   | Type   | Description  |
+|---|---|---|
+| domain_id | integer   | ID of the domain whitelabel to associate with the subuser. |
+
+### POST /whitelabel/domains/{domain_id}/subuser
+
+
+```php
+$request_body = json_decode('{
+  "username": "jane@example.com"
+}');
+$domain_id = "test_url_param";
+$response = $sg->client->whitelabel()->domains()->_($domain_id)->subuser()->post($request_body);
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Add an IP to a domain authentication.
+
+**This endpoint allows you to add an IP address to a domain authentication.**
+
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Authenticating a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that Twilio SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, Twilio SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+
+For more information on domain authentication, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/)
+
+## URI Parameters
+| URI Parameter   | Type  |  Description  |
+|---|---|---|
+| id | integer  | ID of the domain to which you are adding an IP |
+
+### POST /whitelabel/domains/{id}/ips
+
+
+```php
+$request_body = json_decode('{
+  "ip": "192.168.0.1"
+}');
+$id = "test_url_param";
+$response = $sg->client->whitelabel()->domains()->_($id)->ips()->post($request_body);
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Remove an IP from a domain authenticaiton.
+
+**This endpoint allows you to remove a domain's IP address from that domain's authentication.**
+
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Authenticating a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that Twilio SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, Twilio SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+
+For more information on domain authentication, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/)
+
+## URI Parameters
+| URI Parameter   | Type  | Description  |
+|---|---|---|
+| id | integer  | ID of the domain whitelabel to delete the IP from. |
+| ip | string | IP to remove from the domain whitelabel. |
+
+### DELETE /whitelabel/domains/{id}/ips/{ip}
+
+
+```php
+$id = "test_url_param";
+$ip = "test_url_param";
+$response = $sg->client->whitelabel()->domains()->_($id)->ips()->_($ip)->delete();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Validate a domain authentication.
+
+**This endpoint allows you to validate a domain authentication. If it fails, it will return an error message describing why the domain could not be validated.**
+
+A domain authentication allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Authenticating a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that Twilio SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, Twilio SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
+
+For more information on domain authentication, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/)
+
+## URI Parameters
+| URI Parameter   | Type   | Description  |
+|---|---|---|
+| id | integer  |ID of the domain whitelabel to validate. |
+
+### POST /whitelabel/domains/{id}/validate
+
+
+```php
+$id = "test_url_param";
+$response = $sg->client->whitelabel()->domains()->_($id)->validate()->post();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Create a reverse DNS record
+
+**This endpoint allows you to create a reverse DNS record.**
+
+When creating a reverse DNS record, you should use the same subdomain that you used when you created a domain authentication.
+
+Reverse DNS consists of a subdomain and domain that will be used to generate a record for a given IP. Once Twilio SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.
+
+For more information, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-reverse-dns/).
+
+### POST /whitelabel/ips
+
+
+```php
+$request_body = json_decode('{
+  "domain": "example.com",
+  "ip": "192.168.1.1",
+  "subdomain": "email"
+}');
+$response = $sg->client->whitelabel()->ips()->post($request_body);
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Retrieve all reverse DNS records
+
+**This endpoint allows you to retrieve all of the reverse DNS records that have been created by this account.**
+
+You may include a search key by using the "ip" parameter. This enables you to perform a prefix search for a given IP segment (e.g. "192.").
+
+Reverse DNS consists of a subdomain and domain that will be used to generate a record for a given IP. Once Twilio SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.
+
+For more information, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-reverse-dns/).
+
+### GET /whitelabel/ips
+
+
+```php
+$query_params = json_decode('{"ip": "test_string", "limit": 1, "offset": 1}');
+$response = $sg->client->whitelabel()->ips()->get(null, $query_params);
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Retrieve an reverse DNS record
+
+**This endpoint allows you to retrieve a reverse DNS record.**
+
+Reverse DNS consists of a subdomain and domain that will be used to generate a record for a given IP. Once Twilio SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.
+
+For more information, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-reverse-dns/).
+
+### GET /whitelabel/ips/{id}
+
+
+```php
+$id = "test_url_param";
+$response = $sg->client->whitelabel()->ips()->_($id)->get();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Delete an reverse DNS record
+
+**This endpoint allows you to delete a reverse DNS record.**
+
+Reverse DNS consists of a subdomain and domain that will be used to generate a record for a given IP. Once Twilio SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.
+
+For more information, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-reverse-dns/).
+
+### DELETE /whitelabel/ips/{id}
+
+
+```php
+$id = "test_url_param";
+$response = $sg->client->whitelabel()->ips()->_($id)->delete();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Validate a reverse DNS record
+
+**This endpoint allows you to validate a reverse DNS record.**
+
+Reverse DNS consists of a subdomain and domain that will be used to generate a record for a given IP. Once Twilio SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.
+
+For more information, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-reverse-dns/).
+
+### POST /whitelabel/ips/{id}/validate
+
+
+```php
+$id = "test_url_param";
+$response = $sg->client->whitelabel()->ips()->_($id)->validate()->post();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Create a Branded Link
+
+**This endpoint allows you to create a new link branding.**
+
+Email link branding allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.
+
+For more information, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-link-branding/).
+
+### POST /whitelabel/links
+
+
+```php
+$request_body = json_decode('{
+  "default": true,
+  "domain": "example.com",
+  "subdomain": "mail"
+}');
+$query_params = json_decode('{"limit": 1, "offset": 1}');
+$response = $sg->client->whitelabel()->links()->post($request_body, $query_params);
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Retrieve all link brandings
+
+**This endpoint allows you to retrieve all link brandings.**
+
+Email link branding allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.
+
+For more information, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-link-branding/).
+
+### GET /whitelabel/links
+
+
+```php
+$query_params = json_decode('{"limit": 1}');
+$response = $sg->client->whitelabel()->links()->get(null, $query_params);
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Retrieve a Default Link Branding
+
+**This endpoint allows you to retrieve the default link branding.**
+
+Default link branding is the actual link branding to be used when sending messages. If there are multiple link brandings, the default is determined by the following order:
+<ul>
+  <li>Validated link branding marked as "default"</li>
+  <li>Legacy link brands (migrated from the whitelabel wizard)</li>
+  <li>Default Twilio SendGrid link whitelabel (i.e. 100.ct.sendgrid.net)</li>
+</ul>
+
+Email link branding allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.
+
+For more information, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-link-branding/).
+
+### GET /whitelabel/links/default
+
+
+```php
+$query_params = json_decode('{"domain": "test_string"}');
+$response = $sg->client->whitelabel()->links()->default()->get(null, $query_params);
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Retrieve Associated Link Branding
+
+**This endpoint allows you to retrieve the associated link branding for a subuser.**
+
+Link branding can be associated with subusers from the parent account. This functionality allows
+subusers to send mail using their parent's link brands. To associate a link branding, the parent account
+must first create a branded link and validate it. The parent may then associate that branded link with a subuser via the API or the Subuser Management page in the user interface.
+
+Email link branding allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.
+
+For more information, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-link-branding/).
+
+### GET /whitelabel/links/subuser
+
+
+```php
+$query_params = json_decode('{"username": "test_string"}');
+$response = $sg->client->whitelabel()->links()->subuser()->get(null, $query_params);
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Disassociate a Link Branding
+
+**This endpoint allows you to disassociate a link branding from a subuser.**
+
+Link branding can be associated with subusers from the parent account. This functionality allows
+subusers to send mail using their parent's link brands. To associate a link branding, the parent account
+must first create a branded link and validate it. The parent may then associate that branded link with a subuser via the API or the Subuser Management page in the user interface.
+
+Email link branding allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.
+
+For more information, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-link-branding/).
+
+### DELETE /whitelabel/links/subuser
+
+
+```php
+$query_params = json_decode('{"username": "test_string"}');
+$response = $sg->client->whitelabel()->links()->subuser()->delete(null, $query_params);
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Update a Link Branding
+
+**This endpoint allows you to update a specific link branding. You can use this endpoint to change a branded link's default status.**
+
+Email link branding allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.
+
+For more information, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-link-branding/).
+
+### PATCH /whitelabel/links/{id}
+
+
+```php
+$request_body = json_decode('{
+  "default": true
+}');
+$id = "test_url_param";
+$response = $sg->client->whitelabel()->links()->_($id)->patch($request_body);
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Retrieve a Link Branding
+
+**This endpoint allows you to retrieve a specific link branding.**
+
+Email link branding allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.
+
+For more information, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-link-branding/).
+
+### GET /whitelabel/links/{id}
+
+
+```php
+$id = "test_url_param";
+$response = $sg->client->whitelabel()->links()->_($id)->get();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Delete a Link Branding
+
+**This endpoint allows you to delete a link branding.**
+
+Email link branding allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.
+
+For more information, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-link-branding/).
+
+### DELETE /whitelabel/links/{id}
+
+
+```php
+$id = "test_url_param";
+$response = $sg->client->whitelabel()->links()->_($id)->delete();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Validate a Link Branding
+
+**This endpoint allows you to validate a link branding.**
+
+Email link branding allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.
+
+For more information, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-link-branding/).
+
+### POST /whitelabel/links/{id}/validate
+
+
+```php
+$id = "test_url_param";
+$response = $sg->client->whitelabel()->links()->_($id)->validate()->post();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+## Associate a Link Branding
+
+**This endpoint allows you to associate a link branding with a subuser account.**
+
+Link branding can be associated with subusers from the parent account. This functionality allows
+subusers to send mail using their parent's link brands. To associate a link branding, the parent account
+must first create a branded link and validate it. The parent may then associate that branded link with a subuser via the API or the Subuser Management page in the user interface.
+
+Email link branding allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.
+
+For more information, please see our [User Guide](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-link-branding/).
+
+### POST /whitelabel/links/{link_id}/subuser
+
+
+```php
+$request_body = json_decode('{
+  "username": "jane@example.com"
+}');
+$link_id = "test_url_param";
+$response = $sg->client->whitelabel()->links()->_($link_id)->subuser()->post($request_body);
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
+print_r($response->headers());
+```
+
 <a name="stats"></a>
 # STATS
 
@@ -2868,8 +3536,8 @@ Parent accounts will see aggregated stats for their account and all subuser acco
 ```php
 $query_params = json_decode('{"aggregated_by": "day", "limit": 1, "start_date": "2016-01-01", "end_date": "2016-04-01", "offset": 1}');
 $response = $sg->client->stats()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 <a name="subusers"></a>
@@ -2898,8 +3566,8 @@ $request_body = json_decode('{
   "username": "John@example.com"
 }');
 $response = $sg->client->subusers()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## List all Subusers
@@ -2917,8 +3585,8 @@ For more information about Subusers:
 ```php
 $query_params = json_decode('{"username": "test_string", "limit": 1, "offset": 1}');
 $response = $sg->client->subusers()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve Subuser Reputations
@@ -2933,8 +3601,8 @@ This endpoint allows you to request the reputations for your subusers.
 ```php
 $query_params = json_decode('{"usernames": "test_string"}');
 $response = $sg->client->subusers()->reputations()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve email statistics for your subusers.
@@ -2953,8 +3621,8 @@ For more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "limit": 1, "offset": 1, "start_date": "2016-01-01", "subusers": "test_string"}');
 $response = $sg->client->subusers()->stats()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve monthly stats for all subusers
@@ -2974,8 +3642,8 @@ For more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/
 ```php
 $query_params = json_decode('{"subuser": "test_string", "limit": 1, "sort_by_metric": "test_string", "offset": 1, "date": "test_string", "sort_by_direction": "asc"}');
 $response = $sg->client->subusers()->stats()->monthly()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ##  Retrieve the totals for each email statistic metric for all subusers.
@@ -2993,8 +3661,8 @@ For more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/
 ```php
 $query_params = json_decode('{"end_date": "2016-04-01", "aggregated_by": "day", "limit": 1, "sort_by_metric": "test_string", "offset": 1, "start_date": "2016-01-01", "sort_by_direction": "asc"}');
 $response = $sg->client->subusers()->stats()->sums()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Enable/disable a subuser
@@ -3015,8 +3683,8 @@ $request_body = json_decode('{
 }');
 $subuser_name = "test_url_param";
 $response = $sg->client->subusers()->_($subuser_name)->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete a subuser
@@ -3034,8 +3702,8 @@ For more information about Subusers:
 ```php
 $subuser_name = "test_url_param";
 $response = $sg->client->subusers()->_($subuser_name)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update IPs assigned to a subuser
@@ -3045,7 +3713,7 @@ Each subuser should be assigned to an IP address, from which all of this subuser
 More information:
 
 * [How to request more IPs](https://sendgrid.com/docs/Classroom/Basics/Account/adding_an_additional_dedicated_ip_to_your_account.html)
-* [IPs can be whitelabeled](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/ips.html)
+* [How to set up reverse DNS](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-reverse-dns/)
 
 ### PUT /subusers/{subuser_name}/ips
 
@@ -3056,8 +3724,8 @@ $request_body = json_decode('[
 ]');
 $subuser_name = "test_url_param";
 $response = $sg->client->subusers()->_($subuser_name)->ips()->put($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update Monitor Settings for a subuser
@@ -3074,8 +3742,8 @@ $request_body = json_decode('{
 }');
 $subuser_name = "test_url_param";
 $response = $sg->client->subusers()->_($subuser_name)->monitor()->put($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Create monitor settings
@@ -3092,8 +3760,8 @@ $request_body = json_decode('{
 }');
 $subuser_name = "test_url_param";
 $response = $sg->client->subusers()->_($subuser_name)->monitor()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve monitor settings for a subuser
@@ -3106,8 +3774,8 @@ Subuser monitor settings allow you to receive a sample of an outgoing message by
 ```php
 $subuser_name = "test_url_param";
 $response = $sg->client->subusers()->_($subuser_name)->monitor()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete monitor settings
@@ -3120,8 +3788,8 @@ Subuser monitor settings allow you to receive a sample of an outgoing message by
 ```php
 $subuser_name = "test_url_param";
 $response = $sg->client->subusers()->_($subuser_name)->monitor()->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve the monthly email statistics for a single subuser
@@ -3142,8 +3810,8 @@ For more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/
 $query_params = json_decode('{"date": "test_string", "sort_by_direction": "asc", "limit": 1, "sort_by_metric": "test_string", "offset": 1}');
 $subuser_name = "test_url_param";
 $response = $sg->client->subusers()->_($subuser_name)->stats()->monthly()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 <a name="suppression"></a>
@@ -3163,8 +3831,8 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 ```php
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
 $response = $sg->client->suppression()->blocks()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete blocks
@@ -3192,8 +3860,8 @@ $request_body = json_decode('{
   ]
 }');
 $response = $sg->client->suppression()->blocks()->delete($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve a specific block
@@ -3210,8 +3878,8 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 ```php
 $email = "test_url_param";
 $response = $sg->client->suppression()->blocks()->_($email)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete a specific block
@@ -3228,8 +3896,8 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 ```php
 $email = "test_url_param";
 $response = $sg->client->suppression()->blocks()->_($email)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all bounces
@@ -3249,8 +3917,8 @@ For more information see:
 ```php
 $query_params = json_decode('{"start_time": 1, "end_time": 1}');
 $response = $sg->client->suppression()->bounces()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete bounces
@@ -3279,8 +3947,8 @@ $request_body = json_decode('{
   ]
 }');
 $response = $sg->client->suppression()->bounces()->delete($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve a Bounce
@@ -3301,8 +3969,8 @@ For more information see:
 ```php
 $email = "test_url_param";
 $response = $sg->client->suppression()->bounces()->_($email)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete a bounce
@@ -3324,8 +3992,8 @@ For more information see:
 $query_params = json_decode('{"email_address": "example@example.com"}');
 $email = "test_url_param";
 $response = $sg->client->suppression()->bounces()->_($email)->delete(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all invalid emails
@@ -3344,8 +4012,8 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 ```php
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
 $response = $sg->client->suppression()->invalid_emails()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete invalid emails
@@ -3375,8 +4043,8 @@ $request_body = json_decode('{
   ]
 }');
 $response = $sg->client->suppression()->invalid_emails()->delete($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve a specific invalid email
@@ -3395,8 +4063,8 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 ```php
 $email = "test_url_param";
 $response = $sg->client->suppression()->invalid_emails()->_($email)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete a specific invalid email
@@ -3415,15 +4083,15 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 ```php
 $email = "test_url_param";
 $response = $sg->client->suppression()->invalid_emails()->_($email)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve a specific spam report
 
 **This endpoint allows you to retrieve a specific spam report.**
 
-[Spam reports](https://sendgrid.com/docs/Glossary/spam_reports.html) happen when a recipient indicates that they think your email is [spam](https://sendgrid.com/docs/Glossary/spam.html) and then their email provider reports this to SendGrid.
+[Spam reports](https://sendgrid.com/docs/Glossary/spam_reports.html) happen when a recipient indicates that they think your email is [spam](https://sendgrid.com/docs/Glossary/spam.html) and then their email provider reports this to Twilio SendGrid.
 
 For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/spam_reports.html).
 
@@ -3433,15 +4101,15 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 ```php
 $email = "test_url_param";
 $response = $sg->client->suppression()->spam_reports()->_($email)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete a specific spam report
 
 **This endpoint allows you to delete a specific spam report.**
 
-[Spam reports](https://sendgrid.com/docs/Glossary/spam_reports.html) happen when a recipient indicates that they think your email is [spam](https://sendgrid.com/docs/Glossary/spam.html) and then their email provider reports this to SendGrid.
+[Spam reports](https://sendgrid.com/docs/Glossary/spam_reports.html) happen when a recipient indicates that they think your email is [spam](https://sendgrid.com/docs/Glossary/spam.html) and then their email provider reports this to Twilio SendGrid.
 
 For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/spam_reports.html).
 
@@ -3451,15 +4119,15 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 ```php
 $email = "test_url_param";
 $response = $sg->client->suppression()->spam_reports()->_($email)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all spam reports
 
 **This endpoint allows you to retrieve all spam reports.**
 
-[Spam reports](https://sendgrid.com/docs/Glossary/spam_reports.html) happen when a recipient indicates that they think your email is [spam](https://sendgrid.com/docs/Glossary/spam.html) and then their email provider reports this to SendGrid.
+[Spam reports](https://sendgrid.com/docs/Glossary/spam_reports.html) happen when a recipient indicates that they think your email is [spam](https://sendgrid.com/docs/Glossary/spam.html) and then their email provider reports this to Twilio SendGrid.
 
 For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/spam_reports.html).
 
@@ -3469,8 +4137,8 @@ For more information, please see our [User Guide](https://sendgrid.com/docs/User
 ```php
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
 $response = $sg->client->suppression()->spam_reports()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete spam reports
@@ -3482,7 +4150,7 @@ There are two options for deleting spam reports:
 1) You can delete all spam reports by setting "delete_all" to true in the request body.
 2) You can delete some spam reports by specifying the email addresses in an array in the request body.
 
-[Spam reports](https://sendgrid.com/docs/Glossary/spam_reports.html) happen when a recipient indicates that they think your email is [spam](https://sendgrid.com/docs/Glossary/spam.html) and then their email provider reports this to SendGrid.
+[Spam reports](https://sendgrid.com/docs/Glossary/spam_reports.html) happen when a recipient indicates that they think your email is [spam](https://sendgrid.com/docs/Glossary/spam.html) and then their email provider reports this to Twilio SendGrid.
 
 For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/spam_reports.html).
 
@@ -3498,8 +4166,8 @@ $request_body = json_decode('{
   ]
 }');
 $response = $sg->client->suppression()->spam_reports()->delete($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all global suppressions
@@ -3514,8 +4182,8 @@ A global suppression (or global unsubscribe) is an email address of a recipient 
 ```php
 $query_params = json_decode('{"start_time": 1, "limit": 1, "end_time": 1, "offset": 1}');
 $response = $sg->client->suppression()->unsubscribes()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 <a name="templates"></a>
@@ -3537,11 +4205,11 @@ $request_body = json_decode('{
   "name": "example_name"
 }');
 $response = $sg->client->templates()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
-## Retrieve all transactional templates.
+## Retrieve all transactional templates (legacy & dynamic).
 
 **This endpoint allows you to retrieve all transactional templates.**
 
@@ -3553,9 +4221,10 @@ Transactional templates are templates created specifically for transactional ema
 
 
 ```php
-$response = $sg->client->templates()->get();
-echo $response->statusCode();
-echo $response->body();
+$query_params = json_decode('{"generations": "legacy,dynamic"}');
+$response = $sg->client->templates()->get(null, $query_params);
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Edit a transactional template.
@@ -3576,8 +4245,8 @@ $request_body = json_decode('{
 }');
 $template_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve a single transactional template.
@@ -3595,8 +4264,8 @@ Transactional templates are templates created specifically for transactional ema
 ```php
 $template_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete a template.
@@ -3614,8 +4283,8 @@ Transactional templates are templates created specifically for transactional ema
 ```php
 $template_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Create a new transactional template version.
@@ -3641,8 +4310,8 @@ $request_body = json_decode('{
 }');
 $template_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->versions()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Edit a transactional template version.
@@ -3673,8 +4342,8 @@ $request_body = json_decode('{
 $template_id = "test_url_param";
 $version_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve a specific transactional template version.
@@ -3698,8 +4367,8 @@ For more information about transactional templates, please see our [User Guide](
 $template_id = "test_url_param";
 $version_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete a transactional template version.
@@ -3723,8 +4392,8 @@ For more information about transactional templates, please see our [User Guide](
 $template_id = "test_url_param";
 $version_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Activate a transactional template version.
@@ -3749,11 +4418,11 @@ For more information about transactional templates, please see our [User Guide](
 $template_id = "test_url_param";
 $version_id = "test_url_param";
 $response = $sg->client->templates()->_($template_id)->versions()->_($version_id)->activate()->post();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
-<a name="tracking_settings"></a>
+<a name="tracking-settings"></a>
 # TRACKING SETTINGS
 
 ## Retrieve Tracking Settings
@@ -3770,8 +4439,8 @@ For more information about tracking, please see our [User Guide](https://sendgri
 ```php
 $query_params = json_decode('{"limit": 1, "offset": 1}');
 $response = $sg->client->tracking_settings()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update Click Tracking Settings
@@ -3790,8 +4459,8 @@ $request_body = json_decode('{
   "enabled": true
 }');
 $response = $sg->client->tracking_settings()->click()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve Click Track Settings
@@ -3807,8 +4476,8 @@ For more information about tracking, please see our [User Guide](https://sendgri
 
 ```php
 $response = $sg->client->tracking_settings()->click()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update Google Analytics Settings
@@ -3836,8 +4505,8 @@ $request_body = json_decode('{
   "utm_term": ""
 }');
 $response = $sg->client->tracking_settings()->google_analytics()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve Google Analytics Settings
@@ -3857,15 +4526,15 @@ For more information about tracking, please see our [User Guide](https://sendgri
 
 ```php
 $response = $sg->client->tracking_settings()->google_analytics()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update Open Tracking Settings
 
 **This endpoint allows you to update your current settings for open tracking.**
 
-Open Tracking adds an invisible image at the end of the email which can track email opens. If the email recipient has images enabled on their email client, a request to SendGrids server for the invisible image is executed and an open event is logged. These events are logged in the Statistics portal, Email Activity interface, and are reported by the Event Webhook.
+Open Tracking adds an invisible image at the end of the email which can track email opens. If the email recipient has images enabled on their email client, a request to Twilio SendGrid's server for the invisible image is executed and an open event is logged. These events are logged in the Statistics portal, Email Activity interface, and are reported by the Event Webhook.
 
 You can track a variety of the actions your recipients may take when interacting with your emails including opening your emails, clicking on links in your emails, and subscribing to (or unsubscribing from) your emails.
 
@@ -3879,15 +4548,15 @@ $request_body = json_decode('{
   "enabled": true
 }');
 $response = $sg->client->tracking_settings()->open()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Get Open Tracking Settings
 
 **This endpoint allows you to retrieve your current settings for open tracking.**
 
-Open Tracking adds an invisible image at the end of the email which can track email opens. If the email recipient has images enabled on their email client, a request to SendGrids server for the invisible image is executed and an open event is logged. These events are logged in the Statistics portal, Email Activity interface, and are reported by the Event Webhook.
+Open Tracking adds an invisible image at the end of the email which can track email opens. If the email recipient has images enabled on their email client, a request to Twilio SendGrid's server for the invisible image is executed and an open event is logged. These events are logged in the Statistics portal, Email Activity interface, and are reported by the Event Webhook.
 
 You can track a variety of the actions your recipients may take when interacting with your emails including opening your emails, clicking on links in your emails, and subscribing to (or unsubscribing from) your emails.
 
@@ -3898,8 +4567,8 @@ For more information about tracking, please see our [User Guide](https://sendgri
 
 ```php
 $response = $sg->client->tracking_settings()->open()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update Subscription Tracking Settings
@@ -3925,8 +4594,8 @@ $request_body = json_decode('{
   "url": "url"
 }');
 $response = $sg->client->tracking_settings()->subscription()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve Subscription Tracking Settings
@@ -3944,8 +4613,8 @@ For more information about tracking, please see our [User Guide](https://sendgri
 
 ```php
 $response = $sg->client->tracking_settings()->subscription()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 <a name="user"></a>
@@ -3957,19 +4626,19 @@ print_r($response->headers());
 
 Your user's account information includes the user's account type and reputation.
 
-Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
+Keeping your user profile up to date is important. This will help Twilio SendGrid to verify who you are as well as contact you should we need to.
 
 For more information about your user profile:
 
-* [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
+* [Twilio SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
 
 ### GET /user/account
 
 
 ```php
 $response = $sg->client->user()->account()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve your credit balance
@@ -3983,19 +4652,19 @@ Your monthly credit allotment limits the number of emails you may send before in
 
 ```php
 $response = $sg->client->user()->credits()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update your account email address
 
 **This endpoint allows you to update the email address currently on file for your account.**
 
-Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
+Keeping your user profile up to date is important. This will help Twilio SendGrid to verify who you are as well as contact you should we need to.
 
 For more information about your user profile:
 
-* [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
+* [Twilio SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
 
 ### PUT /user/email
 
@@ -4005,38 +4674,38 @@ $request_body = json_decode('{
   "email": "example@example.com"
 }');
 $response = $sg->client->user()->email()->put($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve your account email address
 
 **This endpoint allows you to retrieve the email address currently on file for your account.**
 
-Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
+Keeping your user profile up to date is important. This will help Twilio SendGrid to verify who you are as well as contact you should we need to.
 
 For more information about your user profile:
 
-* [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
+* [Twilio SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
 
 ### GET /user/email
 
 
 ```php
 $response = $sg->client->user()->email()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update your password
 
 **This endpoint allows you to update your password.**
 
-Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
+Keeping your user profile up to date is important. This will help Twilio SendGrid to verify who you are as well as contact you should we need to.
 
 For more information about your user profile:
 
-* [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
+* [Twilio SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
 
 ### PUT /user/password
 
@@ -4047,19 +4716,19 @@ $request_body = json_decode('{
   "old_password": "old_password"
 }');
 $response = $sg->client->user()->password()->put($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update a user's profile
 
 **This endpoint allows you to update your current profile details.**
 
-Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
+Keeping your user profile up to date is important. This will help Twilio SendGrid to verify who you are as well as contact you should we need to.
 
 For more information about your user profile:
 
-* [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
+* [Twilio SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
 
 It should be noted that any one or more of the parameters can be updated via the PATCH /user/profile endpoint. The only requirement is that you include at least one when you PATCH.
 
@@ -4073,25 +4742,25 @@ $request_body = json_decode('{
   "last_name": "User"
 }');
 $response = $sg->client->user()->profile()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Get a user's profile
 
-Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
+Keeping your user profile up to date is important. This will help Twilio SendGrid to verify who you are as well as contact you should we need to.
 
 For more information about your user profile:
 
-* [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
+* [Twilio SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
 
 ### GET /user/profile
 
 
 ```php
 $response = $sg->client->user()->profile()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Cancel or pause a scheduled send
@@ -4112,8 +4781,8 @@ $request_body = json_decode('{
   "status": "pause"
 }');
 $response = $sg->client->user()->scheduled_sends()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all scheduled sends
@@ -4127,8 +4796,8 @@ The Cancel Scheduled Sends feature allows the customer to cancel a scheduled sen
 
 ```php
 $response = $sg->client->user()->scheduled_sends()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update user scheduled send information
@@ -4146,8 +4815,8 @@ $request_body = json_decode('{
 }');
 $batch_id = "test_url_param";
 $response = $sg->client->user()->scheduled_sends()->_($batch_id)->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve scheduled send
@@ -4162,8 +4831,8 @@ The Cancel Scheduled Sends feature allows the customer to cancel a scheduled sen
 ```php
 $batch_id = "test_url_param";
 $response = $sg->client->user()->scheduled_sends()->_($batch_id)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete a cancellation or pause of a scheduled send
@@ -4178,8 +4847,8 @@ The Cancel Scheduled Sends feature allows the customer to cancel a scheduled sen
 ```php
 $batch_id = "test_url_param";
 $response = $sg->client->user()->scheduled_sends()->_($batch_id)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update Enforced TLS settings
@@ -4199,8 +4868,8 @@ $request_body = json_decode('{
   "require_valid_cert": false
 }');
 $response = $sg->client->user()->settings()->enforced_tls()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve current Enforced TLS settings.
@@ -4216,19 +4885,19 @@ The Enforced TLS settings specify whether or not the recipient is required to su
 
 ```php
 $response = $sg->client->user()->settings()->enforced_tls()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update your username
 
 **This endpoint allows you to update the username for your account.**
 
-Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
+Keeping your user profile up to date is important. This will help Twilio SendGrid to verify who you are as well as contact you should we need to.
 
 For more information about your user profile:
 
-* [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
+* [Twilio SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
 
 ### PUT /user/username
 
@@ -4238,27 +4907,27 @@ $request_body = json_decode('{
   "username": "test_username"
 }');
 $response = $sg->client->user()->username()->put($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve your username
 
 **This endpoint allows you to retrieve your current account username.**
 
-Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
+Keeping your user profile up to date is important. This will help Twilio SendGrid to verify who you are as well as contact you should we need to.
 
 For more information about your user profile:
 
-* [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
+* [Twilio SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
 
 ### GET /user/username
 
 
 ```php
 $response = $sg->client->user()->username()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update Event Notification Settings
@@ -4267,7 +4936,7 @@ print_r($response->headers());
 
 If an event type is marked as `true`, then the event webhook will include information about that event.
 
-SendGrids Event Webhook will notify a URL of your choice via HTTP POST with information about events that occur as SendGrid processes your email.
+Twilio SendGrid's Event Webhook will notify a URL of your choice via HTTP POST with information about events that occur as Twilio SendGrid processes your email.
 
 Common uses of this data are to remove unsubscribes, react to spam reports, determine unengaged recipients, identify bounced email addresses, or create advanced analytics of your email program.
 
@@ -4291,8 +4960,8 @@ $request_body = json_decode('{
   "url": "url"
 }');
 $response = $sg->client->user()->webhooks()->event()->settings()->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve Event Webhook settings
@@ -4301,7 +4970,7 @@ print_r($response->headers());
 
 If an event type is marked as `true`, then the event webhook will include information about that event.
 
-SendGrids Event Webhook will notify a URL of your choice via HTTP POST with information about events that occur as SendGrid processes your email.
+Twilio SendGrid's Event Webhook will notify a URL of your choice via HTTP POST with information about events that occur as Twilio SendGrid processes your email.
 
 Common uses of this data are to remove unsubscribes, react to spam reports, determine unengaged recipients, identify bounced email addresses, or create advanced analytics of your email program.
 
@@ -4310,15 +4979,15 @@ Common uses of this data are to remove unsubscribes, react to spam reports, dete
 
 ```php
 $response = $sg->client->user()->webhooks()->event()->settings()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Test Event Notification Settings
 
 **This endpoint allows you to test your event webhook by sending a fake event notification post to the provided URL.**
 
-SendGrids Event Webhook will notify a URL of your choice via HTTP POST with information about events that occur as SendGrid processes your email.
+Twilio SendGrid's Event Webhook will notify a URL of your choice via HTTP POST with information about events that occur as Twilio SendGrid processes your email.
 
 Common uses of this data are to remove unsubscribes, react to spam reports, determine unengaged recipients, identify bounced email addresses, or create advanced analytics of your email program.
 
@@ -4330,15 +4999,15 @@ $request_body = json_decode('{
   "url": "url"
 }');
 $response = $sg->client->user()->webhooks()->event()->test()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Create a parse setting
 
 **This endpoint allows you to create a new inbound parse setting.**
 
-The inbound parse webhook allows you to have incoming emails parsed, extracting some or all of the content, and then have that content POSTed by SendGrid to a URL of your choosing. For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Webhooks/parse.html).
+The inbound parse webhook allows you to have incoming emails parsed, extracting some or all of the content, and then have that content POSTed by Twilio SendGrid to a URL of your choosing. For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Webhooks/parse.html).
 
 ### POST /user/webhooks/parse/settings
 
@@ -4351,30 +5020,30 @@ $request_body = json_decode('{
   "url": "http://email.myhosthame.com"
 }');
 $response = $sg->client->user()->webhooks()->parse()->settings()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve all parse settings
 
 **This endpoint allows you to retrieve all of your current inbound parse settings.**
 
-The inbound parse webhook allows you to have incoming emails parsed, extracting some or all of the content, and then have that content POSTed by SendGrid to a URL of your choosing. For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Webhooks/parse.html).
+The inbound parse webhook allows you to have incoming emails parsed, extracting some or all of the content, and then have that content POSTed by Twilio SendGrid to a URL of your choosing. For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Webhooks/parse.html).
 
 ### GET /user/webhooks/parse/settings
 
 
 ```php
 $response = $sg->client->user()->webhooks()->parse()->settings()->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Update a parse setting
 
 **This endpoint allows you to update a specific inbound parse setting.**
 
-The inbound parse webhook allows you to have incoming emails parsed, extracting some or all of the content, and then have that content POSTed by SendGrid to a URL of your choosing. For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Webhooks/parse.html).
+The inbound parse webhook allows you to have incoming emails parsed, extracting some or all of the content, and then have that content POSTed by Twilio SendGrid to a URL of your choosing. For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Webhooks/parse.html).
 
 ### PATCH /user/webhooks/parse/settings/{hostname}
 
@@ -4387,15 +5056,15 @@ $request_body = json_decode('{
 }');
 $hostname = "test_url_param";
 $response = $sg->client->user()->webhooks()->parse()->settings()->_($hostname)->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieve a specific parse setting
 
 **This endpoint allows you to retrieve a specific inbound parse setting.**
 
-The inbound parse webhook allows you to have incoming emails parsed, extracting some or all of the content, and then have that content POSTed by SendGrid to a URL of your choosing. For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Webhooks/parse.html).
+The inbound parse webhook allows you to have incoming emails parsed, extracting some or all of the content, and then have that content POSTed by Twilio SendGrid to a URL of your choosing. For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Webhooks/parse.html).
 
 ### GET /user/webhooks/parse/settings/{hostname}
 
@@ -4403,15 +5072,15 @@ The inbound parse webhook allows you to have incoming emails parsed, extracting 
 ```php
 $hostname = "test_url_param";
 $response = $sg->client->user()->webhooks()->parse()->settings()->_($hostname)->get();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Delete a parse setting
 
 **This endpoint allows you to delete a specific inbound parse setting.**
 
-The inbound parse webhook allows you to have incoming emails parsed, extracting some or all of the content, and then have that content POSTed by SendGrid to a URL of your choosing. For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Webhooks/parse.html).
+The inbound parse webhook allows you to have incoming emails parsed, extracting some or all of the content, and then have that content POSTed by Twilio SendGrid to a URL of your choosing. For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Webhooks/parse.html).
 
 ### DELETE /user/webhooks/parse/settings/{hostname}
 
@@ -4419,17 +5088,17 @@ The inbound parse webhook allows you to have incoming emails parsed, extracting 
 ```php
 $hostname = "test_url_param";
 $response = $sg->client->user()->webhooks()->parse()->settings()->_($hostname)->delete();
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
 ## Retrieves Inbound Parse Webhook statistics.
 
 **This endpoint allows you to retrieve the statistics for your Parse Webhook usage.**
 
-SendGrid's Inbound Parse Webhook allows you to parse the contents and attachments of incoming emails. The Parse API can then POST the parsed emails to a URL that you specify. The Inbound Parse Webhook cannot parse messages greater than 20MB in size, including all attachments.
+Twilio SendGrid's Inbound Parse Webhook allows you to parse the contents and attachments of incoming emails. The Parse API can then POST the parsed emails to a URL that you specify. The Inbound Parse Webhook cannot parse messages greater than 20MB in size, including all attachments.
 
-There are a number of pre-made integrations for the SendGrid Parse Webhook which make processing events easy. You can find these integrations in the [Library Index](https://sendgrid.com/docs/Integrate/libraries.html#-Webhook-Libraries).
+There are a number of pre-made integrations for the Twilio SendGrid Parse Webhook which make processing events easy. You can find these integrations in the [Library Index](https://sendgrid.com/docs/Integrate/libraries.html#-Webhook-Libraries).
 
 ### GET /user/webhooks/parse/stats
 
@@ -4437,602 +5106,7 @@ There are a number of pre-made integrations for the SendGrid Parse Webhook which
 ```php
 $query_params = json_decode('{"aggregated_by": "day", "limit": "test_string", "start_date": "2016-01-01", "end_date": "2016-04-01", "offset": "test_string"}');
 $response = $sg->client->user()->webhooks()->parse()->stats()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
+print $response->statusCode() . "\n";
+print $response->body() . "\n";
 print_r($response->headers());
 ```
-<a name="whitelabel"></a>
-# WHITELABEL
-
-## Create a domain whitelabel.
-
-**This endpoint allows you to create a whitelabel for one of your domains.**
-
-If you are creating a domain whitelabel that you would like a subuser to use, you have two options:
-1. Use the "username" parameter. This allows you to create a whitelabel on behalf of your subuser. This means the subuser is able to see and modify the created whitelabel.
-2. Use the Association workflow (see Associate Domain section). This allows you to assign a whitelabel created by the parent to a subuser. This means the subuser will default to the assigned whitelabel, but will not be able to see or modify that whitelabel. However, if the subuser creates their own whitelabel it will overwrite the assigned whitelabel.
-
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
-
-For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
-
-### POST /whitelabel/domains
-
-
-```php
-$request_body = json_decode('{
-  "automatic_security": false,
-  "custom_spf": true,
-  "default": true,
-  "domain": "example.com",
-  "ips": [
-    "192.168.1.1",
-    "192.168.1.2"
-  ],
-  "subdomain": "news",
-  "username": "john@example.com"
-}');
-$response = $sg->client->whitelabel()->domains()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## List all domain whitelabels.
-
-**This endpoint allows you to retrieve a list of all domain whitelabels you have created.**
-
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
-
-For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
-
-
-### GET /whitelabel/domains
-
-
-```php
-$query_params = json_decode('{"username": "test_string", "domain": "test_string", "exclude_subusers": "true", "limit": 1, "offset": 1}');
-$response = $sg->client->whitelabel()->domains()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Get the default domain whitelabel.
-
-**This endpoint allows you to retrieve the default whitelabel for a domain.**
-
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
-
-For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
-
-## URI Parameters
-| URI Parameter   | Type   | Description  |
-|---|---|---|
-| domain | string  |The domain to find a default domain whitelabel for. |
-
-### GET /whitelabel/domains/default
-
-
-```php
-$response = $sg->client->whitelabel()->domains()->default()->get();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## List the domain whitelabel associated with the given user.
-
-**This endpoint allows you to retrieve all of the whitelabels that have been assigned to a specific subuser.**
-
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
-
-Domain whitelabels can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's whitelabels. To associate a whitelabel with a subuser, the parent account must first create the whitelabel and validate it. The the parent may then associate the whitelabel via the subuser management tools.
-
-For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
-
-## URI Parameters
-| URI Parameter   | Type  | Description  |
-|---|---|---|
-| username | string  | Username of the subuser to find associated whitelabels for. |
-
-### GET /whitelabel/domains/subuser
-
-
-```php
-$response = $sg->client->whitelabel()->domains()->subuser()->get();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Disassociate a domain whitelabel from a given user.
-
-**This endpoint allows you to disassociate a specific whitelabel from a subuser.**
-
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
-
-Domain whitelabels can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's whitelabels. To associate a whitelabel with a subuser, the parent account must first create the whitelabel and validate it. The the parent may then associate the whitelabel via the subuser management tools.
-
-For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
-
-## URI Parameters
-| URI Parameter   | Type  | Required?  | Description  |
-|---|---|---|---|
-| username | string  | required  | Username for the subuser to find associated whitelabels for. |
-
-### DELETE /whitelabel/domains/subuser
-
-
-```php
-$response = $sg->client->whitelabel()->domains()->subuser()->delete();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Update a domain whitelabel.
-
-**This endpoint allows you to update the settings for a domain whitelabel.**
-
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
-
-For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
-
-### PATCH /whitelabel/domains/{domain_id}
-
-
-```php
-$request_body = json_decode('{
-  "custom_spf": true,
-  "default": false
-}');
-$domain_id = "test_url_param";
-$response = $sg->client->whitelabel()->domains()->_($domain_id)->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Retrieve a domain whitelabel.
-
-**This endpoint allows you to retrieve a specific domain whitelabel.**
-
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
-
-For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
-
-
-### GET /whitelabel/domains/{domain_id}
-
-
-```php
-$domain_id = "test_url_param";
-$response = $sg->client->whitelabel()->domains()->_($domain_id)->get();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Delete a domain whitelabel.
-
-**This endpoint allows you to delete a domain whitelabel.**
-
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
-
-For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
-
-### DELETE /whitelabel/domains/{domain_id}
-
-
-```php
-$domain_id = "test_url_param";
-$response = $sg->client->whitelabel()->domains()->_($domain_id)->delete();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Associate a domain whitelabel with a given user.
-
-**This endpoint allows you to associate a specific domain whitelabel with a subuser.**
-
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
-
-Domain whitelabels can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's whitelabels. To associate a whitelabel with a subuser, the parent account must first create the whitelabel and validate it. The the parent may then associate the whitelabel via the subuser management tools.
-
-For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
-
-## URI Parameters
-| URI Parameter   | Type   | Description  |
-|---|---|---|
-| domain_id | integer   | ID of the domain whitelabel to associate with the subuser. |
-
-### POST /whitelabel/domains/{domain_id}/subuser
-
-
-```php
-$request_body = json_decode('{
-  "username": "jane@example.com"
-}');
-$domain_id = "test_url_param";
-$response = $sg->client->whitelabel()->domains()->_($domain_id)->subuser()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Add an IP to a domain whitelabel.
-
-**This endpoint allows you to add an IP address to a domain whitelabel.**
-
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
-
-For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
-
-## URI Parameters
-| URI Parameter   | Type  |  Description  |
-|---|---|---|
-| id | integer  | ID of the domain to which you are adding an IP |
-
-### POST /whitelabel/domains/{id}/ips
-
-
-```php
-$request_body = json_decode('{
-  "ip": "192.168.0.1"
-}');
-$id = "test_url_param";
-$response = $sg->client->whitelabel()->domains()->_($id)->ips()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Remove an IP from a domain whitelabel.
-
-**This endpoint allows you to remove a domain's IP address from that domain's whitelabel.**
-
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
-
-For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
-
-## URI Parameters
-| URI Parameter   | Type  | Description  |
-|---|---|---|
-| id | integer  | ID of the domain whitelabel to delete the IP from. |
-| ip | string | IP to remove from the domain whitelabel. |
-
-### DELETE /whitelabel/domains/{id}/ips/{ip}
-
-
-```php
-$id = "test_url_param";
-$ip = "test_url_param";
-$response = $sg->client->whitelabel()->domains()->_($id)->ips()->_($ip)->delete();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Validate a domain whitelabel.
-
-**This endpoint allows you to validate a domain whitelabel. If it fails, it will return an error message describing why the whitelabel could not be validated.**
-
-A domain whitelabel allows you to remove the via or sent on behalf of message that your recipients see when they read your emails. Whitelabeling a domain allows you to replace sendgrid.net with your personal sending domain. You will be required to create a subdomain so that SendGrid can generate the DNS records which you must give to your host provider. If you choose to use Automated Security, SendGrid will provide you with 3 CNAME records. If you turn Automated Security off, you will be given 2 TXT records and 1 MX record.
-
-For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
-
-## URI Parameters
-| URI Parameter   | Type   | Description  |
-|---|---|---|
-| id | integer  |ID of the domain whitelabel to validate. |
-
-### POST /whitelabel/domains/{id}/validate
-
-
-```php
-$id = "test_url_param";
-$response = $sg->client->whitelabel()->domains()->_($id)->validate()->post();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Create an IP whitelabel
-
-**This endpoint allows you to create an IP whitelabel.**
-
-When creating an IP whitelable, you should use the same subdomain that you used when you created a domain whitelabel.
-
-A IP whitelabel consists of a subdomain and domain that will be used to generate a reverse DNS record for a given IP. Once SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.
-
-For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/ips.html).
-
-### POST /whitelabel/ips
-
-
-```php
-$request_body = json_decode('{
-  "domain": "example.com",
-  "ip": "192.168.1.1",
-  "subdomain": "email"
-}');
-$response = $sg->client->whitelabel()->ips()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Retrieve all IP whitelabels
-
-**This endpoint allows you to retrieve all of the IP whitelabels that have been createdy by this account.**
-
-You may include a search key by using the "ip" parameter. This enables you to perform a prefix search for a given IP segment (e.g. "192.").
-
-A IP whitelabel consists of a subdomain and domain that will be used to generate a reverse DNS record for a given IP. Once SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.
-
-For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/ips.html).
-
-### GET /whitelabel/ips
-
-
-```php
-$query_params = json_decode('{"ip": "test_string", "limit": 1, "offset": 1}');
-$response = $sg->client->whitelabel()->ips()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Retrieve an IP whitelabel
-
-**This endpoint allows you to retrieve an IP whitelabel.**
-
-A IP whitelabel consists of a subdomain and domain that will be used to generate a reverse DNS record for a given IP. Once SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.
-
-For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/ips.html).
-
-### GET /whitelabel/ips/{id}
-
-
-```php
-$id = "test_url_param";
-$response = $sg->client->whitelabel()->ips()->_($id)->get();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Delete an IP whitelabel
-
-**This endpoint allows you to delete an IP whitelabel.**
-
-A IP whitelabel consists of a subdomain and domain that will be used to generate a reverse DNS record for a given IP. Once SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.
-
-For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/ips.html).
-
-### DELETE /whitelabel/ips/{id}
-
-
-```php
-$id = "test_url_param";
-$response = $sg->client->whitelabel()->ips()->_($id)->delete();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Validate an IP whitelabel
-
-**This endpoint allows you to validate an IP whitelabel.**
-
-A IP whitelabel consists of a subdomain and domain that will be used to generate a reverse DNS record for a given IP. Once SendGrid has verified that the appropriate A record for the IP has been created, the appropriate reverse DNS record for the IP is generated.
-
-For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/ips.html).
-
-### POST /whitelabel/ips/{id}/validate
-
-
-```php
-$id = "test_url_param";
-$response = $sg->client->whitelabel()->ips()->_($id)->validate()->post();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Create a Link Whitelabel
-
-**This endpoint allows you to create a new link whitelabel.**
-
-Email link whitelabels allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.
-
-For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).
-
-### POST /whitelabel/links
-
-
-```php
-$request_body = json_decode('{
-  "default": true,
-  "domain": "example.com",
-  "subdomain": "mail"
-}');
-$query_params = json_decode('{"limit": 1, "offset": 1}');
-$response = $sg->client->whitelabel()->links()->post($request_body, $query_params);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Retrieve all link whitelabels
-
-**This endpoint allows you to retrieve all link whitelabels.**
-
-Email link whitelabels allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.
-
-For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).
-
-### GET /whitelabel/links
-
-
-```php
-$query_params = json_decode('{"limit": 1}');
-$response = $sg->client->whitelabel()->links()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Retrieve a Default Link Whitelabel
-
-**This endpoint allows you to retrieve the default link whitelabel.**
-
-Default link whitelabel is the actual link whitelabel to be used when sending messages. If there are multiple link whitelabels, the default is determined by the following order:
-<ul>
-  <li>Validated link whitelabels marked as "default"</li>
-  <li>Legacy link whitelabels (migrated from the whitelabel wizard)</li>
-  <li>Default SendGrid link whitelabel (i.e. 100.ct.sendgrid.net)</li>
-</ul>
-
-Email link whitelabels allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.
-
-For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).
-
-### GET /whitelabel/links/default
-
-
-```php
-$query_params = json_decode('{"domain": "test_string"}');
-$response = $sg->client->whitelabel()->links()->default()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Retrieve Associated Link Whitelabel
-
-**This endpoint allows you to retrieve the associated link whitelabel for a subuser.**
-
-Link whitelables can be associated with subusers from the parent account. This functionality allows
-subusers to send mail using their parent's like whitelabels. To associate a link whitelabel, the parent account
-must first create a whitelabel and validate it. The parent may then associate that whitelabel with a subuser via the API or the Subuser Management page in the user interface.
-
-Email link whitelabels allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.
-
-For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).
-
-### GET /whitelabel/links/subuser
-
-
-```php
-$query_params = json_decode('{"username": "test_string"}');
-$response = $sg->client->whitelabel()->links()->subuser()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Disassociate a Link Whitelabel
-
-**This endpoint allows you to disassociate a link whitelabel from a subuser.**
-
-Link whitelables can be associated with subusers from the parent account. This functionality allows
-subusers to send mail using their parent's like whitelabels. To associate a link whitelabel, the parent account
-must first create a whitelabel and validate it. The parent may then associate that whitelabel with a subuser via the API or the Subuser Management page in the user interface.
-
-Email link whitelabels allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.
-
-For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).
-
-### DELETE /whitelabel/links/subuser
-
-
-```php
-$query_params = json_decode('{"username": "test_string"}');
-$response = $sg->client->whitelabel()->links()->subuser()->delete(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Update a Link Whitelabel
-
-**This endpoint allows you to update a specific link whitelabel. You can use this endpoint to change a link whitelabel's default status.**
-
-Email link whitelabels allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.
-
-For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).
-
-### PATCH /whitelabel/links/{id}
-
-
-```php
-$request_body = json_decode('{
-  "default": true
-}');
-$id = "test_url_param";
-$response = $sg->client->whitelabel()->links()->_($id)->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Retrieve a Link Whitelabel
-
-**This endpoint allows you to retrieve a specific link whitelabel.**
-
-Email link whitelabels allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.
-
-For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).
-
-### GET /whitelabel/links/{id}
-
-
-```php
-$id = "test_url_param";
-$response = $sg->client->whitelabel()->links()->_($id)->get();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Delete a Link Whitelabel
-
-**This endpoint allows you to delete a link whitelabel.**
-
-Email link whitelabels allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.
-
-For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).
-
-### DELETE /whitelabel/links/{id}
-
-
-```php
-$id = "test_url_param";
-$response = $sg->client->whitelabel()->links()->_($id)->delete();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Validate a Link Whitelabel
-
-**This endpoint allows you to validate a link whitelabel.**
-
-Email link whitelabels allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.
-
-For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).
-
-### POST /whitelabel/links/{id}/validate
-
-
-```php
-$id = "test_url_param";
-$response = $sg->client->whitelabel()->links()->_($id)->validate()->post();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-## Associate a Link Whitelabel
-
-**This endpoint allows you to associate a link whitelabel with a subuser account.**
-
-Link whitelables can be associated with subusers from the parent account. This functionality allows
-subusers to send mail using their parent's like whitelabels. To associate a link whitelabel, the parent account
-must first create a whitelabel and validate it. The parent may then associate that whitelabel with a subuser via the API or the Subuser Management page in the user interface.
-
-Email link whitelabels allow all of the click-tracked links you send in your emails to include the URL of your domain instead of sendgrid.net.
-
-For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).
-
-### POST /whitelabel/links/{link_id}/subuser
-
-
-```php
-$request_body = json_decode('{
-  "username": "jane@example.com"
-}');
-$link_id = "test_url_param";
-$response = $sg->client->whitelabel()->links()->_($link_id)->subuser()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
-```
-

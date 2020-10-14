@@ -1,55 +1,24 @@
 <?php
-/**
-  * This library allows you to quickly and easily send emails through SendGrid using PHP.
-  *
-  * @author    Elmer Thomas <dx@sendgrid.com>
-  * @copyright 2017 SendGrid
-  * @license   https://opensource.org/licenses/MIT The MIT License
-  * @version   GIT: <git_id>
-  * @link      http://packagist.org/packages/sendgrid/sendgrid
-  */
 
 /**
-  * Interface to the SendGrid Web API
-  */
-class SendGrid
+ * This library allows you to quickly and easily send emails through Twilio
+ * SendGrid using PHP.
+ *
+ * @package SendGrid\Mail
+ */
+class SendGrid extends BaseSendGridClientInterface
 {
-    const VERSION = '6.0.0';
-
     /**
+     * Set up the HTTP Client.
      *
-     * @var string
+     * @param string $apiKey Your Twilio SendGrid API Key.
+     * @param array $options An array of options, currently only "host", "curl",
+     *                       "version", and "impersonateSubuser", are implemented.
      */
-    protected $namespace = 'SendGrid';
-
-    /**
-     * @var \SendGrid\Client
-     */
-    public $client;
-
-    /**
-     * @var string
-     */
-    public $version = self::VERSION;
-
-    /**
-      * Setup the HTTP Client
-      *
-      * @param string $apiKey  your SendGrid API Key.
-      * @param array  $options an array of options, currently only "host" and "curl" are implemented.
-      */
     public function __construct($apiKey, $options = array())
     {
-        $headers = array(
-            'Authorization: Bearer '.$apiKey,
-            'User-Agent: sendgrid/' . $this->version . ';php',
-            'Accept: application/json'
-            );
-
-        $host = isset($options['host']) ? $options['host'] : 'https://api.sendgrid.com';
-
-        $curlOptions = isset($options['curl']) ? $options['curl'] : null;
-
-        $this->client = new \SendGrid\Client($host, $headers, '/v3', null, $curlOptions);
+        $auth = 'Authorization: Bearer ' . $apiKey;
+        $host = 'https://api.sendgrid.com';
+        parent::__construct($auth, $host, $options);
     }
 }

@@ -1,7 +1,8 @@
 <?php
-// If you are using Composer
-require 'vendor/autoload.php';
 
+// Next line will load dependencies to run this example
+// Please refer to the README how to use in your project
+require_once __DIR__ . '/../../sendgrid-php.php';
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
@@ -11,10 +12,15 @@ $sg = new \SendGrid($apiKey);
 // GET /clients/stats #
 
 $query_params = json_decode('{"aggregated_by": "day", "start_date": "2016-01-01", "end_date": "2016-04-01"}');
-$response = $sg->client->clients()->stats()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->clients()->stats()->get(null, $query_params);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Retrieve stats by a specific client type. #
@@ -22,7 +28,12 @@ print_r($response->headers());
 
 $query_params = json_decode('{"aggregated_by": "day", "start_date": "2016-01-01", "end_date": "2016-04-01"}');
 $client_type = "test_url_param";
-$response = $sg->client->clients()->_($client_type)->stats()->get(null, $query_params);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->clients()->_($client_type)->stats()->get(null, $query_params);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}

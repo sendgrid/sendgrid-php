@@ -1,7 +1,8 @@
 <?php
-// If you are using Composer
-require 'vendor/autoload.php';
 
+// Next line will load dependencies to run this example
+// Please refer to the README how to use in your project
+require_once __DIR__ . '/../../sendgrid-php.php';
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
@@ -11,89 +12,118 @@ $sg = new \SendGrid($apiKey);
 // POST /senders #
 
 $request_body = json_decode('{
-  "address": "123 Elm St.", 
-  "address_2": "Apt. 456", 
-  "city": "Denver", 
-  "country": "United States", 
+  "address": "123 Elm St.",
+  "address_2": "Apt. 456",
+  "city": "Denver",
+  "country": "United States",
   "from": {
-    "email": "from@example.com", 
+    "email": "from@example.com",
     "name": "Example INC"
-  }, 
-  "nickname": "My Sender ID", 
+  },
+  "nickname": "My Sender ID",
   "reply_to": {
-    "email": "replyto@example.com", 
+    "email": "replyto@example.com",
     "name": "Example INC"
-  }, 
-  "state": "Colorado", 
+  },
+  "state": "Colorado",
   "zip": "80202"
 }');
-$response = $sg->client->senders()->post($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->senders()->post($request_body);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Get all Sender Identities #
 // GET /senders #
 
-$response = $sg->client->senders()->get();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+try {
+    $response = $sg->client->senders()->get();
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Update a Sender Identity #
 // PATCH /senders/{sender_id} #
 
 $request_body = json_decode('{
-  "address": "123 Elm St.", 
-  "address_2": "Apt. 456", 
-  "city": "Denver", 
-  "country": "United States", 
+  "address": "123 Elm St.",
+  "address_2": "Apt. 456",
+  "city": "Denver",
+  "country": "United States",
   "from": {
-    "email": "from@example.com", 
+    "email": "from@example.com",
     "name": "Example INC"
-  }, 
-  "nickname": "My Sender ID", 
+  },
+  "nickname": "My Sender ID",
   "reply_to": {
-    "email": "replyto@example.com", 
+    "email": "replyto@example.com",
     "name": "Example INC"
-  }, 
-  "state": "Colorado", 
+  },
+  "state": "Colorado",
   "zip": "80202"
 }');
 $sender_id = "test_url_param";
-$response = $sg->client->senders()->_($sender_id)->patch($request_body);
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->senders()->_($sender_id)->patch($request_body);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // View a Sender Identity #
 // GET /senders/{sender_id} #
 
 $sender_id = "test_url_param";
-$response = $sg->client->senders()->_($sender_id)->get();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->senders()->_($sender_id)->get();
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Delete a Sender Identity #
 // DELETE /senders/{sender_id} #
 
 $sender_id = "test_url_param";
-$response = $sg->client->senders()->_($sender_id)->delete();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->senders()->_($sender_id)->delete();
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 ////////////////////////////////////////////////////
 // Resend Sender Identity Verification #
 // POST /senders/{sender_id}/resend_verification #
 
 $sender_id = "test_url_param";
-$response = $sg->client->senders()->_($sender_id)->resend_verification()->post();
-echo $response->statusCode();
-echo $response->body();
-print_r($response->headers());
+
+try {
+    $response = $sg->client->senders()->_($sender_id)->resend_verification()->post();
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
