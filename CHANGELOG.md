@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2020-10-14] Version 7.8.5
+--------------------------
+**Library - Docs**
+- [PR #1009](https://github.com/sendgrid/sendgrid-php/pull/1009): Incorrect value order in example array for addAttachments. Thanks to [@Anorris-NLR](https://github.com/Anorris-NLR)!
+
+
 [2020-09-28] Version 7.8.4
 --------------------------
 **Library - Fix**
