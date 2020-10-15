@@ -1,18 +1,11 @@
 <?php
 /**
  * This helper builds the Substitution object for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Mail
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 
 namespace SendGrid\Mail;
+
+use SendGrid\Helper\Assert;
 
 /**
  * This class is used to construct a Substitution object for the /mail/send API call
@@ -37,6 +30,7 @@ class Substitution implements \JsonSerializable
      *
      * @param string|null $key Substitution key
      * @param string|null $value Substitution value
+     * @throws \SendGrid\Mail\TypeException
      */
     public function __construct($key = null, $value = null)
     {
@@ -52,16 +46,14 @@ class Substitution implements \JsonSerializable
      * Add the key on a Substitution object
      *
      * @param string $key Substitution key
-     * 
-     * @throws TypeException
-     * @return null
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setKey($key)
     {
-        if (!is_string($key)) {
-            throw new TypeException('$key must be of type string.');
-        }
-        $this->key = (string) $key;
+        Assert::string($key, 'key');
+
+        $this->key = $key;
     }
 
     /**
@@ -77,16 +69,21 @@ class Substitution implements \JsonSerializable
     /**
      * Add the value on a Substitution object
      *
-     * @param string|array|bool|int $value Substitution value
-     * 
-     * @throws TypeException
-     * @return null
-     */ 
+     * @param string|array|object|bool|int|float $value Substitution value
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setValue($value)
     {
-        if (!is_string($value) && !is_array($value) && !is_object($value) &&!is_bool($value) &&!is_int($value)) {
-            throw new TypeException('$value must be of type string, array or object.');
-        }
+        Assert::accept($value, 'value', static function ($val) {
+            return \is_string($val)
+                || filter_var($val, FILTER_VALIDATE_INT) !== false
+                || \is_float($val)
+                || \is_bool($val)
+                || \is_array($val)
+                || \is_object($val);
+        }, '"$value" must be an array, object, boolean, string, numeric or integer.');
+
         $this->value = $value;
     }
 
@@ -101,7 +98,7 @@ class Substitution implements \JsonSerializable
     }
 
     /**
-     * Return an array representing a Substitution object for the SendGrid API
+     * Return an array representing a Substitution object for the Twilio SendGrid API
      *
      * @return null|array
      */

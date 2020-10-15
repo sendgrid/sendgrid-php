@@ -1,43 +1,18 @@
 <?php
-/**
- * This file tests the SendGrid Client
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Tests
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
- */
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
+
+use SendGrid\Tests\BaseTestClass;
 
 /**
- * This class tests the SendGrid Client
+ * This class tests the Twilio SendGrid Client.
  *
- * @package SendGrid\Tests
+ * @package SendGrid\Tests\Unit
  */
 class SendGridTest extends BaseTestClass
 {
     /**
-     * Test if the version is correct
-     */
-    public function testVersionIsCorrect()
-    {
-        $this->assertEquals(\SendGrid::VERSION, '7.2.1');
-        $version = json_decode(
-            file_get_contents(__DIR__ . '/../../composer.json')
-        )->version;
-        $this->assertEquals(
-            $version,
-            \SendGrid::VERSION
-        );
-    }
-
-    /**
-     * Test that we can connect to the SendGrid API
+     * Test that we can connect to the Twilio SendGrid API.
      */
     public function testCanConnectToSendGridApi()
     {
@@ -48,41 +23,43 @@ class SendGridTest extends BaseTestClass
             'Accept: application/json'
         ];
 
-        $this->assertEquals(
-            $sg->client->getHost(),
-            'https://api.sendgrid.com',
-            '/v3'
-        );
-        $this->assertEquals(
-            $sg->client->getHeaders(),
-            $headers
-        );
-        $this->assertEquals($sg->client->getVersion(), '/v3');
+        $this->assertEquals('https://api.sendgrid.com', $sg->client->getHost());
+        $this->assertEquals($headers, $sg->client->getHeaders());
+        $this->assertEquals('/v3', $sg->client->getVersion());
 
-        $sg2 = new \SendGrid(self::$apiKey, ['host' => 'https://api.test.com']);
-        $this->assertEquals($sg2->client->getHost(), 'https://api.test.com');
+        $sg = new \SendGrid(self::$apiKey, ['host' => 'https://api.test.com']);
+        $this->assertEquals('https://api.test.com', $sg->client->getHost());
 
-        $sg3 = new \SendGrid(self::$apiKey, ['curl' => ['foo' => 'bar']]);
-        $this->assertEquals(['foo' => 'bar'], $sg3->client->getCurlOptions());
+        $sg = new \SendGrid(self::$apiKey, ['curl' => ['foo' => 'bar']]);
+        $this->assertEquals(['foo' => 'bar'], $sg->client->getCurlOptions());
 
-        $sg4 = new \SendGrid(
+        $sg = new \SendGrid(
             self::$apiKey,
             ['curl' => [CURLOPT_PROXY => '127.0.0.1:8000']]
         );
         $this->assertEquals(
-            $sg4->client->getCurlOptions(),
-            [10004 => '127.0.0.1:8000']
+            [10004 => '127.0.0.1:8000'],
+            $sg->client->getCurlOptions()
         );
 
         $subuser = 'abcxyz@this.is.a.test.subuser';
         $headers[] = 'On-Behalf-Of: ' . $subuser;
-        $sg5 = new \SendGrid(
+        $sg = new \SendGrid(
             self::$apiKey,
             ['impersonateSubuser' => $subuser]
         );
-        $this->assertSame(
-            $headers,
-            $sg5->client->getHeaders()
-        );
+        $this->assertSame($headers, $sg->client->getHeaders());
+    }
+
+    /**
+     * Test that user can override the API version when instantiating a new SendGrid client.
+     */
+    public function testCanOverridePath()
+    {
+        $opts['version'] = '/v4';
+
+        $sg = new \SendGrid(self::$apiKey, $opts);
+
+        $this->assertEquals('/v4', $sg->client->getVersion());
     }
 }

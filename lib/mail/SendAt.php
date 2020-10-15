@@ -1,17 +1,10 @@
 <?php
 /**
  * This helper builds the SendAt object for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Mail
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
  */
 namespace SendGrid\Mail;
+
+use SendGrid\Helper\Assert;
 
 /**
  * This class is used to construct a SendAt object for the /mail/send API call
@@ -30,7 +23,6 @@ class SendAt implements \JsonSerializable
      * result in lower deferral rates because it won't be going through our servers
      * at the same times as everyone else's mail
      */
-
     private $send_at;
 
     /**
@@ -47,8 +39,9 @@ class SendAt implements \JsonSerializable
      *                          example, scheduling at 10:53) can result in lower
      *                          deferral rates because it won't be going through
      *                          our servers at the same times as everyone else's mail
+     * @throws \SendGrid\Mail\TypeException
      */
-    public function __construct($send_at=null)
+    public function __construct($send_at = null)
     {
         if (isset($send_at)) {
             $this->setSendAt($send_at);
@@ -69,14 +62,13 @@ class SendAt implements \JsonSerializable
      *                     example, scheduling at 10:53) can result in lower
      *                     deferral rates because it won't be going through
      *                     our servers at the same times as everyone else's mail
-     * 
-     * @throws TypeException
-     */ 
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function setSendAt($send_at)
     {
-        if (!is_int($send_at)) {
-            throw new TypeException('$send_at must be of type int.');
-        }
+        Assert::integer($send_at, 'send_at');
+
         $this->send_at = $send_at;
     }
 
@@ -91,7 +83,7 @@ class SendAt implements \JsonSerializable
     }
 
     /**
-     * Return an array representing a SendAt object for the SendGrid API
+     * Return an array representing a SendAt object for the Twilio SendGrid API
      *
      * @return int
      */

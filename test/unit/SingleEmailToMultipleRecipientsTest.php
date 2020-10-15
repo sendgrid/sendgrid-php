@@ -1,26 +1,19 @@
 <?php
 /**
- * This file tests the request object generation for a /mail/send API call
- *
- * PHP Version - 5.6, 7.0, 7.1, 7.2
- *
- * @package   SendGrid\Tests
- * @author    Elmer Thomas <dx@sendgrid.com>
- * @copyright 2018 SendGrid
- * @license   https://opensource.org/licenses/MIT The MIT License
- * @version   GIT: <git_id>
- * @link      http://packagist.org/packages/sendgrid/sendgrid
+ * This file tests the request object generation for a /mail/send API call.
  */
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
+
+use SendGrid\Tests\BaseTestClass;
 
 
 /**
- * This class tests the request object generation for a /mail/send API call
+ * This class tests the request object generation for a /mail/send API call.
  *
- * @package SendGrid\Tests
+ * @package SendGrid\Tests\Unit
  */
-class SingleEmailToMulipleRecipientsTest extends BaseTestClass
+class SingleEmailToMultipleRecipientsTest extends BaseTestClass
 {
 
     private $REQUEST_OBJECT = <<<'JSON'
@@ -43,7 +36,7 @@ class SingleEmailToMulipleRecipientsTest extends BaseTestClass
         ]
       }
     ],
-    "subject": "Sending with SendGrid is Fun",
+    "subject": "Sending with Twilio SendGrid is Fun",
     "content": [
       {
         "type": "text/plain",
@@ -73,7 +66,7 @@ JSON;
             new \SendGrid\Mail\To("test+test2@example.com", "Example User2"),
             new \SendGrid\Mail\To("test+test3@example.com", "Example User3")
         ];
-        $subject = new \SendGrid\Mail\Subject("Sending with SendGrid is Fun");
+        $subject = new \SendGrid\Mail\Subject("Sending with Twilio SendGrid is Fun");
         $plainTextContent = new \SendGrid\Mail\PlainTextContent(
             "and easy to do anywhere, even with PHP"
         );
@@ -105,7 +98,7 @@ JSON;
             "test+test3@example.com" => "Example User3"
         ];
         $email->addTos($tos);
-        $email->setSubject("Sending with SendGrid is Fun");
+        $email->setSubject("Sending with Twilio SendGrid is Fun");
         $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
         $email->addContent(
             "text/html", "<strong>and easy to do anywhere, even with PHP</strong>"
