@@ -47,7 +47,7 @@ abstract class BaseSendGridClientInterface
 
         $this->client = new Client($host, $headers, $version);
 
-        $this->client->setCurlOptions(isset($options['curl']) ? $options['curl'] : null);
+        $this->client->setCurlOptions(isset($options['curl']) ? $options['curl'] : []);
         $this->client->setVerifySSLCerts(isset($options['verify_ssl']) ? $options['verify_ssl'] : true);
     }
 
