@@ -26,7 +26,8 @@ abstract class BaseSendGridClientInterface
      * @param string $auth Authorization header value.
      * @param string $host Default host/base URL for the client.
      * @param array $options An array of options, currently only "host", "curl",
-     *                       "version", and "impersonateSubuser", are implemented.
+     *                       "version", "verify_ssl", and "impersonateSubuser",
+     *                       are implemented.
      */
     public function __construct($auth, $host, $options = array())
     {
