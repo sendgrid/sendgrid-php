@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2020-11-05] Version 7.9.0
+--------------------------
+**Library - Feature**
+- [PR #674](https://github.com/sendgrid/sendgrid-php/pull/674): Allows for a user to utilize self-signed certificates. Thanks to [@davcpas1234](https://github.com/davcpas1234)!
+
+**Library - Test**
+- [PR #704](https://github.com/sendgrid/sendgrid-php/pull/704): Adding php static analysis. Thanks to [@reisraff](https://github.com/reisraff)!
+
+
 [2020-10-14] Version 7.8.5
 --------------------------
 **Library - Docs**
