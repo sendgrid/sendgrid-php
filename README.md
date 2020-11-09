@@ -1,6 +1,6 @@
 ![SendGrid Logo](twilio_sendgrid_logo.png)
 
-[![BuildStatus](https://travis-ci.org/sendgrid/sendgrid-php.svg?branch=main)](https://travis-ci.org/sendgrid/sendgrid-php)
+[![BuildStatus](https://travis-ci.com/sendgrid/sendgrid-php.svg?branch=main)](https://travis-ci.com/sendgrid/sendgrid-php)
 [![Packagist](https://img.shields.io/packagist/v/sendgrid/sendgrid.svg)](https://packagist.org/packages/sendgrid/sendgrid)
 [![Downloads](https://img.shields.io/packagist/dt/sendgrid/sendgrid.svg?maxAge=3600)](https://packagist.org/packages/sendgrid/sendgrid)
 [![Email Notifications Badge](https://dx.sendgrid.com/badge/php)](https://dx.sendgrid.com/newsletter/php)
@@ -75,9 +75,9 @@ Add Twilio SendGrid to your `composer.json` file. If you are not using [Composer
 
 ### Alternative: Install package from zip
 
-If you are not using Composer, simply download and install the **[latest packaged release of the library as a zip](https://github.com/sendgrid/sendgrid-php/releases/download/7.8.5/sendgrid-php.zip)**.
+If you are not using Composer, simply download and install the **[latest packaged release of the library as a zip](https://github.com/sendgrid/sendgrid-php/releases/download/7.9.0/sendgrid-php.zip)**.
 
-[**⬇︎ Download Packaged Library ⬇︎**](https://github.com/sendgrid/sendgrid-php/releases/download/7.8.5/sendgrid-php.zip)
+[**⬇︎ Download Packaged Library ⬇︎**](https://github.com/sendgrid/sendgrid-php/releases/download/7.9.0/sendgrid-php.zip)
 
 Previous versions of the library can be downloaded directly from [GitHub](https://github.com/sendgrid/sendgrid-php/releases).
 
