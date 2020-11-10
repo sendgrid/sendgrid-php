@@ -5,6 +5,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a BatchId object for the /mail/send API call
  *
@@ -15,13 +17,13 @@ class BatchId implements \JsonSerializable
     /** @var $batch_id string This ID represents a batch of emails to be sent at the same time */
     private $batch_id;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param string|null $batch_id This ID represents a batch of emails to
-	 *                              be sent at the same time
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param string|null $batch_id This ID represents a batch of emails to
+     *                              be sent at the same time
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct($batch_id = null)
     {
         if (isset($batch_id)) {
@@ -39,9 +41,8 @@ class BatchId implements \JsonSerializable
      */
     public function setBatchId($batch_id)
     {
-        if (!is_string($batch_id)) {
-            throw new TypeException('$batch_id must be of type string.');
-        }
+        Assert::string($batch_id, 'batch_id');
+
         $this->batch_id = $batch_id;
     }
 

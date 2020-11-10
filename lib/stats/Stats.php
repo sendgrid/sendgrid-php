@@ -245,7 +245,7 @@ class Stats
      */
     protected function validateNumericArray($name, $value)
     {
-        if (!is_array($value) || empty($value) || !$this->isNumeric($value)) {
+        if (!\is_array($value) || empty($value) || !$this->isNumeric($value)) {
             throw new Exception($name . ' must be a non-empty numeric array.');
         }
     }
@@ -259,6 +259,6 @@ class Stats
      */
     protected function isNumeric(array $array)
     {
-        return array_keys($array) === range(0, count($array) - 1);
+        return \array_keys($array) === range(0, \count($array) - 1);
     }
 }

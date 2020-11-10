@@ -50,4 +50,16 @@ class SendGridTest extends BaseTestClass
         );
         $this->assertSame($headers, $sg->client->getHeaders());
     }
+
+    /**
+     * Test that user can override the API version when instantiating a new SendGrid client.
+     */
+    public function testCanOverridePath()
+    {
+        $opts['version'] = '/v4';
+
+        $sg = new \SendGrid(self::$apiKey, $opts);
+
+        $this->assertEquals('/v4', $sg->client->getVersion());
+    }
 }

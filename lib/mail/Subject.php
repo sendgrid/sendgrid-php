@@ -5,6 +5,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a Subject object for the /mail/send API call
  *
@@ -38,9 +40,7 @@ class Subject implements \JsonSerializable
      */
     public function setSubject($subject)
     {
-        if (!is_string($subject)) {
-            throw new TypeException('$subject must be of type string.');
-        }
+        Assert::minLength($subject, 'subject', 1);
 
         $this->subject = $subject;
     }

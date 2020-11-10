@@ -5,6 +5,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a Substitution object for the /mail/send API call
  *
@@ -23,13 +25,13 @@ class Substitution implements \JsonSerializable
     /** @var $value string Substitution value */
     private $value;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param string|null $key   Substitution key
-	 * @param string|null $value Substitution value
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param string|null $key Substitution key
+     * @param string|null $value Substitution value
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct($key = null, $value = null)
     {
         if (isset($key)) {
@@ -46,14 +48,12 @@ class Substitution implements \JsonSerializable
      * @param string $key Substitution key
      *
      * @throws \SendGrid\Mail\TypeException
-     * @return null
      */
     public function setKey($key)
     {
-        if (!is_string($key)) {
-            throw new TypeException("The key '$key' must be of type string.");
-        }
-        $this->key = (string) $key;
+        Assert::string($key, 'key');
+
+        $this->key = $key;
     }
 
     /**
@@ -72,13 +72,18 @@ class Substitution implements \JsonSerializable
      * @param string|array|object|bool|int|float $value Substitution value
      *
      * @throws \SendGrid\Mail\TypeException
-     * @return null
      */
     public function setValue($value)
     {
-        if (!is_string($value) && !is_array($value) && !is_object($value) && !is_bool($value) && !is_numeric($value)) {
-            throw new TypeException("The value '$value' must be of type string, array, object, bool, int, or float.");
-        }
+        Assert::accept($value, 'value', static function ($val) {
+            return \is_string($val)
+                || filter_var($val, FILTER_VALIDATE_INT) !== false
+                || \is_float($val)
+                || \is_bool($val)
+                || \is_array($val)
+                || \is_object($val);
+        }, '"$value" must be an array, object, boolean, string, numeric or integer.');
+
         $this->value = $value;
     }
 

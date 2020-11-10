@@ -5,6 +5,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a Ganalytics object for the /mail/send API call
  *
@@ -25,19 +27,19 @@ class Ganalytics implements \JsonSerializable
     /** @var $utm_campaign string The name of the campaign */
     private $utm_campaign;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param bool|null   $enable       Indicates if this setting is enabled
-	 * @param string|null $utm_source   Name of the referrer source. (e.g.
-	 *                                  Google, SomeDomain.com, or Marketing Email)
-	 * @param string|null $utm_medium   Name of the marketing medium. (e.g. Email)
-	 * @param string|null $utm_term     Used to identify any paid keywords
-	 * @param string|null $utm_content  Used to differentiate your campaign from
-	 *                                  advertisements
-	 * @param string|null $utm_campaign The name of the campaign
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param bool|null   $enable       Indicates if this setting is enabled
+     * @param string|null $utm_source   Name of the referrer source. (e.g.
+     *                                  Google, SomeDomain.com, or Marketing Email)
+     * @param string|null $utm_medium   Name of the marketing medium. (e.g. Email)
+     * @param string|null $utm_term     Used to identify any paid keywords
+     * @param string|null $utm_content  Used to differentiate your campaign from
+     *                                  advertisements
+     * @param string|null $utm_campaign The name of the campaign
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct(
         $enable = null,
         $utm_source = null,
@@ -45,8 +47,7 @@ class Ganalytics implements \JsonSerializable
         $utm_term = null,
         $utm_content = null,
         $utm_campaign = null
-    )
-    {
+    ) {
         if (isset($enable)) {
             $this->setEnable($enable);
         }
@@ -76,9 +77,8 @@ class Ganalytics implements \JsonSerializable
      */
     public function setEnable($enable)
     {
-        if (!is_bool($enable)) {
-            throw new TypeException('$enable must be of type bool.');
-        }
+        Assert::boolean($enable, 'enable');
+
         $this->enable = $enable;
     }
 
@@ -102,9 +102,8 @@ class Ganalytics implements \JsonSerializable
      */
     public function setCampaignSource($utm_source)
     {
-        if (!is_string($utm_source)) {
-            throw new TypeException('$utm_source must be of type string.');
-        }
+        Assert::string($utm_source, 'utm_source');
+
         $this->utm_source = $utm_source;
     }
 
@@ -127,9 +126,8 @@ class Ganalytics implements \JsonSerializable
      */
     public function setCampaignMedium($utm_medium)
     {
-        if (!is_string($utm_medium)) {
-            throw new TypeException('$utm_medium must be of type string.');
-        }
+        Assert::string($utm_medium, 'utm_medium');
+
         $this->utm_medium = $utm_medium;
     }
 
@@ -152,9 +150,8 @@ class Ganalytics implements \JsonSerializable
      */
     public function setCampaignTerm($utm_term)
     {
-        if (!is_string($utm_term)) {
-            throw new TypeException('$utm_term must be of type string');
-        }
+        Assert::string($utm_term, 'utm_term');
+
         $this->utm_term = $utm_term;
     }
 
@@ -178,9 +175,8 @@ class Ganalytics implements \JsonSerializable
      */
     public function setCampaignContent($utm_content)
     {
-        if (!is_string($utm_content)) {
-            throw new TypeException('$utm_content must be of type string.');
-        }
+        Assert::string($utm_content, 'utm_content');
+
         $this->utm_content = $utm_content;
     }
 
@@ -203,9 +199,8 @@ class Ganalytics implements \JsonSerializable
      */
     public function setCampaignName($utm_campaign)
     {
-        if (!is_string($utm_campaign)) {
-            throw new TypeException('$utm_campaign must be of type string.');
-        }
+        Assert::string($utm_campaign, 'utm_campaign');
+
         $this->utm_campaign = $utm_campaign;
     }
 

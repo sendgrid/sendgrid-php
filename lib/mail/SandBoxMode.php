@@ -5,6 +5,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a SandBoxMode object for the /mail/send API call
  *
@@ -12,15 +14,17 @@ namespace SendGrid\Mail;
  */
 class SandBoxMode implements \JsonSerializable
 {
-    // @var bool Indicates if this setting is enabled
+    /**
+     * @var bool Indicates if this setting is enabled
+     */
     private $enable;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param bool|null $enable Indicates if this setting is enabled
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param bool|null $enable Indicates if this setting is enabled
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct($enable = null)
     {
         if (isset($enable)) {
@@ -37,9 +41,8 @@ class SandBoxMode implements \JsonSerializable
      */
     public function setEnable($enable)
     {
-        if (!is_bool($enable)) {
-            throw new TypeException('$enable must be of type bool.');
-        }
+        Assert::boolean($enable, 'enable');
+
         $this->enable = $enable;
     }
 

@@ -5,6 +5,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a BccSettings object for the /mail/send API call
  *
@@ -17,14 +19,14 @@ class BccSettings implements \JsonSerializable
     /** @var $email string The email address that you would like to receive the BCC */
     private $email;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param bool|null   $enable Indicates if this setting is enabled
-	 * @param string|null $email  The email address that you would like
-	 *                            to receive the BCC
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param bool|null   $enable Indicates if this setting is enabled
+     * @param string|null $email  The email address that you would like
+     *                            to receive the BCC
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct($enable = null, $email = null)
     {
         if (isset($enable)) {
@@ -44,9 +46,8 @@ class BccSettings implements \JsonSerializable
      */
     public function setEnable($enable)
     {
-        if (!is_bool($enable)) {
-            throw new TypeException('$enable must be of type bool.');
-        }
+        Assert::boolean($enable, 'enable');
+
         $this->enable = $enable;
     }
 
@@ -70,11 +71,8 @@ class BccSettings implements \JsonSerializable
      */
     public function setEmail($email)
     {
-        if (!EmailAddress::isValidEmailAddress($email)) {
-            throw new TypeException(
-                '$email must valid and be of type string.'
-            );
-        }
+        Assert::email($email, 'email');
+
         $this->email = $email;
     }
 
@@ -100,7 +98,7 @@ class BccSettings implements \JsonSerializable
                 'enable' => $this->getEnable(),
                 'email' => $this->getEmail()
             ],
-            function ($value) {
+            static function ($value) {
                 return $value !== null;
             }
         ) ?: null;

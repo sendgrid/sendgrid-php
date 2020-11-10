@@ -3,6 +3,8 @@
 clean:
 	@rm -rf vendor composer.lock sendgrid-php.zip
 
+php_version = `php -v | head -n 1 | cut -d " " -f 2`
+
 install: clean
 ifdef GIT_HUB_TOKEN
 	composer config -g github-oauth.github.com $(GIT_HUB_TOKEN)
@@ -19,13 +21,19 @@ ci-install: clean
 
 test:
 	vendor/bin/phpunit test/unit --filter test*
+	vendor/bin/phpcs lib/*/*
+
+ifeq ($(shell expr $(php_version) \>= 7.1), 1)
+	composer require --dev phpstan/phpstan
+	vendor/bin/phpstan analyse --no-progress --level 1 lib test
+endif
 
 test-integ: test
 	vendor/bin/phpunit test --filter test*
 
 version ?= latest
 test-docker:
-	curl -s https://raw.githubusercontent.com/sendgrid/sendgrid-oai/master/prism/prism.sh -o prism.sh
+	curl -s https://raw.githubusercontent.com/sendgrid/sendgrid-oai/HEAD/prism/prism.sh -o prism.sh
 	dependencies=lowest version=$(version) bash ./prism.sh
 	dependencies=highest version=$(version) bash ./prism.sh
 

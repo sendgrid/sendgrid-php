@@ -3,14 +3,9 @@ This documentation is based on our [OAI specification](https://github.com/sendgr
 # INITIALIZATION
 
 ```php
-require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// Comment out the above line if not using Composer
-// require("<PATH TO>/sendgrid-php.php");
-// If not using Composer, uncomment the above line and
-// download sendgrid-php.zip from the latest release here,
-// replacing <PATH TO> with the path to the sendgrid-php.php file,
-// which is included in the download:
-// https://github.com/sendgrid/sendgrid-php/releases
+<?php
+// Uncomment next line if you're not using a dependency loader (such as Composer)
+// require_once '<PATH TO>/sendgrid-php.php';
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
@@ -28,6 +23,7 @@ $sg = new \SendGrid($apiKey);
 * [CLIENTS](#clients)
 * [CONTACTDB](#contactdb)
 * [DEVICES](#devices)
+* [EMAIL ACTIVITY](#email-activity)
 * [GEO](#geo)
 * [IPS](#ips)
 * [MAIL](#mail)
@@ -1807,7 +1803,7 @@ print_r($response->headers());
 | **Device** | **Description** | **Example** |
 |---|---|---|
 | Desktop | Email software on a desktop computer. | I.E., Outlook, Sparrow, or Apple Mail. |
-| Webmail |	A web-based email client. | I.E., Yahoo, Google, AOL, or Outlook.com. |
+| Webmail | A web-based email client. | I.E., Yahoo, Google, AOL, or Outlook.com. |
 | Phone | A smartphone. | iPhone, Android, Blackberry, etc.
 | Tablet | A tablet computer. | iPad, Android based tablet, etc. |
 | Other | An unrecognized device. |
@@ -1824,6 +1820,16 @@ print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
+
+<a name="email-activity"></a>
+# EMAIL ACTIVITY
+
+## Getting Started With the Email Activity Feed API
+
+**This endpoint allows you to query your messages.**
+
+Email Activity Feed allows you to search and download a CSV of your recent email event activity. For more information on how to get started, please see our [Getting Started Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Tutorials/getting_started_email_activity_api.html).
+
 <a name="geo"></a>
 # GEO
 
@@ -2173,7 +2179,7 @@ For more detailed information about how to use the v3 Mail Send endpoint, please
 
 ### POST /mail/send
 
-This endpoint has a helper, check it out [here](https://github.com/sendgrid/sendgrid-php/blob/master/lib/helpers/mail/README.md).
+This endpoint has a helper, check it out [here](lib/helpers/mail/README.md).
 
 ```php
 $request_body = json_decode('{
@@ -3158,7 +3164,7 @@ print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
-## Remove an IP from a domain authenticaiton.
+## Remove an IP from a domain authentication.
 
 **This endpoint allows you to remove a domain's IP address from that domain's authentication.**
 
@@ -4203,7 +4209,7 @@ print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
-## Retrieve all transactional templates.
+## Retrieve all transactional templates (legacy & dynamic).
 
 **This endpoint allows you to retrieve all transactional templates.**
 
@@ -4215,7 +4221,8 @@ Transactional templates are templates created specifically for transactional ema
 
 
 ```php
-$response = $sg->client->templates()->get();
+$query_params = json_decode('{"generations": "legacy,dynamic"}');
+$response = $sg->client->templates()->get(null, $query_params);
 print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());

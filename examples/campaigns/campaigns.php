@@ -1,9 +1,8 @@
 <?php
-require 'vendor/autoload.php'; // If you're using Composer (recommended)
-// comment out the above line if not using Composer
-// require("./sendgrid-php.php"); 
-// If not using Composer, uncomment the above line
 
+// Next line will load dependencies to run this example
+// Please refer to the README how to use in your project
+require_once __DIR__ . '/../../sendgrid-php.php';
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
@@ -15,26 +14,26 @@ $sg = new \SendGrid($apiKey);
 $request_body = json_decode('{
   "categories": [
     "spring line"
-  ], 
-  "custom_unsubscribe_url": "", 
-  "html_content": "<html><head><title></title></head><body><p>Check out our spring line!</p></body></html>", 
-  "ip_pool": "marketing", 
+  ],
+  "custom_unsubscribe_url": "",
+  "html_content": "<html><head><title></title></head><body><p>Check out our spring line!</p></body></html>",
+  "ip_pool": "marketing",
   "list_ids": [
-    110, 
+    110,
     124
-  ], 
-  "plain_content": "Check out our spring line!", 
+  ],
+  "plain_content": "Check out our spring line!",
   "segment_ids": [
     110
-  ], 
-  "sender_id": 124451, 
-  "subject": "New Products for Spring!", 
-  "suppression_group_id": 42, 
+  ],
+  "sender_id": 124451,
+  "subject": "New Products for Spring!",
+  "suppression_group_id": 42,
   "title": "March Newsletter"
 }');
 
 try {
-    $response = $sg->client->campaigns()->post($request_body);    
+    $response = $sg->client->campaigns()->post($request_body);
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -49,7 +48,7 @@ try {
 $query_params = json_decode('{"limit": 1, "offset": 1}');
 
 try {
-    $response = $sg->client->campaigns()->get(null, $query_params);    
+    $response = $sg->client->campaigns()->get(null, $query_params);
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -64,16 +63,16 @@ try {
 $request_body = json_decode('{
   "categories": [
     "summer line"
-  ], 
-  "html_content": "<html><head><title></title></head><body><p>Check out our summer line!</p></body></html>", 
-  "plain_content": "Check out our summer line!", 
-  "subject": "New Products for Summer!", 
+  ],
+  "html_content": "<html><head><title></title></head><body><p>Check out our summer line!</p></body></html>",
+  "plain_content": "Check out our summer line!",
+  "subject": "New Products for Summer!",
   "title": "May Newsletter"
 }');
 $campaign_id = "test_url_param";
 
 try {
-    $response = $sg->client->campaigns()->_($campaign_id)->patch($request_body);    
+    $response = $sg->client->campaigns()->_($campaign_id)->patch($request_body);
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -88,7 +87,7 @@ try {
 $campaign_id = "test_url_param";
 
 try {
-    $response = $sg->client->campaigns()->_($campaign_id)->get();    
+    $response = $sg->client->campaigns()->_($campaign_id)->get();
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -103,7 +102,7 @@ try {
 $campaign_id = "test_url_param";
 
 try {
-    $response = $sg->client->campaigns()->_($campaign_id)->delete();    
+    $response = $sg->client->campaigns()->_($campaign_id)->delete();
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -121,7 +120,7 @@ $request_body = json_decode('{
 $campaign_id = "test_url_param";
 
 try {
-    $response = $sg->client->campaigns()->_($campaign_id)->schedules()->patch($request_body);    
+    $response = $sg->client->campaigns()->_($campaign_id)->schedules()->patch($request_body);
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -139,7 +138,7 @@ $request_body = json_decode('{
 $campaign_id = "test_url_param";
 
 try {
-    $response = $sg->client->campaigns()->_($campaign_id)->schedules()->post($request_body);    
+    $response = $sg->client->campaigns()->_($campaign_id)->schedules()->post($request_body);
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -154,7 +153,7 @@ try {
 $campaign_id = "test_url_param";
 
 try {
-    $response = $sg->client->campaigns()->_($campaign_id)->schedules()->get();    
+    $response = $sg->client->campaigns()->_($campaign_id)->schedules()->get();
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -169,7 +168,7 @@ try {
 $campaign_id = "test_url_param";
 
 try {
-    $response = $sg->client->campaigns()->_($campaign_id)->schedules()->delete();    
+    $response = $sg->client->campaigns()->_($campaign_id)->schedules()->delete();
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -184,7 +183,7 @@ try {
 $campaign_id = "test_url_param";
 
 try {
-    $response = $sg->client->campaigns()->_($campaign_id)->schedules()->now()->post();    
+    $response = $sg->client->campaigns()->_($campaign_id)->schedules()->now()->post();
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";
@@ -202,7 +201,7 @@ $request_body = json_decode('{
 $campaign_id = "test_url_param";
 
 try {
-    $response = $sg->client->campaigns()->_($campaign_id)->schedules()->test()->post($request_body);    
+    $response = $sg->client->campaigns()->_($campaign_id)->schedules()->test()->post($request_body);
     print $response->statusCode() . "\n";
     print_r($response->headers());
     print $response->body() . "\n";

@@ -5,6 +5,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a EmailAddress object for the /mail/send API call
  *
@@ -56,28 +58,6 @@ class EmailAddress implements \JsonSerializable
     }
 
     /**
-     * Validates given emailAddress against expected type and filter
-     *
-     * @param string $emailAddress The email address
-     *
-     * @return bool Result of validating the email address
-     */
-    public static function isValidEmailAddress($emailAddress)
-    {
-        //  Define additional flags for filter_var to verify unicode characters on local part
-        //  Constant FILTER_FLAG_EMAIL_UNICODE is available since PHP 7.1
-        $flags = (defined('FILTER_FLAG_EMAIL_UNICODE')) ? FILTER_FLAG_EMAIL_UNICODE : null;
-
-        //  Return result of having string type and valid emailAddress
-        //  The filter_var returns the filtered data on success
-        //  (which must be a string), otherwise bool(false)
-        return (
-            is_string($emailAddress) &&
-            is_string(filter_var($emailAddress, FILTER_VALIDATE_EMAIL, $flags))
-        );
-    }
-
-    /**
      * Add the email address to a EmailAddress object
      *
      * @param string $emailAddress The email address
@@ -86,11 +66,8 @@ class EmailAddress implements \JsonSerializable
      */
     public function setEmailAddress($emailAddress)
     {
-        if (!static::isValidEmailAddress($emailAddress)) {
-            throw new TypeException(
-                "{$emailAddress} must be valid and of type string."
-            );
-        }
+        Assert::email($emailAddress, 'emailAddress');
+
         $this->email = $emailAddress;
     }
 
@@ -123,31 +100,8 @@ class EmailAddress implements \JsonSerializable
      */
     public function setName($name)
     {
-        if (!is_string($name)) {
-            throw new TypeException('$name must be of type string.');
-        }
+        Assert::string($name, 'name');
 
-        /*
-            Issue #368
-            ==========
-            If the name is not wrapped in double quotes and contains a comma or
-            semicolon, the API fails to parse it correctly.
-            When wrapped in double quotes, commas, semicolons and unescaped single
-            quotes are supported.
-            Escaped double quotes are supported as well but will appear unescaped in
-            the mail (e.g. "O\'Keefe").
-            Double quotes will be shown in some email clients, so the name should
-            only be wrapped when necessary.
-        */
-        // Only wrap in double quote if comma or semicolon are found
-        if (false !== strpos($name, ',') || false !== strpos($name, ';')) {
-            // Unescape quotes
-            $name = stripslashes(html_entity_decode($name, ENT_QUOTES));
-            // Escape only double quotes
-            $name = str_replace('"', '\\"', $name);
-            // Wrap in double quotes
-            $name = '"' . $name . '"';
-        }
         $this->name = (!empty($name)) ? $name : null;
     }
 
@@ -172,9 +126,7 @@ class EmailAddress implements \JsonSerializable
      */
     public function setSubstitutions($substitutions)
     {
-        if (!is_array($substitutions)) {
-            throw new TypeException('$substitutions must be an array.');
-        }
+        Assert::maxItems($substitutions, 'substitutions', 10000);
 
         $this->substitutions = $substitutions;
     }
@@ -196,9 +148,8 @@ class EmailAddress implements \JsonSerializable
      */
     public function setSubject($subject)
     {
-        if (!is_string($subject)) {
-            throw new TypeException('$subject must be of type string.');
-        }
+        Assert::string($subject, 'subject');
+
         // Now that we know it is a string, we can safely create a new subject
         $this->subject = new Subject($subject);
     }
@@ -211,6 +162,17 @@ class EmailAddress implements \JsonSerializable
     public function getSubject()
     {
         return $this->subject;
+    }
+
+    /**
+     * Determine if this EmailAddress object is personalized by either
+     * containing substitutions or a specific subject.
+     *
+     * @return bool
+     */
+    public function isPersonalized()
+    {
+        return $this->getSubstitutions() || $this->getSubject();
     }
 
     /**

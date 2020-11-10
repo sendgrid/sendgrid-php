@@ -5,6 +5,8 @@
 
 namespace SendGrid\Mail;
 
+use SendGrid\Helper\Assert;
+
 /**
  * This class is used to construct a GroupId object for the /mail/send API call
  *
@@ -15,12 +17,12 @@ class GroupId implements \JsonSerializable
     /** @var $group_id int The unsubscribe group to associate with this email */
     private $group_id;
 
-	/**
-	 * Optional constructor
-	 *
-	 * @param int|null $group_id The unsubscribe group to associate with this email
-	 * @throws \SendGrid\Mail\TypeException
-	 */
+    /**
+     * Optional constructor
+     *
+     * @param int|null $group_id The unsubscribe group to associate with this email
+     * @throws \SendGrid\Mail\TypeException
+     */
     public function __construct($group_id = null)
     {
         if (isset($group_id)) {
@@ -37,9 +39,8 @@ class GroupId implements \JsonSerializable
      */
     public function setGroupId($group_id)
     {
-        if (!is_int($group_id)) {
-            throw new TypeException('$group_id must be of type int.');
-        }
+        Assert::integer($group_id, 'group_id');
+
         $this->group_id = $group_id;
     }
 
