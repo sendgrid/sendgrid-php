@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2020-11-18] Version 7.9.1
+--------------------------
+**Library - Docs**
+- [PR #980](https://github.com/sendgrid/sendgrid-php/pull/980): Incorrect links in Use Cases, section Email Stats. Thanks to [@kampalex](https://github.com/kampalex)!
+
+
 [2020-11-05] Version 7.9.0
 --------------------------
 **Library - Feature**
