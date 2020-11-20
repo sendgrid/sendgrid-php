@@ -12,7 +12,7 @@ use SendGrid\Response;
 abstract class BaseSendGridClientInterface
 {
     /** @var string SendGrid API library version */
-    const VERSION = '7.8.4';
+    const VERSION = '7.9.1';
 
     /** @var Client SendGrid HTTP Client library */
     public $client;
@@ -26,7 +26,8 @@ abstract class BaseSendGridClientInterface
      * @param string $auth Authorization header value.
      * @param string $host Default host/base URL for the client.
      * @param array $options An array of options, currently only "host", "curl",
-     *                       "version", and "impersonateSubuser", are implemented.
+     *                       "version", "verify_ssl", and "impersonateSubuser",
+     *                       are implemented.
      */
     public function __construct($auth, $host, $options = array())
     {
@@ -44,15 +45,10 @@ abstract class BaseSendGridClientInterface
             $headers[] = 'On-Behalf-Of: ' . $options['impersonateSubuser'];
         }
 
-        $curlOptions = isset($options['curl']) ? $options['curl'] : null;
+        $this->client = new Client($host, $headers, $version);
 
-        $this->client = new Client(
-            $host,
-            $headers,
-            $version,
-            null,
-            $curlOptions
-        );
+        $this->client->setCurlOptions(isset($options['curl']) ? $options['curl'] : []);
+        $this->client->setVerifySSLCerts(isset($options['verify_ssl']) ? $options['verify_ssl'] : true);
     }
 
     /**

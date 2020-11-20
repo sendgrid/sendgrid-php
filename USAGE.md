@@ -3164,7 +3164,7 @@ print $response->statusCode() . "\n";
 print $response->body() . "\n";
 print_r($response->headers());
 ```
-## Remove an IP from a domain authenticaiton.
+## Remove an IP from a domain authentication.
 
 **This endpoint allows you to remove a domain's IP address from that domain's authentication.**
 

@@ -13,7 +13,8 @@ class SendGrid extends BaseSendGridClientInterface
      *
      * @param string $apiKey Your Twilio SendGrid API Key.
      * @param array $options An array of options, currently only "host", "curl",
-     *                       "version", and "impersonateSubuser", are implemented.
+     *                       "version", "verify_ssl", and "impersonateSubuser",
+     *                       are implemented.
      */
     public function __construct($apiKey, $options = array())
     {

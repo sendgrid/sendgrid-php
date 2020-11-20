@@ -28,7 +28,7 @@ class FilesExistTest extends TestCase
         $this->assertFileExists("$rootDir/.travis.yml");
         $this->assertFileExists("$rootDir/CHANGELOG.md");
         $this->assertFileExists("$rootDir/CODE_OF_CONDUCT.md");
-        $this->assertFileExists("$rootDir/LICENSE.md");
+        $this->assertFileExists("$rootDir/LICENSE");
         $this->assertFileExists("$rootDir/README.md");
         $this->assertFileExists("$rootDir/TROUBLESHOOTING.md");
         $this->assertFileExists("$rootDir/USAGE.md");

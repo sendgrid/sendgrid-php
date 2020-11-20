@@ -14,7 +14,8 @@ class TwilioEmail extends BaseSendGridClientInterface
      * @param string $username Username to authenticate with
      * @param string $password Password to authenticate with
      * @param array $options An array of options, currently only "host", "curl",
-     *                       "version", and "impersonateSubuser", are implemented.
+     *                       "version", "verify_ssl", and "impersonateSubuser",
+     *                       are implemented.
      */
     public function __construct($username, $password, $options = array())
     {
