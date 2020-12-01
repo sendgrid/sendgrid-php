@@ -1469,9 +1469,9 @@ Find more information about all of Twilio SendGrid's authentication related docu
 <a name="email-stats"></a>
 # How to View Email Statistics
 
-You can find documentation for how to view your email statistics via the UI [here](https://app.example.com/statistics) and via API [here](USAGE.md#stats).
+You can find documentation for how to view your email statistics via the UI [here](https://app.sendgrid.com/statistics) and via API [here](USAGE.md#stats).
 
-Alternatively, we can post events to a URL of your choice via our [Event Webhook](https://example.com/docs/API_Reference/Webhooks/event.html) about events that occur as Twilio SendGrid processes your email.
+Alternatively, we can post events to a URL of your choice via our [Event Webhook](https://sendgrid.com/docs/for-developers/tracking-events/event/) about events that occur as Twilio SendGrid processes your email.
 
 <a name="email-activity"></a>
 # How to Use the Email Activity Feed API
