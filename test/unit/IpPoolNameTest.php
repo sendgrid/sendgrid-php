@@ -2,7 +2,7 @@
 /**
  * This file tests IpPoolName.
  */
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\IpPoolName;

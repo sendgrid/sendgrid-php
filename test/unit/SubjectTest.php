@@ -3,7 +3,7 @@
  * This file tests Subject.
  */
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
 
 use SendGrid\Mail\Subject;
 use PHPUnit\Framework\TestCase;

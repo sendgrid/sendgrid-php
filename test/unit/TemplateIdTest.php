@@ -3,7 +3,7 @@
  * This file tests TemplateId.
  */
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
 
 use SendGrid\Mail\TemplateId;
 use PHPUnit\Framework\TestCase;

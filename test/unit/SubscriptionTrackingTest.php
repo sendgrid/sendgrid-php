@@ -3,7 +3,7 @@
  * This file tests SubscriptionTracking.
  */
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
 
 use SendGrid\Mail\SubscriptionTracking;
 use PHPUnit\Framework\TestCase;

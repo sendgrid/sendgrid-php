@@ -2,7 +2,7 @@
 /**
  * This file tests BypassListManagement.
  */
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\BypassListManagement;

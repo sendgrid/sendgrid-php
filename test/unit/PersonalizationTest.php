@@ -3,7 +3,7 @@
  * This file tests Personalization.
  */
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
 
 use SendGrid\Mail\Personalization;
 use SendGrid\Mail\To;

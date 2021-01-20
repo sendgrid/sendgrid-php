@@ -3,7 +3,7 @@
  * This file tests OpenTracking.
  */
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
 
 use SendGrid\Mail\OpenTracking;
 use PHPUnit\Framework\TestCase;

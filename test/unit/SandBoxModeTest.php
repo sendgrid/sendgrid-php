@@ -3,7 +3,7 @@
  * This file tests SandBoxMode.
  */
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
 
 use SendGrid\Mail\SandBoxMode;
 use PHPUnit\Framework\TestCase;
