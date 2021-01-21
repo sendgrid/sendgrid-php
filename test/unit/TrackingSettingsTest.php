@@ -3,7 +3,7 @@
  * This file tests TrackingSettings.
  */
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
 
 use SendGrid\Mail\TrackingSettings;
 use SendGrid\Mail\ClickTracking;

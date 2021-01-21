@@ -3,7 +3,7 @@
  * This file tests SpamCheck.
  */
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
 
 use SendGrid\Mail\SpamCheck;
 use PHPUnit\Framework\TestCase;

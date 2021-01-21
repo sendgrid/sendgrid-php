@@ -3,7 +3,7 @@
  * This file tests Section.
  */
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
 
 use SendGrid\Mail\Section;
 use PHPUnit\Framework\TestCase;

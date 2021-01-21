@@ -3,7 +3,7 @@
  * This file tests PlainTextContent.
  */
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
 
 use SendGrid\Mail\PlainTextContent;
 use PHPUnit\Framework\TestCase;

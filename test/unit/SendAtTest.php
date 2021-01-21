@@ -3,7 +3,7 @@
  * This file tests SendAt.
  */
 
-namespace SendGrid\Tests;
+namespace SendGrid\Tests\Unit;
 
 use SendGrid\Mail\SendAt;
 use PHPUnit\Framework\TestCase;
