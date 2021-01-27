@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2021-01-27] Version 7.9.2
+--------------------------
+**Library - Fix**
+- [PR #1030](https://github.com/sendgrid/sendgrid-php/pull/1030): Fixing namespace for classes on test/unit folder. Thanks to [@peter279k](https://github.com/peter279k)!
+
+
 [2020-11-18] Version 7.9.1
 --------------------------
 **Library - Docs**
