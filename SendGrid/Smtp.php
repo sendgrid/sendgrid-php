@@ -13,6 +13,7 @@ class Smtp extends Api implements MailInterface
   private $swift_instances = array();
   protected $port;
 
+  // TODO: Convert to API key
   public function __construct($username, $password)
   {
     require_once ROOT_DIR . 'lib/swift/swift_required.php';

@@ -12,35 +12,30 @@ class Web extends Api implements MailInterface
    * __construct
    * Create a new Web instance
    */
-  public function __construct($username, $password)
+  public function __construct($apiKey)
   {
     call_user_func_array("parent::__construct", func_get_args());
   }
 
   /**
-   * _prepMessageData
-   * Takes the mail message and returns a url friendly querystring
+   * Takes the mail message and returns query parameters for the SendGrid send mail request
    * @param  Mail   $mail [description]
-   * @return String - the data query string to be posted
+   * @return array Query parameters
    */
   protected function _prepMessageData(Mail $mail)
   {
-
     /* the api expects a 'to' parameter, but this parameter will be ignored
      * since we're sending the recipients through the header. The from
      * address will be used as a placeholder.
      */
-    $params =
-    array(
-      'api_user'  => $this->username,
-      'api_key'   => $this->password,
+    $params = [
       'subject'   => $mail->getSubject(),
       'html'      => $mail->getHtml(),
       'text'      => $mail->getText(),
       'from'      => $mail->getFrom(),
       'to'        => $mail->getFrom(),
       'x-smtpapi' => $mail->getHeadersJson()
-    );
+    ];
 
     if(($fromname = $mail->getFromName())) {
       $params['fromname'] = $fromname;
@@ -127,8 +122,9 @@ class Web extends Api implements MailInterface
     $session = curl_init($request);
     curl_setopt ($session, CURLOPT_POST, true);
     curl_setopt ($session, CURLOPT_POSTFIELDS, $data);
+      curl_setopt($session, CURLOPT_HEADER, true);
 
-    curl_setopt($session, CURLOPT_HEADER, false);
+    curl_setopt($session, CURLOPT_HTTPHEADER, ['Authorization: Bearer ' . $this->apiKey]);
     curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
     //curl_setopt($session, CURLINFO_HEADER_OUT, true);
 

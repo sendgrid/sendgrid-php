@@ -4,14 +4,12 @@ namespace SendGrid;
 
 class Api
 {
-  
-  protected $username,
-            $password;
+  /** @var string Sendgrid API key with full 'Mail Send' permissions. */
+  protected $apiKey;
 
-  public function __construct($username, $password)
+  public function __construct($apiKey)
   {
-    $this->username = $username;
-    $this->password = $password;
+    $this->apiKey = $apiKey;
   }
 
 }

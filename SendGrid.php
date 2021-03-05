@@ -2,18 +2,17 @@
 
 class SendGrid
 {
-  protected $namespace = "SendGrid",
-            $username,
-            $password;
+  protected $namespace = "SendGrid";
+  /** @var string Sendgrid API key. */
+  protected $apiKey;
 
   // Available transport mechanisms
   protected $web,
             $smtp;
   
-  public function __construct($username, $password)
+  public function __construct($apiKey)
   {
-    $this->username = $username;
-    $this->password = $password;
+    $this->apiKey = $apiKey;
   }
 
   public function __get($api)
@@ -35,8 +34,7 @@ class SendGrid
     }
     require_once $file;
 
-    $this->$name = new $api($this->username, $this->password);
+    $this->$name = new $api($this->apiKey);
     return $this->$name;
   }
-
 }
