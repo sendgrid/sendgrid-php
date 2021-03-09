@@ -2,6 +2,14 @@
 
 namespace SendGrid;
 
+/**
+ * @deprecated
+ * Class Web
+ * Send an email through SendGrid using it's v2 API.
+ *
+ * @see https://www.twilio.com/docs/sendgrid/api/v2/mail#sending-email
+ * @package SendGrid
+ */
 class Web extends Api implements MailInterface
 {
 
@@ -122,8 +130,7 @@ class Web extends Api implements MailInterface
     $session = curl_init($request);
     curl_setopt ($session, CURLOPT_POST, true);
     curl_setopt ($session, CURLOPT_POSTFIELDS, $data);
-      curl_setopt($session, CURLOPT_HEADER, true);
-
+    curl_setopt($session, CURLOPT_HEADER, true);
     curl_setopt($session, CURLOPT_HTTPHEADER, ['Authorization: Bearer ' . $this->apiKey]);
     curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
     //curl_setopt($session, CURLINFO_HEADER_OUT, true);
