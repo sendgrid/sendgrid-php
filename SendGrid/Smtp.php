@@ -7,8 +7,6 @@ namespace SendGrid;
  * Class Smtp
  * Send a SendGrid email using SendGrid's SMTP transport
  *
- * In production
- *
  * @package SendGrid
  */
 class Smtp extends Api implements MailInterface
