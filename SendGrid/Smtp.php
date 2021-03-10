@@ -2,6 +2,15 @@
 
 namespace SendGrid;
 
+/**
+ * @deprecated
+ * Class Smtp
+ * Send a SendGrid email using SendGrid's SMTP transport
+ *
+ * In production
+ *
+ * @package SendGrid
+ */
 class Smtp extends Api implements MailInterface
 {
   //the available ports
@@ -13,8 +22,12 @@ class Smtp extends Api implements MailInterface
   private $swift_instances = array();
   protected $port;
 
-  // TODO: Convert to API key
-  public function __construct($username, $password)
+  /* SendGrid SMTP v2 API requires user_name to be set to 'apikey'.
+   * @see https://sendgrid.com/docs/for-developers/sending-email/upgrade-your-authentication-method-to-api-keys/
+   */
+  const USER_NAME = 'apikey';
+
+  public function __construct($apiKey)
   {
     require_once ROOT_DIR . 'lib/swift/swift_required.php';
     call_user_func_array("parent::__construct", func_get_args());
@@ -44,8 +57,8 @@ class Smtp extends Api implements MailInterface
     if (!isset($this->swift_instances[$port]))
     {
       $transport = \Swift_SmtpTransport::newInstance('smtp.sendgrid.net', $port);
-      $transport->setUsername($this->username);
-      $transport->setPassword($this->password);
+      $transport->setUsername(self::USER_NAME);
+      $transport->setPassword($this->apiKey);
 
       $swift = \Swift_Mailer::newInstance($transport);
 
