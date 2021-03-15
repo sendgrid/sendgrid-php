@@ -174,8 +174,6 @@ try {
 <a name="announcements"></a>
 # Announcements
 
-Our Developer Experience team is conducting planned maintenance from 03/09/2021 until 03/11/2021. Our next release is scheduled for 03/15/2021.
-
 v7 has been released! Please see the [release notes](https://github.com/sendgrid/sendgrid-php/releases/tag/v7.0.0) for details.
 
 All updates to this library are documented in our [CHANGELOG](CHANGELOG.md) and [releases](https://github.com/sendgrid/sendgrid-php/releases). You may also subscribe to email [release notifications](https://dx.sendgrid.com/newsletter/php) for releases and breaking changes.
