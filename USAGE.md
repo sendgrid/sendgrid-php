@@ -1034,6 +1034,8 @@ If you do not define any query parameters, this endpoint will return a sum for e
 
 Categories allow you to group your emails together according to broad topics that you define. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/categories.html).
 
+Note: Category statistics are available for the previous thirteen months only.
+
 ### GET /categories/stats/sums
 
 
