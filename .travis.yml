@@ -1,22 +1,17 @@
 language: php
-
 services:
-  - docker
-
+- docker
 script:
-  - make test-docker
-
+- make test-docker
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
-
+- bash <(curl -s https://codecov.io/bash)
 env:
-  - version=5.6
-  - version=7.0
-  - version=7.1
-  - version=7.2
-  - version=7.3
-  - version=7.4
-
+- version=5.6
+- version=7.0
+- version=7.1
+- version=7.2
+- version=7.3
+- version=7.4
 notifications:
   slack:
     if: branch = main
@@ -24,4 +19,4 @@ notifications:
     on_success: never
     on_failure: change
     rooms:
-      - secure: R9JCklL/+TTher3FyJ2h3jFCnxkMHF8T9FszoOLfZeIR1hNADN9wqsLu8bItuKr3hcLzzR/1dG/rDQnHH2TmYuen0VSXBNoN/D1qGJPGayRrsAAUQXrcI9YVwdGwIcuoszM1GYFh3kQRf7RztUJeIw4P6Hl5WQyQC27UmflHK/M=
+      secure: ROIw8lajCv1VMBi5n0YVIc5Zr9gJYbget6RtjGVkC4tOmmN0B3AXYag7+kGzBeWRzgciWq4RwgzKLifAnHv8at57iYr3E7BoqeLRM82zXF8DLt0BEHTKjOcKKTcERUwEe19KtVgdkgEKNfbzKSs9/NleNncno1hxW67tiekCuz4=
