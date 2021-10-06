@@ -20,6 +20,8 @@ class Personalization implements \JsonSerializable
 {
     /** @var $tos To[] objects */
     private $tos;
+    /** @var $from From object */
+    private $from;
     /** @var $ccs Cc[] objects */
     private $ccs;
     /** @var $bccs Bcc[] objects */
@@ -57,6 +59,26 @@ class Personalization implements \JsonSerializable
     public function getTos()
     {
         return $this->tos;
+    }
+
+    /**
+     * Add a From object to a Personalization object
+     *
+     * @param From $email From object
+     */
+    public function addFrom($email)
+    {
+        $this->from = $email;
+    }
+
+    /**
+     * Retrieve From object from a Personalization object
+     *
+     * @return From|null
+     */
+    public function getFrom()
+    {
+        return $this->from;
     }
 
     /**
@@ -290,6 +312,7 @@ class Personalization implements \JsonSerializable
         return array_filter(
             [
                 'to' => $this->getTos(),
+                'from' => $this->getFrom(),
                 'cc' => $this->getCcs(),
                 'bcc' => $this->getBccs(),
                 'subject' => $this->getSubject(),

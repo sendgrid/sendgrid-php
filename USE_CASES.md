@@ -1062,6 +1062,92 @@ try {
 }
 ```
 
+<a name="multiple-email-personalizations"></a>
+# Send Multiple Emails with Personalizations
+
+```php
+<?php
+// Uncomment next line if you're not using a dependency loader (such as Composer)
+// require_once '<PATH TO>/sendgrid-php.php';
+
+use SendGrid\Mail\From;
+use SendGrid\Mail\Mail;
+use SendGrid\Mail\Personalization;
+use SendGrid\Mail\Subject;
+use SendGrid\Mail\To;
+
+$from = new From("test@example.com", "Twilio Sendgrid");
+$to = new To(
+    "test+test1@example.com",
+    "Example User1",
+    [
+        '-name-' => 'Example User 1'
+    ],
+    "Example User1 -name-"
+ );
+$subject = new Subject("Hello from Twilio Sendgrid!");
+$plainTextContent = new PlainTextContent(
+    "How's it going -name-?"
+);
+$htmlContent = new HtmlContent(
+    "<strong>How's it going -name-?</strong>"
+);
+$email = new Mail($from, $to, $subject, $plainTextContent, $htmlContent);
+
+$personalization0 = new Personalization();
+$personalization0->addTo(new To(
+        "test+test2@example.com",
+        "Example User2",
+        [
+            '-name-' => 'Example User 2'
+        ],
+        "Example User2 -name-"
+));
+$personalization0->addTo(new To(
+        "test+test3@example.com",
+        "Example User3",
+        [
+            '-name-' => 'Example User 3'
+        ],
+        "Example User3 -name-"
+));
+$personalization0->setSubject(new Subject("Hello from Twilio Sendgrid!"));
+$email->addPersonalization($personalization0);
+
+$personalization1 = new Personalization();
+$personalization1->addTo(new To(
+        "test+test3@example.com",
+        "Example User4",
+        [
+            '-name-' => 'Example User 4'
+        ],
+        "Example User4 -name-"
+));
+$personalization1->addTo(new To(
+        "test+test4@example.com",
+        "Example User5",
+        [
+            '-name-' => 'Example User 5'
+        ],
+        "Example User5 -name-"
+));
+$personalization1->addFrom(new From(
+    "test5@example.com" => "Twilio"
+))
+$personalization1->setSubject(new Subject("Hello from Twilio!"));
+$mail->addPersonalization($personalization1);
+
+$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+try {
+    $response = $sendgrid->send($email);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: '.  $e->getMessage(). "\n";
+}
+```
+
 <a name="transactional-templates"></a>
 # Transactional Templates
 

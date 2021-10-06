@@ -5,6 +5,7 @@
 
 namespace SendGrid\Tests\Unit;
 
+use SendGrid\Mail\From;
 use SendGrid\Mail\Personalization;
 use SendGrid\Mail\To;
 use SendGrid\Mail\Cc;
@@ -28,6 +29,14 @@ class PersonalizationTest extends TestCase
         $personalization->addTo(new To('dx@sendgrid.com'));
 
         $this->assertSame('dx@sendgrid.com', $personalization->getTos()[0]->getEmail());
+    }
+
+    public function testAddFrom()
+    {
+        $personalization = new Personalization();
+        $personalization->addFrom(new From('dx@sendgrid.com'));
+
+        $this->assertSame('dx@sendgrid.com', $personalization->getFrom()->getEmail());
     }
 
     public function testAddCc()

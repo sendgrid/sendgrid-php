@@ -34,7 +34,7 @@ use SendGrid\Mail\ReplyTo;
 function helloEmail()
 {
     try {
-        $from = new From("test@example.com");
+        $from = new From("test@example.com", "Twilio Sendgrid");
         $subject = "Hello World from the Twilio SendGrid PHP Library";
         $to = new To("test@example.com");
         $content = new Content("text/plain", "some text here");
@@ -42,6 +42,7 @@ function helloEmail()
 
         $personalization = new Personalization();
         $personalization->addTo(new To("test2@example.com"));
+        $personalization->addFrom(new From("test@example.com", "Twilio Sendgrid"));
         $mail->addPersonalization($personalization);
 
         //echo json_encode($mail, JSON_PRETTY_PRINT), "\n";
@@ -65,6 +66,7 @@ function kitchenSink()
 
         $personalization0 = new Personalization();
         $personalization0->addTo(new To("test2@example.com", "Example User"));
+        $personalization0->addFrom(new From("test@example.com", "Twilio SendGrid"));
         $personalization0->addCc(new Cc("test3@example.com", "Example User"));
         $personalization0->addCc(new Cc("test4@example.com", "Example User"));
         $personalization0->addBcc(new Bcc("test5@example.com", "Example User"));
@@ -83,6 +85,7 @@ function kitchenSink()
         $personalization1 = new Personalization();
         $personalization1->addTo(new To("test7@example.com", "Example User"));
         $personalization1->addTo(new To("test8@example.com", "Example User"));
+        $personalization1->addFrom(new From("test@example.com", "Twilio SendGrid"));
         $personalization1->addCc(new Cc("test9@example.com", "Example User"));
         $personalization1->addCc(new Cc("test10@example.com", "Example User"));
         $personalization1->addBcc(new Bcc("test11@example.com", "Example User"));
