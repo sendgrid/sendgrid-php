@@ -9,6 +9,7 @@ This documentation provides examples for specific use cases. Please [open an iss
 - [Send an Email to a Single Recipient](#send-an-email-to-a-single-recipient)
 - [Send an Email to Multiple Recipients](#send-an-email-to-multiple-recipients)
 - [Send Multiple Emails to Multiple Recipients](#send-multiple-emails-to-multiple-recipients)
+- [Send Multiple Emails with Personalizations](#multiple-email-personalizations)
 - [Transactional Templates](#transactional-templates)
 - [Legacy Templates](#legacy-templates)
 - [Send an Email With Twilio Email (Pilot)](#send-an-email-with-twilio-email-pilot)
