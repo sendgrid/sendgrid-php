@@ -17,6 +17,7 @@ If you can't find a solution below, please open an [issue](https://github.com/se
 - [Fixing Error 415](#fixing-error-415)
 - [Viewing the Request Body](#viewing-the-request-body)
 - [Google App Engine installation](#google-app-engine-installation)
+- [Verifying Event Webhooks](#signed-webhooks)
 
 <a name="migrating"></a>
 ## Migrating from v2 to v3
@@ -130,3 +131,14 @@ echo json_encode($email, JSON_PRETTY_PRINT);
 ## Google App Engine installation
 
 Please refer to [`USE_CASES.md`](USE_CASES.md#GAE-instructions) for additional instructions.
+
+<a name="signed-webhooks"></a>
+## Signed Webhook Verification
+
+Twilio SendGrid's Event Webhook will notify a URL via HTTP POST with information about events that occur as your mail is processed. [This](https://docs.sendgrid.com/for-developers/tracking-events/getting-started-event-webhook-security-features) article covers all you need to know to secure the Event Webhook, allowing you to verify that incoming requests originate from Twilio SendGrid. The sendgrid-php library can help you verify these Signed Event Webhooks.
+
+You can find the usage example [here](examples/helpers/eventwebhook/example.php) and the tests [here](test/unit/EventWebhookTest.php). 
+If you are still having trouble getting the validation to work, follow the following instructions:
+- Be sure to use the *raw* payload for validation
+- Be sure to include a trailing carriage return and newline in your payload
+- In case of multi-event webhooks, make sure you include the trailing newline and carriage return after *each* event
