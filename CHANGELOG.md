@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2021-10-18] Version 7.10.0
+---------------------------
+**Library - Feature**
+- [PR #1061](https://github.com/sendgrid/sendgrid-php/pull/1061): allow personalization of the From name and email for each email recipient. Thanks to [@beebzz](https://github.com/beebzz)!
+
+**Library - Docs**
+- [PR #1060](https://github.com/sendgrid/sendgrid-php/pull/1060): improve signed webhook event validation docs. Thanks to [@shwetha-manvinkurke](https://github.com/shwetha-manvinkurke)!
+
+
 [2021-01-27] Version 7.9.2
 --------------------------
 **Library - Fix**
