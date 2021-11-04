@@ -20,7 +20,10 @@ use SendGrid\Mail\Asm;
 use SendGrid\Mail\MailSettings;
 use SendGrid\Mail\BccSettings;
 use SendGrid\Mail\SandBoxMode;
+use SendGrid\Mail\BypassBounceManagement;
 use SendGrid\Mail\BypassListManagement;
+use SendGrid\Mail\BypassSpamManagement;
+use SendGrid\Mail\BypassUnsubscribeManagement;
 use SendGrid\Mail\Footer;
 use SendGrid\Mail\SpamCheck;
 use SendGrid\Mail\TrackingSettings;
@@ -158,9 +161,20 @@ function kitchenSink()
         $sandbox_mode = new SandBoxMode();
         $sandbox_mode->setEnable(true);
         $mail_settings->setSandboxMode($sandbox_mode);
+        // Note: Bypass Spam, Bounce, and Unsubscribe management cannot
+        // be combined with Bypass List Management
+        $bypass_bounce_management = new BypassBounceManagement();
+        $bypass_bounce_management->setEnable(true);
+        $mail_settings->setBypassBounceManagement($bypass_bounce_management);
         $bypass_list_management = new BypassListManagement();
         $bypass_list_management->setEnable(true);
         $mail_settings->setBypassListManagement($bypass_list_management);
+        $bypass_spam_management = new BypassSpamManagement();
+        $bypass_spam_management->setEnable(true);
+        $mail_settings->setBypassSpamManagement($bypass_spam_management);
+        $bypass_unsubscribe_management = new BypassUnsubscribeManagement();
+        $bypass_unsubscribe_management->setEnable(true);
+        $mail_settings->setBypassUnsubscribeManagement($bypass_unsubscribe_management);
         $footer = new Footer();
         $footer->setEnable(true);
         $footer->setText("Footer Text");

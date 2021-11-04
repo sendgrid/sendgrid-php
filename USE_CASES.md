@@ -450,7 +450,12 @@ $email->setIpPoolName("23");
 
 // Mail Settings
 $email->setBccSettings(true, "bcc@example.com");
+// Note: Bypass Spam, Bounce, and Unsubscribe management cannot
+// be combined with Bypass List Management
+$email->enableBypassBounceManagement();
 $email->enableBypassListManagement();
+$email->enableBypassSpamManagement();
+$email->enableBypassUnsubscribeManagement();
 //$email->disableBypassListManagement();
 $email->setFooter(true, "Footer", "<strong>Footer</strong>");
 $email->enableSandBoxMode();
@@ -498,7 +503,10 @@ use SendGrid\Mail\Attachment;
 use SendGrid\Mail\BatchId;
 use SendGrid\Mail\Bcc;
 use SendGrid\Mail\BccSettings;
+use SendGrid\Mail\BypassBounceManagement;
 use SendGrid\Mail\BypassListManagement;
+use SendGrid\Mail\BypassSpamManagement;
+use SendGrid\Mail\BypassUnsubscribeManagement;
 use SendGrid\Mail\Category;
 use SendGrid\Mail\Cc;
 use SendGrid\Mail\ClickTracking;
@@ -712,9 +720,24 @@ $mail_settings = new MailSettings();
 $mail_settings->setBccSettings(
     new BccSettings(true, "bcc@example.com")
 );
+
+// Note: Bypass Spam, Bounce, and Unsubscribe management cannot
+// be combined with Bypass List Management
+$mail_settings->setBypassBounceManagement(
+    new BypassBounceManagement(true)
+);
+$mail_settings->setBypassSpamManagement(
+    new BypassSpamManagement(true)
+);
+$mail_settings->setBypassUnsubscribeManagement(
+    new BypassUnsubscribeManagement(true)
+);
+
+// OR
 $mail_settings->setBypassListManagement(
     new BypassListManagement(true)
 );
+
 $mail_settings->setFooter(
     new Footer(true, "Footer", "<strong>Footer</strong>")
 );
