@@ -738,7 +738,6 @@ $mail_settings->setBypassListManagement(
     new BypassListManagement(true)
 );
 
-
 $mail_settings->setFooter(
     new Footer(true, "Footer", "<strong>Footer</strong>")
 );
