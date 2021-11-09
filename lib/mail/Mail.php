@@ -1951,6 +1951,7 @@ class Mail implements \JsonSerializable
      * @return null|array
      * @throws TypeException
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         // Detect if we are using the new dynamic templates
