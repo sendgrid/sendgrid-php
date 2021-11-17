@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2021-11-17] Version 7.11.0
+---------------------------
+**Library - Feature**
+- [PR #1065](https://github.com/sendgrid/sendgrid-php/pull/1065): add spam, bounce and unsubscribe bypass management filters. Thanks to [@shwetha-manvinkurke](https://github.com/shwetha-manvinkurke)!
+
+
 [2021-10-18] Version 7.10.0
 ---------------------------
 **Library - Feature**
