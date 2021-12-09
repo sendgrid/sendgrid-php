@@ -299,6 +299,7 @@ class Personalization implements \JsonSerializable
      *
      * @return null|array
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         if ($this->getHasDynamicTemplate()) {
