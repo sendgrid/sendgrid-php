@@ -8,6 +8,8 @@
 
 namespace SendGrid\Helper;
 
+use Egulias\EmailValidator\EmailLexer;
+use Egulias\EmailValidator\Validation\RFCValidation;
 use SendGrid\Mail\TypeException;
 
 class Assert
@@ -47,11 +49,7 @@ class Assert
     {
         static::string($value, $property, $message);
 
-        //  Define additional flags for filter_var to verify unicode characters on local part
-        //  Constant FILTER_FLAG_EMAIL_UNICODE is available since PHP 7.1
-        $flags = (defined('FILTER_FLAG_EMAIL_UNICODE')) ? FILTER_FLAG_EMAIL_UNICODE : null;
-
-        if (filter_var($value, FILTER_VALIDATE_EMAIL, $flags) === false) {
+        if ((new RFCValidation())->isValid($value, new EmailLexer()) === false) {
             $message = sprintf(
                 $message ?: '"$%s" must be a valid email address. Got: %s',
                 $property,
