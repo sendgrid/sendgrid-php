@@ -49,7 +49,7 @@ class Assert
     {
         static::string($value, $property, $message);
 
-        if (!(new RFCValidation())->isValid($value, new EmailLexer())) {
+        if ((new RFCValidation())->isValid($value, new EmailLexer()) === false) {
             $message = sprintf(
                 $message ?: '"$%s" must be a valid email address. Got: %s',
                 $property,

@@ -41,6 +41,14 @@ class AssertTest extends TestCase
         Assert::email('test', 'test');
     }
 
+    public function testEmailThrowExceptionWithNonRFCFormatWithDefaultMessage()
+    {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessage('"$test" must be a valid email address. Got: test');
+
+        Assert::email('test sd@test.es', 'test');
+    }
+
     public function testEmailThrowExceptionWithCustomMessage()
     {
         $this->expectException(TypeException::class);
