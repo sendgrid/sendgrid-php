@@ -19,7 +19,8 @@
     "ext-curl": "*",
     "ext-json": "*",
     "ext-mbstring": "*",
-    "ext-openssl": "*"
+    "ext-openssl": "*",
+    "egulias/email-validator": "^2.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^5.7.9 || ^6.4.3",
