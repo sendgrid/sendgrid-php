@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2022-01-12] Version 7.11.2
+---------------------------
+**Library - Chore**
+- [PR #1074](https://github.com/sendgrid/sendgrid-php/pull/1074): update license year. Thanks to [@JenniferMah](https://github.com/JenniferMah)!
+
+
 [2021-12-15] Version 7.11.1
 ---------------------------
 **Library - Fix**
