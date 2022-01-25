@@ -18,6 +18,12 @@ jobs:
       matrix:
         php: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4]
     steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_AUTH_TOKEN }}
+
       - uses: actions/checkout@v2
       - name: Run Unit Tests
         run: make test-docker version=${{ matrix.php }}
