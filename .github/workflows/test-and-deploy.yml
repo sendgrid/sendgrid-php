@@ -30,13 +30,21 @@ jobs:
       - name: Run Unit Tests
         run: make test-docker version=${{ matrix.php }}
 
-    deploy:
-      name: Deploy
-      if: success() && github.ref_type == 'tag'
-      needs: [ test ]
-      steps:
-        - name: Create GitHub Release
+  deploy:
+    name: Deploy
+    if: success() && github.ref_type == 'tag'
+    needs: [ test ]
+    steps:
+      - name: Checkout sendgrid-php
+        uses: actions/checkout@v2
+
+      - name: Build artifacts
+        run: make bundle
+
+      - name: Create GitHub Release
         uses: sendgrid/dx-automator/actions/release@main
+        with:
+          assets: sendgrid-php.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
