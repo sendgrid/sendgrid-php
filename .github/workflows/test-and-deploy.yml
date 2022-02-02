@@ -39,7 +39,7 @@ jobs:
       - name: Checkout sendgrid-php
         uses: actions/checkout@v2
 
-      - name: Build artifacts
+      - name: Build Release Artifacts
         run: make bundle
 
       - name: Create GitHub Release
