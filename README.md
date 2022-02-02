@@ -12,7 +12,6 @@
 
 **The default branch name for this repository has been changed to `main` as of 07/27/2020.**
 
-- Subscribe to email [notifications](https://dx.sendgrid.com/newsletter/php) for releases and breaking changes.
 - Send SMS messages with [Twilio](USE_CASES.md#sms).
 
 **This library allows you to quickly and easily use the Twilio SendGrid Web API v3 via PHP.**
@@ -175,7 +174,7 @@ try {
 
 v7 has been released! Please see the [release notes](https://github.com/sendgrid/sendgrid-php/releases/tag/v7.0.0) for details.
 
-All updates to this library are documented in our [CHANGELOG](CHANGELOG.md) and [releases](https://github.com/sendgrid/sendgrid-php/releases). You may also subscribe to email [release notifications](https://dx.sendgrid.com/newsletter/php) for releases and breaking changes.
+All updates to this library are documented in our [CHANGELOG](CHANGELOG.md) and [releases](https://github.com/sendgrid/sendgrid-php/releases).
 
 <a name="contribute"></a>
 # How to Contribute
