@@ -1,6 +1,6 @@
 ![SendGrid Logo](twilio_sendgrid_logo.png)
 
-[![Tests](https://github.com/sendgrid/sendgrid-php/actions/workflows/test-and-deploy.yml/badge.svg)](https://github.com/sendgrid/sendgrid-php/actions/workflows/test-and-deploy.yml)
+[![BuildStatus](https://github.com/sendgrid/sendgrid-php/actions/workflows/test-and-deploy.yml/badge.svg)](https://github.com/sendgrid/sendgrid-php/actions/workflows/test-and-deploy.yml)
 [![Packagist](https://img.shields.io/packagist/v/sendgrid/sendgrid.svg)](https://packagist.org/packages/sendgrid/sendgrid)
 [![Downloads](https://img.shields.io/packagist/dt/sendgrid/sendgrid.svg?maxAge=3600)](https://packagist.org/packages/sendgrid/sendgrid)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
