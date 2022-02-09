@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2022-02-09] Version 7.11.4
+---------------------------
+**Library - Chore**
+- [PR #1079](https://github.com/sendgrid/sendgrid-php/pull/1079): add deploy job to test and deploy gh workflow. Thanks to [@Hunga1](https://github.com/Hunga1)!
+
+
 [2022-01-26] Version 7.11.3
 ---------------------------
 **Library - Chore**
