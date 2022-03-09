@@ -12,7 +12,7 @@ use SendGrid\Response;
 abstract class BaseSendGridClientInterface
 {
     /** @var string SendGrid API library version */
-    const VERSION = '7.11.4';
+    const VERSION = '7.11.5';
 
     /** @var Client SendGrid HTTP Client library */
     public $client;
