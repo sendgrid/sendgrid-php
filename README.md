@@ -10,8 +10,6 @@
 
 **NEW:**
 
-**The default branch name for this repository has been changed to `main` as of 07/27/2020.**
-
 - Send SMS messages with [Twilio](USE_CASES.md#sms).
 
 **This library allows you to quickly and easily use the Twilio SendGrid Web API v3 via PHP.**
