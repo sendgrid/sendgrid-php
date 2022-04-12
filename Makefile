@@ -34,4 +34,4 @@ test-docker:
 	dependencies=highest version=$(version) bash ./prism.sh
 
 bundle: ci-install
-	zip -r sendgrid-php.zip . -x \*.git\* \*composer.json\* \*scripts\* \*test\* \*.travis.yml\* \*prism\*
+	zip -r sendgrid-php.zip . -x \*.git\* \*composer.json\* \*scripts\* \*test\* \*prism\*
