@@ -2,10 +2,12 @@
 /**
  * This file tests BatchId.
  */
+
 namespace SendGrid\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\BatchId;
+use SendGrid\Mail\TypeException;
 
 /**
  * This file tests BatchId.
@@ -30,14 +32,13 @@ class BatchIdTest extends TestCase
         $this->assertSame('this_is_batch_id', $batchId->getBatchId());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$batch_id" must be a string.
-     */
     public function testSetBatchIdOnInvalidBatchId()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$batch_id" must be a string/');
+
         $batch_id = new BatchId();
-        $batch_id->setBatchId(['invalid_batch_id']);
+        $batch_id->setBatchId(123);
     }
 
     public function testJsonSerialize()

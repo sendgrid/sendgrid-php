@@ -2,10 +2,12 @@
 /**
  * This file tests Footer.
  */
+
 namespace SendGrid\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\Footer;
+use SendGrid\Mail\TypeException;
 
 /**
  * This file tests Footer.
@@ -32,12 +34,11 @@ class FooterTest extends TestCase
         $this->assertTrue($footer->getEnable());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$enable" must be a boolean.
-     */
     public function testSetEnableOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$enable" must be a boolean/');
+
         $footer = new Footer();
         $footer->setEnable('invalid_bool');
     }
@@ -50,14 +51,13 @@ class FooterTest extends TestCase
         $this->assertSame('footer_text', $footer->getText());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$text" must be a string.
-     */
     public function testSetTextOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$text" must be a string/');
+
         $footer = new Footer();
-        $footer->setText(['footer_text']);
+        $footer->setText(123);
     }
 
     public function testSetHtml()
@@ -68,13 +68,12 @@ class FooterTest extends TestCase
         $this->assertSame('footer_html', $footer->getHtml());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$html" must be a string.
-     */
     public function testSetHtmlOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$html" must be a string/');
+
         $footer = new Footer();
-        $footer->setHtml(['footer_html']);
+        $footer->setHtml(123);
     }
 }

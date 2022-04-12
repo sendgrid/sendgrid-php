@@ -3,11 +3,11 @@
  * This file contains the base class for testing the request object
  * generation for a /mail/send API call
  */
+
 namespace SendGrid\Tests;
 
 use PHPUnit\Framework\TestCase;
 use SendGrid;
-use Swaggest\JsonDiff\Exception;
 use Swaggest\JsonDiff\JsonDiff;
 use Swaggest\JsonDiff\JsonPatch;
 
@@ -27,9 +27,9 @@ class BaseTestClass extends TestCase
     /**
      * This method is run before the classes are initialised
      *
-     * @return null
+     * @return void
      */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         self::$apiKey = 'SENDGRID_API_KEY';
         self::$sg = new SendGrid(self::$apiKey);

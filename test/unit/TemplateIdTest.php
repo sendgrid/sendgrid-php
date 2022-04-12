@@ -5,8 +5,9 @@
 
 namespace SendGrid\Tests\Unit;
 
-use SendGrid\Mail\TemplateId;
 use PHPUnit\Framework\TestCase;
+use SendGrid\Mail\TemplateId;
+use SendGrid\Mail\TypeException;
 
 /**
  * This class tests TemplateId.
@@ -30,12 +31,11 @@ class TemplateIdTest extends TestCase
         $this->assertSame('template_id', $templateId->getTemplateId());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$template_id" must be a string.
-     */
     public function testSetTemplateIdOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$template_id" must be a string/');
+
         $templateId = new TemplateId();
         $templateId->setTemplateId(true);
     }

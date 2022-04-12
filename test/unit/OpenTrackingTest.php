@@ -5,8 +5,9 @@
 
 namespace SendGrid\Tests\Unit;
 
-use SendGrid\Mail\OpenTracking;
 use PHPUnit\Framework\TestCase;
+use SendGrid\Mail\OpenTracking;
+use SendGrid\Mail\TypeException;
 
 /**
  * This class tests OpenTracking.
@@ -31,12 +32,11 @@ class OpenTrackingTest extends TestCase
         $this->assertTrue($openTracking->getEnable());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$enable" must be a boolean.
-     */
     public function testSetEnableOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$enable" must be a boolean/');
+
         $openTracking = new OpenTracking();
         $openTracking->setEnable('invalid_bool');
     }
@@ -49,13 +49,12 @@ class OpenTrackingTest extends TestCase
         $this->assertSame('substitution_tag', $openTracking->getSubstitutionTag());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$substitution_tag" must be a string.
-     */
     public function testSetSubstitutionTagOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$substitution_tag" must be a string/');
+
         $openTracking = new OpenTracking();
-        $openTracking->setSubstitutionTag(['invalid_substitution_tag']);
+        $openTracking->setSubstitutionTag(123);
     }
 }

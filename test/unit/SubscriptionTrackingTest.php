@@ -5,8 +5,9 @@
 
 namespace SendGrid\Tests\Unit;
 
-use SendGrid\Mail\SubscriptionTracking;
 use PHPUnit\Framework\TestCase;
+use SendGrid\Mail\SubscriptionTracking;
+use SendGrid\Mail\TypeException;
 
 /**
  * This class tests SubscriptionTracking.
@@ -34,12 +35,11 @@ class SubscriptionTrackingTest extends TestCase
         $this->assertTrue($subscriptionTracking->getEnable());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$enable" must be a boolean.
-     */
     public function testSetEnableOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$enable" must be a boolean/');
+
         $subscriptionTracking = new SubscriptionTracking();
         $subscriptionTracking->setEnable('invalid_bool_type');
     }
@@ -52,12 +52,11 @@ class SubscriptionTrackingTest extends TestCase
         $this->assertSame('text', $subscriptionTracking->getText());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$text" must be a string.
-     */
     public function testSetTextOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$text" must be a string/');
+
         $subscriptionTracking = new SubscriptionTracking();
         $subscriptionTracking->setText(true);
     }
@@ -70,12 +69,11 @@ class SubscriptionTrackingTest extends TestCase
         $this->assertSame('<h1>I am html text</h1>', $subscriptionTracking->getHtml());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$html" must be a string.
-     */
     public function testSetHtmlOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$html" must be a string/');
+
         $subscriptionTracking = new SubscriptionTracking();
         $subscriptionTracking->setHtml(true);
     }
@@ -88,12 +86,11 @@ class SubscriptionTrackingTest extends TestCase
         $this->assertSame('sub_tag', $subscriptionTracking->getSubstitutionTag());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$substitution_tag" must be a string.
-     */
     public function testSetSubstitutionTagOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$substitution_tag" must be a string/');
+
         $subscriptionTracking = new SubscriptionTracking();
         $subscriptionTracking->setSubstitutionTag(true);
     }

@@ -22,11 +22,7 @@ ci-install: clean
 test:
 	vendor/bin/phpunit test/unit --filter test*
 	vendor/bin/phpcs lib/*/*
-
-ifeq ($(shell expr $(php_version) \>= 7.1), 1)
-	composer require --dev phpstan/phpstan
 	vendor/bin/phpstan analyse --no-progress --level 1 lib test
-endif
 
 test-integ: test
 	vendor/bin/phpunit test --filter test*

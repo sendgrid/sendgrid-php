@@ -5,8 +5,9 @@
 
 namespace SendGrid\Tests\Unit;
 
-use SendGrid\Mail\SandBoxMode;
 use PHPUnit\Framework\TestCase;
+use SendGrid\Mail\SandBoxMode;
+use SendGrid\Mail\TypeException;
 
 /**
  * This class tests SandBoxMode.
@@ -31,12 +32,11 @@ class SandBoxModeTest extends TestCase
         $this->assertTrue($sandBoxMode->getEnable());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$enable" must be a boolean.
-     */
     public function testSetEnableOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$enable" must be a boolean/');
+
         $sandBoxMode = new SandBoxMode();
         $sandBoxMode->setEnable('invalid_bool');
     }

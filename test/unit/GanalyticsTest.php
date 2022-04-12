@@ -2,10 +2,12 @@
 /**
  * This file tests Ganalytics.
  */
+
 namespace SendGrid\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\Ganalytics;
+use SendGrid\Mail\TypeException;
 
 /**
  * This file tests Ganalytics.
@@ -35,12 +37,11 @@ class GanalyticsTest extends TestCase
         $this->assertTrue($ganalytics->getEnable());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$enable" must be a boolean.
-     */
     public function testSetEnableOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$enable" must be a boolean/');
+
         $ganalytics = new Ganalytics();
         $ganalytics->setEnable('invalid_bool');
     }
@@ -53,14 +54,13 @@ class GanalyticsTest extends TestCase
         $this->assertSame('utm_content', $ganalytics->getCampaignContent());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$utm_content" must be a string.
-     */
     public function testSetCampaignContentOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$utm_content" must be a string/');
+
         $ganalytics = new Ganalytics();
-        $ganalytics->setCampaignContent(['invalid_utm_content']);
+        $ganalytics->setCampaignContent(123);
     }
 
     public function testSetCampaignTerm()
@@ -71,14 +71,13 @@ class GanalyticsTest extends TestCase
         $this->assertSame('utm_term', $ganalytics->getCampaignTerm());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$utm_term" must be a string.
-     */
     public function testSetCampaignTermOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$utm_term" must be a string/');
+
         $ganalytics = new Ganalytics();
-        $ganalytics->setCampaignTerm(['invalid_utm_term']);
+        $ganalytics->setCampaignTerm(123);
     }
 
     public function testSetCampaignMedium()
@@ -89,14 +88,13 @@ class GanalyticsTest extends TestCase
         $this->assertSame('utm_medium', $ganalytics->getCampaignMedium());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$utm_medium" must be a string.
-     */
     public function testSetCampaignMediumOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$utm_medium" must be a string/');
+
         $ganalytics = new Ganalytics();
-        $ganalytics->setCampaignMedium(['invalid_utm_medium']);
+        $ganalytics->setCampaignMedium(123);
     }
 
     public function testSetCampaignSource()
@@ -107,14 +105,13 @@ class GanalyticsTest extends TestCase
         $this->assertSame('utm_campaign', $ganalytics->getCampaignSource());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$utm_source" must be a string.
-     */
     public function testSetCampaignSourceOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$utm_source" must be a string/');
+
         $ganalytics = new Ganalytics();
-        $ganalytics->setCampaignSource(['invalid_utm_campaign']);
+        $ganalytics->setCampaignSource(123);
     }
 
     public function testSetCampaignName()
@@ -125,13 +122,12 @@ class GanalyticsTest extends TestCase
         $this->assertSame('utm_campaign_name', $ganalytics->getCampaignName());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$utm_campaign" must be a string.
-     */
     public function testSetCampaignNameOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$utm_campaign" must be a string/');
+
         $ganalytics = new Ganalytics();
-        $ganalytics->setCampaignName(['invalid_utm_campaign_name']);
+        $ganalytics->setCampaignName(123);
     }
 }

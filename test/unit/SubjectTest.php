@@ -5,8 +5,9 @@
 
 namespace SendGrid\Tests\Unit;
 
-use SendGrid\Mail\Subject;
 use PHPUnit\Framework\TestCase;
+use SendGrid\Mail\Subject;
+use SendGrid\Mail\TypeException;
 
 /**
  * This class tests Subject.
@@ -39,12 +40,11 @@ class SubjectTest extends TestCase
         $this->assertSame('subject', $subject->jsonSerialize());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$subject" must be a string.
-     */
     public function testSetSubjectOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$subject" must be a string/');
+
         $subject = new Subject();
         $subject->setSubject(true);
     }
