@@ -5,16 +5,17 @@
 
 namespace SendGrid\Tests\Unit;
 
-use SendGrid\Mail\From;
-use SendGrid\Mail\Personalization;
-use SendGrid\Mail\To;
-use SendGrid\Mail\Cc;
-use SendGrid\Mail\Bcc;
-use SendGrid\Mail\Header;
-use SendGrid\Mail\Subject;
-use SendGrid\Mail\CustomArg;
-use SendGrid\Mail\SendAt;
 use PHPUnit\Framework\TestCase;
+use SendGrid\Mail\Bcc;
+use SendGrid\Mail\Cc;
+use SendGrid\Mail\CustomArg;
+use SendGrid\Mail\From;
+use SendGrid\Mail\Header;
+use SendGrid\Mail\Personalization;
+use SendGrid\Mail\SendAt;
+use SendGrid\Mail\Subject;
+use SendGrid\Mail\To;
+use SendGrid\Mail\TypeException;
 
 /**
  * This class tests Personalization.
@@ -63,12 +64,11 @@ class PersonalizationTest extends TestCase
         $this->assertSame('subject', $personalization->getSubject()->getSubject());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$subject" must be an instance of SendGrid\Mail\Subject or a string
-     */
     public function testSetSubjectOnInvalidSubjectClass()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$subject" must be an instance of SendGrid\\\Mail\\\Subject or a string/');
+
         $personalization = new Personalization();
         $personalization->setSubject(false);
     }
@@ -105,12 +105,11 @@ class PersonalizationTest extends TestCase
         $this->assertSame(1539363393, $personalization->getSendAt()->getSendAt());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$send_at" must be an instance of "SendGrid\Mail\SendAt"
-     */
     public function testSendAtOnInvalidSendAtClass()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$send_at" must be an instance of "SendGrid\\\Mail\\\SendAt/');
+
         $personalization = new Personalization();
         $personalization->setSendAt('invalid_send_at_class');
     }
@@ -123,12 +122,11 @@ class PersonalizationTest extends TestCase
         $this->assertTrue($personalization->getHasDynamicTemplate());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$has_dynamic_template" must be a boolean.
-     */
     public function testSetHasDynamicTemplateOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$has_dynamic_template" must be a boolean/');
+
         $personalization = new Personalization();
         $personalization->setHasDynamicTemplate('invalid_bool_type');
     }

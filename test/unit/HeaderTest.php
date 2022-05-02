@@ -2,10 +2,12 @@
 /**
  * This file tests Header.
  */
+
 namespace SendGrid\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\Header;
+use SendGrid\Mail\TypeException;
 
 /**
  * This file tests Header.
@@ -30,14 +32,13 @@ class HeaderTest extends TestCase
         $this->assertSame('Content-Type', $header->getKey());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$key" must be a string.
-     */
     public function testSetKeyOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$key" must be a string/');
+
         $header = new Header();
-        $header->setKey(['Content-Type']);
+        $header->setKey(123);
     }
 
     public function testSetValue()
@@ -48,13 +49,12 @@ class HeaderTest extends TestCase
         $this->assertSame('text/plain', $header->getValue());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$value" must be a string.
-     */
     public function testSetValueOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$value" must be a string/');
+
         $header = new Header();
-        $header->setValue(['text/plain']);
+        $header->setValue(123);
     }
 }

@@ -2,10 +2,12 @@
 /**
  * This file tests Content.
  */
+
 namespace SendGrid\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\Content;
+use SendGrid\Mail\TypeException;
 
 /**
  * This file tests Content.
@@ -31,14 +33,13 @@ class ContentTest extends TestCase
         $this->assertSame('type', $content->getType());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$type" must be a string.
-     */
     public function testSetTypeOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$type" must be a string/');
+
         $content = new Content();
-        $content->setType(['type']);
+        $content->setType(123);
     }
 
     public function testSetValue()
@@ -49,13 +50,12 @@ class ContentTest extends TestCase
         $this->assertSame('value', $content->getValue());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$value" must be a string.
-     */
     public function testSetValueOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$value" must be a string/');
+
         $content = new Content();
-        $content->setValue(['value']);
+        $content->setValue(123);
     }
 }

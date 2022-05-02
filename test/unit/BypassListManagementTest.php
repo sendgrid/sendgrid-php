@@ -2,10 +2,12 @@
 /**
  * This file tests BypassListManagement.
  */
+
 namespace SendGrid\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\BypassListManagement;
+use SendGrid\Mail\TypeException;
 
 /**
  * This file tests BypassListManagement.
@@ -30,12 +32,11 @@ class BypassListManagementTest extends TestCase
         $this->assertTrue($bypassListManagement->getEnable());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$enable" must be a boolean.
-     */
     public function testSetEnableOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$enable" must be a boolean/');
+
         $bypassListManagement = new BypassListManagement();
         $bypassListManagement->setEnable('invalid_bool_type');
     }

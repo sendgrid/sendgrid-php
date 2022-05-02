@@ -2,10 +2,12 @@
 /**
  * This file tests CustomArg.
  */
+
 namespace SendGrid\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\CustomArg;
+use SendGrid\Mail\TypeException;
 
 /**
  * This file tests CustomArg.
@@ -31,14 +33,13 @@ class CustomArgTest extends TestCase
         $this->assertSame('key', $customArg->getKey());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$key" must be a string.
-     */
     public function testSetKeyOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$key" must be a string/');
+
         $customArg = new CustomArg();
-        $customArg->setKey(['key']);
+        $customArg->setKey(123);
     }
 
     public function testSetValue()
@@ -49,13 +50,12 @@ class CustomArgTest extends TestCase
         $this->assertSame('value', $customArg->getValue());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$value" must be a string.
-     */
     public function testSetValueOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$value" must be a string/');
+
         $customArg = new CustomArg();
-        $customArg->setValue(['value']);
+        $customArg->setValue(123);
     }
 }
