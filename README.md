@@ -16,7 +16,8 @@
 
 Version 7.X.X of this library provides full support for all Twilio SendGrid [Web API v3](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html) endpoints, including the new [v3 /mail/send](https://sendgrid.com/blog/introducing-v3mailsend-sendgrids-new-mail-endpoint).
 
-If you need support using Sendgrid, please check the [Twilio SendGrid Support Help Center](https://support.sendgrid.com).
+
+**If you need support using Sendgrid, please check the [Twilio SendGrid Support Help Center](https://support.sendgrid.com).**
 
 Please browse the rest of this README for further details.
 
