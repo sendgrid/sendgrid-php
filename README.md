@@ -33,6 +33,7 @@ We appreciate your continued support, thank you!
 * [How to Contribute](#contribute)
 * [Troubleshooting](#troubleshooting)
 * [About](#about)
+* [Support](#support)
 * [License](#license)
 
 <a name="installation"></a>
@@ -196,6 +197,11 @@ Please see our [troubleshooting guide](TROUBLESHOOTING.md) for common library is
 # About
 
 sendgrid-php is maintained and funded by Twilio SendGrid, Inc. The names and logos for sendgrid-php are trademarks of Twilio SendGrid, Inc.
+
+<a name="support"></a>
+# Support
+
+For product support please check the [Twilio SendGrid Support Center](https://support.sendgrid.com).
 
 # License
 [The MIT License (MIT)](LICENSE)
