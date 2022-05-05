@@ -200,7 +200,7 @@ sendgrid-php is maintained and funded by Twilio SendGrid, Inc. The names and log
 <a name="support"></a>
 # Support
 
-For product support please check the [Twilio SendGrid Support Center](https://support.sendgrid.com).
+For product support, please check the [Twilio SendGrid Support Help Center](https://support.sendgrid.com).
 
 # License
 [The MIT License (MIT)](LICENSE)
