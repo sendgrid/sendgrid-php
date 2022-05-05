@@ -16,7 +16,7 @@
 
 Version 7.X.X of this library provides full support for all Twilio SendGrid [Web API v3](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html) endpoints, including the new [v3 /mail/send](https://sendgrid.com/blog/introducing-v3mailsend-sendgrids-new-mail-endpoint).
 
-We want this library to be community driven and Twilio SendGrid led. Your help is needed to realize this goal. To help make sure we are building the right things in the right order, we ask that you create [issues](https://github.com/sendgrid/sendgrid-php/issues) and [pull requests](CONTRIBUTING.md) or simply upvote or comment on existing issues or pull requests.
+**If you need support using SendGrid, please check the [Twilio SendGrid Support Help Center](https://support.sendgrid.com).**
 
 Please browse the rest of this README for further details.
 
@@ -32,6 +32,7 @@ We appreciate your continued support, thank you!
 * [How to Contribute](#contribute)
 * [Troubleshooting](#troubleshooting)
 * [About](#about)
+* [Support](#support)
 * [License](#license)
 
 <a name="installation"></a>
@@ -196,9 +197,10 @@ Please see our [troubleshooting guide](TROUBLESHOOTING.md) for common library is
 
 sendgrid-php is maintained and funded by Twilio SendGrid, Inc. The names and logos for sendgrid-php are trademarks of Twilio SendGrid, Inc.
 
-If you need help installing or using the library, please check the [Twilio SendGrid Support Help Center](https://support.sendgrid.com).
+<a name="support"></a>
+# Support
 
-If you've instead found a bug in the library or would like new features added, go ahead and open issues or pull requests against this repo!
+For product support, please check the [Twilio SendGrid Support Help Center](https://support.sendgrid.com).
 
 # License
 [The MIT License (MIT)](LICENSE)
