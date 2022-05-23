@@ -21,7 +21,6 @@ class FilesExistTest extends TestCase
     {
         $rootDir = __DIR__ . '/../..';
         $this->assertFileExists("$rootDir/.env.sample");
-        $this->assertFileExists("$rootDir/ISSUE_TEMPLATE.md");
         $this->assertFileExists("$rootDir/PULL_REQUEST_TEMPLATE.md");
         $this->assertFileExists("$rootDir/.gitignore");
         $this->assertFileExists("$rootDir/.github/workflows/test-and-deploy.yml");
