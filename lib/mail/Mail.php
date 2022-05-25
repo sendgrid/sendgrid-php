@@ -78,6 +78,9 @@ class Mail implements \JsonSerializable
     /** @var $reply_to ReplyTo Email to be use when replied to */
     private $reply_to;
 
+     /** @var $reply_to_list ReplyToList Email to be use when replied to */
+    private $reply_to_list;
+
     /** @var $personalization Personalization[] Messages and their metadata */
     private $personalization;
 
@@ -980,6 +983,56 @@ class Mail implements \JsonSerializable
     public function getReplyTo()
     {
         return $this->reply_to;
+    }
+
+    /**
+     * Add the reply to email address to a Mail object
+     *
+     * @param $list array
+     * both of next formats are supported
+     *  'replytolist' => [
+     *      [
+     *          'email' => 'email1@domain.com',
+     *          'name' => 'name one',
+     *      ], [
+     *          'email' => 'email2@domain.com',
+     *          'name' => 'name two',
+     *      ],
+     *  ],
+     *  'replytolist' => [
+     *      'email1@domain.com',
+     *      'email2@domain.com',
+     *      '',
+     *  ],
+     */
+    public function setReplyToList(array $list)
+    {
+        foreach ($list as $l) {
+            if ($l instanceof ReplyTo ) {
+                $this->reply_to_list[] = $l;
+            }else{
+                if (is_array($l)) {
+                    if (!empty($l) && $l['email'] !== '') {
+                        $this->reply_to_list[] = new ReplyTo($l['email'], $l['name']);
+                    }
+                }else{
+                    if ($l !=='') {
+                        $this->reply_to_list[] = new ReplyTo($l);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Retrieve the reply to list to information attached to a Mail object
+     *
+     * @return ReplyToList
+     */
+
+    public function getReplyToList()
+    {
+        return $this->reply_to_list;
     }
 
     /**
@@ -1971,6 +2024,7 @@ class Mail implements \JsonSerializable
                 )),
                 'from' => $this->getFrom(),
                 'reply_to' => $this->getReplyTo(),
+                'reply_to_list' => $this->getReplyToList(),
                 'subject' => $this->getGlobalSubject(),
                 'content' => $this->getContents(),
                 'attachments' => $this->getAttachments(),
