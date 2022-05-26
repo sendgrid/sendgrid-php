@@ -1010,12 +1010,12 @@ class Mail implements \JsonSerializable
         foreach ($list as $l) {
             if ($l instanceof ReplyTo ) {
                 $this->reply_to_list[] = $l;
-            }else{
+            } else {
                 if (is_array($l)) {
                     if (!empty($l) && $l['email'] !== '') {
                         $this->reply_to_list[] = new ReplyTo($l['email'], $l['name']);
                     }
-                }else{
+                } else {
                     if ($l !=='') {
                         $this->reply_to_list[] = new ReplyTo($l);
                     }
