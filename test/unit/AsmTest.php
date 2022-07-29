@@ -2,12 +2,14 @@
 /**
  * This file tests Asm.
  */
+
 namespace SendGrid\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\Asm;
 use SendGrid\Mail\GroupId;
 use SendGrid\Mail\GroupsToDisplay;
+use SendGrid\Mail\TypeException;
 
 /**
  * This file tests Asm.
@@ -39,23 +41,21 @@ class AsmTest extends TestCase
         $this->assertSame([1, 2, 3, 4], $asm->getGroupsToDisplay());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$groups_to_display" must be an instance of SendGrid\Mail\GroupsToDisplay or an array.
-     */
     public function testSetGroupToDisplayOnInvalidValue()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$groups_to_display" must be an instance of SendGrid\\\Mail\\\GroupsToDisplay or an array/');
+
         $asm = new Asm(123456, [1, 2, 3, 4]);
         $asm->setGroupsToDisplay('invalid_array');
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$group_id" must be an instance of SendGrid\Mail\GroupId or an integer.
-     */
     public function testSetGroupIdOnInvalidGroupId()
     {
-        $asm = new Asm(123456, [1,2,3,4]);
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$group_id" must be an instance of SendGrid\\\Mail\\\GroupId or an integer/');
+
+        $asm = new Asm(123456, [1, 2, 3, 4]);
         $asm->setGroupId('invalid_group_id');
     }
 }

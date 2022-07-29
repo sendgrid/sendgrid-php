@@ -5,8 +5,9 @@
 
 namespace SendGrid\Tests\Unit;
 
-use SendGrid\Mail\SpamCheck;
 use PHPUnit\Framework\TestCase;
+use SendGrid\Mail\SpamCheck;
+use SendGrid\Mail\TypeException;
 
 /**
  * This class tests SpamCheck.
@@ -33,12 +34,11 @@ class SpamCheckTest extends TestCase
         $this->assertTrue($spamCheck->getEnable());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$enable" must be a boolean.
-     */
     public function testSetEnableOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$enable" must be a boolean/');
+
         $spamCheck = new SpamCheck();
         $spamCheck->setEnable('invalid_bool_type');
     }
@@ -51,12 +51,11 @@ class SpamCheckTest extends TestCase
         $this->assertSame(1, $spamCheck->getThreshold());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$threshold" must be an integer.
-     */
     public function testSetThresholdOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$threshold" must be an integer/');
+
         $spamCheck = new SpamCheck();
         $spamCheck->setThreshold('invalid_int_type');
     }
@@ -69,12 +68,11 @@ class SpamCheckTest extends TestCase
         $this->assertSame('http://post-to.url', $spamCheck->getPostToUrl());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$post_to_url" must be a string.
-     */
     public function testSetPostToUrlOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$post_to_url" must be a string/');
+
         $spamCheck = new SpamCheck();
         $spamCheck->setPostToUrl(true);
     }

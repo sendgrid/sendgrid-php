@@ -2,10 +2,12 @@
 /**
  * This file tests BypassSpamManagement.
  */
+
 namespace SendGrid\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\BypassSpamManagement;
+use SendGrid\Mail\TypeException;
 
 /**
  * This file tests BypassSpamManagement.
@@ -30,12 +32,11 @@ class BypassSpamManagementTest extends TestCase
         $this->assertTrue($bypassSpamManagement->getEnable());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$enable" must be a boolean.
-     */
     public function testSetEnableOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$enable" must be a boolean/');
+
         $bypassSpamManagement = new BypassSpamManagement();
         $bypassSpamManagement->setEnable('invalid_bool_type');
     }

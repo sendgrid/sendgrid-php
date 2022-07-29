@@ -2,10 +2,12 @@
 /**
  * This file tests Category.
  */
+
 namespace SendGrid\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\Category;
+use SendGrid\Mail\TypeException;
 
 /**
  * This file tests Category.
@@ -30,14 +32,13 @@ class CategoryTest extends TestCase
         $this->assertSame('category', $category->getCategory());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$category" must be a string.
-     */
     public function testSetCategoryOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$category" must be a string/');
+
         $category = new Category();
-        $category->setCategory(['invalid_category']);
+        $category->setCategory(123);
     }
 
     public function testJsonSerialize()

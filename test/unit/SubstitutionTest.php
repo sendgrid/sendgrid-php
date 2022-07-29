@@ -1,8 +1,10 @@
 <?php
+
 namespace SendGrid\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\Substitution;
+use SendGrid\Mail\TypeException;
 
 /**
  * This file tests Substitutions.
@@ -16,7 +18,7 @@ class SubstitutionTest extends TestCase
         $substitution = new Substitution();
         $testString = 'Twilio SendGrid is awesome!';
         $testArray = ['one', 'two', 'three'];
-        $testObject = (object) array('1' => 'foo');
+        $testObject = (object)array('1' => 'foo');
         $testNumberInt = 1;
         $testNumberFloat = 1.0;
         $testInvalidInput = null;
@@ -52,12 +54,11 @@ class SubstitutionTest extends TestCase
         $this->assertSame('key', $substitution->getKey());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$key" must be a string.
-     */
     public function testSetKeyOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$key" must be a string/');
+
         $substitution = new Substitution();
         $substitution->setKey(true);
     }
@@ -70,12 +71,11 @@ class SubstitutionTest extends TestCase
         $this->assertSame('key', $substitution->getValue());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$value" must be an array, object, boolean, string, numeric or integer.
-     */
     public function testSetValueOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$value" must be an array, object, boolean, string, numeric or integer/');
+
         $substitution = new Substitution();
         $substitution->setValue(null);
     }
