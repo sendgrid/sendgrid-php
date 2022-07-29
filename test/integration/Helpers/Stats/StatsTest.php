@@ -1,8 +1,9 @@
 <?php
+
 namespace SendGrid\Tests\Integration\Helpers\Stats;
 
-use SendGrid\Tests\BaseTestClass;
 use SendGrid\Stats\Stats;
+use SendGrid\Tests\BaseTestClass;
 
 class StatsTest extends BaseTestClass
 {
@@ -21,7 +22,8 @@ class StatsTest extends BaseTestClass
         $expectedSubuser,
         $expectedSum,
         $expectedSubuserMonthly
-    ) {
+    )
+    {
         $userStats = new Stats($expectedGlobal['start_date'], $expectedGlobal['end_date'], $expectedGlobal['aggregated_by']);
         $this->assertEquals($expectedGlobal, $userStats->getGlobal());
         $this->assertEquals($expectedCategory, $userStats->getCategory($expectedCategory['categories']));
@@ -48,7 +50,6 @@ class StatsTest extends BaseTestClass
      * @param array $expectedSum
      * @param array $expectedSubuserMonthly
      * @dataProvider invalidValues
-     * @expectedException \Exception
      */
     public function testGetValuesFail(
         $expectedGlobal,
@@ -56,7 +57,9 @@ class StatsTest extends BaseTestClass
         $expectedSubuser,
         $expectedSum,
         $expectedSubuserMonthly
-    ) {
+    )
+    {
+        $this->expectException(\Exception::class);
         $this->testGetValues(
             $expectedGlobal,
             $expectedCategory,

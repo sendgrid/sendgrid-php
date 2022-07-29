@@ -86,7 +86,16 @@ $request_body = json_decode('{
       "email": "ben.doe@example.com",
       "enable": true
     },
+    "bypass_bounce_management": {
+      "enable": true
+    },
     "bypass_list_management": {
+      "enable": true
+    },
+    "bypass_spam_management": {
+      "enable": true
+    },
+    "bypass_unsubscribe_management": {
       "enable": true
     },
     "footer": {

@@ -61,6 +61,7 @@ class BatchId implements \JsonSerializable
      *
      * @return null|string
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->getBatchId();

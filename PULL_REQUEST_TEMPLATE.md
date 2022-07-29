@@ -3,7 +3,7 @@ We appreciate the effort for this pull request but before that please make sure 
 
 Please format the PR title appropriately based on the type of change:
   <type>[!]: <description>
-Where <type> is one of: docs, chore, feat, fix, test.
+Where <type> is one of: docs, chore, feat, fix, test, misc.
 Add a '!' after the type for breaking changes (e.g. feat!: new breaking feature).
 
 **All third-party contributors acknowledge that any contributions they provide will be made under the same open-source license that the open-source project is provided under.**
@@ -28,4 +28,4 @@ A short description of what this PR does.
 - [ ] I have added the necessary documentation about the functionality in the appropriate .md file
 - [ ] I have added inline documentation to the code I modified
 
-If you have questions, please file a [support ticket](https://support.sendgrid.com), or create a GitHub Issue in this repository.
+If you have questions, please file a [support ticket](https://support.sendgrid.com).

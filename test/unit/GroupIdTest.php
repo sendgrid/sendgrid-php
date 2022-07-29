@@ -2,10 +2,12 @@
 /**
  * This file tests GroupId.
  */
+
 namespace SendGrid\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\GroupId;
+use SendGrid\Mail\TypeException;
 
 /**
  * This file tests GroupId.
@@ -29,12 +31,11 @@ class GroupIdTest extends TestCase
         $this->assertSame(123456, $groupId->getGroupId());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$group_id" must be an integer.
-     */
     public function testSetGroupIdOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$group_id" must be an integer/');
+
         $groupId = new GroupId();
         $groupId->setGroupId('invalid_group_id');
     }

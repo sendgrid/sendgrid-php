@@ -5,8 +5,9 @@
 
 namespace SendGrid\Tests\Unit;
 
-use SendGrid\Mail\Section;
 use PHPUnit\Framework\TestCase;
+use SendGrid\Mail\Section;
+use SendGrid\Mail\TypeException;
 
 /**
  * This class tests Section.
@@ -32,12 +33,11 @@ class SectionTest extends TestCase
         $this->assertSame('key', $section->getKey());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$key" must be a string.
-     */
     public function testSetKeyOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$key" must be a string/');
+
         $section = new Section();
         $section->setKey(true);
     }
@@ -50,12 +50,11 @@ class SectionTest extends TestCase
         $this->assertSame('value', $section->getValue());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$value" must be a string.
-     */
     public function testSetValueOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$value" must be a string/');
+
         $section = new Section();
         $section->setValue(true);
     }

@@ -88,7 +88,16 @@ class KitchenSinkTest extends BaseTestClass
       "email": "bcc@example.com",
       "enable": true
     },
+    "bypass_bounce_management": {
+      "enable": true
+    },
     "bypass_list_management": {
+      "enable": true
+    },
+    "bypass_spam_management": {
+      "enable": true
+    },
+    "bypass_unsubscribe_management": {
       "enable": true
     },
     "footer": {
@@ -292,7 +301,16 @@ JSON;
       "email": "bcc@example.com",
       "enable": true
     },
+    "bypass_bounce_management": {
+      "enable": true
+    },
     "bypass_list_management": {
+      "enable": true
+    },
+    "bypass_spam_management": {
+      "enable": true
+    },
+    "bypass_unsubscribe_management": {
       "enable": true
     },
     "footer": {
@@ -559,8 +577,14 @@ JSON;
 
         // Mail Settings
         $email->setBccSettings(true, "bcc@example.com");
+        $email->enableBypassBounceManagement();
+        //$email->disableBypassBounceManagement();
         $email->enableBypassListManagement();
         //$email->disableBypassListManagement();
+        $email->enableBypassSpamManagement();
+        //$email->disableBypassSpamManagement();
+        $email->enableBypassUnsubscribeManagement();
+        //$email->disableBypassUnsubscribeManagement();
         $email->setFooter(true, "Footer", "<strong>Footer</strong>");
         $email->enableSandBoxMode();
         //$email->disableSandBoxMode();
@@ -734,8 +758,14 @@ JSON;
 
         // Mail Settings
         $email->setBccSettings(true, "bcc@example.com");
+        $email->enableBypassBounceManagement();
+        //$email->disableBypassBounceManagement();
         $email->enableBypassListManagement();
         //$email->disableBypassListManagement();
+        $email->enableBypassSpamManagement();
+        //$email->disableBypassSpamManagement();
+        $email->enableBypassUnsubscribeManagement();
+        //$email->disableBypassUnsubscribeManagement();
         $email->setFooter(true, "Footer", "<strong>Footer</strong>");
         $email->enableSandBoxMode();
         //$email->disableSandBoxMode();
@@ -946,8 +976,17 @@ JSON;
         $mail_settings->setBccSettings(
             new \SendGrid\Mail\BccSettings(true, "bcc@example.com")
         );
+        $mail_settings->setBypassBounceManagement(
+            new \SendGrid\Mail\BypassBounceManagement(true)
+        );
         $mail_settings->setBypassListManagement(
             new \SendGrid\Mail\BypassListManagement(true)
+        );
+        $mail_settings->setBypassSpamManagement(
+            new \SendGrid\Mail\BypassSpamManagement(true)
+        );
+        $mail_settings->setBypassUnsubscribeManagement(
+            new \SendGrid\Mail\BypassUnsubscribeManagement(true)
         );
         $mail_settings->setFooter(
             new \SendGrid\Mail\Footer(true, "Footer", "<strong>Footer</strong>")
@@ -1176,8 +1215,17 @@ JSON;
         $mail_settings->setBccSettings(
             new \SendGrid\Mail\BccSettings(true, "bcc@example.com")
         );
+        $mail_settings->setBypassBounceManagement(
+            new \SendGrid\Mail\BypassBounceManagement(true)
+        );
         $mail_settings->setBypassListManagement(
             new \SendGrid\Mail\BypassListManagement(true)
+        );
+        $mail_settings->setBypassSpamManagement(
+            new \SendGrid\Mail\BypassSpamManagement(true)
+        );
+        $mail_settings->setBypassUnsubscribeManagement(
+            new \SendGrid\Mail\BypassUnsubscribeManagement(true)
         );
         $mail_settings->setFooter(
             new \SendGrid\Mail\Footer(true, "Footer", "<strong>Footer</strong>")

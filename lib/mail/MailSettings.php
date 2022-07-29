@@ -19,8 +19,14 @@ class MailSettings implements \JsonSerializable
 {
     /** @var $bcc Bcc object */
     private $bcc;
+    /** @var $bypass_bounce_management BypassBounceManagement object */
+    private $bypass_bounce_management;
     /** @var $bypass_list_management BypassListManagement object */
     private $bypass_list_management;
+    /** @var $bypass_spam_management BypassSpamManagement object */
+    private $bypass_spam_management;
+    /** @var $bypass_unsubscribe_management BypassUnsubscribeManagement object */
+    private $bypass_unsubscribe_management;
     /** @var $footer Footer object */
     private $footer;
     /** @var $sandbox_mode SandBoxMode object */
@@ -31,17 +37,26 @@ class MailSettings implements \JsonSerializable
     /**
      * Optional constructor
      *
-     * @param BccSettings|null          $bcc_settings           BccSettings object
-     * @param BypassListManagement|null $bypass_list_management BypassListManagement
-     *                                                          object
-     * @param Footer|null               $footer                 Footer object
-     * @param SandBoxMode|null          $sandbox_mode           SandBoxMode object
-     * @param SpamCheck|null            $spam_check             SpamCheck object
+     * @param BccSettings|null                 $bcc_settings                  BccSettings object
+     * @param BypassBounceManagement|null      $bypass_bounce_management      BypassBounceManagement
+     *                                                                        object
+     * @param BypassListManagement|null        $bypass_list_management        BypassListManagement
+     *                                                                        object
+     * @param BypassSpamManagement|null        $bypass_spam_management        BypassSpamManagement
+     *                                                                        object
+     * @param BypassUnsubscribeManagement|null $bypass_unsubscribe_management BypassUnsubscribeManagement
+     *                                                                        object
+     * @param Footer|null                      $footer                        Footer object
+     * @param SandBoxMode|null                 $sandbox_mode                  SandBoxMode object
+     * @param SpamCheck|null                   $spam_check                    SpamCheck object
      * @throws \SendGrid\Mail\TypeException
      */
     public function __construct(
         $bcc_settings = null,
+        $bypass_bounce_management = null,
         $bypass_list_management = null,
+        $bypass_spam_management = null,
+        $bypass_unsubscribe_management = null,
         $footer = null,
         $sandbox_mode = null,
         $spam_check = null
@@ -49,8 +64,17 @@ class MailSettings implements \JsonSerializable
         if (isset($bcc_settings)) {
             $this->setBccSettings($bcc_settings);
         }
+        if (isset($bypass_bounce_management)) {
+            $this->setBypassBounceManagement($bypass_bounce_management);
+        }
         if (isset($bypass_list_management)) {
             $this->setBypassListManagement($bypass_list_management);
+        }
+        if (isset($bypass_spam_management)) {
+            $this->setBypassSpamManagement($bypass_spam_management);
+        }
+        if (isset($bypass_unsubscribe_management)) {
+            $this->setBypassUnsubscribeManagement($bypass_unsubscribe_management);
         }
         if (isset($footer)) {
             $this->setFooter($footer);
@@ -68,7 +92,7 @@ class MailSettings implements \JsonSerializable
      *
      * @param BccSettings|bool $enable The BccSettings object or an indication
      *                                 if the setting is enabled
-     * @param string|null $email The email address that you would like
+     * @param string|null      $email  The email address that you would like
      *                                 to receive the BCC
      *
      * @throws \SendGrid\Mail\TypeException
@@ -96,6 +120,30 @@ class MailSettings implements \JsonSerializable
         return $this->bcc;
     }
 
+
+    /**
+     * Set bypass bounce management settings on a MailSettings object
+     *
+     * @param BypassBounceManagement|bool $enable The BypassBounceManagement
+     *                                            object or an indication
+     *                                            if the setting is enabled
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
+    public function setBypassBounceManagement($enable)
+    {
+        if ($enable instanceof BypassBounceManagement) {
+            $bypass_bounce_management = $enable;
+            $this->bypass_bounce_management = $bypass_bounce_management;
+            return;
+        }
+        Assert::boolean(
+            $enable, 'enable', 'Value "$enable" must be an instance of SendGrid\Mail\BypassBounceManagement
+                                                or a boolean.'
+        );
+        $this->bypass_bounce_management = new BypassBounceManagement($enable);
+    }
+
     /**
      * Set bypass list management settings on a MailSettings object
      *
@@ -113,9 +161,65 @@ class MailSettings implements \JsonSerializable
             return;
         }
         Assert::boolean(
-            $enable, 'enable', 'Value "$enable" must be an instance of SendGrid\Mail\BypassListManagement or a boolean.'
+            $enable, 'enable', 'Value "$enable" must be an instance of SendGrid\Mail\BypassListManagement
+                                                or a boolean.'
         );
         $this->bypass_list_management = new BypassListManagement($enable);
+    }
+
+    /**
+     * Set bypass spam management settings on a MailSettings object
+     *
+     * @param BypassSpamManagement|bool $enable The BypassSpamManagement
+     *                                          object or an indication
+     *                                          if the setting is enabled
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
+    public function setBypassSpamManagement($enable)
+    {
+        if ($enable instanceof BypassSpamManagement) {
+            $bypass_spam_management = $enable;
+            $this->bypass_spam_management = $bypass_spam_management;
+            return;
+        }
+        Assert::boolean(
+            $enable, 'enable', 'Value "$enable" must be an instance of SendGrid\Mail\BypassSpamManagement or a boolean.'
+        );
+        $this->bypass_spam_management = new BypassSpamManagement($enable);
+    }
+
+    /**
+     * Set bypass unsubscribe management settings on a MailSettings object
+     *
+     * @param BypassUnsubscribeManagement|bool $enable The BypassUnsubscribeManagement
+     *                                                 object or an indication
+     *                                                 if the setting is enabled
+     *
+     * @throws \SendGrid\Mail\TypeException
+     */
+    public function setBypassUnsubscribeManagement($enable)
+    {
+        if ($enable instanceof BypassUnsubscribeManagement) {
+            $bypass_unsubscribe_management = $enable;
+            $this->bypass_unsubscribe_management = $bypass_unsubscribe_management;
+            return;
+        }
+        Assert::boolean(
+            $enable, 'enable', 'Value "$enable" must be an instance of SendGrid\Mail\BypassUnsubscribeManagement
+                                                or a boolean.'
+        );
+        $this->bypass_unsubscribe_management = new BypassUnsubscribeManagement($enable);
+    }
+
+    /**
+     * Retrieve bypass bounce management settings from a MailSettings object
+     *
+     * @return BypassBounceManagement
+     */
+    public function getBypassBounceManagement()
+    {
+        return $this->bypass_bounce_management;
     }
 
     /**
@@ -129,12 +233,32 @@ class MailSettings implements \JsonSerializable
     }
 
     /**
+     * Retrieve bypass spam management settings from a MailSettings object
+     *
+     * @return BypassSpamManagement
+     */
+    public function getBypassSpamManagement()
+    {
+        return $this->bypass_spam_management;
+    }
+
+    /**
+     * Retrieve bypass unsubscribe management settings from a MailSettings object
+     *
+     * @return BypassUnsubscribeManagement
+     */
+    public function getBypassUnsubscribeManagement()
+    {
+        return $this->bypass_unsubscribe_management;
+    }
+
+    /**
      * Set the footer settings on a MailSettings object
      *
      * @param Footer|bool $enable The Footer object or an indication
      *                            if the setting is enabled
-     * @param string|null $text The plain text content of your footer
-     * @param string|null $html The HTML content of your footer
+     * @param string|null $text   The plain text content of your footer
+     * @param string|null $html   The HTML content of your footer
      *
      * @throws TypeException
      */
@@ -212,13 +336,13 @@ class MailSettings implements \JsonSerializable
     /**
      * Set spam check settings on a MailSettings object
      *
-     * @param SpamCheck|bool $enable The SpamCheck object or an
+     * @param SpamCheck|bool $enable      The SpamCheck object or an
      *                                    indication if the setting is enabled
-     * @param int $threshold The threshold used to determine if your
+     * @param int            $threshold   The threshold used to determine if your
      *                                    content qualifies as spam on a scale
      *                                    from 1 to 10, with 10 being most strict,
      *                                    or most
-     * @param string $post_to_url An Inbound Parse URL that you would like
+     * @param string         $post_to_url An Inbound Parse URL that you would like
      *                                    a copy of your email along with the spam
      *                                    report to be sent to
      *
@@ -252,12 +376,16 @@ class MailSettings implements \JsonSerializable
      *
      * @return null|array
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return array_filter(
             [
                 'bcc' => $this->getBccSettings(),
+                'bypass_bounce_management' => $this->getBypassBounceManagement(),
                 'bypass_list_management' => $this->getBypassListManagement(),
+                'bypass_spam_management' => $this->getBypassSpamManagement(),
+                'bypass_unsubscribe_management' => $this->getBypassUnsubscribeManagement(),
                 'footer' => $this->getFooter(),
                 'sandbox_mode' => $this->getSandboxMode(),
                 'spam_check' => $this->getSpamCheck()

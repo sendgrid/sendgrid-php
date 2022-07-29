@@ -3,6 +3,59 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2022-05-04] Version 8.0.0
+--------------------------
+**Note:** This release contains breaking changes, check our [upgrade guide](./UPGRADE.md#2022-05-04-7xx-to-8xx) for detailed migration notes.
+
+**Library - Chore**
+- [PR #1090](https://github.com/sendgrid/sendgrid-php/pull/1090): drop support for EOL PHP versions and add support for PHP 8. Thanks to [@childish-sambino](https://github.com/childish-sambino)! **(breaking change)**
+
+
+[2022-03-09] Version 7.11.5
+---------------------------
+**Library - Chore**
+- [PR #1085](https://github.com/sendgrid/sendgrid-php/pull/1085): push Datadog Release Metric upon deploy success. Thanks to [@eshanholtz](https://github.com/eshanholtz)!
+
+
+[2022-02-09] Version 7.11.4
+---------------------------
+**Library - Chore**
+- [PR #1079](https://github.com/sendgrid/sendgrid-php/pull/1079): add deploy job to test and deploy gh workflow. Thanks to [@Hunga1](https://github.com/Hunga1)!
+
+
+[2022-01-26] Version 7.11.3
+---------------------------
+**Library - Chore**
+- [PR #1075](https://github.com/sendgrid/sendgrid-php/pull/1075): migrate to Github actions. Thanks to [@JenniferMah](https://github.com/JenniferMah)!
+
+
+[2022-01-12] Version 7.11.2
+---------------------------
+**Library - Chore**
+- [PR #1074](https://github.com/sendgrid/sendgrid-php/pull/1074): update license year. Thanks to [@JenniferMah](https://github.com/JenniferMah)!
+
+
+[2021-12-15] Version 7.11.1
+---------------------------
+**Library - Fix**
+- [PR #1066](https://github.com/sendgrid/sendgrid-php/pull/1066): Suppress deprecation warnings in PHP 8.1. Thanks to [@andreas-aeschlimann](https://github.com/andreas-aeschlimann)!
+
+
+[2021-11-17] Version 7.11.0
+---------------------------
+**Library - Feature**
+- [PR #1065](https://github.com/sendgrid/sendgrid-php/pull/1065): add spam, bounce and unsubscribe bypass management filters. Thanks to [@shwetha-manvinkurke](https://github.com/shwetha-manvinkurke)!
+
+
+[2021-10-18] Version 7.10.0
+---------------------------
+**Library - Feature**
+- [PR #1061](https://github.com/sendgrid/sendgrid-php/pull/1061): allow personalization of the From name and email for each email recipient. Thanks to [@beebzz](https://github.com/beebzz)!
+
+**Library - Docs**
+- [PR #1060](https://github.com/sendgrid/sendgrid-php/pull/1060): improve signed webhook event validation docs. Thanks to [@shwetha-manvinkurke](https://github.com/shwetha-manvinkurke)!
+
+
 [2021-01-27] Version 7.9.2
 --------------------------
 **Library - Fix**

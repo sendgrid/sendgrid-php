@@ -2,10 +2,12 @@
 /**
  * This file tests IpPoolName.
  */
+
 namespace SendGrid\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\IpPoolName;
+use SendGrid\Mail\TypeException;
 
 /**
  * This file tests IpPoolName.
@@ -30,14 +32,13 @@ class IpPoolNameTest extends TestCase
         $this->assertSame('127.0.0.1', $ipPoolName->getIpPoolName());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$ip_pool_name" must be a string.
-     */
     public function testSetIpPoolNmeOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$ip_pool_name" must be a string/');
+
         $ipPoolName = new IpPoolName();
-        $ipPoolName->setIpPoolName(['127.0.0.1']);
+        $ipPoolName->setIpPoolName(123);
     }
 
     public function testJsonSerialize()

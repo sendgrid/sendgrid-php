@@ -1,6 +1,6 @@
 <?php
 /**
- * This helper builds the BypassListManagement object for a /mail/send API call
+ * This helper builds the BypassBounceManagement object for a /mail/send API call
  */
 
 namespace SendGrid\Mail;
@@ -8,17 +8,18 @@ namespace SendGrid\Mail;
 use SendGrid\Helper\Assert;
 
 /**
- * This class is used to construct a BypassListManagement object for
+ * This class is used to construct a BypassBounceManagement object for
  * the /mail/send API call
  *
- * Allows you to bypass all unsubscribe groups and suppressions to
- * ensure that the email is delivered to every single recipient. This
- * should only be used in emergencies when it is absolutely necessary
- * that every recipient receives your email
+ * Allows you to bypass the bounce list to ensure that the email is delivered to recipients.
+ * Spam report and unsubscribe lists will still be checked; addresses on these other lists
+ * will not receive the message.
+ *
+ * This filter cannot be combined with the bypass_list_management filter.
  *
  * @package SendGrid\Mail
  */
-class BypassListManagement implements \JsonSerializable
+class BypassBounceManagement implements \JsonSerializable
 {
     /** @var $enable bool Indicates if this setting is enabled */
     private $enable;
@@ -37,7 +38,7 @@ class BypassListManagement implements \JsonSerializable
     }
 
     /**
-     * Update the enable setting on a BypassListManagement object
+     * Update the enable setting on a BypassBounceManagement object
      *
      * @param bool $enable Indicates if this setting is enabled
      *
@@ -51,7 +52,7 @@ class BypassListManagement implements \JsonSerializable
     }
 
     /**
-     * Retrieve the enable setting on a BypassListManagement object
+     * Retrieve the enable setting on a BypassBounceManagement object
      *
      * @return bool
      */
@@ -61,7 +62,7 @@ class BypassListManagement implements \JsonSerializable
     }
 
     /**
-     * Return an array representing a BypassListManagement object for
+     * Return an array representing a BypassBounceManagement object for
      * the SendGrid API
      *
      * @return null|array

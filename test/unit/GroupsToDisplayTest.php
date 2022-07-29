@@ -47,12 +47,11 @@ class GroupsToDisplayTest extends TestCase
         $this->assertSame([123456], $groupsToDisplay->getGroupsToDisplay());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$groups_to_display" must be an array.
-     */
     public function testSetGroupsToDisplayOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$groups_to_display" must be an array/');
+
         $groupsToDisplay = new GroupsToDisplay();
         $groupsToDisplay->setGroupsToDisplay('invalid_groups_to_display');
     }

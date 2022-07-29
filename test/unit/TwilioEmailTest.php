@@ -17,12 +17,10 @@ class TwilioEmailTest extends BaseTestClass
     public function testCanConnectToTwilioEmailApi()
     {
         $mail = new \TwilioEmail('username', 'password');
-        $headers = [
-            'Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=',
-        ];
+        $authHeader = 'Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=';
 
         $this->assertEquals('https://email.twilio.com', $mail->client->getHost());
-        $this->assertArraySubset($headers, $mail->client->getHeaders());
+        $this->assertContains($authHeader, $mail->client->getHeaders());
 
         $mail = new \TwilioEmail('username', 'password', ['host' => 'https://api.test.com']);
         $this->assertEquals('https://api.test.com', $mail->client->getHost());

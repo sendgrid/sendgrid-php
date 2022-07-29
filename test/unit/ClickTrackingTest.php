@@ -2,10 +2,12 @@
 /**
  * This file tests ClickTracking.
  */
+
 namespace SendGrid\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use SendGrid\Mail\ClickTracking;
+use SendGrid\Mail\TypeException;
 
 /**
  * This file tests ClickTracking.
@@ -31,12 +33,11 @@ class ClickTrackingTest extends TestCase
         $this->assertTrue($clickTracking->getEnable());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$enable" must be a boolean.
-     */
     public function testSetEnableOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$enable" must be a boolean/');
+
         $clickTracking = new ClickTracking();
         $clickTracking->setEnable('invalid_bool');
     }
@@ -49,12 +50,11 @@ class ClickTrackingTest extends TestCase
         $this->assertTrue($clickTracking->getEnableText());
     }
 
-    /**
-     * @expectedException \SendGrid\Mail\TypeException
-     * @expectedExceptionMessage "$enable_text" must be a boolean.
-     */
     public function testSetEnableTextOnInvalidType()
     {
+        $this->expectException(TypeException::class);
+        $this->expectExceptionMessageMatches('/"\$enable_text" must be a boolean/');
+
         $clickTracking = new ClickTracking();
         $clickTracking->setEnableText('invalid_bool');
     }
