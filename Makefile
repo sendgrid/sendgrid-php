@@ -22,7 +22,7 @@ ci-install: clean
 test:
 	vendor/bin/phpunit test/unit --filter test*
 	vendor/bin/phpcs lib/*/*
-	vendor/bin/phpstan analyse --no-progress --level 1 lib test
+	vendor/bin/phpstan analyse --memory-limit 1G --no-progress --level 1 lib test
 
 test-integ: test
 	vendor/bin/phpunit test --filter test*
