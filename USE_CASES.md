@@ -1156,10 +1156,10 @@ $personalization1->addTo(new To(
         "Example User5 -name-"
 ));
 $personalization1->addFrom(new From(
-    "test5@example.com" => "Twilio"
+    "test5@example.com", "Twilio"
 ))
 $personalization1->setSubject(new Subject("Hello from Twilio!"));
-$mail->addPersonalization($personalization1);
+$email->addPersonalization($personalization1);
 
 $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 try {
