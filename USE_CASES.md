@@ -1099,6 +1099,8 @@ use SendGrid\Mail\Mail;
 use SendGrid\Mail\Personalization;
 use SendGrid\Mail\Subject;
 use SendGrid\Mail\To;
+use SendGrid\Mail\PlainTextContent;
+use SendGrid\Mail\HtmlContent;
 
 $from = new From("test@example.com", "Twilio Sendgrid");
 $to = new To(
