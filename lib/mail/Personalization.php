@@ -44,7 +44,9 @@ class Personalization implements \JsonSerializable
     /**
      * Add a To object to a Personalization object
      * If there are substitutions in the To object preserve them
-     * by transferring them to the Personalization object
+     * by transferring them to the Personalization object.
+     * If a substitution with the same key already exists
+     * that takes precedence, and we don't overwrite
      *
      * @param To $email To object
      */
