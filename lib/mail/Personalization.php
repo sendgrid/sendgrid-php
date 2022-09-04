@@ -43,19 +43,22 @@ class Personalization implements \JsonSerializable
 
     /**
      * Add a To object to a Personalization object
-     * If there are substitutions in the To object preserve them 
-     * by transfering them to the Personalization object
+     * If there are substitutions in the To object preserve them
+     * by transferring them to the Personalization object
      *
      * @param To $email To object
      */
     public function addTo($email)
     {
         if ($subs = $email->getSubstitutions()) {
+            $existing_subs = $this->getSubstitutions();
             foreach ($subs as $key => $value) {
-                $this->addSubstitution($key, $value);
+                if (!array_key_exists($key, $existing_subs)) {
+                    $this->addSubstitution($key, $value);
+                }
             }
         }
-        
+
         $this->tos[] = $email;
     }
 
