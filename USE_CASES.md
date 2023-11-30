@@ -1184,7 +1184,9 @@ The SendGrid object can also be used to set the region to "eu", which will send 
 
 $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 $sendgrid->setDataResidency("eu");
+
 OR
+
 $sendgrid->setDataResidency("global");
 ```
 
