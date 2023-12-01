@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2023-12-01] Version 8.1.0
+--------------------------
+**Library - Feature**
+- [PR #1104](https://github.com/sendgrid/sendgrid-php/pull/1104): Added Data residency for eu and global region. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
 [2022-08-10] Version 8.0.1
 --------------------------
 **Library - Docs**
