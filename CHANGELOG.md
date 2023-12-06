@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2023-12-06] Version 8.1.1
+--------------------------
+**Library - Chore**
+- [PR #1105](https://github.com/sendgrid/sendgrid-php/pull/1105): updated php-http-client version to enable setHost. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
 [2023-12-01] Version 8.1.0
 --------------------------
 **Library - Feature**
