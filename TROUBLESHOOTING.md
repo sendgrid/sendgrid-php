@@ -142,3 +142,4 @@ If you are still having trouble getting the validation to work, follow the follo
 - Be sure to use the *raw* payload for validation
 - Be sure to include a trailing carriage return and newline in your payload
 - In case of multi-event webhooks, make sure you include the trailing newline and carriage return after *each* event
+- In case of not using the *raw* payload, make sure you encode the json with `JSON_UNESCAPED_SLASHES` flag
