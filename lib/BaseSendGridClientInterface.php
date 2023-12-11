@@ -61,12 +61,14 @@ abstract class BaseSendGridClientInterface
      * Make an API request.
      *
      * @param Mail $email A Mail object, containing the request object
+     * @param array|null $query A query, containing additional settings,
+     *                          e.g., css_inline
      *
      * @return Response
      */
-    public function send(Mail $email)
+    public function send(Mail $email, array $query = null)
     {
-        return $this->client->mail()->send()->post($email);
+        return $this->client->mail()->send()->post($email, $query);
     }
 
     /*
