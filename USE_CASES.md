@@ -10,6 +10,7 @@ This documentation provides examples for specific use cases. Please [open an iss
 - [Send an Email to Multiple Recipients](#send-an-email-to-multiple-recipients)
 - [Send Multiple Emails to Multiple Recipients](#send-multiple-emails-to-multiple-recipients)
 - [Send Multiple Emails with Personalizations](#multiple-email-personalizations)
+- [Set Region](#set-region)
 - [Transactional Templates](#transactional-templates)
 - [Legacy Templates](#legacy-templates)
 - [Send an Email With Twilio Email (Pilot)](#send-an-email-with-twilio-email-pilot)
@@ -1172,6 +1173,23 @@ try {
 } catch (Exception $e) {
     echo 'Caught exception: '.  $e->getMessage(). "\n";
 }
+```
+
+<a name="set-region"></a>
+# Set Region
+The SendGrid object can also be used to set the region to "eu", which will send the request to https://api.eu.sendgrid.com/. By default, it is set to https://api.sendgrid.com/, e.g.
+
+```php
+<?php
+// Uncomment next line if you're not using a dependency loader (such as Composer)
+// require_once '<PATH TO>/sendgrid-php.php';
+
+$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+$sendgrid->setDataResidency("eu");
+
+OR
+
+$sendgrid->setDataResidency("global");
 ```
 
 <a name="transactional-templates"></a>

@@ -12,13 +12,19 @@ use SendGrid\Response;
 abstract class BaseSendGridClientInterface
 {
     /** @var string SendGrid API library version */
-    const VERSION = '8.0.1';
+    const VERSION = '8.1.1';
 
     /** @var Client SendGrid HTTP Client library */
     public $client;
 
     /** @var string SendGrid version */
     public $version = self::VERSION;
+
+    /** @var allowedRegionsHostMap regions specific hosts */
+    public $allowedRegionsHostMap = [
+        "eu" => "https://api.eu.sendgrid.com",
+        "global" => "https://api.sendgrid.com",
+    ];
 
     /**
      * Set up the HTTP Client.
@@ -62,4 +68,23 @@ abstract class BaseSendGridClientInterface
     {
         return $this->client->mail()->send()->post($email);
     }
+
+    /*
+      * Client libraries contain setters for specifying region/edge.
+      * This allows support global and eu regions only. This set will likely expand in the future.
+      * Global should be the default
+      * Global region means the message should be sent through:
+      * HTTP: api.sendgrid.com
+      * EU region means the message should be sent through:
+      * HTTP: api.eu.sendgrid.com
+    */
+    public function setDataResidency($region): void
+    {
+        if (array_key_exists($region, $this->allowedRegionsHostMap)) {
+            $this->client->setHost($this->allowedRegionsHostMap[$region]);
+        } else {
+            throw new InvalidArgumentException("region can only be \"eu\" or \"global\"");
+        }
+    }
+
 }
