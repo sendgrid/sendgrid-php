@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2024-04-18] Version 8.1.2
+--------------------------
+**Library - Chore**
+- [PR #1107](https://github.com/sendgrid/sendgrid-php/pull/1107): updating php-http-client version to dynamic. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
 [2023-12-06] Version 8.1.1
 --------------------------
 **Library - Chore**
