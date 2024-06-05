@@ -1,6 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use SendGrid\Mail\Mail;
 
 class ReplyToListTest extends TestCase
 {
