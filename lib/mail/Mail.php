@@ -986,40 +986,41 @@ class Mail implements \JsonSerializable
     }
 
     /**
-     * Add the reply to email address to a Mail object
+     * Set a list of ReplyTo email addresses. The following input formats are supported:
      *
-     * @param $list array
-     * both of next formats are supported
-     *  'replytolist' => [
-     *      [
-     *          'email' => 'email1@domain.com',
-     *          'name' => 'name one',
-     *      ], [
-     *          'email' => 'email2@domain.com',
-     *          'name' => 'name two',
-     *      ],
-     *  ],
-     *  'replytolist' => [
-     *      'email1@domain.com',
-     *      'email2@domain.com',
-     *      '',
-     *  ],
+     * 1. only email addresses
+     * [
+     *     'email1@domain.com',
+     *     'email2@domain.com',
+     * ]
+     * 2. items with email address and name
+     * [
+     *     'email' => 'email1@domain.com',
+     *     'name' => 'John Doe',
+     * ], [
+     *     'email' => 'email2@domain.com',
+     *     'name' => '',
+     * ]
+     *
+     * @param array $replyToList
+     * @throws \InvalidArgumentException
      */
-    public function setReplyToList(array $list)
+    public function setReplyToList(array $replyToList)
     {
-        foreach ($list as $l) {
-            if ($l instanceof ReplyTo ) {
-                $this->reply_to_list[] = $l;
-            } else {
-                if (is_array($l)) {
-                    if (!empty($l) && $l['email'] !== '') {
-                        $this->reply_to_list[] = new ReplyTo($l['email'], $l['name']);
-                    }
-                } else {
-                    if ($l !=='') {
-                        $this->reply_to_list[] = new ReplyTo($l);
-                    }
+        Assert::minItems($replyToList, 'replyToList', 1);
+        Assert::maxItems($replyToList, 'replyToList', 1000);
+
+        foreach ($replyToList as $replyTo) {
+            if ($replyTo instanceof ReplyTo ) {
+                $this->reply_to_list[] = $replyTo;
+            } elseif (is_array($replyTo)) {
+                if (! isset($replyTo['email'])) {
+                    throw new \InvalidArgumentException('Email is mandatory on ReplyToList array.');
                 }
+                $replyTo['name'] = isset($replyTo['name']) ? $replyTo['name'] : null;
+                $this->reply_to_list[] = new ReplyTo($replyTo['email'], $replyTo['name']);
+            } else {
+                $this->reply_to_list[] = new ReplyTo($replyTo);
             }
         }
     }
