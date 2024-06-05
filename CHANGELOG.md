@@ -3,6 +3,37 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2024-04-18] Version 8.1.2
+--------------------------
+**Library - Chore**
+- [PR #1107](https://github.com/sendgrid/sendgrid-php/pull/1107): updating php-http-client version to dynamic. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
+[2023-12-06] Version 8.1.1
+--------------------------
+**Library - Chore**
+- [PR #1105](https://github.com/sendgrid/sendgrid-php/pull/1105): updated php-http-client version to enable setHost. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
+[2023-12-01] Version 8.1.0
+--------------------------
+**Library - Feature**
+- [PR #1104](https://github.com/sendgrid/sendgrid-php/pull/1104): Added Data residency for eu and global region. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
+[2022-08-10] Version 8.0.1
+--------------------------
+**Library - Docs**
+- [PR #1097](https://github.com/sendgrid/sendgrid-php/pull/1097): rewrite function description. Thanks to [@mohamed-foly](https://github.com/mohamed-foly)!
+- [PR #1095](https://github.com/sendgrid/sendgrid-php/pull/1095): Modify README in alignment with SendGrid Support. Thanks to [@garethpaul](https://github.com/garethpaul)!
+
+**Library - Fix**
+- [PR #1081](https://github.com/sendgrid/sendgrid-php/pull/1081): get rid of deprecation warnings regarding the first parameter of mb_convert_encoding. Thanks to [@cclark61](https://github.com/cclark61)!
+
+**Library - Test**
+- [PR #1099](https://github.com/sendgrid/sendgrid-php/pull/1099): Adding misc as PR type. Thanks to [@rakatyal](https://github.com/rakatyal)!
+
+
 [2022-05-04] Version 8.0.0
 --------------------------
 **Note:** This release contains breaking changes, check our [upgrade guide](./UPGRADE.md#2022-05-04-7xx-to-8xx) for detailed migration notes.
