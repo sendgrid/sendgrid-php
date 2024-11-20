@@ -19,7 +19,8 @@
     "ext-curl": "*",
     "ext-json": "*",
     "ext-mbstring": "*",
-    "ext-openssl": "*"
+    "ext-openssl": "*",
+    "ext-gmp": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "^9",
