@@ -14,6 +14,7 @@ class EventWebhookTest extends TestCase
 {
     private static $PUBLIC_KEY;
     private static $SIGNATURE;
+    private static $BAD_SIGNATURE;
     private static $TIMESTAMP;
     private static $PAYLOAD;
 
@@ -22,6 +23,8 @@ class EventWebhookTest extends TestCase
         self::$PUBLIC_KEY = 'MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE83T4O/n84iotIv
         IW4mdBgQ/7dAfSmpqIM8kF9mN1flpVKS3GRqe62gw+2fNNRaINXvVpiglSI8eNEc6wEA3F+g==';
         self::$SIGNATURE = 'MEUCIGHQVtGj+Y3LkG9fLcxf3qfI10QysgDWmMOVmxG0u6ZUAiE
+        AyBiXDWzM+uOe5W0JuG+luQAbPIqHh89M15TluLtEZtM=';
+        self::$BAD_SIGNATURE = 'BADSIGNATURE+Y3LkG9fLcxf3qfI10QysgDWmMOVmxG0u6ZUAiE
         AyBiXDWzM+uOe5W0JuG+luQAbPIqHh89M15TluLtEZtM=';
         self::$TIMESTAMP = '1600112502';
         self::$PAYLOAD = \json_encode(
@@ -81,7 +84,7 @@ class EventWebhookTest extends TestCase
         $isValidSignature = $this->verify(
             self::$PUBLIC_KEY,
             self::$PAYLOAD,
-            'signature',
+            self::$BAD_SIGNATURE,
             self::$TIMESTAMP
         );
 
