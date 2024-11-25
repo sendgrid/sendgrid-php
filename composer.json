@@ -15,11 +15,12 @@
   "require": {
     "php": ">=7.3",
     "sendgrid/php-http-client": "~4.1",
-    "starkbank/ecdsa": "0.*",
+    "starkbank/ecdsa": "^2.1.0",
     "ext-curl": "*",
     "ext-json": "*",
     "ext-mbstring": "*",
-    "ext-openssl": "*"
+    "ext-openssl": "*",
+    "ext-gmp": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "^9",
