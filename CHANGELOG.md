@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2024-12-12] Version 8.1.5
+--------------------------
+**Library - Fix**
+- [PR #1111](https://github.com/sendgrid/sendgrid-php/pull/1111): Use starkbank/ecdsa 2.1.0. Thanks to [@simoheinonen](https://github.com/simoheinonen)!
+
+**Library - Chore**
+- [PR #1115](https://github.com/sendgrid/sendgrid-php/pull/1115): install docker-compose. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
 [2024-12-12] Version 8.1.4
 --------------------------
 **Library - Fix**
