@@ -14,7 +14,7 @@
 
 **This library allows you to quickly and easily use the Twilio SendGrid Web API v3 via PHP.**
 
-Version 7.X.X of this library provides full support for all Twilio SendGrid [Web API v3](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html) endpoints, including the new [v3 /mail/send](https://sendgrid.com/blog/introducing-v3mailsend-sendgrids-new-mail-endpoint).
+This library provides full support for all Twilio SendGrid [Web API v3](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html) endpoints, including the new [v3 /mail/send](https://sendgrid.com/blog/introducing-v3mailsend-sendgrids-new-mail-endpoint).
 
 **If you need support using SendGrid, please check the [Twilio SendGrid Support Help Center](https://support.sendgrid.com).**
 
@@ -40,7 +40,7 @@ We appreciate your continued support, thank you!
 
 ## Prerequisites
 
-- PHP version 7.3, 7.4, 8.0, or 8.1
+- PHP version 7.3+
 - The Twilio SendGrid service, starting at the [free level](https://sendgrid.com/free?source=sendgrid-php) to send up to 40,000 emails for the first 30 days, then send 100 emails/day free forever or check out [our pricing](https://sendgrid.com/pricing?source=sendgrid-php).
 - For SMS messages, you will need a free [Twilio account](https://www.twilio.com/try-twilio?source=sendgrid-php).
 
@@ -170,8 +170,6 @@ try {
 
 <a name="announcements"></a>
 # Announcements
-
-v7 has been released! Please see the [release notes](https://github.com/sendgrid/sendgrid-php/releases/tag/v7.0.0) for details.
 
 All updates to this library are documented in our [CHANGELOG](CHANGELOG.md) and [releases](https://github.com/sendgrid/sendgrid-php/releases).
 
