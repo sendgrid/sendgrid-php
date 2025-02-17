@@ -29,7 +29,7 @@ Please note that we utilize the [Gitflow Workflow](https://www.atlassian.com/git
 
 ##### Prerequisites #####
 
-- PHP version 7.3, 7.4, 8.0, or 8.1
+- PHP version 7.3+
 
 ##### Initial setup: #####
 
