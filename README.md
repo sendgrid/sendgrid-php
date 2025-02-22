@@ -14,7 +14,7 @@
 
 **This library allows you to quickly and easily use the Twilio SendGrid Web API v3 via PHP.**
 
-This library provides full support for all Twilio SendGrid [Web API v3](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html) endpoints, including the new [v3 /mail/send](https://sendgrid.com/blog/introducing-v3mailsend-sendgrids-new-mail-endpoint).
+Version 7.X.X of this library provides full support for all Twilio SendGrid [Web API v3](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html) endpoints, including the new [v3 /mail/send](https://sendgrid.com/blog/introducing-v3mailsend-sendgrids-new-mail-endpoint).
 
 **If you need support using SendGrid, please check the [Twilio SendGrid Support Help Center](https://support.sendgrid.com).**
 
@@ -170,6 +170,8 @@ try {
 
 <a name="announcements"></a>
 # Announcements
+
+v7 has been released! Please see the [release notes](https://github.com/sendgrid/sendgrid-php/releases/tag/v7.0.0) for details.
 
 All updates to this library are documented in our [CHANGELOG](CHANGELOG.md) and [releases](https://github.com/sendgrid/sendgrid-php/releases).
 
