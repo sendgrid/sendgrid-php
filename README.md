@@ -40,7 +40,7 @@ We appreciate your continued support, thank you!
 
 ## Prerequisites
 
-- PHP version 7.3, 7.4, 8.0, or 8.1
+- PHP version 7.3+
 - The Twilio SendGrid service, starting at the [free level](https://sendgrid.com/free?source=sendgrid-php) to send up to 40,000 emails for the first 30 days, then send 100 emails/day free forever or check out [our pricing](https://sendgrid.com/pricing?source=sendgrid-php).
 - For SMS messages, you will need a free [Twilio account](https://www.twilio.com/try-twilio?source=sendgrid-php).
 
