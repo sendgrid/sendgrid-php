@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2025-02-22] Version 8.1.11
+---------------------------
+**Library - Fix**
+- [PR #1119](https://github.com/sendgrid/sendgrid-php/pull/1119): deprecations in PHP 8.4. Thanks to [@theodorejb](https://github.com/theodorejb)!
+
+
 [2025-02-11] Version 8.1.10
 ---------------------------
 **Library - Fix**
