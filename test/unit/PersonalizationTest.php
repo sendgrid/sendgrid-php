@@ -16,6 +16,7 @@ use SendGrid\Mail\SendAt;
 use SendGrid\Mail\Subject;
 use SendGrid\Mail\To;
 use SendGrid\Mail\TypeException;
+use SendGrid\Mail\Substitution;
 
 /**
  * This class tests Personalization.
@@ -30,6 +31,32 @@ class PersonalizationTest extends TestCase
         $personalization->addTo(new To('dx@sendgrid.com'));
 
         $this->assertSame('dx@sendgrid.com', $personalization->getTos()[0]->getEmail());
+    }
+
+    public function testAddToWithSubstitution()
+    {
+        $personalization = new Personalization();
+        $personalization->addTo(new To('dx@sendgrid.com', 'Test with sub',
+            [
+                '-name-' => 'Example User'
+            ]
+        ));
+
+        $this->assertArrayHasKey('-name-', $personalization->getSubstitutions());
+    }
+
+    public function testAddSubstitutionHasPrecedence()
+    {
+        $personalization = new Personalization();
+        $personalization->addSubstitution(new Substitution('-name-', 'Example User 2'));
+        $personalization->addTo(new To('dx@sendgrid.com', 'Test with sub',
+            [
+                '-name-' => 'Example User'
+            ]
+        ));
+
+        $this->assertArrayHasKey('-name-', $personalization->getSubstitutions());
+        $this->assertSame('Example User 2', $personalization->getSubstitutions()['-name-']);
     }
 
     public function testAddFrom()
