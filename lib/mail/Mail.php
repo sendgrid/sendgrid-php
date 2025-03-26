@@ -81,6 +81,13 @@ class Mail implements \JsonSerializable
     /** @var $personalization Personalization[] Messages and their metadata */
     private $personalization;
 
+    /** @var $emailRecipients monitors unique email addresses in each emailType */
+    private $emailRecipients = array(
+        'To' => array(),
+        'Cc' => array(),
+        'Bcc' => array()
+        );
+    
     /**
      * If passing parameters into this constructor, include $from, $to, $subject,
      * $plainTextContent, $htmlContent and $globalSubstitutions at a minimum.
@@ -198,18 +205,20 @@ class Mail implements \JsonSerializable
             && $emailType === 'To' && $email->isPersonalized()) {
             $personalization = new Personalization();
         }
+        if(!in_array($email->getEmailAddress(),$this->emailRecipients[$emailType])){
+            $this->emailRecipients[$emailType][] = $email->getEmailAddress();
+            $personalization = $this->getPersonalization($personalizationIndex, $personalization);
+            $personalization->$personalizationFunctionCall($email);
 
-        $personalization = $this->getPersonalization($personalizationIndex, $personalization);
-        $personalization->$personalizationFunctionCall($email);
-
-        if ($subs = $email->getSubstitutions()) {
-            foreach ($subs as $key => $value) {
-                $personalization->addSubstitution($key, $value);
+            if ($subs = $email->getSubstitutions()) {
+                foreach ($subs as $key => $value) {
+                    $personalization->addSubstitution($key, $value);
+                }
             }
-        }
 
-        if ($email->getSubject()) {
-            $personalization->setSubject($email->getSubject());
+            if ($email->getSubject()) {
+                $personalization->setSubject($email->getSubject());
+            }
         }
     }
 
