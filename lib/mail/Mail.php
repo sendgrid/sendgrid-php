@@ -78,6 +78,9 @@ class Mail implements \JsonSerializable
     /** @var $reply_to ReplyTo Email to be use when replied to */
     private $reply_to;
 
+     /** @var $reply_to_list ReplyToList Email to be use when replied to */
+    private $reply_to_list;
+
     /** @var $personalization Personalization[] Messages and their metadata */
     private $personalization;
 
@@ -980,6 +983,57 @@ class Mail implements \JsonSerializable
     public function getReplyTo()
     {
         return $this->reply_to;
+    }
+
+    /**
+     * Set a list of ReplyTo email addresses. The following input formats are supported:
+     *
+     * 1. only email addresses
+     * [
+     *     'email1@domain.com',
+     *     'email2@domain.com',
+     * ]
+     * 2. items with email address and name
+     * [
+     *     'email' => 'email1@domain.com',
+     *     'name' => 'John Doe',
+     * ], [
+     *     'email' => 'email2@domain.com',
+     *     'name' => '',
+     * ]
+     *
+     * @param array $replyToList
+     * @throws \InvalidArgumentException
+     */
+    public function setReplyToList(array $replyToList)
+    {
+        Assert::minItems($replyToList, 'replyToList', 1);
+        Assert::maxItems($replyToList, 'replyToList', 1000);
+
+        foreach ($replyToList as $replyTo) {
+            if ($replyTo instanceof ReplyTo ) {
+                $this->reply_to_list[] = $replyTo;
+            } elseif (is_array($replyTo)) {
+                if (! isset($replyTo['email'])) {
+                    throw new \InvalidArgumentException('Email is mandatory on ReplyToList array.');
+                }
+                $replyTo['name'] = isset($replyTo['name']) ? $replyTo['name'] : null;
+                $this->reply_to_list[] = new ReplyTo($replyTo['email'], $replyTo['name']);
+            } else {
+                $this->reply_to_list[] = new ReplyTo($replyTo);
+            }
+        }
+    }
+
+    /**
+     * Retrieve the reply to list to information attached to a Mail object
+     *
+     * @return ReplyToList
+     */
+
+    public function getReplyToList()
+    {
+        return $this->reply_to_list;
     }
 
     /**
@@ -1970,6 +2024,7 @@ class Mail implements \JsonSerializable
                 )),
                 'from' => $this->getFrom(),
                 'reply_to' => $this->getReplyTo(),
+                'reply_to_list' => $this->getReplyToList(),
                 'subject' => $this->getGlobalSubject(),
                 'content' => $this->getContents(),
                 'attachments' => $this->getAttachments(),
