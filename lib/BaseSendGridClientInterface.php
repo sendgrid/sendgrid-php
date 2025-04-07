@@ -66,7 +66,7 @@ abstract class BaseSendGridClientInterface
      */
     public function send(Mail $email)
     {
-        return $this->client->mail()->send()->post($email);
+        return $this->client->mail()->send()->post($email->jsonSerialize());
     }
 
     /*
