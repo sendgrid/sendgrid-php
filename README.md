@@ -40,7 +40,7 @@ We appreciate your continued support, thank you!
 
 ## Prerequisites
 
-- PHP version 7.3, 7.4, 8.0, or 8.1
+- PHP version 7.3+
 - The Twilio SendGrid service, starting at the [free level](https://sendgrid.com/free?source=sendgrid-php) to send up to 40,000 emails for the first 30 days, then send 100 emails/day free forever or check out [our pricing](https://sendgrid.com/pricing?source=sendgrid-php).
 - For SMS messages, you will need a free [Twilio account](https://www.twilio.com/try-twilio?source=sendgrid-php).
 
@@ -72,9 +72,9 @@ Add Twilio SendGrid to your `composer.json` file. If you are not using [Composer
 
 ### Alternative: Install package from zip
 
-If you are not using Composer, simply download and install the **[latest packaged release of the library as a zip](https://github.com/sendgrid/sendgrid-php/releases/download/8.0.1/sendgrid-php.zip)**.
+If you are not using Composer, simply download and install the **[latest packaged release of the library as a zip](https://github.com/sendgrid/sendgrid-php/releases/download/8.1.11/sendgrid-php.zip)**.
 
-[**⬇︎ Download Packaged Library ⬇︎**](https://github.com/sendgrid/sendgrid-php/releases/download/8.0.1/sendgrid-php.zip)
+[**⬇︎ Download Packaged Library ⬇︎**](https://github.com/sendgrid/sendgrid-php/releases/download/8.1.11/sendgrid-php.zip)
 
 Previous versions of the library can be downloaded directly from [GitHub](https://github.com/sendgrid/sendgrid-php/releases).
 

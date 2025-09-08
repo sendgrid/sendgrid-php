@@ -3,6 +3,102 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2025-02-22] Version 8.1.11
+---------------------------
+**Library - Fix**
+- [PR #1119](https://github.com/sendgrid/sendgrid-php/pull/1119): deprecations in PHP 8.4. Thanks to [@theodorejb](https://github.com/theodorejb)!
+
+
+[2025-02-11] Version 8.1.10
+---------------------------
+**Library - Fix**
+- [PR #1111](https://github.com/sendgrid/sendgrid-php/pull/1111): Use starkbank/ecdsa 2.1.0. Thanks to [@simoheinonen](https://github.com/simoheinonen)!
+
+**Library - Chore**
+- [PR #1115](https://github.com/sendgrid/sendgrid-php/pull/1115): install docker-compose. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
+[2025-01-28] Version 8.1.9
+--------------------------
+**Library - Fix**
+- [PR #1111](https://github.com/sendgrid/sendgrid-php/pull/1111): Use starkbank/ecdsa 2.1.0. Thanks to [@simoheinonen](https://github.com/simoheinonen)!
+
+**Library - Chore**
+- [PR #1115](https://github.com/sendgrid/sendgrid-php/pull/1115): install docker-compose. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
+[2025-01-28] Version 8.1.8
+--------------------------
+**Library - Fix**
+- [PR #1111](https://github.com/sendgrid/sendgrid-php/pull/1111): Use starkbank/ecdsa 2.1.0. Thanks to [@simoheinonen](https://github.com/simoheinonen)!
+
+**Library - Chore**
+- [PR #1115](https://github.com/sendgrid/sendgrid-php/pull/1115): install docker-compose. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
+[2025-01-13] Version 8.1.7
+--------------------------
+**Library - Fix**
+- [PR #1111](https://github.com/sendgrid/sendgrid-php/pull/1111): Use starkbank/ecdsa 2.1.0. Thanks to [@simoheinonen](https://github.com/simoheinonen)!
+
+**Library - Chore**
+- [PR #1115](https://github.com/sendgrid/sendgrid-php/pull/1115): install docker-compose. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
+[2025-01-09] Version 8.1.6
+--------------------------
+**Library - Fix**
+- [PR #1111](https://github.com/sendgrid/sendgrid-php/pull/1111): Use starkbank/ecdsa 2.1.0. Thanks to [@simoheinonen](https://github.com/simoheinonen)!
+
+**Library - Chore**
+- [PR #1115](https://github.com/sendgrid/sendgrid-php/pull/1115): install docker-compose. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
+[2024-12-12] Version 8.1.5
+--------------------------
+**Library - Fix**
+- [PR #1111](https://github.com/sendgrid/sendgrid-php/pull/1111): Use starkbank/ecdsa 2.1.0. Thanks to [@simoheinonen](https://github.com/simoheinonen)!
+
+**Library - Chore**
+- [PR #1115](https://github.com/sendgrid/sendgrid-php/pull/1115): install docker-compose. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
+[2024-12-12] Version 8.1.4
+--------------------------
+**Library - Fix**
+- [PR #1111](https://github.com/sendgrid/sendgrid-php/pull/1111): Use starkbank/ecdsa 2.1.0. Thanks to [@simoheinonen](https://github.com/simoheinonen)!
+
+**Library - Chore**
+- [PR #1115](https://github.com/sendgrid/sendgrid-php/pull/1115): install docker-compose. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
+[2024-12-05] Version 8.1.3
+--------------------------
+**Library - Fix**
+- [PR #1111](https://github.com/sendgrid/sendgrid-php/pull/1111): Use starkbank/ecdsa 2.1.0. Thanks to [@simoheinonen](https://github.com/simoheinonen)!
+
+**Library - Chore**
+- [PR #1115](https://github.com/sendgrid/sendgrid-php/pull/1115): install docker-compose. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
+[2024-04-18] Version 8.1.2
+--------------------------
+**Library - Chore**
+- [PR #1107](https://github.com/sendgrid/sendgrid-php/pull/1107): updating php-http-client version to dynamic. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
+[2023-12-06] Version 8.1.1
+--------------------------
+**Library - Chore**
+- [PR #1105](https://github.com/sendgrid/sendgrid-php/pull/1105): updated php-http-client version to enable setHost. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
+[2023-12-01] Version 8.1.0
+--------------------------
+**Library - Feature**
+- [PR #1104](https://github.com/sendgrid/sendgrid-php/pull/1104): Added Data residency for eu and global region. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
 [2022-08-10] Version 8.0.1
 --------------------------
 **Library - Docs**

@@ -189,15 +189,15 @@ class Stats
     }
 
     /**
-     * Validate the date format
+     * Validate YYYY-MM-DD date format
      *
-     * @param string $date YYYY-MM-DD
+     * @param string|null $date
      *
      * @throws Exception
      */
     protected function validateDateFormat($date)
     {
-        if (false === DateTime::createFromFormat(self::DATE_FORMAT, $date)) {
+        if (is_null($date) || !DateTime::createFromFormat(self::DATE_FORMAT, $date)) {
             throw new Exception('Date must be in the YYYY-MM-DD format.');
         }
     }

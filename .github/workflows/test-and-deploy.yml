@@ -17,7 +17,7 @@ jobs:
     timeout-minutes: 20
     strategy:
       matrix:
-        php: [ '7.3', '7.4', '8.0', '8.1' ]
+        php: [ '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4' ]
     env:
       DOCKER_LOGIN: ${{ secrets.DOCKER_USERNAME && secrets.DOCKER_AUTH_TOKEN }}
     steps:
@@ -30,6 +30,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_AUTH_TOKEN }}
+
+      - name: Install Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
 
       - name: Run Unit Tests
         run: make test-docker version=${{ matrix.php }}
@@ -47,6 +52,7 @@ jobs:
         uses: shivammathur/setup-php@2.15.0
         with:
           php-version: '8.1'
+          extensions: gmp
         id: php
 
       - name: Build Release Artifacts
