@@ -60,7 +60,7 @@ abstract class BaseSendGridClientInterface
      *
      * @return Response
      */
-    public function send(Mail $email, array $query = null)
+    public function send(Mail $email, ?array $query = null)
     {
         return $this->client->mail()->send()->post($email, $query);
     }
